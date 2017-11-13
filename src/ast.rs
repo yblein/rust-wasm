@@ -1,41 +1,41 @@
 use types;
 
-enum Literal {
+pub enum Literal {
 	I32(i32),
 	I64(i64),
 	F32(f32),
 	F64(f64),
 }
 
-enum IUnOp {
+pub enum IUnOp {
 	Clz, Ctz, Popcnt,
 }
 
-enum FUnOp {
+pub enum FUnOp {
 	Neg, Abs, Ceil, Floor, Trunc, Nearest, Sqrt,
 }
 
-enum IBinOp {
+pub enum IBinOp {
 	Add, Sub, Mul, DivS, DivU, RemS, RemU, And, Or, Xor, Shl, ShrS, ShrU, Rotl, Rotr,
 }
 
-enum FBinOp {
+pub enum FBinOp {
 	Add, Sub, Mul, Div, Min, Max, CopySign,
 }
 
-enum ITestOp {
+pub enum ITestOp {
 	Eqz,
 }
 
-enum IRelOp {
+pub enum IRelOp {
 	Eq_, Ne, LtS, LtU, GtS, GtU, LeS, LeU, GeS, GeU,
 }
 
-enum FRelOp {
+pub enum FRelOp {
 	Eq_, Ne, Lt, Gt, Le, Ge
 }
 
-enum ConvertOp {
+pub enum ConvertOp {
 	I32WrapI64,
 	I64ExtendUI32,
 	I64ExtendSI32,
@@ -46,22 +46,22 @@ enum ConvertOp {
 	F64PromoteF32,
 }
 
-struct LoadOp {
-	offset: u32,
-	align: u32,
-	type_: types::Value,
-	size: Option<u32>,
-	signed: bool,
+pub struct LoadOp {
+	pub offset: u32,
+	pub align: u32,
+	pub type_: types::Value,
+	pub size: Option<u32>,
+	pub signed: bool,
 }
 
-struct StoreOp {
-	offset: u32,
-	align: u32,
-	type_: types::Value,
-	size: Option<u32>,
+pub struct StoreOp {
+	pub offset: u32,
+	pub align: u32,
+	pub type_: types::Value,
+	pub size: Option<u32>,
 }
 
-enum Instr {
+pub enum Instr {
 	Unreachable,                                   // trap unconditionally
 	Nop,                                           // do nothing
 	Block(Vec<types::Value>, Vec<Instr>),          // execute in sequence
@@ -95,66 +95,66 @@ enum Instr {
 	Convert(ConvertOp),                            // conversion
 }
 
-type Expr = Vec<Instr>;
+pub type Expr = Vec<Instr>;
 
-struct Module {
-	types: Vec<types::Func>,
-	funcs: Vec<Func>,
-	tables: Vec<Table>,
-	memories: Vec<Memory>,
-	globals: Vec<Global>,
-	elems: Vec<Segment<Index>>, // initial values for tables
-	data: Vec<Segment<u8>>,     // initial values for memories
-	start: Option<Index>,       // optionnal index to a start function
-	imports: Vec<Import>,
-	exports: Vec<Export>,
+pub struct Module {
+	pub types: Vec<types::Func>,
+	pub funcs: Vec<Func>,
+	pub tables: Vec<Table>,
+	pub memories: Vec<Memory>,
+	pub globals: Vec<Global>,
+	pub elems: Vec<Segment<Index>>, // initial values for tables
+	pub data: Vec<Segment<u8>>,     // initial values for memories
+	pub start: Option<Index>,       // optionnal index to a start function
+	pub imports: Vec<Import>,
+	pub exports: Vec<Export>,
 }
 
-type Index = u32;
+pub type Index = u32;
 
-struct Func {
-	type_index: Index,
-	locals: Vec<types::Value>,
-	body: Expr,
+pub struct Func {
+	pub type_index: Index,
+	pub locals: Vec<types::Value>,
+	pub body: Expr,
 }
 
-struct Table {
-	type_: types::Table,
+pub struct Table {
+	pub type_: types::Table,
 }
 
-struct Memory {
-	type_: types::Memory,
+pub struct Memory {
+	pub type_: types::Memory,
 }
 
-struct Global {
-	type_: types::Global,
-	value: Expr, // NB: Must be a constant expression
+pub struct Global {
+	pub type_: types::Global,
+	pub value: Expr, // NB: Must be a constant expression
 }
 
-struct Segment<T> {
-	index: Index,
-	offset: Expr, // NB: Must be a constant expression
-	init: Vec<T>,
+pub struct Segment<T> {
+	pub index: Index,
+	pub offset: Expr, // NB: Must be a constant expression
+	pub init: Vec<T>,
 }
 
-struct Export {
-	name: String,
-	desc: ExportDesc,
+pub struct Export {
+	pub name: String,
+	pub desc: ExportDesc,
 }
 
-enum ExportDesc {
+pub enum ExportDesc {
 	Func(Index),
 	Table(Index),
 	Memory(Index),
 	Global(Index),
 }
 
-struct Import {
-	name: String,
-	desc: ImportDesc,
+pub struct Import {
+	pub name: String,
+	pub desc: ImportDesc,
 }
 
-enum ImportDesc {
+pub enum ImportDesc {
 	Func(Index),
 	Table(types::Table),
 	Memory(types::Memory),

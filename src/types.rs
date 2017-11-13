@@ -16,28 +16,28 @@ pub enum Elem {
 }
 
 pub struct Func {
-	args: Vec<Value>,
-	result: Vec<Value>,
+	pub args: Vec<Value>,
+	pub result: Vec<Value>,
 }
 
 
 pub struct Limits {
-	min: u32,
-	max: Option<u32>,
+	pub min: u32,
+	pub max: Option<u32>,
 }
 
 pub struct Table {
-	limits: Limits,
-	elem: Elem,
+	pub limits: Limits,
+	pub elem: Elem,
 }
 
 pub struct Memory {
-	limits: Limits,
+	pub limits: Limits,
 }
 
 pub struct Global {
-	value: Value,
-	mutable: bool,
+	pub value: Value,
+	pub mutable: bool,
 }
 
 /// Types of elements defined externally to the module
