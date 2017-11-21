@@ -47,16 +47,15 @@ pub enum ConvertOp {
 }
 
 pub struct LoadOp {
-	pub offset: u32,
 	pub align: u32,
+	pub offset: u32,
 	pub type_: types::Value,
-	pub size: Option<u32>,
-	pub signed: bool,
+	pub size_signed: Option<(u32, bool)>,
 }
 
 pub struct StoreOp {
-	pub offset: u32,
 	pub align: u32,
+	pub offset: u32,
 	pub type_: types::Value,
 	pub size: Option<u32>,
 }
@@ -150,6 +149,7 @@ pub enum ExportDesc {
 }
 
 pub struct Import {
+	pub module: String,
 	pub name: String,
 	pub desc: ImportDesc,
 }
