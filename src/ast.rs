@@ -1,5 +1,6 @@
 use types;
 
+#[derive(Debug)]
 pub enum Literal {
 	I32(i32),
 	I64(i64),
@@ -7,34 +8,42 @@ pub enum Literal {
 	F64(f64),
 }
 
+#[derive(Debug)]
 pub enum IUnOp {
 	Clz, Ctz, Popcnt,
 }
 
+#[derive(Debug)]
 pub enum FUnOp {
 	Neg, Abs, Ceil, Floor, Trunc, Nearest, Sqrt,
 }
 
+#[derive(Debug)]
 pub enum IBinOp {
 	Add, Sub, Mul, DivS, DivU, RemS, RemU, And, Or, Xor, Shl, ShrS, ShrU, Rotl, Rotr,
 }
 
+#[derive(Debug)]
 pub enum FBinOp {
 	Add, Sub, Mul, Div, Min, Max, CopySign,
 }
 
+#[derive(Debug)]
 pub enum ITestOp {
 	Eqz,
 }
 
+#[derive(Debug)]
 pub enum IRelOp {
 	Eq_, Ne, LtS, LtU, GtS, GtU, LeS, LeU, GeS, GeU,
 }
 
+#[derive(Debug)]
 pub enum FRelOp {
 	Eq_, Ne, Lt, Gt, Le, Ge
 }
 
+#[derive(Debug)]
 pub enum ConvertOp {
 	I32WrapI64,
 	I64ExtendUI32,
@@ -46,6 +55,7 @@ pub enum ConvertOp {
 	F64PromoteF32,
 }
 
+#[derive(Debug)]
 pub struct LoadOp {
 	pub align: u32,
 	pub offset: u32,
@@ -53,6 +63,7 @@ pub struct LoadOp {
 	pub size_signed: Option<(u32, bool)>,
 }
 
+#[derive(Debug)]
 pub struct StoreOp {
 	pub align: u32,
 	pub offset: u32,
@@ -60,6 +71,7 @@ pub struct StoreOp {
 	pub size: Option<u32>,
 }
 
+#[derive(Debug)]
 pub enum Instr {
 	Unreachable,                                   // trap unconditionally
 	Nop,                                           // do nothing
@@ -96,6 +108,7 @@ pub enum Instr {
 
 pub type Expr = Vec<Instr>;
 
+#[derive(Debug)]
 pub struct Module {
 	pub types: Vec<types::Func>,
 	pub funcs: Vec<Func>,
@@ -111,36 +124,43 @@ pub struct Module {
 
 pub type Index = u32;
 
+#[derive(Debug)]
 pub struct Func {
 	pub type_index: Index,
 	pub locals: Vec<types::Value>,
 	pub body: Expr,
 }
 
+#[derive(Debug)]
 pub struct Table {
 	pub type_: types::Table,
 }
 
+#[derive(Debug)]
 pub struct Memory {
 	pub type_: types::Memory,
 }
 
+#[derive(Debug)]
 pub struct Global {
 	pub type_: types::Global,
 	pub value: Expr, // NB: Must be a constant expression
 }
 
+#[derive(Debug)]
 pub struct Segment<T> {
 	pub index: Index,
 	pub offset: Expr, // NB: Must be a constant expression
 	pub init: Vec<T>,
 }
 
+#[derive(Debug)]
 pub struct Export {
 	pub name: String,
 	pub desc: ExportDesc,
 }
 
+#[derive(Debug)]
 pub enum ExportDesc {
 	Func(Index),
 	Table(Index),
@@ -148,12 +168,14 @@ pub enum ExportDesc {
 	Global(Index),
 }
 
+#[derive(Debug)]
 pub struct Import {
 	pub module: String,
 	pub name: String,
 	pub desc: ImportDesc,
 }
 
+#[derive(Debug)]
 pub enum ImportDesc {
 	Func(Index),
 	Table(types::Table),
