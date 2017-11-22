@@ -160,3 +160,25 @@ pub enum ImportDesc {
 	Memory(types::Memory),
 	Global(types::Global),
 }
+
+
+// Helper function for tests
+impl Module {
+    // Right now, we cannot only publish this function for test
+    // See https://github.com/rust-lang/rust/issues/45599
+    // #[cfg(test)]
+    pub fn new() -> Module {
+        Module {
+            types: Vec::new(),
+            funcs: Vec::new(),
+            tables: Vec::new(),
+            memories: Vec::new(),
+            globals: Vec::new(),
+            elems: Vec::new(),
+            data: Vec::new(),
+            start: None,
+            imports: Vec::new(),
+            exports: Vec::new(),
+        }
+    }
+}
