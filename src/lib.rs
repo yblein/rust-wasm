@@ -4,3 +4,4 @@ mod types;
 pub mod interpreter;
 pub mod ast;
 pub mod vm;
+pub mod binary;
