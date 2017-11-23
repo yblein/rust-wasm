@@ -693,11 +693,12 @@ fn decode_value_type(b: u8) -> DecodeResult<types::Value> {
 #[cfg(test)]
 mod tests {
 	use super::*;
+	use std::io::Cursor;
 
 	#[test]
 	fn decode_vu64() {
 		fn decode_to(buf: &[u8], expected: u64) {
-			assert_eq!(Decoder { reader: buf }.read_vu64().unwrap(), expected);
+			assert_eq!(Decoder { reader: Cursor::new(buf) }.read_vu64().unwrap(), expected);
 		}
 
 		decode_to(&[0x00], 0);
@@ -708,7 +709,7 @@ mod tests {
 	#[test]
 	fn decode_vs32() {
 		fn decode_to(buf: &[u8], expected: i32) {
-			assert_eq!(Decoder { reader: buf }.read_vs32().unwrap(), expected);
+			assert_eq!(Decoder { reader: Cursor::new(buf) }.read_vs32().unwrap(), expected);
 		}
 
 		decode_to(&[0x00], 0);
@@ -723,7 +724,7 @@ mod tests {
 	#[test]
 	fn decode_vs64() {
 		fn decode_to(buf: &[u8], expected: i64) {
-			assert_eq!(Decoder { reader: buf }.read_vs64().unwrap(), expected);
+			assert_eq!(Decoder { reader: Cursor::new(buf) }.read_vs64().unwrap(), expected);
 		}
 
 		decode_to(&[0x00], 0);
@@ -738,13 +739,15 @@ mod tests {
 	#[test]
 	fn decode_vec_bytes() {
 		let buf = [0x02, 0x01, 0x02];
-		let vec = Decoder { reader: &buf[..] }.read_vec(&Decoder::read_byte).unwrap();
+		let mut dec = Decoder { reader: Cursor::new(&buf[..]) };
+		let vec = dec.read_vec(&Decoder::read_byte).unwrap();
 		assert_eq!(vec, vec![0x01, 0x02]);
 	}
 
 	#[test]
 	fn decode_name() {
 		let buf = [0x03, 0x65, 0xC3, 0xa9];
-		assert_eq!(Decoder { reader: &buf[..] }.read_name().unwrap(), "eé");
+		let mut dec = Decoder { reader: Cursor::new(&buf[..]) };
+		assert_eq!(dec.read_name().unwrap(), "eé");
 	}
 }
