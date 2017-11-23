@@ -1,10 +1,14 @@
+use std::intrinsics;
+
 use vm;
 use ast::*;
 use types;
 
+
+
 /// A struct storing the state of the current interpreted
 pub struct Interpreter {
-	stack: Vec<types::Value>,
+	stack: Vec<Literal>,
 	vm: vm::VM,
 }
 
@@ -15,6 +19,7 @@ type IntResult = Result<(), InterpreterError>;
 pub enum InterpreterError {
 	UnconditionalTrap,
 	UnknownLocal(Index),
+	WrongType,
 }
 use self::InterpreterError::*;
 
@@ -37,6 +42,8 @@ impl Interpreter {
 				Unreachable => self.unreachable(),
 				Nop => self.nop(),
 				GetLocal(idx) => self.get_local(idx),
+				Const(c) => self.const_(c),
+				IUnary(t, op) => self.iunary(t, op),
 				_ => unimplemented!()
 			}?
 		}
@@ -60,11 +67,41 @@ impl Interpreter {
 		}
 		Ok(())
 	}
+
+	/// Push c to the stack
+	fn const_(&mut self, c: Literal) -> IntResult {
+		self.stack.push(c);
+		Ok(())
+	}
+
+	/// Dispath an IUnop
+	fn iunary(&mut self, t: types::Int, op: IUnOp) -> IntResult {
+		// Validation should assert that the top of the stack exists and has the type t
+		let v = match self.stack.pop().unwrap() {
+			Literal::I32(c) => Literal::I32(self.type_iunary(c, op)),
+			Literal::I64(c) => Literal::I64(self.type_iunary(c, op)),
+			_ => return Err(WrongType), // Should never happen with validation?
+		};
+		self.stack.push(v);
+		Ok(())
+	}
+
+	// Type should be i32 or i64 (how to make it explicit?)
+	fn type_iunary<T>(&self, v: T, op: IUnOp) -> T {
+		// Use std::intrinsics to use X86 instruction instead of reimplementing the
+		// algorithms
+		match op {
+			IUnOp::Clz => unsafe { intrinsics::ctlz(v) },
+			IUnOp::Ctz => unsafe { intrinsics::cttz(v) },
+			IUnOp::Popcnt => unsafe { intrinsics::ctpop(v) },
+		}
+	}
 }
 
 #[cfg(test)]
 mod tests {
 	use super::*;
+	use ast::Instr::*;
 
 	#[test]
 	fn empty() {
@@ -77,15 +114,15 @@ mod tests {
 	#[test]
 	fn unreachable() {
 		t(|mut int: Interpreter| {
-			let v = vec![Instr::Unreachable];
-			assert_eq!(int.interpret(&v).err().unwrap(), InterpreterError::UnconditionalTrap)
+			let v = vec![Unreachable];
+			assert_eq!(int.interpret(&v).err().unwrap(), UnconditionalTrap)
 		})
 	}
 
 	#[test]
 	fn nop() {
 		t(|mut int: Interpreter| {
-			let v = vec![Instr::Nop];
+			let v = vec![Nop];
 			assert!(int.interpret(&v).is_ok());
 		})
 	}
@@ -93,16 +130,128 @@ mod tests {
 	#[test]
 	fn nop_then_unreachable() {
 		t(|mut int: Interpreter| {
-			let v = vec![Instr::Nop, Instr::Unreachable];
-			assert_eq!(int.interpret(&v).err().unwrap(), InterpreterError::UnconditionalTrap)
+			let v = vec![Nop, Unreachable];
+			assert_eq!(int.interpret(&v).err().unwrap(), UnconditionalTrap)
 		})
 	}
 
 	#[test]
 	fn get_local() {
 		t(|mut int: Interpreter| {
-			let v = vec![Instr::GetLocal(0)];
-			assert_eq!(int.interpret(&v).err().unwrap(), InterpreterError::UnknownLocal(0))
+			let v = vec![GetLocal(0)];
+			assert_eq!(int.interpret(&v).err().unwrap(), UnknownLocal(0))
+		})
+	}
+
+	#[test]
+	fn const_() {
+		t(|mut int: Interpreter| {
+			let v = vec![Const(Literal::I32(42))];
+			assert!(int.interpret(&v).is_ok());
+			assert_eq!(*int.stack.last().unwrap(), Literal::I32(42));
+		})
+	}
+
+	#[test]
+	fn iunary_wrongtype() {
+		t(|mut int: Interpreter| {
+			use types::{Int, Float};
+
+			let v = vec![Const(Literal::F32(42.0)), IUnary(Int::I32, IUnOp::Clz)];
+			assert_eq!(int.interpret(&v).err().unwrap(), WrongType)
+		})
+	}
+
+	#[test]
+	fn iclz() {
+		t(|mut int: Interpreter| {
+			use types::Int;
+
+			let v = vec![Const(Literal::I32(42)), IUnary(Int::I32, IUnOp::Clz)];
+			assert!(int.interpret(&v).is_ok());
+			assert_eq!(*int.stack.last().unwrap(), Literal::I32(26));
+
+			let v = vec![Const(Literal::I64(42)), IUnary(Int::I64, IUnOp::Clz)];
+			assert!(int.interpret(&v).is_ok());
+			assert_eq!(*int.stack.last().unwrap(), Literal::I64(32+26));
+
+			let v = vec![Const(Literal::I32(0)), IUnary(Int::I32, IUnOp::Clz)];
+			assert!(int.interpret(&v).is_ok());
+			assert_eq!(*int.stack.last().unwrap(), Literal::I32(32));
+
+			let v = vec![Const(Literal::I64(0)), IUnary(Int::I64, IUnOp::Clz)];
+			assert!(int.interpret(&v).is_ok());
+			assert_eq!(*int.stack.last().unwrap(), Literal::I64(64));
+
+			let v = vec![Const(Literal::I32((-1 as i32))), IUnary(Int::I32, IUnOp::Clz)];
+			assert!(int.interpret(&v).is_ok());
+			assert_eq!(*int.stack.last().unwrap(), Literal::I32(0));
+
+			let v = vec![Const(Literal::I64((-1 as i64))), IUnary(Int::I64, IUnOp::Clz)];
+			assert!(int.interpret(&v).is_ok());
+			assert_eq!(*int.stack.last().unwrap(), Literal::I64(0));
+		})
+	}
+
+	#[test]
+	fn ictz() {
+		t(|mut int: Interpreter| {
+			use types::Int;
+
+			let v = vec![Const(Literal::I32(42)), IUnary(Int::I32, IUnOp::Ctz)];
+			assert!(int.interpret(&v).is_ok());
+			assert_eq!(*int.stack.last().unwrap(), Literal::I32(1));
+
+			let v = vec![Const(Literal::I64(42)), IUnary(Int::I64, IUnOp::Ctz)];
+			assert!(int.interpret(&v).is_ok());
+			assert_eq!(*int.stack.last().unwrap(), Literal::I64(1));
+
+			let v = vec![Const(Literal::I32(0)), IUnary(Int::I32, IUnOp::Ctz)];
+			assert!(int.interpret(&v).is_ok());
+			assert_eq!(*int.stack.last().unwrap(), Literal::I32(32));
+
+			let v = vec![Const(Literal::I64(0)), IUnary(Int::I64, IUnOp::Ctz)];
+			assert!(int.interpret(&v).is_ok());
+			assert_eq!(*int.stack.last().unwrap(), Literal::I64(64));
+
+			let v = vec![Const(Literal::I32((-1 as i32))), IUnary(Int::I32, IUnOp::Ctz)];
+			assert!(int.interpret(&v).is_ok());
+			assert_eq!(*int.stack.last().unwrap(), Literal::I32(0));
+
+			let v = vec![Const(Literal::I64((-1 as i64))), IUnary(Int::I64, IUnOp::Ctz)];
+			assert!(int.interpret(&v).is_ok());
+			assert_eq!(*int.stack.last().unwrap(), Literal::I64(0));
+		})
+	}
+
+	#[test]
+	fn ipopcnt() {
+		t(|mut int: Interpreter| {
+			use types::Int;
+
+			let v = vec![Const(Literal::I32(42)), IUnary(Int::I32, IUnOp::Popcnt)];
+			assert!(int.interpret(&v).is_ok());
+			assert_eq!(*int.stack.last().unwrap(), Literal::I32(3));
+
+			let v = vec![Const(Literal::I64(42)), IUnary(Int::I64, IUnOp::Popcnt)];
+			assert!(int.interpret(&v).is_ok());
+			assert_eq!(*int.stack.last().unwrap(), Literal::I64(3));
+
+			let v = vec![Const(Literal::I32(0)), IUnary(Int::I32, IUnOp::Popcnt)];
+			assert!(int.interpret(&v).is_ok());
+			assert_eq!(*int.stack.last().unwrap(), Literal::I32(0));
+
+			let v = vec![Const(Literal::I64(0)), IUnary(Int::I64, IUnOp::Popcnt)];
+			assert!(int.interpret(&v).is_ok());
+			assert_eq!(*int.stack.last().unwrap(), Literal::I64(0));
+
+			let v = vec![Const(Literal::I32((-1 as i32))), IUnary(Int::I32, IUnOp::Popcnt)];
+			assert!(int.interpret(&v).is_ok());
+			assert_eq!(*int.stack.last().unwrap(), Literal::I32(32));
+
+			let v = vec![Const(Literal::I64((-1 as i64))), IUnary(Int::I64, IUnOp::Popcnt)];
+			assert!(int.interpret(&v).is_ok());
+			assert_eq!(*int.stack.last().unwrap(), Literal::I64(64));
 		})
 	}
 

@@ -1,6 +1,6 @@
 use types;
 
-#[derive(Debug)]
+#[derive(Debug, PartialEq, Clone, Copy)]
 pub enum Literal {
 	I32(i32),
 	I64(i64),
@@ -8,7 +8,7 @@ pub enum Literal {
 	F64(f64),
 }
 
-#[derive(Debug)]
+#[derive(Debug, Clone, Copy)]
 pub enum IUnOp {
 	Clz, Ctz, Popcnt,
 }
