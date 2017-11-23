@@ -5,3 +5,9 @@ pub mod interpreter;
 pub mod ast;
 pub mod vm;
 pub mod binary;
+
+macro_rules! unimplemented {
+	() => (
+		Err("Not implemented yet")
+	)
+}
