@@ -4,6 +4,7 @@ use std::io::{Read, Seek};
 
 use types;
 use ast::*;
+use values::Value;
 
 const MAGIC: u32 = 0x6d736100;
 
@@ -306,10 +307,10 @@ impl<R: Read + Seek> Decoder<R> {
 				GrowMemory
 			},
 
-			0x41 => Const(Literal::I32(self.read_vs32()?)),
-			0x42 => Const(Literal::I64(self.read_vs64()?)),
-			0x43 => Const(Literal::F32(self.read_f32()?)),
-			0x44 => Const(Literal::F64(self.read_f64()?)),
+			0x41 => Const(Value::from_i32(self.read_vs32()?)),
+			0x42 => Const(Value::from_i64(self.read_vs64()?)),
+			0x43 => Const(Value::F32(self.read_f32()?)),
+			0x44 => Const(Value::F64(self.read_f64()?)),
 
 			0x45 => ITest(I32, ITestOp::Eqz),
 			0x46 => IRel(I32, IRelOp::Eq_),

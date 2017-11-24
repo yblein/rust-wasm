@@ -1,12 +1,5 @@
 use types;
-
-#[derive(Debug, PartialEq, Clone, Copy)]
-pub enum Literal {
-	I32(i32),
-	I64(i64),
-	F32(f32),
-	F64(f64),
-}
+use values;
 
 #[derive(Debug, Clone, Copy)]
 pub enum IUnOp {
@@ -95,7 +88,7 @@ pub enum Instr {
 	Store(StoreOp),                                // write memory at address
 	CurrentMemory,                                 // size(linear memory
 	GrowMemory,                                    // grow linear memory
-	Const(Literal),                                // constant
+	Const(values::Value),                          // constant
 	IUnary(types::Int, IUnOp),                     // integer unary numeric operators
 	FUnary(types::Float, FUnOp),                   // floating unary numeric operators
 	IBin(types::Int, IBinOp),                      // integer binary numeric operators
