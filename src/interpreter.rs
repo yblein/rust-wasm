@@ -42,13 +42,13 @@ impl Interpreter {
 				Nop => self.nop(),
 				GetLocal(idx) => self.get_local(idx),
 				Const(c) => self.const_(c),
-				IUnary(ref t, ref op) => self.iunary(&t, &op),
-				FUnary(ref t, ref op) => self.funary(&t, &op),
-				IBin(ref t, ref op) => self.ibin(&t, &op),
-				FBin(ref t, ref op) => self.fbin(&t, &op),
-				ITest(ref t, ref op) => self.itest(&t, &op),
-				IRel(ref t, ref op) => self.irel(&t, &op),
-				FRel(ref t, ref op) => self.frel(&t, &op),
+				IUnary(ref t, ref op) => self.iunary(t, op),
+				FUnary(ref t, ref op) => self.funary(t, op),
+				IBin(ref t, ref op) => self.ibin(t, op),
+				FBin(ref t, ref op) => self.fbin(t, op),
+				ITest(ref t, ref op) => self.itest(t, op),
+				IRel(ref t, ref op) => self.irel(t, op),
+				FRel(ref t, ref op) => self.frel(t, op),
 				_ => unimplemented!()
 			}?
 		}
