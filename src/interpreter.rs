@@ -20,7 +20,6 @@ type IntResult = Result<(), InterpreterError>;
 pub enum InterpreterError {
 	UnconditionalTrap,
 	UnknownLocal(Index),
-	WrongType,
 }
 use self::InterpreterError::*;
 
@@ -81,7 +80,7 @@ impl Interpreter {
 		let v = match self.stack.pop().unwrap() {
 			Value::I32(c) => Value::I32(self.type_iunary(c, op)),
 			Value::I64(c) => Value::I64(self.type_iunary(c, op)),
-			_ => return Err(WrongType), // Should never happen with validation?
+			_ => unreachable!(),
 		};
 		self.stack.push(v);
 		Ok(())
@@ -154,12 +153,13 @@ mod tests {
 	}
 
 	#[test]
-	fn iunary_wrongtype() {
+	#[should_panic]
+	fn iunary_unreachable() {
 		t(|mut int: Interpreter| {
 			use types::{Int, Float};
 
 			let v = vec![Const(Value::F32(42.0)), IUnary(Int::I32, IUnOp::Clz)];
-			assert_eq!(int.interpret(&v).err().unwrap(), WrongType)
+			int.interpret(&v);
 		})
 	}
 
