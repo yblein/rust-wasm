@@ -1,7 +1,8 @@
 use vm;
 use ast::*;
 use types;
-use values::{Value,GenericIntOp};
+use values::Value;
+use ops::{IntOp,FloatOp};
 
 
 /// A struct storing the state of the current interpreted
@@ -42,6 +43,7 @@ impl Interpreter {
 				GetLocal(idx) => self.get_local(idx),
 				Const(c) => self.const_(c),
 				IUnary(ref t, ref op) => self.iunary(&t, &op),
+				FUnary(ref t, ref op) => self.funary(&t, &op),
 				IBin(ref t, ref op) => self.ibin(&t, &op),
 				ITest(ref t, ref op) => self.itest(&t, &op),
 				IRel(ref t, ref op) => self.irel(&t, &op),
@@ -75,7 +77,7 @@ impl Interpreter {
 		Ok(())
 	}
 
-	/// Dispath an IUnop
+	/// Dispatch an IUnop
 	fn iunary(&mut self, _t: &types::Int, op: &IUnOp) -> IntResult {
 		// Validation should assert that the top of the stack exists and has the type t
 		let v = match self.stack.pop().unwrap() {
@@ -88,7 +90,7 @@ impl Interpreter {
 	}
 
 	fn type_iunary<T>(&self, v: T, op: &IUnOp) -> T
-		where T: GenericIntOp
+		where T: IntOp
 	{
 		match *op {
 			IUnOp::Clz => v.leading_zeros(),
@@ -97,7 +99,33 @@ impl Interpreter {
 		}
 	}
 
-	/// Dispath an IBin
+	/// Dispatch an FUnOp
+	fn funary(&mut self, _t: &types::Float, op: &FUnOp) -> IntResult {
+		// Validation should assert that the top of the stack exists and has the type t
+		let v = match self.stack.pop().unwrap() {
+			Value::F32(c) => Value::F32(self.type_funary(c, op)),
+			Value::F64(c) => Value::F64(self.type_funary(c, op)),
+			_ => unreachable!(),
+		};
+		self.stack.push(v);
+		Ok(())
+	}
+
+	fn type_funary<T>(&self, v: T, op: &FUnOp) -> T
+		where T: FloatOp
+	{
+		match *op {
+			FUnOp::Neg => v.neg(),
+			FUnOp::Abs => v.abs(),
+			FUnOp::Ceil => v.ceil(),
+			FUnOp::Floor => v.floor(),
+			FUnOp::Trunc => v.trunc(),
+			FUnOp::Nearest => v.nearest(),
+			FUnOp::Sqrt => v.sqrt(),
+		}
+	}
+
+	/// Dispatch an IBinOp
 	fn ibin(&mut self, _t: &types::Int, op: &IBinOp) -> IntResult {
 		// Validation should assert that there are two values on top of the
 		// stack having the same type t
@@ -128,7 +156,7 @@ impl Interpreter {
 
 	// type_ibin returns None if the result is undefined
 	fn type_ibin<T>(&self, c1: T, c2: T, op: &IBinOp) -> Option<T>
-		where T: GenericIntOp
+		where T: IntOp
 	{
 		let res = match *op {
 			IBinOp::Add => c1.add(c2),
@@ -150,7 +178,7 @@ impl Interpreter {
 		Some(res)
 	}
 
-	/// Dispath an ITest
+	/// Dispatch an ITestOp
 	fn itest(&mut self, _t: &types::Int, op: &ITestOp) -> IntResult {
 		// Validation should assert that the top of the stack exists and has the type t
 		let v = match self.stack.pop().unwrap() {
@@ -163,14 +191,14 @@ impl Interpreter {
 	}
 
 	fn type_itest<T>(&self, v: T, op: &ITestOp) -> T
-		where T: GenericIntOp
+		where T: IntOp
 	{
 		match *op {
 			ITestOp::Eqz => v.eqz(),
 		}
 	}
 
-	/// Dispath an IRel
+	/// Dispatch an IRelOp
 	fn irel(&mut self, _t: &types::Int, op: &IRelOp) -> IntResult {
 		// Validation should assert that there are two values on top of the
 		// stack having the same type t
@@ -190,7 +218,7 @@ impl Interpreter {
 	}
 
 	fn type_irel<T>(&self, c1: T, c2: T, op: &IRelOp) -> T
-		where T: GenericIntOp
+		where T: IntOp
 	{
 		match *op {
 			IRelOp::Eq_ => c1.eq(c2),
@@ -265,7 +293,7 @@ mod tests {
 	#[should_panic]
 	fn iunary_unreachable() {
 		t(|mut int: Interpreter| {
-			use types::{Int, Float};
+			use types::Int;
 
 			let v = vec![Const(Value::F32(42.0)), IUnary(Int::I32, IUnOp::Clz)];
 			int.interpret(&v);
@@ -441,6 +469,44 @@ mod tests {
 			let v = vec![Const(Value::I32(-42i32 as u32)), Const(Value::I32(43)), IRel(Int::I32, IRelOp::LtU)];
 			assert!(int.interpret(&v).is_ok());
 			assert_eq!(*int.stack.last().unwrap(), Value::I32(1));
+		})
+	}
+
+	#[test]
+	fn funary() {
+		t(|mut int: Interpreter| {
+			use types::Float;
+			let v = vec![Const(Value::F32(3.0)), FUnary(Float::F32, FUnOp::Neg)];
+			assert!(int.interpret(&v).is_ok());
+			assert_eq!(*int.stack.last().unwrap(), Value::F32(-3.0));
+
+			let v = vec![Const(Value::F32(3.0)), FUnary(Float::F32, FUnOp::Neg)];
+			assert!(int.interpret(&v).is_ok());
+			assert_eq!(*int.stack.last().unwrap(), Value::F32(-3.0));
+
+			let v = vec![Const(Value::F32(-3.0)), FUnary(Float::F32, FUnOp::Abs)];
+			assert!(int.interpret(&v).is_ok());
+			assert_eq!(*int.stack.last().unwrap(), Value::F32(3.0));
+
+			let v = vec![Const(Value::F32(-3.5)), FUnary(Float::F32, FUnOp::Ceil)];
+			assert!(int.interpret(&v).is_ok());
+			assert_eq!(*int.stack.last().unwrap(), Value::F32(-3.0));
+
+			let v = vec![Const(Value::F32(-3.5)), FUnary(Float::F32, FUnOp::Floor)];
+			assert!(int.interpret(&v).is_ok());
+			assert_eq!(*int.stack.last().unwrap(), Value::F32(-4.0));
+
+			let v = vec![Const(Value::F32(-3.5)), FUnary(Float::F32, FUnOp::Trunc)];
+			assert!(int.interpret(&v).is_ok());
+			assert_eq!(*int.stack.last().unwrap(), Value::F32(-3.0));
+
+			let v = vec![Const(Value::F32(3.2)), FUnary(Float::F32, FUnOp::Nearest)];
+			assert!(int.interpret(&v).is_ok());
+			assert_eq!(*int.stack.last().unwrap(), Value::F32(3.0));
+
+			let v = vec![Const(Value::F32(4.0)), FUnary(Float::F32, FUnOp::Sqrt)];
+			assert!(int.interpret(&v).is_ok());
+			assert_eq!(*int.stack.last().unwrap(), Value::F32(2.0));
 		})
 	}
 
