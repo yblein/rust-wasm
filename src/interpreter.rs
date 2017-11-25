@@ -129,29 +129,18 @@ impl Interpreter {
 	/// Dispatch an IBinOp
 	fn ibin(&mut self, _t: &types::Int, op: &IBinOp) -> IntResult {
 		// Validation should assert that there are two values on top of the
-		// stack having the same type t
-		let res = match self.stack.pop().unwrap() {
-			Value::I32(c1) => match self.stack.pop().unwrap() {
-				Value::I32(c2) => match self.type_ibin(c1, c2, op) {
-					Some(r) => Some(Value::I32(r)),
-					None => None
-				},
-				_ => unreachable!()
-			},
-			Value::I64(c1) => match self.stack.pop().unwrap() {
-				Value::I64(c2) => match self.type_ibin(c1, c2, op) {
-					Some(r) => Some(Value::I64(r)),
-					None => None
-				},
-				_ => unreachable!()
-			},
+		// stack having the same integer type t
+		let res = match self.pop2() {
+			(Value::I32(c1), Value::I32(c2)) => self.type_ibin(c1, c2, op).map(Value::I32),
+			(Value::I64(c1), Value::I64(c2)) => self.type_ibin(c1, c2, op).map(Value::I64),
 			_ => unreachable!(),
 		};
-		if res.is_none() {
-			return Err(UndefinedResult)
-		} else {
+
+		if let Some(v) = res {
 			self.stack.push(res.unwrap());
-			return Ok(())
+			Ok(())
+		} else {
+			Err(UndefinedResult)
 		}
 	}
 
@@ -236,16 +225,10 @@ impl Interpreter {
 	/// Dispatch an IRelOp
 	fn irel(&mut self, _t: &types::Int, op: &IRelOp) -> IntResult {
 		// Validation should assert that there are two values on top of the
-		// stack having the same type t
-		let res = match self.stack.pop().unwrap() {
-			Value::I32(c1) => match self.stack.pop().unwrap() {
-				Value::I32(c2) => Value::I32(self.type_irel(c1, c2, op)),
-				_ => unreachable!()
-			},
-			Value::I64(c1) => match self.stack.pop().unwrap() {
-				Value::I64(c2) => Value::I64(self.type_irel(c1, c2, op)),
-				_ => unreachable!()
-			},
+		// stack having the same integer type t
+		let res = match self.pop2() {
+			(Value::I32(c1), Value::I32(c2)) => Value::I32(self.type_irel(c1, c2, op)),
+			(Value::I64(c1), Value::I64(c2)) => Value::I64(self.type_irel(c1, c2, op)),
 			_ => unreachable!(),
 		};
 		self.stack.push(res);
@@ -267,6 +250,11 @@ impl Interpreter {
 			IRelOp::GeS => c1.ges(c2),
 			IRelOp::GeU => c1.geu(c2),
 		}
+	}
+
+	/// Pops two values from the stack, assuming that the stack is large enough to do so.
+	fn pop2(&mut self) -> (Value, Value) {
+		(self.stack.pop().unwrap(), self.stack.pop().unwrap())
 	}
 }
 
