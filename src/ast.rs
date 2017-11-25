@@ -1,7 +1,7 @@
 use types;
 use values;
 
-#[derive(Debug, Clone, Copy)]
+#[derive(Debug)]
 pub enum IUnOp {
 	Clz, Ctz, Popcnt,
 }
