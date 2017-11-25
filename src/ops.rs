@@ -226,10 +226,19 @@ pub trait FloatOp {
 	fn trunc(self) -> Self;
 	fn nearest(self) -> Self;
 	fn sqrt(self) -> Self;
+
+	// FBinOp
+	fn add(self, rhs: Self) -> Self;
+	fn sub(self, rhs: Self) -> Self;
+	fn mul(self, rhs: Self) -> Self;
+	fn div(self, rhs: Self) -> Self;
+	fn min(self, rhs: Self) -> Self;
+	fn max(self, rhs: Self) -> Self;
+	fn copysign(self, rhs: Self) -> Self;
 }
 
 macro_rules! impl_float_op {
-	($T:ty) => (
+	($T:ty, $copysign:ident) => (
 		impl FloatOp for $T {
 			#[inline]
 			fn neg(self) -> $T {
@@ -265,8 +274,44 @@ macro_rules! impl_float_op {
 			fn sqrt(self) -> $T {
 				<$T>::sqrt(self)
 			}
+
+			#[inline]
+			fn add(self, rhs: $T) -> $T {
+				self + rhs
+			}
+
+			#[inline]
+			fn sub(self, rhs: $T) -> $T {
+				self - rhs
+			}
+
+			#[inline]
+			fn mul(self, rhs: $T) -> $T {
+				self * rhs
+			}
+
+			#[inline]
+			fn div(self, rhs: $T) -> $T {
+				self / rhs
+			}
+
+			#[inline]
+			fn min(self, rhs: $T) -> $T {
+				<$T>::min(self, rhs)
+			}
+
+			#[inline]
+			fn max(self, rhs: $T) -> $T {
+				<$T>::max(self, rhs)
+			}
+
+			#[inline]
+			fn copysign(self, rhs: $T) -> $T {
+				use std::intrinsics;
+				unsafe { intrinsics::$copysign(self, rhs) }
+			}
 		}
 	)
 }
-impl_float_op!(f32);
-impl_float_op!(f64);
+impl_float_op!(f32, copysignf32);
+impl_float_op!(f64, copysignf64);

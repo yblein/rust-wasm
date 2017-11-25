@@ -45,6 +45,7 @@ impl Interpreter {
 				IUnary(ref t, ref op) => self.iunary(&t, &op),
 				FUnary(ref t, ref op) => self.funary(&t, &op),
 				IBin(ref t, ref op) => self.ibin(&t, &op),
+				FBin(ref t, ref op) => self.fbin(&t, &op),
 				ITest(ref t, ref op) => self.itest(&t, &op),
 				IRel(ref t, ref op) => self.irel(&t, &op),
 				_ => unimplemented!()
@@ -176,6 +177,40 @@ impl Interpreter {
 			IBinOp::Rotl => c1.rotl(c2),
 		};
 		Some(res)
+	}
+
+
+	/// Dispatch an FBinOp
+	fn fbin(&mut self, _t: &types::Float, op: &FBinOp) -> IntResult {
+		// Validation should assert that there are two values on top of the
+		// stack having the same type t
+		let res = match self.stack.pop().unwrap() {
+			Value::F32(c1) => match self.stack.pop().unwrap() {
+				Value::F32(c2) => Value::F32(self.type_fbin(c1, c2, op)),
+				_ => unreachable!()
+			},
+			Value::F64(c1) => match self.stack.pop().unwrap() {
+				Value::F64(c2) => Value::F64(self.type_fbin(c1, c2, op)),
+				_ => unreachable!()
+			},
+			_ => unreachable!(),
+		};
+		self.stack.push(res);
+		Ok(())
+	}
+
+	fn type_fbin<T>(&self, c1: T, c2: T, op: &FBinOp) -> T
+		where T: FloatOp
+	{
+		match *op {
+			FBinOp::Add => c1.add(c2),
+			FBinOp::Sub => c1.sub(c2),
+			FBinOp::Mul => c1.mul(c2),
+			FBinOp::Div => c1.div(c2),
+			FBinOp::Min => c1.min(c2),
+			FBinOp::Max => c1.max(c2),
+			FBinOp::CopySign => c1.copysign(c2),
+		}
 	}
 
 	/// Dispatch an ITestOp
@@ -507,6 +542,42 @@ mod tests {
 			let v = vec![Const(Value::F32(4.0)), FUnary(Float::F32, FUnOp::Sqrt)];
 			assert!(int.interpret(&v).is_ok());
 			assert_eq!(*int.stack.last().unwrap(), Value::F32(2.0));
+		})
+	}
+
+	#[test]
+	fn fbin() {
+		t(|mut int: Interpreter| {
+			use types::Float;
+			use std::f32;
+
+			let v = vec![Const(Value::F32(3.0)), Const(Value::F32(5.0)), FBin(Float::F32, FBinOp::Add)];
+			assert!(int.interpret(&v).is_ok());
+			assert_eq!(*int.stack.last().unwrap(), Value::F32(8.0));
+
+			let v = vec![Const(Value::F32(3.0)), Const(Value::F32(-5.0)), FBin(Float::F32, FBinOp::Sub)];
+			assert!(int.interpret(&v).is_ok());
+			assert_eq!(*int.stack.last().unwrap(), Value::F32(-8.0));
+
+			let v = vec![Const(Value::F32(3.0)), Const(Value::F32(5.5)), FBin(Float::F32, FBinOp::Mul)];
+			assert!(int.interpret(&v).is_ok());
+			assert_eq!(*int.stack.last().unwrap(), Value::F32(16.5));
+
+			let v = vec![Const(Value::F32(-0.0)), Const(Value::F32(5.0)), FBin(Float::F32, FBinOp::Div)];
+			assert!(int.interpret(&v).is_ok());
+			assert_eq!(*int.stack.last().unwrap(), Value::F32(f32::NEG_INFINITY));
+
+			let v = vec![Const(Value::F32(-3.0)), Const(Value::F32(5.0)), FBin(Float::F32, FBinOp::Min)];
+			assert!(int.interpret(&v).is_ok());
+			assert_eq!(*int.stack.last().unwrap(), Value::F32(-3.0));
+
+			let v = vec![Const(Value::F32(3.0)), Const(Value::F32(-5.0)), FBin(Float::F32, FBinOp::Max)];
+			assert!(int.interpret(&v).is_ok());
+			assert_eq!(*int.stack.last().unwrap(), Value::F32(3.0));
+
+			let v = vec![Const(Value::F32(-3.0)), Const(Value::F32(-5.0)), FBin(Float::F32, FBinOp::CopySign)];
+			assert!(int.interpret(&v).is_ok());
+			assert_eq!(*int.stack.last().unwrap(), Value::F32(-5.0));
 		})
 	}
 
