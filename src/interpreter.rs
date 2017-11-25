@@ -48,6 +48,7 @@ impl Interpreter {
 				FBin(ref t, ref op) => self.fbin(&t, &op),
 				ITest(ref t, ref op) => self.itest(&t, &op),
 				IRel(ref t, ref op) => self.irel(&t, &op),
+				FRel(ref t, ref op) => self.frel(&t, &op),
 				_ => unimplemented!()
 			}?
 		}
@@ -243,6 +244,32 @@ impl Interpreter {
 			IRelOp::LeU => c1.leu(c2),
 			IRelOp::GeS => c1.ges(c2),
 			IRelOp::GeU => c1.geu(c2),
+		}
+	}
+
+	/// Dispatch an FRelOp
+	fn frel(&mut self, _t: &types::Float, op: &FRelOp) -> IntResult {
+		// Validation should assert that there are two values on top of the
+		// stack having the same integer type t
+		let res = match self.pop2() {
+			(Value::F32(c1), Value::F32(c2)) => Value::F32(self.type_frel(c1, c2, op)),
+			(Value::F64(c1), Value::F64(c2)) => Value::F64(self.type_frel(c1, c2, op)),
+			_ => unreachable!(),
+		};
+		self.stack.push(res);
+		Ok(())
+	}
+
+	fn type_frel<T>(&self, c1: T, c2: T, op: &FRelOp) -> T
+		where T: FloatOp
+	{
+		match *op {
+			FRelOp::Eq_ => c1.eq(c2),
+			FRelOp::Ne => c1.ne(c2),
+			FRelOp::Lt => c1.lt(c2),
+			FRelOp::Gt => c1.gt(c2),
+			FRelOp::Le => c1.le(c2),
+			FRelOp::Ge => c1.ge(c2),
 		}
 	}
 
@@ -562,6 +589,40 @@ mod tests {
 			assert_eq!(*int.stack.last().unwrap(), Value::F32(-5.0));
 		})
 	}
+
+
+	#[test]
+	fn frel() {
+		t(|mut int: Interpreter| {
+			use types::Float;
+			use std::f32;
+
+			let v = vec![Const(Value::F32(3.0)), Const(Value::F32(5.0)), FRel(Float::F32, FRelOp::Eq_)];
+			assert!(int.interpret(&v).is_ok());
+			assert_eq!(*int.stack.last().unwrap(), Value::F32(0.0));
+
+			let v = vec![Const(Value::F32(3.0)), Const(Value::F32(5.0)), FRel(Float::F32, FRelOp::Ne)];
+			assert!(int.interpret(&v).is_ok());
+			assert_eq!(*int.stack.last().unwrap(), Value::F32(1.0));
+
+			let v = vec![Const(Value::F32(3.0)), Const(Value::F32(5.0)), FRel(Float::F32, FRelOp::Lt)];
+			assert!(int.interpret(&v).is_ok());
+			assert_eq!(*int.stack.last().unwrap(), Value::F32(0.0));
+
+			let v = vec![Const(Value::F32(3.0)), Const(Value::F32(5.0)), FRel(Float::F32, FRelOp::Gt)];
+			assert!(int.interpret(&v).is_ok());
+			assert_eq!(*int.stack.last().unwrap(), Value::F32(1.0));
+
+			let v = vec![Const(Value::F32(5.0)), Const(Value::F32(5.0)), FRel(Float::F32, FRelOp::Le)];
+			assert!(int.interpret(&v).is_ok());
+			assert_eq!(*int.stack.last().unwrap(), Value::F32(1.0));
+
+			let v = vec![Const(Value::F32(3.0)), Const(Value::F32(5.0)), FRel(Float::F32, FRelOp::Ge)];
+			assert!(int.interpret(&v).is_ok());
+			assert_eq!(*int.stack.last().unwrap(), Value::F32(1.0));
+		})
+	}
+
 
 	#[test]
 	fn interpret_vm_ownership() {

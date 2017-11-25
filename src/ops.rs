@@ -235,6 +235,17 @@ pub trait FloatOp {
 	fn min(self, rhs: Self) -> Self;
 	fn max(self, rhs: Self) -> Self;
 	fn copysign(self, rhs: Self) -> Self;
+
+	// FRelOp
+	fn eq(self, rhs: Self) -> Self;
+	fn ne(self, rhs: Self) -> Self;
+	fn lt(self, rhs: Self) -> Self;
+	fn gt(self, rhs: Self) -> Self;
+	fn le(self, rhs: Self) -> Self;
+	fn ge(self, rhs: Self) -> Self;
+
+	// Helpers
+	fn bool_to_type(bool) -> Self;
 }
 
 macro_rules! impl_float_op {
@@ -309,6 +320,45 @@ macro_rules! impl_float_op {
 			fn copysign(self, rhs: $T) -> $T {
 				use std::intrinsics;
 				unsafe { intrinsics::$copysign(self, rhs) }
+			}
+
+			#[inline]
+			fn bool_to_type(b: bool) -> $T {
+				if b {
+					1.0
+				} else {
+					0.0
+				}
+			}
+
+			#[inline]
+			fn eq(self, rhs: $T) -> $T {
+				Self::bool_to_type(self == rhs)
+			}
+
+			#[inline]
+			fn ne(self, rhs: $T) -> $T {
+				Self::bool_to_type(self != rhs)
+			}
+
+			#[inline]
+			fn lt(self, rhs: $T) -> $T {
+				Self::bool_to_type(self < rhs)
+			}
+
+			#[inline]
+			fn gt(self, rhs: $T) -> $T {
+				Self::bool_to_type(self > rhs)
+			}
+
+			#[inline]
+			fn le(self, rhs: $T) -> $T {
+				Self::bool_to_type(self <= rhs)
+			}
+
+			#[inline]
+			fn ge(self, rhs: $T) -> $T {
+				Self::bool_to_type(self >= rhs)
 			}
 		}
 	)
