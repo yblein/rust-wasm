@@ -173,15 +173,9 @@ impl Interpreter {
 	fn fbin(&mut self, _t: &types::Float, op: &FBinOp) -> IntResult {
 		// Validation should assert that there are two values on top of the
 		// stack having the same type t
-		let res = match self.stack.pop().unwrap() {
-			Value::F32(c1) => match self.stack.pop().unwrap() {
-				Value::F32(c2) => Value::F32(self.type_fbin(c1, c2, op)),
-				_ => unreachable!()
-			},
-			Value::F64(c1) => match self.stack.pop().unwrap() {
-				Value::F64(c2) => Value::F64(self.type_fbin(c1, c2, op)),
-				_ => unreachable!()
-			},
+		let res = match self.pop2() {
+			(Value::F32(c1), Value::F32(c2)) => Value::F32(self.type_fbin(c1, c2, op)),
+			(Value::F64(c1), Value::F64(c2)) => Value::F64(self.type_fbin(c1, c2, op)),
 			_ => unreachable!(),
 		};
 		self.stack.push(res);
