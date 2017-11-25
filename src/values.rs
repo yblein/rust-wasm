@@ -19,10 +19,12 @@ impl Value {
 }
 
 pub trait GenericIntOp<S=Self> {
+	// IUnOp
 	fn leading_zeros(self) -> Self;
 	fn trailing_zeros(self) -> Self;
 	fn count_ones(self) -> Self;
 
+	// IBinOp
 	fn add(self, rhs: Self) -> Self;
 	fn sub(self, rhs: Self) -> Self;
 	fn mul(self, rhs: Self) -> Self;
@@ -38,6 +40,9 @@ pub trait GenericIntOp<S=Self> {
 	fn shru(self, rhs: Self) -> Self;
 	fn rotr(self, rhs: Self) -> Self;
 	fn rotl(self, rhs: Self) -> Self;
+
+	// ITestOp
+	fn eqz(self) -> Self;
 }
 
 macro_rules! impl_generic_op {
@@ -142,6 +147,15 @@ macro_rules! impl_generic_op {
 			#[inline]
 			fn rotl(self, rhs: $T) -> $T {
 				<$T>::rotate_right(self, rhs as u32)
+			}
+
+			#[inline]
+			fn eqz(self) -> $T {
+				if self == 0 {
+					0
+				} else {
+					1
+				}
 			}
 		}
 	)

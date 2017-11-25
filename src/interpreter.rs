@@ -43,6 +43,7 @@ impl Interpreter {
 				Const(c) => self.const_(c),
 				IUnary(ref t, ref op) => self.iunary(&t, &op),
 				IBin(ref t, ref op) => self.ibin(&t, &op),
+				ITest(ref t, ref op) => self.itest(&t, &op),
 				_ => unimplemented!()
 			}?
 		}
@@ -147,6 +148,27 @@ impl Interpreter {
 		};
 		Some(res)
 	}
+
+	/// Dispath an ITest
+	fn itest(&mut self, _t: &types::Int, op: &ITestOp) -> IntResult {
+		// Validation should assert that the top of the stack exists and has the type t
+		let v = match self.stack.pop().unwrap() {
+			Value::I32(c) => Value::I32(self.type_itest(c, op)),
+			Value::I64(c) => Value::I64(self.type_itest(c, op)),
+			_ => unreachable!(),
+		};
+		self.stack.push(v);
+		Ok(())
+	}
+
+	fn type_itest<T>(&self, v: T, op: &ITestOp) -> T
+		where T: GenericIntOp
+	{
+		match *op {
+			ITestOp::Eqz => v.eqz(),
+		}
+	}
+
 }
 
 #[cfg(test)]
@@ -347,6 +369,20 @@ mod tests {
 			let v = vec![Const(Value::I32(16)), Const(Value::I32(0xFFFFFFFF)), IBin(Int::I32, IBinOp::ShrS)];
 			assert!(int.interpret(&v).is_ok());
 			assert_eq!(*int.stack.last().unwrap(), Value::I32(0xFFFFFFFF));
+		})
+	}
+
+	#[test]
+	fn itest() {
+		t(|mut int: Interpreter| {
+			use types::Int;
+			let v = vec![Const(Value::I32(0)), ITest(Int::I32, ITestOp::Eqz)];
+			assert!(int.interpret(&v).is_ok());
+			assert_eq!(*int.stack.last().unwrap(), Value::I32(0));
+
+			let v = vec![Const(Value::I32(42)), ITest(Int::I32, ITestOp::Eqz)];
+			assert!(int.interpret(&v).is_ok());
+			assert_eq!(*int.stack.last().unwrap(), Value::I32(1));
 		})
 	}
 
