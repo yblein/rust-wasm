@@ -43,6 +43,21 @@ pub trait GenericIntOp<S=Self> {
 
 	// ITestOp
 	fn eqz(self) -> Self;
+
+	// IRelOp
+	fn eq(self, rhs: Self) -> Self;
+	fn ne(self, rhs: Self) -> Self;
+	fn lts(self, rhs: Self) -> Self;
+	fn ltu(self, rhs: Self) -> Self;
+	fn gts(self, rhs: Self) -> Self;
+	fn gtu(self, rhs: Self) -> Self;
+	fn les(self, rhs: Self) -> Self;
+	fn leu(self, rhs: Self) -> Self;
+	fn ges(self, rhs: Self) -> Self;
+	fn geu(self, rhs: Self) -> Self;
+
+	// Helpers
+	fn bool_to_type(bool) -> Self;
 }
 
 macro_rules! impl_generic_op {
@@ -150,12 +165,67 @@ macro_rules! impl_generic_op {
 			}
 
 			#[inline]
-			fn eqz(self) -> $T {
-				if self == 0 {
-					0
-				} else {
+			fn bool_to_type(b: bool) -> $T {
+				if b {
 					1
+				} else {
+					0
 				}
+			}
+
+			#[inline]
+			fn eqz(self) -> $T {
+				Self::bool_to_type(self == 0)
+			}
+
+			#[inline]
+			fn eq(self, rhs: $T) -> $T {
+				Self::bool_to_type(self == rhs)
+			}
+
+			#[inline]
+			fn ne(self, rhs: $T) -> $T {
+				Self::bool_to_type(self != rhs)
+			}
+
+			#[inline]
+			fn lts(self, rhs: $T) -> $T {
+				Self::bool_to_type((self as $S) < (rhs as $S))
+			}
+
+			#[inline]
+			fn ltu(self, rhs: $T) -> $T {
+				Self::bool_to_type(self < rhs)
+			}
+
+			#[inline]
+			fn gts(self, rhs: $T) -> $T {
+				Self::bool_to_type((self as $S) > (rhs as $S))
+			}
+
+			#[inline]
+			fn gtu(self, rhs: $T) -> $T {
+				Self::bool_to_type(self > rhs)
+			}
+
+			#[inline]
+			fn les(self, rhs: $T) -> $T {
+				Self::bool_to_type((self as $S) <= (rhs as $S))
+			}
+
+			#[inline]
+			fn leu(self, rhs: $T) -> $T {
+				Self::bool_to_type(self <= rhs)
+			}
+
+			#[inline]
+			fn ges(self, rhs: $T) -> $T {
+				Self::bool_to_type((self as $S) >= (rhs as $S))
+			}
+
+			#[inline]
+			fn geu(self, rhs: $T) -> $T {
+				Self::bool_to_type((self as $S) >= (rhs as $S))
 			}
 		}
 	)

@@ -44,6 +44,7 @@ impl Interpreter {
 				IUnary(ref t, ref op) => self.iunary(&t, &op),
 				IBin(ref t, ref op) => self.ibin(&t, &op),
 				ITest(ref t, ref op) => self.itest(&t, &op),
+				IRel(ref t, ref op) => self.irel(&t, &op),
 				_ => unimplemented!()
 			}?
 		}
@@ -169,6 +170,41 @@ impl Interpreter {
 		}
 	}
 
+	/// Dispath an IRel
+	fn irel(&mut self, _t: &types::Int, op: &IRelOp) -> IntResult {
+		// Validation should assert that there are two values on top of the
+		// stack having the same type t
+		let res = match self.stack.pop().unwrap() {
+			Value::I32(c1) => match self.stack.pop().unwrap() {
+				Value::I32(c2) => Value::I32(self.type_irel(c1, c2, op)),
+				_ => unreachable!()
+			},
+			Value::I64(c1) => match self.stack.pop().unwrap() {
+				Value::I64(c2) => Value::I64(self.type_irel(c1, c2, op)),
+				_ => unreachable!()
+			},
+			_ => unreachable!(),
+		};
+		self.stack.push(res);
+		Ok(())
+	}
+
+	fn type_irel<T>(&self, c1: T, c2: T, op: &IRelOp) -> T
+		where T: GenericIntOp
+	{
+		match *op {
+			IRelOp::Eq_ => c1.eq(c2),
+			IRelOp::Ne => c1.ne(c2),
+			IRelOp::LtS => c1.lts(c2),
+			IRelOp::LtU => c1.ltu(c2),
+			IRelOp::GtS => c1.gts(c2),
+			IRelOp::GtU => c1.gtu(c2),
+			IRelOp::LeS => c1.les(c2),
+			IRelOp::LeU => c1.leu(c2),
+			IRelOp::GeS => c1.ges(c2),
+			IRelOp::GeU => c1.geu(c2),
+		}
+	}
 }
 
 #[cfg(test)]
@@ -378,9 +414,31 @@ mod tests {
 			use types::Int;
 			let v = vec![Const(Value::I32(0)), ITest(Int::I32, ITestOp::Eqz)];
 			assert!(int.interpret(&v).is_ok());
-			assert_eq!(*int.stack.last().unwrap(), Value::I32(0));
+			assert_eq!(*int.stack.last().unwrap(), Value::I32(1));
 
 			let v = vec![Const(Value::I32(42)), ITest(Int::I32, ITestOp::Eqz)];
+			assert!(int.interpret(&v).is_ok());
+			assert_eq!(*int.stack.last().unwrap(), Value::I32(0));
+		})
+	}
+
+	#[test]
+	fn irel() {
+		t(|mut int: Interpreter| {
+			use types::Int;
+			let v = vec![Const(Value::I32(42)), Const(Value::I32(43)), IRel(Int::I32, IRelOp::Eq_)];
+			assert!(int.interpret(&v).is_ok());
+			assert_eq!(*int.stack.last().unwrap(), Value::I32(0));
+
+			let v = vec![Const(Value::I32(42)), Const(Value::I32(43)), IRel(Int::I32, IRelOp::Ne)];
+			assert!(int.interpret(&v).is_ok());
+			assert_eq!(*int.stack.last().unwrap(), Value::I32(1));
+
+			let v = vec![Const(Value::I32(-42i32 as u32)), Const(Value::I32(43)), IRel(Int::I32, IRelOp::LtS)];
+			assert!(int.interpret(&v).is_ok());
+			assert_eq!(*int.stack.last().unwrap(), Value::I32(0));
+
+			let v = vec![Const(Value::I32(-42i32 as u32)), Const(Value::I32(43)), IRel(Int::I32, IRelOp::LtU)];
 			assert!(int.interpret(&v).is_ok());
 			assert_eq!(*int.stack.last().unwrap(), Value::I32(1));
 		})
