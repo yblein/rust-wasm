@@ -50,6 +50,8 @@ impl Interpreter {
 		match *instr {
 			Unreachable => self.unreachable(),
 			Nop => self.nop(),
+			Drop_ => self.drop(),
+			Select => self.select(),
 			Const(c) => self.const_(c),
 			IUnary(ref t, ref op) => self.iunary(t, op),
 			FUnary(ref t, ref op) => self.funary(t, op),
@@ -71,6 +73,39 @@ impl Interpreter {
 	/// Do nothing
 	fn nop(&self) -> IntResult {
 		Ok(Continue)
+	}
+
+	/// Drop a value from the stack
+	fn drop(&mut self) -> IntResult {
+		self.stack.pop();
+		Ok(Continue)
+	}
+
+	/// branchless conditional
+	fn select(&mut self) -> IntResult {
+		let res = match self.stack.pop().unwrap() {
+			Value::I32(c) => {
+				match self.pop2() {
+					(v1 @ Value::I32(_), v2 @ Value::I32(_)) => self.type_select(c, v1, v2),
+					(v1 @ Value::I64(_), v2 @ Value::I64(_)) => self.type_select(c, v1, v2),
+					(v1 @ Value::F32(_), v2 @ Value::F32(_)) => self.type_select(c, v1, v2),
+					(v1 @ Value::F64(_), v2 @ Value::F64(_)) => self.type_select(c, v1, v2),
+					_ => unreachable!(),
+				}
+			},
+			_ => unreachable!()
+		};
+		self.stack.push(res);
+		Ok(Continue)
+	}
+
+	fn type_select<T>(&self, c: u32, v1: T, v2: T) -> T
+	{
+		if c == 0 {
+			v2
+		} else {
+			v1
+		}
 	}
 
 	/// Push c to the stack
@@ -599,6 +634,27 @@ mod tests {
 	}
 
 	#[test]
+	fn drop() {
+		t(|mut int: Interpreter| {
+			use types::Int;
+			let v = [Const(Value::I64(0xFFFFDEADC0DEFFFF)), Drop_];
+			assert_seq_stack0(&v);
+		})
+	}
+
+	#[test]
+	fn select() {
+		t(|mut int: Interpreter| {
+			use types::Int;
+			let v = [Const(Value::I64(1)), Const(Value::I64(2)), Const(Value::I32(0)), Select];
+			assert_seq_stack1(&v, Value::I64(1));
+
+			let v = [Const(Value::F64(1.0)), Const(Value::F64(2.0)), Const(Value::I32(42)), Select];
+			assert_seq_stack1(&v, Value::F64(2.0));
+		})
+	}
+
+	#[test]
 	fn interpret_vm_ownership() {
 		t(|mut int: Interpreter| {
 			assert_eq!(int.vm.modules.len(), 0);
@@ -647,5 +703,10 @@ mod tests {
 	/// Variant of `assert_seq_stack` where the resulting stack holds a single value.
 	fn assert_seq_stack1(instrs: &[Instr], v: Value) {
 		assert_seq_stack(instrs, &[v]);
+	}
+
+	/// Variant of `assert_seq_stack` where the resulting stack holds no value.
+	fn assert_seq_stack0(instrs: &[Instr]) {
+		assert_seq_stack(instrs, &[]);
 	}
 }
