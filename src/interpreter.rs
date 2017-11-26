@@ -11,23 +11,26 @@ pub struct Interpreter {
 	vm: vm::VM,
 }
 
-type IntResult = Result<(), InterpreterError>;
-
 #[derive(Debug, PartialEq)]
-/// All possible errors the interpreter can raise
-/// These errors are here for debugging
-pub enum InterpreterError {
+/// Causes at the origin of a trap.
+pub enum TrapOrigin {
 	Unreachable,
 	UndefinedResult,
 }
 
 #[derive(Debug, PartialEq)]
-pub enum TrapError {
-	Trap(InterpreterError)
+pub struct Trap {
+	/// Original cause of the trap. Useful for debugging.
+	pub origin: TrapOrigin
 }
 
-use self::InterpreterError::*;
-use self::TrapError::*;
+enum Control {
+	Continue,
+}
+
+use self::Control::*;
+
+type IntResult = Result<Control, Trap>;
 
 impl Interpreter {
 	/// Instantiate a new interpreter
@@ -44,7 +47,7 @@ impl Interpreter {
 		use ast::Instr::*;
 
 		match *instr {
-			Instr::Unreachable => self.unreachable(),
+			Unreachable => self.unreachable(),
 			Nop => self.nop(),
 			Const(c) => self.const_(c),
 			IUnary(ref t, ref op) => self.iunary(t, op),
@@ -60,18 +63,18 @@ impl Interpreter {
 
 	/// Raises an unconditional trap
 	fn unreachable(&self) -> IntResult {
-		Err(Unreachable)
+		Err(Trap { origin: TrapOrigin::Unreachable })
 	}
 
 	/// Do nothing
 	fn nop(&self) -> IntResult {
-		Ok(())
+		Ok(Continue)
 	}
 
 	/// Push c to the stack
 	fn const_(&mut self, c: Value) -> IntResult {
 		self.stack.push(c);
-		Ok(())
+		Ok(Continue)
 	}
 
 	/// Dispatch an IUnop
@@ -83,7 +86,7 @@ impl Interpreter {
 			_ => unreachable!(),
 		};
 		self.stack.push(v);
-		Ok(())
+		Ok(Continue)
 	}
 
 	fn type_iunary<T>(&self, v: T, op: &IUnOp) -> T
@@ -105,7 +108,7 @@ impl Interpreter {
 			_ => unreachable!(),
 		};
 		self.stack.push(v);
-		Ok(())
+		Ok(Continue)
 	}
 
 	fn type_funary<T>(&self, v: T, op: &FUnOp) -> T
@@ -134,9 +137,9 @@ impl Interpreter {
 
 		if let Some(v) = res {
 			self.stack.push(v);
-			Ok(())
+			Ok(Continue)
 		} else {
-			Err(UndefinedResult)
+			Err(Trap { origin: TrapOrigin::UndefinedResult })
 		}
 	}
 
@@ -175,7 +178,7 @@ impl Interpreter {
 			_ => unreachable!(),
 		};
 		self.stack.push(res);
-		Ok(())
+		Ok(Continue)
 	}
 
 	fn type_fbin<T>(&self, c1: T, c2: T, op: &FBinOp) -> T
@@ -201,7 +204,7 @@ impl Interpreter {
 			_ => unreachable!(),
 		};
 		self.stack.push(v);
-		Ok(())
+		Ok(Continue)
 	}
 
 	fn type_itest<T>(&self, v: T, op: &ITestOp) -> bool
@@ -222,7 +225,7 @@ impl Interpreter {
 			_ => unreachable!(),
 		};
 		self.stack.push(res);
-		Ok(())
+		Ok(Continue)
 	}
 
 	fn type_irel<T>(&self, c1: T, c2: T, op: &IRelOp) -> bool
@@ -252,7 +255,7 @@ impl Interpreter {
 			_ => unreachable!(),
 		};
 		self.stack.push(res);
-		Ok(())
+		Ok(Continue)
 	}
 
 	fn type_frel<T>(&self, c1: T, c2: T, op: &FRelOp) -> bool
@@ -291,7 +294,7 @@ mod tests {
 	fn unreachable() {
 		t(|mut int: Interpreter| {
 			let v = vec![Instr::Unreachable];
-			assert_eq!(run_seq(&mut int, &v).err().unwrap(), Trap(InterpreterError::Unreachable))
+			assert_eq!(run_seq(&mut int, &v).err().unwrap(), Trap { origin: TrapOrigin::Unreachable })
 		})
 	}
 
@@ -307,7 +310,7 @@ mod tests {
 	fn nop_then_unreachable() {
 		t(|mut int: Interpreter| {
 			let v = vec![Nop, Instr::Unreachable];
-			assert_eq!(run_seq(&mut int, &v).err().unwrap(), Trap(InterpreterError::Unreachable))
+			assert_eq!(run_seq(&mut int, &v).err().unwrap(), Trap { origin: TrapOrigin::Unreachable })
 		})
 	}
 
@@ -433,17 +436,17 @@ mod tests {
 			assert_eq!(*int.stack.last().unwrap(), Value::I32(1));
 
 			let v = vec![Const(Value::I32(0)), Const(Value::I32(1)), IBin(Int::I32, IBinOp::DivU)];
-			assert_eq!(run_seq(&mut int, &v).err().unwrap(), Trap(UndefinedResult));
+			assert_eq!(run_seq(&mut int, &v).err().unwrap(), Trap { origin: TrapOrigin::UndefinedResult });
 
 			let v = vec![Const(Value::I32(-1i32 as u32)), Const(Value::I32((i32::min_value() as u32))), IBin(Int::I32, IBinOp::DivS)];
-			assert_eq!(run_seq(&mut int, &v).err().unwrap(), Trap(UndefinedResult));
+			assert_eq!(run_seq(&mut int, &v).err().unwrap(), Trap { origin: TrapOrigin::UndefinedResult });
 
 			let v = vec![Const(Value::I32(-1i32 as u32)), Const(Value::I32((i32::min_value() as u32))), IBin(Int::I32, IBinOp::DivU)];
 			assert!(run_seq(&mut int, &v).is_ok());
 			assert_eq!(*int.stack.last().unwrap(), Value::I32(0));
 
 			let v = vec![Const(Value::I32(0)), Const(Value::I32(1)), IBin(Int::I32, IBinOp::RemU)];
-			assert_eq!(run_seq(&mut int, &v).err().unwrap(), Trap(UndefinedResult));
+			assert_eq!(run_seq(&mut int, &v).err().unwrap(), Trap { origin: TrapOrigin::UndefinedResult });
 
 			let v = vec![Const(Value::I32(8)), Const(Value::I32(-13i32 as u32)), IBin(Int::I32, IBinOp::RemS)];
 			assert!(run_seq(&mut int, &v).is_ok());
@@ -632,10 +635,10 @@ mod tests {
 		test(int)
 	}
 
-	fn run_seq(int: &mut Interpreter, instrs: &Vec<Instr>) -> Result<(), TrapError> {
+	fn run_seq(int: &mut Interpreter, instrs: &Vec<Instr>) -> IntResult {
 		for instr in instrs {
-			int.instr(instr).map_err(TrapError::Trap)?;
+			int.instr(instr)?;
 		}
-		Ok(())
+		Ok(Continue)
 	}
 }
