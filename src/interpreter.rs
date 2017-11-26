@@ -567,10 +567,7 @@ mod tests {
 	/// Run a sequence of instructions in a new empty interpreter.
 	fn run_seq(instrs: &[Instr]) -> Result<(), Trap> {
 		t(|mut int: Interpreter| {
-			for instr in instrs {
-				int.instr(instr)?;
-			}
-			Ok(())
+			run_seq_in(&mut int, instrs)
 		})
 	}
 
