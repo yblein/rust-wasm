@@ -21,6 +21,12 @@ pub enum DecodeError {
 	MalformedBinary,
 }
 
+impl From<io::Error> for DecodeError {
+	fn from(e: io::Error) -> Self {
+		DecodeError::Io(e)
+	}
+}
+
 type DecodeResult<T> = Result<T, DecodeError>;
 
 struct Decoder<R: Read + Seek> {

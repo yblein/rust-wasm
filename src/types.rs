@@ -1,16 +1,16 @@
-#[derive(Debug, Clone, Copy)]
+#[derive(Debug, Clone, Copy, PartialEq)]
 pub enum Float {
 	F32,
 	F64,
 }
 
-#[derive(Debug, Clone, Copy)]
+#[derive(Debug, Clone, Copy, PartialEq)]
 pub enum Int {
 	I32,
 	I64,
 }
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, PartialEq)]
 pub enum Value {
 	Int(Int),
 	Float(Float),
@@ -21,12 +21,11 @@ pub enum Elem {
 	AnyFunc,
 }
 
-#[derive(Debug)]
+#[derive(Debug, Clone, PartialEq)]
 pub struct Func {
 	pub args: Vec<Value>,
 	pub result: Vec<Value>,
 }
-
 
 #[derive(Debug)]
 pub struct Limits {

@@ -137,6 +137,7 @@ pub struct Memory {
 #[derive(Debug)]
 pub struct Global {
 	pub type_: types::Global,
+	// TODO: Create a InstrConst type + ExprConst type at runtime
 	pub value: Expr, // NB: Must be a constant expression
 }
 
@@ -195,5 +196,10 @@ impl Module {
 			imports: Vec::new(),
 			exports: Vec::new(),
 		}
+	}
+
+	pub fn is_valid(&self) -> bool {
+		// TODO: validate the module
+		true
 	}
 }

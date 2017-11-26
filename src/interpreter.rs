@@ -384,6 +384,15 @@ impl Interpreter {
 	fn pop2(&mut self) -> (Value, Value) {
 		(self.stack.pop().unwrap(), self.stack.pop().unwrap())
 	}
+
+	/// Evaluate an Expr and return a given value
+	/// Use for global initialization
+	// Todo: Implement ConstExpr
+	pub fn evaluate_global_expr(&mut self, instrs: &Expr) -> Option<Value> {
+		// Only the last value matters for ConstExpr
+		self.instr(instrs.last().unwrap()).ok()?;
+		self.stack.pop()
+	}
 }
 
 #[cfg(test)]
@@ -689,7 +698,6 @@ mod tests {
 	#[test]
 	fn cvtop() {
 		t(|mut int: Interpreter| {
-			use types::Int;
 			let v = [Const(Value::I64(0xFFFFDEADC0DEFFFF)), Convert(ConvertOp::I32WrapI64)];
 			assert_seq_stack1(&v, Value::I32(0xC0DEFFFF));
 
@@ -704,7 +712,6 @@ mod tests {
 	#[test]
 	fn drop() {
 		t(|mut int: Interpreter| {
-			use types::Int;
 			let v = [Const(Value::I64(0xFFFFDEADC0DEFFFF)), Drop_];
 			assert_seq_stack0(&v);
 		})
@@ -713,7 +720,6 @@ mod tests {
 	#[test]
 	fn select() {
 		t(|mut int: Interpreter| {
-			use types::Int;
 			let v = [Const(Value::I64(1)), Const(Value::I64(2)), Const(Value::I32(0)), Select];
 			assert_seq_stack1(&v, Value::I64(1));
 
@@ -724,12 +730,7 @@ mod tests {
 
 	#[test]
 	fn interpret_vm_ownership() {
-		t(|mut int: Interpreter| {
-			assert_eq!(int.vm.modules.len(), 0);
-			let mut m = int.vm.modules;
-			m.push(Module::empty());
-
-			assert_eq!(m.len(), 1);
+		t(|mut _int: Interpreter| {
 		})
 	}
 
