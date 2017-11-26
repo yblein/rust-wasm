@@ -15,12 +15,19 @@ type IntResult = Result<(), InterpreterError>;
 
 #[derive(Debug, PartialEq)]
 /// All possible errors the interpreter can raise
+/// These errors are here for debugging
 pub enum InterpreterError {
-	UnconditionalTrap,
-	UnknownLocal(Index),
+	Unreachable,
 	UndefinedResult,
 }
+
+#[derive(Debug, PartialEq)]
+pub enum TrapError {
+	Trap(InterpreterError)
+}
+
 use self::InterpreterError::*;
+use self::TrapError::*;
 
 impl Interpreter {
 	/// Instantiate a new interpreter
@@ -32,15 +39,19 @@ impl Interpreter {
 	}
 
 	/// Interpret a, Expr (a vector of instruction)
-	/// This is the main dispatching function of the interpreter
-	pub fn interpret(&mut self, expr: &Expr) -> IntResult {
+	/// Wrap a InterpreterError into a trap
+	pub fn interpret(&mut self, expr: &Expr) -> Result<(), TrapError> {
+		self.interpret_sub(&expr).or_else(|e| Err(Trap(e)))
+	}
+
+	/// Main dispatching function of the interpreter
+	fn interpret_sub(&mut self, expr: &Expr) -> IntResult {
 		for ins in expr {
 			use ast::Instr::*;
 
 			match *ins {
-				Unreachable => self.unreachable(),
+				Instr::Unreachable => self.unreachable(),
 				Nop => self.nop(),
-				GetLocal(idx) => self.get_local(idx),
 				Const(c) => self.const_(c),
 				IUnary(ref t, ref op) => self.iunary(t, op),
 				FUnary(ref t, ref op) => self.funary(t, op),
@@ -57,19 +68,11 @@ impl Interpreter {
 
 	/// Raises an unconditional trap
 	fn unreachable(&self) -> IntResult {
-		Err(UnconditionalTrap)
+		Err(Unreachable)
 	}
 
 	/// Do nothing
 	fn nop(&self) -> IntResult {
-		Ok(())
-	}
-
-	/// Get local from the stack
-	fn get_local(&self, idx: Index)-> IntResult {
-		if (idx as usize) >= self.stack.len() {
-			return Err(UnknownLocal(idx))
-		}
 		Ok(())
 	}
 
@@ -138,7 +141,7 @@ impl Interpreter {
 		};
 
 		if let Some(v) = res {
-			self.stack.push(res.unwrap());
+			self.stack.push(v);
 			Ok(())
 		} else {
 			Err(UndefinedResult)
@@ -295,8 +298,8 @@ mod tests {
 	#[test]
 	fn unreachable() {
 		t(|mut int: Interpreter| {
-			let v = vec![Unreachable];
-			assert_eq!(int.interpret(&v).err().unwrap(), UnconditionalTrap)
+			let v = vec![Instr::Unreachable];
+			assert_eq!(int.interpret(&v).err().unwrap(), Trap(InterpreterError::Unreachable))
 		})
 	}
 
@@ -311,16 +314,8 @@ mod tests {
 	#[test]
 	fn nop_then_unreachable() {
 		t(|mut int: Interpreter| {
-			let v = vec![Nop, Unreachable];
-			assert_eq!(int.interpret(&v).err().unwrap(), UnconditionalTrap)
-		})
-	}
-
-	#[test]
-	fn get_local() {
-		t(|mut int: Interpreter| {
-			let v = vec![GetLocal(0)];
-			assert_eq!(int.interpret(&v).err().unwrap(), UnknownLocal(0))
+			let v = vec![Nop, Instr::Unreachable];
+			assert_eq!(int.interpret(&v).err().unwrap(), Trap(InterpreterError::Unreachable))
 		})
 	}
 
@@ -340,7 +335,7 @@ mod tests {
 			use types::Int;
 
 			let v = vec![Const(Value::F32(42.0)), IUnary(Int::I32, IUnOp::Clz)];
-			int.interpret(&v);
+			let _ = int.interpret(&v);
 		})
 	}
 
@@ -446,17 +441,17 @@ mod tests {
 			assert_eq!(*int.stack.last().unwrap(), Value::I32(1));
 
 			let v = vec![Const(Value::I32(0)), Const(Value::I32(1)), IBin(Int::I32, IBinOp::DivU)];
-			assert_eq!(int.interpret(&v).err().unwrap(), UndefinedResult);
+			assert_eq!(int.interpret(&v).err().unwrap(), Trap(UndefinedResult));
 
 			let v = vec![Const(Value::I32(-1i32 as u32)), Const(Value::I32((i32::min_value() as u32))), IBin(Int::I32, IBinOp::DivS)];
-			assert_eq!(int.interpret(&v).err().unwrap(), UndefinedResult);
+			assert_eq!(int.interpret(&v).err().unwrap(), Trap(UndefinedResult));
 
 			let v = vec![Const(Value::I32(-1i32 as u32)), Const(Value::I32((i32::min_value() as u32))), IBin(Int::I32, IBinOp::DivU)];
 			assert!(int.interpret(&v).is_ok());
 			assert_eq!(*int.stack.last().unwrap(), Value::I32(0));
 
 			let v = vec![Const(Value::I32(0)), Const(Value::I32(1)), IBin(Int::I32, IBinOp::RemU)];
-			assert_eq!(int.interpret(&v).err().unwrap(), UndefinedResult);
+			assert_eq!(int.interpret(&v).err().unwrap(), Trap(UndefinedResult));
 
 			let v = vec![Const(Value::I32(8)), Const(Value::I32(-13i32 as u32)), IBin(Int::I32, IBinOp::RemS)];
 			assert!(int.interpret(&v).is_ok());
@@ -595,7 +590,6 @@ mod tests {
 	fn frel() {
 		t(|mut int: Interpreter| {
 			use types::Float;
-			use std::f32;
 
 			let v = vec![Const(Value::F32(3.0)), Const(Value::F32(5.0)), FRel(Float::F32, FRelOp::Eq_)];
 			assert!(int.interpret(&v).is_ok());
