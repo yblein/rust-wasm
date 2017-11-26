@@ -2,7 +2,7 @@ use vm;
 use ast::*;
 use types;
 use values::Value;
-use ops::{IntOp,FloatOp};
+use ops::{IntOp,FloatOp,FloatDemoteOp,FloatPromoteOp};
 
 
 /// A struct storing the state of the current interpreted
@@ -58,6 +58,7 @@ impl Interpreter {
 			ITest(ref t, ref op) => self.itest(t, op),
 			IRel(ref t, ref op) => self.irel(t, op),
 			FRel(ref t, ref op) => self.frel(t, op),
+			Convert(ref op) => self.cvtop(op),
 			_ => unimplemented!()
 		}
 	}
@@ -269,6 +270,55 @@ impl Interpreter {
 			FRelOp::Gt => c1.gt(c2),
 			FRelOp::Le => c1.le(c2),
 			FRelOp::Ge => c1.ge(c2),
+		}
+	}
+
+	/// Dispatch a ConvertOp
+	fn cvtop(&mut self, op: &ConvertOp) -> IntResult {
+		use types::{Int, Float};
+		use types::Value as tv;
+
+		let c = self.stack.pop().unwrap();
+		let cls = |&op, &c| {
+			Some(match (op, c) {
+				(&ConvertOp::I32WrapI64, Value::I64(c)) => Value::I32(c.to_u32()),
+				(&ConvertOp::I64ExtendUI32, Value::I32(c)) => Value::I64(c.to_u64()),
+				(&ConvertOp::I64ExtendSI32, Value::I32(c)) => Value::from_i64(c.to_i64()),
+
+				(&ConvertOp::Trunc{from: Float::F32, to: Int::I32, signed: false}, Value::F32(c)) => Value::I32(c.to_u32()?),
+				(&ConvertOp::Trunc{from: Float::F32, to: Int::I32, signed: true }, Value::F32(c)) => Value::from_i32(c.to_i32()?),
+				(&ConvertOp::Trunc{from: Float::F32, to: Int::I64, signed: false}, Value::F32(c)) => Value::I64(c.to_u64()?),
+				(&ConvertOp::Trunc{from: Float::F32, to: Int::I64, signed: true }, Value::F32(c)) => Value::from_i64(c.to_i64()?),
+				(&ConvertOp::Trunc{from: Float::F64, to: Int::I32, signed: false}, Value::F64(c)) => Value::I32(c.to_u32()?),
+				(&ConvertOp::Trunc{from: Float::F64, to: Int::I32, signed: true }, Value::F64(c)) => Value::from_i32(c.to_i32()?),
+				(&ConvertOp::Trunc{from: Float::F64, to: Int::I64, signed: false}, Value::F64(c)) => Value::I64(c.to_u64()?),
+				(&ConvertOp::Trunc{from: Float::F64, to: Int::I64, signed: true }, Value::F64(c)) => Value::from_i64(c.to_i64()?),
+
+				(&ConvertOp::Convert{from: Int::I32, to: Float::F32, signed: false}, Value::I32(c)) => Value::F32(c.to_uf32()),
+				(&ConvertOp::Convert{from: Int::I32, to: Float::F32, signed: true }, Value::I32(c)) => Value::F32(c.to_if32()),
+				(&ConvertOp::Convert{from: Int::I32, to: Float::F64, signed: false}, Value::I32(c)) => Value::F64(c.to_uf64()),
+				(&ConvertOp::Convert{from: Int::I32, to: Float::F64, signed: true }, Value::I32(c)) => Value::F64(c.to_if64()),
+				(&ConvertOp::Convert{from: Int::I64, to: Float::F32, signed: false}, Value::I64(c)) => Value::F32(c.to_uf32()),
+				(&ConvertOp::Convert{from: Int::I64, to: Float::F32, signed: true }, Value::I64(c)) => Value::F32(c.to_if32()),
+				(&ConvertOp::Convert{from: Int::I64, to: Float::F64, signed: false}, Value::I64(c)) => Value::F64(c.to_uf64()),
+				(&ConvertOp::Convert{from: Int::I64, to: Float::F64, signed: true }, Value::I64(c)) => Value::F64(c.to_if64()),
+
+				(&ConvertOp::Reinterpret{from: tv::Int(Int::I32), to: tv::Float(Float::F32) }, Value::I32(c)) => Value::F32(c.reinterpret()),
+				(&ConvertOp::Reinterpret{from: tv::Int(Int::I64), to: tv::Float(Float::F64) }, Value::I64(c)) => Value::F64(c.reinterpret()),
+				(&ConvertOp::Reinterpret{from: tv::Float(Float::F32), to: tv::Int(Int::I32) }, Value::F32(c)) => Value::I32(c.reinterpret()),
+				(&ConvertOp::Reinterpret{from: tv::Float(Float::F32), to: tv::Int(Int::I64) }, Value::F64(c)) => Value::I64(c.reinterpret()),
+
+				(&ConvertOp::F32DemoteF64, Value::F64(c)) => Value::F32(c.demote()),
+				(&ConvertOp::F64PromoteF32, Value::F32(c)) => Value::F64(c.promote()),
+				_ =>  unimplemented!()
+			})
+		};
+
+		if let Some(v) = cls(&op, &c) {
+			self.stack.push(v);
+			Ok(Continue)
+		} else {
+			Err(Trap { origin: TrapOrigin::UndefinedResult })
 		}
 	}
 
@@ -533,6 +583,20 @@ mod tests {
 		assert_seq_stack1(&v, Value::true_());
 	}
 
+	#[test]
+	fn cvtop() {
+		t(|mut int: Interpreter| {
+			use types::Int;
+			let v = [Const(Value::I64(0xFFFFDEADC0DEFFFF)), Convert(ConvertOp::I32WrapI64)];
+			assert_seq_stack1(&v, Value::I32(0xC0DEFFFF));
+
+			let v = [Const(Value::I32(0xDEADC0DE)), Convert(ConvertOp::I64ExtendUI32)];
+			assert_seq_stack1(&v, Value::I64(0x00000000DEADC0DE));
+
+			let v = [Const(Value::I32(-3i32 as u32)), Convert(ConvertOp::I64ExtendSI32)];
+			assert_seq_stack1(&v, Value::I64(-3i64 as u64));
+		})
+	}
 
 	#[test]
 	fn interpret_vm_ownership() {

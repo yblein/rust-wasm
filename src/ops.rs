@@ -2,6 +2,8 @@ use std;
 use std::ops::*;
 
 pub trait IntOp<S=Self> {
+	type FloatType;
+
 	// IUnOp
 	fn leading_zeros(self) -> Self;
 	fn trailing_zeros(self) -> Self;
@@ -38,11 +40,23 @@ pub trait IntOp<S=Self> {
 	fn leu(self, rhs: Self) -> bool;
 	fn ges(self, rhs: Self) -> bool;
 	fn geu(self, rhs: Self) -> bool;
+
+	// ConvertOp
+	fn to_u32(self) -> u32;
+	fn to_u64(self) -> u64;
+	fn to_i64(self) -> i64;
+	fn to_uf32(self) -> f32; // Unsigned convert to f32
+	fn to_if32(self) -> f32; // Signed convert to f32
+	fn to_uf64(self) -> f64;
+	fn to_if64(self) -> f64;
+	fn reinterpret(self) -> Self::FloatType;
 }
 
 macro_rules! impl_int_op {
-	($T:ty, $S:ty, $U:ty) => (
+	($T:ty, $S:ty, $U:ty, $F:ty) => (
 		impl IntOp for $T {
+			type FloatType=$F;
+
 			#[inline]
 			fn leading_zeros(self) -> $T {
 				<$T>::leading_zeros(self) as $T
@@ -198,14 +212,55 @@ macro_rules! impl_int_op {
 			fn geu(self, rhs: $T) -> bool {
 				(self as $S) >= (rhs as $S)
 			}
+
+			#[inline]
+			fn to_u32(self) -> u32 {
+				self as u32
+			}
+
+			#[inline]
+			fn to_u64(self) -> u64 {
+				self as u64
+			}
+
+			#[inline]
+			fn to_i64(self) -> i64 {
+				(self as $S) as i64
+			}
+
+			#[inline]
+			fn to_uf32(self) -> f32 {
+				self as f32
+			}
+
+			#[inline]
+			fn to_if32(self) -> f32 {
+				(self as $S) as f32
+			}
+
+			#[inline]
+			fn to_uf64(self) -> f64 {
+				self as f64
+			}
+
+			#[inline]
+			fn to_if64(self) -> f64 {
+				(self as $S) as f64
+			}
+
+			#[inline]
+			fn reinterpret(self) -> $F {
+				<$F>::from_bits(self)
+			}
 		}
 	)
 }
-impl_int_op!(u32, i32, u32);
-impl_int_op!(u64, i64, u64);
-
+impl_int_op!(u32, i32, u32, f32);
+impl_int_op!(u64, i64, u64, f64);
 
 pub trait FloatOp {
+	type IntType;
+
 	// FUnOp
 	fn neg(self) -> Self;
 	fn abs(self) -> Self;
@@ -231,11 +286,42 @@ pub trait FloatOp {
 	fn gt(self, rhs: Self) -> bool;
 	fn le(self, rhs: Self) -> bool;
 	fn ge(self, rhs: Self) -> bool;
+
+	// Convert
+	fn to_i32(self) -> Option<i32>;
+	fn to_i64(self) -> Option<i64>;
+	fn to_u32(self) -> Option<u32>;
+	fn to_u64(self) -> Option<u64>;
+	fn reinterpret(self) -> Self::IntType;
+
+	// Canonical NaN
+	fn canon() -> Self;
+	fn is_canon(self) -> bool;
+}
+
+macro_rules! impl_convert_float {
+	($T:ty, $U:ty, $N:ident) => (
+		#[inline]
+		fn $N(self) -> Option<$U> {
+			if self.is_nan() || self.is_infinite() {
+				None
+			} else {
+				let trunc = self.trunc();
+				if (<$U>::min_value() as $T) > trunc || trunc > (<$U>::max_value() as $T) {
+					None
+				} else {
+					Some(trunc as $U)
+				}
+			}
+		}
+	)
 }
 
 macro_rules! impl_float_op {
-	($T:ty, $copysign:ident) => (
+	($T:ty, $I:ty, $SB:expr, $copysign:ident) => (
 		impl FloatOp for $T {
+			type IntType = $I;
+
 			#[inline]
 			fn neg(self) -> $T {
 				std::ops::Neg::neg(self)
@@ -336,8 +422,64 @@ macro_rules! impl_float_op {
 			fn ge(self, rhs: $T) -> bool {
 				self >= rhs
 			}
+
+			impl_convert_float!($T, u32, to_u32);
+			impl_convert_float!($T, u64, to_u64);
+			impl_convert_float!($T, i32, to_i32);
+			impl_convert_float!($T, i64, to_i64);
+
+			#[inline]
+			fn reinterpret(self) -> $I {
+				self.to_bits()
+			}
+
+			#[inline]
+			fn canon() -> $T {
+				<$T>::from_bits(1 << ($SB - 1))
+			}
+
+			#[inline]
+			fn is_canon(self) -> bool {
+				self == <$T>::canon()
+			}
 		}
 	)
 }
-impl_float_op!(f32, copysignf32);
-impl_float_op!(f64, copysignf64);
+
+impl_float_op!(f32, u32, 32, copysignf32);
+impl_float_op!(f64, u64, 64, copysignf64);
+
+// Promote/Demote are only available in one way
+pub trait FloatPromoteOp {
+	fn promote(self) -> f64;
+}
+
+pub trait FloatDemoteOp {
+	fn demote(self) -> f32;
+}
+
+impl FloatPromoteOp for f32 {
+	#[inline]
+	fn promote(self) -> f64 {
+		if self.is_canon() {
+			f64::canon()
+		} else if self.is_nan() {
+			std::f64::NAN
+		} else {
+			self as f64
+		}
+	}
+}
+
+impl FloatDemoteOp for f64 {
+	#[inline]
+	fn demote(self) -> f32 {
+		if self.is_canon() {
+			f32::canon()
+		} else if self.is_nan() {
+			std::f32::NAN
+		} else {
+			self as f32
+		}
+	}
+}
