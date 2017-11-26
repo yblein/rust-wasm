@@ -26,7 +26,10 @@ pub struct Trap {
 
 #[derive(Debug, PartialEq)]
 enum Control {
+	/// Continue the execution linearly
 	Continue,
+	/// Branch to the `nesting_levels` outer scope, 0 being the innermost surrounding scope.
+	Branch { nesting_levels: u32 },
 }
 
 use self::Control::*;
@@ -50,6 +53,8 @@ impl Interpreter {
 		match *instr {
 			Unreachable => self.unreachable(),
 			Nop => self.nop(),
+			Block(ref result_type, ref instrs) => self.block(result_type, instrs),
+			Br(nesting_levels) => self.branch(nesting_levels),
 			Drop_ => self.drop(),
 			Select => self.select(),
 			Const(c) => self.const_(c),
@@ -73,6 +78,38 @@ impl Interpreter {
 	/// Do nothing
 	fn nop(&self) -> IntResult {
 		Ok(Continue)
+	}
+
+	/// Interpret a block
+	fn block(&mut self, result_type: &[types::Value], instrs: &[Instr]) -> IntResult {
+		let local_stack_begin = self.stack.len();
+
+		for instr in instrs {
+			let res = self.instr(instr)?;
+
+			if let Branch { nesting_levels } = res {
+				// If the instruction caused a branch, we need to exit the block early on.
+				// The way to do so depends if the current block is the target of the branch.
+				return Ok(if nesting_levels == 0 {
+					// We have reached the target block.
+					// Unwind values that could be left on the stack, except for the result,
+					// and resume normal execution.
+					let junk_end = self.stack.len() - result_type.len();
+					self.stack.drain(local_stack_begin..junk_end);
+					Continue
+				} else {
+					// Keep traversing nesting levels
+					Branch { nesting_levels: nesting_levels - 1 }
+				})
+			}
+		}
+
+		Ok(Continue)
+	}
+
+	/// Perform a unconditional branch to the nesting_levels+1 surrouding block.
+	fn branch(&self, nesting_levels: u32) -> IntResult {
+		Ok(Branch { nesting_levels })
 	}
 
 	/// Drop a value from the stack
@@ -390,6 +427,51 @@ mod tests {
 	fn nop_then_unreachable() {
 		let v = [Nop, Instr::Unreachable];
 		assert_eq!(run_seq(&v), Err(Trap { origin: TrapOrigin::Unreachable }));
+	}
+
+	#[test]
+	/// Test running a block to completion
+	fn block_no_br() {
+		let const_i32 = |v| Instr::Const(Value::I32(v));
+		let seq = [
+			Instr::Block(
+				vec![types::Value::Int(types::Int::I32)],
+				vec![const_i32(42)],
+			),
+		];
+		// 1 is expected to remain on the stack since the block returns a single value.
+		assert_seq_stack1(&seq, Value::I32(42));
+	}
+
+	#[test]
+	/// Test branching two levels of block nesting at once
+	fn block_br2() {
+		let const_i32 = |v| Instr::Const(Value::I32(v));
+		let seq = [
+			Instr::Block(
+				vec![types::Value::Int(types::Int::I32)],
+				vec![
+					const_i32(0),
+					Instr::Block(
+						vec![],
+						vec![
+							const_i32(1),
+							const_i32(2),
+							Instr::Br(1),
+							const_i32(3),
+						],
+					),
+					const_i32(4),
+				]
+			),
+		];
+		// We expect the final stack to contain only 2 because:
+		// - 0 is dropped as junk in the outer block
+		// - 1 is dropped as junk in the inner block
+		// - 3 is never reached
+		// - 4 is never reached
+		// 2 remains on the stack because the target block (the outer one) returns a value.
+		assert_seq_stack1(&seq, Value::I32(2));
 	}
 
 	#[test]
