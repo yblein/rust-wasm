@@ -285,7 +285,7 @@ mod tests {
 	#[test]
 	fn empty() {
 		t(|mut int: Interpreter| {
-			let v = vec![];
+			let v = [];
 			assert!(run_seq(&mut int, &v).is_ok());
 		})
 	}
@@ -293,7 +293,7 @@ mod tests {
 	#[test]
 	fn unreachable() {
 		t(|mut int: Interpreter| {
-			let v = vec![Instr::Unreachable];
+			let v = [Instr::Unreachable];
 			assert_eq!(run_seq(&mut int, &v).err().unwrap(), Trap { origin: TrapOrigin::Unreachable })
 		})
 	}
@@ -301,7 +301,7 @@ mod tests {
 	#[test]
 	fn nop() {
 		t(|mut int: Interpreter| {
-			let v = vec![Nop];
+			let v = [Nop];
 			assert!(run_seq(&mut int, &v).is_ok());
 		})
 	}
@@ -309,7 +309,7 @@ mod tests {
 	#[test]
 	fn nop_then_unreachable() {
 		t(|mut int: Interpreter| {
-			let v = vec![Nop, Instr::Unreachable];
+			let v = [Nop, Instr::Unreachable];
 			assert_eq!(run_seq(&mut int, &v).err().unwrap(), Trap { origin: TrapOrigin::Unreachable })
 		})
 	}
@@ -317,7 +317,7 @@ mod tests {
 	#[test]
 	fn const_() {
 		t(|mut int: Interpreter| {
-			let v = vec![Const(Value::I32(42))];
+			let v = [Const(Value::I32(42))];
 			assert!(run_seq(&mut int, &v).is_ok());
 			assert_eq!(*int.stack.last().unwrap(), Value::I32(42));
 		})
@@ -329,7 +329,7 @@ mod tests {
 		t(|mut int: Interpreter| {
 			use types::Int;
 
-			let v = vec![Const(Value::F32(42.0)), IUnary(Int::I32, IUnOp::Clz)];
+			let v = [Const(Value::F32(42.0)), IUnary(Int::I32, IUnOp::Clz)];
 			let _ = run_seq(&mut int, &v);
 		})
 	}
@@ -339,27 +339,27 @@ mod tests {
 		t(|mut int: Interpreter| {
 			use types::Int;
 
-			let v = vec![Const(Value::I32(42)), IUnary(Int::I32, IUnOp::Clz)];
+			let v = [Const(Value::I32(42)), IUnary(Int::I32, IUnOp::Clz)];
 			assert!(run_seq(&mut int, &v).is_ok());
 			assert_eq!(*int.stack.last().unwrap(), Value::I32(26));
 
-			let v = vec![Const(Value::I64(42)), IUnary(Int::I64, IUnOp::Clz)];
+			let v = [Const(Value::I64(42)), IUnary(Int::I64, IUnOp::Clz)];
 			assert!(run_seq(&mut int, &v).is_ok());
 			assert_eq!(*int.stack.last().unwrap(), Value::I64(32+26));
 
-			let v = vec![Const(Value::I32(0)), IUnary(Int::I32, IUnOp::Clz)];
+			let v = [Const(Value::I32(0)), IUnary(Int::I32, IUnOp::Clz)];
 			assert!(run_seq(&mut int, &v).is_ok());
 			assert_eq!(*int.stack.last().unwrap(), Value::I32(32));
 
-			let v = vec![Const(Value::I64(0)), IUnary(Int::I64, IUnOp::Clz)];
+			let v = [Const(Value::I64(0)), IUnary(Int::I64, IUnOp::Clz)];
 			assert!(run_seq(&mut int, &v).is_ok());
 			assert_eq!(*int.stack.last().unwrap(), Value::I64(64));
 
-			let v = vec![Const(Value::from_i32(-1)), IUnary(Int::I32, IUnOp::Clz)];
+			let v = [Const(Value::from_i32(-1)), IUnary(Int::I32, IUnOp::Clz)];
 			assert!(run_seq(&mut int, &v).is_ok());
 			assert_eq!(*int.stack.last().unwrap(), Value::I32(0));
 
-			let v = vec![Const(Value::from_i64(-1)), IUnary(Int::I64, IUnOp::Clz)];
+			let v = [Const(Value::from_i64(-1)), IUnary(Int::I64, IUnOp::Clz)];
 			assert!(run_seq(&mut int, &v).is_ok());
 			assert_eq!(*int.stack.last().unwrap(), Value::I64(0));
 		})
@@ -370,27 +370,27 @@ mod tests {
 		t(|mut int: Interpreter| {
 			use types::Int;
 
-			let v = vec![Const(Value::I32(42)), IUnary(Int::I32, IUnOp::Ctz)];
+			let v = [Const(Value::I32(42)), IUnary(Int::I32, IUnOp::Ctz)];
 			assert!(run_seq(&mut int, &v).is_ok());
 			assert_eq!(*int.stack.last().unwrap(), Value::I32(1));
 
-			let v = vec![Const(Value::I64(42)), IUnary(Int::I64, IUnOp::Ctz)];
+			let v = [Const(Value::I64(42)), IUnary(Int::I64, IUnOp::Ctz)];
 			assert!(run_seq(&mut int, &v).is_ok());
 			assert_eq!(*int.stack.last().unwrap(), Value::I64(1));
 
-			let v = vec![Const(Value::I32(0)), IUnary(Int::I32, IUnOp::Ctz)];
+			let v = [Const(Value::I32(0)), IUnary(Int::I32, IUnOp::Ctz)];
 			assert!(run_seq(&mut int, &v).is_ok());
 			assert_eq!(*int.stack.last().unwrap(), Value::I32(32));
 
-			let v = vec![Const(Value::I64(0)), IUnary(Int::I64, IUnOp::Ctz)];
+			let v = [Const(Value::I64(0)), IUnary(Int::I64, IUnOp::Ctz)];
 			assert!(run_seq(&mut int, &v).is_ok());
 			assert_eq!(*int.stack.last().unwrap(), Value::I64(64));
 
-			let v = vec![Const(Value::from_i32(-1)), IUnary(Int::I32, IUnOp::Ctz)];
+			let v = [Const(Value::from_i32(-1)), IUnary(Int::I32, IUnOp::Ctz)];
 			assert!(run_seq(&mut int, &v).is_ok());
 			assert_eq!(*int.stack.last().unwrap(), Value::I32(0));
 
-			let v = vec![Const(Value::from_i64(-1)), IUnary(Int::I64, IUnOp::Ctz)];
+			let v = [Const(Value::from_i64(-1)), IUnary(Int::I64, IUnOp::Ctz)];
 			assert!(run_seq(&mut int, &v).is_ok());
 			assert_eq!(*int.stack.last().unwrap(), Value::I64(0));
 		})
@@ -401,27 +401,27 @@ mod tests {
 		t(|mut int: Interpreter| {
 			use types::Int;
 
-			let v = vec![Const(Value::I32(42)), IUnary(Int::I32, IUnOp::Popcnt)];
+			let v = [Const(Value::I32(42)), IUnary(Int::I32, IUnOp::Popcnt)];
 			assert!(run_seq(&mut int, &v).is_ok());
 			assert_eq!(*int.stack.last().unwrap(), Value::I32(3));
 
-			let v = vec![Const(Value::I64(42)), IUnary(Int::I64, IUnOp::Popcnt)];
+			let v = [Const(Value::I64(42)), IUnary(Int::I64, IUnOp::Popcnt)];
 			assert!(run_seq(&mut int, &v).is_ok());
 			assert_eq!(*int.stack.last().unwrap(), Value::I64(3));
 
-			let v = vec![Const(Value::I32(0)), IUnary(Int::I32, IUnOp::Popcnt)];
+			let v = [Const(Value::I32(0)), IUnary(Int::I32, IUnOp::Popcnt)];
 			assert!(run_seq(&mut int, &v).is_ok());
 			assert_eq!(*int.stack.last().unwrap(), Value::I32(0));
 
-			let v = vec![Const(Value::I64(0)), IUnary(Int::I64, IUnOp::Popcnt)];
+			let v = [Const(Value::I64(0)), IUnary(Int::I64, IUnOp::Popcnt)];
 			assert!(run_seq(&mut int, &v).is_ok());
 			assert_eq!(*int.stack.last().unwrap(), Value::I64(0));
 
-			let v = vec![Const(Value::from_i32(-1)), IUnary(Int::I32, IUnOp::Popcnt)];
+			let v = [Const(Value::from_i32(-1)), IUnary(Int::I32, IUnOp::Popcnt)];
 			assert!(run_seq(&mut int, &v).is_ok());
 			assert_eq!(*int.stack.last().unwrap(), Value::I32(32));
 
-			let v = vec![Const(Value::from_i64(-1i64)), IUnary(Int::I64, IUnOp::Popcnt)];
+			let v = [Const(Value::from_i64(-1i64)), IUnary(Int::I64, IUnOp::Popcnt)];
 			assert!(run_seq(&mut int, &v).is_ok());
 			assert_eq!(*int.stack.last().unwrap(), Value::I64(64));
 		})
@@ -431,40 +431,40 @@ mod tests {
 	fn ibin() {
 		t(|mut int: Interpreter| {
 			use types::Int;
-			let v = vec![Const(Value::I32(u32::max_value() - 2)), Const(Value::I32(4)), IBin(Int::I32, IBinOp::Add)];
+			let v = [Const(Value::I32(u32::max_value() - 2)), Const(Value::I32(4)), IBin(Int::I32, IBinOp::Add)];
 			assert!(run_seq(&mut int, &v).is_ok());
 			assert_eq!(*int.stack.last().unwrap(), Value::I32(1));
 
-			let v = vec![Const(Value::I32(0)), Const(Value::I32(1)), IBin(Int::I32, IBinOp::DivU)];
+			let v = [Const(Value::I32(0)), Const(Value::I32(1)), IBin(Int::I32, IBinOp::DivU)];
 			assert_eq!(run_seq(&mut int, &v).err().unwrap(), Trap { origin: TrapOrigin::UndefinedResult });
 
-			let v = vec![Const(Value::I32(-1i32 as u32)), Const(Value::I32((i32::min_value() as u32))), IBin(Int::I32, IBinOp::DivS)];
+			let v = [Const(Value::I32(-1i32 as u32)), Const(Value::I32((i32::min_value() as u32))), IBin(Int::I32, IBinOp::DivS)];
 			assert_eq!(run_seq(&mut int, &v).err().unwrap(), Trap { origin: TrapOrigin::UndefinedResult });
 
-			let v = vec![Const(Value::I32(-1i32 as u32)), Const(Value::I32((i32::min_value() as u32))), IBin(Int::I32, IBinOp::DivU)];
+			let v = [Const(Value::I32(-1i32 as u32)), Const(Value::I32((i32::min_value() as u32))), IBin(Int::I32, IBinOp::DivU)];
 			assert!(run_seq(&mut int, &v).is_ok());
 			assert_eq!(*int.stack.last().unwrap(), Value::I32(0));
 
-			let v = vec![Const(Value::I32(0)), Const(Value::I32(1)), IBin(Int::I32, IBinOp::RemU)];
+			let v = [Const(Value::I32(0)), Const(Value::I32(1)), IBin(Int::I32, IBinOp::RemU)];
 			assert_eq!(run_seq(&mut int, &v).err().unwrap(), Trap { origin: TrapOrigin::UndefinedResult });
 
-			let v = vec![Const(Value::I32(8)), Const(Value::I32(-13i32 as u32)), IBin(Int::I32, IBinOp::RemS)];
+			let v = [Const(Value::I32(8)), Const(Value::I32(-13i32 as u32)), IBin(Int::I32, IBinOp::RemS)];
 			assert!(run_seq(&mut int, &v).is_ok());
 			assert_eq!(*int.stack.last().unwrap(), Value::I32(-5i32 as u32));
 
-			let v = vec![Const(Value::I64(54)), Const(Value::I64(58)), IBin(Int::I64, IBinOp::Shl)];
+			let v = [Const(Value::I64(54)), Const(Value::I64(58)), IBin(Int::I64, IBinOp::Shl)];
 			assert!(run_seq(&mut int, &v).is_ok());
 			assert_eq!(*int.stack.last().unwrap(), Value::I64(1044835113549955072));
 
-			let v = vec![Const(Value::I32(54)), Const(Value::I32(58)), IBin(Int::I32, IBinOp::Shl)];
+			let v = [Const(Value::I32(54)), Const(Value::I32(58)), IBin(Int::I32, IBinOp::Shl)];
 			assert!(run_seq(&mut int, &v).is_ok());
 			assert_eq!(*int.stack.last().unwrap(), Value::I32(243269632));
 
-			let v = vec![Const(Value::I32(16)), Const(Value::I32(0xFFFFFFFF)), IBin(Int::I32, IBinOp::ShrU)];
+			let v = [Const(Value::I32(16)), Const(Value::I32(0xFFFFFFFF)), IBin(Int::I32, IBinOp::ShrU)];
 			assert!(run_seq(&mut int, &v).is_ok());
 			assert_eq!(*int.stack.last().unwrap(), Value::I32(0x0000FFFF));
 
-			let v = vec![Const(Value::I32(16)), Const(Value::I32(0xFFFFFFFF)), IBin(Int::I32, IBinOp::ShrS)];
+			let v = [Const(Value::I32(16)), Const(Value::I32(0xFFFFFFFF)), IBin(Int::I32, IBinOp::ShrS)];
 			assert!(run_seq(&mut int, &v).is_ok());
 			assert_eq!(*int.stack.last().unwrap(), Value::I32(0xFFFFFFFF));
 		})
@@ -474,11 +474,11 @@ mod tests {
 	fn itest() {
 		t(|mut int: Interpreter| {
 			use types::Int;
-			let v = vec![Const(Value::I32(0)), ITest(Int::I32, ITestOp::Eqz)];
+			let v = [Const(Value::I32(0)), ITest(Int::I32, ITestOp::Eqz)];
 			assert!(run_seq(&mut int, &v).is_ok());
 			assert_eq!(*int.stack.last().unwrap(), Value::true_());
 
-			let v = vec![Const(Value::I32(42)), ITest(Int::I32, ITestOp::Eqz)];
+			let v = [Const(Value::I32(42)), ITest(Int::I32, ITestOp::Eqz)];
 			assert!(run_seq(&mut int, &v).is_ok());
 			assert_eq!(*int.stack.last().unwrap(), Value::false_());
 		})
@@ -488,19 +488,19 @@ mod tests {
 	fn irel() {
 		t(|mut int: Interpreter| {
 			use types::Int;
-			let v = vec![Const(Value::I32(42)), Const(Value::I32(43)), IRel(Int::I32, IRelOp::Eq_)];
+			let v = [Const(Value::I32(42)), Const(Value::I32(43)), IRel(Int::I32, IRelOp::Eq_)];
 			assert!(run_seq(&mut int, &v).is_ok());
 			assert_eq!(*int.stack.last().unwrap(), Value::false_());
 
-			let v = vec![Const(Value::I32(42)), Const(Value::I32(43)), IRel(Int::I32, IRelOp::Ne)];
+			let v = [Const(Value::I32(42)), Const(Value::I32(43)), IRel(Int::I32, IRelOp::Ne)];
 			assert!(run_seq(&mut int, &v).is_ok());
 			assert_eq!(*int.stack.last().unwrap(), Value::true_());
 
-			let v = vec![Const(Value::I32(-42i32 as u32)), Const(Value::I32(43)), IRel(Int::I32, IRelOp::LtS)];
+			let v = [Const(Value::I32(-42i32 as u32)), Const(Value::I32(43)), IRel(Int::I32, IRelOp::LtS)];
 			assert!(run_seq(&mut int, &v).is_ok());
 			assert_eq!(*int.stack.last().unwrap(), Value::false_());
 
-			let v = vec![Const(Value::I32(-42i32 as u32)), Const(Value::I32(43)), IRel(Int::I32, IRelOp::LtU)];
+			let v = [Const(Value::I32(-42i32 as u32)), Const(Value::I32(43)), IRel(Int::I32, IRelOp::LtU)];
 			assert!(run_seq(&mut int, &v).is_ok());
 			assert_eq!(*int.stack.last().unwrap(), Value::true_());
 		})
@@ -510,35 +510,35 @@ mod tests {
 	fn funary() {
 		t(|mut int: Interpreter| {
 			use types::Float;
-			let v = vec![Const(Value::F32(3.0)), FUnary(Float::F32, FUnOp::Neg)];
+			let v = [Const(Value::F32(3.0)), FUnary(Float::F32, FUnOp::Neg)];
 			assert!(run_seq(&mut int, &v).is_ok());
 			assert_eq!(*int.stack.last().unwrap(), Value::F32(-3.0));
 
-			let v = vec![Const(Value::F32(3.0)), FUnary(Float::F32, FUnOp::Neg)];
+			let v = [Const(Value::F32(3.0)), FUnary(Float::F32, FUnOp::Neg)];
 			assert!(run_seq(&mut int, &v).is_ok());
 			assert_eq!(*int.stack.last().unwrap(), Value::F32(-3.0));
 
-			let v = vec![Const(Value::F32(-3.0)), FUnary(Float::F32, FUnOp::Abs)];
+			let v = [Const(Value::F32(-3.0)), FUnary(Float::F32, FUnOp::Abs)];
 			assert!(run_seq(&mut int, &v).is_ok());
 			assert_eq!(*int.stack.last().unwrap(), Value::F32(3.0));
 
-			let v = vec![Const(Value::F32(-3.5)), FUnary(Float::F32, FUnOp::Ceil)];
+			let v = [Const(Value::F32(-3.5)), FUnary(Float::F32, FUnOp::Ceil)];
 			assert!(run_seq(&mut int, &v).is_ok());
 			assert_eq!(*int.stack.last().unwrap(), Value::F32(-3.0));
 
-			let v = vec![Const(Value::F32(-3.5)), FUnary(Float::F32, FUnOp::Floor)];
+			let v = [Const(Value::F32(-3.5)), FUnary(Float::F32, FUnOp::Floor)];
 			assert!(run_seq(&mut int, &v).is_ok());
 			assert_eq!(*int.stack.last().unwrap(), Value::F32(-4.0));
 
-			let v = vec![Const(Value::F32(-3.5)), FUnary(Float::F32, FUnOp::Trunc)];
+			let v = [Const(Value::F32(-3.5)), FUnary(Float::F32, FUnOp::Trunc)];
 			assert!(run_seq(&mut int, &v).is_ok());
 			assert_eq!(*int.stack.last().unwrap(), Value::F32(-3.0));
 
-			let v = vec![Const(Value::F32(3.2)), FUnary(Float::F32, FUnOp::Nearest)];
+			let v = [Const(Value::F32(3.2)), FUnary(Float::F32, FUnOp::Nearest)];
 			assert!(run_seq(&mut int, &v).is_ok());
 			assert_eq!(*int.stack.last().unwrap(), Value::F32(3.0));
 
-			let v = vec![Const(Value::F32(4.0)), FUnary(Float::F32, FUnOp::Sqrt)];
+			let v = [Const(Value::F32(4.0)), FUnary(Float::F32, FUnOp::Sqrt)];
 			assert!(run_seq(&mut int, &v).is_ok());
 			assert_eq!(*int.stack.last().unwrap(), Value::F32(2.0));
 		})
@@ -550,31 +550,31 @@ mod tests {
 			use types::Float;
 			use std::f32;
 
-			let v = vec![Const(Value::F32(3.0)), Const(Value::F32(5.0)), FBin(Float::F32, FBinOp::Add)];
+			let v = [Const(Value::F32(3.0)), Const(Value::F32(5.0)), FBin(Float::F32, FBinOp::Add)];
 			assert!(run_seq(&mut int, &v).is_ok());
 			assert_eq!(*int.stack.last().unwrap(), Value::F32(8.0));
 
-			let v = vec![Const(Value::F32(3.0)), Const(Value::F32(-5.0)), FBin(Float::F32, FBinOp::Sub)];
+			let v = [Const(Value::F32(3.0)), Const(Value::F32(-5.0)), FBin(Float::F32, FBinOp::Sub)];
 			assert!(run_seq(&mut int, &v).is_ok());
 			assert_eq!(*int.stack.last().unwrap(), Value::F32(-8.0));
 
-			let v = vec![Const(Value::F32(3.0)), Const(Value::F32(5.5)), FBin(Float::F32, FBinOp::Mul)];
+			let v = [Const(Value::F32(3.0)), Const(Value::F32(5.5)), FBin(Float::F32, FBinOp::Mul)];
 			assert!(run_seq(&mut int, &v).is_ok());
 			assert_eq!(*int.stack.last().unwrap(), Value::F32(16.5));
 
-			let v = vec![Const(Value::F32(-0.0)), Const(Value::F32(5.0)), FBin(Float::F32, FBinOp::Div)];
+			let v = [Const(Value::F32(-0.0)), Const(Value::F32(5.0)), FBin(Float::F32, FBinOp::Div)];
 			assert!(run_seq(&mut int, &v).is_ok());
 			assert_eq!(*int.stack.last().unwrap(), Value::F32(f32::NEG_INFINITY));
 
-			let v = vec![Const(Value::F32(-3.0)), Const(Value::F32(5.0)), FBin(Float::F32, FBinOp::Min)];
+			let v = [Const(Value::F32(-3.0)), Const(Value::F32(5.0)), FBin(Float::F32, FBinOp::Min)];
 			assert!(run_seq(&mut int, &v).is_ok());
 			assert_eq!(*int.stack.last().unwrap(), Value::F32(-3.0));
 
-			let v = vec![Const(Value::F32(3.0)), Const(Value::F32(-5.0)), FBin(Float::F32, FBinOp::Max)];
+			let v = [Const(Value::F32(3.0)), Const(Value::F32(-5.0)), FBin(Float::F32, FBinOp::Max)];
 			assert!(run_seq(&mut int, &v).is_ok());
 			assert_eq!(*int.stack.last().unwrap(), Value::F32(3.0));
 
-			let v = vec![Const(Value::F32(-3.0)), Const(Value::F32(-5.0)), FBin(Float::F32, FBinOp::CopySign)];
+			let v = [Const(Value::F32(-3.0)), Const(Value::F32(-5.0)), FBin(Float::F32, FBinOp::CopySign)];
 			assert!(run_seq(&mut int, &v).is_ok());
 			assert_eq!(*int.stack.last().unwrap(), Value::F32(-5.0));
 		})
@@ -586,27 +586,27 @@ mod tests {
 		t(|mut int: Interpreter| {
 			use types::Float;
 
-			let v = vec![Const(Value::F32(3.0)), Const(Value::F32(5.0)), FRel(Float::F32, FRelOp::Eq_)];
+			let v = [Const(Value::F32(3.0)), Const(Value::F32(5.0)), FRel(Float::F32, FRelOp::Eq_)];
 			assert!(run_seq(&mut int, &v).is_ok());
 			assert_eq!(*int.stack.last().unwrap(), Value::false_());
 
-			let v = vec![Const(Value::F32(3.0)), Const(Value::F32(5.0)), FRel(Float::F32, FRelOp::Ne)];
+			let v = [Const(Value::F32(3.0)), Const(Value::F32(5.0)), FRel(Float::F32, FRelOp::Ne)];
 			assert!(run_seq(&mut int, &v).is_ok());
 			assert_eq!(*int.stack.last().unwrap(), Value::true_());
 
-			let v = vec![Const(Value::F32(3.0)), Const(Value::F32(5.0)), FRel(Float::F32, FRelOp::Lt)];
+			let v = [Const(Value::F32(3.0)), Const(Value::F32(5.0)), FRel(Float::F32, FRelOp::Lt)];
 			assert!(run_seq(&mut int, &v).is_ok());
 			assert_eq!(*int.stack.last().unwrap(), Value::false_());
 
-			let v = vec![Const(Value::F32(3.0)), Const(Value::F32(5.0)), FRel(Float::F32, FRelOp::Gt)];
+			let v = [Const(Value::F32(3.0)), Const(Value::F32(5.0)), FRel(Float::F32, FRelOp::Gt)];
 			assert!(run_seq(&mut int, &v).is_ok());
 			assert_eq!(*int.stack.last().unwrap(), Value::true_());
 
-			let v = vec![Const(Value::F32(5.0)), Const(Value::F32(5.0)), FRel(Float::F32, FRelOp::Le)];
+			let v = [Const(Value::F32(5.0)), Const(Value::F32(5.0)), FRel(Float::F32, FRelOp::Le)];
 			assert!(run_seq(&mut int, &v).is_ok());
 			assert_eq!(*int.stack.last().unwrap(), Value::true_());
 
-			let v = vec![Const(Value::F32(3.0)), Const(Value::F32(5.0)), FRel(Float::F32, FRelOp::Ge)];
+			let v = [Const(Value::F32(3.0)), Const(Value::F32(5.0)), FRel(Float::F32, FRelOp::Ge)];
 			assert!(run_seq(&mut int, &v).is_ok());
 			assert_eq!(*int.stack.last().unwrap(), Value::true_());
 		})
@@ -635,7 +635,7 @@ mod tests {
 		test(int)
 	}
 
-	fn run_seq(int: &mut Interpreter, instrs: &Vec<Instr>) -> IntResult {
+	fn run_seq(int: &mut Interpreter, instrs: &[Instr]) -> IntResult {
 		for instr in instrs {
 			int.instr(instr)?;
 		}
