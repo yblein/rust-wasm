@@ -120,29 +120,15 @@ impl Interpreter {
 
 	/// branchless conditional
 	fn select(&mut self) -> IntResult {
-		let res = match self.stack.pop().unwrap() {
-			Value::I32(c) => {
-				match self.pop2() {
-					(v1 @ Value::I32(_), v2 @ Value::I32(_)) => self.type_select(c, v1, v2),
-					(v1 @ Value::I64(_), v2 @ Value::I64(_)) => self.type_select(c, v1, v2),
-					(v1 @ Value::F32(_), v2 @ Value::F32(_)) => self.type_select(c, v1, v2),
-					(v1 @ Value::F64(_), v2 @ Value::F64(_)) => self.type_select(c, v1, v2),
-					_ => unreachable!(),
-				}
-			},
-			_ => unreachable!()
-		};
-		self.stack.push(res);
-		Ok(Continue)
-	}
+		let b = self.stack.pop().unwrap();
+		let (v1, v2) = self.pop2();
 
-	fn type_select<T>(&self, c: u32, v1: T, v2: T) -> T
-	{
-		if c == 0 {
-			v2
-		} else {
-			v1
+		match b {
+			Value::I32(c) => self.stack.push(if c != 0 { v1 } else { v2 }),
+			_ => unreachable!()
 		}
+
+		Ok(Continue)
 	}
 
 	/// Push c to the stack
