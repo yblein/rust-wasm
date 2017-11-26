@@ -11,3 +11,4 @@ pub mod interpreter;
 pub mod ast;
 pub mod vm;
 pub mod binary;
+pub mod valid;

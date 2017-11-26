@@ -572,8 +572,8 @@ mod tests {
 		m.globals.push(ast::Global {
 			type_: types::Global { value: types::Value::Int(types::Int::I32), mutable: false },
 			value: vec![
-				InstrConst::Const(values::Value::I32(41)),
-				InstrConst::Const(values::Value::I32(42)),
+				Instr::Const(values::Value::I32(41)),
+				Instr::Const(values::Value::I32(42)),
 			],
 		});
 		let mib = v.instantiate_module(m).unwrap();
@@ -589,14 +589,14 @@ mod tests {
 		m.globals.push(ast::Global {
 			type_: types::Global { value: types::Value::Int(types::Int::I32), mutable: false },
 			value: vec![
-				InstrConst::Const(values::Value::I32(42)),
+				Instr::Const(values::Value::I32(42)),
 			],
 		});
 
 		m.globals.push(ast::Global {
 			type_: types::Global { value: types::Value::Int(types::Int::I32), mutable: false },
 			value: vec![
-				InstrConst::GetGlobal(0),
+				Instr::GetGlobal(0),
 			],
 		});
 		let mib = v.instantiate_module(m).unwrap();
@@ -616,7 +616,7 @@ mod tests {
 		m.elems.push(ast::Segment::<ast::Index> {
 			index: 0,
 			offset: vec![
-				InstrConst::Const(values::Value::I32(3)),
+				Instr::Const(values::Value::I32(3)),
 			],
 			init: vec![3, 4, 5],
 		});
@@ -635,7 +635,7 @@ mod tests {
 		m.data.push(ast::Segment::<u8> {
 			index: 0,
 			offset: vec![
-				InstrConst::Const(values::Value::I32((PAGE_SIZE as u32) - 2)),
+				Instr::Const(values::Value::I32((PAGE_SIZE as u32) - 2)),
 			],
 			init: vec![3, 4, 5],
 		});
@@ -654,7 +654,7 @@ mod tests {
 		m.data.push(ast::Segment::<u8> {
 			index: 0,
 			offset: vec![
-				InstrConst::Const(values::Value::I32((PAGE_SIZE as u32) - 4)),
+				Instr::Const(values::Value::I32((PAGE_SIZE as u32) - 4)),
 			],
 			init: vec![3, 4, 5],
 		});
@@ -698,7 +698,7 @@ mod tests {
 		m.elems.push(ast::Segment::<Index> {
 			index: 0,
 			offset: vec![
-				InstrConst::Const(values::Value::I32(1)),
+				Instr::Const(values::Value::I32(1)),
 			],
 			init: vec![15, 16, 17],
 		});
@@ -849,7 +849,7 @@ mod tests {
 		m1.globals.push(ast::Global {
 			type_: first_type.clone(),
 			value: vec![
-				InstrConst::Const(first_value.clone())
+				Instr::Const(first_value.clone())
 			],
 		});
 		m1.exports.push(ast::Export { name: String::from("wasm"), desc: ast::ExportDesc::Global(0) });
@@ -865,7 +865,7 @@ mod tests {
 		m2.globals.push(ast::Global {
 			type_: second_type,
 			value: vec![
-				InstrConst::Const(second_value.clone())
+				Instr::Const(second_value.clone())
 			],
 		});
 		let m2b = v.instantiate_module(m2);
@@ -887,7 +887,7 @@ mod tests {
 				mutable: true,
 			},
 			value: vec![
-				InstrConst::Const(values::Value::I32((PAGE_SIZE as u32) - 4))
+				Instr::Const(values::Value::I32((PAGE_SIZE as u32) - 4))
 			],
 		});
 		m1.exports.push(ast::Export { name: String::from("global"), desc: ast::ExportDesc::Global(0) });
@@ -901,7 +901,7 @@ mod tests {
 				mutable: false,
 			},
 			value: vec![
-				InstrConst::Const(values::Value::I32((PAGE_SIZE as u32) - 4))
+				Instr::Const(values::Value::I32((PAGE_SIZE as u32) - 4))
 			],
 		});
 		m2.exports.push(ast::Export { name: String::from("global"), desc: ast::ExportDesc::Global(0) });
@@ -920,7 +920,7 @@ mod tests {
 				mutable: false,
 			},
 			value: vec![
-				InstrConst::Const(values::Value::I32((PAGE_SIZE as u32) - 4))
+				Instr::Const(values::Value::I32((PAGE_SIZE as u32) - 4))
 			],
 		});
 		m1.exports.push(ast::Export { name: String::from("global"), desc: ast::ExportDesc::Global(0) });
@@ -934,7 +934,7 @@ mod tests {
 		m2.data.push(ast::Segment::<u8> {
 			index: 0,
 			offset: vec![
-				InstrConst::GetGlobal(0),
+				Instr::GetGlobal(0),
 			],
 			init: vec![3, 4, 5],
 		});
@@ -985,7 +985,7 @@ mod tests {
 		m2.data.push(ast::Segment::<u8> {
 			index: 0,
 			offset: vec![
-				InstrConst::Const(values::Value::I32(PAGE_SIZE as u32 - 1)),
+				Instr::Const(values::Value::I32(PAGE_SIZE as u32 - 1)),
 			],
 			init: vec![3, 4, 5],
 		});
@@ -1010,7 +1010,7 @@ mod tests {
 		m2.data.push(ast::Segment::<u8> {
 			index: 1,
 			offset: vec![
-				InstrConst::Const(values::Value::I32(PAGE_SIZE as u32 - 1)),
+				Instr::Const(values::Value::I32(PAGE_SIZE as u32 - 1)),
 			],
 			init: vec![3, 4, 5],
 		});
@@ -1035,14 +1035,14 @@ mod tests {
 		m2.data.push(ast::Segment::<u8> {
 			index: 0,
 			offset: vec![
-				InstrConst::Const(values::Value::I32(0)),
+				Instr::Const(values::Value::I32(0)),
 			],
 			init: vec![3, 4, 5],
 		});
 		m2.data.push(ast::Segment::<u8> {
 			index: 1,
 			offset: vec![
-				InstrConst::Const(values::Value::I32(0)),
+				Instr::Const(values::Value::I32(0)),
 			],
 			init: vec![7, 8, 9],
 		});

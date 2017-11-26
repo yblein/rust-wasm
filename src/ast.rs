@@ -49,20 +49,18 @@ pub enum ConvertOp {
 }
 
 #[derive(Debug)]
-pub struct LoadOp {
+pub struct MemOp<T> {
 	pub align: u32,
 	pub offset: u32,
 	pub type_: types::Value,
-	pub size_signed: Option<(u32, bool)>,
+	pub opt: Option<T>,
 }
 
-#[derive(Debug)]
-pub struct StoreOp {
-	pub align: u32,
-	pub offset: u32,
-	pub type_: types::Value,
-	pub size: Option<u32>,
-}
+/// A memory load with optional size and sign
+pub type LoadOp = MemOp<(u32, bool)>;
+
+/// A memory store with optional size
+pub type StoreOp = MemOp<(u32)>;
 
 #[derive(Debug)]
 pub enum Instr {
@@ -99,14 +97,7 @@ pub enum Instr {
 	Convert(ConvertOp),                            // conversion
 }
 
-#[derive(Debug)]
-pub enum InstrConst {
-	Const(values::Value),
-	GetGlobal(Index),
-}
-
 pub type Expr = Vec<Instr>;
-pub type ExprConst = Vec<InstrConst>;
 
 #[derive(Debug)]
 pub struct Module {
@@ -144,13 +135,13 @@ pub struct Memory {
 #[derive(Debug)]
 pub struct Global {
 	pub type_: types::Global,
-	pub value: ExprConst,
+	pub value: Expr, // NB: Must be constant
 }
 
 #[derive(Debug)]
 pub struct Segment<T> {
 	pub index: Index,
-	pub offset: ExprConst,
+	pub offset: Expr, // NB: Must be constant
 	pub init: Vec<T>,
 }
 

@@ -77,12 +77,13 @@ impl Interpreter {
 	/// Interpret a single const instruction.
 	// TODO: replace frame_globals by a Frame
 	pub fn instr_const(&mut self,
-					   instr: &InstrConst,
+					   instr: &Instr,
 					   globals: &[GlobalInst],
 					   frame_globals: &[GlobalAddr]) -> IntResult {
 		match *instr {
-			InstrConst::Const(c) => self.const_(c),
-			InstrConst::GetGlobal(idx) => self.get_global(idx, globals, frame_globals),
+			Instr::Const(c) => self.const_(c),
+			Instr::GetGlobal(idx) => self.get_global(idx, globals, frame_globals),
+			_ => unreachable!(),
 		}
 	}
 

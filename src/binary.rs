@@ -477,26 +477,16 @@ impl<R: Read + Seek> Decoder<R> {
 		self.read_instr_block()
 	}
 
-	fn read_expr_const(&mut self) -> DecodeResult<Vec<InstrConst>> {
-		self.read_instr_block()?.iter().map(|i| {
-			match *i {
-				Instr::Const(c) => Ok(InstrConst::Const(c)),
-				Instr::GetGlobal(i) => Ok(InstrConst::GetGlobal(i)),
-				_ => Err(DecodeError::MalformedBinary)
-			}
-		}).collect()
-	}
-
-	fn read_load_op(&mut self, type_: types::Value, size_signed: Option<(u32, bool)>) -> DecodeResult<Instr> {
+	fn read_load_op(&mut self, type_: types::Value, opt: Option<(u32, bool)>) -> DecodeResult<Instr> {
 		let align = self.read_vu32()?;
 		let offset = self.read_vu32()?;
-		Ok(Instr::Load(LoadOp { align, offset, type_, size_signed }))
+		Ok(Instr::Load(LoadOp { align, offset, type_, opt }))
 	}
 
-	fn read_store_op(&mut self, type_: types::Value, size: Option<u32>) -> DecodeResult<Instr> {
+	fn read_store_op(&mut self, type_: types::Value, opt: Option<u32>) -> DecodeResult<Instr> {
 		let align = self.read_vu32()?;
 		let offset = self.read_vu32()?;
-		Ok(Instr::Store(StoreOp { align, offset, type_, size }))
+		Ok(Instr::Store(StoreOp { align, offset, type_, opt }))
 	}
 
 	fn read_type_section(&mut self) -> DecodeResult<Vec<types::Func>> {
@@ -546,7 +536,7 @@ impl<R: Read + Seek> Decoder<R> {
 
 	fn read_global(&mut self) -> DecodeResult<Global> {
 		let type_ = self.read_global_type()?;
-		let value = self.read_expr_const()?;
+		let value = self.read_expr()?;
 		Ok(Global { type_, value })
 	}
 
@@ -582,7 +572,7 @@ impl<R: Read + Seek> Decoder<R> {
 		where F: Fn(&mut Decoder<R>) -> DecodeResult<T>
 	{
 		let index = self.read_index()?;
-		let offset = self.read_expr_const()?;
+		let offset = self.read_expr()?;
 		let init = self.read_vec(read_elem)?;
 		Ok(Segment { index, offset, init })
 	}

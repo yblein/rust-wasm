@@ -1,20 +1,30 @@
-#[derive(Debug, Clone, Copy, PartialEq)]
+#[derive(Debug, PartialEq, Clone, Copy)]
 pub enum Float {
 	F32,
 	F64,
 }
 
-#[derive(Debug, Clone, Copy, PartialEq)]
+#[derive(Debug, PartialEq, Clone, Copy)]
 pub enum Int {
 	I32,
 	I64,
 }
 
-#[derive(Debug, Clone, PartialEq)]
+#[derive(Debug, PartialEq, Clone, Copy)]
 pub enum Value {
 	Int(Int),
 	Float(Float),
 }
+
+impl Value {
+	pub fn bit_width(&self) -> u32 {
+		match *self {
+			Value::Int(Int::I32) | Value::Float(Float::F32) => 32,
+			Value::Int(Int::I64) | Value::Float(Float::F64) => 64,
+		}
+	}
+}
+
 
 #[derive(Debug, Clone, PartialEq)]
 pub enum Elem {
