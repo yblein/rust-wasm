@@ -25,22 +25,19 @@ pub trait IntOp<S=Self> {
 	fn rotl(self, rhs: Self) -> Self;
 
 	// ITestOp
-	fn eqz(self) -> Self;
+	fn eqz(self) -> bool;
 
 	// IRelOp
-	fn eq(self, rhs: Self) -> Self;
-	fn ne(self, rhs: Self) -> Self;
-	fn lts(self, rhs: Self) -> Self;
-	fn ltu(self, rhs: Self) -> Self;
-	fn gts(self, rhs: Self) -> Self;
-	fn gtu(self, rhs: Self) -> Self;
-	fn les(self, rhs: Self) -> Self;
-	fn leu(self, rhs: Self) -> Self;
-	fn ges(self, rhs: Self) -> Self;
-	fn geu(self, rhs: Self) -> Self;
-
-	// Helpers
-	fn bool_to_type(bool) -> Self;
+	fn eq(self, rhs: Self) -> bool;
+	fn ne(self, rhs: Self) -> bool;
+	fn lts(self, rhs: Self) -> bool;
+	fn ltu(self, rhs: Self) -> bool;
+	fn gts(self, rhs: Self) -> bool;
+	fn gtu(self, rhs: Self) -> bool;
+	fn les(self, rhs: Self) -> bool;
+	fn leu(self, rhs: Self) -> bool;
+	fn ges(self, rhs: Self) -> bool;
+	fn geu(self, rhs: Self) -> bool;
 }
 
 macro_rules! impl_int_op {
@@ -148,67 +145,58 @@ macro_rules! impl_int_op {
 			}
 
 			#[inline]
-			fn bool_to_type(b: bool) -> $T {
-				if b {
-					1
-				} else {
-					0
-				}
+			fn eqz(self) -> bool {
+				self == 0
 			}
 
 			#[inline]
-			fn eqz(self) -> $T {
-				Self::bool_to_type(self == 0)
+			fn eq(self, rhs: $T) -> bool {
+				self == rhs
 			}
 
 			#[inline]
-			fn eq(self, rhs: $T) -> $T {
-				Self::bool_to_type(self == rhs)
+			fn ne(self, rhs: $T) -> bool {
+				self != rhs
 			}
 
 			#[inline]
-			fn ne(self, rhs: $T) -> $T {
-				Self::bool_to_type(self != rhs)
+			fn lts(self, rhs: $T) -> bool {
+				(self as $S) < (rhs as $S)
 			}
 
 			#[inline]
-			fn lts(self, rhs: $T) -> $T {
-				Self::bool_to_type((self as $S) < (rhs as $S))
+			fn ltu(self, rhs: $T) -> bool {
+				self < rhs
 			}
 
 			#[inline]
-			fn ltu(self, rhs: $T) -> $T {
-				Self::bool_to_type(self < rhs)
+			fn gts(self, rhs: $T) -> bool {
+				(self as $S) > (rhs as $S)
 			}
 
 			#[inline]
-			fn gts(self, rhs: $T) -> $T {
-				Self::bool_to_type((self as $S) > (rhs as $S))
+			fn gtu(self, rhs: $T) -> bool {
+				self > rhs
 			}
 
 			#[inline]
-			fn gtu(self, rhs: $T) -> $T {
-				Self::bool_to_type(self > rhs)
+			fn les(self, rhs: $T) -> bool {
+				(self as $S) <= (rhs as $S)
 			}
 
 			#[inline]
-			fn les(self, rhs: $T) -> $T {
-				Self::bool_to_type((self as $S) <= (rhs as $S))
+			fn leu(self, rhs: $T) -> bool {
+				self <= rhs
 			}
 
 			#[inline]
-			fn leu(self, rhs: $T) -> $T {
-				Self::bool_to_type(self <= rhs)
+			fn ges(self, rhs: $T) -> bool {
+				(self as $S) >= (rhs as $S)
 			}
 
 			#[inline]
-			fn ges(self, rhs: $T) -> $T {
-				Self::bool_to_type((self as $S) >= (rhs as $S))
-			}
-
-			#[inline]
-			fn geu(self, rhs: $T) -> $T {
-				Self::bool_to_type((self as $S) >= (rhs as $S))
+			fn geu(self, rhs: $T) -> bool {
+				(self as $S) >= (rhs as $S)
 			}
 		}
 	)
@@ -237,15 +225,12 @@ pub trait FloatOp {
 	fn copysign(self, rhs: Self) -> Self;
 
 	// FRelOp
-	fn eq(self, rhs: Self) -> Self;
-	fn ne(self, rhs: Self) -> Self;
-	fn lt(self, rhs: Self) -> Self;
-	fn gt(self, rhs: Self) -> Self;
-	fn le(self, rhs: Self) -> Self;
-	fn ge(self, rhs: Self) -> Self;
-
-	// Helpers
-	fn bool_to_type(bool) -> Self;
+	fn eq(self, rhs: Self) -> bool;
+	fn ne(self, rhs: Self) -> bool;
+	fn lt(self, rhs: Self) -> bool;
+	fn gt(self, rhs: Self) -> bool;
+	fn le(self, rhs: Self) -> bool;
+	fn ge(self, rhs: Self) -> bool;
 }
 
 macro_rules! impl_float_op {
@@ -323,42 +308,33 @@ macro_rules! impl_float_op {
 			}
 
 			#[inline]
-			fn bool_to_type(b: bool) -> $T {
-				if b {
-					1.0
-				} else {
-					0.0
-				}
+			fn eq(self, rhs: $T) -> bool {
+				self == rhs
 			}
 
 			#[inline]
-			fn eq(self, rhs: $T) -> $T {
-				Self::bool_to_type(self == rhs)
+			fn ne(self, rhs: $T) -> bool {
+				self != rhs
 			}
 
 			#[inline]
-			fn ne(self, rhs: $T) -> $T {
-				Self::bool_to_type(self != rhs)
+			fn lt(self, rhs: $T) -> bool {
+				self < rhs
 			}
 
 			#[inline]
-			fn lt(self, rhs: $T) -> $T {
-				Self::bool_to_type(self < rhs)
+			fn gt(self, rhs: $T) -> bool {
+				self > rhs
 			}
 
 			#[inline]
-			fn gt(self, rhs: $T) -> $T {
-				Self::bool_to_type(self > rhs)
+			fn le(self, rhs: $T) -> bool {
+				self <= rhs
 			}
 
 			#[inline]
-			fn le(self, rhs: $T) -> $T {
-				Self::bool_to_type(self <= rhs)
-			}
-
-			#[inline]
-			fn ge(self, rhs: $T) -> $T {
-				Self::bool_to_type(self >= rhs)
+			fn ge(self, rhs: $T) -> bool {
+				self >= rhs
 			}
 		}
 	)

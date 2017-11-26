@@ -204,15 +204,15 @@ impl Interpreter {
 	fn itest(&mut self, _t: &types::Int, op: &ITestOp) -> IntResult {
 		// Validation should assert that the top of the stack exists and has the type t
 		let v = match self.stack.pop().unwrap() {
-			Value::I32(c) => Value::I32(self.type_itest(c, op)),
-			Value::I64(c) => Value::I64(self.type_itest(c, op)),
+			Value::I32(c) => Value::from_bool(self.type_itest(c, op)),
+			Value::I64(c) => Value::from_bool(self.type_itest(c, op)),
 			_ => unreachable!(),
 		};
 		self.stack.push(v);
 		Ok(())
 	}
 
-	fn type_itest<T>(&self, v: T, op: &ITestOp) -> T
+	fn type_itest<T>(&self, v: T, op: &ITestOp) -> bool
 		where T: IntOp
 	{
 		match *op {
@@ -225,15 +225,15 @@ impl Interpreter {
 		// Validation should assert that there are two values on top of the
 		// stack having the same integer type t
 		let res = match self.pop2() {
-			(Value::I32(c1), Value::I32(c2)) => Value::I32(self.type_irel(c1, c2, op)),
-			(Value::I64(c1), Value::I64(c2)) => Value::I64(self.type_irel(c1, c2, op)),
+			(Value::I32(c1), Value::I32(c2)) => Value::from_bool(self.type_irel(c1, c2, op)),
+			(Value::I64(c1), Value::I64(c2)) => Value::from_bool(self.type_irel(c1, c2, op)),
 			_ => unreachable!(),
 		};
 		self.stack.push(res);
 		Ok(())
 	}
 
-	fn type_irel<T>(&self, c1: T, c2: T, op: &IRelOp) -> T
+	fn type_irel<T>(&self, c1: T, c2: T, op: &IRelOp) -> bool
 		where T: IntOp
 	{
 		match *op {
@@ -255,15 +255,15 @@ impl Interpreter {
 		// Validation should assert that there are two values on top of the
 		// stack having the same integer type t
 		let res = match self.pop2() {
-			(Value::F32(c1), Value::F32(c2)) => Value::F32(self.type_frel(c1, c2, op)),
-			(Value::F64(c1), Value::F64(c2)) => Value::F64(self.type_frel(c1, c2, op)),
+			(Value::F32(c1), Value::F32(c2)) => Value::from_bool(self.type_frel(c1, c2, op)),
+			(Value::F64(c1), Value::F64(c2)) => Value::from_bool(self.type_frel(c1, c2, op)),
 			_ => unreachable!(),
 		};
 		self.stack.push(res);
 		Ok(())
 	}
 
-	fn type_frel<T>(&self, c1: T, c2: T, op: &FRelOp) -> T
+	fn type_frel<T>(&self, c1: T, c2: T, op: &FRelOp) -> bool
 		where T: FloatOp
 	{
 		match *op {
@@ -481,11 +481,11 @@ mod tests {
 			use types::Int;
 			let v = vec![Const(Value::I32(0)), ITest(Int::I32, ITestOp::Eqz)];
 			assert!(int.interpret(&v).is_ok());
-			assert_eq!(*int.stack.last().unwrap(), Value::I32(1));
+			assert_eq!(*int.stack.last().unwrap(), Value::true_());
 
 			let v = vec![Const(Value::I32(42)), ITest(Int::I32, ITestOp::Eqz)];
 			assert!(int.interpret(&v).is_ok());
-			assert_eq!(*int.stack.last().unwrap(), Value::I32(0));
+			assert_eq!(*int.stack.last().unwrap(), Value::false_());
 		})
 	}
 
@@ -495,19 +495,19 @@ mod tests {
 			use types::Int;
 			let v = vec![Const(Value::I32(42)), Const(Value::I32(43)), IRel(Int::I32, IRelOp::Eq_)];
 			assert!(int.interpret(&v).is_ok());
-			assert_eq!(*int.stack.last().unwrap(), Value::I32(0));
+			assert_eq!(*int.stack.last().unwrap(), Value::false_());
 
 			let v = vec![Const(Value::I32(42)), Const(Value::I32(43)), IRel(Int::I32, IRelOp::Ne)];
 			assert!(int.interpret(&v).is_ok());
-			assert_eq!(*int.stack.last().unwrap(), Value::I32(1));
+			assert_eq!(*int.stack.last().unwrap(), Value::true_());
 
 			let v = vec![Const(Value::I32(-42i32 as u32)), Const(Value::I32(43)), IRel(Int::I32, IRelOp::LtS)];
 			assert!(int.interpret(&v).is_ok());
-			assert_eq!(*int.stack.last().unwrap(), Value::I32(0));
+			assert_eq!(*int.stack.last().unwrap(), Value::false_());
 
 			let v = vec![Const(Value::I32(-42i32 as u32)), Const(Value::I32(43)), IRel(Int::I32, IRelOp::LtU)];
 			assert!(int.interpret(&v).is_ok());
-			assert_eq!(*int.stack.last().unwrap(), Value::I32(1));
+			assert_eq!(*int.stack.last().unwrap(), Value::true_());
 		})
 	}
 
@@ -593,27 +593,27 @@ mod tests {
 
 			let v = vec![Const(Value::F32(3.0)), Const(Value::F32(5.0)), FRel(Float::F32, FRelOp::Eq_)];
 			assert!(int.interpret(&v).is_ok());
-			assert_eq!(*int.stack.last().unwrap(), Value::F32(0.0));
+			assert_eq!(*int.stack.last().unwrap(), Value::false_());
 
 			let v = vec![Const(Value::F32(3.0)), Const(Value::F32(5.0)), FRel(Float::F32, FRelOp::Ne)];
 			assert!(int.interpret(&v).is_ok());
-			assert_eq!(*int.stack.last().unwrap(), Value::F32(1.0));
+			assert_eq!(*int.stack.last().unwrap(), Value::true_());
 
 			let v = vec![Const(Value::F32(3.0)), Const(Value::F32(5.0)), FRel(Float::F32, FRelOp::Lt)];
 			assert!(int.interpret(&v).is_ok());
-			assert_eq!(*int.stack.last().unwrap(), Value::F32(0.0));
+			assert_eq!(*int.stack.last().unwrap(), Value::false_());
 
 			let v = vec![Const(Value::F32(3.0)), Const(Value::F32(5.0)), FRel(Float::F32, FRelOp::Gt)];
 			assert!(int.interpret(&v).is_ok());
-			assert_eq!(*int.stack.last().unwrap(), Value::F32(1.0));
+			assert_eq!(*int.stack.last().unwrap(), Value::true_());
 
 			let v = vec![Const(Value::F32(5.0)), Const(Value::F32(5.0)), FRel(Float::F32, FRelOp::Le)];
 			assert!(int.interpret(&v).is_ok());
-			assert_eq!(*int.stack.last().unwrap(), Value::F32(1.0));
+			assert_eq!(*int.stack.last().unwrap(), Value::true_());
 
 			let v = vec![Const(Value::F32(3.0)), Const(Value::F32(5.0)), FRel(Float::F32, FRelOp::Ge)];
 			assert!(int.interpret(&v).is_ok());
-			assert_eq!(*int.stack.last().unwrap(), Value::F32(1.0));
+			assert_eq!(*int.stack.last().unwrap(), Value::true_());
 		})
 	}
 
