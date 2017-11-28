@@ -45,14 +45,14 @@ impl Interpreter {
 
 	/// Intrepret a single instruction.
 	/// This is the main dispatching function of the interpreter.
-	fn instr(&mut self, instr: &Instr, _vm: &mut vm::VM) -> IntResult {
+	fn instr(&mut self, instr: &Instr, vm: &mut vm::VM) -> IntResult {
 		use ast::Instr::*;
 
 		// Note: passing VM (mut/imut) is case by case
 		match *instr {
 			Unreachable => self.unreachable(),
 			Nop => self.nop(),
-			Block(ref result_type, ref instrs) => self.block(result_type, instrs),
+			Block(ref result_type, ref instrs) => self.block(result_type, instrs, vm),
 			Br(nesting_levels) => self.branch(nesting_levels),
 			Drop_ => self.drop(),
 			Select => self.select(),
@@ -80,11 +80,11 @@ impl Interpreter {
 	}
 
 	/// Interpret a block
-	fn block(&mut self, result_type: &[types::Value], instrs: &[Instr]) -> IntResult {
+	fn block(&mut self, result_type: &[types::Value], instrs: &[Instr], vm: &mut vm::VM) -> IntResult {
 		let local_stack_begin = self.stack.len();
 
 		for instr in instrs {
-			let res = self.instr(instr)?;
+			let res = self.instr(instr, vm)?;
 
 			if let Branch { nesting_levels } = res {
 				// If the instruction caused a branch, we need to exit the block early on.
