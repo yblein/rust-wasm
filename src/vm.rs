@@ -112,9 +112,11 @@ pub struct VM {
 	store: Store
 }
 
-#[derive(Debug)]
+#[derive(Debug, PartialEq)]
 pub enum VMError {
 	ModuleInvalid,
+	ElemOffsetTooLarge(usize),
+	DataOffsetTooLarge(usize),
 	WrongImportNumber,
 }
 
@@ -169,25 +171,79 @@ impl VM {
 	/// assert_eq!(v.modules.extern_val.len(), 1)
 	/// ```
 	pub fn instantiate_module(&mut self, m: ast::Module) -> Result<Rc<ModuleInst>, VMError> {
+		// 1. If module is not valid, then: Fail
 		if !m.is_valid() {
 			return Err(VMError::ModuleInvalid)
 		}
 
-		// TODO: Resolve imports
+		// 2. Assert: module is valid with external types externtype^{m}_{im} classifying its import
+		// TODO: resolve imports by module name & fct name
 		assert_eq!(m.imports.len(), 0);
 
-		// TODO: Match required imported types with resolved types
+		// 3. If the number m of imports is not equal to the number n of provided external values, then: Fail
+		// TODO: check if all imports has been found
+
+		// 4. For each external value externval_i in externval^n and external
+		// type externtype'_i in externtype^{n}_{im}, do:
+		// a. Assert: externval_i is valid with external type externtype_i in store S.
+		// b. If externtype_i does not match externtype'_i, then: Fail
+		// TODO: check that the types of the import found match the types of the requested imports
+
+		// 5. Let moduleinst_im be the auxiliary module instance {globaladdrs
+		// globals(externval∗)} that only consists of the imported globals.
+		// 6. Let F be the frame {module moduleinstim,locals ϵ}.
+		// 7. Push the frame F to the stack.
+		// TODO: setup the frame with a "fake" ModuleInst with its imported global variable found
+		// TODO: require Frame support
 
 		// Create an interpret for const evaluation
 		let mut const_int = Interpreter::new();
 
-		// Evaluate global expr
-		let val = m.globals.iter().map(|g| {
-			// TODO: support GetGlobal
+		// 8. Let globalidx_{new} be the global index that corresponds to the
+		// number of global imports in module.imports (i.e., the index of the
+		// first non-imported global).
+		// 9. For each global globali in module.globals, do:
+		// ...
+		// Note: we only compute vals here, we will create the GlobalInstance when we allocate globals
+		let vals = m.globals.iter().map(|g| {
 			const_int.evaluate_expr_const(&g.value, &self).unwrap()
 		}).collect();
 
-		self.allocate_module(m, val)
+		// 10. For each element segment elemi in module.elem, do:
+		// ...
+		// Intuition: check if the module does not try to init too many elements
+		// TODO: check if a module can init the elements of an imported
+		// table. If yes, than we should use the size of the imported tables
+		// instead of the number of elements declared inside the module
+		let mut i = 0;
+		for elem in m.elems.iter() {
+			let offset = match const_int.evaluate_expr_const(&elem.offset, &self).unwrap() {
+				values::Value::I32(c) => c as usize,
+				_ => unreachable!(),
+			};
+			// We will allocate limits.min empty elements when allocating the table
+			if offset + elem.init.len() > (m.tables[elem.index as usize].type_.limits.min as usize) {
+				return Err(VMError::ElemOffsetTooLarge(i));
+			}
+			i += 1;
+		}
+
+		// 11. For each data segment datai in module.data, do:
+		// ...
+		// Intuition: check if the module does not try to init too much memory
+		let mut i = 0;
+		for data in m.data.iter() {
+			let offset = match const_int.evaluate_expr_const(&data.offset, &self).unwrap() {
+				values::Value::I32(c) => c as usize,
+				_ => unreachable!(),
+			};
+			// We will allocate limits.min empty data when allocating the table
+			if offset + data.init.len() > ((m.memories[data.index as usize].type_.limits.min as usize) * PAGE_SIZE) {
+				return Err(VMError::DataOffsetTooLarge(i));
+			}
+			i += 1;
+		}
+		self.allocate_module(m, vals)
 	}
 
 	pub fn allocate_module(&mut self, m: ast::Module, vals: Vec<values::Value>) -> Result<Rc<ModuleInst>, VMError> {
@@ -324,5 +380,43 @@ mod tests {
 		let mib = v.instantiate_module(m).unwrap();
 		assert_eq!(v.store.globals.len(), 2);
 		assert_eq!(v.store.globals[mib.global_addrs[0]].value, values::Value::I32(42));
+	}
+
+	#[test]
+	fn elem_size_error() {
+		let mut v = VM::new();
+		let mut m = Module::empty();
+
+		m.tables.push(ast::Table {
+			type_: types::Table { limits: types::Limits { min: 5, max: None }, elem: types::Elem::AnyFunc },
+		});
+
+		m.elems.push(ast::Segment::<ast::Index> {
+			index: 0,
+			offset: vec![
+				InstrConst::Const(values::Value::I32(3)),
+			],
+			init: vec![3, 4, 5],
+		});
+		assert_eq!(v.instantiate_module(m).err(), Some(VMError::ElemOffsetTooLarge(0)));
+	}
+
+	#[test]
+	fn data_size_error() {
+		let mut v = VM::new();
+		let mut m = Module::empty();
+
+		m.memories.push(ast::Memory {
+			type_: types::Memory { limits: types::Limits { min: 1, max: None } },
+		});
+
+		m.data.push(ast::Segment::<u8> {
+			index: 0,
+			offset: vec![
+				InstrConst::Const(values::Value::I32((PAGE_SIZE as u32) - 2)),
+			],
+			init: vec![3, 4, 5],
+		});
+		assert_eq!(v.instantiate_module(m).err(), Some(VMError::DataOffsetTooLarge(0)));
 	}
 }
