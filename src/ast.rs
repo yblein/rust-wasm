@@ -99,7 +99,14 @@ pub enum Instr {
 	Convert(ConvertOp),                            // conversion
 }
 
+#[derive(Debug)]
+pub enum InstrConst {
+	Const(values::Value),
+	GetGlobal(Index),
+}
+
 pub type Expr = Vec<Instr>;
+pub type ExprConst = Vec<InstrConst>;
 
 #[derive(Debug)]
 pub struct Module {
@@ -137,14 +144,13 @@ pub struct Memory {
 #[derive(Debug)]
 pub struct Global {
 	pub type_: types::Global,
-	// TODO: Create a InstrConst type + ExprConst type at runtime
-	pub value: Expr, // NB: Must be a constant expression
+	pub value: ExprConst,
 }
 
 #[derive(Debug)]
 pub struct Segment<T> {
 	pub index: Index,
-	pub offset: Expr, // NB: Must be a constant expression
+	pub offset: ExprConst,
 	pub init: Vec<T>,
 }
 

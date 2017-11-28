@@ -8,7 +8,6 @@ use ops::{IntOp,FloatOp,FloatDemoteOp,FloatPromoteOp};
 /// A struct storing the state of the current interpreted
 pub struct Interpreter {
 	stack: Vec<Value>,
-	vm: vm::VM,
 }
 
 #[derive(Debug, PartialEq)]
@@ -38,18 +37,18 @@ type IntResult = Result<Control, Trap>;
 
 impl Interpreter {
 	/// Instantiate a new interpreter
-	pub fn new(vm: vm::VM) -> Interpreter {
+	pub fn new() -> Interpreter {
 		Interpreter {
-			stack: Vec::new(),
-			vm: vm
+			stack: Vec::new()
 		}
 	}
 
 	/// Intrepret a single instruction.
 	/// This is the main dispatching function of the interpreter.
-	fn instr(&mut self, instr: &Instr) -> IntResult {
+	fn instr(&mut self, instr: &Instr, _vm: &mut vm::VM) -> IntResult {
 		use ast::Instr::*;
 
+		// Note: passing VM (mut/imut) is case by case
 		match *instr {
 			Unreachable => self.unreachable(),
 			Nop => self.nop(),
@@ -380,17 +379,25 @@ impl Interpreter {
 		}
 	}
 
+	/// GetGlobal
+	fn get_global(&mut self, _idx: Index, _vm: &vm::VM) -> IntResult {
+		// TODO: implement Frame
+		unimplemented!();
+	}
+
 	/// Pops two values from the stack, assuming that the stack is large enough to do so.
 	fn pop2(&mut self) -> (Value, Value) {
 		(self.stack.pop().unwrap(), self.stack.pop().unwrap())
 	}
 
-	/// Evaluate an Expr and return a given value
-	/// Use for global initialization
-	// Todo: Implement ConstExpr
-	pub fn evaluate_global_expr(&mut self, instrs: &Expr) -> Option<Value> {
-		// Only the last value matters for ConstExpr
-		self.instr(instrs.last().unwrap()).ok()?;
+	/// Evaluate an ExprConst and return a given value
+	/// Use for global/segment initialization
+	pub fn evaluate_expr_const(&mut self, instrs: &ExprConst, vm: &vm::VM) -> Option<Value> {
+		// Only the last value matters for ExprConst
+		match *instrs.last().unwrap() {
+			InstrConst::Const(c) => self.const_(c),
+			InstrConst::GetGlobal(idx) => self.get_global(idx, vm),
+		}.ok()?;
 		self.stack.pop()
 	}
 }
@@ -697,74 +704,62 @@ mod tests {
 
 	#[test]
 	fn cvtop() {
-		t(|mut int: Interpreter| {
-			let v = [Const(Value::I64(0xFFFFDEADC0DEFFFF)), Convert(ConvertOp::I32WrapI64)];
-			assert_seq_stack1(&v, Value::I32(0xC0DEFFFF));
+		let v = [Const(Value::I64(0xFFFFDEADC0DEFFFF)), Convert(ConvertOp::I32WrapI64)];
+		assert_seq_stack1(&v, Value::I32(0xC0DEFFFF));
 
-			let v = [Const(Value::I32(0xDEADC0DE)), Convert(ConvertOp::I64ExtendUI32)];
-			assert_seq_stack1(&v, Value::I64(0x00000000DEADC0DE));
+		let v = [Const(Value::I32(0xDEADC0DE)), Convert(ConvertOp::I64ExtendUI32)];
+		assert_seq_stack1(&v, Value::I64(0x00000000DEADC0DE));
 
-			let v = [Const(Value::I32(-3i32 as u32)), Convert(ConvertOp::I64ExtendSI32)];
-			assert_seq_stack1(&v, Value::I64(-3i64 as u64));
-		})
+		let v = [Const(Value::I32(-3i32 as u32)), Convert(ConvertOp::I64ExtendSI32)];
+		assert_seq_stack1(&v, Value::I64(-3i64 as u64));
 	}
 
 	#[test]
 	fn drop() {
-		t(|mut int: Interpreter| {
-			let v = [Const(Value::I64(0xFFFFDEADC0DEFFFF)), Drop_];
-			assert_seq_stack0(&v);
-		})
+		let v = [Const(Value::I64(0xFFFFDEADC0DEFFFF)), Drop_];
+		assert_seq_stack0(&v);
 	}
 
 	#[test]
 	fn select() {
-		t(|mut int: Interpreter| {
-			let v = [Const(Value::I64(1)), Const(Value::I64(2)), Const(Value::I32(0)), Select];
-			assert_seq_stack1(&v, Value::I64(1));
+		let v = [Const(Value::I64(1)), Const(Value::I64(2)), Const(Value::I32(0)), Select];
+		assert_seq_stack1(&v, Value::I64(1));
 
-			let v = [Const(Value::F64(1.0)), Const(Value::F64(2.0)), Const(Value::I32(42)), Select];
-			assert_seq_stack1(&v, Value::F64(2.0));
-		})
-	}
-
-	#[test]
-	fn interpret_vm_ownership() {
-		t(|mut _int: Interpreter| {
-		})
+		let v = [Const(Value::F64(1.0)), Const(Value::F64(2.0)), Const(Value::I32(42)), Select];
+		assert_seq_stack1(&v, Value::F64(2.0));
 	}
 
 	// Inspired from
 	// https://medium.com/@ericdreichert/test-setup-and-teardown-in-rust-without-a-framework-ba32d97aa5ab
 	fn t<F, T>(test: F) -> T
-		where F: FnOnce(Interpreter) -> T
+		where F: FnOnce(Interpreter, vm::VM) -> T
 	{
 		let vm = vm::VM::new();
-		let int = Interpreter::new(vm);
+		let int = Interpreter::new();
 
-		test(int)
+		test(int, vm)
 	}
 
 	/// Run a sequence of instructions in the given interpreter `int`.
-	fn run_seq_in(int: &mut Interpreter, instrs: &[Instr]) -> Result<(), Trap> {
+	fn run_seq_in(int: &mut Interpreter, vm: &mut vm::VM, instrs: &[Instr]) -> Result<(), Trap> {
 		for instr in instrs {
-			int.instr(instr)?;
+			int.instr(instr, vm)?;
 		}
 		Ok(())
 	}
 
 	/// Run a sequence of instructions in a new empty interpreter.
 	fn run_seq(instrs: &[Instr]) -> Result<(), Trap> {
-		t(|mut int: Interpreter| {
-			run_seq_in(&mut int, instrs)
+		t(|mut int: Interpreter, mut vm: vm::VM| {
+			run_seq_in(&mut int, &mut vm, instrs)
 		})
 	}
 
 	/// Assert that executing the sequence of instructions `instrs` in a clean context
 	/// is sucessful and that the resulting stack is equal to `final_stack`.
 	fn assert_seq_stack(instrs: &[Instr], final_stack: &[Value]) {
-		t(|mut int: Interpreter| {
-			assert_eq!(run_seq_in(&mut int, instrs), Ok(()));
+		t(|mut int: Interpreter, mut vm: vm::VM| {
+			assert_eq!(run_seq_in(&mut int, &mut vm, instrs), Ok(()));
 			assert_eq!(int.stack, final_stack);
 		})
 	}

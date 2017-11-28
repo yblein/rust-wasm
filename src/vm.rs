@@ -178,12 +178,13 @@ impl VM {
 
 		// TODO: Match required imported types with resolved types
 
+		// Create an interpret for const evaluation
+		let mut const_int = Interpreter::new();
+
 		// Evaluate global expr
 		let val = m.globals.iter().map(|g| {
-			// g.value is a constant expression, so for now we span a new
-			// useless VM for it
 			// TODO: support GetGlobal
-			Interpreter::new(VM::new()).evaluate_global_expr(&g.value).unwrap()
+			const_int.evaluate_expr_const(&g.value, &self).unwrap()
 		}).collect();
 
 		self.allocate_module(m, val)
@@ -293,8 +294,8 @@ mod tests {
 		m.globals.push(ast::Global {
 			type_: types::Global { value: types::Value::Int(types::Int::I32), mutable: false },
 			value: vec![
-				Instr::Const(values::Value::I32(41)),
-				Instr::Const(values::Value::I32(42)),
+				InstrConst::Const(values::Value::I32(41)),
+				InstrConst::Const(values::Value::I32(42)),
 			],
 		});
 		let mib = v.instantiate_module(m).unwrap();
@@ -310,20 +311,18 @@ mod tests {
 		m.globals.push(ast::Global {
 			type_: types::Global { value: types::Value::Int(types::Int::I32), mutable: false },
 			value: vec![
-				Instr::Const(values::Value::I32(42)),
+				InstrConst::Const(values::Value::I32(42)),
 			],
 		});
 
 		m.globals.push(ast::Global {
 			type_: types::Global { value: types::Value::Int(types::Int::I32), mutable: false },
 			value: vec![
-				Instr::GetGlobal(0),
-				Instr::Const(values::Value::I32(41)),
-				Instr::Const(values::Value::I32(42)),
+				InstrConst::GetGlobal(0),
 			],
 		});
 		let mib = v.instantiate_module(m).unwrap();
-		assert_eq!(v.store.globals.len(), 1);
+		assert_eq!(v.store.globals.len(), 2);
 		assert_eq!(v.store.globals[mib.global_addrs[0]].value, values::Value::I32(42));
 	}
 }
