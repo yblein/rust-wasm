@@ -124,6 +124,7 @@ pub struct VM {
 #[derive(Debug, PartialEq)]
 pub enum VMError {
 	ModuleInvalid,
+	UnknownImport,
 	ElemOffsetTooLarge(usize),
 	DataOffsetTooLarge(usize),
 	StartFunctionFailed,
@@ -188,8 +189,33 @@ impl VM {
 		}
 
 		// 2. Assert: module is valid with external types externtype^{m}_{im} classifying its import
-		// TODO: resolve imports by module name & fct name
-		assert_eq!(m.imports.len(), 0);
+		// 3. If the number m of imports is not equal to the number n of provided external values, then: Fail
+		// Intuition: resolve imports by module name & fct name, check their types
+		// TODO: handle more than one module name
+		// TODO: suppotr importing host functions
+		let mut external_val = Vec::new();
+		let mut external_types = Vec::new();
+		for import in m.imports {
+			let type_match = match self.registry.get(&HashKey { name: import.name, module: import.module }) {
+				Some(ev) => {
+					external_val.push(ev);
+					match (ev, import.desc) {
+						(&ExternVal::Func(addr), ast::ImportDesc::Func(idx)) => match &self.store.funcs[idx as usize] {
+							&FuncInst::Module(ref mfi) => mfi.type_ == m.types[idx as usize],
+							_ => unimplemented!(),
+						},
+						(&ExternVal::Table(addr), ast::ImportDesc::Table(idx)) => &self.store.tables[idx as usize].type_ == m.tables[idx as usize],
+						(&ExternVal::Memory(addr), ast::ImportDesc::Memory(idx)) => &self.store.mems[idx as usize].type_ == m.memories[idx as usize],
+						(&ExternVal::Global(addr), ast::ImportDesc::Global(idx)) => &self.store.globals[idx as usize].type_ == m.globals[idx as usize],
+						_ => return Err(VMError::ImportTypeMismatch),
+					}
+				},
+				None => return Err(VMError::UnknownImport),
+			};
+			if !type_match {
+				return Err(VMError::ImportTypeMismatch);
+			}
+		}
 
 		// 3. If the number m of imports is not equal to the number n of provided external values, then: Fail
 		// TODO: check if all imports has been found
