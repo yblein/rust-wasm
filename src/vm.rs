@@ -2,7 +2,6 @@ use std::fs::File;
 use std::io;
 use std::rc::Rc;
 
-
 use ast;
 use binary;
 use types;
@@ -216,11 +215,13 @@ impl VM {
 		// table. If yes, than we should use the size of the imported tables
 		// instead of the number of elements declared inside the module
 		let mut i = 0;
+		let mut elem_offsets = Vec::new();
 		for elem in m.elems.iter() {
 			let offset = match const_int.evaluate_expr_const(&elem.offset, &self).unwrap() {
 				values::Value::I32(c) => c as usize,
 				_ => unreachable!(),
 			};
+			elem_offsets.push(offset);
 			// We will allocate limits.min empty elements when allocating the table
 			if offset + elem.init.len() > (m.tables[elem.index as usize].type_.limits.min as usize) {
 				return Err(VMError::ElemOffsetTooLarge(i));
@@ -232,21 +233,28 @@ impl VM {
 		// ...
 		// Intuition: check if the module does not try to init too much memory
 		let mut i = 0;
+		let mut data_offsets = Vec::new();
 		for data in m.data.iter() {
 			let offset = match const_int.evaluate_expr_const(&data.offset, &self).unwrap() {
 				values::Value::I32(c) => c as usize,
 				_ => unreachable!(),
 			};
+			data_offsets.push(offset);
 			// We will allocate limits.min empty data when allocating the table
 			if offset + data.init.len() > ((m.memories[data.index as usize].type_.limits.min as usize) * PAGE_SIZE) {
 				return Err(VMError::DataOffsetTooLarge(i));
 			}
 			i += 1;
 		}
-		self.allocate_module(m, vals)
+
+		// 14. Let moduleinst be a new module instance allocated from module in
+		// store S with imports externval∗ and glboal initializer values val∗.
+		// Note: module tables/data/globals initializations are performed in the
+		// following function
+		self.allocate_and_init_module(m, vals, elem_offsets, data_offsets)
 	}
 
-	pub fn allocate_module(&mut self, m: ast::Module, vals: Vec<values::Value>) -> Result<Rc<ModuleInst>, VMError> {
+	fn allocate_and_init_module(&mut self, m: ast::Module, vals: Vec<values::Value>, elem_offsets: Vec<usize>, data_offsets: Vec<usize>) -> Result<Rc<ModuleInst>, VMError> {
 		// Two passes algorithms
 		// 1. do all modifications on the ModuleInst in a single scope
 		let mut mi = ModuleInst::new();
@@ -272,6 +280,16 @@ impl VM {
 					max: max,
 				}
 			);
+		}
+
+		// Memories initialization
+		assert_eq!(m.data.len(), data_offsets.len());
+		for data in m.data.iter().zip(data_offsets.iter()) {
+			let (data, offset) = data;
+
+			for i in 0..data.init.len() {
+				self.store.mems[mi.mem_addrs[data.index as usize]].data[*offset + i] = data.init[i];
+			}
 		}
 
 		// Tables allocation
@@ -418,5 +436,30 @@ mod tests {
 			init: vec![3, 4, 5],
 		});
 		assert_eq!(v.instantiate_module(m).err(), Some(VMError::DataOffsetTooLarge(0)));
+	}
+
+	#[test]
+	fn init_data() {
+		let mut v = VM::new();
+		let mut m = Module::empty();
+
+		m.memories.push(ast::Memory {
+			type_: types::Memory { limits: types::Limits { min: 1, max: None } },
+		});
+
+		m.data.push(ast::Segment::<u8> {
+			index: 0,
+			offset: vec![
+				InstrConst::Const(values::Value::I32((PAGE_SIZE as u32) - 4)),
+			],
+			init: vec![3, 4, 5],
+		});
+
+		let mut check = vec![0; PAGE_SIZE - 4];
+		check.extend(vec![3, 4, 5]);
+		check.extend(vec![0]);
+
+		assert!(v.instantiate_module(m).is_ok());
+		assert_eq!(v.store.mems[0].data, check);
 	}
 }
