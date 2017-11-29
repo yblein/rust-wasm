@@ -268,6 +268,34 @@ impl VM {
 		let fsi_max = fsi_min + m.funcs.len();
 		mi.func_addrs.extend(fsi_min..fsi_max);
 
+		// Tables allocation
+		for tab in m.tables {
+			let min = tab.type_.limits.min;
+			let max = tab.type_.limits.max;
+
+			mi.table_addrs.push(self.store.tables.len());
+			self.store.tables.push(
+				TableInst {
+					elem: vec![None; min as usize],
+					max: max,
+				}
+			);
+		}
+
+		// 15. For each element segment elemi in module.elem, do:
+		// ...
+		// Intuition: tables initialization with elem segments
+		assert_eq!(m.elems.len(), elem_offsets.len());
+		for elem in m.elems.iter().zip(elem_offsets.iter()) {
+			let (elem, offset) = elem;
+
+			for i in 0..elem.init.len() {
+				let funcidx = elem.init[i] as usize;
+				let funcaddr = mi.func_addrs[funcidx];
+				self.store.tables[mi.table_addrs[elem.index as usize]].elem[*offset + i] = Some(funcaddr);
+			}
+		}
+
 		// Memories allocation
 		for mem in m.memories {
 			let min = mem.type_.limits.min;
@@ -282,7 +310,9 @@ impl VM {
 			);
 		}
 
-		// Memories initialization
+		// 16. For each data segment datai in module.data, do:
+		// ...
+		// Intuition: memories initialization with data segments
 		assert_eq!(m.data.len(), data_offsets.len());
 		for data in m.data.iter().zip(data_offsets.iter()) {
 			let (data, offset) = data;
@@ -290,20 +320,6 @@ impl VM {
 			for i in 0..data.init.len() {
 				self.store.mems[mi.mem_addrs[data.index as usize]].data[*offset + i] = data.init[i];
 			}
-		}
-
-		// Tables allocation
-		for tab in m.tables {
-			let min = tab.type_.limits.min;
-			let max = tab.type_.limits.max;
-
-			mi.table_addrs.push(self.store.tables.len());
-			self.store.tables.push(
-				TableInst {
-					elem: vec![None; min as usize],
-					max: max,
-				}
-			);
 		}
 
 		// Globals allocation
@@ -461,5 +477,50 @@ mod tests {
 
 		assert!(v.instantiate_module(m).is_ok());
 		assert_eq!(v.store.mems[0].data, check);
+	}
+
+	#[test]
+	fn init_table() {
+		let mut v = VM::new();
+		let mut m = Module::empty();
+
+		// Allocate "fake" FuncInst inside the store to see funcaddrs != funcidx
+		let len_shift = 5;
+		for i in 0..len_shift {
+			v.store.funcs.push(FuncInst::Host(HostFuncInst {
+				type_: types::Func { args: Vec::new(), result: Vec::new() },
+				hostcode: (),
+			}));
+		}
+
+		m.tables.push(ast::Table {
+			type_: types::Table { limits: types::Limits { min: 5, max: None }, elem: types::Elem::AnyFunc },
+		});
+
+		m.types.push(types::Func { args: Vec::new(), result: Vec::new() });
+
+		for i in 0..42 {
+			m.funcs.push(ast::Func {
+				type_index: 0,
+				locals: Vec::new(),
+				body: Vec::new(),
+			});
+		}
+
+		m.elems.push(ast::Segment::<Index> {
+			index: 0,
+			offset: vec![
+				InstrConst::Const(values::Value::I32(1)),
+			],
+			init: vec![15, 16, 17],
+		});
+
+		let check = vec![None,
+						 Some(len_shift + 15),
+						 Some(len_shift + 16),
+						 Some(len_shift + 17),
+						 None];
+		assert!(v.instantiate_module(m).is_ok());
+		assert_eq!(v.store.tables[0].elem, check);
 	}
 }
