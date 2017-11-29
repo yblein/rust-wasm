@@ -117,6 +117,7 @@ pub enum VMError {
 	ModuleInvalid,
 	ElemOffsetTooLarge(usize),
 	DataOffsetTooLarge(usize),
+	StartFunctionFailed,
 	WrongImportNumber,
 }
 
@@ -352,6 +353,22 @@ impl VM {
 			)
 		}
 
+		// 17. If the start function module.start is not empty, then:
+		// ...
+		// Intuition: call the start function if it exists
+		if let Some(idx) = m.start {
+			let mut start_int = Interpreter::new();
+			let func_addr = inst.func_addrs[idx as usize];
+			let res = match &self.store.funcs[func_addr] {
+				&FuncInst::Module(ref f) => interpreter_eval_func!(&mut start_int, self, f.code),
+				_ => unreachable!(),
+			};
+
+			if let Err(_) = res {
+				return Err(VMError::StartFunctionFailed)
+			}
+		}
+
 		Ok(inst)
 	}
 }
@@ -523,5 +540,26 @@ mod tests {
 						 None];
 		assert!(v.instantiate_module(m).is_ok());
 		assert_eq!(v.store.tables[0].elem, check);
+	}
+
+	#[test]
+	fn start() {
+		let mut v = VM::new();
+		let mut m = Module::empty();
+
+		m.types.push(types::Func { args: Vec::new(), result: Vec::new() });
+
+		m.funcs.push(ast::Func {
+			type_index: 0,
+			locals: Vec::new(),
+			body: vec![
+				Instr::Const(values::Value::I32(42)),
+				Instr::SetGlobal(0)
+			],
+		});
+
+		m.start = Some(0);
+		assert!(v.instantiate_module(m).is_ok());
+		assert_eq!(v.store.globals[0].value, values::Value::I32(42));
 	}
 }

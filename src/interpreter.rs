@@ -1,4 +1,4 @@
-use vm::{self, FuncInst, TableInst, GlobalInst, MemInst};
+use vm::{FuncInst, TableInst, GlobalInst, MemInst};
 use ast::*;
 use types;
 use values::Value;
@@ -418,17 +418,17 @@ impl Interpreter {
 macro_rules! interpreter_eval_expr {
 	($int: expr, $vm: ident, $instrs: expr) => {
 		{
-			let mut cls = || {
+			let mut cls = |funcs: &[FuncInst], tables: &[TableInst], globals: &[GlobalInst], mems: &mut Vec<MemInst>| {
 				for instr in $instrs {
 					// Cannot use ? because Rust is not able to infer the type
-					match $int.instr(instr, & $vm.store.funcs, &$vm.store.tables, & $vm.store.globals, &mut $vm.store.mems) {
+					match $int.instr(instr, funcs, tables, globals, mems) {
 						Ok(_) => continue,
 						Err(c) => return Err(c),
 					};
 				}
 				Ok(())
 			};
-			cls()
+			cls(& $vm.store.funcs, & $vm.store.tables, & $vm.store.globals, &mut $vm.store.mems)
 		}
 	}
 }
@@ -440,13 +440,21 @@ macro_rules! interpreter_eval_expr {
 macro_rules! interpreter_eval_expr_const {
 	($int: expr, $vm: ident, $instrs: expr) => {
 		{
-			let mut cls = || {
+			let mut cls = |globals: &[GlobalInst]| {
 				// Only the last value matters for ExprConst
-				$int.instr_const($instrs.last().unwrap(), & $vm.store.globals).ok()?;
+				$int.instr_const($instrs.last().unwrap(), globals).ok()?;
 				$int.stack.pop()
 			};
-			cls()
+			cls(& $vm.store.globals)
 		}
+	}
+}
+
+/// Evaluate a Func
+#[macro_export]
+macro_rules! interpreter_eval_func {
+	($int: expr, $vm: ident, $func: expr) => {
+		interpreter_eval_expr!($int, $vm, &$func.body)
 	}
 }
 
