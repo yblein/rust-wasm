@@ -1,4 +1,4 @@
-use vm;
+use vm::{self, FuncInst, TableInst, GlobalInst, MemInst};
 use ast::*;
 use types;
 use values::Value;
@@ -7,7 +7,7 @@ use ops::{IntOp,FloatOp,FloatDemoteOp,FloatPromoteOp};
 
 /// A struct storing the state of the current interpreted
 pub struct Interpreter {
-	stack: Vec<Value>,
+	pub stack: Vec<Value>,
 }
 
 #[derive(Debug, PartialEq)]
@@ -24,7 +24,7 @@ pub struct Trap {
 }
 
 #[derive(Debug, PartialEq)]
-enum Control {
+pub enum Control {
 	/// Continue the execution linearly
 	Continue,
 	/// Branch to the `nesting_levels` outer scope, 0 being the innermost surrounding scope.
@@ -45,14 +45,19 @@ impl Interpreter {
 
 	/// Intrepret a single instruction.
 	/// This is the main dispatching function of the interpreter.
-	fn instr(&mut self, instr: &Instr, vm: &mut vm::VM) -> IntResult {
+	pub fn instr(&mut self,
+			 instr: &Instr,
+			 funcs: &[FuncInst],
+			 tables: &[TableInst],
+			 globals: &[GlobalInst],
+			 mems: &mut Vec<MemInst>) -> IntResult {
 		use ast::Instr::*;
 
 		// Note: passing VM (mut/imut) is case by case
 		match *instr {
 			Unreachable => self.unreachable(),
 			Nop => self.nop(),
-			Block(ref result_type, ref instrs) => self.block(result_type, instrs, vm),
+			Block(ref result_type, ref instrs) => self.block(result_type, instrs, funcs, tables, globals, mems),
 			Br(nesting_levels) => self.branch(nesting_levels),
 			Drop_ => self.drop(),
 			Select => self.select(),
@@ -69,6 +74,16 @@ impl Interpreter {
 		}
 	}
 
+	/// Interpret a single const instruction.
+	pub fn instr_const(&mut self,
+					   instr: &InstrConst,
+					   globals: &[GlobalInst]) -> IntResult {
+		match *instr {
+			InstrConst::Const(c) => self.const_(c),
+			InstrConst::GetGlobal(idx) => self.get_global(idx, globals),
+		}
+	}
+
 	/// Raises an unconditional trap
 	fn unreachable(&self) -> IntResult {
 		Err(Trap { origin: TrapOrigin::Unreachable })
@@ -80,11 +95,17 @@ impl Interpreter {
 	}
 
 	/// Interpret a block
-	fn block(&mut self, result_type: &[types::Value], instrs: &[Instr], vm: &mut vm::VM) -> IntResult {
+	fn block(&mut self,
+			 result_type: &[types::Value],
+			 instrs: &[Instr],
+			 funcs: &[FuncInst],
+			 tables: &[TableInst],
+			 globals: &[GlobalInst],
+			 mems: &mut Vec<MemInst>) -> IntResult {
 		let local_stack_begin = self.stack.len();
 
 		for instr in instrs {
-			let res = self.instr(instr, vm)?;
+			let res = self.instr(instr, funcs, tables, globals, mems)?;
 
 			if let Branch { nesting_levels } = res {
 				// If the instruction caused a branch, we need to exit the block early on.
@@ -380,7 +401,7 @@ impl Interpreter {
 	}
 
 	/// GetGlobal
-	fn get_global(&mut self, _idx: Index, _vm: &vm::VM) -> IntResult {
+	fn get_global(&mut self, _idx: Index, _globals: &[GlobalInst]) -> IntResult {
 		// TODO: implement Frame
 		unimplemented!();
 	}
@@ -389,16 +410,43 @@ impl Interpreter {
 	fn pop2(&mut self) -> (Value, Value) {
 		(self.stack.pop().unwrap(), self.stack.pop().unwrap())
 	}
+}
 
-	/// Evaluate an ExprConst and return a given value
-	/// Use for global/segment initialization
-	pub fn evaluate_expr_const(&mut self, instrs: &ExprConst, vm: &vm::VM) -> Option<Value> {
-		// Only the last value matters for ExprConst
-		match *instrs.last().unwrap() {
-			InstrConst::Const(c) => self.const_(c),
-			InstrConst::GetGlobal(idx) => self.get_global(idx, vm),
-		}.ok()?;
-		self.stack.pop()
+/// Evaluate an ExprConst and return a given value
+/// Use for global/segment initialization
+#[macro_export]
+macro_rules! interpreter_eval_expr {
+	($int: expr, $vm: ident, $instrs: expr) => {
+		{
+			let mut cls = || {
+				for instr in $instrs {
+					// Cannot use ? because Rust is not able to infer the type
+					match $int.instr(instr, & $vm.store.funcs, &$vm.store.tables, & $vm.store.globals, &mut $vm.store.mems) {
+						Ok(_) => continue,
+						Err(c) => return Err(c),
+					};
+				}
+				Ok(())
+			};
+			cls()
+		}
+	}
+}
+
+/// Evaluate an ExprConst and return a given value, returning a Value::I32
+/// (validation)
+/// Used for global/segment initialization
+#[macro_export]
+macro_rules! interpreter_eval_expr_const {
+	($int: expr, $vm: ident, $instrs: expr) => {
+		{
+			let mut cls = || {
+				// Only the last value matters for ExprConst
+				$int.instr_const($instrs.last().unwrap(), & $vm.store.globals).ok()?;
+				$int.stack.pop()
+			};
+			cls()
+		}
 	}
 }
 
@@ -740,18 +788,10 @@ mod tests {
 		test(int, vm)
 	}
 
-	/// Run a sequence of instructions in the given interpreter `int`.
-	fn run_seq_in(int: &mut Interpreter, vm: &mut vm::VM, instrs: &[Instr]) -> Result<(), Trap> {
-		for instr in instrs {
-			int.instr(instr, vm)?;
-		}
-		Ok(())
-	}
-
 	/// Run a sequence of instructions in a new empty interpreter.
 	fn run_seq(instrs: &[Instr]) -> Result<(), Trap> {
 		t(|mut int: Interpreter, mut vm: vm::VM| {
-			run_seq_in(&mut int, &mut vm, instrs)
+			interpreter_eval_expr!(&mut int, vm, instrs)
 		})
 	}
 
@@ -759,7 +799,7 @@ mod tests {
 	/// is sucessful and that the resulting stack is equal to `final_stack`.
 	fn assert_seq_stack(instrs: &[Instr], final_stack: &[Value]) {
 		t(|mut int: Interpreter, mut vm: vm::VM| {
-			assert_eq!(run_seq_in(&mut int, &mut vm, instrs), Ok(()));
+			assert_eq!(interpreter_eval_expr!(&mut int, vm, instrs), Ok(()));
 			assert_eq!(int.stack, final_stack);
 		})
 	}

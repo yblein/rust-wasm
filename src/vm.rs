@@ -50,47 +50,48 @@ impl ModuleInst {
 
 type HostFunc = ();
 
-struct HostFuncInst {
+pub struct HostFuncInst {
 	type_: types::Func,
 	hostcode: HostFunc,
 }
 
-struct ModuleFuncInst {
+pub struct ModuleFuncInst {
 	type_: types::Func,
 	module: Rc<ModuleInst>,
 	code: ast::Func,
 }
 
-enum FuncInst {
+pub enum FuncInst {
 	Module(ModuleFuncInst),
 	Host(HostFuncInst),
 }
 
 type FuncElem = Option<FuncAddr>;
 
-struct TableInst {
+pub struct TableInst {
 	elem: Vec<FuncElem>,
 	max: Option<u32>,
 }
 
 const PAGE_SIZE: usize = 65536;
 
-struct MemInst {
+pub struct MemInst {
 	data: Vec<u8>,
 	max: Option<u32>,
 }
 
-struct GlobalInst {
+pub struct GlobalInst {
 	value: values::Value,
 	mutable: bool,
 }
 
-struct Store {
-	funcs: Vec<FuncInst>,
-	tables: Vec<TableInst>,
-	mems: Vec<MemInst>,
-	globals: Vec<GlobalInst>,
-	modules: Vec<ModuleInst>,
+// TODO: refactor pub visibility usign pub(crate)
+pub struct Store {
+	pub funcs: Vec<FuncInst>,
+	pub tables: Vec<TableInst>,
+	pub mems: Vec<MemInst>,
+	pub globals: Vec<GlobalInst>,
+	pub modules: Vec<ModuleInst>,
 }
 
 impl Store {
@@ -108,7 +109,7 @@ impl Store {
 /// A struct storing the state of the virtual machine
 pub struct VM {
 //	registry: HashMap<ast::Import, ExternVal>,
-	store: Store
+	pub store: Store
 }
 
 #[derive(Debug, PartialEq)]
@@ -205,7 +206,7 @@ impl VM {
 		// ...
 		// Note: we only compute vals here, we will create the GlobalInstance when we allocate globals
 		let vals = m.globals.iter().map(|g| {
-			const_int.evaluate_expr_const(&g.value, &self).unwrap()
+			interpreter_eval_expr_const!(&mut const_int, self, &g.value).unwrap()
 		}).collect();
 
 		// 10. For each element segment elemi in module.elem, do:
@@ -217,7 +218,7 @@ impl VM {
 		let mut i = 0;
 		let mut elem_offsets = Vec::new();
 		for elem in m.elems.iter() {
-			let offset = match const_int.evaluate_expr_const(&elem.offset, &self).unwrap() {
+			let offset = match interpreter_eval_expr_const!(&mut const_int, self, &elem.offset).unwrap() {
 				values::Value::I32(c) => c as usize,
 				_ => unreachable!(),
 			};
@@ -235,7 +236,7 @@ impl VM {
 		let mut i = 0;
 		let mut data_offsets = Vec::new();
 		for data in m.data.iter() {
-			let offset = match const_int.evaluate_expr_const(&data.offset, &self).unwrap() {
+			let offset = match interpreter_eval_expr_const!(&mut const_int, self, &data.offset).unwrap() {
 				values::Value::I32(c) => c as usize,
 				_ => unreachable!(),
 			};

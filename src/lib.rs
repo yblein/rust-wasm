@@ -5,6 +5,8 @@
 mod types;
 mod values;
 mod ops;
+
+#[macro_use]
 pub mod interpreter;
 pub mod ast;
 pub mod vm;
