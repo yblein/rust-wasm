@@ -462,6 +462,7 @@ macro_rules! interpreter_eval_func {
 mod tests {
 	use super::*;
 	use ast::Instr::*;
+	use vm;
 
 	#[test]
 	fn empty() {

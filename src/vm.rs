@@ -1,6 +1,7 @@
 use std::fs::File;
 use std::io;
 use std::rc::Rc;
+use std::collections::HashMap;
 
 use ast;
 use binary;
@@ -14,6 +15,7 @@ type TableAddr = Addr;
 type MemAddr = Addr;
 type GlobalAddr = Addr;
 
+#[derive(Clone, Copy, PartialEq, Debug)]
 pub enum ExternVal {
 	Func(FuncAddr),
 	Table(TableAddr),
@@ -106,9 +108,16 @@ impl Store {
 	}
 }
 
+/// Exports are stored inside a global registry
+#[derive(Eq, PartialEq, Hash)]
+struct HashKey {
+	module: String,
+	name: String,
+}
+
 /// A struct storing the state of the virtual machine
 pub struct VM {
-//	registry: HashMap<ast::Import, ExternVal>,
+	registry: HashMap<HashKey, ExternVal>,
 	pub store: Store
 }
 
@@ -135,6 +144,7 @@ impl VM {
 	/// ```
 	pub fn new() -> VM {
 		VM {
+			registry: HashMap::new(),
 			store: Store::new(),
 		}
 	}
@@ -339,6 +349,26 @@ impl VM {
 			i += 1;
 		}
 
+
+		// 14. For each export exporti in module.exports, do:
+		// ...
+		// Intuition: put all exports inside the registry, allowing them to be re-used later
+		for export in m.exports {
+			let extern_val = match export.desc {
+				ast::ExportDesc::Func(idx) => ExternVal::Func(mi.func_addrs[idx as usize]),
+				ast::ExportDesc::Table(idx) => ExternVal::Table(mi.table_addrs[idx as usize]),
+				ast::ExportDesc::Memory(idx) => ExternVal::Memory(mi.mem_addrs[idx as usize]),
+				ast::ExportDesc::Global(idx) => ExternVal::Global(mi.global_addrs[idx as usize]),
+			};
+			// TODO: handle module name / change the registry using the returned
+			// ModuleInst? (is this up to the embedder?)
+			self.registry.insert(HashKey { module: String::from(""), name: export.name.clone() }, extern_val);
+			mi.exports.push(ExportInst {
+				name: export.name,
+				value: extern_val,
+			});
+		}
+
 		// 2. put the FuncInst (which have a ref to ModuleInst) into the store
 		let inst = Rc::new(mi);
 		for func in m.funcs {
@@ -393,6 +423,8 @@ mod tests {
 		assert_eq!(mib.table_addrs.len(), 1);
 		assert_eq!(v.store.tables[mib.table_addrs[0]].elem.len(), 0);
 		assert_eq!(v.store.tables[mib.table_addrs[0]].max, None);
+		assert_eq!(v.registry.get(&HashKey { module: String::from(""), name: String::from("memory") }).unwrap(), &ExternVal::Memory(mib.mem_addrs[0]));
+		assert_eq!(v.registry.get(&HashKey { module: String::from(""), name: String::from("main") }).unwrap(), &ExternVal::Func(mib.func_addrs[0]));
 	}
 
 	#[test]
