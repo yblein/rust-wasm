@@ -204,20 +204,39 @@ impl VM {
 		// Intuition: resolve imports by module name & fct name, check their types
 		// TODO: handle more than one module name
 		// TODO: move extern export/import retrieval outside VM, and provide helpers for users to manage this
-		let mut extern_vals = Vec::new();
+		let mut imported_funcs = Vec::new();
+		let mut imported_tables = Vec::new();
+		let mut imported_memories = Vec::new();
 		let mut imported_globals = Vec::new();
 		{
 			for import in &m.imports {
 				let type_match = match self.registry.get(&HashKey { name: import.name.clone(), module: import.module.clone() }) {
 					Some(&HashValue { ref type_, value }) => {
-						extern_vals.push(value);
 						match (type_, &import.desc) {
-							(&types::Extern::Func(ref exported_type), &ast::ImportDesc::Func(idx)) =>
-								exported_type == &m.types[idx as usize],
-							(&types::Extern::Table(ref exported_type), &ast::ImportDesc::Table(ref imported_type)) =>
-								exported_type.elem == imported_type.elem && Self::match_limits(&imported_type.limits, &exported_type.limits),
-							(&types::Extern::Memory(ref exported_type), &ast::ImportDesc::Memory(ref imported_type)) =>
-								Self::match_limits(&imported_type.limits, &exported_type.limits),
+							(&types::Extern::Func(ref exported_type), &ast::ImportDesc::Func(idx)) => {
+								if let ExternVal::Func(addr) = value {
+									imported_funcs.push(addr);
+								} else {
+									unreachable!();
+								}
+								exported_type == &m.types[idx as usize]
+							},
+							(&types::Extern::Table(ref exported_type), &ast::ImportDesc::Table(ref imported_type)) => {
+								if let ExternVal::Table(addr) = value {
+									imported_tables.push(addr);
+								} else {
+									unreachable!();
+								}
+								exported_type.elem == imported_type.elem && Self::match_limits(&imported_type.limits, &exported_type.limits)
+							},
+							(&types::Extern::Memory(ref exported_type), &ast::ImportDesc::Memory(ref imported_type)) => {
+								if let ExternVal::Memory(addr) = value {
+									imported_memories.push(addr);
+								} else {
+									unreachable!();
+								}
+								Self::match_limits(&imported_type.limits, &exported_type.limits)
+							},
 							(&types::Extern::Global(ref exported_type), &ast::ImportDesc::Global(ref imported_type)) => {
 								// Save globals for the auxiliary module instance now
 								if let ExternVal::Global(addr) = value {
@@ -265,7 +284,6 @@ impl VM {
 		// TODO: check if a module can init the elements of an imported
 		// table. If yes, than we should use the size of the imported tables
 		// instead of the number of elements declared inside the module
-		let mut i = 0;
 		let mut elem_offsets = Vec::new();
 		for elem in m.elems.iter() {
 			// TODO: replace imported_globals by the auxiliary Frame
@@ -274,17 +292,24 @@ impl VM {
 				_ => unreachable!(),
 			};
 			elem_offsets.push(offset);
+
+			let table_size = {
+				if (elem.index as usize) >= imported_tables.len() {
+					m.tables[(elem.index as usize) - imported_tables.len()].type_.limits.min as usize
+				} else {
+					self.store.mems[elem.index as usize].data.len()
+				}
+			};
+
 			// We will allocate limits.min empty elements when allocating the table
-			if offset + elem.init.len() > (m.tables[elem.index as usize].type_.limits.min as usize) {
-				return Err(VMError::ElemOffsetTooLarge(i));
+			if offset + elem.init.len() > table_size {
+				return Err(VMError::ElemOffsetTooLarge(elem.index as usize));
 			}
-			i += 1;
 		}
 
 		// 11. For each data segment datai in module.data, do:
 		// ...
 		// Intuition: check if the module does not try to init too much memory
-		let mut i = 0;
 		let mut data_offsets = Vec::new();
 		for data in m.data.iter() {
 			// TODO: replace imported_globals by the auxiliary Frame
@@ -293,21 +318,36 @@ impl VM {
 				_ => unreachable!(),
 			};
 			data_offsets.push(offset);
-			// We will allocate limits.min empty data when allocating the table
-			if offset + data.init.len() > ((m.memories[data.index as usize].type_.limits.min as usize) * PAGE_SIZE) {
-				return Err(VMError::DataOffsetTooLarge(i));
+
+			let memory_size = {
+				if (data.index as usize) >= imported_memories.len() {
+					(m.memories[(data.index as usize) - imported_memories.len()].type_.limits.min as usize) * PAGE_SIZE
+				} else {
+					self.store.mems[data.index as usize].data.len()
+				}
+			};
+
+			if offset + data.init.len() > memory_size {
+				return Err(VMError::DataOffsetTooLarge(data.index as usize));
 			}
-			i += 1;
 		}
 
 		// 14. Let moduleinst be a new module instance allocated from module in
 		// store S with imports externval∗ and glboal initializer values val∗.
 		// Note: module tables/data/globals initializations are performed in the
 		// following function
-		self.allocate_and_init_module(m, extern_vals, vals, elem_offsets, data_offsets)
+		self.allocate_and_init_module(m, imported_funcs, imported_tables, imported_memories, imported_globals, vals, elem_offsets, data_offsets)
 	}
 
-	fn allocate_and_init_module(&mut self, m: ast::Module, extern_vals: Vec<ExternVal>, vals: Vec<values::Value>, elem_offsets: Vec<usize>, data_offsets: Vec<usize>) -> Result<Rc<ModuleInst>, VMError> {
+	fn allocate_and_init_module(&mut self,
+								m: ast::Module,
+								extern_funcs: Vec<FuncAddr>,
+								extern_tables: Vec<TableAddr>,
+								extern_memories: Vec<MemAddr>,
+								extern_globals: Vec<GlobalAddr>,
+								vals: Vec<values::Value>,
+								elem_offsets: Vec<usize>,
+								data_offsets: Vec<usize>) -> Result<Rc<ModuleInst>, VMError> {
 		// Two passes algorithms
 		// 1. do all modifications on the ModuleInst in a single scope
 		let mut mi = ModuleInst::new();
@@ -319,6 +359,23 @@ impl VM {
 		let table_types: Vec<types::Table> = m.tables.iter().map(|t| { t.type_.clone() }).collect();
 		let memory_types: Vec<types::Memory> = m.memories.iter().map(|t| { t.type_.clone() }).collect();
 		let global_types: Vec<types::Global> = m.globals.iter().map(|t| { t.type_.clone() }).collect();
+
+		// Alloc steps 10-13
+		for addr in extern_funcs {
+			mi.func_addrs.push(addr);
+		}
+
+		for addr in extern_tables {
+			mi.table_addrs.push(addr);
+		}
+
+		for addr in extern_memories {
+			mi.mem_addrs.push(addr);
+		}
+
+		for addr in extern_globals {
+			mi.global_addrs.push(addr);
+		}
 
 		// Functions allocation
 		// Only allocate indices, pushing to the store outside the mutable scope
@@ -380,25 +437,11 @@ impl VM {
 			}
 		}
 
-		// Alloc steps 10-13
-		// Note: this block should be after func/table/mem allocation but before
-		// global allocation, globals imports have lower indices than module
-		// globals
-		for val in extern_vals {
-			match val {
-				ExternVal::Func(addr) => mi.func_addrs.push(addr),
-				ExternVal::Table(addr) => mi.table_addrs.push(addr),
-				ExternVal::Memory(addr) => mi.mem_addrs.push(addr),
-				ExternVal::Global(addr) => mi.global_addrs.push(addr),
-			}
-		}
-
 		// Globals allocation
 		assert_eq!(m.globals.len(), vals.len());
 		let mut i = 0;
 		for global in m.globals {
 			mi.global_addrs.push(self.store.globals.len());
-			// TODO: do we need to check if types(vals[i]) == global.type_.type? Or is it part of the validation?
 			self.store.globals.push(
 				GlobalInst {
 					value: vals[i],
@@ -781,12 +824,12 @@ mod tests {
 
 		let m2b = m2b.unwrap();
 		if let FuncInst::Module(ref f) = v.store.funcs[m2b.func_addrs[0]] {
-			assert_eq!(f.type_, second_type);
+			assert_eq!(f.type_, first_type);
 		} else {
 			panic!("First function (local function) is not of type FuncInst::Module.");
 		}
 		if let FuncInst::Module(ref f) = v.store.funcs[m2b.func_addrs[1]] {
-			assert_eq!(f.type_, first_type);
+			assert_eq!(f.type_, second_type);
 		} else {
 			panic!("Second function (imported function) is not of type FuncInst::Module.");
 		}
@@ -907,5 +950,109 @@ mod tests {
 
 		assert!(v.instantiate_module(m2).is_ok());
 		assert_eq!(v.store.mems[0].data, check);
+	}
+
+
+	#[test]
+	fn memory_init_other_module() {
+		let mut v = VM::new();
+
+		let mut m1 = Module::empty();
+		m1.memories.push(ast::Memory {
+			type_: types::Memory {
+				limits: types::Limits { min: 1, max: None }
+			},
+		});
+		m1.exports.push(ast::Export { name: String::from("mem"), desc: ast::ExportDesc::Memory(0) });
+		let m1b = v.instantiate_module(m1);
+		assert!(m1b.is_ok());
+
+		let mut m2 = Module::empty();
+		m2.memories.push(ast::Memory {
+			type_: types::Memory {
+				limits: types::Limits { min: 1, max: None },
+			},
+		});
+		m2.imports.push(ast::Import {
+			module: String::from(""),
+			name: String::from("mem"),
+			desc: ast::ImportDesc::Memory(
+				types::Memory {
+					limits: types::Limits { min: 1, max: None }
+				}
+			),
+		});
+		m2.data.push(ast::Segment::<u8> {
+			index: 0,
+			offset: vec![
+				InstrConst::Const(values::Value::I32(PAGE_SIZE as u32 - 1)),
+			],
+			init: vec![3, 4, 5],
+		});
+		let m2b = v.instantiate_module(m2);
+		assert_eq!(m2b.err(), Some(VMError::DataOffsetTooLarge(0)));
+
+		let mut m2 = Module::empty();
+		m2.memories.push(ast::Memory {
+			type_: types::Memory {
+				limits: types::Limits { min: 1, max: None },
+			},
+		});
+		m2.imports.push(ast::Import {
+			module: String::from(""),
+			name: String::from("mem"),
+			desc: ast::ImportDesc::Memory(
+				types::Memory {
+					limits: types::Limits { min: 1, max: None }
+				}
+			),
+		});
+		m2.data.push(ast::Segment::<u8> {
+			index: 1,
+			offset: vec![
+				InstrConst::Const(values::Value::I32(PAGE_SIZE as u32 - 1)),
+			],
+			init: vec![3, 4, 5],
+		});
+		let m2b = v.instantiate_module(m2);
+		assert_eq!(m2b.err(), Some(VMError::DataOffsetTooLarge(1)));
+
+		let mut m2 = Module::empty();
+		m2.memories.push(ast::Memory {
+			type_: types::Memory {
+				limits: types::Limits { min: 1, max: None },
+			},
+		});
+		m2.imports.push(ast::Import {
+			module: String::from(""),
+			name: String::from("mem"),
+			desc: ast::ImportDesc::Memory(
+				types::Memory {
+					limits: types::Limits { min: 1, max: None }
+				}
+			),
+		});
+		m2.data.push(ast::Segment::<u8> {
+			index: 0,
+			offset: vec![
+				InstrConst::Const(values::Value::I32(0)),
+			],
+			init: vec![3, 4, 5],
+		});
+		m2.data.push(ast::Segment::<u8> {
+			index: 1,
+			offset: vec![
+				InstrConst::Const(values::Value::I32(0)),
+			],
+			init: vec![7, 8, 9],
+		});
+		let mut check1 = vec![3, 4, 5];
+		check1.extend(vec![0; PAGE_SIZE - 3]);
+		let mut check2 = vec![7, 8, 9];
+		check2.extend(vec![0; PAGE_SIZE - 3]);
+
+		assert!(v.instantiate_module(m2).is_ok());
+		assert_eq!(v.store.mems[0].data, check1);
+		assert_eq!(v.store.mems[1].data, check2);
 	}
 }
