@@ -7,7 +7,7 @@ use ast;
 use binary;
 use types;
 use values;
-use interpreter::Interpreter;
+use interpreter::{Interpreter, StackFrames};
 
 type Addr = usize;
 type FuncAddr = Addr;
@@ -33,7 +33,7 @@ pub struct ModuleInst {
 	func_addrs: Vec<FuncAddr>,
 	table_addrs: Vec<TableAddr>,
 	mem_addrs: Vec<MemAddr>,
-	global_addrs: Vec<GlobalAddr>,
+	pub global_addrs: Vec<GlobalAddr>,
 	exports: Vec<ExportInst>,
 }
 
@@ -261,82 +261,82 @@ impl VM {
 		// globals(externval∗)} that only consists of the imported globals.
 		// 6. Let F be the frame {module moduleinstim,locals ϵ}.
 		// 7. Push the frame F to the stack.
-		// TODO: setup the frame with a "fake" ModuleInst with its imported global variable found
-		// TODO: require Frame support
-
-		// Create an interpret for const evaluation
 		let mut const_int = Interpreter::new();
+		let mut mod_aux = ModuleInst::new();
+		mod_aux.global_addrs = imported_globals;
 
-		// 8. Let globalidx_{new} be the global index that corresponds to the
-		// number of global imports in module.imports (i.e., the index of the
-		// first non-imported global).
-		// 9. For each global globali in module.globals, do:
-		// ...
-		// Note: we only compute vals here, we will create the GlobalInstance when we allocate globals
-		let vals = m.globals.iter().map(|g| {
-			// TODO: replace imported_globals by the auxiliary Frame
-			interpreter_eval_expr_const!(&mut const_int, self, &g.value, &imported_globals).unwrap()
-		}).collect();
+		// For sframe/mod_aux lifetime dependecy
+		let (global_vals, elem_offsets, data_offsets) = {
+			let mut sframe = StackFrames::new();
+			sframe.push(&mod_aux, 0);
 
-		// 10. For each element segment elemi in module.elem, do:
-		// ...
-		// Intuition: check if the module does not try to init too many elements
-		// TODO: check if a module can init the elements of an imported
-		// table. If yes, than we should use the size of the imported tables
-		// instead of the number of elements declared inside the module
-		let mut elem_offsets = Vec::new();
-		for elem in m.elems.iter() {
-			// TODO: replace imported_globals by the auxiliary Frame
-			let offset = match interpreter_eval_expr_const!(&mut const_int, self, &elem.offset, &imported_globals).unwrap() {
-				values::Value::I32(c) => c as usize,
-				_ => unreachable!(),
-			};
-			elem_offsets.push(offset);
+			// 8. Let globalidx_{new} be the global index that corresponds to the
+			// number of global imports in module.imports (i.e., the index of the
+			// first non-imported global).
+			// 9. For each global globali in module.globals, do:
+			// ...
+			// Note: we only compute vals here, we will create the GlobalInstance when we allocate globals
+			let vals = m.globals.iter().map(|g| {
+				interpreter_eval_expr_const!(&mut const_int, &mut sframe, self, &g.value).unwrap()
+			}).collect();
 
-			let table_size = {
-				if (elem.index as usize) >= imported_tables.len() {
-					m.tables[(elem.index as usize) - imported_tables.len()].type_.limits.min as usize
-				} else {
-					self.store.mems[elem.index as usize].data.len()
+			// 10. For each element segment elemi in module.elem, do:
+			// ...
+			// Intuition: check if the module does not try to init too many elements
+			let mut elem_offsets = Vec::new();
+			for elem in m.elems.iter() {
+				let offset = match interpreter_eval_expr_const!(&mut const_int, &mut sframe, self, &elem.offset).unwrap() {
+					values::Value::I32(c) => c as usize,
+					_ => unreachable!(),
+				};
+				elem_offsets.push(offset);
+
+				let table_size = {
+					if (elem.index as usize) >= imported_tables.len() {
+						m.tables[(elem.index as usize) - imported_tables.len()].type_.limits.min as usize
+					} else {
+						self.store.mems[elem.index as usize].data.len()
+					}
+				};
+
+				// We will allocate limits.min empty elements when allocating the table
+				if offset + elem.init.len() > table_size {
+					return Err(VMError::ElemOffsetTooLarge(elem.index as usize));
 				}
-			};
-
-			// We will allocate limits.min empty elements when allocating the table
-			if offset + elem.init.len() > table_size {
-				return Err(VMError::ElemOffsetTooLarge(elem.index as usize));
 			}
-		}
 
-		// 11. For each data segment datai in module.data, do:
-		// ...
-		// Intuition: check if the module does not try to init too much memory
-		let mut data_offsets = Vec::new();
-		for data in m.data.iter() {
-			// TODO: replace imported_globals by the auxiliary Frame
-			let offset = match interpreter_eval_expr_const!(&mut const_int, self, &data.offset, &imported_globals).unwrap() {
-				values::Value::I32(c) => c as usize,
-				_ => unreachable!(),
-			};
-			data_offsets.push(offset);
+			// 11. For each data segment datai in module.data, do:
+			// ...
+			// Intuition: check if the module does not try to init too much memory
+			let mut data_offsets = Vec::new();
+			for data in m.data.iter() {
+				let offset = match interpreter_eval_expr_const!(&mut const_int, &mut sframe, self, &data.offset).unwrap() {
+					values::Value::I32(c) => c as usize,
+					_ => unreachable!(),
+				};
+				data_offsets.push(offset);
 
-			let memory_size = {
-				if (data.index as usize) >= imported_memories.len() {
-					(m.memories[(data.index as usize) - imported_memories.len()].type_.limits.min as usize) * PAGE_SIZE
-				} else {
-					self.store.mems[data.index as usize].data.len()
+				let memory_size = {
+					if (data.index as usize) >= imported_memories.len() {
+						(m.memories[(data.index as usize) - imported_memories.len()].type_.limits.min as usize) * PAGE_SIZE
+					} else {
+						self.store.mems[data.index as usize].data.len()
+					}
+				};
+
+				if offset + data.init.len() > memory_size {
+					return Err(VMError::DataOffsetTooLarge(data.index as usize));
 				}
-			};
-
-			if offset + data.init.len() > memory_size {
-				return Err(VMError::DataOffsetTooLarge(data.index as usize));
 			}
-		}
+
+			(vals, elem_offsets, data_offsets)
+		};
 
 		// 14. Let moduleinst be a new module instance allocated from module in
 		// store S with imports externval∗ and glboal initializer values val∗.
 		// Note: module tables/data/globals initializations are performed in the
 		// following function
-		self.allocate_and_init_module(m, imported_funcs, imported_tables, imported_memories, imported_globals, vals, elem_offsets, data_offsets)
+		self.allocate_and_init_module(m, imported_funcs, imported_tables, imported_memories, mod_aux.global_addrs, global_vals, elem_offsets, data_offsets)
 	}
 
 	fn allocate_and_init_module(&mut self,
@@ -503,9 +503,11 @@ impl VM {
 		// Intuition: call the start function if it exists
 		if let Some(idx) = m.start {
 			let mut start_int = Interpreter::new();
+			let mut sframe = StackFrames::new();
+			sframe.push(&inst, 0);
 			let func_addr = inst.func_addrs[idx as usize];
 			let res = match &self.store.funcs[func_addr] {
-				&FuncInst::Module(ref f) => interpreter_eval_func!(&mut start_int, self, f.code),
+				&FuncInst::Module(ref f) => interpreter_eval_func!(&mut start_int, &mut sframe, self, f.code),
 				_ => unreachable!(),
 			};
 
@@ -584,24 +586,47 @@ mod tests {
 	#[test]
 	fn global_get_global() {
 		let mut v = VM::new();
-		let mut m = Module::empty();
+		let mut m1 = Module::empty();
 
-		m.globals.push(ast::Global {
-			type_: types::Global { value: types::Value::Int(types::Int::I32), mutable: false },
+		let global_type = types::Global { value: types::Value::Int(types::Int::I32), mutable: false };
+		m1.globals.push(ast::Global {
+			type_: global_type.clone(),
 			value: vec![
 				Instr::Const(values::Value::I32(42)),
 			],
 		});
+		m1.globals.push(ast::Global {
+			type_: global_type.clone(),
+			value: vec![
+				Instr::Const(values::Value::I32(43)),
+			],
+		});
+		m1.exports.push(ast::Export { name: String::from("wasm"), desc: ast::ExportDesc::Global(0) });
+		m1.exports.push(ast::Export { name: String::from("wasm2"), desc: ast::ExportDesc::Global(1) });
+		assert!(v.instantiate_module(m1).is_ok());
 
-		m.globals.push(ast::Global {
-			type_: types::Global { value: types::Value::Int(types::Int::I32), mutable: false },
+		let mut m2 = Module::empty();
+		m2.imports.push(ast::Import {
+			module: String::from(""),
+			name: String::from("wasm"),
+			desc: ast::ImportDesc::Global(global_type.clone()),
+		});
+		m2.imports.push(ast::Import {
+			module: String::from(""),
+			name: String::from("wasm2"),
+			desc: ast::ImportDesc::Global(global_type.clone()),
+		});
+		m2.globals.push(ast::Global {
+			type_: global_type,
 			value: vec![
 				Instr::GetGlobal(0),
 			],
 		});
-		let mib = v.instantiate_module(m).unwrap();
-		assert_eq!(v.store.globals.len(), 2);
-		assert_eq!(v.store.globals[mib.global_addrs[0]].value, values::Value::I32(42));
+		let m2b = v.instantiate_module(m2).unwrap();
+		assert_eq!(v.store.globals.len(), 3);
+		assert_eq!(v.store.globals[m2b.global_addrs[0]].value, values::Value::I32(42));
+		assert_eq!(v.store.globals[m2b.global_addrs[1]].value, values::Value::I32(43));
+		assert_eq!(v.store.globals[m2b.global_addrs[2]].value, values::Value::I32(42));
 	}
 
 	#[test]
@@ -718,7 +743,12 @@ mod tests {
 		let mut m = Module::empty();
 
 		m.types.push(types::Func { args: Vec::new(), result: Vec::new() });
-
+		m.globals.push(ast::Global {
+			type_: types::Global { value: types::Value::Int(types::Int::I32), mutable: true },
+			value: vec![
+				Instr::Const(values::Value::I32(40)),
+			],
+		});
 		m.funcs.push(ast::Func {
 			type_index: 0,
 			locals: Vec::new(),
@@ -1054,5 +1084,80 @@ mod tests {
 		assert!(v.instantiate_module(m2).is_ok());
 		assert_eq!(v.store.mems[0].data, check1);
 		assert_eq!(v.store.mems[1].data, check2);
+	}
+
+	#[test]
+	fn args() {
+		let mut v = VM::new();
+		let mut m = Module::empty();
+
+		let type_ = types::Value::Int(types::Int::I32);
+		m.types.push(types::Func { args: vec![type_.clone(), type_.clone()], result: vec![type_.clone()] });
+		m.funcs.push(ast::Func {
+			type_index: 0,
+			locals: Vec::new(),//vec![type_.clone(), type_.clone()],
+			body: vec![
+				Instr::GetLocal(0),
+				Instr::Const(values::Value::I32(1)),
+				Instr::IBin(types::Int::I32, IBinOp::Shl),
+				Instr::GetLocal(1),
+				Instr::IBin(types::Int::I32, IBinOp::Add),
+			],
+		});
+		let inst = v.instantiate_module(m).unwrap();
+		let mut int = Interpreter::new();
+		let mut sframe = StackFrames::new();
+
+		// Push args
+		int.stack.push(values::Value::I32(1));
+		int.stack.push(values::Value::I32(2));
+		sframe.push(&inst, 0);
+
+		let res = match &v.store.funcs[0] {
+			&FuncInst::Module(ref f) => interpreter_eval_func!(&mut int, &mut sframe, v, f.code),
+			_ => unreachable!(),
+		};
+		assert_eq!(int.stack.len(), 3);
+		assert_eq!(int.stack.last().unwrap(), &values::Value::I32(4));
+	}
+
+	#[test]
+	fn locals() {
+		let mut v = VM::new();
+		let mut m = Module::empty();
+
+		let type_ = types::Value::Int(types::Int::I32);
+		m.types.push(types::Func { args: vec![type_.clone(), type_.clone()], result: vec![type_.clone()] });
+		m.funcs.push(ast::Func {
+			type_index: 0,
+			locals: vec![type_.clone(), type_.clone()],
+			body: vec![
+				Instr::GetLocal(0),
+				Instr::Const(values::Value::I32(1)),
+				Instr::IBin(types::Int::I32, IBinOp::Shl),
+				Instr::GetLocal(2),
+				Instr::IBin(types::Int::I32, IBinOp::Add),
+			],
+		});
+		let inst = v.instantiate_module(m).unwrap();
+		let mut int = Interpreter::new();
+		let mut sframe = StackFrames::new();
+
+		// Push args
+		int.stack.push(values::Value::I32(1));
+		int.stack.push(values::Value::I32(2));
+
+		// Push locals
+		int.stack.push(values::Value::I32(0));
+		int.stack.push(values::Value::I32(0));
+
+		sframe.push(&inst, 0);
+
+		let res = match &v.store.funcs[0] {
+			&FuncInst::Module(ref f) => interpreter_eval_func!(&mut int, &mut sframe, v, f.code),
+			_ => unreachable!(),
+		};
+		assert_eq!(int.stack.len(), 5);
+		assert_eq!(int.stack.last().unwrap(), &values::Value::I32(2));
 	}
 }

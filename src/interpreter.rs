@@ -1,4 +1,4 @@
-use vm::{FuncInst, TableInst, GlobalInst, MemInst, GlobalAddr};
+use vm::{FuncInst, TableInst, GlobalInst, MemInst, ModuleInst, GlobalAddr};
 use ast::*;
 use types;
 use values::Value;
@@ -35,6 +35,39 @@ use self::Control::*;
 
 type IntResult = Result<Control, Trap>;
 
+/// Frame represents a frame of execution
+pub struct Frame<'a> {
+	module: &'a ModuleInst,
+}
+
+impl<'a> Frame<'a> {
+	fn new(module: &'a ModuleInst) -> Frame<'a> {
+		Frame {
+			module
+		}
+	}
+}
+
+/// Stack frames tracks frame activation
+pub struct StackFrames<'a> {
+	frames: Vec<Frame<'a>>,
+	stack_idx: usize, // Where the Frame stack starts (for locals)
+}
+
+impl<'a> StackFrames<'a> {
+	pub fn new() -> StackFrames<'a>{
+		StackFrames {
+			frames: Vec::new(),
+			stack_idx: 0,
+		}
+	}
+
+	pub fn push(&mut self, module: &'a ModuleInst, stack_idx: usize) {
+		self.frames.push(Frame::new(module));
+		self.stack_idx = stack_idx;
+	}
+}
+
 impl Interpreter {
 	/// Instantiate a new interpreter
 	pub fn new() -> Interpreter {
@@ -46,18 +79,19 @@ impl Interpreter {
 	/// Intrepret a single instruction.
 	/// This is the main dispatching function of the interpreter.
 	pub fn instr(&mut self,
-			 instr: &Instr,
-			 funcs: &[FuncInst],
-			 tables: &[TableInst],
-			 globals: &[GlobalInst],
-			 mems: &mut Vec<MemInst>) -> IntResult {
+				 sframe: &mut StackFrames,
+				 instr: &Instr,
+				 funcs: &[FuncInst],
+				 tables: &[TableInst],
+				 globals: &mut Vec<GlobalInst>,
+				 mems: &mut Vec<MemInst>) -> IntResult {
 		use ast::Instr::*;
 
 		// Note: passing VM (mut/imut) is case by case
 		match *instr {
 			Unreachable => self.unreachable(),
 			Nop => self.nop(),
-			Block(ref result_type, ref instrs) => self.block(result_type, instrs, funcs, tables, globals, mems),
+			Block(ref result_type, ref instrs) => self.block(sframe, result_type, instrs, funcs, tables, globals, mems),
 			Br(nesting_levels) => self.branch(nesting_levels),
 			Drop_ => self.drop(),
 			Select => self.select(),
@@ -70,20 +104,12 @@ impl Interpreter {
 			IRel(ref t, ref op) => self.irel(t, op),
 			FRel(ref t, ref op) => self.frel(t, op),
 			Convert(ref op) => self.cvtop(op),
+			GetLocal(idx) => self.get_local(idx, sframe.stack_idx),
+			SetLocal(idx) => self.set_local(idx, sframe.stack_idx),
+			TeeLocal(idx) => self.tee_local(idx, sframe.stack_idx),
+			GetGlobal(idx) => self.get_global(idx, &globals, &sframe.frames.last().unwrap().module.global_addrs),
+			SetGlobal(idx) => self.set_global(idx, globals, &sframe.frames.last().unwrap().module.global_addrs),
 			_ => unimplemented!()
-		}
-	}
-
-	/// Interpret a single const instruction.
-	// TODO: replace frame_globals by a Frame
-	pub fn instr_const(&mut self,
-					   instr: &Instr,
-					   globals: &[GlobalInst],
-					   frame_globals: &[GlobalAddr]) -> IntResult {
-		match *instr {
-			Instr::Const(c) => self.const_(c),
-			Instr::GetGlobal(idx) => self.get_global(idx, globals, frame_globals),
-			_ => unreachable!(),
 		}
 	}
 
@@ -99,16 +125,17 @@ impl Interpreter {
 
 	/// Interpret a block
 	fn block(&mut self,
+			 sframe: &mut StackFrames,
 			 result_type: &[types::Value],
 			 instrs: &[Instr],
 			 funcs: &[FuncInst],
 			 tables: &[TableInst],
-			 globals: &[GlobalInst],
+			 globals: &mut Vec<GlobalInst>,
 			 mems: &mut Vec<MemInst>) -> IntResult {
 		let local_stack_begin = self.stack.len();
 
 		for instr in instrs {
-			let res = self.instr(instr, funcs, tables, globals, mems)?;
+			let res = self.instr(sframe, instr, funcs, tables, globals, mems)?;
 
 			if let Branch { nesting_levels } = res {
 				// If the instruction caused a branch, we need to exit the block early on.
@@ -404,9 +431,35 @@ impl Interpreter {
 	}
 
 	/// GetGlobal
-	// TODO: replace frame_globals by a Frame
 	fn get_global(&mut self, idx: Index, globals: &[GlobalInst], frame_globals: &[GlobalAddr]) -> IntResult {
 		self.stack.push(globals[frame_globals[idx as usize]].value);
+		Ok(Continue)
+	}
+
+	/// SetGlobal
+	fn set_global(&mut self, idx: Index, globals: &mut Vec<GlobalInst>, frame_globals: &[GlobalAddr]) -> IntResult {
+		// "Validation ensures that the global is, in fact, marked as mutable."
+		let val = self.stack.pop().unwrap();
+		globals[frame_globals[idx as usize]].value = val;
+		Ok(Continue)
+	}
+
+	/// Push local idx on the Stack
+	fn get_local(&mut self, idx: Index, stack_frame_idx: usize) -> IntResult {
+		let val = self.stack[stack_frame_idx + idx as usize];
+		self.stack.push(val);
+		Ok(Continue)
+	}
+
+	/// Update local idx based on the value poped from the stack
+	fn set_local(&mut self, idx: Index, stack_frame_idx: usize) -> IntResult {
+		self.stack[stack_frame_idx + idx as usize] = self.stack.pop().unwrap();
+		Ok(Continue)
+	}
+
+	/// Update the local idx without poping the top of the stack
+	fn tee_local(&mut self, idx: Index, stack_frame_idx: usize) -> IntResult {
+		self.stack[stack_frame_idx + idx as usize] = *self.stack.last().unwrap();
 		Ok(Continue)
 	}
 
@@ -420,19 +473,19 @@ impl Interpreter {
 /// Use for global/segment initialization
 #[macro_export]
 macro_rules! interpreter_eval_expr {
-	($int: expr, $vm: ident, $instrs: expr) => {
+	($int: expr, $sframe: expr, $vm: ident, $instrs: expr) => {
 		{
-			let mut cls = |funcs: &[FuncInst], tables: &[TableInst], globals: &[GlobalInst], mems: &mut Vec<MemInst>| {
+			let mut cls = |funcs: &[FuncInst], tables: &[TableInst], globals: &mut Vec<GlobalInst>, mems: &mut Vec<MemInst>| {
 				for instr in $instrs {
 					// Cannot use ? because Rust is not able to infer the type
-					match $int.instr(instr, funcs, tables, globals, mems) {
+					match $int.instr($sframe, instr, funcs, tables, globals, mems) {
 						Ok(_) => continue,
 						Err(c) => return Err(c),
 					};
 				}
 				Ok(())
 			};
-			cls(& $vm.store.funcs, & $vm.store.tables, & $vm.store.globals, &mut $vm.store.mems)
+			cls(& $vm.store.funcs, & $vm.store.tables, &mut $vm.store.globals, &mut $vm.store.mems)
 		}
 	}
 }
@@ -440,17 +493,16 @@ macro_rules! interpreter_eval_expr {
 /// Evaluate an ExprConst and return a given value, returning a Value::I32
 /// (validation)
 /// Used for global/segment initialization
-// TODO: replace $frame_globals by a Frame
 #[macro_export]
 macro_rules! interpreter_eval_expr_const {
-	($int: expr, $vm: ident, $instrs: expr, $frame_globals: expr) => {
+	($int: expr, $sframe: expr, $vm: ident, $instrs: expr) => {
 		{
-			let mut cls = |globals: &[GlobalInst]| {
+			let mut cls = |globals: &mut Vec<GlobalInst>| {
 				// Only the last value matters for ExprConst
-				$int.instr_const($instrs.last().unwrap(), globals, $frame_globals).ok()?;
+				$int.instr($sframe, $instrs.last().unwrap(), &[], &[], globals, &mut Vec::new()).ok()?;
 				$int.stack.pop()
 			};
-			cls(& $vm.store.globals)
+			cls(&mut $vm.store.globals)
 		}
 	}
 }
@@ -458,8 +510,8 @@ macro_rules! interpreter_eval_expr_const {
 /// Evaluate a Func
 #[macro_export]
 macro_rules! interpreter_eval_func {
-	($int: expr, $vm: ident, $func: expr) => {
-		interpreter_eval_expr!($int, $vm, &$func.body)
+	($int: expr, $sframe: expr, $vm: ident, $func: expr) => {
+		interpreter_eval_expr!($int, $sframe, $vm, &$func.body)
 	}
 }
 
@@ -794,26 +846,27 @@ mod tests {
 	// Inspired from
 	// https://medium.com/@ericdreichert/test-setup-and-teardown-in-rust-without-a-framework-ba32d97aa5ab
 	fn t<F, T>(test: F) -> T
-		where F: FnOnce(Interpreter, vm::VM) -> T
+		where F: FnOnce(Interpreter, vm::VM, StackFrames) -> T
 	{
 		let vm = vm::VM::new();
 		let int = Interpreter::new();
+		let sframe = StackFrames::new();
 
-		test(int, vm)
+		test(int, vm, sframe)
 	}
 
 	/// Run a sequence of instructions in a new empty interpreter.
 	fn run_seq(instrs: &[Instr]) -> Result<(), Trap> {
-		t(|mut int: Interpreter, mut vm: vm::VM| {
-			interpreter_eval_expr!(&mut int, vm, instrs)
+		t(|mut int: Interpreter, mut vm: vm::VM, mut sframe: StackFrames| {
+			interpreter_eval_expr!(&mut int, &mut sframe, vm, instrs)
 		})
 	}
 
 	/// Assert that executing the sequence of instructions `instrs` in a clean context
 	/// is sucessful and that the resulting stack is equal to `final_stack`.
 	fn assert_seq_stack(instrs: &[Instr], final_stack: &[Value]) {
-		t(|mut int: Interpreter, mut vm: vm::VM| {
-			assert_eq!(interpreter_eval_expr!(&mut int, vm, instrs), Ok(()));
+		t(|mut int: Interpreter, mut vm: vm::VM, mut sframe: StackFrames| {
+			assert_eq!(interpreter_eval_expr!(&mut int, &mut sframe, vm, instrs), Ok(()));
 			assert_eq!(int.stack, final_stack);
 		})
 	}
