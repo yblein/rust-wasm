@@ -195,15 +195,20 @@ impl VM {
 
 		// 2. Assert: module is valid with external types externtype^{m}_{im} classifying its import
 		// 3. If the number m of imports is not equal to the number n of provided external values, then: Fail
+		// 4. For each external value externval_i in externval^n and external
+		// type externtype'_i in externtype^{n}_{im}, do:
+		// a. Assert: externval_i is valid with external type externtype_i in store S.
+		// b. If externtype_i does not match externtype'_i, then: Fail
+		//
 		// Intuition: resolve imports by module name & fct name, check their types
 		// TODO: handle more than one module name
 		// TODO: move extern export/import retrieval outside VM, and provide helpers for users to manage this
-		let mut external_val = Vec::new();
+		let mut extern_vals = Vec::new();
 		{
 			for import in &m.imports {
 				let type_match = match self.registry.get(&HashKey { name: import.name.clone(), module: import.module.clone() }) {
 					Some(&HashValue { ref type_, value }) => {
-						external_val.push(value);
+						extern_vals.push(value);
 						match (type_, &import.desc) {
 							(&types::Extern::Func(ref exported_type), &ast::ImportDesc::Func(idx)) =>
 								exported_type == &m.types[idx as usize],
@@ -223,12 +228,6 @@ impl VM {
 				}
 			}
 		}
-
-		// 4. For each external value externval_i in externval^n and external
-		// type externtype'_i in externtype^{n}_{im}, do:
-		// a. Assert: externval_i is valid with external type externtype_i in store S.
-		// b. If externtype_i does not match externtype'_i, then: Fail
-		// TODO: check that the types of the import found match the types of the requested imports
 
 		// 5. Let moduleinst_im be the auxiliary module instance {globaladdrs
 		// globals(externval∗)} that only consists of the imported globals.
@@ -293,10 +292,10 @@ impl VM {
 		// store S with imports externval∗ and glboal initializer values val∗.
 		// Note: module tables/data/globals initializations are performed in the
 		// following function
-		self.allocate_and_init_module(m, vals, elem_offsets, data_offsets)
+		self.allocate_and_init_module(m, extern_vals, vals, elem_offsets, data_offsets)
 	}
 
-	fn allocate_and_init_module(&mut self, m: ast::Module, vals: Vec<values::Value>, elem_offsets: Vec<usize>, data_offsets: Vec<usize>) -> Result<Rc<ModuleInst>, VMError> {
+	fn allocate_and_init_module(&mut self, m: ast::Module, extern_vals: Vec<ExternVal>, vals: Vec<values::Value>, elem_offsets: Vec<usize>, data_offsets: Vec<usize>) -> Result<Rc<ModuleInst>, VMError> {
 		// Two passes algorithms
 		// 1. do all modifications on the ModuleInst in a single scope
 		let mut mi = ModuleInst::new();
@@ -384,6 +383,15 @@ impl VM {
 			i += 1;
 		}
 
+		// Alloc steps 10-13
+		for val in extern_vals {
+			match val {
+				ExternVal::Func(addr) => mi.func_addrs.push(addr),
+				ExternVal::Table(addr) => mi.table_addrs.push(addr),
+				ExternVal::Memory(addr) => mi.mem_addrs.push(addr),
+				ExternVal::Global(addr) => mi.global_addrs.push(addr),
+			}
+		}
 
 		// 14. For each export exporti in module.exports, do:
 		// ...
@@ -705,5 +713,59 @@ mod tests {
 		});
 		let m4b = v.instantiate_module(m4);
 		assert_eq!(m4b.err(), Some(VMError::ImportTypeMismatch));
+	}
+
+
+	#[test]
+	fn export_addr() {
+		let mut v = VM::new();
+		let mut m1 = Module::empty();
+
+		let first_type = types::Func { args: Vec::new(), result: Vec::new() };
+		let second_type = types::Func { args: Vec::new(), result: vec![types::Value::Int(types::Int::I32)] };
+
+		m1.types.push(first_type.clone());
+		m1.funcs.push(ast::Func {
+			type_index: 0,
+			locals: Vec::new(),
+			body: vec![
+				Instr::Const(values::Value::I32(42)),
+				Instr::SetGlobal(0)
+			],
+		});
+		m1.exports.push(ast::Export { name: String::from("wasm"), desc: ast::ExportDesc::Func(0) });
+		let m1b = v.instantiate_module(m1);
+		assert!(m1b.is_ok());
+
+		let mut m2 = Module::empty();
+		m2.types.push(first_type.clone());
+		m2.types.push(second_type.clone());
+		m2.imports.push(ast::Import {
+			module: String::from(""),
+			name: String::from("wasm"),
+			desc: ast::ImportDesc::Func(0),
+		});
+		m2.funcs.push(ast::Func {
+			type_index: 1,
+			locals: Vec::new(),
+			body: vec![
+				Instr::Const(values::Value::I32(42)),
+				Instr::SetGlobal(0)
+			],
+		});
+		let m2b = v.instantiate_module(m2);
+		assert!(m2b.is_ok());
+
+		let m2b = m2b.unwrap();
+		if let FuncInst::Module(ref f) = v.store.funcs[m2b.func_addrs[0]] {
+			assert_eq!(f.type_, second_type);
+		} else {
+			panic!("First function (local function) is not of type FuncInst::Module.");
+		}
+		if let FuncInst::Module(ref f) = v.store.funcs[m2b.func_addrs[1]] {
+			assert_eq!(f.type_, first_type);
+		} else {
+			panic!("Second function (imported function) is not of type FuncInst::Module.");
+		}
 	}
 }
