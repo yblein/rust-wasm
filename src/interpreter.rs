@@ -1,4 +1,4 @@
-use vm::{FuncInst, TableInst, GlobalInst, MemInst};
+use vm::{FuncInst, TableInst, GlobalInst, MemInst, GlobalAddr};
 use ast::*;
 use types;
 use values::Value;
@@ -75,12 +75,14 @@ impl Interpreter {
 	}
 
 	/// Interpret a single const instruction.
+	// TODO: replace frame_globals by a Frame
 	pub fn instr_const(&mut self,
 					   instr: &InstrConst,
-					   globals: &[GlobalInst]) -> IntResult {
+					   globals: &[GlobalInst],
+					   frame_globals: &[GlobalAddr]) -> IntResult {
 		match *instr {
 			InstrConst::Const(c) => self.const_(c),
-			InstrConst::GetGlobal(idx) => self.get_global(idx, globals),
+			InstrConst::GetGlobal(idx) => self.get_global(idx, globals, frame_globals),
 		}
 	}
 
@@ -401,9 +403,10 @@ impl Interpreter {
 	}
 
 	/// GetGlobal
-	fn get_global(&mut self, _idx: Index, _globals: &[GlobalInst]) -> IntResult {
-		// TODO: implement Frame
-		unimplemented!();
+	// TODO: replace frame_globals by a Frame
+	fn get_global(&mut self, idx: Index, globals: &[GlobalInst], frame_globals: &[GlobalAddr]) -> IntResult {
+		self.stack.push(globals[frame_globals[idx as usize]].value);
+		Ok(Continue)
 	}
 
 	/// Pops two values from the stack, assuming that the stack is large enough to do so.
@@ -436,13 +439,14 @@ macro_rules! interpreter_eval_expr {
 /// Evaluate an ExprConst and return a given value, returning a Value::I32
 /// (validation)
 /// Used for global/segment initialization
+// TODO: replace $frame_globals by a Frame
 #[macro_export]
 macro_rules! interpreter_eval_expr_const {
-	($int: expr, $vm: ident, $instrs: expr) => {
+	($int: expr, $vm: ident, $instrs: expr, $frame_globals: expr) => {
 		{
 			let mut cls = |globals: &[GlobalInst]| {
 				// Only the last value matters for ExprConst
-				$int.instr_const($instrs.last().unwrap(), globals).ok()?;
+				$int.instr_const($instrs.last().unwrap(), globals, $frame_globals).ok()?;
 				$int.stack.pop()
 			};
 			cls(& $vm.store.globals)

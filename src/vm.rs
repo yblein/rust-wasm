@@ -13,7 +13,7 @@ type Addr = usize;
 type FuncAddr = Addr;
 type TableAddr = Addr;
 type MemAddr = Addr;
-type GlobalAddr = Addr;
+pub type GlobalAddr = Addr;
 
 #[derive(Clone, Copy, PartialEq, Debug)]
 pub enum ExternVal {
@@ -83,7 +83,7 @@ pub struct MemInst {
 }
 
 pub struct GlobalInst {
-	value: values::Value,
+	pub value: values::Value,
 	mutable: bool,
 }
 
@@ -133,6 +133,7 @@ pub enum VMError {
 	ImportTypeMismatch,
 	ElemOffsetTooLarge(usize),
 	DataOffsetTooLarge(usize),
+	MutableGlobalExported,
 	StartFunctionFailed,
 }
 
@@ -204,6 +205,7 @@ impl VM {
 		// TODO: handle more than one module name
 		// TODO: move extern export/import retrieval outside VM, and provide helpers for users to manage this
 		let mut extern_vals = Vec::new();
+		let mut imported_globals = Vec::new();
 		{
 			for import in &m.imports {
 				let type_match = match self.registry.get(&HashKey { name: import.name.clone(), module: import.module.clone() }) {
@@ -216,8 +218,15 @@ impl VM {
 								exported_type.elem == imported_type.elem && Self::match_limits(&imported_type.limits, &exported_type.limits),
 							(&types::Extern::Memory(ref exported_type), &ast::ImportDesc::Memory(ref imported_type)) =>
 								Self::match_limits(&imported_type.limits, &exported_type.limits),
-							(&types::Extern::Global(ref exported_type), &ast::ImportDesc::Global(ref imported_type)) =>
-								exported_type == imported_type,
+							(&types::Extern::Global(ref exported_type), &ast::ImportDesc::Global(ref imported_type)) => {
+								// Save globals for the auxiliary module instance now
+								if let ExternVal::Global(addr) = value {
+									imported_globals.push(addr);
+								} else {
+									unreachable!();
+								}
+								exported_type == imported_type
+							},
 							_ => return Err(VMError::ImportTypeMismatch),
 						}
 					},
@@ -246,7 +255,8 @@ impl VM {
 		// ...
 		// Note: we only compute vals here, we will create the GlobalInstance when we allocate globals
 		let vals = m.globals.iter().map(|g| {
-			interpreter_eval_expr_const!(&mut const_int, self, &g.value).unwrap()
+			// TODO: replace imported_globals by the auxiliary Frame
+			interpreter_eval_expr_const!(&mut const_int, self, &g.value, &imported_globals).unwrap()
 		}).collect();
 
 		// 10. For each element segment elemi in module.elem, do:
@@ -258,7 +268,8 @@ impl VM {
 		let mut i = 0;
 		let mut elem_offsets = Vec::new();
 		for elem in m.elems.iter() {
-			let offset = match interpreter_eval_expr_const!(&mut const_int, self, &elem.offset).unwrap() {
+			// TODO: replace imported_globals by the auxiliary Frame
+			let offset = match interpreter_eval_expr_const!(&mut const_int, self, &elem.offset, &imported_globals).unwrap() {
 				values::Value::I32(c) => c as usize,
 				_ => unreachable!(),
 			};
@@ -276,7 +287,8 @@ impl VM {
 		let mut i = 0;
 		let mut data_offsets = Vec::new();
 		for data in m.data.iter() {
-			let offset = match interpreter_eval_expr_const!(&mut const_int, self, &data.offset).unwrap() {
+			// TODO: replace imported_globals by the auxiliary Frame
+			let offset = match interpreter_eval_expr_const!(&mut const_int, self, &data.offset, &imported_globals).unwrap() {
 				values::Value::I32(c) => c as usize,
 				_ => unreachable!(),
 			};
@@ -368,11 +380,24 @@ impl VM {
 			}
 		}
 
+		// Alloc steps 10-13
+		// Note: this block should be after func/table/mem allocation but before
+		// global allocation, globals imports have lower indices than module
+		// globals
+		for val in extern_vals {
+			match val {
+				ExternVal::Func(addr) => mi.func_addrs.push(addr),
+				ExternVal::Table(addr) => mi.table_addrs.push(addr),
+				ExternVal::Memory(addr) => mi.mem_addrs.push(addr),
+				ExternVal::Global(addr) => mi.global_addrs.push(addr),
+			}
+		}
+
 		// Globals allocation
 		assert_eq!(m.globals.len(), vals.len());
 		let mut i = 0;
 		for global in m.globals {
-			mi.global_addrs.push(self.store.tables.len());
+			mi.global_addrs.push(self.store.globals.len());
 			// TODO: do we need to check if types(vals[i]) == global.type_.type? Or is it part of the validation?
 			self.store.globals.push(
 				GlobalInst {
@@ -383,13 +408,12 @@ impl VM {
 			i += 1;
 		}
 
-		// Alloc steps 10-13
-		for val in extern_vals {
-			match val {
-				ExternVal::Func(addr) => mi.func_addrs.push(addr),
-				ExternVal::Table(addr) => mi.table_addrs.push(addr),
-				ExternVal::Memory(addr) => mi.mem_addrs.push(addr),
-				ExternVal::Global(addr) => mi.global_addrs.push(addr),
+		// Only immutable variable can be exported
+		for export in &m.exports {
+			if let ast::ExportDesc::Global(idx) = export.desc {
+				if global_types[idx as usize].mutable {
+					return Err(VMError::MutableGlobalExported);
+				}
 			}
 		}
 
@@ -715,7 +739,6 @@ mod tests {
 		assert_eq!(m4b.err(), Some(VMError::ImportTypeMismatch));
 	}
 
-
 	#[test]
 	fn export_addr() {
 		let mut v = VM::new();
@@ -767,5 +790,122 @@ mod tests {
 		} else {
 			panic!("Second function (imported function) is not of type FuncInst::Module.");
 		}
+	}
+
+
+	#[test]
+	fn export_addr_global() {
+		let mut v = VM::new();
+		let mut m1 = Module::empty();
+
+		let first_type = types::Global { value: types::Value::Int(types::Int::I32), mutable: false };
+		let second_type = types::Global { value: types::Value::Int(types::Int::I64), mutable: true };
+		let first_value = values::Value::I32(42);
+		let second_value = values::Value::I64(43);
+
+		m1.globals.push(ast::Global {
+			type_: first_type.clone(),
+			value: vec![
+				InstrConst::Const(first_value.clone())
+			],
+		});
+		m1.exports.push(ast::Export { name: String::from("wasm"), desc: ast::ExportDesc::Global(0) });
+		let m1b = v.instantiate_module(m1);
+		assert!(m1b.is_ok());
+
+		let mut m2 = Module::empty();
+		m2.imports.push(ast::Import {
+			module: String::from(""),
+			name: String::from("wasm"),
+			desc: ast::ImportDesc::Global(first_type.clone()),
+		});
+		m2.globals.push(ast::Global {
+			type_: second_type,
+			value: vec![
+				InstrConst::Const(second_value.clone())
+			],
+		});
+		let m2b = v.instantiate_module(m2);
+		assert!(m2b.is_ok());
+
+		let m2b = m2b.unwrap();
+		assert_eq!(v.store.globals[m2b.global_addrs[0]].value, first_value);
+		assert_eq!(v.store.globals[m2b.global_addrs[1]].value, second_value);
+	}
+
+	#[test]
+	fn exporting_immutable_global() {
+		let mut v = VM::new();
+		let mut m1 = Module::empty();
+
+		m1.globals.push(ast::Global {
+			type_: types::Global {
+				value: types::Value::Int(types::Int::I32),
+				mutable: true,
+			},
+			value: vec![
+				InstrConst::Const(values::Value::I32((PAGE_SIZE as u32) - 4))
+			],
+		});
+		m1.exports.push(ast::Export { name: String::from("global"), desc: ast::ExportDesc::Global(0) });
+		let m1b = v.instantiate_module(m1);
+		assert_eq!(m1b.err(), Some(VMError::MutableGlobalExported));
+
+		let mut m2 = Module::empty();
+		m2.globals.push(ast::Global {
+			type_: types::Global {
+				value: types::Value::Int(types::Int::I32),
+				mutable: false,
+			},
+			value: vec![
+				InstrConst::Const(values::Value::I32((PAGE_SIZE as u32) - 4))
+			],
+		});
+		m2.exports.push(ast::Export { name: String::from("global"), desc: ast::ExportDesc::Global(0) });
+		let m2b = v.instantiate_module(m2);
+		assert!(m2b.is_ok());
+	}
+
+	#[test]
+	fn init_with_imported_global() {
+		let mut v = VM::new();
+		let mut m1 = Module::empty();
+
+		m1.globals.push(ast::Global {
+			type_: types::Global {
+				value: types::Value::Int(types::Int::I32),
+				mutable: false,
+			},
+			value: vec![
+				InstrConst::Const(values::Value::I32((PAGE_SIZE as u32) - 4))
+			],
+		});
+		m1.exports.push(ast::Export { name: String::from("global"), desc: ast::ExportDesc::Global(0) });
+		let m1b = v.instantiate_module(m1);
+		assert!(m1b.is_ok());
+
+		let mut m2 = Module::empty();
+		m2.memories.push(ast::Memory {
+			type_: types::Memory { limits: types::Limits { min: 1, max: None } },
+		});
+		m2.data.push(ast::Segment::<u8> {
+			index: 0,
+			offset: vec![
+				InstrConst::GetGlobal(0),
+			],
+			init: vec![3, 4, 5],
+		});
+		m2.imports.push(ast::Import {
+			module: String::from(""),
+			name: String::from("global"),
+			desc: ast::ImportDesc::Global(types::Global { value: types::Value::Int(types::Int::I32), mutable: false }),
+		});
+
+		let mut check = vec![0; PAGE_SIZE - 4];
+		check.extend(vec![3, 4, 5]);
+		check.extend(vec![0]);
+
+		assert!(v.instantiate_module(m2).is_ok());
+		assert_eq!(v.store.mems[0].data, check);
 	}
 }
