@@ -11,7 +11,7 @@ use interpreter::{Interpreter, StackFrames};
 
 type Addr = usize;
 type FuncAddr = Addr;
-type TableAddr = Addr;
+pub type TableAddr = Addr;
 type MemAddr = Addr;
 pub type GlobalAddr = Addr;
 
@@ -29,9 +29,9 @@ struct ExportInst {
 }
 
 pub struct ModuleInst {
-	types: Vec<types::Func>,
+	pub types: Vec<types::Func>,
 	func_addrs: Vec<FuncAddr>,
-	table_addrs: Vec<TableAddr>,
+	pub table_addrs: Vec<TableAddr>,
 	mem_addrs: Vec<MemAddr>,
 	pub global_addrs: Vec<GlobalAddr>,
 	exports: Vec<ExportInst>,
@@ -53,14 +53,14 @@ impl ModuleInst {
 type HostFunc = ();
 
 pub struct HostFuncInst {
-	type_: types::Func,
+	pub type_: types::Func,
 	hostcode: HostFunc,
 }
 
 pub struct ModuleFuncInst {
-	type_: types::Func,
-	module: Rc<ModuleInst>,
-	code: ast::Func,
+	pub type_: types::Func,
+	pub module: Rc<ModuleInst>,
+	pub code: ast::Func,
 }
 
 pub enum FuncInst {
@@ -71,7 +71,7 @@ pub enum FuncInst {
 type FuncElem = Option<FuncAddr>;
 
 pub struct TableInst {
-	elem: Vec<FuncElem>,
+	pub elem: Vec<FuncElem>,
 	max: Option<u32>,
 }
 
@@ -262,13 +262,14 @@ impl VM {
 		// 6. Let F be the frame {module moduleinstim,locals ϵ}.
 		// 7. Push the frame F to the stack.
 		let mut const_int = Interpreter::new();
-		let mut mod_aux = ModuleInst::new();
-		mod_aux.global_addrs = imported_globals;
+		let mut mod_aux_m = ModuleInst::new();
+		mod_aux_m.global_addrs = imported_globals;
+		let mod_aux = Rc::new(mod_aux_m);
 
 		// For sframe/mod_aux lifetime dependecy
 		let (global_vals, elem_offsets, data_offsets) = {
 			let mut sframe = StackFrames::new();
-			sframe.push(&mod_aux, 0);
+			sframe.push(mod_aux.clone(), 0);
 
 			// 8. Let globalidx_{new} be the global index that corresponds to the
 			// number of global imports in module.imports (i.e., the index of the
@@ -336,7 +337,8 @@ impl VM {
 		// store S with imports externval∗ and glboal initializer values val∗.
 		// Note: module tables/data/globals initializations are performed in the
 		// following function
-		self.allocate_and_init_module(m, imported_funcs, imported_tables, imported_memories, mod_aux.global_addrs, global_vals, elem_offsets, data_offsets)
+		let global_addrs = Rc::try_unwrap(mod_aux).ok().unwrap().global_addrs;
+		self.allocate_and_init_module(m, imported_funcs, imported_tables, imported_memories, global_addrs, global_vals, elem_offsets, data_offsets)
 	}
 
 	fn allocate_and_init_module(&mut self,
@@ -504,7 +506,7 @@ impl VM {
 		if let Some(idx) = m.start {
 			let mut start_int = Interpreter::new();
 			let mut sframe = StackFrames::new();
-			sframe.push(&inst, 0);
+			sframe.push(inst.clone(), 0);
 			let func_addr = inst.func_addrs[idx as usize];
 			let res = match &self.store.funcs[func_addr] {
 				&FuncInst::Module(ref f) => interpreter_eval_func!(&mut start_int, &mut sframe, self, f.code),
@@ -1095,7 +1097,7 @@ mod tests {
 		m.types.push(types::Func { args: vec![type_.clone(), type_.clone()], result: vec![type_.clone()] });
 		m.funcs.push(ast::Func {
 			type_index: 0,
-			locals: Vec::new(),//vec![type_.clone(), type_.clone()],
+			locals: Vec::new(),
 			body: vec![
 				Instr::GetLocal(0),
 				Instr::Const(values::Value::I32(1)),
@@ -1111,7 +1113,7 @@ mod tests {
 		// Push args
 		int.stack.push(values::Value::I32(1));
 		int.stack.push(values::Value::I32(2));
-		sframe.push(&inst, 0);
+		sframe.push(inst.clone(), 0);
 
 		let res = match &v.store.funcs[0] {
 			&FuncInst::Module(ref f) => interpreter_eval_func!(&mut int, &mut sframe, v, f.code),
@@ -1151,7 +1153,7 @@ mod tests {
 		int.stack.push(values::Value::I32(0));
 		int.stack.push(values::Value::I32(0));
 
-		sframe.push(&inst, 0);
+		sframe.push(inst.clone(), 0);
 
 		let res = match &v.store.funcs[0] {
 			&FuncInst::Module(ref f) => interpreter_eval_func!(&mut int, &mut sframe, v, f.code),
@@ -1159,5 +1161,155 @@ mod tests {
 		};
 		assert_eq!(int.stack.len(), 5);
 		assert_eq!(int.stack.last().unwrap(), &values::Value::I32(2));
+	}
+
+	#[test]
+	fn functions() {
+		let mut v = VM::new();
+		let mut m = Module::empty();
+
+		let type_ = types::Value::Int(types::Int::I32);
+		m.types.push(types::Func { args: vec![type_.clone(), type_.clone()], result: vec![type_.clone()] });
+		m.types.push(types::Func { args: Vec::new(), result: vec![type_.clone()] });
+		m.funcs.push(ast::Func {
+			type_index: 0,
+			locals: Vec::new(),
+			body: vec![
+				Instr::GetLocal(0),
+				Instr::Const(values::Value::I32(1)),
+				Instr::IBin(types::Int::I32, IBinOp::Shl),
+				Instr::GetLocal(1),
+				Instr::IBin(types::Int::I32, IBinOp::Add),
+			],
+		});
+		m.funcs.push(ast::Func {
+			type_index: 1,
+			locals: Vec::new(),
+			body: vec![
+				Instr::Const(values::Value::I32(1)),
+				Instr::Const(values::Value::I32(2)),
+				Instr::Call(0),
+			],
+		});
+		let inst = v.instantiate_module(m).unwrap();
+		let mut int = Interpreter::new();
+		let mut sframe = StackFrames::new();
+		sframe.push(inst.clone(), 0);
+
+		let res = match &v.store.funcs[1] {
+			&FuncInst::Module(ref f) => interpreter_eval_func!(&mut int, &mut sframe, v, f.code),
+			_ => unreachable!(),
+		};
+		assert_eq!(int.stack.len(), 1);
+		assert_eq!(int.stack.last().unwrap(), &values::Value::I32(4));
+	}
+
+	#[test]
+	fn return_() {
+		let mut v = VM::new();
+		let mut m = Module::empty();
+
+		let type_ = types::Value::Int(types::Int::I32);
+		m.types.push(types::Func { args: vec![type_.clone(), type_.clone()], result: vec![type_.clone()] });
+		m.types.push(types::Func { args: Vec::new(), result: vec![type_.clone()] });
+		m.funcs.push(ast::Func {
+			type_index: 0,
+			locals: Vec::new(),
+			body: vec![
+				Instr::GetLocal(0),
+				Instr::Const(values::Value::I32(1)),
+				Instr::IBin(types::Int::I32, IBinOp::Shl),
+				Instr::Block(vec![type_.clone()],
+							 vec![
+								 Instr::Const(values::Value::I32(5)),
+								 Instr::Block(vec![type_.clone()],
+											  vec![
+												  Instr::Const(values::Value::I32(42)),
+												  Instr::Return,
+												  Instr::Const(values::Value::I32(43)),
+											  ]
+								 ),
+								 Instr::Const(values::Value::I32(44)),
+							 ],
+				),
+				Instr::GetLocal(1),
+				Instr::IBin(types::Int::I32, IBinOp::Add),
+			],
+		});
+		m.funcs.push(ast::Func {
+			type_index: 1,
+			locals: Vec::new(),
+			body: vec![
+				Instr::Const(values::Value::I32(1)),
+				Instr::Const(values::Value::I32(2)),
+				Instr::Call(0),
+			],
+		});
+		let inst = v.instantiate_module(m).unwrap();
+		let mut int = Interpreter::new();
+		let mut sframe = StackFrames::new();
+		sframe.push(inst.clone(), 0);
+
+		let res = match &v.store.funcs[1] {
+			&FuncInst::Module(ref f) => interpreter_eval_func!(&mut int, &mut sframe, v, f.code),
+			_ => unreachable!(),
+		};
+		assert_eq!(int.stack.len(), 1);
+		assert_eq!(int.stack.last().unwrap(), &values::Value::I32(42));
+	}
+
+
+	#[test]
+	fn call_indirect() {
+		let mut v = VM::new();
+		let mut m = Module::empty();
+
+		let type_ = types::Value::Int(types::Int::I32);
+		m.types.push(types::Func { args: vec![type_.clone(), type_.clone()], result: vec![type_.clone()] });
+		m.types.push(types::Func { args: Vec::new(), result: vec![type_.clone()] });
+		m.funcs.push(ast::Func {
+			type_index: 0,
+			locals: Vec::new(),
+			body: vec![
+				Instr::GetLocal(0),
+				Instr::Const(values::Value::I32(1)),
+				Instr::IBin(types::Int::I32, IBinOp::Shl),
+				Instr::GetLocal(1),
+				Instr::IBin(types::Int::I32, IBinOp::Add),
+			],
+		});
+		m.funcs.push(ast::Func {
+			type_index: 1,
+			locals: Vec::new(),
+			body: vec![
+				Instr::Const(values::Value::I32(1)),
+				Instr::Const(values::Value::I32(2)),
+				Instr::Const(values::Value::I32(4)),
+				Instr::CallIndirect(0),
+			],
+		});
+		m.tables.push(ast::Table {
+			type_: types::Table { limits: types::Limits { min: 5, max: None }, elem: types::Elem::AnyFunc },
+		});
+		m.elems.push(ast::Segment::<Index> {
+			index: 0,
+			offset: vec![
+				Instr::Const(values::Value::I32(4)),
+			],
+			init: vec![0],
+		});
+
+		let inst = v.instantiate_module(m).unwrap();
+		let mut int = Interpreter::new();
+		let mut sframe = StackFrames::new();
+		sframe.push(inst.clone(), 0);
+
+		let res = match &v.store.funcs[1] {
+			&FuncInst::Module(ref f) => interpreter_eval_func!(&mut int, &mut sframe, v, f.code),
+			_ => unreachable!(),
+		};
+		assert_eq!(res, Ok(()));
+		assert_eq!(int.stack.len(), 1);
+		assert_eq!(int.stack.last().unwrap(), &values::Value::I32(4));
 	}
 }

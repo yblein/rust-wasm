@@ -1,8 +1,9 @@
-use vm::{FuncInst, TableInst, GlobalInst, MemInst, ModuleInst, GlobalAddr};
+use vm::{FuncInst, TableInst, GlobalInst, MemInst, ModuleInst, TableAddr, GlobalAddr};
 use ast::*;
 use types;
 use values::Value;
 use ops::{IntOp,FloatOp,FloatDemoteOp,FloatPromoteOp};
+use std::rc::Rc;
 
 
 /// A struct storing the state of the current interpreted
@@ -15,6 +16,9 @@ pub struct Interpreter {
 pub enum TrapOrigin {
 	Unreachable,
 	UndefinedResult,
+	CallIndirectElemNotFound,
+	CallIndirectElemUnitialized,
+	CallIndirectTypesDiffer,
 }
 
 #[derive(Debug, PartialEq)]
@@ -29,6 +33,8 @@ pub enum Control {
 	Continue,
 	/// Branch to the `nesting_levels` outer scope, 0 being the innermost surrounding scope.
 	Branch { nesting_levels: u32 },
+	/// Exit the function
+	Return,
 }
 
 use self::Control::*;
@@ -36,12 +42,12 @@ use self::Control::*;
 type IntResult = Result<Control, Trap>;
 
 /// Frame represents a frame of execution
-pub struct Frame<'a> {
-	module: &'a ModuleInst,
+pub struct Frame {
+	module: Rc<ModuleInst>,
 }
 
-impl<'a> Frame<'a> {
-	fn new(module: &'a ModuleInst) -> Frame<'a> {
+impl Frame {
+	fn new(module: Rc<ModuleInst>) -> Frame {
 		Frame {
 			module
 		}
@@ -49,21 +55,26 @@ impl<'a> Frame<'a> {
 }
 
 /// Stack frames tracks frame activation
-pub struct StackFrames<'a> {
-	frames: Vec<Frame<'a>>,
-	stack_idx: usize, // Where the Frame stack starts (for locals)
+pub struct StackFrames {
+	frames: Vec<Frame>,
+	stack_idx: usize, // The size of the stack before pushing args & locals for the Frame
 }
 
-impl<'a> StackFrames<'a> {
-	pub fn new() -> StackFrames<'a>{
+impl StackFrames {
+	pub fn new() -> StackFrames {
 		StackFrames {
 			frames: Vec::new(),
 			stack_idx: 0,
 		}
 	}
 
-	pub fn push(&mut self, module: &'a ModuleInst, stack_idx: usize) {
+	pub fn push(&mut self, module: Rc<ModuleInst>, stack_idx: usize) {
 		self.frames.push(Frame::new(module));
+		self.stack_idx = stack_idx;
+	}
+
+	pub fn pop(&mut self, stack_idx: usize) {
+		self.frames.pop();
 		self.stack_idx = stack_idx;
 	}
 }
@@ -79,9 +90,9 @@ impl Interpreter {
 	/// Intrepret a single instruction.
 	/// This is the main dispatching function of the interpreter.
 	pub fn instr(&mut self,
-				 sframe: &mut StackFrames,
+				 sframe: & mut StackFrames,
 				 instr: &Instr,
-				 funcs: &[FuncInst],
+				 funcs: & [FuncInst],
 				 tables: &[TableInst],
 				 globals: &mut Vec<GlobalInst>,
 				 mems: &mut Vec<MemInst>) -> IntResult {
@@ -93,6 +104,19 @@ impl Interpreter {
 			Nop => self.nop(),
 			Block(ref result_type, ref instrs) => self.block(sframe, result_type, instrs, funcs, tables, globals, mems),
 			Br(nesting_levels) => self.branch(nesting_levels),
+			Return => self.return_(),
+			Call(idx) => self.call(idx, sframe, funcs, tables, globals, mems),
+			CallIndirect(idx) => {
+				let mod_inst = sframe.frames.last().unwrap().module.clone();
+				self.call_indirect(idx,
+								   sframe,
+								   funcs,
+								   tables,
+								   globals,
+								   mems,
+								   &mod_inst.table_addrs,
+								   &mod_inst.types)
+			},
 			Drop_ => self.drop(),
 			Select => self.select(),
 			Const(c) => self.const_(c),
@@ -128,7 +152,7 @@ impl Interpreter {
 			 sframe: &mut StackFrames,
 			 result_type: &[types::Value],
 			 instrs: &[Instr],
-			 funcs: &[FuncInst],
+			 funcs: & [FuncInst],
 			 tables: &[TableInst],
 			 globals: &mut Vec<GlobalInst>,
 			 mems: &mut Vec<MemInst>) -> IntResult {
@@ -151,6 +175,9 @@ impl Interpreter {
 					// Keep traversing nesting levels
 					Branch { nesting_levels: nesting_levels - 1 }
 				})
+			} else if let Return = res {
+				// Stack unwinding will be done by the caller
+				return Ok(Return)
 			}
 		}
 
@@ -446,21 +473,102 @@ impl Interpreter {
 
 	/// Push local idx on the Stack
 	fn get_local(&mut self, idx: Index, stack_frame_idx: usize) -> IntResult {
-		let val = self.stack[stack_frame_idx + idx as usize];
+		let val = self.stack[stack_frame_idx + (idx as usize)];
 		self.stack.push(val);
 		Ok(Continue)
 	}
 
 	/// Update local idx based on the value poped from the stack
 	fn set_local(&mut self, idx: Index, stack_frame_idx: usize) -> IntResult {
-		self.stack[stack_frame_idx + idx as usize] = self.stack.pop().unwrap();
+		self.stack[stack_frame_idx + (idx as usize)] = self.stack.pop().unwrap();
 		Ok(Continue)
 	}
 
 	/// Update the local idx without poping the top of the stack
 	fn tee_local(&mut self, idx: Index, stack_frame_idx: usize) -> IntResult {
-		self.stack[stack_frame_idx + idx as usize] = *self.stack.last().unwrap();
+		self.stack[stack_frame_idx + (idx as usize)] = *self.stack.last().unwrap();
 		Ok(Continue)
+	}
+
+	/// Call a function directly
+	fn call(&mut self, idx: Index, sframe: & mut StackFrames, funcs: & [FuncInst], tables: &[TableInst], globals: &mut Vec<GlobalInst>, mems: &mut Vec<MemInst>) -> IntResult {
+		// Idea: the new stack_idx is the base frame pointer, which point to the
+		// first argument of the called function. When calling call, all
+		// arguments should already be on the stack (thanks to validation).
+		let f_inst = match funcs[idx as usize] {
+			FuncInst::Module(ref m) => m,
+			_ => unimplemented!(),
+		};
+		let f_num_args = f_inst.type_.args.len();
+
+		// Push locals
+		for l in &f_inst.code.locals {
+			match *l {
+				types::Value::Int(types::Int::I32) => self.stack.push(Value::I32(0)),
+				types::Value::Int(types::Int::I64) => self.stack.push(Value::I64(0)),
+				types::Value::Float(types::Float::F32) => self.stack.push(Value::F32(0.0)),
+				types::Value::Float(types::Float::F64) => self.stack.push(Value::F64(0.0)),
+			}
+		}
+
+		// Push the frame
+		let old_stack_idx = sframe.stack_idx;
+		let frame_begin = self.stack.len() - f_num_args - f_inst.code.locals.len();
+		sframe.push(f_inst.module.clone(), frame_begin);
+
+		// Execute the function inside a block
+		self.block(sframe,
+				   &f_inst.type_.result,
+				   &f_inst.code.body,
+				   funcs,
+				   tables,
+				   globals,
+				   mems)?;
+
+		// Pop the context
+		sframe.pop(old_stack_idx);
+
+		// Remove locals/args
+		let drain_start = frame_begin;
+		let drain_end = self.stack.len() - f_inst.type_.result.len();
+		self.stack.drain(drain_start..drain_end);
+
+		Ok(Continue)
+	}
+
+	/// Call a function indirectly
+	fn call_indirect(&mut self, idx: Index, sframe: & mut StackFrames, funcs: & [FuncInst], tables: &[TableInst], globals: &mut Vec<GlobalInst>, mems: &mut Vec<MemInst>, table_addrs: &[TableAddr], types: &[types::Func]) -> IntResult {
+		// For the MVP, only the table at index 0 exists and is implicitly refered
+		let tab = &tables[table_addrs[0]];
+		let type_ = &types[idx as usize];
+		let indirect_idx = match self.stack.pop().unwrap() {
+			Value::I32(c) => c as usize,
+			_ => unreachable!()
+		};
+
+		if indirect_idx >= tab.elem.len() {
+			return Err(Trap { origin: TrapOrigin::CallIndirectElemNotFound })
+		}
+
+		let func_addr = match tab.elem[indirect_idx] {
+			Some(c) => c,
+			None => return Err(Trap { origin: TrapOrigin::CallIndirectElemUnitialized })
+		};
+
+		let f = &funcs[func_addr];
+		let f_type_ = match f {
+			&FuncInst::Module(ref f) => &f.type_,
+			&FuncInst::Host(ref f) => &f.type_,
+		};
+		if f_type_ != type_ {
+			return Err(Trap { origin: TrapOrigin::CallIndirectTypesDiffer })
+		}
+		self.call(func_addr as u32, sframe, funcs, tables, globals, mems)
+	}
+
+	/// Return to the caller of the current function
+	fn return_(&self) -> IntResult {
+		Ok(Return)
 	}
 
 	/// Pops two values from the stack, assuming that the stack is large enough to do so.
@@ -469,8 +577,6 @@ impl Interpreter {
 	}
 }
 
-/// Evaluate an ExprConst and return a given value
-/// Use for global/segment initialization
 #[macro_export]
 macro_rules! interpreter_eval_expr {
 	($int: expr, $sframe: expr, $vm: ident, $instrs: expr) => {
