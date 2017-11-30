@@ -115,9 +115,14 @@ struct HashKey {
 	name: String,
 }
 
+struct HashValue {
+	type_: types::Extern,
+	value: ExternVal,
+}
+
 /// A struct storing the state of the virtual machine
 pub struct VM {
-	registry: HashMap<HashKey, ExternVal>,
+	registry: HashMap<HashKey, HashValue>,
 	pub store: Store
 }
 
@@ -125,10 +130,10 @@ pub struct VM {
 pub enum VMError {
 	ModuleInvalid,
 	UnknownImport,
+	ImportTypeMismatch,
 	ElemOffsetTooLarge(usize),
 	DataOffsetTooLarge(usize),
 	StartFunctionFailed,
-	WrongImportNumber,
 }
 
 impl VM {
@@ -192,33 +197,32 @@ impl VM {
 		// 3. If the number m of imports is not equal to the number n of provided external values, then: Fail
 		// Intuition: resolve imports by module name & fct name, check their types
 		// TODO: handle more than one module name
-		// TODO: suppotr importing host functions
+		// TODO: move extern export/import retrieval outside VM, and provide helpers for users to manage this
 		let mut external_val = Vec::new();
-		let mut external_types = Vec::new();
-		for import in m.imports {
-			let type_match = match self.registry.get(&HashKey { name: import.name, module: import.module }) {
-				Some(ev) => {
-					external_val.push(ev);
-					match (ev, import.desc) {
-						(&ExternVal::Func(addr), ast::ImportDesc::Func(idx)) => match &self.store.funcs[idx as usize] {
-							&FuncInst::Module(ref mfi) => mfi.type_ == m.types[idx as usize],
-							_ => unimplemented!(),
-						},
-						(&ExternVal::Table(addr), ast::ImportDesc::Table(idx)) => &self.store.tables[idx as usize].type_ == m.tables[idx as usize],
-						(&ExternVal::Memory(addr), ast::ImportDesc::Memory(idx)) => &self.store.mems[idx as usize].type_ == m.memories[idx as usize],
-						(&ExternVal::Global(addr), ast::ImportDesc::Global(idx)) => &self.store.globals[idx as usize].type_ == m.globals[idx as usize],
-						_ => return Err(VMError::ImportTypeMismatch),
-					}
-				},
-				None => return Err(VMError::UnknownImport),
-			};
-			if !type_match {
-				return Err(VMError::ImportTypeMismatch);
+		{
+			for import in &m.imports {
+				let type_match = match self.registry.get(&HashKey { name: import.name.clone(), module: import.module.clone() }) {
+					Some(&HashValue { ref type_, value }) => {
+						external_val.push(value);
+						match (type_, &import.desc) {
+							(&types::Extern::Func(ref exported_type), &ast::ImportDesc::Func(idx)) =>
+								exported_type == &m.types[idx as usize],
+							(&types::Extern::Table(ref exported_type), &ast::ImportDesc::Table(ref imported_type)) =>
+								exported_type.elem == imported_type.elem && Self::match_limits(&imported_type.limits, &exported_type.limits),
+							(&types::Extern::Memory(ref exported_type), &ast::ImportDesc::Memory(ref imported_type)) =>
+								Self::match_limits(&imported_type.limits, &exported_type.limits),
+							(&types::Extern::Global(ref exported_type), &ast::ImportDesc::Global(ref imported_type)) =>
+								exported_type == imported_type,
+							_ => return Err(VMError::ImportTypeMismatch),
+						}
+					},
+					None => return Err(VMError::UnknownImport),
+				};
+				if !type_match {
+					return Err(VMError::ImportTypeMismatch);
+				}
 			}
 		}
-
-		// 3. If the number m of imports is not equal to the number n of provided external values, then: Fail
-		// TODO: check if all imports has been found
 
 		// 4. For each external value externval_i in externval^n and external
 		// type externtype'_i in externtype^{n}_{im}, do:
@@ -300,6 +304,11 @@ impl VM {
 		// Types copying
 		mi.types = m.types;
 
+		// Also copy types of globals/memories/tables, we will need later for exported external var
+		let table_types: Vec<types::Table> = m.tables.iter().map(|t| { t.type_.clone() }).collect();
+		let memory_types: Vec<types::Memory> = m.memories.iter().map(|t| { t.type_.clone() }).collect();
+		let global_types: Vec<types::Global> = m.globals.iter().map(|t| { t.type_.clone() }).collect();
+
 		// Functions allocation
 		// Only allocate indices, pushing to the store outside the mutable scope
 		let fsi_min = self.store.funcs.len();
@@ -380,15 +389,20 @@ impl VM {
 		// ...
 		// Intuition: put all exports inside the registry, allowing them to be re-used later
 		for export in m.exports {
-			let extern_val = match export.desc {
-				ast::ExportDesc::Func(idx) => ExternVal::Func(mi.func_addrs[idx as usize]),
-				ast::ExportDesc::Table(idx) => ExternVal::Table(mi.table_addrs[idx as usize]),
-				ast::ExportDesc::Memory(idx) => ExternVal::Memory(mi.mem_addrs[idx as usize]),
-				ast::ExportDesc::Global(idx) => ExternVal::Global(mi.global_addrs[idx as usize]),
+			let (extern_type, extern_val) = match export.desc {
+				ast::ExportDesc::Func(idx) =>
+					(types::Extern::Func(mi.types[idx as usize].clone()), ExternVal::Func(mi.func_addrs[idx as usize])),
+				ast::ExportDesc::Table(idx) =>
+					(types::Extern::Table(table_types[idx as usize].clone()), ExternVal::Table(mi.table_addrs[idx as usize])),
+				ast::ExportDesc::Memory(idx) =>
+					(types::Extern::Memory(memory_types[idx as usize].clone()), ExternVal::Memory(mi.mem_addrs[idx as usize])),
+				ast::ExportDesc::Global(idx) =>
+					(types::Extern::Global(global_types[idx as usize].clone()), ExternVal::Global(mi.global_addrs[idx as usize])),
 			};
 			// TODO: handle module name / change the registry using the returned
 			// ModuleInst? (is this up to the embedder?)
-			self.registry.insert(HashKey { module: String::from(""), name: export.name.clone() }, extern_val);
+			self.registry.insert(HashKey { module: String::from(""), name: export.name.clone() },
+								 HashValue { type_: extern_type, value: extern_val });
 			mi.exports.push(ExportInst {
 				name: export.name,
 				value: extern_val,
@@ -427,6 +441,11 @@ impl VM {
 
 		Ok(inst)
 	}
+
+	/// Check if l1 matches l2 according to import matching rule on limits
+	fn match_limits(l1: &types::Limits, l2: &types::Limits) -> bool {
+		l1.min >= l2.min && (l2.max.is_none() || (l1.max.is_some() && l1.max.unwrap() <= l2.max.unwrap()))
+	}
 }
 
 #[cfg(test)]
@@ -449,8 +468,26 @@ mod tests {
 		assert_eq!(mib.table_addrs.len(), 1);
 		assert_eq!(v.store.tables[mib.table_addrs[0]].elem.len(), 0);
 		assert_eq!(v.store.tables[mib.table_addrs[0]].max, None);
-		assert_eq!(v.registry.get(&HashKey { module: String::from(""), name: String::from("memory") }).unwrap(), &ExternVal::Memory(mib.mem_addrs[0]));
-		assert_eq!(v.registry.get(&HashKey { module: String::from(""), name: String::from("main") }).unwrap(), &ExternVal::Func(mib.func_addrs[0]));
+
+		let exported_mem = v.registry.get(&HashKey { module: String::from(""), name: String::from("memory") }).unwrap();
+		let (exported_mem_type, exported_mem_value) = (&exported_mem.type_, &exported_mem.value);
+		assert_eq!(exported_mem_value, &ExternVal::Memory(mib.mem_addrs[0]));
+		match exported_mem_type {
+			&types::Extern::Memory(types::Memory { limits: types::Limits { min, max } }) => {
+				assert_eq!(min, 1);
+				assert_eq!(max, None);
+			},
+			_ => panic!("Exported type for memory is not types::Extern::Memory"),
+		};
+
+
+		let exported_func = v.registry.get(&HashKey { module: String::from(""), name: String::from("main") }).unwrap();
+		let (exported_func_type, exported_func_value) = (&exported_func.type_, &exported_func.value);
+		assert_eq!(exported_func_value, &ExternVal::Func(mib.func_addrs[0]));
+		match exported_func_type {
+			&types::Extern::Func(ref f) => assert_eq!(f, &types::Func { args: Vec::new(), result: vec![types::Value::Int(types::Int::I32)] }),
+			_ => panic!("Exported type for main is not types::Extern::Func"),
+		};
 	}
 
 	#[test]
@@ -575,7 +612,7 @@ mod tests {
 
 		m.types.push(types::Func { args: Vec::new(), result: Vec::new() });
 
-		for i in 0..42 {
+		for _ in 0..42 {
 			m.funcs.push(ast::Func {
 				type_index: 0,
 				locals: Vec::new(),
@@ -619,5 +656,54 @@ mod tests {
 		m.start = Some(0);
 		assert!(v.instantiate_module(m).is_ok());
 		assert_eq!(v.store.globals[0].value, values::Value::I32(42));
+	}
+
+	#[test]
+	fn import() {
+		let mut v = VM::new();
+		let mut m1 = Module::empty();
+
+		m1.types.push(types::Func { args: Vec::new(), result: Vec::new() });
+		m1.funcs.push(ast::Func {
+			type_index: 0,
+			locals: Vec::new(),
+			body: vec![
+				Instr::Const(values::Value::I32(42)),
+				Instr::SetGlobal(0)
+			],
+		});
+		m1.exports.push(ast::Export { name: String::from("wasm"), desc: ast::ExportDesc::Func(0) });
+		let m1b = v.instantiate_module(m1);
+		assert!(m1b.is_ok());
+
+		let mut m2 = Module::empty();
+		m2.types.push(types::Func { args: Vec::new(), result: Vec::new() });
+		m2.imports.push(ast::Import {
+			module: String::from(""),
+			name: String::from("wasm"),
+			desc: ast::ImportDesc::Func(0),
+		});
+		let m2b = v.instantiate_module(m2);
+		assert!(m2b.is_ok());
+
+		let mut m3 = Module::empty();
+		m3.types.push(types::Func { args: Vec::new(), result: Vec::new() });
+		m3.imports.push(ast::Import {
+			module: String::from(""),
+			name: String::from("unknown"),
+			desc: ast::ImportDesc::Func(0),
+		});
+		let m3b = v.instantiate_module(m3);
+		assert_eq!(m3b.err(), Some(VMError::UnknownImport));
+
+		let mut m4 = Module::empty();
+		m4.types.push(types::Func { args: Vec::new(), result: vec![types::Value::Int(types::Int::I32)] });
+		m4.imports.push(ast::Import {
+			module: String::from(""),
+			name: String::from("wasm"),
+			desc: ast::ImportDesc::Func(0),
+		});
+		let m4b = v.instantiate_module(m4);
+		assert_eq!(m4b.err(), Some(VMError::ImportTypeMismatch));
 	}
 }

@@ -16,7 +16,7 @@ pub enum Value {
 	Float(Float),
 }
 
-#[derive(Debug)]
+#[derive(Debug, Clone, PartialEq)]
 pub enum Elem {
 	AnyFunc,
 }
@@ -27,24 +27,25 @@ pub struct Func {
 	pub result: Vec<Value>,
 }
 
-#[derive(Debug)]
+// Note: Do not implement PartialEq on Limits, Limits comparison is specified and not straightforward
+#[derive(Debug, Clone)]
 pub struct Limits {
 	pub min: u32,
 	pub max: Option<u32>,
 }
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct Table {
 	pub limits: Limits,
 	pub elem: Elem,
 }
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct Memory {
 	pub limits: Limits,
 }
 
-#[derive(Debug)]
+#[derive(Debug, Clone, PartialEq)]
 pub struct Global {
 	pub value: Value,
 	pub mutable: bool,
