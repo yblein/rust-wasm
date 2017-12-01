@@ -6,6 +6,7 @@ use std::collections::HashMap;
 use ast;
 use binary;
 use types;
+use valid;
 use values;
 use interpreter::{Interpreter, StackFrames};
 
@@ -190,7 +191,7 @@ impl VM {
 	/// ```
 	pub fn instantiate_module(&mut self, m: ast::Module) -> Result<Rc<ModuleInst>, VMError> {
 		// 1. If module is not valid, then: Fail
-		if !m.is_valid() {
+		if !valid::is_valid(&m) {
 			return Err(VMError::ModuleInvalid)
 		}
 
@@ -576,7 +577,6 @@ mod tests {
 		m.globals.push(ast::Global {
 			type_: types::Global { value: types::Value::Int(types::Int::I32), mutable: false },
 			value: vec![
-				Instr::Const(values::Value::I32(41)),
 				Instr::Const(values::Value::I32(42)),
 			],
 		});
@@ -636,6 +636,15 @@ mod tests {
 		let mut v = VM::new();
 		let mut m = Module::empty();
 
+		m.types.push(types::Func { args: Vec::new(), result: Vec::new() });
+		for _ in 0..6 {
+			m.funcs.push(ast::Func {
+				type_index: 0,
+				locals: Vec::new(),
+				body: vec![
+				],
+			});
+		}
 		m.tables.push(ast::Table {
 			type_: types::Table { limits: types::Limits { min: 5, max: None }, elem: types::Elem::AnyFunc },
 		});
@@ -775,8 +784,6 @@ mod tests {
 			type_index: 0,
 			locals: Vec::new(),
 			body: vec![
-				Instr::Const(values::Value::I32(42)),
-				Instr::SetGlobal(0)
 			],
 		});
 		m1.exports.push(ast::Export { name: String::from("wasm"), desc: ast::ExportDesc::Func(0) });
@@ -827,8 +834,6 @@ mod tests {
 			type_index: 0,
 			locals: Vec::new(),
 			body: vec![
-				Instr::Const(values::Value::I32(42)),
-				Instr::SetGlobal(0)
 			],
 		});
 		m1.exports.push(ast::Export { name: String::from("wasm"), desc: ast::ExportDesc::Func(0) });
@@ -848,7 +853,6 @@ mod tests {
 			locals: Vec::new(),
 			body: vec![
 				Instr::Const(values::Value::I32(42)),
-				Instr::SetGlobal(0)
 			],
 		});
 		let m2b = v.instantiate_module(m2);
@@ -924,7 +928,7 @@ mod tests {
 		});
 		m1.exports.push(ast::Export { name: String::from("global"), desc: ast::ExportDesc::Global(0) });
 		let m1b = v.instantiate_module(m1);
-		assert_eq!(m1b.err(), Some(VMError::MutableGlobalExported));
+		assert_eq!(m1b.err(), Some(VMError::ModuleInvalid));
 
 		let mut m2 = Module::empty();
 		m2.globals.push(ast::Global {
@@ -1000,11 +1004,6 @@ mod tests {
 		assert!(m1b.is_ok());
 
 		let mut m2 = Module::empty();
-		m2.memories.push(ast::Memory {
-			type_: types::Memory {
-				limits: types::Limits { min: 1, max: None },
-			},
-		});
 		m2.imports.push(ast::Import {
 			module: String::from(""),
 			name: String::from("mem"),
@@ -1025,36 +1024,6 @@ mod tests {
 		assert_eq!(m2b.err(), Some(VMError::DataOffsetTooLarge(0)));
 
 		let mut m2 = Module::empty();
-		m2.memories.push(ast::Memory {
-			type_: types::Memory {
-				limits: types::Limits { min: 1, max: None },
-			},
-		});
-		m2.imports.push(ast::Import {
-			module: String::from(""),
-			name: String::from("mem"),
-			desc: ast::ImportDesc::Memory(
-				types::Memory {
-					limits: types::Limits { min: 1, max: None }
-				}
-			),
-		});
-		m2.data.push(ast::Segment::<u8> {
-			index: 1,
-			offset: vec![
-				Instr::Const(values::Value::I32(PAGE_SIZE as u32 - 1)),
-			],
-			init: vec![3, 4, 5],
-		});
-		let m2b = v.instantiate_module(m2);
-		assert_eq!(m2b.err(), Some(VMError::DataOffsetTooLarge(1)));
-
-		let mut m2 = Module::empty();
-		m2.memories.push(ast::Memory {
-			type_: types::Memory {
-				limits: types::Limits { min: 1, max: None },
-			},
-		});
 		m2.imports.push(ast::Import {
 			module: String::from(""),
 			name: String::from("mem"),
@@ -1071,21 +1040,11 @@ mod tests {
 			],
 			init: vec![3, 4, 5],
 		});
-		m2.data.push(ast::Segment::<u8> {
-			index: 1,
-			offset: vec![
-				Instr::Const(values::Value::I32(0)),
-			],
-			init: vec![7, 8, 9],
-		});
-		let mut check1 = vec![3, 4, 5];
-		check1.extend(vec![0; PAGE_SIZE - 3]);
-		let mut check2 = vec![7, 8, 9];
-		check2.extend(vec![0; PAGE_SIZE - 3]);
+		let mut check = vec![3, 4, 5];
+		check.extend(vec![0; PAGE_SIZE - 3]);
 
 		assert!(v.instantiate_module(m2).is_ok());
-		assert_eq!(v.store.mems[0].data, check1);
-		assert_eq!(v.store.mems[1].data, check2);
+		assert_eq!(v.store.mems[0].data, check);
 	}
 
 	#[test]
@@ -1222,6 +1181,7 @@ mod tests {
 				Instr::Block(vec![type_.clone()],
 							 vec![
 								 Instr::Const(values::Value::I32(5)),
+								 Instr::Drop_,
 								 Instr::Block(vec![type_.clone()],
 											  vec![
 												  Instr::Const(values::Value::I32(42)),
@@ -1230,9 +1190,9 @@ mod tests {
 											  ]
 								 ),
 								 Instr::Const(values::Value::I32(44)),
+								 Instr::Drop_,
 							 ],
 				),
-				Instr::GetLocal(1),
 				Instr::IBin(types::Int::I32, IBinOp::Add),
 			],
 		});

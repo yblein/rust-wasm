@@ -269,6 +269,7 @@ fn check_instr<'a>(
 		CallIndirect(index) => {
 			let _ = mod_ctx.tables.get(0)?;
 			let func = mod_ctx.types.get(index as usize)?;
+			pop_expected(operands, frames, Operand::Exact(Int(I32)));
 			exact_step(operands, frames, &func.args[..], &func.result[..])?;
 		}
 
