@@ -103,7 +103,7 @@ impl Interpreter {
 			Unreachable => self.unreachable(),
 			Nop => self.nop(),
 			Block(ref result_type, ref instrs) => self.block(sframe, result_type, instrs, funcs, tables, globals, mems),
-			Loop(ref result_type, ref instrs) => self.loop_(sframe, instrs, funcs, tables, globals, mems),
+			Loop(_, ref instrs) => self.loop_(sframe, instrs, funcs, tables, globals, mems),
 			Br(nesting_levels) => self.branch(nesting_levels),
 			BrIf(nesting_levels) => self.branch_cond(nesting_levels),
 			Return => self.return_(),
@@ -204,7 +204,7 @@ impl Interpreter {
 			match res {
 				Branch { nesting_levels } => {
 					// If the instruction caused a branch, we need to exit or restart the loop
-					return Ok(if nesting_levels == 0 {
+					if nesting_levels == 0 {
 						// We have reached the target loop.
 						// Unwind all values that could be left on the stack and restart the loop
 						self.stack.truncate(local_stack_begin);
@@ -212,7 +212,7 @@ impl Interpreter {
 					} else {
 						// Exit the loop and keep traversing nesting levels
 						return Ok(Branch { nesting_levels: nesting_levels - 1 });
-					})
+					}
 				}
 				Return => return Ok(Return),
 				Continue => {}
