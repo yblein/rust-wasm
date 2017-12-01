@@ -101,7 +101,7 @@ impl Interpreter {
 			If(ref result_type, ref if_instrs, ref else_instrs) => self.if_(sframe, result_type, if_instrs, else_instrs, funcs, tables, globals, mems),
 			Br(nesting_levels) => self.branch(nesting_levels),
 			BrIf(nesting_levels) => self.branch_cond(nesting_levels),
-			// BrTable
+			BrTable(ref all_levels, default_level) => self.branch_table(all_levels, default_level),
 			Return => self.return_(),
 			Call(idx) => self.call(idx, sframe, funcs, tables, globals, mems),
 			CallIndirect(idx) => {
@@ -135,7 +135,6 @@ impl Interpreter {
 			IRel(ref t, ref op) => self.irel(t, op),
 			FRel(ref t, ref op) => self.frel(t, op),
 			Convert(ref op) => self.cvtop(op),
-			_ => unimplemented!()
 		}
 	}
 
@@ -234,6 +233,18 @@ impl Interpreter {
 	fn branch_cond(&mut self, nesting_levels: u32) -> IntResult {
 		match self.stack.pop().unwrap() {
 			Value::I32(c) => Ok(if c != 0 { Branch { nesting_levels } } else { Continue }),
+			_ => unreachable!()
+		}
+	}
+
+	/// Perform a branch using a vector of levels, or a default nesting level based on the top of the stack
+	fn branch_table(&mut self, all_levels: &[u32], default_level: u32) -> IntResult {
+		match self.stack.pop().unwrap() {
+			Value::I32(c) => Ok(
+				Branch {
+					nesting_levels: *all_levels.get(c as usize).unwrap_or(&default_level)
+				}
+			),
 			_ => unreachable!()
 		}
 	}

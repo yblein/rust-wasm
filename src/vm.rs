@@ -1398,4 +1398,64 @@ mod tests {
 		assert_eq!(int.stack.len(), 1);
 		assert_eq!(int.stack.last().unwrap(), &values::Value::I32(47));
 	}
+
+
+	#[test]
+	fn brtable() {
+		let mut v = VM::new();
+		let mut m = Module::empty();
+
+		let type_ = types::Value::Int(types::Int::I32);
+		m.types.push(types::Func { args: Vec::new(), result: vec![type_.clone()] });
+		m.funcs.push(ast::Func {
+			type_index: 0,
+			locals: Vec::new(),
+			body: vec![
+				Instr::Const(values::Value::I32(1)),
+				Instr::If(vec![type_.clone()],
+						  vec![
+							  Instr::Const(values::Value::I32(5)),
+						  ],
+						  vec![
+							  Instr::Const(values::Value::I32(0)),
+						  ],
+				),
+				// Stack = [5]
+				Instr::Const(values::Value::I32(0)),
+				Instr::If(vec![type_.clone()],
+						  vec![
+							  Instr::Const(values::Value::I32(4)),
+						  ],
+						  vec![
+							  Instr::Block(vec![type_.clone()],
+										   vec![
+											   // Note:
+											   // If br=1, stack = [42]
+											   // If br=0, stack = [43]
+											   Instr::Const(values::Value::I32(42)),
+											   Instr::Const(values::Value::I32(3)),
+											   Instr::BrTable(vec![0, 1], 1),
+										   ]
+							  ),
+							  Instr::Drop_,
+							  Instr::Const(values::Value::I32(43)),
+						  ]
+				),
+				// Stack = [5; 42]
+				Instr::IBin(types::Int::I32, IBinOp::Add),
+				// Stack = [47]
+			],
+		});
+		let inst = v.instantiate_module(m).unwrap();
+		let mut int = Interpreter::new();
+		let mut sframe = StackFrames::new();
+		sframe.push(inst.clone(), 0);
+
+		let res = match &v.store.funcs[0] {
+			&FuncInst::Module(ref f) => interpreter_eval_func!(&mut int, &mut sframe, v, f.code),
+			_ => unreachable!(),
+		};
+		assert_eq!(int.stack.len(), 1);
+		assert_eq!(int.stack.last().unwrap(), &values::Value::I32(47));
+	}
 }
