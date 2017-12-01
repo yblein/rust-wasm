@@ -220,6 +220,7 @@ fn check_instr<'a>(
 		}
 
 		If(ref result_type, ref instrs_then, ref instrs_else) => {
+			pop_expected(operands, frames, Operand::Exact(Int(I32)));
 			check_expr(mod_ctx, func_ctx, operands, frames, &result_type[..], &result_type[..], instrs_then)?;
 			if !instrs_else.is_empty() {
 				// if there is an "else", we need to remove the result of the "then" part first

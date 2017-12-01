@@ -92,14 +92,16 @@ impl Interpreter {
 	) -> IntResult {
 		use ast::Instr::*;
 
-		// Note: passing VM (mut/imut) is case by case
+		// Note: passing VM components mutability is case by case
 		match *instr {
 			Unreachable => self.unreachable(),
 			Nop => self.nop(),
 			Block(ref result_type, ref instrs) => self.block(sframe, result_type, instrs, funcs, tables, globals, mems),
 			Loop(_, ref instrs) => self.loop_(sframe, instrs, funcs, tables, globals, mems),
+			If(ref result_type, ref if_instrs, ref else_instrs) => self.if_(sframe, result_type, if_instrs, else_instrs, funcs, tables, globals, mems),
 			Br(nesting_levels) => self.branch(nesting_levels),
 			BrIf(nesting_levels) => self.branch_cond(nesting_levels),
+			// BrTable
 			Return => self.return_(),
 			Call(idx) => self.call(idx, sframe, funcs, tables, globals, mems),
 			CallIndirect(idx) => {
@@ -180,7 +182,7 @@ impl Interpreter {
 					})
 				},
 				Return => return Ok(Return), // Stack unwinding will be done by the caller
-				_ => continue,
+				Continue => {},
 			}
 		}
 
@@ -235,6 +237,33 @@ impl Interpreter {
 			_ => unreachable!()
 		}
 	}
+
+	/// If/Else block (delegate to block)
+	fn if_(
+		&mut self,
+		sframe: &mut StackFrames,
+		result_type: &[types::Value],
+		if_instrs: &[Instr],
+		else_instrs: &[Instr],
+		funcs: &[FuncInst],
+		tables: &[TableInst],
+		globals: &mut Vec<GlobalInst>,
+		mems: &mut Vec<MemInst>,
+	) -> IntResult {
+		let c = match self.stack.pop().unwrap() {
+			Value::I32(c) => c,
+			_ => unreachable!()
+		};
+
+		Ok(
+			if c != 0 {
+				self.block(sframe, result_type, if_instrs, funcs, tables, globals, mems)?
+			} else {
+				self.block(sframe, result_type, else_instrs, funcs, tables, globals, mems)?
+			}
+		)
+	}
+
 
 	/// Drop a value from the stack
 	fn drop(&mut self) -> IntResult {
