@@ -342,15 +342,17 @@ impl VM {
 		self.allocate_and_init_module(m, imported_funcs, imported_tables, imported_memories, global_addrs, global_vals, elem_offsets, data_offsets)
 	}
 
-	fn allocate_and_init_module(&mut self,
-								m: ast::Module,
-								extern_funcs: Vec<FuncAddr>,
-								extern_tables: Vec<TableAddr>,
-								extern_memories: Vec<MemAddr>,
-								extern_globals: Vec<GlobalAddr>,
-								vals: Vec<values::Value>,
-								elem_offsets: Vec<usize>,
-								data_offsets: Vec<usize>) -> Result<Rc<ModuleInst>, VMError> {
+	fn allocate_and_init_module(
+		&mut self,
+		m: ast::Module,
+		extern_funcs: Vec<FuncAddr>,
+		extern_tables: Vec<TableAddr>,
+		extern_memories: Vec<MemAddr>,
+		extern_globals: Vec<GlobalAddr>,
+		vals: Vec<values::Value>,
+		elem_offsets: Vec<usize>,
+		data_offsets: Vec<usize>
+	) -> Result<Rc<ModuleInst>, VMError> {
 		// Two passes algorithms
 		// 1. do all modifications on the ModuleInst in a single scope
 		let mut mi = ModuleInst::new();

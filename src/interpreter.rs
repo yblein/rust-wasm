@@ -46,14 +46,6 @@ pub struct Frame {
 	module: Rc<ModuleInst>,
 }
 
-impl Frame {
-	fn new(module: Rc<ModuleInst>) -> Frame {
-		Frame {
-			module
-		}
-	}
-}
-
 /// Stack frames tracks frame activation
 pub struct StackFrames {
 	frames: Vec<Frame>,
@@ -69,7 +61,7 @@ impl StackFrames {
 	}
 
 	pub fn push(&mut self, module: Rc<ModuleInst>, stack_idx: usize) {
-		self.frames.push(Frame::new(module));
+		self.frames.push(Frame { module });
 		self.stack_idx = stack_idx;
 	}
 
@@ -89,13 +81,15 @@ impl Interpreter {
 
 	/// Intrepret a single instruction.
 	/// This is the main dispatching function of the interpreter.
-	pub fn instr(&mut self,
-				 sframe: & mut StackFrames,
-				 instr: &Instr,
-				 funcs: & [FuncInst],
-				 tables: &[TableInst],
-				 globals: &mut Vec<GlobalInst>,
-				 mems: &mut Vec<MemInst>) -> IntResult {
+	pub fn instr(
+		&mut self,
+		sframe: & mut StackFrames,
+		instr: &Instr,
+		funcs: & [FuncInst],
+		tables: &[TableInst],
+		globals: &mut Vec<GlobalInst>,
+		mems: &mut Vec<MemInst>
+	) -> IntResult {
 		use ast::Instr::*;
 
 		// Note: passing VM (mut/imut) is case by case
@@ -150,36 +144,39 @@ impl Interpreter {
 	}
 
 	/// Interpret a block
-	fn block(&mut self,
-			 sframe: &mut StackFrames,
-			 result_type: &[types::Value],
-			 instrs: &[Instr],
-			 funcs: & [FuncInst],
-			 tables: &[TableInst],
-			 globals: &mut Vec<GlobalInst>,
-			 mems: &mut Vec<MemInst>) -> IntResult {
+	fn block(
+		&mut self,
+		sframe: &mut StackFrames,
+		result_type: &[types::Value],
+		instrs: &[Instr],
+		funcs: & [FuncInst],
+		tables: &[TableInst],
+		globals: &mut Vec<GlobalInst>,
+		mems: &mut Vec<MemInst>
+	) -> IntResult {
 		let local_stack_begin = self.stack.len();
 
 		for instr in instrs {
 			let res = self.instr(sframe, instr, funcs, tables, globals, mems)?;
 
-			if let Branch { nesting_levels } = res {
-				// If the instruction caused a branch, we need to exit the block early on.
-				// The way to do so depends if the current block is the target of the branch.
-				return Ok(if nesting_levels == 0 {
-					// We have reached the target block.
-					// Unwind values that could be left on the stack, except for the result,
-					// and resume normal execution.
-					let junk_end = self.stack.len() - result_type.len();
-					self.stack.drain(local_stack_begin..junk_end);
-					Continue
-				} else {
-					// Keep traversing nesting levels
-					Branch { nesting_levels: nesting_levels - 1 }
-				})
-			} else if let Return = res {
-				// Stack unwinding will be done by the caller
-				return Ok(Return)
+			match res {
+				Branch { nesting_levels } => {
+					// If the instruction caused a branch, we need to exit the block early on.
+					// The way to do so depends if the current block is the target of the branch.
+					return Ok(if nesting_levels == 0 {
+						// We have reached the target block.
+						// Unwind values that could be left on the stack, except for the result,
+						// and resume normal execution.
+						let junk_end = self.stack.len() - result_type.len();
+						self.stack.drain(local_stack_begin..junk_end);
+						Continue
+					} else {
+						// Keep traversing nesting levels
+						Branch { nesting_levels: nesting_levels - 1 }
+					})
+				},
+				Return => return Ok(Return), // Stack unwinding will be done by the caller
+				_ => continue,
 			}
 		}
 
