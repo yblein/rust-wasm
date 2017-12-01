@@ -1,4 +1,4 @@
-use vm::{FuncInst, TableInst, GlobalInst, MemInst, ModuleInst, TableAddr, GlobalAddr};
+use vm::{PAGE_SIZE, FuncInst, TableInst, GlobalInst, MemInst, ModuleInst, TableAddr, GlobalAddr, MemAddr};
 use ast::*;
 use types;
 use values::Value;
@@ -115,6 +115,16 @@ impl Interpreter {
 			},
 			Drop_ => self.drop(),
 			Select => self.select(),
+			GetLocal(idx) => self.get_local(idx, sframe.stack_idx),
+			SetLocal(idx) => self.set_local(idx, sframe.stack_idx),
+			TeeLocal(idx) => self.tee_local(idx, sframe.stack_idx),
+			GetGlobal(idx) => self.get_global(idx, &globals, &sframe.frames.last().unwrap().module.global_addrs),
+			SetGlobal(idx) => self.set_global(idx, globals, &sframe.frames.last().unwrap().module.global_addrs),
+			// Load
+			// Store
+			// Current Memory
+			CurrentMemory => self.current_memory(&mems, &sframe.frames.last().unwrap().module.mem_addrs),
+			// Grow Memory
 			Const(c) => self.const_(c),
 			IUnary(ref t, ref op) => self.iunary(t, op),
 			FUnary(ref t, ref op) => self.funary(t, op),
@@ -124,11 +134,6 @@ impl Interpreter {
 			IRel(ref t, ref op) => self.irel(t, op),
 			FRel(ref t, ref op) => self.frel(t, op),
 			Convert(ref op) => self.cvtop(op),
-			GetLocal(idx) => self.get_local(idx, sframe.stack_idx),
-			SetLocal(idx) => self.set_local(idx, sframe.stack_idx),
-			TeeLocal(idx) => self.tee_local(idx, sframe.stack_idx),
-			GetGlobal(idx) => self.get_global(idx, &globals, &sframe.frames.last().unwrap().module.global_addrs),
-			SetGlobal(idx) => self.set_global(idx, globals, &sframe.frames.last().unwrap().module.global_addrs),
 			_ => unimplemented!()
 		}
 	}
@@ -612,6 +617,14 @@ impl Interpreter {
 	/// Return to the caller of the current function
 	fn return_(&self) -> IntResult {
 		Ok(Return)
+	}
+
+	/// Get the size of the current memory
+	fn current_memory(&mut self, memories: &[MemInst], frame_memories: &[MemAddr]) -> IntResult {
+		let mem = &memories[frame_memories[0] as usize];
+		let sz = mem.data.len() / PAGE_SIZE;
+		self.stack.push(Value::I32(sz as u32));
+		Ok(Continue)
 	}
 
 	/// Pops two values from the stack, assuming that the stack is large enough to do so.

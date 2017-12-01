@@ -13,7 +13,7 @@ use interpreter::{Interpreter, StackFrames};
 type Addr = usize;
 type FuncAddr = Addr;
 pub type TableAddr = Addr;
-type MemAddr = Addr;
+pub type MemAddr = Addr;
 pub type GlobalAddr = Addr;
 
 #[derive(Clone, Copy, PartialEq, Debug)]
@@ -33,7 +33,7 @@ pub struct ModuleInst {
 	pub types: Vec<types::Func>,
 	func_addrs: Vec<FuncAddr>,
 	pub table_addrs: Vec<TableAddr>,
-	mem_addrs: Vec<MemAddr>,
+	pub mem_addrs: Vec<MemAddr>,
 	pub global_addrs: Vec<GlobalAddr>,
 	exports: Vec<ExportInst>,
 }
@@ -76,10 +76,10 @@ pub struct TableInst {
 	max: Option<u32>,
 }
 
-const PAGE_SIZE: usize = 65536;
+pub const PAGE_SIZE: usize = 65536;
 
 pub struct MemInst {
-	data: Vec<u8>,
+	pub data: Vec<u8>,
 	max: Option<u32>,
 }
 
@@ -1273,5 +1273,37 @@ mod tests {
 		assert_eq!(res, Ok(()));
 		assert_eq!(int.stack.len(), 1);
 		assert_eq!(int.stack.last().unwrap(), &values::Value::I32(4));
+	}
+
+	#[test]
+	fn current_memory() {
+		let mut v = VM::new();
+		let mut m = Module::empty();
+		let type_ = types::Value::Int(types::Int::I32);
+		let memory_size = 42;
+
+		m.types.push(types::Func { args: Vec::new(), result: vec![type_.clone()] });
+		m.funcs.push(ast::Func {
+			type_index: 0,
+			locals: Vec::new(),
+			body: vec![
+				Instr::CurrentMemory,
+			],
+		});
+		m.memories.push(ast::Memory {
+			type_: types::Memory { limits: types::Limits { min: memory_size, max: None } },
+		});
+
+		let inst = v.instantiate_module(m).unwrap();
+		let mut int = Interpreter::new();
+		let mut sframe = StackFrames::new();
+		sframe.push(inst.clone(), 0);
+
+		let res = match &v.store.funcs[0] {
+			&FuncInst::Module(ref f) => interpreter_eval_func!(&mut int, &mut sframe, v, f.code),
+			_ => unreachable!(),
+		};
+		assert_eq!(int.stack.len(), 1);
+		assert_eq!(int.stack.last().unwrap(), &values::Value::I32(memory_size));
 	}
 }
