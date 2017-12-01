@@ -122,9 +122,8 @@ impl Interpreter {
 			SetGlobal(idx) => self.set_global(idx, globals, &sframe.frames.last().unwrap().module.global_addrs),
 			// Load
 			// Store
-			// Current Memory
 			CurrentMemory => self.current_memory(&mems, &sframe.frames.last().unwrap().module.mem_addrs),
-			// Grow Memory
+			GrowMemory => self.grow_memory(mems, &sframe.frames.last().unwrap().module.mem_addrs),
 			Const(c) => self.const_(c),
 			IUnary(ref t, ref op) => self.iunary(t, op),
 			FUnary(ref t, ref op) => self.funary(t, op),
@@ -623,6 +622,20 @@ impl Interpreter {
 	fn current_memory(&mut self, memories: &[MemInst], frame_memories: &[MemAddr]) -> IntResult {
 		let mem = &memories[frame_memories[0] as usize];
 		let sz = mem.data.len() / PAGE_SIZE;
+		self.stack.push(Value::I32(sz as u32));
+		Ok(Continue)
+	}
+
+	/// Grow the memory
+	fn grow_memory(&mut self, memories: &mut Vec<MemInst>, frame_memories: &[MemAddr]) -> IntResult {
+		let mem = &mut memories[frame_memories[0] as usize];
+		let sz = mem.data.len() / PAGE_SIZE;
+		let new_pages = match self.stack.pop().unwrap() {
+			Value::I32(c) => c as usize,
+			_ => unreachable!()
+		};
+		// TODO: no limit for the moment, its up to the embedder
+		mem.data.resize((sz + new_pages) * PAGE_SIZE, 0);
 		self.stack.push(Value::I32(sz as u32));
 		Ok(Continue)
 	}
