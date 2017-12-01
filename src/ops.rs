@@ -1,6 +1,9 @@
 use std;
 use std::ops::*;
 
+use core;
+use core::ptr::copy_nonoverlapping;
+
 pub trait IntOp<S=Self> {
 	type FloatType;
 
@@ -257,6 +260,56 @@ macro_rules! impl_int_op {
 }
 impl_int_op!(u32, i32, u32, f32);
 impl_int_op!(u64, i64, u64, f64);
+
+// From crate byteorder
+macro_rules! impl_bits_ops {
+	($ty:ty, $size:expr) => {
+		impl BitsOp for $ty {
+
+			#[inline]
+			fn from_bits(src: &[u8]) -> $ty {
+				assert!($size == core::mem::size_of::<$ty>());
+				assert!($size <= src.len());
+				let mut data: $ty = 0;
+				unsafe {
+					copy_nonoverlapping(
+						src.as_ptr(),
+						&mut data as *mut $ty as *mut u8,
+						$size);
+				}
+				data.to_le()
+			}
+
+			#[inline]
+			fn to_bits(self, dst: &mut [u8]) {
+				assert!($size == core::mem::size_of::<$ty>());
+				assert_eq!($size, dst.len());
+
+				unsafe {
+					copy_nonoverlapping(
+						[self].as_ptr() as *const u8,
+						dst.as_mut_ptr(),
+						dst.len());
+				}
+			}
+		}
+	}
+}
+
+pub trait BitsOp {
+	// MemOp
+	fn from_bits(src: &[u8]) -> Self;
+	fn to_bits(self, dst: &mut [u8]);
+}
+
+impl_bits_ops!(u8,  1);
+impl_bits_ops!(i8,  1);
+impl_bits_ops!(u16, 2);
+impl_bits_ops!(i16, 2);
+impl_bits_ops!(u32, 4);
+impl_bits_ops!(i32, 4);
+impl_bits_ops!(u64, 8);
+impl_bits_ops!(i64, 8);
 
 pub trait FloatOp {
 	type IntType;

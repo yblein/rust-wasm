@@ -2,9 +2,8 @@ use vm::{PAGE_SIZE, FuncInst, TableInst, GlobalInst, MemInst, ModuleInst, TableA
 use ast::*;
 use types;
 use values::Value;
-use ops::{IntOp,FloatOp,FloatDemoteOp,FloatPromoteOp};
+use ops::{IntOp, FloatOp, FloatDemoteOp, FloatPromoteOp, BitsOp};
 use std::rc::Rc;
-
 
 /// A struct storing the state of the current interpreted
 pub struct Interpreter {
@@ -19,6 +18,7 @@ pub enum TrapOrigin {
 	CallIndirectElemNotFound,
 	CallIndirectElemUnitialized,
 	CallIndirectTypesDiffer,
+	LoadOutOfMemory,
 }
 
 #[derive(Debug, PartialEq)]
@@ -120,8 +120,8 @@ impl Interpreter {
 			TeeLocal(idx) => self.tee_local(idx, sframe.stack_idx),
 			GetGlobal(idx) => self.get_global(idx, &globals, &sframe.frames.last().unwrap().module.global_addrs),
 			SetGlobal(idx) => self.set_global(idx, globals, &sframe.frames.last().unwrap().module.global_addrs),
-			// Load
-			// Store
+			Load(ref memop) => self.load(memop, &mems, &sframe.frames.last().unwrap().module.mem_addrs),
+			Store(ref memop) => self.store(memop, mems, &sframe.frames.last().unwrap().module.mem_addrs),
 			CurrentMemory => self.current_memory(&mems, &sframe.frames.last().unwrap().module.mem_addrs),
 			GrowMemory => self.grow_memory(mems, &sframe.frames.last().unwrap().module.mem_addrs),
 			Const(c) => self.const_(c),
@@ -637,6 +637,85 @@ impl Interpreter {
 		// TODO: no limit for the moment, its up to the embedder
 		mem.data.resize((sz + new_pages) * PAGE_SIZE, 0);
 		self.stack.push(Value::I32(sz as u32));
+		Ok(Continue)
+	}
+
+	/// Load memory (dispatcher)
+	fn load(&mut self, memop: &LoadOp, memories: &[MemInst], frame_memories: &[MemAddr]) -> IntResult {
+		use types::{Int, Float};
+		use types::Value as Tv;
+
+		let mem = &memories[frame_memories[0] as usize];
+		let offset = match self.stack.pop().unwrap() {
+			Value::I32(c) => c + memop.offset,
+			_ => unreachable!()
+		};
+		let (size_in_bits, signed) = memop.opt.unwrap_or((memop.type_.bit_width(), false));
+		let size_in_bytes = size_in_bits / 8;
+
+		if (offset + size_in_bytes) as usize >= mem.data.len() {
+			return Err(Trap { origin: TrapOrigin::LoadOutOfMemory });
+		}
+		let bits = &mem.data[(offset as usize) .. ((offset + size_in_bytes) as usize)];
+
+		let res = match (size_in_bits, signed, memop.type_) {
+			(8,  false, Tv::Int(Int::I32)) => Value::I32(u8::from_bits(bits)  as u32),
+			(8,  true,  Tv::Int(Int::I32)) => Value::I32(i8::from_bits(bits)  as u32),
+			(16, false, Tv::Int(Int::I32)) => Value::I32(u16::from_bits(bits) as u32),
+			(16, true,  Tv::Int(Int::I32)) => Value::I32(i16::from_bits(bits) as u32),
+			(32, false, Tv::Int(Int::I32)) => Value::I32(u32::from_bits(bits) as u32),
+			(32, true,  Tv::Int(Int::I32)) => Value::I32(i32::from_bits(bits) as u32),
+
+			(8,  false, Tv::Int(Int::I64)) => Value::I64(u8::from_bits(bits)  as u64),
+			(8,  true,  Tv::Int(Int::I64)) => Value::I64(i8::from_bits(bits)  as u64),
+			(16, false, Tv::Int(Int::I64)) => Value::I64(u16::from_bits(bits) as u64),
+			(16, true,  Tv::Int(Int::I64)) => Value::I64(i32::from_bits(bits) as u64),
+			(32, false, Tv::Int(Int::I64)) => Value::I64(u32::from_bits(bits) as u64),
+			(32, true,  Tv::Int(Int::I64)) => Value::I64(i32::from_bits(bits) as u64),
+			(64, false, Tv::Int(Int::I64)) => Value::I64(u64::from_bits(bits) as u64),
+			(64, true,  Tv::Int(Int::I64)) => Value::I64(i64::from_bits(bits) as u64),
+
+			(32, false, Tv::Float(Float::F32)) => Value::F32(f32::from_bits(u32::from_bits(bits))),
+			(64, true,  Tv::Float(Float::F64)) => Value::F64(f64::from_bits(u64::from_bits(bits))),
+			_ => unreachable!()
+		};
+		self.stack.push(res);
+		Ok(Continue)
+	}
+
+	/// Store memory (dispatcher)
+	fn store(&mut self, memop: &StoreOp, memories: &mut [MemInst], frame_memories: &[MemAddr]) -> IntResult {
+		use types::{Int, Float};
+		use types::Value as Tv;
+
+		let mem = &mut memories[frame_memories[0] as usize];
+		let c = self.stack.pop().unwrap();
+		let offset = match self.stack.pop().unwrap() {
+			Value::I32(c) => c + memop.offset,
+			_ => unreachable!()
+		};
+
+		let size_in_bits = memop.opt.unwrap_or(memop.type_.bit_width());
+		let size_in_bytes = size_in_bits / 8;
+		if (offset + size_in_bytes) as usize >= mem.data.len() {
+			return Err(Trap { origin: TrapOrigin::LoadOutOfMemory });
+		}
+
+		let bits = &mut mem.data[(offset as usize) .. ((offset + size_in_bytes) as usize)];
+		match (size_in_bits, memop.type_, c) {
+			(8,  Tv::Int(Int::I32), Value::I32(c)) => (c as u8).to_bits(bits),
+			(16, Tv::Int(Int::I32), Value::I32(c)) => (c as u16).to_bits(bits),
+			(32, Tv::Int(Int::I32), Value::I32(c)) => (c as u32).to_bits(bits),
+
+			(8,  Tv::Int(Int::I64), Value::I64(c)) => (c as u8).to_bits(bits),
+			(16, Tv::Int(Int::I64), Value::I64(c)) => (c as u16).to_bits(bits),
+			(32, Tv::Int(Int::I64), Value::I64(c)) => (c as u32).to_bits(bits),
+			(64, Tv::Int(Int::I64), Value::I64(c)) => (c as u64).to_bits(bits),
+
+			(32, Tv::Float(Float::F32), Value::F32(c)) => (c as f32).to_bits().to_bits(bits),
+			(64, Tv::Float(Float::F64), Value::F64(c)) => (c as f64).to_bits().to_bits(bits),
+			_ => unreachable!()
+		};
 		Ok(Continue)
 	}
 
