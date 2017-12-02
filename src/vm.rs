@@ -11,7 +11,7 @@ use values;
 use interpreter::{Interpreter, StackFrames};
 
 type Addr = usize;
-type FuncAddr = Addr;
+pub type FuncAddr = Addr;
 pub type TableAddr = Addr;
 pub type MemAddr = Addr;
 pub type GlobalAddr = Addr;
