@@ -80,7 +80,7 @@ pub const PAGE_SIZE: usize = 65536;
 
 pub struct MemInst {
 	pub data: Vec<u8>,
-	max: Option<u32>,
+	pub max: Option<u32>,
 }
 
 pub struct GlobalInst {

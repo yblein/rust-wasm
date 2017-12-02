@@ -33,6 +33,8 @@ pub type GlobalAddr = vm::GlobalAddr;
 pub enum Error {
 	DecodeModuleFailed,
 	InvalidModule,
+	InvalidMemoryRead,
+	InvalidMemoryWrite,
 }
 
 /// Return the empty store
@@ -128,7 +130,16 @@ pub fn grow_table(store: &mut Store, tableaddr: TableAddr, new: usize) -> Option
 
 /// Allocate a memory
 pub fn alloc_mem(store: &mut Store, memtype: &types::Memory) -> MemAddr {
-	unimplemented!();
+	let min = memtype.limits.min;
+	let max = memtype.limits.max;
+
+	store.vm.store.mems.push(
+		vm::MemInst {
+			data: vec![0; (min as usize) * vm::PAGE_SIZE],
+			max: max,
+		}
+	);
+	store.vm.store.mems.len() - 1
 }
 
 /// Get the type of a memory
@@ -137,23 +148,40 @@ pub fn type_mem(store: &Store, memaddr: MemAddr) -> types::Memory {
 }
 
 /// Read a byte of a memory at a given address
-pub fn read_mem(store: &Store, memaddr: MemAddr, addr: usize) -> u8 {
-	unimplemented!();
+pub fn read_mem(store: &Store, memaddr: MemAddr, addr: usize) -> Result<u8, Error> {
+	assert!(store.vm.store.mems.get(memaddr).is_some());
+	let mi = &store.vm.store.mems[memaddr];
+	if addr >= mi.data.len() {
+		Err(Error::InvalidMemoryRead)
+	} else {
+		Ok(mi.data[addr])
+	}
 }
 
 /// Write a byte to a memory at a given address
 pub fn write_mem(store: &mut Store, memaddr: MemAddr, addr: usize, byte: u8) -> Option<Error> {
-	unimplemented!();
+	assert!(store.vm.store.mems.get(memaddr).is_some());
+	let mut mi = &mut store.vm.store.mems[memaddr];
+	if addr >= mi.data.len() {
+		Some(Error::InvalidMemoryWrite)
+	} else {
+		mi.data[addr] = byte;
+		None
+	}
 }
 
 /// Get the size of a memory
 pub fn size_mem(store: &Store, memaddr: MemAddr) -> usize {
-	unimplemented!();
+	assert!(store.vm.store.mems.get(memaddr).is_some());
+	store.vm.store.mems[memaddr].data.len() / vm::PAGE_SIZE
 }
 
 /// Grow a memory by new pages
 pub fn grow_mem(store: &mut Store, memaddr: MemAddr, new: usize) {
-	unimplemented!();
+	assert!(store.vm.store.mems.get(memaddr).is_some());
+	let mut mem = &mut store.vm.store.mems[memaddr].data;
+	let sz = mem.len() / vm::PAGE_SIZE;
+	mem.resize((sz + new) * vm::PAGE_SIZE, 0);
 }
 
 /// Allocate a new global
