@@ -73,7 +73,7 @@ type FuncElem = Option<FuncAddr>;
 
 pub struct TableInst {
 	pub elem: Vec<FuncElem>,
-	max: Option<u32>,
+	pub max: Option<u32>,
 }
 
 pub const PAGE_SIZE: usize = 65536;

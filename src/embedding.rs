@@ -33,6 +33,8 @@ pub type GlobalAddr = vm::GlobalAddr;
 pub enum Error {
 	DecodeModuleFailed,
 	InvalidModule,
+	InvalidTableRead,
+	InvalidTableWrite,
 	InvalidMemoryRead,
 	InvalidMemoryWrite,
 }
@@ -100,7 +102,16 @@ pub fn invoke_func(store: &mut Store, funcaddr: FuncAddr, args: Vec<values::Valu
 
 /// Allocate a table
 pub fn alloc_table(store: &mut Store, tabletype: &types::Table) -> TableAddr {
-	unimplemented!();
+	let min = tabletype.limits.min;
+	let max = tabletype.limits.max;
+
+	store.vm.store.tables.push(
+		vm::TableInst {
+			elem: vec![None; min as usize],
+			max: max,
+		}
+	);
+	store.vm.store.tables.len() - 1
 }
 
 /// Get the type of a table
@@ -109,23 +120,41 @@ pub fn type_table(store: &Store, tableaddr: TableAddr) -> types::Table {
 }
 
 /// Read the content of a table at a given address
-pub fn read_table(store: &Store, tableaddr: TableAddr, addr: usize) -> types::Table {
-	unimplemented!();
+pub fn read_table(store: &Store, tableaddr: TableAddr, addr: usize) -> Result<Option<FuncAddr>, Error> {
+	assert!(store.vm.store.tables.get(tableaddr).is_some());
+	let ti = &store.vm.store.tables[tableaddr];
+	if addr >= ti.elem.len() {
+		Err(Error::InvalidTableRead)
+	} else {
+		Ok(ti.elem[addr])
+	}
 }
 
 /// Write AnyFunc to a specific table at a given address
 pub fn write_table(store: &mut Store, tableaddr: TableAddr, addr: usize, funcaddr: Option<FuncAddr>) -> Option<Error> {
-	unimplemented!();
+	assert!(store.vm.store.tables.get(tableaddr).is_some());
+	let mut ti = &mut store.vm.store.tables[tableaddr];
+	if addr >= ti.elem.len() {
+		Some(Error::InvalidTableWrite)
+	} else {
+		ti.elem[addr] = funcaddr;
+		None
+	}
 }
 
 /// Get the size of a table
 pub fn size_table(store: &Store, tableaddr: TableAddr) -> usize {
-	unimplemented!();
+	assert!(store.vm.store.tables.get(tableaddr).is_some());
+	store.vm.store.tables[tableaddr].elem.len()
 }
 
 /// Grow a table by new elements
 pub fn grow_table(store: &mut Store, tableaddr: TableAddr, new: usize) -> Option<Error> {
-	unimplemented!();
+	assert!(store.vm.store.tables.get(tableaddr).is_some());
+	let mut table = &mut store.vm.store.tables[tableaddr].elem;
+	let sz = table.len();
+	table.resize(sz + new, None);
+	None
 }
 
 /// Allocate a memory
