@@ -86,13 +86,41 @@ pub fn instantiate_module(store: &mut Store, module: ast::Module, extern_val: &[
 }
 
 /// List module imports with their types
-pub fn module_imports(module: &ast::Module) -> (&str, &str, &[types::Extern]) {
-	unimplemented!();
+pub fn module_imports(module: &ast::Module) -> Vec<(String, String, types::Extern)> {
+	assert!(valid::is_valid(module));
+	let mut types = Vec::new();
+
+	for import in &module.imports {
+		use types::*;
+		use ast::*;
+		let ex = match import.desc {
+			ImportDesc::Func(idx)   => Extern::Func(module.types[idx as usize].clone()),
+			ImportDesc::Table(ref type_)  => Extern::Table(type_.clone()),
+			ImportDesc::Memory(ref type_) => Extern::Memory(type_.clone()),
+			ImportDesc::Global(ref type_) => Extern::Global(type_.clone()),
+		};
+		types.push((import.module.clone(), import.name.clone(), ex));
+	}
+	types
 }
 
 /// List module exports with their types
-pub fn module_exports(module: &ast::Module) -> (&str, &[types::Extern]) {
-	unimplemented!();
+pub fn module_exports(module: &ast::Module) -> Vec<(String, types::Extern)> {
+	assert!(valid::is_valid(module));
+	let mut types = Vec::new();
+
+	for export in &module.exports {
+		use types::*;
+		use ast::*;
+		let ex = match export.desc {
+			ExportDesc::Func(idx)   => Extern::Func(module.types[module.funcs[idx as usize].type_index as usize].clone()),
+			ExportDesc::Table(idx)  => Extern::Table(module.tables[idx as usize].type_.clone()),
+			ExportDesc::Memory(idx) => Extern::Memory(module.memories[idx as usize].type_.clone()),
+			ExportDesc::Global(idx) => Extern::Global(module.globals[idx as usize].type_.clone()),
+		};
+		types.push((export.name.clone(), ex));
+	}
+	types
 }
 
 /// Get an externval value according to the exported name
