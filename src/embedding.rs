@@ -41,6 +41,7 @@ pub enum Error {
 	InvalidTableWrite,
 	InvalidMemoryRead,
 	InvalidMemoryWrite,
+	GlobalImmutable,
 }
 
 /// Return the empty store
@@ -275,7 +276,13 @@ pub fn grow_mem(store: &mut Store, memaddr: MemAddr, new: usize) {
 
 /// Allocate a new global
 pub fn alloc_global(store: &mut Store, globaltype: types::Global, val: values::Value) -> GlobalAddr {
-	unimplemented!();
+	store.vm.store.globals.push(
+		vm::GlobalInst {
+			value: val,
+			mutable: globaltype.mutable,
+		}
+	);
+	store.vm.store.globals.len() - 1
 }
 
 /// Get the type of a global
@@ -285,10 +292,19 @@ pub fn type_global(store: &Store, globaladdr: GlobalAddr) -> types::Global {
 
 /// Read a global
 pub fn read_global(store: &Store, globaladdr: GlobalAddr) -> values::Value {
-	unimplemented!();
+	assert!(store.vm.store.globals.get(globaladdr).is_some());
+	let gi = &store.vm.store.globals[globaladdr];
+	gi.value
 }
 
 /// Write a global
 pub fn write_global(store: &mut Store, globaladdr: GlobalAddr, val: values::Value) -> Option<Error> {
-	unimplemented!();
+	assert!(store.vm.store.globals.get(globaladdr).is_some());
+	let mut gi = &mut store.vm.store.globals[globaladdr];
+	if !gi.mutable {
+		Some(Error::GlobalImmutable)
+	} else {
+		gi.value = val;
+		None
+	}
 }

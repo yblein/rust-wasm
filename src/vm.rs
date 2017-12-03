@@ -85,10 +85,11 @@ pub struct MemInst {
 
 pub struct GlobalInst {
 	pub value: values::Value,
-	mutable: bool,
+	pub mutable: bool,
 }
 
-// TODO: refactor pub visibility usign pub(crate)
+// TODO: each field should be a type, and we implement methods to remove duplicate
+// code between vm, embedding and interpreter
 pub struct Store {
 	pub funcs: Vec<FuncInst>,
 	pub tables: Vec<TableInst>,
