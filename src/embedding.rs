@@ -11,10 +11,19 @@ use interpreter;
 
 use std::rc::Rc;
 use std::io::Cursor;
+use std::collections::HashMap;
+
+#[derive(PartialEq, Eq, Hash)]
+pub struct TypeKey {
+	pub extern_val: vm::ExternVal,
+}
+
+pub type TypeHashMap = HashMap<TypeKey, types::Extern>;
 
 // We export opaque types to the user
 pub struct Store {
 	vm: vm::VM,
+	types_map: TypeHashMap,
 }
 
 pub struct ModuleInst {
@@ -48,6 +57,7 @@ pub enum Error {
 pub fn init_store() -> Store {
 	Store {
 		vm: vm::VM::new(),
+		types_map: HashMap::new(),
 	}
 }
 
@@ -97,7 +107,11 @@ pub fn alloc_func(store: &mut Store, functype: &types::Func, hostfunc: &HostCode
 
 /// Get the type of a function
 pub fn type_func(store: &Store, funcaddr: FuncAddr) -> types::Func {
-	unimplemented!();
+	assert!(store.vm.store.funcs.get(funcaddr).is_some());
+	match store.types_map.get(&TypeKey { extern_val: vm::ExternVal::Func(funcaddr) }) {
+		Some(&types::Extern::Func(ref type_)) => type_.clone(),
+		_ => unreachable!(),
+	}
 }
 
 /// Invoke a function
@@ -172,12 +186,18 @@ pub fn alloc_table(store: &mut Store, tabletype: &types::Table) -> TableAddr {
 			max: max,
 		}
 	);
-	store.vm.store.tables.len() - 1
+	let addr = store.vm.store.tables.len() - 1;
+	store.types_map.insert(TypeKey { extern_val: vm::ExternVal::Table(addr) }, types::Extern::Table(tabletype.clone()));
+	addr
 }
 
 /// Get the type of a table
 pub fn type_table(store: &Store, tableaddr: TableAddr) -> types::Table {
-	unimplemented!();
+	assert!(store.vm.store.tables.get(tableaddr).is_some());
+	match store.types_map.get(&TypeKey { extern_val: vm::ExternVal::Table(tableaddr) }) {
+		Some(&types::Extern::Table(ref type_)) => type_.clone(),
+		_ => unreachable!(),
+	}
 }
 
 /// Read the content of a table at a given address
@@ -229,12 +249,18 @@ pub fn alloc_mem(store: &mut Store, memtype: &types::Memory) -> MemAddr {
 			max: max,
 		}
 	);
-	store.vm.store.mems.len() - 1
+	let addr = store.vm.store.mems.len() - 1;
+	store.types_map.insert(TypeKey { extern_val: vm::ExternVal::Memory(addr) }, types::Extern::Memory(memtype.clone()));
+	addr
 }
 
 /// Get the type of a memory
 pub fn type_mem(store: &Store, memaddr: MemAddr) -> types::Memory {
-	unimplemented!();
+	assert!(store.vm.store.mems.get(memaddr).is_some());
+	match store.types_map.get(&TypeKey { extern_val: vm::ExternVal::Memory(memaddr) }) {
+		Some(&types::Extern::Memory(ref type_)) => type_.clone(),
+		_ => unreachable!(),
+	}
 }
 
 /// Read a byte of a memory at a given address
@@ -282,12 +308,18 @@ pub fn alloc_global(store: &mut Store, globaltype: types::Global, val: values::V
 			mutable: globaltype.mutable,
 		}
 	);
-	store.vm.store.globals.len() - 1
+	let addr = store.vm.store.globals.len() - 1;
+	store.types_map.insert(TypeKey { extern_val: vm::ExternVal::Global(addr) }, types::Extern::Global(globaltype.clone()));
+	addr
 }
 
 /// Get the type of a global
 pub fn type_global(store: &Store, globaladdr: GlobalAddr) -> types::Global {
-	unimplemented!();
+	assert!(store.vm.store.globals.get(globaladdr).is_some());
+	match store.types_map.get(&TypeKey { extern_val: vm::ExternVal::Global(globaladdr) }) {
+		Some(&types::Extern::Global(ref type_)) => type_.clone(),
+		_ => unreachable!(),
+	}
 }
 
 /// Read a global

@@ -8,6 +8,7 @@ use binary;
 use types;
 use valid;
 use values;
+use embedding;
 use interpreter::{Interpreter, StackFrames};
 
 type Addr = usize;
@@ -16,7 +17,7 @@ pub type TableAddr = Addr;
 pub type MemAddr = Addr;
 pub type GlobalAddr = Addr;
 
-#[derive(Clone, Copy, PartialEq, Debug)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, Debug)]
 pub enum ExternVal {
 	Func(FuncAddr),
 	Table(TableAddr),
@@ -190,7 +191,7 @@ impl VM {
 	/// v.instantiate_module(m).unwrap();
 	/// assert_eq!(v.modules.extern_val.len(), 1)
 	/// ```
-	pub fn instantiate_module(&mut self, m: ast::Module) -> Result<Rc<ModuleInst>, VMError> {
+	pub fn instantiate_module(&mut self, m: ast::Module, types_map: &mut embedding::TypeHashMap) -> Result<Rc<ModuleInst>, VMError> {
 		// 1. If module is not valid, then: Fail
 		if !valid::is_valid(&m) {
 			return Err(VMError::ModuleInvalid)
@@ -340,7 +341,7 @@ impl VM {
 		// Note: module tables/data/globals initializations are performed in the
 		// following function
 		let global_addrs = Rc::try_unwrap(mod_aux).ok().unwrap().global_addrs;
-		self.allocate_and_init_module(m, imported_funcs, imported_tables, imported_memories, global_addrs, global_vals, elem_offsets, data_offsets)
+		self.allocate_and_init_module(m, imported_funcs, imported_tables, imported_memories, global_addrs, global_vals, elem_offsets, data_offsets, types_map)
 	}
 
 	fn allocate_and_init_module(
@@ -352,7 +353,8 @@ impl VM {
 		extern_globals: Vec<GlobalAddr>,
 		vals: Vec<values::Value>,
 		elem_offsets: Vec<usize>,
-		data_offsets: Vec<usize>
+		data_offsets: Vec<usize>,
+		types_map: &mut embedding::TypeHashMap
 	) -> Result<Rc<ModuleInst>, VMError> {
 		// Two passes algorithms
 		// 1. do all modifications on the ModuleInst in a single scope
@@ -401,6 +403,8 @@ impl VM {
 					max: max,
 				}
 			);
+			types_map.insert(embedding::TypeKey { extern_val: ExternVal::Table(self.store.tables.len() - 1) },
+							 types::Extern::Table(tab.type_.clone()));
 		}
 
 		// 15. For each element segment elemi in module.elem, do:
@@ -429,6 +433,8 @@ impl VM {
 					max: max,
 				}
 			);
+			types_map.insert(embedding::TypeKey { extern_val: ExternVal::Memory(self.store.mems.len() - 1) },
+							 types::Extern::Memory(mem.type_.clone()));
 		}
 
 		// 16. For each data segment datai in module.data, do:
@@ -454,6 +460,8 @@ impl VM {
 					mutable: global.type_.mutable,
 				}
 			);
+			types_map.insert(embedding::TypeKey { extern_val: ExternVal::Global(self.store.globals.len() - 1) },
+							 types::Extern::Global(global.type_.clone()));
 			i += 1;
 		}
 
@@ -493,15 +501,18 @@ impl VM {
 		// 2. put the FuncInst (which have a ref to ModuleInst) into the store
 		let inst = Rc::new(mi);
 		for func in m.funcs {
+			let type_ = &inst.types[func.type_index as usize];
 			self.store.funcs.push(
 				FuncInst::Module(
 					ModuleFuncInst {
-						type_: inst.types[func.type_index as usize].clone(),
+						type_: type_.clone(),
 						module: Rc::clone(&inst),
 						code: func,
 					}
 				)
-			)
+			);
+			types_map.insert(embedding::TypeKey { extern_val: ExternVal::Func(self.store.funcs.len() - 1) },
+							 types::Extern::Func(type_.clone()));
 		}
 
 		// 17. If the start function module.start is not empty, then:
