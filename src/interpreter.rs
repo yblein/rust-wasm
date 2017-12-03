@@ -767,7 +767,7 @@ impl Interpreter {
 
 #[macro_export]
 macro_rules! interpreter_eval_expr {
-	($int: expr, $sframe: expr, $vm: ident, $instrs: expr) => {
+	($int: expr, $sframe: expr, $vm: expr, $instrs: expr) => {
 		{
 			let mut cls = |funcs: &[FuncInst], tables: &[TableInst], globals: &mut Vec<GlobalInst>, mems: &mut Vec<MemInst>| {
 				for instr in $instrs {
@@ -789,7 +789,7 @@ macro_rules! interpreter_eval_expr {
 /// Used for global/segment initialization
 #[macro_export]
 macro_rules! interpreter_eval_expr_const {
-	($int: expr, $sframe: expr, $vm: ident, $instrs: expr) => {
+	($int: expr, $sframe: expr, $vm: expr, $instrs: expr) => {
 		{
 			let mut cls = |globals: &mut Vec<GlobalInst>| {
 				// Only the last value matters for ExprConst
@@ -804,7 +804,7 @@ macro_rules! interpreter_eval_expr_const {
 /// Evaluate a Func
 #[macro_export]
 macro_rules! interpreter_eval_func {
-	($int: expr, $sframe: expr, $vm: ident, $func: expr) => {
+	($int: expr, $sframe: expr, $vm: expr, $func: expr) => {
 		interpreter_eval_expr!($int, $sframe, $vm, &$func.body)
 	}
 }

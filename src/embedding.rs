@@ -7,6 +7,7 @@ use valid;
 use types;
 use values;
 use binary;
+use interpreter;
 
 use std::rc::Rc;
 use std::io::Cursor;
@@ -32,6 +33,9 @@ pub type GlobalAddr = vm::GlobalAddr;
 
 pub enum Error {
 	DecodeModuleFailed,
+	NotEnoughArgument,
+	ArgumentTypeMismatch,
+	CodeTrapped,
 	InvalidModule,
 	InvalidTableRead,
 	InvalidTableWrite,
@@ -96,8 +100,64 @@ pub fn type_func(store: &Store, funcaddr: FuncAddr) -> types::Func {
 }
 
 /// Invoke a function
-pub fn invoke_func(store: &mut Store, funcaddr: FuncAddr, args: Vec<values::Value>) -> types::Func {
-	unimplemented!();
+pub fn invoke_func(store: &mut Store, funcaddr: FuncAddr, args: Vec<values::Value>) -> Result<Vec<values::Value>, Error> {
+	assert!(store.vm.store.funcs.get(funcaddr).is_some());
+	let funcinst = &store.vm.store.funcs[funcaddr];
+	let funcinst = match funcinst {
+		&vm::FuncInst::Module(ref f) => f,
+		&vm::FuncInst::Host(ref f) => unimplemented!(),
+	};
+	let functype = &funcinst.type_;
+
+	if functype.args.len() != args.len() {
+		return Err(Error::NotEnoughArgument);
+	}
+
+	for types in functype.args.iter().zip(args.iter()) {
+		use values::Value;
+		use types as Tv;
+
+		// TODO: find a better way to do this
+		match types {
+			(&Tv::Value::Int(Tv::Int::I32), &Value::I32(_)) => (),
+			(&Tv::Value::Int(Tv::Int::I64), &Value::I64(_)) => (),
+			(&Tv::Value::Float(Tv::Float::F32), &Value::F32(_)) => (),
+			(&Tv::Value::Float(Tv::Float::F64), &Value::F64(_)) => (),
+			_ => return Err(Error::ArgumentTypeMismatch),
+		}
+	}
+
+	let mut int = interpreter::Interpreter::new();
+	let mut sframe = interpreter::StackFrames::new();
+	sframe.push(funcinst.module.clone(), 0);
+
+	for arg in args {
+		int.stack.push(arg);
+	}
+
+	for valtype in &funcinst.code.locals {
+		use types::*;
+		int.stack.push(
+			// TODO: refactor
+			match valtype {
+				&Value::Int(Int::I32) => values::Value::I32(0),
+				&Value::Int(Int::I64) => values::Value::I64(0),
+				&Value::Float(Float::F32) => values::Value::F32(0.0),
+				&Value::Float(Float::F64) => values::Value::F64(0.0),
+			}
+		);
+	}
+
+	let res = {
+		use vm::{FuncInst, TableInst, MemInst, GlobalInst};
+		interpreter_eval_func!(&mut int, &mut sframe, store.vm, funcinst.code)
+	};
+
+	if let Err(_) = res {
+		Err(Error::CodeTrapped)
+	} else {
+		Ok(int.stack)
+	}
 }
 
 /// Allocate a table
