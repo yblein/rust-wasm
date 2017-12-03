@@ -2,5 +2,13 @@
 name = "rust-wasm"
 version = "0.1.0"
 authors = ["Yoann Blein <yoann.blein@free.fr>", "Hugo Guiroux <gx.hugo@gmail.com>"]
+build = "gen_parsers.rs"
 
 [dependencies]
+
+[build-dependencies]
+lalrpop = "0.13.1"
+
+[dev-dependencies]
+lalrpop-util = "0.13.1"
+regex = "0.2.1"
