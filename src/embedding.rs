@@ -42,6 +42,7 @@ pub type GlobalAddr = vm::GlobalAddr;
 
 pub enum Error {
 	DecodeModuleFailed,
+	CannotInstantiateModule,
 	NotEnoughArgument,
 	ArgumentTypeMismatch,
 	CodeTrapped,
@@ -82,8 +83,22 @@ pub fn validate_module(module: &ast::Module) -> Option<Error> {
 }
 
 /// Instantiate a module
-pub fn instantiate_module(store: &mut Store, module: ast::Module, extern_val: &[ExternVal]) -> Result<ModuleInst, Error> {
-	unimplemented!();
+pub fn instantiate_module(store: &mut Store, module: ast::Module, extern_vals: Vec<ExternVal>) -> Result<ModuleInst, Error> {
+	let mut unwrap = Vec::new();
+	for extern_val in extern_vals {
+		unwrap.push(extern_val.val);
+	}
+
+	let res = store.vm.instantiate_module(module, &unwrap, &mut store.types_map);
+	if let Ok(inst) = res {
+		Ok(
+			ModuleInst {
+				inst
+			}
+		)
+	} else {
+		Err(Error::CannotInstantiateModule)
+	}
 }
 
 /// List module imports with their types

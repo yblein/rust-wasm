@@ -125,13 +125,13 @@ struct HashValue {
 
 /// A struct storing the state of the virtual machine
 pub struct VM {
-	registry: HashMap<HashKey, HashValue>,
 	pub store: Store
 }
 
 #[derive(Debug, PartialEq)]
 pub enum VMError {
 	ModuleInvalid,
+	NotEnoughExternVal,
 	UnknownImport,
 	ImportTypeMismatch,
 	ElemOffsetTooLarge(usize),
@@ -154,7 +154,6 @@ impl VM {
 	/// ```
 	pub fn new() -> VM {
 		VM {
-			registry: HashMap::new(),
 			store: Store::new(),
 		}
 	}
@@ -191,7 +190,7 @@ impl VM {
 	/// v.instantiate_module(m).unwrap();
 	/// assert_eq!(v.modules.extern_val.len(), 1)
 	/// ```
-	pub fn instantiate_module(&mut self, m: ast::Module, types_map: &mut embedding::TypeHashMap) -> Result<Rc<ModuleInst>, VMError> {
+	pub fn instantiate_module(&mut self, m: ast::Module, extern_vals: &[ExternVal], types_map: &mut embedding::TypeHashMap) -> Result<Rc<ModuleInst>, VMError> {
 		// 1. If module is not valid, then: Fail
 		if !valid::is_valid(&m) {
 			return Err(VMError::ModuleInvalid)
@@ -199,25 +198,27 @@ impl VM {
 
 		// 2. Assert: module is valid with external types externtype^{m}_{im} classifying its import
 		// 3. If the number m of imports is not equal to the number n of provided external values, then: Fail
+		if extern_vals.len() != m.imports.len() {
+			return Err(VMError::NotEnoughExternVal)
+		}
+
 		// 4. For each external value externval_i in externval^n and external
 		// type externtype'_i in externtype^{n}_{im}, do:
 		// a. Assert: externval_i is valid with external type externtype_i in store S.
 		// b. If externtype_i does not match externtype'_i, then: Fail
 		//
 		// Intuition: resolve imports by module name & fct name, check their types
-		// TODO: handle more than one module name
-		// TODO: move extern export/import retrieval outside VM, and provide helpers for users to manage this
 		let mut imported_funcs = Vec::new();
 		let mut imported_tables = Vec::new();
 		let mut imported_memories = Vec::new();
 		let mut imported_globals = Vec::new();
 		{
-			for import in &m.imports {
-				let type_match = match self.registry.get(&HashKey { name: import.name.clone(), module: import.module.clone() }) {
-					Some(&HashValue { ref type_, value }) => {
+			for (import, value) in m.imports.iter().zip(extern_vals.iter()) {
+				let type_match = match types_map.get(&embedding::TypeKey { extern_val: value.clone() }) {
+					Some(type_) => {
 						match (type_, &import.desc) {
 							(&types::Extern::Func(ref exported_type), &ast::ImportDesc::Func(idx)) => {
-								if let ExternVal::Func(addr) = value {
+								if let &ExternVal::Func(addr) = value {
 									imported_funcs.push(addr);
 								} else {
 									unreachable!();
@@ -225,7 +226,7 @@ impl VM {
 								exported_type == &m.types[idx as usize]
 							},
 							(&types::Extern::Table(ref exported_type), &ast::ImportDesc::Table(ref imported_type)) => {
-								if let ExternVal::Table(addr) = value {
+								if let &ExternVal::Table(addr) = value {
 									imported_tables.push(addr);
 								} else {
 									unreachable!();
@@ -233,7 +234,7 @@ impl VM {
 								exported_type.elem == imported_type.elem && Self::match_limits(&imported_type.limits, &exported_type.limits)
 							},
 							(&types::Extern::Memory(ref exported_type), &ast::ImportDesc::Memory(ref imported_type)) => {
-								if let ExternVal::Memory(addr) = value {
+								if let &ExternVal::Memory(addr) = value {
 									imported_memories.push(addr);
 								} else {
 									unreachable!();
@@ -241,8 +242,7 @@ impl VM {
 								Self::match_limits(&imported_type.limits, &exported_type.limits)
 							},
 							(&types::Extern::Global(ref exported_type), &ast::ImportDesc::Global(ref imported_type)) => {
-								// Save globals for the auxiliary module instance now
-								if let ExternVal::Global(addr) = value {
+								if let &ExternVal::Global(addr) = value {
 									imported_globals.push(addr);
 								} else {
 									unreachable!();
@@ -476,7 +476,6 @@ impl VM {
 
 		// 14. For each export exporti in module.exports, do:
 		// ...
-		// Intuition: put all exports inside the registry, allowing them to be re-used later
 		for export in m.exports {
 			let (extern_type, extern_val) = match export.desc {
 				ast::ExportDesc::Func(idx) =>
@@ -488,10 +487,6 @@ impl VM {
 				ast::ExportDesc::Global(idx) =>
 					(types::Extern::Global(global_types[idx as usize].clone()), ExternVal::Global(mi.global_addrs[idx as usize])),
 			};
-			// TODO: handle module name / change the registry using the returned
-			// ModuleInst? (is this up to the embedder?)
-			self.registry.insert(HashKey { module: String::from(""), name: export.name.clone() },
-								 HashValue { type_: extern_type, value: extern_val });
 			mi.exports.push(ExportInst {
 				name: export.name,
 				value: extern_val,
@@ -546,7 +541,7 @@ impl VM {
 mod tests {
 	use super::*;
 	use ast::*;
-
+/*
 	#[test]
 	fn simple() {
 		let mut v = VM::new();
@@ -1470,4 +1465,5 @@ mod tests {
 		assert_eq!(int.stack.len(), 1);
 		assert_eq!(int.stack.last().unwrap(), &values::Value::I32(47));
 	}
+	*/
 }
