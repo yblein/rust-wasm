@@ -25,9 +25,9 @@ pub enum ExternVal {
 	Global(GlobalAddr),
 }
 
-struct ExportInst {
-	name: String,
-	value: ExternVal,
+pub struct ExportInst {
+	pub name: String,
+	pub value: ExternVal,
 }
 
 pub struct ModuleInst {
@@ -36,7 +36,7 @@ pub struct ModuleInst {
 	pub table_addrs: Vec<TableAddr>,
 	pub mem_addrs: Vec<MemAddr>,
 	pub global_addrs: Vec<GlobalAddr>,
-	exports: Vec<ExportInst>,
+	pub exports: Vec<ExportInst>,
 }
 
 impl ModuleInst {

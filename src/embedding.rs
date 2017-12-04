@@ -46,6 +46,7 @@ pub enum Error {
 	ArgumentTypeMismatch,
 	CodeTrapped,
 	InvalidModule,
+	ExportNotFound,
 	InvalidTableRead,
 	InvalidTableWrite,
 	InvalidMemoryRead,
@@ -125,7 +126,12 @@ pub fn module_exports(module: &ast::Module) -> Vec<(String, types::Extern)> {
 
 /// Get an externval value according to the exported name
 pub fn get_export(inst: &ModuleInst, name: &str) -> Result<ExternVal, Error> {
-	unimplemented!();
+	for export in &inst.inst.exports {
+		if export.name == name {
+			return Ok(ExternVal { val: export.value.clone() });
+		}
+	}
+	Err(Error::ExportNotFound)
 }
 
 /// Allocate a host function
