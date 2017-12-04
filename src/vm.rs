@@ -1,9 +1,6 @@
-use std::fs::File;
-use std::io;
 use std::rc::Rc;
 
 use ast;
-use binary;
 use types;
 use valid;
 use values;
@@ -123,7 +120,6 @@ pub enum VMError {
 	ImportTypeMismatch,
 	ElemOffsetTooLarge(usize),
 	DataOffsetTooLarge(usize),
-	MutableGlobalExported,
 	StartFunctionFailed,
 }
 
@@ -134,12 +130,6 @@ impl VM {
 		VM {
 			store: Store::new(),
 		}
-	}
-
-	/// Generate the ast::Module for a given file
-	pub fn parse(&self, filename: &str) -> Result<ast::Module, binary::DecodeError> {
-		let f = File::open(filename)?;
-		binary::decode(io::BufReader::new(f))
 	}
 
 	/// Instantiate a new module inside the VM context
@@ -316,11 +306,6 @@ impl VM {
 		// Types copying
 		mi.types = m.types;
 
-		// Also copy types of globals/memories/tables, we will need later for exported external var
-		let table_types: Vec<types::Table> = m.tables.iter().map(|t| { t.type_.clone() }).collect();
-		let memory_types: Vec<types::Memory> = m.memories.iter().map(|t| { t.type_.clone() }).collect();
-		let global_types: Vec<types::Global> = m.globals.iter().map(|t| { t.type_.clone() }).collect();
-
 		// Alloc steps 10-13
 		for addr in extern_funcs {
 			mi.func_addrs.push(addr);
@@ -418,27 +403,14 @@ impl VM {
 			i += 1;
 		}
 
-		// Only immutable variable can be exported
-		for export in &m.exports {
-			if let ast::ExportDesc::Global(idx) = export.desc {
-				if global_types[idx as usize].mutable {
-					return Err(VMError::MutableGlobalExported);
-				}
-			}
-		}
-
 		// 14. For each export exporti in module.exports, do:
 		// ...
 		for export in m.exports {
-			let (extern_type, extern_val) = match export.desc {
-				ast::ExportDesc::Func(idx) =>
-					(types::Extern::Func(mi.types[idx as usize].clone()), ExternVal::Func(mi.func_addrs[idx as usize])),
-				ast::ExportDesc::Table(idx) =>
-					(types::Extern::Table(table_types[idx as usize].clone()), ExternVal::Table(mi.table_addrs[idx as usize])),
-				ast::ExportDesc::Memory(idx) =>
-					(types::Extern::Memory(memory_types[idx as usize].clone()), ExternVal::Memory(mi.mem_addrs[idx as usize])),
-				ast::ExportDesc::Global(idx) =>
-					(types::Extern::Global(global_types[idx as usize].clone()), ExternVal::Global(mi.global_addrs[idx as usize])),
+			let extern_val = match export.desc {
+				ast::ExportDesc::Func(idx)   => ExternVal::Func(mi.func_addrs[idx as usize]),
+				ast::ExportDesc::Table(idx)  => ExternVal::Table(mi.table_addrs[idx as usize]),
+				ast::ExportDesc::Memory(idx) => ExternVal::Memory(mi.mem_addrs[idx as usize]),
+				ast::ExportDesc::Global(idx) => ExternVal::Global(mi.global_addrs[idx as usize]),
 			};
 			mi.exports.push(ExportInst {
 				name: export.name,

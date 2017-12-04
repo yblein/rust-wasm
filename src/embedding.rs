@@ -71,7 +71,7 @@ pub fn decode_module(bytes: &[u8]) -> Result<ast::Module, Error> {
 }
 
 /// Parse a S-Expr module
-pub fn parse_module(codepoint: &str) -> Result<ast::Module, Error> {
+pub fn parse_module(_codepoint: &str) -> Result<ast::Module, Error> {
 	unimplemented!();
 }
 
@@ -152,7 +152,7 @@ pub fn get_export(inst: &ModuleInst, name: &str) -> Result<ExternVal, Error> {
 }
 
 /// Allocate a host function
-pub fn alloc_func(store: &mut Store, functype: &types::Func, hostfunc: &HostCode) -> FuncAddr {
+pub fn alloc_func(_store: &mut Store, _functype: &types::Func, _hostfunc: &HostCode) -> FuncAddr {
 	unimplemented!();
 }
 
@@ -171,7 +171,7 @@ pub fn invoke_func(store: &mut Store, funcaddr: FuncAddr, args: Vec<values::Valu
 	let funcinst = &store.vm.store.funcs[funcaddr];
 	let funcinst = match funcinst {
 		&vm::FuncInst::Module(ref f) => f,
-		&vm::FuncInst::Host(ref f) => unimplemented!(),
+		&vm::FuncInst::Host(_) => unimplemented!(),
 	};
 	let functype = &funcinst.type_;
 
@@ -267,7 +267,7 @@ pub fn read_table(store: &Store, tableaddr: TableAddr, addr: usize) -> Result<Op
 /// Write AnyFunc to a specific table at a given address
 pub fn write_table(store: &mut Store, tableaddr: TableAddr, addr: usize, funcaddr: Option<FuncAddr>) -> Option<Error> {
 	assert!(store.vm.store.tables.get(tableaddr).is_some());
-	let mut ti = &mut store.vm.store.tables[tableaddr];
+	let ti = &mut store.vm.store.tables[tableaddr];
 	if addr >= ti.elem.len() {
 		Some(Error::InvalidTableWrite)
 	} else {
@@ -285,7 +285,7 @@ pub fn size_table(store: &Store, tableaddr: TableAddr) -> usize {
 /// Grow a table by new elements
 pub fn grow_table(store: &mut Store, tableaddr: TableAddr, new: usize) -> Option<Error> {
 	assert!(store.vm.store.tables.get(tableaddr).is_some());
-	let mut table = &mut store.vm.store.tables[tableaddr].elem;
+	let table = &mut store.vm.store.tables[tableaddr].elem;
 	let sz = table.len();
 	table.resize(sz + new, None);
 	None
@@ -330,7 +330,7 @@ pub fn read_mem(store: &Store, memaddr: MemAddr, addr: usize) -> Result<u8, Erro
 /// Write a byte to a memory at a given address
 pub fn write_mem(store: &mut Store, memaddr: MemAddr, addr: usize, byte: u8) -> Option<Error> {
 	assert!(store.vm.store.mems.get(memaddr).is_some());
-	let mut mi = &mut store.vm.store.mems[memaddr];
+	let mi = &mut store.vm.store.mems[memaddr];
 	if addr >= mi.data.len() {
 		Some(Error::InvalidMemoryWrite)
 	} else {
@@ -348,7 +348,7 @@ pub fn size_mem(store: &Store, memaddr: MemAddr) -> usize {
 /// Grow a memory by new pages
 pub fn grow_mem(store: &mut Store, memaddr: MemAddr, new: usize) {
 	assert!(store.vm.store.mems.get(memaddr).is_some());
-	let mut mem = &mut store.vm.store.mems[memaddr].data;
+	let mem = &mut store.vm.store.mems[memaddr].data;
 	let sz = mem.len() / vm::PAGE_SIZE;
 	mem.resize((sz + new) * vm::PAGE_SIZE, 0);
 }
@@ -385,7 +385,7 @@ pub fn read_global(store: &Store, globaladdr: GlobalAddr) -> values::Value {
 /// Write a global
 pub fn write_global(store: &mut Store, globaladdr: GlobalAddr, val: values::Value) -> Option<Error> {
 	assert!(store.vm.store.globals.get(globaladdr).is_some());
-	let mut gi = &mut store.vm.store.globals[globaladdr];
+	let gi = &mut store.vm.store.globals[globaladdr];
 	if !gi.mutable {
 		Some(Error::GlobalImmutable)
 	} else {
@@ -410,7 +410,7 @@ mod tests {
 		});
 
 		let mut store = init_store();
-		let mib = instantiate_module(&mut store, m, Vec::new()).unwrap();
+		assert!(instantiate_module(&mut store, m, Vec::new()).is_ok());
 		assert_eq!(read_global(&store, 0), values::Value::I32(42));
 	}
 
@@ -462,7 +462,7 @@ mod tests {
 			extern_vals.push(get_export(&m1b, name).unwrap());
 		}
 
-		let m2b = instantiate_module(&mut store, m2, extern_vals).unwrap();
+		assert!(instantiate_module(&mut store, m2, extern_vals).is_ok());
 		assert_eq!(read_global(&store, 0), values::Value::I32(42));
 		assert_eq!(read_global(&store, 1), values::Value::I32(43));
 		assert_eq!(read_global(&store, 2), values::Value::I32(42));
@@ -504,7 +504,7 @@ mod tests {
 		// Allocate "fake" FuncInst inside the store to see funcaddrs != funcidx
 		// TODO: use alloc_func when implemented
 		let len_shift = 5;
-		for i in 0..len_shift {
+		for _ in 0..len_shift {
 			store.vm.store.funcs.push(vm::FuncInst::Host(vm::HostFuncInst {
 				type_: types::Func { args: Vec::new(), result: Vec::new() },
 				hostcode: (),
@@ -603,7 +603,7 @@ mod tests {
 				extern_vals.push(val);
 			}
 		}
-		let m2b = instantiate_module(&mut store, m2, extern_vals);
+		assert!(instantiate_module(&mut store, m2, extern_vals).is_ok());
 
 		let mut m3 = Module::empty();
 		m3.types.push(types::Func { args: Vec::new(), result: Vec::new() });
@@ -686,7 +686,6 @@ mod tests {
 		let m2b = instantiate_module(&mut store, m2, extern_vals);
 		assert!(m2b.is_ok());
 
-		let m2b = m2b.unwrap();
 		assert_eq!(type_func(&store, 0), first_type);
 		assert_eq!(type_func(&store, 1), second_type);
 	}
@@ -733,8 +732,6 @@ mod tests {
 		}
 		let m2b = instantiate_module(&mut store, m2, extern_vals);
 		assert!(m2b.is_ok());
-
-		let m2b = m2b.unwrap();
 		assert_eq!(read_global(&store, 0), first_value);
 		assert_eq!(read_global(&store, 1), second_value);
 	}
@@ -887,7 +884,7 @@ mod tests {
 				Instr::IBin(types::Int::I32, IBinOp::Add),
 			],
 		});
-		let inst = instantiate_module(&mut store, m, Vec::new()).unwrap();
+		assert!(instantiate_module(&mut store, m, Vec::new()).is_ok());
 		let args = vec![values::Value::I32(1), values::Value::I32(2)];
 		let res = invoke_func(&mut store, 0, args).unwrap();
 		assert_eq!(res, vec![values::Value::I32(4)]);
@@ -912,7 +909,7 @@ mod tests {
 				Instr::IBin(types::Int::I32, IBinOp::Add),
 			],
 		});
-		let inst = instantiate_module(&mut store, m, Vec::new()).unwrap();
+		assert!(instantiate_module(&mut store, m, Vec::new()).is_ok());
 		let args = vec![values::Value::I32(1), values::Value::I32(2)];
 		let res = invoke_func(&mut store, 0, args).unwrap();
 		assert_eq!(res, vec![values::Value::I32(2)]);
@@ -946,7 +943,7 @@ mod tests {
 				Instr::Call(0),
 			],
 		});
-		let inst = instantiate_module(&mut store, m, Vec::new()).unwrap();
+		assert!(instantiate_module(&mut store, m, Vec::new()).is_ok());
 		let res = invoke_func(&mut store, 1, Vec::new()).unwrap();
 		assert_eq!(res, vec![values::Value::I32(4)]);
 	}
@@ -993,7 +990,7 @@ mod tests {
 				Instr::Call(0),
 			],
 		});
-		let inst = instantiate_module(&mut store, m, Vec::new()).unwrap();
+		assert!(instantiate_module(&mut store, m, Vec::new()).is_ok());
 		let res = invoke_func(&mut store, 1, Vec::new()).unwrap();
 		assert_eq!(res, vec![values::Value::I32(42)]);
 	}
@@ -1037,7 +1034,7 @@ mod tests {
 			],
 			init: vec![0],
 		});
-		let inst = instantiate_module(&mut store, m, Vec::new()).unwrap();
+		assert!(instantiate_module(&mut store, m, Vec::new()).is_ok());
 		let res = invoke_func(&mut store, 1, Vec::new()).unwrap();
 		assert_eq!(res, vec![values::Value::I32(4)]);
 	}
@@ -1060,7 +1057,7 @@ mod tests {
 		m.memories.push(ast::Memory {
 			type_: types::Memory { limits: types::Limits { min: memory_size, max: None } },
 		});
-		let inst = instantiate_module(&mut store, m, Vec::new()).unwrap();
+		assert!(instantiate_module(&mut store, m, Vec::new()).is_ok());
 		let res = invoke_func(&mut store, 0, Vec::new()).unwrap();
 		assert_eq!(res, vec![values::Value::I32(memory_size)]);
 	}
@@ -1084,7 +1081,7 @@ mod tests {
 		m.memories.push(ast::Memory {
 			type_: types::Memory { limits: types::Limits { min: memory_size, max: None } },
 		});
-		let inst = instantiate_module(&mut store, m, Vec::new()).unwrap();
+		assert!(instantiate_module(&mut store, m, Vec::new()).is_ok());
 		let res = invoke_func(&mut store, 0, Vec::new()).unwrap();
 		assert_eq!(res, vec![values::Value::I32(memory_size)]);
 		assert_eq!(size_mem(&store, 0), (memory_size as usize + 4));
@@ -1135,7 +1132,7 @@ mod tests {
 				// Stack = [47]
 			],
 		});
-		let inst = instantiate_module(&mut store, m, Vec::new()).unwrap();
+		assert!(instantiate_module(&mut store, m, Vec::new()).is_ok());
 		let res = invoke_func(&mut store, 0, Vec::new()).unwrap();
 		assert_eq!(res, vec![values::Value::I32(47)]);
 	}
@@ -1186,7 +1183,7 @@ mod tests {
 				// Stack = [47]
 			],
 		});
-		let inst = instantiate_module(&mut store, m, Vec::new()).unwrap();
+		assert!(instantiate_module(&mut store, m, Vec::new()).is_ok());
 		let res = invoke_func(&mut store, 0, Vec::new()).unwrap();
 		assert_eq!(res, vec![values::Value::I32(47)]);
 	}
