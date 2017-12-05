@@ -10,7 +10,7 @@ use binary;
 use interpreter;
 
 use std::rc::Rc;
-use std::io::Cursor;
+use std::io::{Read, Seek};
 use std::collections::HashMap;
 
 #[derive(PartialEq, Eq, Hash)]
@@ -66,8 +66,8 @@ pub fn init_store() -> Store {
 }
 
 /// Decode a binary module
-pub fn decode_module(bytes: &[u8]) -> Result<ast::Module, Error> {
-	binary::decode(Cursor::new(bytes)).map_err(|_| Error::DecodeModuleFailed)
+pub fn decode_module<R: Read + Seek>(reader: R) -> Result<ast::Module, Error> {
+	binary::decode(reader).map_err(|_| Error::DecodeModuleFailed)
 }
 
 /// Parse a S-Expr module
@@ -1190,14 +1190,12 @@ mod tests {
 
 	#[test]
 	fn simple() {
-		use std::io::prelude::*;
+		use std::io::BufReader;
 		use std::fs::File;
 
 		let mut store = init_store();
-		let mut f = File::open("test-wasms/simple.wasm").unwrap();
-		let mut contents = Vec::new();
-		f.read_to_end(&mut contents).expect("Unable to read the file");
-		let m = decode_module(&contents).unwrap();
+		let f = File::open("test-wasms/simple.wasm").unwrap();
+		let m = decode_module(BufReader::new(f)).unwrap();
 		let mib = instantiate_module(&mut store, m, Vec::new()).unwrap();
 
 		assert_eq!(size_mem(&store, 0), 1);
