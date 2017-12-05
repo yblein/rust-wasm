@@ -104,7 +104,10 @@ impl Interpreter {
 			BrIf(nesting_levels) => self.branch_cond(nesting_levels),
 			BrTable(ref all_levels, default_level) => self.branch_table(all_levels, default_level),
 			Return => self.return_(),
-			Call(idx) => self.call(idx, sframe, funcs, tables, globals, mems),
+			Call(idx) => {
+				let f_addr = sframe.frames.last().unwrap().module.func_addrs[idx as usize];
+				self.call(f_addr, sframe, funcs, tables, globals, mems)
+			},
 			CallIndirect(idx) => {
 				let mod_inst = sframe.frames.last().unwrap().module.clone();
 				self.call_indirect(idx,
@@ -579,11 +582,19 @@ impl Interpreter {
 	}
 
 	/// Call a function directly
-	fn call(&mut self, idx: Index, sframe: & mut StackFrames, funcs: & FuncInstStore, tables: &TableInstStore, globals: &mut GlobalInstStore, mems: &mut MemInstStore) -> IntResult {
+	fn call(
+		&mut self,
+		f_addr: FuncAddr,
+		sframe: & mut StackFrames,
+		funcs: & FuncInstStore,
+		tables: &TableInstStore,
+		globals: &mut GlobalInstStore,
+		mems: &mut MemInstStore
+	) -> IntResult {
 		// Idea: the new stack_idx is the base frame pointer, which point to the
 		// first argument of the called function. When calling call, all
 		// arguments should already be on the stack (thanks to validation).
-		let f_inst = match funcs[idx as usize] {
+		let f_inst = match funcs[f_addr] {
 			FuncInst::Module(ref m) => m,
 			_ => unimplemented!(),
 		};
@@ -661,7 +672,7 @@ impl Interpreter {
 		if f_type_ != type_ {
 			return Err(Trap { origin: TrapOrigin::CallIndirectTypesDiffer })
 		}
-		self.call(func_addr as u32, sframe, funcs, tables, globals, mems)
+		self.call(func_addr, sframe, funcs, tables, globals, mems)
 	}
 
 	/// Return to the caller of the current function
@@ -671,7 +682,7 @@ impl Interpreter {
 
 	/// Get the size of the current memory
 	fn current_memory(&mut self, memories: &MemInstStore, frame_memories: &[MemAddr]) -> IntResult {
-		let mem = &memories[frame_memories[0] as usize];
+		let mem = &memories[frame_memories[0]];
 		let sz = mem.data.len() / PAGE_SIZE;
 		self.stack.push(Value::I32(sz as u32));
 		Ok(Continue)
@@ -679,7 +690,7 @@ impl Interpreter {
 
 	/// Grow the memory
 	fn grow_memory(&mut self, memories: &mut MemInstStore, frame_memories: &[MemAddr]) -> IntResult {
-		let mem = &mut memories[frame_memories[0] as usize];
+		let mem = &mut memories[frame_memories[0]];
 		let sz = mem.data.len() / PAGE_SIZE;
 		let new_pages = match self.stack.pop().unwrap() {
 			Value::I32(c) => c as usize,
@@ -696,7 +707,7 @@ impl Interpreter {
 		use types::{Int, Float};
 		use types::Value as Tv;
 
-		let mem = &memories[frame_memories[0] as usize];
+		let mem = &memories[frame_memories[0]];
 		let offset = match self.stack.pop().unwrap() {
 			Value::I32(c) => c + memop.offset,
 			_ => unreachable!()
@@ -739,7 +750,7 @@ impl Interpreter {
 		use types::{Int, Float};
 		use types::Value as Tv;
 
-		let mem = &mut memories[frame_memories[0] as usize];
+		let mem = &mut memories[frame_memories[0]];
 		let c = self.stack.pop().unwrap();
 		let offset = match self.stack.pop().unwrap() {
 			Value::I32(c) => c + memop.offset,

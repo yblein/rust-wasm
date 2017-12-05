@@ -17,6 +17,11 @@ pub mod types;
 pub use runtime::{
 	ModuleInst,
 	ExternVal,
+	FuncAddr,
+	TableAddr,
+	MemAddr,
+	GlobalAddr,
+	AddrCtor,
 	PAGE_SIZE
 };
 
@@ -145,14 +150,14 @@ pub fn alloc_func(store: &mut Store, functype: &types::Func, hostfunc: &HostCode
 		type_: functype.clone(),
 		hostcode: hostfunc.clone(),
 	}));
-	let addr = store.funcs.len() - 1;
+	let addr = FuncAddr::new(store.funcs.len() - 1);
 	store.types_map.insert(TypeKey { extern_val: ExternVal::Func(addr) }, types::Extern::Func(functype.clone()));
 	addr
 }
 
 /// Get the type of a function
 pub fn type_func(store: &Store, funcaddr: FuncAddr) -> types::Func {
-	assert!(store.funcs.len() >= funcaddr);
+	assert!(store.funcs.contains(funcaddr));
 	match store.types_map.get(&TypeKey { extern_val: ExternVal::Func(funcaddr) }) {
 		Some(&types::Extern::Func(ref type_)) => type_.clone(),
 		_ => unreachable!(),
@@ -161,7 +166,7 @@ pub fn type_func(store: &Store, funcaddr: FuncAddr) -> types::Func {
 
 /// Invoke a function
 pub fn invoke_func(store: &mut Store, funcaddr: FuncAddr, args: Vec<values::Value>) -> Result<Vec<values::Value>, Error> {
-	assert!(store.funcs.len() >= funcaddr);
+	assert!(store.funcs.contains(funcaddr));
 	let funcinst = &store.funcs[funcaddr];
 	let funcinst = match funcinst {
 		&FuncInst::Module(ref f) => f,
@@ -232,14 +237,14 @@ pub fn alloc_table(store: &mut Store, tabletype: &types::Table) -> TableAddr {
 			max: max,
 		}
 	);
-	let addr = store.tables.len() - 1;
+	let addr = TableAddr::new(store.tables.len() - 1);
 	store.types_map.insert(TypeKey { extern_val: ExternVal::Table(addr) }, types::Extern::Table(tabletype.clone()));
 	addr
 }
 
 /// Get the type of a table
 pub fn type_table(store: &Store, tableaddr: TableAddr) -> types::Table {
-	assert!(store.tables.len() >= tableaddr);
+	assert!(store.tables.contains(tableaddr));
 	match store.types_map.get(&TypeKey { extern_val: ExternVal::Table(tableaddr) }) {
 		Some(&types::Extern::Table(ref type_)) => type_.clone(),
 		_ => unreachable!(),
@@ -248,7 +253,7 @@ pub fn type_table(store: &Store, tableaddr: TableAddr) -> types::Table {
 
 /// Read the content of a table at a given address
 pub fn read_table(store: &Store, tableaddr: TableAddr, addr: usize) -> Result<Option<FuncAddr>, Error> {
-	assert!(store.tables.len() >= tableaddr);
+	assert!(store.tables.contains(tableaddr));
 	let ti = &store.tables[tableaddr];
 	if addr >= ti.elem.len() {
 		Err(Error::InvalidTableRead)
@@ -259,7 +264,7 @@ pub fn read_table(store: &Store, tableaddr: TableAddr, addr: usize) -> Result<Op
 
 /// Write AnyFunc to a specific table at a given address
 pub fn write_table(store: &mut Store, tableaddr: TableAddr, addr: usize, funcaddr: Option<FuncAddr>) -> Option<Error> {
-	assert!(store.tables.len() >= tableaddr);
+	assert!(store.tables.contains(tableaddr));
 	let ti = &mut store.tables[tableaddr];
 	if addr >= ti.elem.len() {
 		Some(Error::InvalidTableWrite)
@@ -271,13 +276,13 @@ pub fn write_table(store: &mut Store, tableaddr: TableAddr, addr: usize, funcadd
 
 /// Get the size of a table
 pub fn size_table(store: &Store, tableaddr: TableAddr) -> usize {
-	assert!(store.tables.len() >= tableaddr);
+	assert!(store.tables.contains(tableaddr));
 	store.tables[tableaddr].elem.len()
 }
 
 /// Grow a table by new elements
 pub fn grow_table(store: &mut Store, tableaddr: TableAddr, new: usize) -> Option<Error> {
-	assert!(store.tables.len() >= tableaddr);
+	assert!(store.tables.contains(tableaddr));
 	let table = &mut store.tables[tableaddr].elem;
 	let sz = table.len();
 	table.resize(sz + new, None);
@@ -295,14 +300,14 @@ pub fn alloc_mem(store: &mut Store, memtype: &types::Memory) -> MemAddr {
 			max: max,
 		}
 	);
-	let addr = store.mems.len() - 1;
+	let addr = MemAddr::new(store.mems.len() - 1);
 	store.types_map.insert(TypeKey { extern_val: ExternVal::Memory(addr) }, types::Extern::Memory(memtype.clone()));
 	addr
 }
 
 /// Get the type of a memory
 pub fn type_mem(store: &Store, memaddr: MemAddr) -> types::Memory {
-	assert!(store.mems.len() >= memaddr);
+	assert!(store.mems.contains(memaddr));
 	match store.types_map.get(&TypeKey { extern_val: ExternVal::Memory(memaddr) }) {
 		Some(&types::Extern::Memory(ref type_)) => type_.clone(),
 		_ => unreachable!(),
@@ -311,7 +316,7 @@ pub fn type_mem(store: &Store, memaddr: MemAddr) -> types::Memory {
 
 /// Read a byte of a memory at a given address
 pub fn read_mem(store: &Store, memaddr: MemAddr, addr: usize) -> Result<u8, Error> {
-	assert!(store.mems.len() >= memaddr);
+	assert!(store.mems.contains(memaddr));
 	let mi = &store.mems[memaddr];
 	if addr >= mi.data.len() {
 		Err(Error::InvalidMemoryRead)
@@ -322,7 +327,7 @@ pub fn read_mem(store: &Store, memaddr: MemAddr, addr: usize) -> Result<u8, Erro
 
 /// Write a byte to a memory at a given address
 pub fn write_mem(store: &mut Store, memaddr: MemAddr, addr: usize, byte: u8) -> Option<Error> {
-	assert!(store.mems.len() >= memaddr);
+	assert!(store.mems.contains(memaddr));
 	let mi = &mut store.mems[memaddr];
 	if addr >= mi.data.len() {
 		Some(Error::InvalidMemoryWrite)
@@ -334,13 +339,13 @@ pub fn write_mem(store: &mut Store, memaddr: MemAddr, addr: usize, byte: u8) -> 
 
 /// Get the size of a memory
 pub fn size_mem(store: &Store, memaddr: MemAddr) -> usize {
-	assert!(store.mems.len() >= memaddr);
+	assert!(store.mems.contains(memaddr));
 	store.mems[memaddr].data.len() / PAGE_SIZE
 }
 
 /// Grow a memory by new pages
 pub fn grow_mem(store: &mut Store, memaddr: MemAddr, new: usize) {
-	assert!(store.mems.len() >= memaddr);
+	assert!(store.mems.contains(memaddr));
 	let mem = &mut store.mems[memaddr].data;
 	let sz = mem.len() / PAGE_SIZE;
 	mem.resize((sz + new) * PAGE_SIZE, 0);
@@ -354,14 +359,14 @@ pub fn alloc_global(store: &mut Store, globaltype: types::Global, val: values::V
 			mutable: globaltype.mutable,
 		}
 	);
-	let addr = store.globals.len() - 1;
+	let addr = GlobalAddr::new(store.globals.len() - 1);
 	store.types_map.insert(TypeKey { extern_val: ExternVal::Global(addr) }, types::Extern::Global(globaltype.clone()));
 	addr
 }
 
 /// Get the type of a global
 pub fn type_global(store: &Store, globaladdr: GlobalAddr) -> types::Global {
-	assert!(store.globals.len() >= globaladdr);
+	assert!(store.globals.contains(globaladdr));
 	match store.types_map.get(&TypeKey { extern_val: ExternVal::Global(globaladdr) }) {
 		Some(&types::Extern::Global(ref type_)) => type_.clone(),
 		_ => unreachable!(),
@@ -370,14 +375,14 @@ pub fn type_global(store: &Store, globaladdr: GlobalAddr) -> types::Global {
 
 /// Read a global
 pub fn read_global(store: &Store, globaladdr: GlobalAddr) -> values::Value {
-	assert!(store.globals.len() >= globaladdr);
+	assert!(store.globals.contains(globaladdr));
 	let gi = &store.globals[globaladdr];
 	gi.value
 }
 
 /// Write a global
 pub fn write_global(store: &mut Store, globaladdr: GlobalAddr, val: values::Value) -> Option<Error> {
-	assert!(store.globals.len() >= globaladdr);
+	assert!(store.globals.contains(globaladdr));
 	let gi = &mut store.globals[globaladdr];
 	if !gi.mutable {
 		Some(Error::GlobalImmutable)
@@ -490,7 +495,7 @@ pub fn instantiate_module(store: &mut Store, module: ast::Module, extern_vals: &
 				if (elem.index as usize) >= imported_tables.len() {
 					module.tables[(elem.index as usize) - imported_tables.len()].type_.limits.min as usize
 				} else {
-					store.mems[elem.index as usize].data.len()
+					store.tables[imported_tables[elem.index as usize]].elem.len()
 				}
 			};
 
@@ -515,7 +520,7 @@ pub fn instantiate_module(store: &mut Store, module: ast::Module, extern_vals: &
 				if (data.index as usize) >= imported_memories.len() {
 					(module.memories[(data.index as usize) - imported_memories.len()].type_.limits.min as usize) * PAGE_SIZE
 				} else {
-					store.mems[data.index as usize].data.len()
+					store.mems[imported_memories[data.index as usize]].data.len()
 				}
 			};
 
@@ -574,21 +579,23 @@ fn allocate_and_init_module(
 	// Only allocate indices, pushing to the store outside the mutable scope
 	let fsi_min = store.funcs.len();
 	let fsi_max = fsi_min + module.funcs.len();
-	mi.func_addrs.extend(fsi_min..fsi_max);
+	for addr in fsi_min..fsi_max {
+		mi.func_addrs.push(FuncAddr::new(addr));
+	}
 
 	// Tables allocation
 	for tab in module.tables {
 		let min = tab.type_.limits.min;
 		let max = tab.type_.limits.max;
 
-		mi.table_addrs.push(store.tables.len());
+		mi.table_addrs.push(TableAddr::new(store.tables.len()));
 		store.tables.push(
 			TableInst {
 				elem: vec![None; min as usize],
 				max: max,
 			}
 		);
-		store.types_map.insert(TypeKey { extern_val: ExternVal::Table(store.tables.len() - 1) },
+		store.types_map.insert(TypeKey { extern_val: ExternVal::Table(TableAddr::new(store.tables.len() - 1)) },
 							   types::Extern::Table(tab.type_.clone()));
 	}
 
@@ -611,14 +618,14 @@ fn allocate_and_init_module(
 		let min = mem.type_.limits.min;
 		let max = mem.type_.limits.max;
 
-		mi.mem_addrs.push(store.mems.len());
+		mi.mem_addrs.push(MemAddr::new(store.mems.len()));
 		store.mems.push(
 			MemInst {
 				data: vec![0; (min as usize) * PAGE_SIZE],
 				max: max,
 			}
 		);
-		store.types_map.insert(TypeKey { extern_val: ExternVal::Memory(store.mems.len() - 1) },
+		store.types_map.insert(TypeKey { extern_val: ExternVal::Memory(MemAddr::new(store.mems.len() - 1)) },
 							   types::Extern::Memory(mem.type_.clone()));
 	}
 
@@ -638,14 +645,14 @@ fn allocate_and_init_module(
 	assert_eq!(module.globals.len(), vals.len());
 	let mut i = 0;
 	for global in module.globals {
-		mi.global_addrs.push(store.globals.len());
+		mi.global_addrs.push(GlobalAddr::new(store.globals.len()));
 		store.globals.push(
 			GlobalInst {
 				value: vals[i],
 				mutable: global.type_.mutable,
 			}
 		);
-		store.types_map.insert(TypeKey { extern_val: ExternVal::Global(store.globals.len() - 1) },
+		store.types_map.insert(TypeKey { extern_val: ExternVal::Global(GlobalAddr::new(store.globals.len() - 1)) },
 							   types::Extern::Global(global.type_.clone()));
 		i += 1;
 	}
@@ -678,7 +685,7 @@ fn allocate_and_init_module(
 				}
 			)
 		);
-		store.types_map.insert(TypeKey { extern_val: ExternVal::Func(store.funcs.len() - 1) },
+		store.types_map.insert(TypeKey { extern_val: ExternVal::Func(FuncAddr::new(store.funcs.len() - 1)) },
 							   types::Extern::Func(type_.clone()));
 	}
 

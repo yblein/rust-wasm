@@ -15,7 +15,7 @@ fn global_const() {
 
 	let mut store = init_store();
 	assert!(instantiate_module(&mut store, m, &[]).is_ok());
-	assert_eq!(read_global(&store, 0), values::Value::I32(42));
+	assert_eq!(read_global(&store, GlobalAddr::new(0)), values::Value::I32(42));
 }
 
 #[test]
@@ -67,9 +67,9 @@ fn global_get_global() {
 	}
 
 	assert!(instantiate_module(&mut store, m2, &extern_vals[..]).is_ok());
-	assert_eq!(read_global(&store, 0), values::Value::I32(42));
-	assert_eq!(read_global(&store, 1), values::Value::I32(43));
-	assert_eq!(read_global(&store, 2), values::Value::I32(42));
+	assert_eq!(read_global(&store, GlobalAddr::new(0)), values::Value::I32(42));
+	assert_eq!(read_global(&store, GlobalAddr::new(1)), values::Value::I32(43));
+	assert_eq!(read_global(&store, GlobalAddr::new(2)), values::Value::I32(42));
 }
 
 #[test]
@@ -95,7 +95,7 @@ fn init_data() {
 
 	assert!(instantiate_module(&mut store, m, &[]).is_ok());
 	for i in 0..check.len() {
-		assert_eq!(read_mem(&store, 0, i).unwrap(), check[i]);
+		assert_eq!(read_mem(&store, MemAddr::new(0), i).unwrap(), check[i]);
 	}
 }
 
@@ -135,13 +135,13 @@ fn init_table() {
 	});
 
 	let check = vec![None,
-					 Some(len_shift + 15),
-					 Some(len_shift + 16),
-					 Some(len_shift + 17),
+					 Some(FuncAddr::new(len_shift + 15)),
+					 Some(FuncAddr::new(len_shift + 16)),
+					 Some(FuncAddr::new(len_shift + 17)),
 					 None];
 	assert!(instantiate_module(&mut store, m, &[]).is_ok());
 	for i in 0..check.len() {
-		assert_eq!(read_table(&store, 0, i).unwrap(), check[i]);
+		assert_eq!(read_table(&store, TableAddr::new(0), i).unwrap(), check[i]);
 	}
 }
 
@@ -168,7 +168,7 @@ fn start() {
 
 	m.start = Some(0);
 	assert!(instantiate_module(&mut store, m, &[]).is_ok());
-	assert_eq!(read_global(&store, 0), values::Value::I32(42));
+	assert_eq!(read_global(&store, GlobalAddr::new(0)), values::Value::I32(42));
 }
 
 #[test]
@@ -287,8 +287,8 @@ fn export_addr() {
 	let m2b = instantiate_module(&mut store, m2, &extern_vals[..]);
 	assert!(m2b.is_ok());
 
-	assert_eq!(type_func(&store, 0), first_type);
-	assert_eq!(type_func(&store, 1), second_type);
+	assert_eq!(type_func(&store, FuncAddr::new(0)), first_type);
+	assert_eq!(type_func(&store, FuncAddr::new(1)), second_type);
 }
 
 #[test]
@@ -333,8 +333,8 @@ fn export_addr_global() {
 	}
 	let m2b = instantiate_module(&mut store, m2, &extern_vals[..]);
 	assert!(m2b.is_ok());
-	assert_eq!(read_global(&store, 0), first_value);
-	assert_eq!(read_global(&store, 1), second_value);
+	assert_eq!(read_global(&store, GlobalAddr::new(0)), first_value);
+	assert_eq!(read_global(&store, GlobalAddr::new(1)), second_value);
 }
 
 #[test]
@@ -416,7 +416,7 @@ fn init_with_imported_global() {
 	}
 	assert!(instantiate_module(&mut store, m2, &extern_vals[..]).is_ok());
 	for i in 0..check.len() {
-		assert_eq!(read_mem(&store, 0, i).unwrap(), check[i]);
+		assert_eq!(read_mem(&store, MemAddr::new(0), i).unwrap(), check[i]);
 	}
 }
 
@@ -463,7 +463,7 @@ fn memory_init_other_module_public() {
 	}
 	assert!(instantiate_module(&mut store, m2, &extern_vals[..]).is_ok());
 	for i in 0..check.len() {
-		assert_eq!(read_mem(&store, 0, i).unwrap(), check[i]);
+		assert_eq!(read_mem(&store, MemAddr::new(0), i).unwrap(), check[i]);
 	}
 }
 
@@ -487,7 +487,7 @@ fn args() {
 	});
 	assert!(instantiate_module(&mut store, m, &[]).is_ok());
 	let args = vec![values::Value::I32(1), values::Value::I32(2)];
-	let res = invoke_func(&mut store, 0, args).unwrap();
+	let res = invoke_func(&mut store, FuncAddr::new(0), args).unwrap();
 	assert_eq!(res, vec![values::Value::I32(4)]);
 }
 
@@ -512,7 +512,7 @@ fn locals() {
 	});
 	assert!(instantiate_module(&mut store, m, &[]).is_ok());
 	let args = vec![values::Value::I32(1), values::Value::I32(2)];
-	let res = invoke_func(&mut store, 0, args).unwrap();
+	let res = invoke_func(&mut store, FuncAddr::new(0), args).unwrap();
 	assert_eq!(res, vec![values::Value::I32(2)]);
 }
 
@@ -545,7 +545,7 @@ fn functions() {
 		],
 	});
 	assert!(instantiate_module(&mut store, m, &[]).is_ok());
-	let res = invoke_func(&mut store, 1, Vec::new()).unwrap();
+	let res = invoke_func(&mut store, FuncAddr::new(1), Vec::new()).unwrap();
 	assert_eq!(res, vec![values::Value::I32(4)]);
 }
 
@@ -592,7 +592,7 @@ fn return_() {
 		],
 	});
 	assert!(instantiate_module(&mut store, m, &[]).is_ok());
-	let res = invoke_func(&mut store, 1, Vec::new()).unwrap();
+	let res = invoke_func(&mut store, FuncAddr::new(1), Vec::new()).unwrap();
 	assert_eq!(res, vec![values::Value::I32(42)]);
 }
 
@@ -636,7 +636,7 @@ fn call_indirect() {
 		init: vec![0],
 	});
 	assert!(instantiate_module(&mut store, m, &[]).is_ok());
-	let res = invoke_func(&mut store, 1, Vec::new()).unwrap();
+	let res = invoke_func(&mut store, FuncAddr::new(1), Vec::new()).unwrap();
 	assert_eq!(res, vec![values::Value::I32(4)]);
 }
 
@@ -659,7 +659,7 @@ fn current_memory() {
 		type_: types::Memory { limits: types::Limits { min: memory_size, max: None } },
 	});
 	assert!(instantiate_module(&mut store, m, &[]).is_ok());
-	let res = invoke_func(&mut store, 0, Vec::new()).unwrap();
+	let res = invoke_func(&mut store, FuncAddr::new(0), Vec::new()).unwrap();
 	assert_eq!(res, vec![values::Value::I32(memory_size)]);
 }
 
@@ -683,9 +683,9 @@ fn grow_memory() {
 		type_: types::Memory { limits: types::Limits { min: memory_size, max: None } },
 	});
 	assert!(instantiate_module(&mut store, m, &[]).is_ok());
-	let res = invoke_func(&mut store, 0, Vec::new()).unwrap();
+	let res = invoke_func(&mut store, FuncAddr::new(0), Vec::new()).unwrap();
 	assert_eq!(res, vec![values::Value::I32(memory_size)]);
-	assert_eq!(size_mem(&store, 0), (memory_size as usize + 4));
+	assert_eq!(size_mem(&store, MemAddr::new(0)), (memory_size as usize + 4));
 }
 
 #[test]
@@ -734,7 +734,7 @@ fn if_() {
 		],
 	});
 	assert!(instantiate_module(&mut store, m, &[]).is_ok());
-	let res = invoke_func(&mut store, 0, Vec::new()).unwrap();
+	let res = invoke_func(&mut store, FuncAddr::new(0), Vec::new()).unwrap();
 	assert_eq!(res, vec![values::Value::I32(47)]);
 }
 
@@ -785,7 +785,7 @@ fn brtable() {
 		],
 	});
 	assert!(instantiate_module(&mut store, m, &[]).is_ok());
-	let res = invoke_func(&mut store, 0, Vec::new()).unwrap();
+	let res = invoke_func(&mut store, FuncAddr::new(0), Vec::new()).unwrap();
 	assert_eq!(res, vec![values::Value::I32(47)]);
 }
 
@@ -799,12 +799,12 @@ fn simple() {
 	let m = decode_module(BufReader::new(f)).unwrap();
 	let mib = instantiate_module(&mut store, m, &[]).unwrap();
 
-	assert_eq!(size_mem(&store, 0), 1);
-	assert_eq!(size_table(&store, 0), 0);
-	assert_eq!(type_func(&store, 0), types::Func { args: Vec::new(), result: vec![types::Value::Int(types::Int::I32)] });
+	assert_eq!(size_mem(&store, MemAddr::new(0)), 1);
+	assert_eq!(size_table(&store, TableAddr::new(0)), 0);
+	assert_eq!(type_func(&store, FuncAddr::new(0)), types::Func { args: Vec::new(), result: vec![types::Value::Int(types::Int::I32)] });
 
-	assert_eq!(get_export(&mib, "memory").unwrap(), ExternVal::Memory(0));
-	assert_eq!(get_export(&mib, "main").unwrap(), ExternVal::Func(0));
+	assert_eq!(get_export(&mib, "memory").unwrap(), ExternVal::Memory(MemAddr::new(0)));
+	assert_eq!(get_export(&mib, "main").unwrap(), ExternVal::Func(FuncAddr::new(0)));
 }
 
 
@@ -885,5 +885,5 @@ fn memory_init_other_module_private() {
 		],
 		init: vec![3, 4, 5],
 	});
-	assert_eq!(instantiate_module(&mut store, m2, &vec![ExternVal::Memory(0)]).err(), Some(Error::DataOffsetTooLarge(0)));
+	assert_eq!(instantiate_module(&mut store, m2, &vec![ExternVal::Memory(MemAddr::new(0))]).err(), Some(Error::DataOffsetTooLarge(0)));
 }

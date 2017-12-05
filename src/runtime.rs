@@ -71,10 +71,14 @@ pub struct GlobalInstStore(Vec<GlobalInst>);
 
 // Addrs and extern valus exported to the user
 type Addr = usize;
-pub type FuncAddr = Addr;
-pub type TableAddr = Addr;
-pub type MemAddr = Addr;
-pub type GlobalAddr = Addr;
+#[derive(Clone, Copy, PartialEq, Eq, Debug, Hash)]
+pub struct FuncAddr(Addr);
+#[derive(Clone, Copy, PartialEq, Eq, Debug, Hash)]
+pub struct TableAddr(Addr);
+#[derive(Clone, Copy, PartialEq, Eq, Debug, Hash)]
+pub struct MemAddr(Addr);
+#[derive(Clone, Copy, PartialEq, Eq, Debug, Hash)]
+pub struct GlobalAddr(Addr);
 
 #[derive(Clone, Copy, PartialEq, Eq, Hash, Debug)]
 pub enum ExternVal {
@@ -110,10 +114,15 @@ pub trait InstStore<S=Self> {
 	fn new() -> Self;
 	fn push(&mut self, v: Self::InnerType);
 	fn len(&self) -> usize;
+	fn contains(&self, addr: Self::AddrType) -> bool;
+}
+
+pub trait AddrCtor {
+	fn new(addr: Addr) -> Self;
 }
 
 macro_rules! impl_inst_store {
-	($StoreType:tt, $InnerType:ty, $AddrType:ty) => (
+	($StoreType:tt, $InnerType:ty, $AddrType:tt) => (
 		impl InstStore for $StoreType {
 			type InnerType=$InnerType;
 			type AddrType=$AddrType;
@@ -129,18 +138,28 @@ macro_rules! impl_inst_store {
 			fn len(&self) -> usize {
 				self.0.len()
 			}
+
+			fn contains(&self, addr: $AddrType) -> bool {
+				self.0.len() >= addr.0
+			}
 		}
 
 		impl Index<$AddrType> for $StoreType {
 			type Output = $InnerType;
 			fn index(&self, idx: $AddrType) -> &$InnerType {
-				self.0.get(idx).unwrap()
+				self.0.get(idx.0).unwrap()
 			}
 		}
 
 		impl IndexMut<$AddrType> for $StoreType {
 			fn index_mut(&mut self, idx: $AddrType) -> &mut $InnerType {
-				self.0.get_mut(idx).unwrap()
+				self.0.get_mut(idx.0).unwrap()
+			}
+		}
+
+		impl AddrCtor for $AddrType {
+			fn new(addr: Addr) -> $AddrType {
+				$AddrType { 0: addr }
 			}
 		}
 	)
