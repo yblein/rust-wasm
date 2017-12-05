@@ -537,7 +537,7 @@ impl Interpreter {
 
 				(&ConvertOp::F32DemoteF64, Value::F64(c)) => Value::F32(c.demote()),
 				(&ConvertOp::F64PromoteF32, Value::F32(c)) => Value::F64(c.promote()),
-				_ =>  unreachable!()
+				_ => return None // FIXME: unreachable!()
 			})
 		};
 

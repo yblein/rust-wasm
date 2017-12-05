@@ -15,14 +15,12 @@ fn run_suite() {
 	for entry in fs::read_dir(dir).unwrap() {
 		let path = entry.unwrap().path();
 
-		println!("parsing {}", path.display());
+		println!("running script `{}`", path.file_name().unwrap().to_str().unwrap());
 
 		let mut f = File::open(path).unwrap();
 		let mut src = String::new();
 		f.read_to_string(&mut src).unwrap();
 
-		//println!("{:?}", script::parse(&src[..]));
-		let _ = script::parse(&src[..]);
+		script::run(&src[..]);
 	}
-
 }

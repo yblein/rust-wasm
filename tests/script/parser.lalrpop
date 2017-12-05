@@ -3,29 +3,27 @@ use rust_wasm::values::Value;
 use std::str::FromStr;
 use std::{f32, f64};
 
+//! This grammar does not match exactly the one given informally in the
+//! official interpreter implementation, but it is good enough to parse the test
+//! scripts converted into binary.
+
 grammar;
 
 pub script: Script = cmd*;
 
 cmd: Cmd = {
-	module => Cmd::Module(<>),
+	module => Cmd::ModuleSource(<>),
 	action => Cmd::Action(<>),
 	assertion => Cmd::Assertion(<>),
-	"(" "register" <n:string> <m:name?> ")" => Cmd::Register { name: n.to_owned(), module: m.map(|s| s.to_owned()) },
+	"(" "register" <n:string> <m:name?> ")" => Cmd::Register { name: n, mod_ref: m },
 };
 
-module: Module = {
-	"(" "module" <n:name?> "binary" <bss:bytestring*> ")" => Module::Binary(n.map(|s| s.to_owned()), bss.concat()),
-	"(" "module" <n:name?> "quote" <ss:string*> ")" => Module::Text(n.map(|s| s.to_owned()), ss.concat()),
+module: ModuleSource = {
+	"(" "module" <n:name?> "binary" <bss:bytestring*> ")" => ModuleSource::Binary(n, bss.concat()),
+	"(" "module" <n:name?> "quote" <ss:string*> ")" => ModuleSource::Text(n, ss.concat()),
 };
 
-name: &'input str = <s:r"\$[\w_]+"> => &s[1..];
-
-//bytestring: Vec<u8> = <s:r#""(\\[[:xdigit:]]{2})*""#> => {
-bytestring: Vec<u8> = <s:string> => {
-	let ascii_to_byte = |v| { char::from(v).to_digit(16).unwrap() as u8 };
-	s.as_bytes().chunks(3).map(|c| 16 * ascii_to_byte(c[1]) + ascii_to_byte(c[2])).collect()
-};
+name: String = <s:r"\$[\w_]+"> => String::from_str(&s[1..]).unwrap();
 
 assertion: Assertion = "(" <assertion_int> ")";
 
@@ -33,21 +31,21 @@ assertion_int: Assertion = {
 	"assert_return" <a:action> <rs:expr*> => Assertion::Return(a, rs),
 	"assert_return_canonical_nan" <a:action> => Assertion::ReturnCanonicalNan(a),
 	"assert_return_arithmetic_nan" <a:action> => Assertion::ReturnArithmeticNan(a),
-	"assert_trap" <a:action> <s:string> => Assertion::TrapAction(a, s.to_owned()),
-	"assert_trap" <m:module> <s:string> => Assertion::TrapInstantiate(m, s.to_owned()),
-	"assert_exhaustion" <a:action> <s:string> => Assertion::Exhaustion(a, s.to_owned()),
-	"assert_invalid" <m:module> <s:string> => Assertion::Invalid(m, s.to_owned()),
-	"assert_malformed" <m:module> <s:string> => Assertion::Malformed(m, s.to_owned()),
-	"assert_unlinkable" <m:module> <s:string> => Assertion::Unlinkable(m, s.to_owned()),
+	"assert_trap" <a:action> <s:string> => Assertion::TrapAction(a, s),
+	"assert_trap" <m:module> <s:string> => Assertion::TrapInstantiate(m, s),
+	"assert_exhaustion" <a:action> <s:string> => Assertion::Exhaustion(a, s),
+	"assert_invalid" <m:module> <s:string> => Assertion::Invalid(m, s),
+	"assert_malformed" <m:module> <s:string> => Assertion::Malformed(m, s),
+	"assert_unlinkable" <m:module> <s:string> => Assertion::Unlinkable(m, s),
 };
 
 action: Action = {
 	"(" "invoke" <m:name?> <f:string> <args:expr*> ")" => Action::Invoke {
-		module: m.map(|s| s.to_owned()),
-		func: f.to_owned(),
+		mod_ref: m.map(|s| s),
+		func: f,
 		args: args
 	},
-	"(" "get" <m:name?> <n:string> ")" => Action::Get { module: m.map(|s| s.to_owned()), global: n.to_owned() },
+	"(" "get" <m:name?> <n:string> ")" => Action::Get { mod_ref: m, global: n },
 };
 
 expr: Value = "(" <expr_int> ")";
@@ -81,4 +79,19 @@ float64: f64 = {
 	},
 };
 
-string: &'input str = <s:r#""([^"\\]|\\([tnr\\"]|[[:xdigit:]]{2}|u\{[[:xdigit:]]+\}))*""#> => &s[1..s.len()-1];
+string: String = <s:r#""([^"\\]|\\([tnr\\"]|u\{[[:xdigit:]]+\}))*""#> => {
+	String::from_str(&s[1..s.len() - 1]).unwrap()
+};
+
+bytestring: Vec<u8> = <s:r#""(\\[[:xdigit:]]{2})*""#> => {
+	let ascii_to_byte = |v| { char::from(v).to_digit(16).unwrap() as u8 };
+	s[1..s.len()-1].as_bytes().chunks(3).map(|c| 16 * ascii_to_byte(c[1]) + ascii_to_byte(c[2])).collect()
+};
+
+// I'm pretty sure there is no ambiguity between those two regex, but whatever.
+match {
+	r#""(\\[[:xdigit:]]{2})*""#
+} else {
+	r#""([^"\\]|\\([tnr\\"]|u\{[[:xdigit:]]+\}))*""#,
+	_
+}
