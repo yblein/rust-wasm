@@ -2,8 +2,9 @@ use ast;
 use types;
 use values;
 
-use std::collections::HashMap;
 use std::rc::Rc;
+use std::ops::{Index, IndexMut};
+use std::collections::HashMap;
 
 // Use a map for types to answer type_{func, table, memory, global}
 #[derive(PartialEq, Eq, Hash)]
@@ -40,7 +41,6 @@ pub struct HostFuncInst {
 	pub hostcode: HostFunc,
 }
 
-
 pub struct ModuleFuncInst {
 	pub type_: types::Func,
 	pub module: Rc<ModuleInst>,
@@ -63,6 +63,11 @@ pub struct ExportInst {
 	pub name: String,
 	pub value: ExternVal,
 }
+
+pub struct FuncInstStore(Vec<FuncInst>);
+pub struct MemInstStore(Vec<MemInst>);
+pub struct TableInstStore(Vec<TableInst>);
+pub struct GlobalInstStore(Vec<GlobalInst>);
 
 // Addrs and extern valus exported to the user
 type Addr = usize;
@@ -97,3 +102,54 @@ impl ModuleInst {
 		}
 	}
 }
+
+pub trait InstStore<S=Self> {
+	type InnerType;
+	type AddrType;
+
+	fn new() -> Self;
+	fn push(&mut self, v: Self::InnerType);
+	fn len(&self) -> usize;
+}
+
+macro_rules! impl_inst_store {
+	($StoreType:tt, $InnerType:ty, $AddrType:ty) => (
+		impl InstStore for $StoreType {
+			type InnerType=$InnerType;
+			type AddrType=$AddrType;
+
+			fn new() -> Self {
+				Self { 0: Vec::new() }
+			}
+
+			fn push(&mut self, v: Self::InnerType) {
+				self.0.push(v)
+			}
+
+			fn len(&self) -> usize {
+				self.0.len()
+			}
+		}
+
+		impl Index<$AddrType> for $StoreType {
+			type Output = $InnerType;
+			fn index(&self, idx: $AddrType) -> &$InnerType {
+				self.0.get(idx).unwrap()
+			}
+		}
+
+		impl IndexMut<$AddrType> for $StoreType {
+			fn index_mut(&mut self, idx: $AddrType) -> &mut $InnerType {
+				self.0.get_mut(idx).unwrap()
+			}
+		}
+	)
+}
+
+impl_inst_store!(FuncInstStore, FuncInst, FuncAddr);
+impl_inst_store!(TableInstStore, TableInst, TableAddr);
+impl_inst_store!(GlobalInstStore, GlobalInst, GlobalAddr);
+impl_inst_store!(MemInstStore, MemInst, MemAddr);
+/*
+
+*/

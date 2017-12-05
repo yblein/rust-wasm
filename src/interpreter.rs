@@ -86,10 +86,10 @@ impl Interpreter {
 		&mut self,
 		sframe: & mut StackFrames,
 		instr: &Instr,
-		funcs: & [FuncInst],
-		tables: &[TableInst],
-		globals: &mut Vec<GlobalInst>,
-		mems: &mut Vec<MemInst>
+		funcs: & FuncInstStore,
+		tables: &TableInstStore,
+		globals: &mut GlobalInstStore,
+		mems: &mut MemInstStore
 	) -> IntResult {
 		use ast::Instr::*;
 
@@ -155,10 +155,10 @@ impl Interpreter {
 		sframe: &mut StackFrames,
 		result_type: &[types::Value],
 		instrs: &[Instr],
-		funcs: & [FuncInst],
-		tables: &[TableInst],
-		globals: &mut Vec<GlobalInst>,
-		mems: &mut Vec<MemInst>
+		funcs: & FuncInstStore,
+		tables: &TableInstStore,
+		globals: &mut GlobalInstStore,
+		mems: &mut MemInstStore
 	) -> IntResult {
 		let local_stack_begin = self.stack.len();
 
@@ -194,10 +194,10 @@ impl Interpreter {
 		&mut self,
 		sframe: &mut StackFrames,
 		instrs: &[Instr],
-		funcs: &[FuncInst],
-		tables: &[TableInst],
-		globals: &mut Vec<GlobalInst>,
-		mems: &mut Vec<MemInst>,
+		funcs: &FuncInstStore,
+		tables: &TableInstStore,
+		globals: &mut GlobalInstStore,
+		mems: &mut MemInstStore,
 	) -> IntResult {
 		let local_stack_begin = self.stack.len();
 
@@ -257,10 +257,10 @@ impl Interpreter {
 		result_type: &[types::Value],
 		if_instrs: &[Instr],
 		else_instrs: &[Instr],
-		funcs: &[FuncInst],
-		tables: &[TableInst],
-		globals: &mut Vec<GlobalInst>,
-		mems: &mut Vec<MemInst>,
+		funcs: &FuncInstStore,
+		tables: &TableInstStore,
+		globals: &mut GlobalInstStore,
+		mems: &mut MemInstStore,
 	) -> IntResult {
 		let c = match self.stack.pop().unwrap() {
 			Value::I32(c) => c,
@@ -546,13 +546,13 @@ impl Interpreter {
 	}
 
 	/// GetGlobal
-	fn get_global(&mut self, idx: Index, globals: &[GlobalInst], frame_globals: &[GlobalAddr]) -> IntResult {
+	fn get_global(&mut self, idx: Index, globals: &GlobalInstStore, frame_globals: &[GlobalAddr]) -> IntResult {
 		self.stack.push(globals[frame_globals[idx as usize]].value);
 		Ok(Continue)
 	}
 
 	/// SetGlobal
-	fn set_global(&mut self, idx: Index, globals: &mut Vec<GlobalInst>, frame_globals: &[GlobalAddr]) -> IntResult {
+	fn set_global(&mut self, idx: Index, globals: &mut GlobalInstStore, frame_globals: &[GlobalAddr]) -> IntResult {
 		// "Validation ensures that the global is, in fact, marked as mutable."
 		let val = self.stack.pop().unwrap();
 		globals[frame_globals[idx as usize]].value = val;
@@ -579,7 +579,7 @@ impl Interpreter {
 	}
 
 	/// Call a function directly
-	fn call(&mut self, idx: Index, sframe: & mut StackFrames, funcs: & [FuncInst], tables: &[TableInst], globals: &mut Vec<GlobalInst>, mems: &mut Vec<MemInst>) -> IntResult {
+	fn call(&mut self, idx: Index, sframe: & mut StackFrames, funcs: & FuncInstStore, tables: &TableInstStore, globals: &mut GlobalInstStore, mems: &mut MemInstStore) -> IntResult {
 		// Idea: the new stack_idx is the base frame pointer, which point to the
 		// first argument of the called function. When calling call, all
 		// arguments should already be on the stack (thanks to validation).
@@ -625,7 +625,17 @@ impl Interpreter {
 	}
 
 	/// Call a function indirectly
-	fn call_indirect(&mut self, idx: Index, sframe: & mut StackFrames, funcs: & [FuncInst], tables: &[TableInst], globals: &mut Vec<GlobalInst>, mems: &mut Vec<MemInst>, table_addrs: &[TableAddr], types: &[types::Func]) -> IntResult {
+	fn call_indirect(
+		&mut self,
+		idx: Index,
+		sframe: &mut StackFrames,
+		funcs: & FuncInstStore,
+		tables: &TableInstStore,
+		globals: &mut GlobalInstStore,
+		mems: &mut MemInstStore,
+		table_addrs: &[TableAddr],
+		types: &[types::Func]
+	) -> IntResult {
 		// For the MVP, only the table at index 0 exists and is implicitly refered
 		let tab = &tables[table_addrs[0]];
 		let type_ = &types[idx as usize];
@@ -660,7 +670,7 @@ impl Interpreter {
 	}
 
 	/// Get the size of the current memory
-	fn current_memory(&mut self, memories: &[MemInst], frame_memories: &[MemAddr]) -> IntResult {
+	fn current_memory(&mut self, memories: &MemInstStore, frame_memories: &[MemAddr]) -> IntResult {
 		let mem = &memories[frame_memories[0] as usize];
 		let sz = mem.data.len() / PAGE_SIZE;
 		self.stack.push(Value::I32(sz as u32));
@@ -668,7 +678,7 @@ impl Interpreter {
 	}
 
 	/// Grow the memory
-	fn grow_memory(&mut self, memories: &mut Vec<MemInst>, frame_memories: &[MemAddr]) -> IntResult {
+	fn grow_memory(&mut self, memories: &mut MemInstStore, frame_memories: &[MemAddr]) -> IntResult {
 		let mem = &mut memories[frame_memories[0] as usize];
 		let sz = mem.data.len() / PAGE_SIZE;
 		let new_pages = match self.stack.pop().unwrap() {
@@ -682,7 +692,7 @@ impl Interpreter {
 	}
 
 	/// Load memory (dispatcher)
-	fn load(&mut self, memop: &LoadOp, memories: &[MemInst], frame_memories: &[MemAddr]) -> IntResult {
+	fn load(&mut self, memop: &LoadOp, memories: &MemInstStore, frame_memories: &[MemAddr]) -> IntResult {
 		use types::{Int, Float};
 		use types::Value as Tv;
 
@@ -725,7 +735,7 @@ impl Interpreter {
 	}
 
 	/// Store memory (dispatcher)
-	fn store(&mut self, memop: &StoreOp, memories: &mut [MemInst], frame_memories: &[MemAddr]) -> IntResult {
+	fn store(&mut self, memop: &StoreOp, memories: &mut MemInstStore, frame_memories: &[MemAddr]) -> IntResult {
 		use types::{Int, Float};
 		use types::Value as Tv;
 
@@ -770,7 +780,7 @@ impl Interpreter {
 macro_rules! interpreter_eval_expr {
 	($int: expr, $sframe: expr, $store: expr, $instrs: expr) => {
 		{
-			let mut cls = |funcs: &[FuncInst], tables: &[TableInst], globals: &mut Vec<GlobalInst>, mems: &mut Vec<MemInst>| {
+			let mut cls = |funcs: &FuncInstStore, tables: &TableInstStore, globals: &mut GlobalInstStore, mems: &mut MemInstStore| {
 				for instr in $instrs {
 					// Cannot use ? because Rust is not able to infer the type
 					match $int.instr($sframe, instr, funcs, tables, globals, mems) {
@@ -792,9 +802,9 @@ macro_rules! interpreter_eval_expr {
 macro_rules! interpreter_eval_expr_const {
 	($int: expr, $sframe: expr, $store: expr, $instrs: expr) => {
 		{
-			let mut cls = |globals: &mut Vec<GlobalInst>| {
+			let mut cls = |globals: &mut GlobalInstStore| {
 				// Only the last value matters for ExprConst
-				$int.instr($sframe, $instrs.last().unwrap(), &[], &[], globals, &mut Vec::new()).ok()?;
+				$int.instr($sframe, $instrs.last().unwrap(), &FuncInstStore::new(), &TableInstStore::new(), globals, &mut MemInstStore::new()).ok()?;
 				$int.stack.pop()
 			};
 			cls(&mut $store.globals)
