@@ -1,8 +1,9 @@
-use vm::{PAGE_SIZE, FuncInst, TableInst, GlobalInst, MemInst, ModuleInst, TableAddr, GlobalAddr, MemAddr};
 use ast::*;
+use runtime::*;
 use types;
 use values::Value;
 use ops::{IntOp, FloatOp, FloatDemoteOp, FloatPromoteOp, BitsOp};
+
 use std::rc::Rc;
 
 /// A struct storing the state of the current interpreted
@@ -767,7 +768,7 @@ impl Interpreter {
 
 #[macro_export]
 macro_rules! interpreter_eval_expr {
-	($int: expr, $sframe: expr, $vm: expr, $instrs: expr) => {
+	($int: expr, $sframe: expr, $store: expr, $instrs: expr) => {
 		{
 			let mut cls = |funcs: &[FuncInst], tables: &[TableInst], globals: &mut Vec<GlobalInst>, mems: &mut Vec<MemInst>| {
 				for instr in $instrs {
@@ -779,7 +780,7 @@ macro_rules! interpreter_eval_expr {
 				}
 				Ok(())
 			};
-			cls(& $vm.store.funcs, & $vm.store.tables, &mut $vm.store.globals, &mut $vm.store.mems)
+			cls(& $store.funcs, & $store.tables, &mut $store.globals, &mut $store.mems)
 		}
 	}
 }
@@ -789,14 +790,14 @@ macro_rules! interpreter_eval_expr {
 /// Used for global/segment initialization
 #[macro_export]
 macro_rules! interpreter_eval_expr_const {
-	($int: expr, $sframe: expr, $vm: expr, $instrs: expr) => {
+	($int: expr, $sframe: expr, $store: expr, $instrs: expr) => {
 		{
 			let mut cls = |globals: &mut Vec<GlobalInst>| {
 				// Only the last value matters for ExprConst
 				$int.instr($sframe, $instrs.last().unwrap(), &[], &[], globals, &mut Vec::new()).ok()?;
 				$int.stack.pop()
 			};
-			cls(&mut $vm.store.globals)
+			cls(&mut $store.globals)
 		}
 	}
 }
@@ -804,8 +805,8 @@ macro_rules! interpreter_eval_expr_const {
 /// Evaluate a Func
 #[macro_export]
 macro_rules! interpreter_eval_func {
-	($int: expr, $sframe: expr, $vm: expr, $func: expr) => {
-		interpreter_eval_expr!($int, $sframe, $vm, &$func.body)
+	($int: expr, $sframe: expr, $store: expr, $func: expr) => {
+		interpreter_eval_expr!($int, $sframe, $store, &$func.body)
 	}
 }
 
@@ -813,7 +814,7 @@ macro_rules! interpreter_eval_func {
 mod tests {
 	use super::*;
 	use ast::Instr::*;
-	use vm;
+	use {init_store, Store};
 
 	#[test]
 	fn empty() {
@@ -1140,27 +1141,27 @@ mod tests {
 	// Inspired from
 	// https://medium.com/@ericdreichert/test-setup-and-teardown-in-rust-without-a-framework-ba32d97aa5ab
 	fn t<F, T>(test: F) -> T
-		where F: FnOnce(Interpreter, vm::VM, StackFrames) -> T
+		where F: FnOnce(Interpreter, Store, StackFrames) -> T
 	{
-		let vm = vm::VM::new();
+		let store = init_store();
 		let int = Interpreter::new();
 		let sframe = StackFrames::new();
 
-		test(int, vm, sframe)
+		test(int, store, sframe)
 	}
 
 	/// Run a sequence of instructions in a new empty interpreter.
 	fn run_seq(instrs: &[Instr]) -> Result<(), Trap> {
-		t(|mut int: Interpreter, mut vm: vm::VM, mut sframe: StackFrames| {
-			interpreter_eval_expr!(&mut int, &mut sframe, vm, instrs)
+		t(|mut int: Interpreter, mut store: Store, mut sframe: StackFrames| {
+			interpreter_eval_expr!(&mut int, &mut sframe, store, instrs)
 		})
 	}
 
 	/// Assert that executing the sequence of instructions `instrs` in a clean context
 	/// is sucessful and that the resulting stack is equal to `final_stack`.
 	fn assert_seq_stack(instrs: &[Instr], final_stack: &[Value]) {
-		t(|mut int: Interpreter, mut vm: vm::VM, mut sframe: StackFrames| {
-			assert_eq!(interpreter_eval_expr!(&mut int, &mut sframe, vm, instrs), Ok(()));
+		t(|mut int: Interpreter, mut store: Store, mut sframe: StackFrames| {
+			assert_eq!(interpreter_eval_expr!(&mut int, &mut sframe, store, instrs), Ok(()));
 			assert_eq!(int.stack, final_stack);
 		})
 	}
