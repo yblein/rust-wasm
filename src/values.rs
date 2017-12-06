@@ -1,11 +1,26 @@
 use types;
 
-#[derive(Debug, PartialEq, Clone, Copy)]
+#[derive(Debug, Clone, Copy)]
 pub enum Value {
 	I32(u32),
 	I64(u64),
 	F32(f32),
 	F64(f64),
+}
+
+impl PartialEq for Value {
+	/// Two values are equals if they have the same type and they are bitwise equals.
+	fn eq(&self, other: &Value) -> bool {
+		use self::Value::*;
+
+		match (*self, *other) {
+			(I32(a), I32(b)) => a == b,
+			(I64(a), I64(b)) => a == b,
+			(F32(a), F32(b)) => a.to_bits() == b.to_bits(),
+			(F64(a), F64(b)) => a.to_bits() == b.to_bits(),
+			_ => false,
+		}
+	}
 }
 
 impl Value {
