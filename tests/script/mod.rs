@@ -58,11 +58,6 @@ pub fn run(input: &str) {
 					extern_vals.push(get_export(&instances[&Some(mod_name)], &import_name).unwrap());
 				}
 
-				let mut extern_vals = Vec::new();
-				for (mod_name, import_name, _) in module_imports(&m) {
-					extern_vals.push(get_export(&instances[&Some(mod_name)], &import_name).unwrap());
-				}
-
 				let inst = instantiate_module(&mut store, m, &extern_vals[..]).unwrap();
 				instances.insert(opt_name, inst);
 			}
@@ -70,7 +65,8 @@ pub fn run(input: &str) {
 			Cmd::Assertion(a) => {
 				match run_assertion(&mut store, &instances, a) {
 					Ok(()) => ok += 1,
-					Err(e) => ko += 1,
+					//Err(e) => ko += 1,
+					Err(e) => panic!(e),
 				}
 			}
 			Cmd::Action(a) => {
