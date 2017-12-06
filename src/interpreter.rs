@@ -204,28 +204,31 @@ impl Interpreter {
 	) -> IntResult {
 		let local_stack_begin = self.stack.len();
 
-		for instr in instrs {
-			let res = self.instr(sframe, instr, funcs, tables, globals, mems)?;
+		'outer: loop {
+			for instr in instrs {
+				let res = self.instr(sframe, instr, funcs, tables, globals, mems)?;
 
-			match res {
-				Branch { nesting_levels } => {
-					// If the instruction caused a branch, we need to exit or restart the loop
-					if nesting_levels == 0 {
-						// We have reached the target loop.
-						// Unwind all values that could be left on the stack and restart the loop
-						self.stack.truncate(local_stack_begin);
-						continue;
-					} else {
-						// Exit the loop and keep traversing nesting levels
-						return Ok(Branch { nesting_levels: nesting_levels - 1 });
+				match res {
+					Branch { nesting_levels } => {
+						// If the instruction caused a branch, we need to exit or restart the loop
+						if nesting_levels == 0 {
+							// We have reached the target loop.
+							// Unwind all values that could be left on the stack and restart the loop
+							self.stack.truncate(local_stack_begin);
+							continue 'outer;
+						} else {
+							// Exit the loop and keep traversing nesting levels
+							return Ok(Branch { nesting_levels: nesting_levels - 1 });
+						}
 					}
+					Return => return Ok(Return),
+					Continue => {}
 				}
-				Return => return Ok(Return),
-				Continue => {}
 			}
-		}
 
-		Ok(Continue)
+			// loops that reach the end of the instruction sequence without branching terminate
+			return Ok(Continue)
+		}
 	}
 
 	/// Perform a unconditional branch to the nesting_levels+1 surrouding block.
