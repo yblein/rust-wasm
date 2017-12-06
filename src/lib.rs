@@ -34,7 +34,6 @@ use std::collections::HashMap;
 
 
 // Do not publish internal fields of the Store struct
-// TODO: replace vecs by their own types to implement a trait for alloc, size, grow, etc.
 pub struct Store {
 	funcs: FuncInstStore,
 	tables: TableInstStore,

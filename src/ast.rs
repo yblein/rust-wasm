@@ -194,9 +194,4 @@ impl Module {
 			exports: Vec::new(),
 		}
 	}
-
-	pub fn is_valid(&self) -> bool {
-		// TODO: validate the module
-		true
-	}
 }
