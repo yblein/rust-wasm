@@ -150,7 +150,7 @@ fn get_label<'a>(frames: &Vec<Frame<'a>>, nesting_levels: u32) -> Option<&'a [ty
 		"validation of instructions should always happen in a frame"
 	);
 
-	if nesting_levels as usize <= frames.len() {
+	if (nesting_levels as usize) < frames.len() {
 		Some(frames[frames.len() - nesting_levels as usize - 1].label_type)
 	} else {
 		None
