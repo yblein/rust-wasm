@@ -1,5 +1,6 @@
 mod parser;
 
+use std::{f32, f64};
 use std::io::Cursor;
 use std::rc::Rc;
 use std::collections::HashMap;
@@ -45,9 +46,6 @@ pub fn run(input: &str) {
 	let mut store = init_store();
 	let mut instances: HashMap<Option<String>, Rc<ModuleInst>> = HashMap::new();
 
-	let mut ok = 0;
-	let mut ko = 0;
-
 	for cmd in script {
 		match cmd {
 			Cmd::ModuleSource(src) => {
@@ -61,13 +59,8 @@ pub fn run(input: &str) {
 				let inst = instantiate_module(&mut store, m, &extern_vals[..]).unwrap();
 				instances.insert(opt_name, inst);
 			}
-			Cmd::Assertion(Assertion::Malformed(_, _)) => {} // FIXME: this line is temporary for counting
 			Cmd::Assertion(a) => {
-				match run_assertion(&mut store, &instances, a) {
-					Ok(()) => ok += 1,
-					//Err(e) => ko += 1,
-					Err(e) => panic!(e),
-				}
+				run_assertion(&mut store, &instances, a);
 			}
 			Cmd::Action(a) => {
 				let _ = run_action(&mut store, &instances, &a);
@@ -78,8 +71,6 @@ pub fn run(input: &str) {
 			}
 		}
 	}
-
-	println!("{} KO out of {}", ko, ok+ko);
 }
 
 fn decode_module_src(module: &ModuleSource) -> (Option<String>, ast::Module) {
@@ -89,7 +80,7 @@ fn decode_module_src(module: &ModuleSource) -> (Option<String>, ast::Module) {
 	}
 }
 
-fn run_assertion(store: &mut Store, instances: &HashMap<Option<String>, Rc<ModuleInst>>, assertion: Assertion) -> Result<(), String> {
+fn run_assertion(store: &mut Store, instances: &HashMap<Option<String>, Rc<ModuleInst>>, assertion: Assertion) {
 	use self::Assertion::*;
 
 	match assertion {
@@ -98,31 +89,53 @@ fn run_assertion(store: &mut Store, instances: &HashMap<Option<String>, Rc<Modul
 			match result {
 				Ok(ref actual) if *actual == expected => {}
 				_ => {
-					return Err(format!(
+					panic!(
 						"the result of the action `{:?}` is `{:?}` but should be `{:?}`",
 						action, result, expected,
-					));
+					);
 				}
 			}
 		}
 		ReturnCanonicalNan(action) => {
-			// cf https://github.com/WebAssembly/spec/blob/master/interpreter/script/run.ml#L386
-			unimplemented!("assert_return_canonical_nan")
+			let result = run_action(store, instances, &action).unwrap();
+			assert!(result.len() == 1);
+			let val = result[0];
+			match val {
+				values::Value::F32(f) if f == f32::NAN || f == -f32::NAN => {},
+				values::Value::F64(f) if f == f64::NAN || f == -f64::NAN => {},
+				_ => {
+					panic!(
+						"the result of the action `{:?}` is `{:?}` but should be a canonical NaN",
+						action, result,
+					);
+				}
+			};
 		}
 		ReturnArithmeticNan(action) => {
-			// cf https://github.com/WebAssembly/spec/blob/master/interpreter/script/run.ml#L396
-			unimplemented!("assert_return_arithmetic_nan")
+			let result = run_action(store, instances, &action).unwrap();
+			assert!(result.len() == 1);
+			let val = result[0];
+			match val {
+				values::Value::F32(f) if f.to_bits() & f32::NAN.to_bits() == f32::NAN.to_bits() => {},
+				values::Value::F64(f) if f.to_bits() & f64::NAN.to_bits() == f64::NAN.to_bits() => {},
+				_ => {
+					panic!(
+						"the result of the action `{:?}` is `{:?}` but should be an arithmetic NaN",
+						action, result,
+					);
+				}
+			};
 		}
 		TrapAction(action, _) => {
 			if run_action(store, instances, &action) != Err(Error::CodeTrapped) {
-				return Err(format!("the action `{:?}` should cause a trap", action));
+				panic!("the action `{:?}` should cause a trap", action);
 			}
 		}
 		TrapInstantiate(module, _) => {
 			let (_, m) = decode_module_src(&module);
 			// TODO: imports
 			if instantiate_module(store, m, &[]).err().unwrap() != Error::CodeTrapped {
-				return Err(format!("instantiating module `{:?}` should cause a trap", module));
+				panic!("instantiating module `{:?}` should cause a trap", module);
 			}
 		}
 		Exhaustion(action, _) => {
@@ -132,19 +145,23 @@ fn run_assertion(store: &mut Store, instances: &HashMap<Option<String>, Rc<Modul
 			let (_, m) = decode_module_src(&module);
 			// TODO: imports
 			if instantiate_module(store, m, &[]).err().unwrap() != Error::InvalidModule {
-				return Err(format!("instantiating module `{:?}` should not be possible because it is invalid", module));
+				panic!("instantiating module `{:?}` should not be possible because it is invalid", module);
 			}
 		}
-		Malformed(_, _) => {
-			// NB: only quoted module may be malformed and we do not suport them
-			// TODO: there are binary sources in there too
+		Malformed(mod_src, _) => {
+			match mod_src {
+				ModuleSource::Binary(_, bytes) => {
+					assert_eq!(decode_module(Cursor::new(bytes)).unwrap_err(), Error::DecodeModuleFailed);
+				},
+				ModuleSource::Text(_, _) => {
+					// NB: only quoted module may be malformed and we do not suport them
+				}
+			}
 		}
 		Unlinkable(module, _) => {
 			unimplemented!("assert_unlinkable")
 		}
 	}
-
-	Ok(())
 }
 
 fn run_action(store: &mut Store, instances: &HashMap<Option<String>, Rc<ModuleInst>>, action: &Action) -> Result<Vec<values::Value>, Error> {
