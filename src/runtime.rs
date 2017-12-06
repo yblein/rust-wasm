@@ -213,6 +213,22 @@ impl MemInstStore {
 						 types::Extern::Memory(memtype.clone()));
 		addr
 	}
+
+	pub(crate) fn grow(&mut self, memaddr: MemAddr, new: usize) -> Option<usize> {
+		let mem = &mut self[memaddr];
+		let sz = mem.data.len() / PAGE_SIZE;
+		if let Some(max) = mem.max {
+			if (max as usize) < sz + new {
+				return None
+			}
+		}
+		mem.data.resize((sz + new) * PAGE_SIZE, 0);
+		Some(sz)
+	}
+
+	pub(crate) fn size(&self, memaddr: MemAddr) -> usize {
+		self[memaddr].data.len() / PAGE_SIZE
+	}
 }
 
 impl TableInstStore {

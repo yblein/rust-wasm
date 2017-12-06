@@ -20,6 +20,7 @@ pub enum TrapOrigin {
 	CallIndirectElemUnitialized,
 	CallIndirectTypesDiffer,
 	LoadOutOfMemory,
+	GrowMemoryFailed,
 }
 
 #[derive(Debug, PartialEq)]
@@ -682,24 +683,22 @@ impl Interpreter {
 
 	/// Get the size of the current memory
 	fn current_memory(&mut self, memories: &MemInstStore, frame_memories: &[MemAddr]) -> IntResult {
-		let mem = &memories[frame_memories[0]];
-		let sz = mem.data.len() / PAGE_SIZE;
-		self.stack.push(Value::I32(sz as u32));
+		self.stack.push(Value::I32(memories.size(frame_memories[0]) as u32));
 		Ok(Continue)
 	}
 
 	/// Grow the memory
 	fn grow_memory(&mut self, memories: &mut MemInstStore, frame_memories: &[MemAddr]) -> IntResult {
-		let mem = &mut memories[frame_memories[0]];
-		let sz = mem.data.len() / PAGE_SIZE;
 		let new_pages = match self.stack.pop().unwrap() {
 			Value::I32(c) => c as usize,
 			_ => unreachable!()
 		};
-		// TODO: no limit for the moment, its up to the embedder
-		mem.data.resize((sz + new_pages) * PAGE_SIZE, 0);
-		self.stack.push(Value::I32(sz as u32));
-		Ok(Continue)
+		if let Some(old_size) = memories.grow(frame_memories[0], new_pages) {
+			self.stack.push(Value::I32(old_size as u32));
+			Ok(Continue)
+		} else {
+			Err(Trap { origin: TrapOrigin::GrowMemoryFailed })
+		}
 	}
 
 	/// Load memory (dispatcher)

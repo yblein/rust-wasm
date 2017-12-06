@@ -63,6 +63,7 @@ pub enum Error {
 	InvalidMemoryRead,
 	InvalidMemoryWrite,
 	GlobalImmutable,
+	GrowMemoryFailed,
 }
 
 /// Return the empty store
@@ -312,15 +313,16 @@ pub fn write_mem(store: &mut Store, memaddr: MemAddr, addr: usize, byte: u8) -> 
 /// Get the size of a memory
 pub fn size_mem(store: &Store, memaddr: MemAddr) -> usize {
 	assert!(store.mems.contains(memaddr));
-	store.mems[memaddr].data.len() / PAGE_SIZE
+	store.mems.size(memaddr)
 }
 
 /// Grow a memory by new pages
-pub fn grow_mem(store: &mut Store, memaddr: MemAddr, new: usize) {
+pub fn grow_mem(store: &mut Store, memaddr: MemAddr, new: usize) -> Option<Error> {
 	assert!(store.mems.contains(memaddr));
-	let mem = &mut store.mems[memaddr].data;
-	let sz = mem.len() / PAGE_SIZE;
-	mem.resize((sz + new) * PAGE_SIZE, 0);
+	match store.mems.grow(memaddr, new) {
+		Some(_) => None,
+		None => Some(Error::GrowMemoryFailed)
+	}
 }
 
 /// Allocate a new global
