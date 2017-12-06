@@ -146,13 +146,7 @@ pub fn get_export(inst: &ModuleInst, name: &str) -> Result<ExternVal, Error> {
 
 /// Allocate a host function
 pub fn alloc_func(store: &mut Store, functype: &types::Func, hostfunc: &HostCode) -> FuncAddr {
-	store.funcs.push(FuncInst::Host(HostFuncInst {
-		type_: functype.clone(),
-		hostcode: hostfunc.clone(),
-	}));
-	let addr = FuncAddr::new(store.funcs.len() - 1);
-	store.types_map.insert(TypeKey { extern_val: ExternVal::Func(addr) }, types::Extern::Func(functype.clone()));
-	addr
+	store.funcs.alloc_host(&mut store.types_map, functype, hostfunc)
 }
 
 /// Get the type of a function
@@ -228,18 +222,7 @@ pub fn invoke_func(store: &mut Store, funcaddr: FuncAddr, args: Vec<values::Valu
 
 /// Allocate a table
 pub fn alloc_table(store: &mut Store, tabletype: &types::Table) -> TableAddr {
-	let min = tabletype.limits.min;
-	let max = tabletype.limits.max;
-
-	store.tables.push(
-		TableInst {
-			elem: vec![None; min as usize],
-			max: max,
-		}
-	);
-	let addr = TableAddr::new(store.tables.len() - 1);
-	store.types_map.insert(TypeKey { extern_val: ExternVal::Table(addr) }, types::Extern::Table(tabletype.clone()));
-	addr
+	store.tables.alloc(&mut store.types_map, tabletype)
 }
 
 /// Get the type of a table
@@ -291,18 +274,7 @@ pub fn grow_table(store: &mut Store, tableaddr: TableAddr, new: usize) -> Option
 
 /// Allocate a memory
 pub fn alloc_mem(store: &mut Store, memtype: &types::Memory) -> MemAddr {
-	let min = memtype.limits.min;
-	let max = memtype.limits.max;
-
-	store.mems.push(
-		MemInst {
-			data: vec![0; (min as usize) * PAGE_SIZE],
-			max: max,
-		}
-	);
-	let addr = MemAddr::new(store.mems.len() - 1);
-	store.types_map.insert(TypeKey { extern_val: ExternVal::Memory(addr) }, types::Extern::Memory(memtype.clone()));
-	addr
+	store.mems.alloc(&mut store.types_map, memtype)
 }
 
 /// Get the type of a memory
@@ -352,16 +324,8 @@ pub fn grow_mem(store: &mut Store, memaddr: MemAddr, new: usize) {
 }
 
 /// Allocate a new global
-pub fn alloc_global(store: &mut Store, globaltype: types::Global, val: values::Value) -> GlobalAddr {
-	store.globals.push(
-		GlobalInst {
-			value: val,
-			mutable: globaltype.mutable,
-		}
-	);
-	let addr = GlobalAddr::new(store.globals.len() - 1);
-	store.types_map.insert(TypeKey { extern_val: ExternVal::Global(addr) }, types::Extern::Global(globaltype.clone()));
-	addr
+pub fn alloc_global(store: &mut Store, globaltype: &types::Global, val: values::Value) -> GlobalAddr {
+	store.globals.alloc(&mut store.types_map, globaltype, val)
 }
 
 /// Get the type of a global
@@ -585,18 +549,7 @@ fn allocate_and_init_module(
 
 	// Tables allocation
 	for tab in module.tables {
-		let min = tab.type_.limits.min;
-		let max = tab.type_.limits.max;
-
-		mi.table_addrs.push(TableAddr::new(store.tables.len()));
-		store.tables.push(
-			TableInst {
-				elem: vec![None; min as usize],
-				max: max,
-			}
-		);
-		store.types_map.insert(TypeKey { extern_val: ExternVal::Table(TableAddr::new(store.tables.len() - 1)) },
-							   types::Extern::Table(tab.type_.clone()));
+		mi.table_addrs.push(store.tables.alloc(&mut store.types_map, &tab.type_));
 	}
 
 	// 15. For each element segment elemi in module.elem, do:
@@ -615,18 +568,7 @@ fn allocate_and_init_module(
 
 	// Memories allocation
 	for mem in module.memories {
-		let min = mem.type_.limits.min;
-		let max = mem.type_.limits.max;
-
-		mi.mem_addrs.push(MemAddr::new(store.mems.len()));
-		store.mems.push(
-			MemInst {
-				data: vec![0; (min as usize) * PAGE_SIZE],
-				max: max,
-			}
-		);
-		store.types_map.insert(TypeKey { extern_val: ExternVal::Memory(MemAddr::new(store.mems.len() - 1)) },
-							   types::Extern::Memory(mem.type_.clone()));
+		mi.mem_addrs.push(store.mems.alloc(&mut store.types_map, &mem.type_));
 	}
 
 	// 16. For each data segment datai in module.data, do:
@@ -645,15 +587,7 @@ fn allocate_and_init_module(
 	assert_eq!(module.globals.len(), vals.len());
 	let mut i = 0;
 	for global in module.globals {
-		mi.global_addrs.push(GlobalAddr::new(store.globals.len()));
-		store.globals.push(
-			GlobalInst {
-				value: vals[i],
-				mutable: global.type_.mutable,
-			}
-		);
-		store.types_map.insert(TypeKey { extern_val: ExternVal::Global(GlobalAddr::new(store.globals.len() - 1)) },
-							   types::Extern::Global(global.type_.clone()));
+		mi.global_addrs.push(store.globals.alloc(&mut store.types_map, &global.type_, vals[i]));
 		i += 1;
 	}
 
@@ -676,17 +610,7 @@ fn allocate_and_init_module(
 	let inst = Rc::new(mi);
 	for func in module.funcs {
 		let type_ = &inst.types[func.type_index as usize];
-		store.funcs.push(
-			FuncInst::Module(
-				ModuleFuncInst {
-					type_: type_.clone(),
-					module: Rc::clone(&inst),
-					code: func,
-				}
-			)
-		);
-		store.types_map.insert(TypeKey { extern_val: ExternVal::Func(FuncAddr::new(store.funcs.len() - 1)) },
-							   types::Extern::Func(type_.clone()));
+		let _ = store.funcs.alloc_module(&mut store.types_map, type_, &inst, func);
 	}
 
 	// 17. If the start function module.start is not empty, then:
