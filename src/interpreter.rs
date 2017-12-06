@@ -20,7 +20,6 @@ pub enum TrapOrigin {
 	CallIndirectElemUnitialized,
 	CallIndirectTypesDiffer,
 	LoadOutOfMemory,
-	GrowMemoryFailed,
 }
 
 #[derive(Debug, PartialEq)]
@@ -695,10 +694,10 @@ impl Interpreter {
 		};
 		if let Some(old_size) = memories.grow(frame_memories[0], new_pages) {
 			self.stack.push(Value::I32(old_size as u32));
-			Ok(Continue)
 		} else {
-			Err(Trap { origin: TrapOrigin::GrowMemoryFailed })
+			self.stack.push(Value::from_i32(-1));
 		}
+		Ok(Continue)
 	}
 
 	/// Load memory (dispatcher)
@@ -782,7 +781,9 @@ impl Interpreter {
 
 	/// Pops two values from the stack, assuming that the stack is large enough to do so.
 	fn pop2(&mut self) -> (Value, Value) {
-		(self.stack.pop().unwrap(), self.stack.pop().unwrap())
+		let b = self.stack.pop().unwrap();
+		let a = self.stack.pop().unwrap();
+		(a, b)
 	}
 }
 

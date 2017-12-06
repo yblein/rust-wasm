@@ -222,6 +222,10 @@ impl MemInstStore {
 				return None
 			}
 		}
+		// Can't allocate more than 4GB since its a 32-bits machine
+		if sz + new > (1 << 32) / PAGE_SIZE {
+			return None
+		}
 		mem.data.resize((sz + new) * PAGE_SIZE, 0);
 		Some(sz)
 	}

@@ -107,12 +107,12 @@ macro_rules! impl_int_op {
 
 			#[inline]
 			fn rems(self, rhs: $T) -> Option<$T> {
+				if rhs == 0 {
+					return None
+				}
 				let s_self = self as $S;
 				let s_rhs = rhs as $S;
-				match <$S>::checked_rem(s_self, s_rhs) {
-					Some(c) => Some(c as $T),
-					None => None
-				}
+				Some(<$S>::wrapping_rem(s_self, s_rhs) as $T)
 			}
 
 			#[inline]
@@ -158,7 +158,7 @@ macro_rules! impl_int_op {
 
 			#[inline]
 			fn rotl(self, rhs: $T) -> $T {
-				<$T>::rotate_right(self, rhs as u32)
+				<$T>::rotate_left(self, rhs as u32)
 			}
 
 			#[inline]
@@ -213,7 +213,7 @@ macro_rules! impl_int_op {
 
 			#[inline]
 			fn geu(self, rhs: $T) -> bool {
-				(self as $S) >= (rhs as $S)
+				self >= rhs
 			}
 
 			#[inline]
