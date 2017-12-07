@@ -192,7 +192,6 @@ pub fn invoke_func(store: &mut Store, funcaddr: FuncAddr, args: Vec<values::Valu
 	}
 
 	let mut sframe = interpreter::StackFrames::new();
-
 	match int.call(funcaddr, &mut sframe, &store.funcs, &store.tables, &mut store.globals, &mut store.mems) {
 		Err(_) => Err(Error::CodeTrapped),
 		_ => {

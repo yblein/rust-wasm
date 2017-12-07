@@ -69,7 +69,11 @@ fn pop_operand(operands: &mut Vec<Operand>, frames: &Vec<Frame>) -> Option<Opera
 		return Some(Operand::Any);
 	}
 
-	operands.pop()
+	if operands.len() <= curr_frame.init_len {
+		None
+	} else {
+		operands.pop()
+	}
 }
 
 fn pop_expected(
@@ -220,7 +224,7 @@ fn check_instr<'a>(
 		}
 
 		If(ref result_type, ref instrs_then, ref instrs_else) => {
-			pop_expected(operands, frames, Operand::Exact(Int(I32)));
+			pop_expected(operands, frames, Operand::Exact(Int(I32)))?;
 			check_expr(mod_ctx, func_ctx, operands, frames, &result_type[..], &result_type[..], instrs_then)?;
 			if !instrs_else.is_empty() {
 				// if there is an "else", we need to remove the result of the "then" part first
@@ -240,8 +244,8 @@ fn check_instr<'a>(
 		}
 
 		BrIf(nesting_levels) => {
+			pop_expected(operands, frames, Operand::Exact(Int(I32)))?;
 			let label_type = get_label(frames, nesting_levels)?;
-			pop_expected(operands, frames, Operand::Exact(Int(I32)));
 			exact_step(operands, frames, label_type, label_type)?;
 		}
 
@@ -270,7 +274,7 @@ fn check_instr<'a>(
 		CallIndirect(index) => {
 			let _ = mod_ctx.tables.get(0)?;
 			let func = mod_ctx.types.get(index as usize)?;
-			pop_expected(operands, frames, Operand::Exact(Int(I32)));
+			pop_expected(operands, frames, Operand::Exact(Int(I32)))?;
 			exact_step(operands, frames, &func.args[..], &func.result[..])?;
 		}
 
@@ -279,7 +283,7 @@ fn check_instr<'a>(
 		}
 
 		Select => {
-			pop_expected(operands, frames, Operand::Exact(Int(I32)));
+			pop_expected(operands, frames, Operand::Exact(Int(I32)))?;
 			let t = pop_operand(operands, frames)?;
 			let _ = pop_expected(operands, frames, t)?;
 			operands.push(t);
