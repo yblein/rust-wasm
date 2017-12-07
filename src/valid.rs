@@ -251,6 +251,7 @@ fn check_instr<'a>(
 
 		BrTable(ref choices, default) => {
 			{
+				pop_expected(operands, frames, Operand::Exact(Int(I32)))?;
 				// all labels must have the same type
 				let label_type = get_label(frames, default)?;
 				for choice in choices {
