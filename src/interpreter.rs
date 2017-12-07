@@ -710,16 +710,16 @@ impl Interpreter {
 
 		let mem = &memories[frame_memories[0]];
 		let offset = match self.stack.pop().unwrap() {
-			Value::I32(c) => c + memop.offset,
+			Value::I32(c) => c as usize + memop.offset as usize,
 			_ => unreachable!()
 		};
 		let (size_in_bits, signed) = memop.opt.unwrap_or((memop.type_.bit_width(), false));
-		let size_in_bytes = size_in_bits / 8;
+		let size_in_bytes: usize = (size_in_bits as usize) / 8;
 
-		if (offset + size_in_bytes) as usize >= mem.data.len() {
+		if offset + size_in_bytes > mem.data.len() {
 			return Err(Trap { origin: TrapOrigin::LoadOutOfMemory });
 		}
-		let bits = &mem.data[(offset as usize) .. ((offset + size_in_bytes) as usize)];
+		let bits = &mem.data[offset .. (offset + size_in_bytes)];
 
 		let res = match (size_in_bits, signed, memop.type_) {
 			(8,  false, Tv::Int(Int::I32)) => Value::I32(u8::from_bits(bits)  as u32),
