@@ -585,7 +585,7 @@ impl Interpreter {
 	}
 
 	/// Call a function directly
-	fn call(
+	pub fn call(
 		&mut self,
 		f_addr: FuncAddr,
 		sframe: & mut StackFrames,
@@ -626,7 +626,6 @@ impl Interpreter {
 				   tables,
 				   globals,
 				   mems)?;
-
 		// Pop the context
 		sframe.pop(old_stack_idx);
 

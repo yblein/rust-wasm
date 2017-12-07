@@ -187,36 +187,19 @@ pub fn invoke_func(store: &mut Store, funcaddr: FuncAddr, args: Vec<values::Valu
 	}
 
 	let mut int = interpreter::Interpreter::new();
-	let mut sframe = interpreter::StackFrames::new();
-	sframe.push(funcinst.module.clone(), 0);
-
 	for arg in args {
 		int.stack.push(arg);
 	}
 
-	for valtype in &funcinst.code.locals {
-		use types::*;
-		int.stack.push(
-			// TODO: refactor
-			match valtype {
-				&Value::Int(Int::I32) => values::Value::I32(0),
-				&Value::Int(Int::I64) => values::Value::I64(0),
-				&Value::Float(Float::F32) => values::Value::F32(0.0),
-				&Value::Float(Float::F64) => values::Value::F64(0.0),
-			}
-		);
-	}
+	let mut sframe = interpreter::StackFrames::new();
 
-	let res = {
-		interpreter_eval_func!(&mut int, &mut sframe, store, funcinst.code)
-	};
-
-	if let Err(_) = res {
-		Err(Error::CodeTrapped)
-	} else {
-		let end_drain = int.stack.len() - functype.result.len();
-		int.stack.drain(0..end_drain);
-		Ok(int.stack)
+	match int.call(funcaddr, &mut sframe, &store.funcs, &store.tables, &mut store.globals, &mut store.mems) {
+		Err(_) => Err(Error::CodeTrapped),
+		_ => {
+			let end_drain = int.stack.len() - functype.result.len();
+			int.stack.drain(0..end_drain);
+			Ok(int.stack)
+		}
 	}
 }
 
