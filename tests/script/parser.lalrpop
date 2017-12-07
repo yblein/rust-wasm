@@ -79,19 +79,15 @@ float64: f64 = {
 	},
 };
 
-string: String = <s:r#""([^"\\]|\\([tnr\\"]|u\{[[:xdigit:]]+\}))*""#> => {
-	String::from_str(&s[1..s.len() - 1]).unwrap()
+string: String = {
+	r#""""# => String::new(),
+	<s:r#""([^"\\]|\\([tnr\\"]|u\{[[:xdigit:]]+\}))+""#> => String::from_str(&s[1..s.len() - 1]).unwrap(),
 };
 
-bytestring: Vec<u8> = <s:r#""(\\[[:xdigit:]]{2})*""#> => {
-	let ascii_to_byte = |v| { char::from(v).to_digit(16).unwrap() as u8 };
-	s[1..s.len()-1].as_bytes().chunks(3).map(|c| 16 * ascii_to_byte(c[1]) + ascii_to_byte(c[2])).collect()
+bytestring: Vec<u8> = {
+	r#""""# => Vec::new(),
+	<s:r#""(\\[[:xdigit:]]{2})+""#> => {
+		let ascii_to_byte = |v| { char::from(v).to_digit(16).unwrap() as u8 };
+		s[1..s.len()-1].as_bytes().chunks(3).map(|c| 16 * ascii_to_byte(c[1]) + ascii_to_byte(c[2])).collect()
+	}
 };
-
-// I'm pretty sure there is no ambiguity between those two regex, but whatever.
-match {
-	r#""(\\[[:xdigit:]]{2})*""#
-} else {
-	r#""([^"\\]|\\([tnr\\"]|u\{[[:xdigit:]]+\}))*""#,
-	_
-}
