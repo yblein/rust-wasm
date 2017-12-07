@@ -53,6 +53,9 @@ pub fn run(input: &str) {
 
 				let mut extern_vals = Vec::new();
 				for (mod_name, import_name, _) in module_imports(&m) {
+					if mod_name == "spectest" {
+						unimplemented!("spectest host module");
+					}
 					extern_vals.push(get_export(&instances[&Some(mod_name)], &import_name).unwrap());
 				}
 
