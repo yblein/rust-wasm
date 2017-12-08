@@ -253,7 +253,7 @@ macro_rules! impl_int_op {
 
 			#[inline]
 			fn reinterpret(self) -> $F {
-				<$F>::from_bits(self)
+				unsafe { std::mem::transmute::<$T, $F>(self) }
 			}
 		}
 	)

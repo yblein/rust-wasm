@@ -1,6 +1,6 @@
-use std::{i32, i64};
-use std::io;
+use std::{i32, i64, io};
 use std::io::{Read, Seek};
+use ops::IntOp;
 
 use types;
 use ast::*;
@@ -129,11 +129,11 @@ impl<R: Read + Seek> Decoder<R> {
 	}
 
 	fn read_f32(&mut self) -> DecodeResult<f32> {
-		self.read_u32().map(f32::from_bits)
+		Ok(self.read_u32()?.reinterpret())
 	}
 
 	fn read_f64(&mut self) -> DecodeResult<f64> {
-		self.read_u64().map(f64::from_bits)
+		Ok(self.read_u64()?.reinterpret())
 	}
 
 	fn read_vec<T, F>(&mut self, read_elem: F) -> DecodeResult<Vec<T>>
