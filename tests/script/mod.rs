@@ -130,14 +130,17 @@ fn run_assertion(store: &mut Store, instances: &HashMap<Option<String>, Rc<Modul
 			};
 		}
 		TrapAction(action, _) => {
-			if run_action(store, instances, &action) != Err(Error::CodeTrapped) {
+			if let Err(Error::CodeTrapped(_)) = run_action(store, instances, &action) {
+				// There is no if let != in Rust?
+			} else {
 				panic!("the action `{:?}` should cause a trap", action);
 			}
 		}
 		TrapInstantiate(module, _) => {
 			let (_, m) = decode_module_src(&module);
 			// TODO: imports
-			if instantiate_module(store, m, &[]).err().unwrap() != Error::CodeTrapped {
+			if let Err(Error::CodeTrapped(_)) = instantiate_module(store, m, &[]) {
+			} else {
 				panic!("instantiating module `{:?}` should cause a trap", module);
 			}
 		}

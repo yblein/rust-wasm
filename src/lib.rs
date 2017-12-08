@@ -26,7 +26,7 @@ pub use runtime::{
 };
 
 use runtime::*;
-use interpreter::{Interpreter, StackFrames};
+use interpreter::{Interpreter, StackFrames, Trap};
 
 use std::rc::Rc;
 use std::io::{Read, Seek};
@@ -54,7 +54,7 @@ pub enum Error {
 	StartFunctionFailed,
 	NotEnoughArgument,
 	ArgumentTypeMismatch,
-	CodeTrapped,
+	CodeTrapped(Trap),
 	InvalidModule,
 	ExportNotFound,
 	InvalidTableRead,
@@ -191,9 +191,10 @@ pub fn invoke_func(store: &mut Store, funcaddr: FuncAddr, args: Vec<values::Valu
 		int.stack.push(arg);
 	}
 
+
 	let mut sframe = interpreter::StackFrames::new();
 	match int.call(funcaddr, &mut sframe, &store.funcs, &store.tables, &mut store.globals, &mut store.mems) {
-		Err(_) => Err(Error::CodeTrapped),
+		Err(err) => Err(Error::CodeTrapped(err)),
 		_ => {
 			let end_drain = int.stack.len() - functype.result.len();
 			int.stack.drain(0..end_drain);

@@ -536,7 +536,7 @@ impl Interpreter {
 				(&ConvertOp::Reinterpret { from: tv::Int(Int::I32), to: tv::Float(Float::F32) }, Value::I32(c)) => Value::F32(c.reinterpret()),
 				(&ConvertOp::Reinterpret { from: tv::Int(Int::I64), to: tv::Float(Float::F64) }, Value::I64(c)) => Value::F64(c.reinterpret()),
 				(&ConvertOp::Reinterpret { from: tv::Float(Float::F32), to: tv::Int(Int::I32) }, Value::F32(c)) => Value::I32(c.reinterpret()),
-				(&ConvertOp::Reinterpret { from: tv::Float(Float::F32), to: tv::Int(Int::I64) }, Value::F64(c)) => Value::I64(c.reinterpret()),
+				(&ConvertOp::Reinterpret { from: tv::Float(Float::F64), to: tv::Int(Int::I64) }, Value::F64(c)) => Value::I64(c.reinterpret()),
 
 				(&ConvertOp::F32DemoteF64, Value::F64(c)) => Value::F32(c.demote()),
 				(&ConvertOp::F64PromoteF32, Value::F32(c)) => Value::F64(c.promote()),
@@ -732,14 +732,14 @@ impl Interpreter {
 			(8,  false, Tv::Int(Int::I64)) => Value::I64(u8::from_bits(bits)  as u64),
 			(8,  true,  Tv::Int(Int::I64)) => Value::I64(i8::from_bits(bits)  as u64),
 			(16, false, Tv::Int(Int::I64)) => Value::I64(u16::from_bits(bits) as u64),
-			(16, true,  Tv::Int(Int::I64)) => Value::I64(i32::from_bits(bits) as u64),
+			(16, true,  Tv::Int(Int::I64)) => Value::I64(i16::from_bits(bits) as u64),
 			(32, false, Tv::Int(Int::I64)) => Value::I64(u32::from_bits(bits) as u64),
 			(32, true,  Tv::Int(Int::I64)) => Value::I64(i32::from_bits(bits) as u64),
 			(64, false, Tv::Int(Int::I64)) => Value::I64(u64::from_bits(bits) as u64),
 			(64, true,  Tv::Int(Int::I64)) => Value::I64(i64::from_bits(bits) as u64),
 
 			(32, false, Tv::Float(Float::F32)) => Value::F32(f32::from_bits(u32::from_bits(bits))),
-			(64, true,  Tv::Float(Float::F64)) => Value::F64(f64::from_bits(u64::from_bits(bits))),
+			(64, false, Tv::Float(Float::F64)) => Value::F64(f64::from_bits(u64::from_bits(bits))),
 			_ => unreachable!()
 		};
 		self.stack.push(res);
