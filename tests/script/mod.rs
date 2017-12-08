@@ -4,6 +4,7 @@ use std::{f32, f64};
 use std::io::Cursor;
 use std::rc::Rc;
 use std::collections::HashMap;
+use std::convert::TryFrom;
 use rust_wasm::*;
 
 pub type Script = Vec<Cmd>;
@@ -192,4 +193,73 @@ fn run_action(store: &mut Store, instances: &HashMap<Option<String>, Rc<ModuleIn
 			}
 		}
 	}
+}
+
+fn unescape<'a>(s: &'a str) -> String {
+	let mut res = String::new();
+
+	enum State {
+		Normal,
+		Esc,
+		Unicode,
+		Scalar(u32),
+	}
+
+	let mut state = State::Normal;
+
+	for c in s.chars() {
+		match state {
+			State::Normal => match c {
+				'\\' => state = State::Esc,
+				_ => res.push(c),
+			},
+			State::Esc => match c {
+				't' => {
+					res.push('\t');
+					state = State::Normal;
+				}
+				'n' => {
+					res.push('\n');
+					state = State::Normal;
+				}
+				'r' => {
+					res.push('\r');
+					state = State::Normal;
+				}
+				'\"' => {
+					res.push('\"');
+					state = State::Normal;
+				}
+				'\'' => {
+					res.push('\'');
+					state = State::Normal;
+				}
+				'\\' => {
+					res.push('\\');
+					state = State::Normal;
+				}
+				'u' => {
+					state = State::Unicode;
+				}
+				_ => panic!("unexpected escape `{}`", c),
+			},
+			State::Unicode => match c {
+				'{' => {
+					state = State::Scalar(0);
+				}
+				_ => panic!("expected `{{`, found `{}`", c),
+			}
+			State::Scalar(v) => match c {
+				'}' => {
+					res.push(char::try_from(v).expect("invalid unicode point"));
+					state = State::Normal;
+				}
+				_ => {
+					state = State::Scalar(v << 4 | c.to_digit(16).expect("expected hex digit"));
+				}
+			}
+		}
+	}
+
+	res
 }

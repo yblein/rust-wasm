@@ -10,7 +10,9 @@ fn main() {
 	// generate a driver for the test suite
 	let mut f = File::create("tests/run.rs").unwrap();
 	f.write_all(
-b"extern crate lalrpop_util;
+b"#![feature(try_from)]
+
+extern crate lalrpop_util;
 extern crate rust_wasm;
 
 mod script;

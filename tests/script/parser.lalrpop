@@ -81,7 +81,7 @@ float64: f64 = {
 
 string: String = {
 	r#""""# => String::new(),
-	<s:r#""([^"\\]|\\([tnr\\"]|u\{[[:xdigit:]]+\}))+""#> => String::from_str(&s[1..s.len() - 1]).unwrap(),
+	<s:r#""([^"\\]|\\([tnr\\"]|u\{[[:xdigit:]]+\}))+""#> => unescape(&s[1..s.len()-1]),
 };
 
 bytestring: Vec<u8> = {
