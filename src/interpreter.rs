@@ -20,6 +20,7 @@ pub enum TrapOrigin {
 	CallIndirectElemUnitialized,
 	CallIndirectTypesDiffer,
 	LoadOutOfMemory,
+	StoreOutOfMemory,
 }
 
 #[derive(Debug, PartialEq)]
@@ -753,17 +754,16 @@ impl Interpreter {
 		let mem = &mut memories[frame_memories[0]];
 		let c = self.stack.pop().unwrap();
 		let offset = match self.stack.pop().unwrap() {
-			Value::I32(c) => c + memop.offset,
+			Value::I32(c) => c as usize + memop.offset as usize,
 			_ => unreachable!()
 		};
-
 		let size_in_bits = memop.opt.unwrap_or(memop.type_.bit_width());
-		let size_in_bytes = size_in_bits / 8;
-		if (offset + size_in_bytes) as usize >= mem.data.len() {
-			return Err(Trap { origin: TrapOrigin::LoadOutOfMemory });
-		}
+		let size_in_bytes: usize = (size_in_bits as usize) / 8;
 
-		let bits = &mut mem.data[(offset as usize) .. ((offset + size_in_bytes) as usize)];
+		if offset + size_in_bytes > mem.data.len() {
+			return Err(Trap { origin: TrapOrigin::StoreOutOfMemory });
+		}
+		let bits = &mut mem.data[offset .. (offset + size_in_bytes)];
 		match (size_in_bits, memop.type_, c) {
 			(8,  Tv::Int(Int::I32), Value::I32(c)) => (c as u8).to_bits(bits),
 			(16, Tv::Int(Int::I32), Value::I32(c)) => (c as u16).to_bits(bits),
