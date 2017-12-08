@@ -147,7 +147,8 @@ fn run_assertion(store: &mut Store, instances: &HashMap<Option<String>, Rc<Modul
 		Invalid(module, _) => {
 			let (_, m) = decode_module_src(&module);
 			// TODO: imports
-			if instantiate_module(store, m, &[]).err().unwrap() != Error::InvalidModule {
+			let res =  instantiate_module(store, m, &[]);
+			if !res.is_err() || res.err().unwrap() != Error::InvalidModule {
 				panic!("instantiating module `{:?}` should not be possible because it is invalid", module);
 			}
 		}
