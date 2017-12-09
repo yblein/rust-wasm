@@ -371,7 +371,7 @@ macro_rules! impl_convert_float {
 }
 
 macro_rules! impl_float_op {
-	($T:ty, $I:ty, $SB:expr, $copysign:ident) => (
+	($T:ty, $I:ty, $SB:expr, $copysign:ident, $NAN:expr) => (
 		impl FloatOp for $T {
 			type IntType = $I;
 
@@ -432,12 +432,30 @@ macro_rules! impl_float_op {
 
 			#[inline]
 			fn min(self, rhs: $T) -> $T {
-				<$T>::min(self, rhs)
+				// min(-0.0, 0.0) == -0.0
+				if self == rhs {
+					(self.to_bits() | rhs.to_bits()).reinterpret()
+				} else if self < rhs {
+					self
+				} else if self > rhs {
+					rhs
+				} else {
+					$NAN
+				}
 			}
 
 			#[inline]
 			fn max(self, rhs: $T) -> $T {
-				<$T>::max(self, rhs)
+				// max(-0.0, 0.0) == 0.0
+				if self == rhs {
+					(self.to_bits() & rhs.to_bits()).reinterpret()
+				} else if self > rhs {
+					self
+				} else if self < rhs {
+					rhs
+				} else {
+					$NAN
+				}
 			}
 
 			#[inline]
@@ -499,8 +517,8 @@ macro_rules! impl_float_op {
 	)
 }
 
-impl_float_op!(f32, u32, 32, copysignf32);
-impl_float_op!(f64, u64, 64, copysignf64);
+impl_float_op!(f32, u32, 32, copysignf32, std::f32::NAN);
+impl_float_op!(f64, u64, 64, copysignf64, std::f64::NAN);
 
 // Promote/Demote are only available in one way
 pub trait FloatPromoteOp {
