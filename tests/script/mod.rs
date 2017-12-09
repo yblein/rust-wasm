@@ -145,8 +145,8 @@ fn run_assertion(store: &mut Store, instances: &ExportHashMap, assertion: Assert
 			assert!(result.len() == 1);
 			let val = result[0];
 			match val {
-				values::Value::F32(f) if f == f32::NAN || f == -f32::NAN => {},
-				values::Value::F64(f) if f == f64::NAN || f == -f64::NAN => {},
+				values::Value::F32(f) if f.to_bits() == f32::NAN.to_bits() || f.to_bits() == (-f32::NAN).to_bits() => {},
+				values::Value::F64(f) if f.to_bits() == f64::NAN.to_bits() || f.to_bits() == (-f64::NAN).to_bits() => {},
 				_ => {
 					panic!(
 						"the result of the action `{:?}` is `{:?}` but should be a canonical NaN",
