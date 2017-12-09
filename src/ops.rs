@@ -548,25 +548,13 @@ pub trait FloatDemoteOp {
 impl FloatPromoteOp for f32 {
 	#[inline]
 	fn promote(self) -> f64 {
-		if self.is_canon() {
-			f64::canon()
-		} else if self.is_nan() {
-			std::f64::NAN
-		} else {
-			self as f64
-		}
+		self as f64
 	}
 }
 
 impl FloatDemoteOp for f64 {
 	#[inline]
 	fn demote(self) -> f32 {
-		if self.is_canon() {
-			f32::canon()
-		} else if self.is_nan() {
-			std::f32::NAN
-		} else {
-			self as f32
-		}
+		self as f32
 	}
 }
