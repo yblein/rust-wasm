@@ -34,19 +34,10 @@ struct Decoder<R: Read + Seek> {
 }
 
 impl<R: Read + Seek> Decoder<R> {
-	fn skip(&mut self, n: u32) -> DecodeResult<()> {
-		match self.reader.seek(io::SeekFrom::Current(n as i64)) {
-			Err(e) => Err(DecodeError::Io(e)),
-			Ok(_) => Ok(()),
-		}
-	}
-
 	fn read_byte(&mut self) -> DecodeResult<u8> {
 		let mut buf = [0];
-		match self.reader.read_exact(&mut buf) {
-			Err(e) => Err(DecodeError::Io(e)),
-			Ok(_) => Ok(buf[0]),
-		}
+		let _ = self.reader.read_exact(&mut buf)?;
+		Ok(buf[0])
 	}
 
 	fn read_u16(&mut self) -> DecodeResult<u16> {
@@ -489,6 +480,14 @@ impl<R: Read + Seek> Decoder<R> {
 		Ok(Instr::Store(StoreOp { align, offset, type_, opt }))
 	}
 
+	fn skip_custom_section(&mut self, size: u32) -> DecodeResult<()> {
+		// Even if we ignore custom sections, we must ensure that its name is valid utf8.
+		let start_pos = self.reader.seek(io::SeekFrom::Current(0))?;
+		let _ = self.read_name()?;
+		let _ = self.reader.seek(io::SeekFrom::Start(start_pos + size as u64))?;
+		Ok(())
+	}
+
 	fn read_type_section(&mut self) -> DecodeResult<Vec<types::Func>> {
 		self.read_vec(Decoder::read_func_type)
 	}
@@ -643,7 +642,7 @@ impl<R: Read + Seek> Decoder<R> {
 					let size = self.read_vu32()?;
 
 					match id {
-						0 => self.skip(size)?, // ignore custom sections
+						0 => self.skip_custom_section(size)?, // ignore custom sections
 						1 => types = self.read_type_section()?,
 						2 => imports = self.read_import_section()?,
 						3 => func_types = self.read_func_section()?,
