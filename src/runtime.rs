@@ -34,7 +34,8 @@ pub struct GlobalInst {
 	pub mutable: bool,
 }
 
-type HostFunc = ();
+pub type HostFunctionError = String;
+pub type HostFunc = Box<Fn(&mut Vec<values::Value>) -> Option<HostFunctionError>>;
 
 pub struct HostFuncInst {
 	pub type_: types::Func,
@@ -87,8 +88,6 @@ pub enum ExternVal {
 	Memory(MemAddr),
 	Global(GlobalAddr),
 }
-
-pub type HostCode = ();
 
 // Constants
 pub const PAGE_SIZE: usize = 65536;
@@ -180,12 +179,12 @@ impl FuncInstStore {
 		)
 	}
 
-	pub(crate) fn alloc_host(&mut self, types_map: &mut TypeHashMap, functype: &types::Func, hostfunc: &HostCode) -> FuncAddr {
+	pub(crate) fn alloc_host(&mut self, types_map: &mut TypeHashMap, functype: &types::Func, hostfunc: HostFunc) -> FuncAddr {
 		self.alloc(types_map,
 				   FuncInst::Host(
 					   HostFuncInst {
 						   type_: functype.clone(),
-						   hostcode: hostfunc.clone(),
+						   hostcode: hostfunc,
 					   }
 				   ),
 				   functype

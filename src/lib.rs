@@ -22,6 +22,7 @@ pub use runtime::{
 	MemAddr,
 	GlobalAddr,
 	AddrCtor,
+	HostFunc,
 	PAGE_SIZE
 };
 
@@ -51,7 +52,6 @@ pub enum Error {
 	ImportTypeMismatch,
 	ElemOffsetTooLarge(usize),
 	DataOffsetTooLarge(usize),
-	StartFunctionFailed,
 	NotEnoughArgument,
 	ArgumentTypeMismatch,
 	CodeTrapped(Trap),
@@ -145,7 +145,7 @@ pub fn get_export(inst: &ModuleInst, name: &str) -> Result<ExternVal, Error> {
 }
 
 /// Allocate a host function
-pub fn alloc_func(store: &mut Store, functype: &types::Func, hostfunc: &HostCode) -> FuncAddr {
+pub fn alloc_func(store: &mut Store, functype: &types::Func, hostfunc: HostFunc) -> FuncAddr {
 	store.funcs.alloc_host(&mut store.types_map, functype, hostfunc)
 }
 
@@ -162,11 +162,10 @@ pub fn type_func(store: &Store, funcaddr: FuncAddr) -> types::Func {
 pub fn invoke_func(store: &mut Store, funcaddr: FuncAddr, args: Vec<values::Value>) -> Result<Vec<values::Value>, Error> {
 	assert!(store.funcs.contains(funcaddr));
 	let funcinst = &store.funcs[funcaddr];
-	let funcinst = match funcinst {
-		&FuncInst::Module(ref f) => f,
-		&FuncInst::Host(_) => unimplemented!(),
+	let functype = match funcinst {
+		&FuncInst::Module(ref f) => &f.type_,
+		&FuncInst::Host(ref f) => &f.type_,
 	};
-	let functype = &funcinst.type_;
 
 	if functype.args.len() != args.len() {
 		return Err(Error::NotEnoughArgument);
@@ -601,17 +600,9 @@ fn allocate_and_init_module(
 	// ...
 	// Intuition: call the start function if it exists
 	if let Some(idx) = module.start {
-		let mut start_int = Interpreter::new();
-		let mut sframe = StackFrames::new();
-		sframe.push(inst.clone(), 0);
 		let func_addr = inst.func_addrs[idx as usize];
-		let res = match &store.funcs[func_addr] {
-			&FuncInst::Module(ref f) => interpreter_eval_func!(&mut start_int, &mut sframe, store, f.code),
-			_ => unreachable!(),
-		};
-
-		if let Err(_) = res {
-			return Err(Error::StartFunctionFailed)
+		if let Err(err) = invoke_func(store, func_addr, Vec::new()) {
+			return Err(err)
 		}
 	}
 

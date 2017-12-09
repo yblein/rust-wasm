@@ -1,8 +1,8 @@
 mod parser;
 
 use std::{f32, f64};
-use std::io::Cursor;
 use std::rc::Rc;
+use std::io::Cursor;
 use std::collections::HashMap;
 use std::convert::TryFrom;
 use rust_wasm::*;
@@ -42,10 +42,26 @@ pub enum Action {
 	Get { mod_ref: Option<String>, global: String },
 }
 
+// There are two kinds of export HashMaps.
+// 1. for module exports, where the requested import type does not matter
+// 2. for host exports, where the type of the import matters
+// https://github.com/WebAssembly/spec/blob/ad2fe24c7350ecba9dd804c91a7a38d79a373a22/interpreter/host/spectest.ml#L33
+type ExportHashKey = Option<String>;
+type HostLookupFunctionPointer = Rc<Fn(&mut Store, &String, &types::Extern) -> Option<ExternVal>>; // Use Rc to allow cloning the ExportHashValue
+#[derive(Clone)]
+enum ExportHashValue {
+	Module(HashMap<String, ExternVal>),
+	Host(HostLookupFunctionPointer),
+}
+type ExportHashMap = HashMap<ExportHashKey, ExportHashValue>;
+
 pub fn run(input: &str) {
 	let script = parser::parse_script(input).unwrap();
 	let mut store = init_store();
-	let mut instances: HashMap<Option<String>, Rc<ModuleInst>> = HashMap::new();
+	let mut instances: ExportHashMap = HashMap::new();
+
+	// Special test host module
+	init_spectest(&mut store, &mut instances);
 
 	for cmd in script {
 		match cmd {
@@ -53,15 +69,28 @@ pub fn run(input: &str) {
 				let (opt_name, m) = decode_module_src(&src);
 
 				let mut extern_vals = Vec::new();
-				for (mod_name, import_name, _) in module_imports(&m) {
-					if mod_name == "spectest" {
-						unimplemented!("spectest host module");
-					}
-					extern_vals.push(get_export(&instances[&Some(mod_name)], &import_name).unwrap());
+				for (mod_name, import_name, type_) in module_imports(&m) {
+					let val = match &instances[&Some(mod_name)] {
+						&ExportHashValue::Module(ref hm) => hm[&import_name],
+						&ExportHashValue::Host(ref lookup) => lookup(&mut store, &import_name, &type_).unwrap(),
+					};
+					extern_vals.push(val.clone());
+				}
+
+				let mut all_exports = Vec::new();
+				for (export_name, _) in module_exports(&m) {
+					all_exports.push(export_name);
 				}
 
 				let inst = instantiate_module(&mut store, m, &extern_vals[..]).unwrap();
-				instances.insert(opt_name, inst);
+
+				let mut export_vals_hm: HashMap<String, ExternVal> = HashMap::new();
+				for export_name in all_exports {
+					let extern_val = get_export(&inst, &export_name).unwrap();
+					export_vals_hm.insert(export_name, extern_val);
+				}
+				instances.insert(opt_name, ExportHashValue::Module(export_vals_hm));
+
 			}
 			Cmd::Assertion(a) => {
 				run_assertion(&mut store, &instances, a);
@@ -84,7 +113,7 @@ fn decode_module_src(module: &ModuleSource) -> (Option<String>, ast::Module) {
 	}
 }
 
-fn run_assertion(store: &mut Store, instances: &HashMap<Option<String>, Rc<ModuleInst>>, assertion: Assertion) {
+fn run_assertion(store: &mut Store, instances: &ExportHashMap, assertion: Assertion) {
 	use self::Assertion::*;
 
 	match assertion {
@@ -172,10 +201,13 @@ fn run_assertion(store: &mut Store, instances: &HashMap<Option<String>, Rc<Modul
 	}
 }
 
-fn run_action(store: &mut Store, instances: &HashMap<Option<String>, Rc<ModuleInst>>, action: &Action) -> Result<Vec<values::Value>, Error> {
+fn run_action(store: &mut Store, instances: &ExportHashMap, action: &Action) -> Result<Vec<values::Value>, Error> {
 	match *action {
 		Action::Invoke { mod_ref: ref mod_name, ref func, ref args } => {
-			let extern_val = get_export(&instances[mod_name], func).unwrap();
+			let extern_val = match instances[mod_name] {
+				ExportHashValue::Module(ref hm) => hm[func],
+				ExportHashValue::Host(_) => unreachable!(),
+			};
 			match extern_val {
 				ExternVal::Func(addr) => {
 					invoke_func(store, addr, args.clone())
@@ -184,7 +216,10 @@ fn run_action(store: &mut Store, instances: &HashMap<Option<String>, Rc<ModuleIn
 			}
 		}
 		Action::Get { mod_ref: ref mod_name, ref global } => {
-			let extern_val = get_export(&instances[mod_name], global).unwrap();
+			let extern_val = match instances[mod_name] {
+				ExportHashValue::Module(ref hm) => hm[global],
+				ExportHashValue::Host(_) => unreachable!(),
+			};
 			match extern_val {
 				ExternVal::Global(addr) => {
 					Ok(vec![read_global(store, addr)])
@@ -262,4 +297,61 @@ fn unescape<'a>(s: &'a str) -> String {
 	}
 
 	res
+}
+
+fn init_spectest(store: &mut Store, instances: &mut ExportHashMap) {
+	let table_addr = ExternVal::Table(
+		alloc_table(
+			store,
+			&types::Table { limits: types::Limits { min: 10, max: Some(20) }, elem: types::Elem::AnyFunc }
+		)
+	);
+
+	let memory_addr = ExternVal::Memory(
+		alloc_mem(
+			store,
+			&types::Memory { limits: types::Limits { min: 1, max: Some(2) } }
+		)
+	);
+
+	let lookup = move |store: &mut Store, name: &String, type_: &types::Extern| {
+		match (name.as_ref(), type_) {
+			("print", &types::Extern::Func(ref t)) => {
+				let args_len = t.args.len();
+				let print = move |stack: &mut Vec<values::Value>| {
+					for val in &stack[(stack.len() - args_len)..stack.len()] {
+						println!("{:?}", val);
+					}
+					None
+				};
+
+				Some(ExternVal::Func(
+					alloc_func(
+						store,
+						&t,
+						Box::new(print)
+					)
+				))
+			},
+			("global", &types::Extern::Global(ref t)) => {
+				Some(ExternVal::Global(
+					alloc_global(
+						store,
+						&t,
+						match t.value {
+							types::Value::Int(types::Int::I32) => values::Value::I32(666),
+							types::Value::Int(types::Int::I64) => values::Value::I64(666),
+							types::Value::Float(types::Float::F32) => values::Value::F32(666.0),
+							types::Value::Float(types::Float::F64) => values::Value::F64(666.0),
+						},
+					)
+				))
+			},
+			("table", _) => Some(table_addr),
+			("memory", _) => Some(memory_addr),
+			_ => None
+		}
+	};
+
+	instances.insert(Some(String::from("spectest")), ExportHashValue::Host(Rc::new(lookup)));
 }

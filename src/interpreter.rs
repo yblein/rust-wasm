@@ -21,6 +21,7 @@ pub enum TrapOrigin {
 	CallIndirectTypesDiffer,
 	LoadOutOfMemory,
 	StoreOutOfMemory,
+	HostFunction(HostFunctionError),
 }
 
 #[derive(Debug, PartialEq)]
@@ -85,7 +86,7 @@ impl Interpreter {
 	/// This is the main dispatching function of the interpreter.
 	pub fn instr(
 		&mut self,
-		sframe: & mut StackFrames,
+		sframe: &mut StackFrames,
 		instr: &Instr,
 		funcs: & FuncInstStore,
 		tables: &TableInstStore,
@@ -589,7 +590,7 @@ impl Interpreter {
 	pub fn call(
 		&mut self,
 		f_addr: FuncAddr,
-		sframe: & mut StackFrames,
+		sframe: &mut StackFrames,
 		funcs: & FuncInstStore,
 		tables: &TableInstStore,
 		globals: &mut GlobalInstStore,
@@ -598,42 +599,67 @@ impl Interpreter {
 		// Idea: the new stack_idx is the base frame pointer, which point to the
 		// first argument of the called function. When calling call, all
 		// arguments should already be on the stack (thanks to validation).
-		let f_inst = match funcs[f_addr] {
-			FuncInst::Module(ref m) => m,
-			_ => unimplemented!(),
+		match funcs[f_addr] {
+			FuncInst::Module(ref f_inst) => {
+				let f_num_args = f_inst.type_.args.len();
+
+				// Push locals
+				for l in &f_inst.code.locals {
+					match *l {
+						types::Value::Int(types::Int::I32) => self.stack.push(Value::I32(0)),
+						types::Value::Int(types::Int::I64) => self.stack.push(Value::I64(0)),
+						types::Value::Float(types::Float::F32) => self.stack.push(Value::F32(0.0)),
+						types::Value::Float(types::Float::F64) => self.stack.push(Value::F64(0.0)),
+					}
+				}
+
+				// Push the frame
+				let old_stack_idx = sframe.stack_idx;
+				let frame_begin = self.stack.len() - f_num_args - f_inst.code.locals.len();
+				sframe.push(f_inst.module.clone(), frame_begin);
+
+				// Execute the function inside a block
+				self.block(sframe,
+						   &f_inst.type_.result,
+						   &f_inst.code.body,
+						   funcs,
+						   tables,
+						   globals,
+						   mems)?;
+				// Pop the context
+				sframe.pop(old_stack_idx);
+
+				// Remove locals/args
+				let drain_start = frame_begin;
+				let drain_end = self.stack.len() - f_inst.type_.result.len();
+				self.stack.drain(drain_start..drain_end);
+			},
+			FuncInst::Host(ref f_inst) => {
+				let f_num_args = f_inst.type_.args.len();
+				let stack_before_call = self.stack.len();
+
+				if let Some(err) = (f_inst.hostcode)(&mut self.stack) {
+					return Err(Trap { origin: TrapOrigin::HostFunction(err) });
+				}
+
+				// Stack must be valid
+				assert_eq!(self.stack.len(), stack_before_call);
+				for (arg, type_) in self.stack[stack_before_call..].iter().zip(f_inst.type_.args.iter()) {
+					match (arg, type_) {
+						(&Value::I32(_), &types::Value::Int(types::Int::I32)) => (),
+						(&Value::I64(_), &types::Value::Int(types::Int::I64)) => (),
+						(&Value::F32(_), &types::Value::Float(types::Float::F32)) => (),
+						(&Value::F64(_), &types::Value::Float(types::Float::F64)) => (),
+						_ => { panic!("Invalid return value by host function."); },
+					};
+				}
+
+				// Remove args
+				let drain_start = stack_before_call - f_num_args;
+				let drain_end = self.stack.len() - f_inst.type_.result.len();
+				self.stack.drain(drain_start..drain_end);
+			},
 		};
-		let f_num_args = f_inst.type_.args.len();
-
-		// Push locals
-		for l in &f_inst.code.locals {
-			match *l {
-				types::Value::Int(types::Int::I32) => self.stack.push(Value::I32(0)),
-				types::Value::Int(types::Int::I64) => self.stack.push(Value::I64(0)),
-				types::Value::Float(types::Float::F32) => self.stack.push(Value::F32(0.0)),
-				types::Value::Float(types::Float::F64) => self.stack.push(Value::F64(0.0)),
-			}
-		}
-
-		// Push the frame
-		let old_stack_idx = sframe.stack_idx;
-		let frame_begin = self.stack.len() - f_num_args - f_inst.code.locals.len();
-		sframe.push(f_inst.module.clone(), frame_begin);
-
-		// Execute the function inside a block
-		self.block(sframe,
-				   &f_inst.type_.result,
-				   &f_inst.code.body,
-				   funcs,
-				   tables,
-				   globals,
-				   mems)?;
-		// Pop the context
-		sframe.pop(old_stack_idx);
-
-		// Remove locals/args
-		let drain_start = frame_begin;
-		let drain_end = self.stack.len() - f_inst.type_.result.len();
-		self.stack.drain(drain_start..drain_end);
 
 		Ok(Continue)
 	}
