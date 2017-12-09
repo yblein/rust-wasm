@@ -53,12 +53,18 @@ enum ExportHashValue {
 	Module(HashMap<String, ExternVal>),
 	Host(HostLookupFunctionPointer),
 }
-type ExportHashMap = HashMap<ExportHashKey, ExportHashValue>;
+struct ExportHashMap {
+	hm: HashMap<ExportHashKey, ExportHashValue>,
+	last_key: ExportHashKey,
+}
 
 pub fn run(input: &str) {
 	let script = parser::parse_script(input).unwrap();
 	let mut store = init_store();
-	let mut instances: ExportHashMap = HashMap::new();
+	let mut instances = ExportHashMap {
+		hm: HashMap::new(),
+		last_key: None,
+	};
 
 	// Special test host module
 	init_spectest(&mut store, &mut instances);
@@ -70,7 +76,7 @@ pub fn run(input: &str) {
 
 				let mut extern_vals = Vec::new();
 				for (mod_name, import_name, type_) in module_imports(&m) {
-					let val = match &instances[&Some(mod_name)] {
+					let val = match &instances.hm[&Some(mod_name)] {
 						&ExportHashValue::Module(ref hm) => hm[&import_name],
 						&ExportHashValue::Host(ref lookup) => lookup(&mut store, &import_name, &type_).unwrap(),
 					};
@@ -89,7 +95,8 @@ pub fn run(input: &str) {
 					let extern_val = get_export(&inst, &export_name).unwrap();
 					export_vals_hm.insert(export_name, extern_val);
 				}
-				instances.insert(opt_name, ExportHashValue::Module(export_vals_hm));
+				instances.last_key = opt_name.clone();
+				instances.hm.insert(opt_name, ExportHashValue::Module(export_vals_hm));
 
 			}
 			Cmd::Assertion(a) => {
@@ -99,8 +106,12 @@ pub fn run(input: &str) {
 				let _ = run_action(&mut store, &instances, &a);
 			}
 			Cmd::Register { name, mod_ref } => {
-				let inst = instances[&mod_ref].clone();
-				instances.insert(Some(name), inst);
+				let mod_name = match mod_ref {
+					None => &instances.last_key,
+					Some(_) => &mod_ref,
+				};
+				let inst = instances.hm[&mod_name].clone();
+				instances.hm.insert(Some(name), inst);
 			}
 		}
 	}
@@ -204,7 +215,11 @@ fn run_assertion(store: &mut Store, instances: &ExportHashMap, assertion: Assert
 fn run_action(store: &mut Store, instances: &ExportHashMap, action: &Action) -> Result<Vec<values::Value>, Error> {
 	match *action {
 		Action::Invoke { mod_ref: ref mod_name, ref func, ref args } => {
-			let extern_val = match instances[mod_name] {
+			let mod_name = match mod_name {
+				&None => &instances.last_key,
+				&Some(_) => mod_name,
+			};
+			let extern_val = match instances.hm[mod_name] {
 				ExportHashValue::Module(ref hm) => hm[func],
 				ExportHashValue::Host(_) => unreachable!(),
 			};
@@ -216,7 +231,11 @@ fn run_action(store: &mut Store, instances: &ExportHashMap, action: &Action) -> 
 			}
 		}
 		Action::Get { mod_ref: ref mod_name, ref global } => {
-			let extern_val = match instances[mod_name] {
+			let mod_name = match mod_name {
+				&None => &instances.last_key,
+				&Some(_) => mod_name,
+			};
+			let extern_val = match instances.hm[mod_name] {
 				ExportHashValue::Module(ref hm) => hm[global],
 				ExportHashValue::Host(_) => unreachable!(),
 			};
@@ -353,5 +372,5 @@ fn init_spectest(store: &mut Store, instances: &mut ExportHashMap) {
 		}
 	};
 
-	instances.insert(Some(String::from("spectest")), ExportHashValue::Host(Rc::new(lookup)));
+	instances.hm.insert(Some(String::from("spectest")), ExportHashValue::Host(Rc::new(lookup)));
 }

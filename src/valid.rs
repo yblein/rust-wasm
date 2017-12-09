@@ -4,6 +4,8 @@ use types::Value::*;
 use types::Int::*;
 use types::Float::*;
 
+use std::collections::HashSet;
+
 static EMPTY_TYPE: [types::Value; 0] = [];
 
 pub fn is_valid(module: &ast::Module) -> bool {
@@ -570,8 +572,11 @@ fn check_module(module: &ast::Module) -> Option<()> {
 	if let Some(ref func) = module.start {
 		check_start(&mod_ctx, func)?;
 	}
+	let mut unique_exports = HashSet::new();
 	for export in module.exports.iter() {
 		check_export(&mod_ctx, export)?;
+		require(!unique_exports.contains(&export.name))?;
+		unique_exports.insert(&export.name);
 	}
 
 	require(mod_ctx.tables.len() <= 1 && mod_ctx.memories.len() <= 1)
