@@ -43,20 +43,23 @@
 )
 (assert_return (invoke "type-local-i32") (i32.const 0))
 (assert_return (invoke "type-local-i64") (i64.const 0))
-(assert_return (invoke "type-local-f32") (f32.const 0.))
-(assert_return (invoke "type-local-f64") (f64.const 0.))
+(assert_return (invoke "type-local-f32") (f32.const 0x0p+0))
+(assert_return (invoke "type-local-f64") (f64.const 0x0p+0))
 (assert_return (invoke "type-param-i32" (i32.const 2)) (i32.const 10))
 (assert_return (invoke "type-param-i64" (i64.const 3)) (i64.const 11))
 (assert_return
-  (invoke "type-param-f32" (f32.const 4.40000009537))
-  (f32.const 11.1000003815)
+  (invoke "type-param-f32" (f32.const 0x1.19999ap+2))
+  (f32.const 0x1.633334p+3)
 )
-(assert_return (invoke "type-param-f64" (f64.const 5.5)) (f64.const 12.2))
+(assert_return
+  (invoke "type-param-f64" (f64.const 0x1.6p+2))
+  (f64.const 0x1.8666666666666p+3)
+)
 (assert_return
   (invoke "type-mixed"
     (i64.const 1)
-    (f32.const 2.20000004768)
-    (f64.const 3.3)
+    (f32.const 0x1.19999ap+1)
+    (f64.const 0x1.a666666666666p+1)
     (i32.const 4)
     (i32.const 5)
   )
@@ -64,8 +67,8 @@
 (assert_return
   (invoke "write"
     (i64.const 1)
-    (f32.const 2.)
-    (f64.const 3.3)
+    (f32.const 0x1p+1)
+    (f64.const 0x1.a666666666666p+1)
     (i32.const 4)
     (i32.const 5)
   )
@@ -74,12 +77,12 @@
 (assert_return
   (invoke "result"
     (i64.const -1)
-    (f32.const -2.)
-    (f64.const -3.3)
+    (f32.const -0x1p+1)
+    (f64.const -0x1.a666666666666p+1)
     (i32.const -4)
     (i32.const -5)
   )
-  (f64.const 34.8)
+  (f64.const 0x1.1666666666666p+5)
 )
 (assert_invalid
   (module binary

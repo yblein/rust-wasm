@@ -8,1258 +8,1279 @@
   "\80\00\00\20\00\20\01\a6\0b"
 )
 (assert_return
-  (invoke "copysign" (f64.const -0.) (f64.const -0.))
-  (f64.const -0.)
+  (invoke "copysign" (f64.const -0x0p+0) (f64.const -0x0p+0))
+  (f64.const -0x0p+0)
 )
 (assert_return
-  (invoke "copysign" (f64.const -0.) (f64.const 0.))
-  (f64.const 0.)
+  (invoke "copysign" (f64.const -0x0p+0) (f64.const 0x0p+0))
+  (f64.const 0x0p+0)
 )
 (assert_return
-  (invoke "copysign" (f64.const 0.) (f64.const -0.))
-  (f64.const -0.)
-)
-(assert_return (invoke "copysign" (f64.const 0.) (f64.const 0.)) (f64.const 0.))
-(assert_return
-  (invoke "copysign" (f64.const -0.) (f64.const -4.94065645841e-324))
-  (f64.const -0.)
+  (invoke "copysign" (f64.const 0x0p+0) (f64.const -0x0p+0))
+  (f64.const -0x0p+0)
 )
 (assert_return
-  (invoke "copysign" (f64.const -0.) (f64.const 4.94065645841e-324))
-  (f64.const 0.)
+  (invoke "copysign" (f64.const 0x0p+0) (f64.const 0x0p+0))
+  (f64.const 0x0p+0)
 )
 (assert_return
-  (invoke "copysign" (f64.const 0.) (f64.const -4.94065645841e-324))
-  (f64.const -0.)
+  (invoke "copysign" (f64.const -0x0p+0) (f64.const -0x0.0000000000001p-1022))
+  (f64.const -0x0p+0)
 )
 (assert_return
-  (invoke "copysign" (f64.const 0.) (f64.const 4.94065645841e-324))
-  (f64.const 0.)
+  (invoke "copysign" (f64.const -0x0p+0) (f64.const 0x0.0000000000001p-1022))
+  (f64.const 0x0p+0)
 )
 (assert_return
-  (invoke "copysign" (f64.const -0.) (f64.const -2.22507385851e-308))
-  (f64.const -0.)
+  (invoke "copysign" (f64.const 0x0p+0) (f64.const -0x0.0000000000001p-1022))
+  (f64.const -0x0p+0)
 )
 (assert_return
-  (invoke "copysign" (f64.const -0.) (f64.const 2.22507385851e-308))
-  (f64.const 0.)
+  (invoke "copysign" (f64.const 0x0p+0) (f64.const 0x0.0000000000001p-1022))
+  (f64.const 0x0p+0)
 )
 (assert_return
-  (invoke "copysign" (f64.const 0.) (f64.const -2.22507385851e-308))
-  (f64.const -0.)
+  (invoke "copysign" (f64.const -0x0p+0) (f64.const -0x1p-1022))
+  (f64.const -0x0p+0)
 )
 (assert_return
-  (invoke "copysign" (f64.const 0.) (f64.const 2.22507385851e-308))
-  (f64.const 0.)
+  (invoke "copysign" (f64.const -0x0p+0) (f64.const 0x1p-1022))
+  (f64.const 0x0p+0)
 )
 (assert_return
-  (invoke "copysign" (f64.const -0.) (f64.const -0.5))
-  (f64.const -0.)
+  (invoke "copysign" (f64.const 0x0p+0) (f64.const -0x1p-1022))
+  (f64.const -0x0p+0)
 )
 (assert_return
-  (invoke "copysign" (f64.const -0.) (f64.const 0.5))
-  (f64.const 0.)
+  (invoke "copysign" (f64.const 0x0p+0) (f64.const 0x1p-1022))
+  (f64.const 0x0p+0)
 )
 (assert_return
-  (invoke "copysign" (f64.const 0.) (f64.const -0.5))
-  (f64.const -0.)
+  (invoke "copysign" (f64.const -0x0p+0) (f64.const -0x1p-1))
+  (f64.const -0x0p+0)
 )
 (assert_return
-  (invoke "copysign" (f64.const 0.) (f64.const 0.5))
-  (f64.const 0.)
+  (invoke "copysign" (f64.const -0x0p+0) (f64.const 0x1p-1))
+  (f64.const 0x0p+0)
 )
 (assert_return
-  (invoke "copysign" (f64.const -0.) (f64.const -1.))
-  (f64.const -0.)
+  (invoke "copysign" (f64.const 0x0p+0) (f64.const -0x1p-1))
+  (f64.const -0x0p+0)
 )
 (assert_return
-  (invoke "copysign" (f64.const -0.) (f64.const 1.))
-  (f64.const 0.)
+  (invoke "copysign" (f64.const 0x0p+0) (f64.const 0x1p-1))
+  (f64.const 0x0p+0)
 )
 (assert_return
-  (invoke "copysign" (f64.const 0.) (f64.const -1.))
-  (f64.const -0.)
-)
-(assert_return (invoke "copysign" (f64.const 0.) (f64.const 1.)) (f64.const 0.))
-(assert_return
-  (invoke "copysign" (f64.const -0.) (f64.const -6.28318530718))
-  (f64.const -0.)
+  (invoke "copysign" (f64.const -0x0p+0) (f64.const -0x1p+0))
+  (f64.const -0x0p+0)
 )
 (assert_return
-  (invoke "copysign" (f64.const -0.) (f64.const 6.28318530718))
-  (f64.const 0.)
+  (invoke "copysign" (f64.const -0x0p+0) (f64.const 0x1p+0))
+  (f64.const 0x0p+0)
 )
 (assert_return
-  (invoke "copysign" (f64.const 0.) (f64.const -6.28318530718))
-  (f64.const -0.)
+  (invoke "copysign" (f64.const 0x0p+0) (f64.const -0x1p+0))
+  (f64.const -0x0p+0)
 )
 (assert_return
-  (invoke "copysign" (f64.const 0.) (f64.const 6.28318530718))
-  (f64.const 0.)
+  (invoke "copysign" (f64.const 0x0p+0) (f64.const 0x1p+0))
+  (f64.const 0x0p+0)
 )
 (assert_return
-  (invoke "copysign" (f64.const -0.) (f64.const -1.79769313486e+308))
-  (f64.const -0.)
+  (invoke "copysign" (f64.const -0x0p+0) (f64.const -0x1.921fb54442d18p+2))
+  (f64.const -0x0p+0)
 )
 (assert_return
-  (invoke "copysign" (f64.const -0.) (f64.const 1.79769313486e+308))
-  (f64.const 0.)
+  (invoke "copysign" (f64.const -0x0p+0) (f64.const 0x1.921fb54442d18p+2))
+  (f64.const 0x0p+0)
 )
 (assert_return
-  (invoke "copysign" (f64.const 0.) (f64.const -1.79769313486e+308))
-  (f64.const -0.)
+  (invoke "copysign" (f64.const 0x0p+0) (f64.const -0x1.921fb54442d18p+2))
+  (f64.const -0x0p+0)
 )
 (assert_return
-  (invoke "copysign" (f64.const 0.) (f64.const 1.79769313486e+308))
-  (f64.const 0.)
+  (invoke "copysign" (f64.const 0x0p+0) (f64.const 0x1.921fb54442d18p+2))
+  (f64.const 0x0p+0)
 )
 (assert_return
-  (invoke "copysign" (f64.const -0.) (f64.const -inf))
-  (f64.const -0.)
+  (invoke "copysign" (f64.const -0x0p+0) (f64.const -0x1.fffffffffffffp+1023))
+  (f64.const -0x0p+0)
 )
 (assert_return
-  (invoke "copysign" (f64.const -0.) (f64.const inf))
-  (f64.const 0.)
+  (invoke "copysign" (f64.const -0x0p+0) (f64.const 0x1.fffffffffffffp+1023))
+  (f64.const 0x0p+0)
 )
 (assert_return
-  (invoke "copysign" (f64.const 0.) (f64.const -inf))
-  (f64.const -0.)
+  (invoke "copysign" (f64.const 0x0p+0) (f64.const -0x1.fffffffffffffp+1023))
+  (f64.const -0x0p+0)
 )
 (assert_return
-  (invoke "copysign" (f64.const 0.) (f64.const inf))
-  (f64.const 0.)
+  (invoke "copysign" (f64.const 0x0p+0) (f64.const 0x1.fffffffffffffp+1023))
+  (f64.const 0x0p+0)
 )
 (assert_return
-  (invoke "copysign" (f64.const -0.) (f64.const -nan:0x8000000000000))
-  (f64.const -0.)
+  (invoke "copysign" (f64.const -0x0p+0) (f64.const -inf))
+  (f64.const -0x0p+0)
 )
 (assert_return
-  (invoke "copysign" (f64.const -0.) (f64.const nan:0x8000000000000))
-  (f64.const 0.)
+  (invoke "copysign" (f64.const -0x0p+0) (f64.const inf))
+  (f64.const 0x0p+0)
 )
 (assert_return
-  (invoke "copysign" (f64.const 0.) (f64.const -nan:0x8000000000000))
-  (f64.const -0.)
+  (invoke "copysign" (f64.const 0x0p+0) (f64.const -inf))
+  (f64.const -0x0p+0)
 )
 (assert_return
-  (invoke "copysign" (f64.const 0.) (f64.const nan:0x8000000000000))
-  (f64.const 0.)
+  (invoke "copysign" (f64.const 0x0p+0) (f64.const inf))
+  (f64.const 0x0p+0)
 )
 (assert_return
-  (invoke "copysign" (f64.const -4.94065645841e-324) (f64.const -0.))
-  (f64.const -4.94065645841e-324)
+  (invoke "copysign" (f64.const -0x0p+0) (f64.const -nan:0x8000000000000))
+  (f64.const -0x0p+0)
 )
 (assert_return
-  (invoke "copysign" (f64.const -4.94065645841e-324) (f64.const 0.))
-  (f64.const 4.94065645841e-324)
+  (invoke "copysign" (f64.const -0x0p+0) (f64.const nan:0x8000000000000))
+  (f64.const 0x0p+0)
 )
 (assert_return
-  (invoke "copysign" (f64.const 4.94065645841e-324) (f64.const -0.))
-  (f64.const -4.94065645841e-324)
+  (invoke "copysign" (f64.const 0x0p+0) (f64.const -nan:0x8000000000000))
+  (f64.const -0x0p+0)
 )
 (assert_return
-  (invoke "copysign" (f64.const 4.94065645841e-324) (f64.const 0.))
-  (f64.const 4.94065645841e-324)
+  (invoke "copysign" (f64.const 0x0p+0) (f64.const nan:0x8000000000000))
+  (f64.const 0x0p+0)
+)
+(assert_return
+  (invoke "copysign" (f64.const -0x0.0000000000001p-1022) (f64.const -0x0p+0))
+  (f64.const -0x0.0000000000001p-1022)
+)
+(assert_return
+  (invoke "copysign" (f64.const -0x0.0000000000001p-1022) (f64.const 0x0p+0))
+  (f64.const 0x0.0000000000001p-1022)
+)
+(assert_return
+  (invoke "copysign" (f64.const 0x0.0000000000001p-1022) (f64.const -0x0p+0))
+  (f64.const -0x0.0000000000001p-1022)
+)
+(assert_return
+  (invoke "copysign" (f64.const 0x0.0000000000001p-1022) (f64.const 0x0p+0))
+  (f64.const 0x0.0000000000001p-1022)
 )
 (assert_return
   (invoke "copysign"
-    (f64.const -4.94065645841e-324)
-    (f64.const -4.94065645841e-324)
+    (f64.const -0x0.0000000000001p-1022)
+    (f64.const -0x0.0000000000001p-1022)
   )
-  (f64.const -4.94065645841e-324)
+  (f64.const -0x0.0000000000001p-1022)
 )
 (assert_return
   (invoke "copysign"
-    (f64.const -4.94065645841e-324)
-    (f64.const 4.94065645841e-324)
+    (f64.const -0x0.0000000000001p-1022)
+    (f64.const 0x0.0000000000001p-1022)
   )
-  (f64.const 4.94065645841e-324)
+  (f64.const 0x0.0000000000001p-1022)
 )
 (assert_return
   (invoke "copysign"
-    (f64.const 4.94065645841e-324)
-    (f64.const -4.94065645841e-324)
+    (f64.const 0x0.0000000000001p-1022)
+    (f64.const -0x0.0000000000001p-1022)
   )
-  (f64.const -4.94065645841e-324)
+  (f64.const -0x0.0000000000001p-1022)
 )
 (assert_return
   (invoke "copysign"
-    (f64.const 4.94065645841e-324)
-    (f64.const 4.94065645841e-324)
+    (f64.const 0x0.0000000000001p-1022)
+    (f64.const 0x0.0000000000001p-1022)
   )
-  (f64.const 4.94065645841e-324)
+  (f64.const 0x0.0000000000001p-1022)
 )
 (assert_return
   (invoke "copysign"
-    (f64.const -4.94065645841e-324)
-    (f64.const -2.22507385851e-308)
+    (f64.const -0x0.0000000000001p-1022)
+    (f64.const -0x1p-1022)
   )
-  (f64.const -4.94065645841e-324)
+  (f64.const -0x0.0000000000001p-1022)
+)
+(assert_return
+  (invoke "copysign" (f64.const -0x0.0000000000001p-1022) (f64.const 0x1p-1022))
+  (f64.const 0x0.0000000000001p-1022)
+)
+(assert_return
+  (invoke "copysign" (f64.const 0x0.0000000000001p-1022) (f64.const -0x1p-1022))
+  (f64.const -0x0.0000000000001p-1022)
+)
+(assert_return
+  (invoke "copysign" (f64.const 0x0.0000000000001p-1022) (f64.const 0x1p-1022))
+  (f64.const 0x0.0000000000001p-1022)
+)
+(assert_return
+  (invoke "copysign" (f64.const -0x0.0000000000001p-1022) (f64.const -0x1p-1))
+  (f64.const -0x0.0000000000001p-1022)
+)
+(assert_return
+  (invoke "copysign" (f64.const -0x0.0000000000001p-1022) (f64.const 0x1p-1))
+  (f64.const 0x0.0000000000001p-1022)
+)
+(assert_return
+  (invoke "copysign" (f64.const 0x0.0000000000001p-1022) (f64.const -0x1p-1))
+  (f64.const -0x0.0000000000001p-1022)
+)
+(assert_return
+  (invoke "copysign" (f64.const 0x0.0000000000001p-1022) (f64.const 0x1p-1))
+  (f64.const 0x0.0000000000001p-1022)
+)
+(assert_return
+  (invoke "copysign" (f64.const -0x0.0000000000001p-1022) (f64.const -0x1p+0))
+  (f64.const -0x0.0000000000001p-1022)
+)
+(assert_return
+  (invoke "copysign" (f64.const -0x0.0000000000001p-1022) (f64.const 0x1p+0))
+  (f64.const 0x0.0000000000001p-1022)
+)
+(assert_return
+  (invoke "copysign" (f64.const 0x0.0000000000001p-1022) (f64.const -0x1p+0))
+  (f64.const -0x0.0000000000001p-1022)
+)
+(assert_return
+  (invoke "copysign" (f64.const 0x0.0000000000001p-1022) (f64.const 0x1p+0))
+  (f64.const 0x0.0000000000001p-1022)
 )
 (assert_return
   (invoke "copysign"
-    (f64.const -4.94065645841e-324)
-    (f64.const 2.22507385851e-308)
+    (f64.const -0x0.0000000000001p-1022)
+    (f64.const -0x1.921fb54442d18p+2)
   )
-  (f64.const 4.94065645841e-324)
+  (f64.const -0x0.0000000000001p-1022)
 )
 (assert_return
   (invoke "copysign"
-    (f64.const 4.94065645841e-324)
-    (f64.const -2.22507385851e-308)
+    (f64.const -0x0.0000000000001p-1022)
+    (f64.const 0x1.921fb54442d18p+2)
   )
-  (f64.const -4.94065645841e-324)
+  (f64.const 0x0.0000000000001p-1022)
 )
 (assert_return
   (invoke "copysign"
-    (f64.const 4.94065645841e-324)
-    (f64.const 2.22507385851e-308)
+    (f64.const 0x0.0000000000001p-1022)
+    (f64.const -0x1.921fb54442d18p+2)
   )
-  (f64.const 4.94065645841e-324)
-)
-(assert_return
-  (invoke "copysign" (f64.const -4.94065645841e-324) (f64.const -0.5))
-  (f64.const -4.94065645841e-324)
-)
-(assert_return
-  (invoke "copysign" (f64.const -4.94065645841e-324) (f64.const 0.5))
-  (f64.const 4.94065645841e-324)
-)
-(assert_return
-  (invoke "copysign" (f64.const 4.94065645841e-324) (f64.const -0.5))
-  (f64.const -4.94065645841e-324)
-)
-(assert_return
-  (invoke "copysign" (f64.const 4.94065645841e-324) (f64.const 0.5))
-  (f64.const 4.94065645841e-324)
-)
-(assert_return
-  (invoke "copysign" (f64.const -4.94065645841e-324) (f64.const -1.))
-  (f64.const -4.94065645841e-324)
-)
-(assert_return
-  (invoke "copysign" (f64.const -4.94065645841e-324) (f64.const 1.))
-  (f64.const 4.94065645841e-324)
-)
-(assert_return
-  (invoke "copysign" (f64.const 4.94065645841e-324) (f64.const -1.))
-  (f64.const -4.94065645841e-324)
-)
-(assert_return
-  (invoke "copysign" (f64.const 4.94065645841e-324) (f64.const 1.))
-  (f64.const 4.94065645841e-324)
-)
-(assert_return
-  (invoke "copysign" (f64.const -4.94065645841e-324) (f64.const -6.28318530718))
-  (f64.const -4.94065645841e-324)
-)
-(assert_return
-  (invoke "copysign" (f64.const -4.94065645841e-324) (f64.const 6.28318530718))
-  (f64.const 4.94065645841e-324)
-)
-(assert_return
-  (invoke "copysign" (f64.const 4.94065645841e-324) (f64.const -6.28318530718))
-  (f64.const -4.94065645841e-324)
-)
-(assert_return
-  (invoke "copysign" (f64.const 4.94065645841e-324) (f64.const 6.28318530718))
-  (f64.const 4.94065645841e-324)
+  (f64.const -0x0.0000000000001p-1022)
 )
 (assert_return
   (invoke "copysign"
-    (f64.const -4.94065645841e-324)
-    (f64.const -1.79769313486e+308)
+    (f64.const 0x0.0000000000001p-1022)
+    (f64.const 0x1.921fb54442d18p+2)
   )
-  (f64.const -4.94065645841e-324)
+  (f64.const 0x0.0000000000001p-1022)
 )
 (assert_return
   (invoke "copysign"
-    (f64.const -4.94065645841e-324)
-    (f64.const 1.79769313486e+308)
+    (f64.const -0x0.0000000000001p-1022)
+    (f64.const -0x1.fffffffffffffp+1023)
   )
-  (f64.const 4.94065645841e-324)
+  (f64.const -0x0.0000000000001p-1022)
 )
 (assert_return
   (invoke "copysign"
-    (f64.const 4.94065645841e-324)
-    (f64.const -1.79769313486e+308)
+    (f64.const -0x0.0000000000001p-1022)
+    (f64.const 0x1.fffffffffffffp+1023)
   )
-  (f64.const -4.94065645841e-324)
+  (f64.const 0x0.0000000000001p-1022)
 )
 (assert_return
   (invoke "copysign"
-    (f64.const 4.94065645841e-324)
-    (f64.const 1.79769313486e+308)
+    (f64.const 0x0.0000000000001p-1022)
+    (f64.const -0x1.fffffffffffffp+1023)
   )
-  (f64.const 4.94065645841e-324)
-)
-(assert_return
-  (invoke "copysign" (f64.const -4.94065645841e-324) (f64.const -inf))
-  (f64.const -4.94065645841e-324)
-)
-(assert_return
-  (invoke "copysign" (f64.const -4.94065645841e-324) (f64.const inf))
-  (f64.const 4.94065645841e-324)
-)
-(assert_return
-  (invoke "copysign" (f64.const 4.94065645841e-324) (f64.const -inf))
-  (f64.const -4.94065645841e-324)
-)
-(assert_return
-  (invoke "copysign" (f64.const 4.94065645841e-324) (f64.const inf))
-  (f64.const 4.94065645841e-324)
+  (f64.const -0x0.0000000000001p-1022)
 )
 (assert_return
   (invoke "copysign"
-    (f64.const -4.94065645841e-324)
+    (f64.const 0x0.0000000000001p-1022)
+    (f64.const 0x1.fffffffffffffp+1023)
+  )
+  (f64.const 0x0.0000000000001p-1022)
+)
+(assert_return
+  (invoke "copysign" (f64.const -0x0.0000000000001p-1022) (f64.const -inf))
+  (f64.const -0x0.0000000000001p-1022)
+)
+(assert_return
+  (invoke "copysign" (f64.const -0x0.0000000000001p-1022) (f64.const inf))
+  (f64.const 0x0.0000000000001p-1022)
+)
+(assert_return
+  (invoke "copysign" (f64.const 0x0.0000000000001p-1022) (f64.const -inf))
+  (f64.const -0x0.0000000000001p-1022)
+)
+(assert_return
+  (invoke "copysign" (f64.const 0x0.0000000000001p-1022) (f64.const inf))
+  (f64.const 0x0.0000000000001p-1022)
+)
+(assert_return
+  (invoke "copysign"
+    (f64.const -0x0.0000000000001p-1022)
     (f64.const -nan:0x8000000000000)
   )
-  (f64.const -4.94065645841e-324)
+  (f64.const -0x0.0000000000001p-1022)
 )
 (assert_return
   (invoke "copysign"
-    (f64.const -4.94065645841e-324)
+    (f64.const -0x0.0000000000001p-1022)
     (f64.const nan:0x8000000000000)
   )
-  (f64.const 4.94065645841e-324)
+  (f64.const 0x0.0000000000001p-1022)
 )
 (assert_return
   (invoke "copysign"
-    (f64.const 4.94065645841e-324)
+    (f64.const 0x0.0000000000001p-1022)
     (f64.const -nan:0x8000000000000)
   )
-  (f64.const -4.94065645841e-324)
+  (f64.const -0x0.0000000000001p-1022)
 )
 (assert_return
   (invoke "copysign"
-    (f64.const 4.94065645841e-324)
+    (f64.const 0x0.0000000000001p-1022)
     (f64.const nan:0x8000000000000)
   )
-  (f64.const 4.94065645841e-324)
+  (f64.const 0x0.0000000000001p-1022)
 )
 (assert_return
-  (invoke "copysign" (f64.const -2.22507385851e-308) (f64.const -0.))
-  (f64.const -2.22507385851e-308)
+  (invoke "copysign" (f64.const -0x1p-1022) (f64.const -0x0p+0))
+  (f64.const -0x1p-1022)
 )
 (assert_return
-  (invoke "copysign" (f64.const -2.22507385851e-308) (f64.const 0.))
-  (f64.const 2.22507385851e-308)
+  (invoke "copysign" (f64.const -0x1p-1022) (f64.const 0x0p+0))
+  (f64.const 0x1p-1022)
 )
 (assert_return
-  (invoke "copysign" (f64.const 2.22507385851e-308) (f64.const -0.))
-  (f64.const -2.22507385851e-308)
+  (invoke "copysign" (f64.const 0x1p-1022) (f64.const -0x0p+0))
+  (f64.const -0x1p-1022)
 )
 (assert_return
-  (invoke "copysign" (f64.const 2.22507385851e-308) (f64.const 0.))
-  (f64.const 2.22507385851e-308)
+  (invoke "copysign" (f64.const 0x1p-1022) (f64.const 0x0p+0))
+  (f64.const 0x1p-1022)
 )
 (assert_return
   (invoke "copysign"
-    (f64.const -2.22507385851e-308)
-    (f64.const -4.94065645841e-324)
+    (f64.const -0x1p-1022)
+    (f64.const -0x0.0000000000001p-1022)
   )
-  (f64.const -2.22507385851e-308)
+  (f64.const -0x1p-1022)
+)
+(assert_return
+  (invoke "copysign" (f64.const -0x1p-1022) (f64.const 0x0.0000000000001p-1022))
+  (f64.const 0x1p-1022)
+)
+(assert_return
+  (invoke "copysign" (f64.const 0x1p-1022) (f64.const -0x0.0000000000001p-1022))
+  (f64.const -0x1p-1022)
+)
+(assert_return
+  (invoke "copysign" (f64.const 0x1p-1022) (f64.const 0x0.0000000000001p-1022))
+  (f64.const 0x1p-1022)
+)
+(assert_return
+  (invoke "copysign" (f64.const -0x1p-1022) (f64.const -0x1p-1022))
+  (f64.const -0x1p-1022)
+)
+(assert_return
+  (invoke "copysign" (f64.const -0x1p-1022) (f64.const 0x1p-1022))
+  (f64.const 0x1p-1022)
+)
+(assert_return
+  (invoke "copysign" (f64.const 0x1p-1022) (f64.const -0x1p-1022))
+  (f64.const -0x1p-1022)
+)
+(assert_return
+  (invoke "copysign" (f64.const 0x1p-1022) (f64.const 0x1p-1022))
+  (f64.const 0x1p-1022)
+)
+(assert_return
+  (invoke "copysign" (f64.const -0x1p-1022) (f64.const -0x1p-1))
+  (f64.const -0x1p-1022)
+)
+(assert_return
+  (invoke "copysign" (f64.const -0x1p-1022) (f64.const 0x1p-1))
+  (f64.const 0x1p-1022)
+)
+(assert_return
+  (invoke "copysign" (f64.const 0x1p-1022) (f64.const -0x1p-1))
+  (f64.const -0x1p-1022)
+)
+(assert_return
+  (invoke "copysign" (f64.const 0x1p-1022) (f64.const 0x1p-1))
+  (f64.const 0x1p-1022)
+)
+(assert_return
+  (invoke "copysign" (f64.const -0x1p-1022) (f64.const -0x1p+0))
+  (f64.const -0x1p-1022)
+)
+(assert_return
+  (invoke "copysign" (f64.const -0x1p-1022) (f64.const 0x1p+0))
+  (f64.const 0x1p-1022)
+)
+(assert_return
+  (invoke "copysign" (f64.const 0x1p-1022) (f64.const -0x1p+0))
+  (f64.const -0x1p-1022)
+)
+(assert_return
+  (invoke "copysign" (f64.const 0x1p-1022) (f64.const 0x1p+0))
+  (f64.const 0x1p-1022)
+)
+(assert_return
+  (invoke "copysign" (f64.const -0x1p-1022) (f64.const -0x1.921fb54442d18p+2))
+  (f64.const -0x1p-1022)
+)
+(assert_return
+  (invoke "copysign" (f64.const -0x1p-1022) (f64.const 0x1.921fb54442d18p+2))
+  (f64.const 0x1p-1022)
+)
+(assert_return
+  (invoke "copysign" (f64.const 0x1p-1022) (f64.const -0x1.921fb54442d18p+2))
+  (f64.const -0x1p-1022)
+)
+(assert_return
+  (invoke "copysign" (f64.const 0x1p-1022) (f64.const 0x1.921fb54442d18p+2))
+  (f64.const 0x1p-1022)
 )
 (assert_return
   (invoke "copysign"
-    (f64.const -2.22507385851e-308)
-    (f64.const 4.94065645841e-324)
+    (f64.const -0x1p-1022)
+    (f64.const -0x1.fffffffffffffp+1023)
   )
-  (f64.const 2.22507385851e-308)
+  (f64.const -0x1p-1022)
+)
+(assert_return
+  (invoke "copysign" (f64.const -0x1p-1022) (f64.const 0x1.fffffffffffffp+1023))
+  (f64.const 0x1p-1022)
+)
+(assert_return
+  (invoke "copysign" (f64.const 0x1p-1022) (f64.const -0x1.fffffffffffffp+1023))
+  (f64.const -0x1p-1022)
+)
+(assert_return
+  (invoke "copysign" (f64.const 0x1p-1022) (f64.const 0x1.fffffffffffffp+1023))
+  (f64.const 0x1p-1022)
+)
+(assert_return
+  (invoke "copysign" (f64.const -0x1p-1022) (f64.const -inf))
+  (f64.const -0x1p-1022)
+)
+(assert_return
+  (invoke "copysign" (f64.const -0x1p-1022) (f64.const inf))
+  (f64.const 0x1p-1022)
+)
+(assert_return
+  (invoke "copysign" (f64.const 0x1p-1022) (f64.const -inf))
+  (f64.const -0x1p-1022)
+)
+(assert_return
+  (invoke "copysign" (f64.const 0x1p-1022) (f64.const inf))
+  (f64.const 0x1p-1022)
+)
+(assert_return
+  (invoke "copysign" (f64.const -0x1p-1022) (f64.const -nan:0x8000000000000))
+  (f64.const -0x1p-1022)
+)
+(assert_return
+  (invoke "copysign" (f64.const -0x1p-1022) (f64.const nan:0x8000000000000))
+  (f64.const 0x1p-1022)
+)
+(assert_return
+  (invoke "copysign" (f64.const 0x1p-1022) (f64.const -nan:0x8000000000000))
+  (f64.const -0x1p-1022)
+)
+(assert_return
+  (invoke "copysign" (f64.const 0x1p-1022) (f64.const nan:0x8000000000000))
+  (f64.const 0x1p-1022)
+)
+(assert_return
+  (invoke "copysign" (f64.const -0x1p-1) (f64.const -0x0p+0))
+  (f64.const -0x1p-1)
+)
+(assert_return
+  (invoke "copysign" (f64.const -0x1p-1) (f64.const 0x0p+0))
+  (f64.const 0x1p-1)
+)
+(assert_return
+  (invoke "copysign" (f64.const 0x1p-1) (f64.const -0x0p+0))
+  (f64.const -0x1p-1)
+)
+(assert_return
+  (invoke "copysign" (f64.const 0x1p-1) (f64.const 0x0p+0))
+  (f64.const 0x1p-1)
+)
+(assert_return
+  (invoke "copysign" (f64.const -0x1p-1) (f64.const -0x0.0000000000001p-1022))
+  (f64.const -0x1p-1)
+)
+(assert_return
+  (invoke "copysign" (f64.const -0x1p-1) (f64.const 0x0.0000000000001p-1022))
+  (f64.const 0x1p-1)
+)
+(assert_return
+  (invoke "copysign" (f64.const 0x1p-1) (f64.const -0x0.0000000000001p-1022))
+  (f64.const -0x1p-1)
+)
+(assert_return
+  (invoke "copysign" (f64.const 0x1p-1) (f64.const 0x0.0000000000001p-1022))
+  (f64.const 0x1p-1)
+)
+(assert_return
+  (invoke "copysign" (f64.const -0x1p-1) (f64.const -0x1p-1022))
+  (f64.const -0x1p-1)
+)
+(assert_return
+  (invoke "copysign" (f64.const -0x1p-1) (f64.const 0x1p-1022))
+  (f64.const 0x1p-1)
+)
+(assert_return
+  (invoke "copysign" (f64.const 0x1p-1) (f64.const -0x1p-1022))
+  (f64.const -0x1p-1)
+)
+(assert_return
+  (invoke "copysign" (f64.const 0x1p-1) (f64.const 0x1p-1022))
+  (f64.const 0x1p-1)
+)
+(assert_return
+  (invoke "copysign" (f64.const -0x1p-1) (f64.const -0x1p-1))
+  (f64.const -0x1p-1)
+)
+(assert_return
+  (invoke "copysign" (f64.const -0x1p-1) (f64.const 0x1p-1))
+  (f64.const 0x1p-1)
+)
+(assert_return
+  (invoke "copysign" (f64.const 0x1p-1) (f64.const -0x1p-1))
+  (f64.const -0x1p-1)
+)
+(assert_return
+  (invoke "copysign" (f64.const 0x1p-1) (f64.const 0x1p-1))
+  (f64.const 0x1p-1)
+)
+(assert_return
+  (invoke "copysign" (f64.const -0x1p-1) (f64.const -0x1p+0))
+  (f64.const -0x1p-1)
+)
+(assert_return
+  (invoke "copysign" (f64.const -0x1p-1) (f64.const 0x1p+0))
+  (f64.const 0x1p-1)
+)
+(assert_return
+  (invoke "copysign" (f64.const 0x1p-1) (f64.const -0x1p+0))
+  (f64.const -0x1p-1)
+)
+(assert_return
+  (invoke "copysign" (f64.const 0x1p-1) (f64.const 0x1p+0))
+  (f64.const 0x1p-1)
+)
+(assert_return
+  (invoke "copysign" (f64.const -0x1p-1) (f64.const -0x1.921fb54442d18p+2))
+  (f64.const -0x1p-1)
+)
+(assert_return
+  (invoke "copysign" (f64.const -0x1p-1) (f64.const 0x1.921fb54442d18p+2))
+  (f64.const 0x1p-1)
+)
+(assert_return
+  (invoke "copysign" (f64.const 0x1p-1) (f64.const -0x1.921fb54442d18p+2))
+  (f64.const -0x1p-1)
+)
+(assert_return
+  (invoke "copysign" (f64.const 0x1p-1) (f64.const 0x1.921fb54442d18p+2))
+  (f64.const 0x1p-1)
+)
+(assert_return
+  (invoke "copysign" (f64.const -0x1p-1) (f64.const -0x1.fffffffffffffp+1023))
+  (f64.const -0x1p-1)
+)
+(assert_return
+  (invoke "copysign" (f64.const -0x1p-1) (f64.const 0x1.fffffffffffffp+1023))
+  (f64.const 0x1p-1)
+)
+(assert_return
+  (invoke "copysign" (f64.const 0x1p-1) (f64.const -0x1.fffffffffffffp+1023))
+  (f64.const -0x1p-1)
+)
+(assert_return
+  (invoke "copysign" (f64.const 0x1p-1) (f64.const 0x1.fffffffffffffp+1023))
+  (f64.const 0x1p-1)
+)
+(assert_return
+  (invoke "copysign" (f64.const -0x1p-1) (f64.const -inf))
+  (f64.const -0x1p-1)
+)
+(assert_return
+  (invoke "copysign" (f64.const -0x1p-1) (f64.const inf))
+  (f64.const 0x1p-1)
+)
+(assert_return
+  (invoke "copysign" (f64.const 0x1p-1) (f64.const -inf))
+  (f64.const -0x1p-1)
+)
+(assert_return
+  (invoke "copysign" (f64.const 0x1p-1) (f64.const inf))
+  (f64.const 0x1p-1)
+)
+(assert_return
+  (invoke "copysign" (f64.const -0x1p-1) (f64.const -nan:0x8000000000000))
+  (f64.const -0x1p-1)
+)
+(assert_return
+  (invoke "copysign" (f64.const -0x1p-1) (f64.const nan:0x8000000000000))
+  (f64.const 0x1p-1)
+)
+(assert_return
+  (invoke "copysign" (f64.const 0x1p-1) (f64.const -nan:0x8000000000000))
+  (f64.const -0x1p-1)
+)
+(assert_return
+  (invoke "copysign" (f64.const 0x1p-1) (f64.const nan:0x8000000000000))
+  (f64.const 0x1p-1)
+)
+(assert_return
+  (invoke "copysign" (f64.const -0x1p+0) (f64.const -0x0p+0))
+  (f64.const -0x1p+0)
+)
+(assert_return
+  (invoke "copysign" (f64.const -0x1p+0) (f64.const 0x0p+0))
+  (f64.const 0x1p+0)
+)
+(assert_return
+  (invoke "copysign" (f64.const 0x1p+0) (f64.const -0x0p+0))
+  (f64.const -0x1p+0)
+)
+(assert_return
+  (invoke "copysign" (f64.const 0x1p+0) (f64.const 0x0p+0))
+  (f64.const 0x1p+0)
+)
+(assert_return
+  (invoke "copysign" (f64.const -0x1p+0) (f64.const -0x0.0000000000001p-1022))
+  (f64.const -0x1p+0)
+)
+(assert_return
+  (invoke "copysign" (f64.const -0x1p+0) (f64.const 0x0.0000000000001p-1022))
+  (f64.const 0x1p+0)
+)
+(assert_return
+  (invoke "copysign" (f64.const 0x1p+0) (f64.const -0x0.0000000000001p-1022))
+  (f64.const -0x1p+0)
+)
+(assert_return
+  (invoke "copysign" (f64.const 0x1p+0) (f64.const 0x0.0000000000001p-1022))
+  (f64.const 0x1p+0)
+)
+(assert_return
+  (invoke "copysign" (f64.const -0x1p+0) (f64.const -0x1p-1022))
+  (f64.const -0x1p+0)
+)
+(assert_return
+  (invoke "copysign" (f64.const -0x1p+0) (f64.const 0x1p-1022))
+  (f64.const 0x1p+0)
+)
+(assert_return
+  (invoke "copysign" (f64.const 0x1p+0) (f64.const -0x1p-1022))
+  (f64.const -0x1p+0)
+)
+(assert_return
+  (invoke "copysign" (f64.const 0x1p+0) (f64.const 0x1p-1022))
+  (f64.const 0x1p+0)
+)
+(assert_return
+  (invoke "copysign" (f64.const -0x1p+0) (f64.const -0x1p-1))
+  (f64.const -0x1p+0)
+)
+(assert_return
+  (invoke "copysign" (f64.const -0x1p+0) (f64.const 0x1p-1))
+  (f64.const 0x1p+0)
+)
+(assert_return
+  (invoke "copysign" (f64.const 0x1p+0) (f64.const -0x1p-1))
+  (f64.const -0x1p+0)
+)
+(assert_return
+  (invoke "copysign" (f64.const 0x1p+0) (f64.const 0x1p-1))
+  (f64.const 0x1p+0)
+)
+(assert_return
+  (invoke "copysign" (f64.const -0x1p+0) (f64.const -0x1p+0))
+  (f64.const -0x1p+0)
+)
+(assert_return
+  (invoke "copysign" (f64.const -0x1p+0) (f64.const 0x1p+0))
+  (f64.const 0x1p+0)
+)
+(assert_return
+  (invoke "copysign" (f64.const 0x1p+0) (f64.const -0x1p+0))
+  (f64.const -0x1p+0)
+)
+(assert_return
+  (invoke "copysign" (f64.const 0x1p+0) (f64.const 0x1p+0))
+  (f64.const 0x1p+0)
+)
+(assert_return
+  (invoke "copysign" (f64.const -0x1p+0) (f64.const -0x1.921fb54442d18p+2))
+  (f64.const -0x1p+0)
+)
+(assert_return
+  (invoke "copysign" (f64.const -0x1p+0) (f64.const 0x1.921fb54442d18p+2))
+  (f64.const 0x1p+0)
+)
+(assert_return
+  (invoke "copysign" (f64.const 0x1p+0) (f64.const -0x1.921fb54442d18p+2))
+  (f64.const -0x1p+0)
+)
+(assert_return
+  (invoke "copysign" (f64.const 0x1p+0) (f64.const 0x1.921fb54442d18p+2))
+  (f64.const 0x1p+0)
+)
+(assert_return
+  (invoke "copysign" (f64.const -0x1p+0) (f64.const -0x1.fffffffffffffp+1023))
+  (f64.const -0x1p+0)
+)
+(assert_return
+  (invoke "copysign" (f64.const -0x1p+0) (f64.const 0x1.fffffffffffffp+1023))
+  (f64.const 0x1p+0)
+)
+(assert_return
+  (invoke "copysign" (f64.const 0x1p+0) (f64.const -0x1.fffffffffffffp+1023))
+  (f64.const -0x1p+0)
+)
+(assert_return
+  (invoke "copysign" (f64.const 0x1p+0) (f64.const 0x1.fffffffffffffp+1023))
+  (f64.const 0x1p+0)
+)
+(assert_return
+  (invoke "copysign" (f64.const -0x1p+0) (f64.const -inf))
+  (f64.const -0x1p+0)
+)
+(assert_return
+  (invoke "copysign" (f64.const -0x1p+0) (f64.const inf))
+  (f64.const 0x1p+0)
+)
+(assert_return
+  (invoke "copysign" (f64.const 0x1p+0) (f64.const -inf))
+  (f64.const -0x1p+0)
+)
+(assert_return
+  (invoke "copysign" (f64.const 0x1p+0) (f64.const inf))
+  (f64.const 0x1p+0)
+)
+(assert_return
+  (invoke "copysign" (f64.const -0x1p+0) (f64.const -nan:0x8000000000000))
+  (f64.const -0x1p+0)
+)
+(assert_return
+  (invoke "copysign" (f64.const -0x1p+0) (f64.const nan:0x8000000000000))
+  (f64.const 0x1p+0)
+)
+(assert_return
+  (invoke "copysign" (f64.const 0x1p+0) (f64.const -nan:0x8000000000000))
+  (f64.const -0x1p+0)
+)
+(assert_return
+  (invoke "copysign" (f64.const 0x1p+0) (f64.const nan:0x8000000000000))
+  (f64.const 0x1p+0)
+)
+(assert_return
+  (invoke "copysign" (f64.const -0x1.921fb54442d18p+2) (f64.const -0x0p+0))
+  (f64.const -0x1.921fb54442d18p+2)
+)
+(assert_return
+  (invoke "copysign" (f64.const -0x1.921fb54442d18p+2) (f64.const 0x0p+0))
+  (f64.const 0x1.921fb54442d18p+2)
+)
+(assert_return
+  (invoke "copysign" (f64.const 0x1.921fb54442d18p+2) (f64.const -0x0p+0))
+  (f64.const -0x1.921fb54442d18p+2)
+)
+(assert_return
+  (invoke "copysign" (f64.const 0x1.921fb54442d18p+2) (f64.const 0x0p+0))
+  (f64.const 0x1.921fb54442d18p+2)
 )
 (assert_return
   (invoke "copysign"
-    (f64.const 2.22507385851e-308)
-    (f64.const -4.94065645841e-324)
+    (f64.const -0x1.921fb54442d18p+2)
+    (f64.const -0x0.0000000000001p-1022)
   )
-  (f64.const -2.22507385851e-308)
+  (f64.const -0x1.921fb54442d18p+2)
 )
 (assert_return
   (invoke "copysign"
-    (f64.const 2.22507385851e-308)
-    (f64.const 4.94065645841e-324)
+    (f64.const -0x1.921fb54442d18p+2)
+    (f64.const 0x0.0000000000001p-1022)
   )
-  (f64.const 2.22507385851e-308)
+  (f64.const 0x1.921fb54442d18p+2)
 )
 (assert_return
   (invoke "copysign"
-    (f64.const -2.22507385851e-308)
-    (f64.const -2.22507385851e-308)
+    (f64.const 0x1.921fb54442d18p+2)
+    (f64.const -0x0.0000000000001p-1022)
   )
-  (f64.const -2.22507385851e-308)
+  (f64.const -0x1.921fb54442d18p+2)
 )
 (assert_return
   (invoke "copysign"
-    (f64.const -2.22507385851e-308)
-    (f64.const 2.22507385851e-308)
+    (f64.const 0x1.921fb54442d18p+2)
+    (f64.const 0x0.0000000000001p-1022)
   )
-  (f64.const 2.22507385851e-308)
+  (f64.const 0x1.921fb54442d18p+2)
+)
+(assert_return
+  (invoke "copysign" (f64.const -0x1.921fb54442d18p+2) (f64.const -0x1p-1022))
+  (f64.const -0x1.921fb54442d18p+2)
+)
+(assert_return
+  (invoke "copysign" (f64.const -0x1.921fb54442d18p+2) (f64.const 0x1p-1022))
+  (f64.const 0x1.921fb54442d18p+2)
+)
+(assert_return
+  (invoke "copysign" (f64.const 0x1.921fb54442d18p+2) (f64.const -0x1p-1022))
+  (f64.const -0x1.921fb54442d18p+2)
+)
+(assert_return
+  (invoke "copysign" (f64.const 0x1.921fb54442d18p+2) (f64.const 0x1p-1022))
+  (f64.const 0x1.921fb54442d18p+2)
+)
+(assert_return
+  (invoke "copysign" (f64.const -0x1.921fb54442d18p+2) (f64.const -0x1p-1))
+  (f64.const -0x1.921fb54442d18p+2)
+)
+(assert_return
+  (invoke "copysign" (f64.const -0x1.921fb54442d18p+2) (f64.const 0x1p-1))
+  (f64.const 0x1.921fb54442d18p+2)
+)
+(assert_return
+  (invoke "copysign" (f64.const 0x1.921fb54442d18p+2) (f64.const -0x1p-1))
+  (f64.const -0x1.921fb54442d18p+2)
+)
+(assert_return
+  (invoke "copysign" (f64.const 0x1.921fb54442d18p+2) (f64.const 0x1p-1))
+  (f64.const 0x1.921fb54442d18p+2)
+)
+(assert_return
+  (invoke "copysign" (f64.const -0x1.921fb54442d18p+2) (f64.const -0x1p+0))
+  (f64.const -0x1.921fb54442d18p+2)
+)
+(assert_return
+  (invoke "copysign" (f64.const -0x1.921fb54442d18p+2) (f64.const 0x1p+0))
+  (f64.const 0x1.921fb54442d18p+2)
+)
+(assert_return
+  (invoke "copysign" (f64.const 0x1.921fb54442d18p+2) (f64.const -0x1p+0))
+  (f64.const -0x1.921fb54442d18p+2)
+)
+(assert_return
+  (invoke "copysign" (f64.const 0x1.921fb54442d18p+2) (f64.const 0x1p+0))
+  (f64.const 0x1.921fb54442d18p+2)
 )
 (assert_return
   (invoke "copysign"
-    (f64.const 2.22507385851e-308)
-    (f64.const -2.22507385851e-308)
+    (f64.const -0x1.921fb54442d18p+2)
+    (f64.const -0x1.921fb54442d18p+2)
   )
-  (f64.const -2.22507385851e-308)
+  (f64.const -0x1.921fb54442d18p+2)
 )
 (assert_return
   (invoke "copysign"
-    (f64.const 2.22507385851e-308)
-    (f64.const 2.22507385851e-308)
+    (f64.const -0x1.921fb54442d18p+2)
+    (f64.const 0x1.921fb54442d18p+2)
   )
-  (f64.const 2.22507385851e-308)
-)
-(assert_return
-  (invoke "copysign" (f64.const -2.22507385851e-308) (f64.const -0.5))
-  (f64.const -2.22507385851e-308)
-)
-(assert_return
-  (invoke "copysign" (f64.const -2.22507385851e-308) (f64.const 0.5))
-  (f64.const 2.22507385851e-308)
-)
-(assert_return
-  (invoke "copysign" (f64.const 2.22507385851e-308) (f64.const -0.5))
-  (f64.const -2.22507385851e-308)
-)
-(assert_return
-  (invoke "copysign" (f64.const 2.22507385851e-308) (f64.const 0.5))
-  (f64.const 2.22507385851e-308)
-)
-(assert_return
-  (invoke "copysign" (f64.const -2.22507385851e-308) (f64.const -1.))
-  (f64.const -2.22507385851e-308)
-)
-(assert_return
-  (invoke "copysign" (f64.const -2.22507385851e-308) (f64.const 1.))
-  (f64.const 2.22507385851e-308)
-)
-(assert_return
-  (invoke "copysign" (f64.const 2.22507385851e-308) (f64.const -1.))
-  (f64.const -2.22507385851e-308)
-)
-(assert_return
-  (invoke "copysign" (f64.const 2.22507385851e-308) (f64.const 1.))
-  (f64.const 2.22507385851e-308)
-)
-(assert_return
-  (invoke "copysign" (f64.const -2.22507385851e-308) (f64.const -6.28318530718))
-  (f64.const -2.22507385851e-308)
-)
-(assert_return
-  (invoke "copysign" (f64.const -2.22507385851e-308) (f64.const 6.28318530718))
-  (f64.const 2.22507385851e-308)
-)
-(assert_return
-  (invoke "copysign" (f64.const 2.22507385851e-308) (f64.const -6.28318530718))
-  (f64.const -2.22507385851e-308)
-)
-(assert_return
-  (invoke "copysign" (f64.const 2.22507385851e-308) (f64.const 6.28318530718))
-  (f64.const 2.22507385851e-308)
+  (f64.const 0x1.921fb54442d18p+2)
 )
 (assert_return
   (invoke "copysign"
-    (f64.const -2.22507385851e-308)
-    (f64.const -1.79769313486e+308)
+    (f64.const 0x1.921fb54442d18p+2)
+    (f64.const -0x1.921fb54442d18p+2)
   )
-  (f64.const -2.22507385851e-308)
+  (f64.const -0x1.921fb54442d18p+2)
 )
 (assert_return
   (invoke "copysign"
-    (f64.const -2.22507385851e-308)
-    (f64.const 1.79769313486e+308)
+    (f64.const 0x1.921fb54442d18p+2)
+    (f64.const 0x1.921fb54442d18p+2)
   )
-  (f64.const 2.22507385851e-308)
+  (f64.const 0x1.921fb54442d18p+2)
 )
 (assert_return
   (invoke "copysign"
-    (f64.const 2.22507385851e-308)
-    (f64.const -1.79769313486e+308)
+    (f64.const -0x1.921fb54442d18p+2)
+    (f64.const -0x1.fffffffffffffp+1023)
   )
-  (f64.const -2.22507385851e-308)
+  (f64.const -0x1.921fb54442d18p+2)
 )
 (assert_return
   (invoke "copysign"
-    (f64.const 2.22507385851e-308)
-    (f64.const 1.79769313486e+308)
+    (f64.const -0x1.921fb54442d18p+2)
+    (f64.const 0x1.fffffffffffffp+1023)
   )
-  (f64.const 2.22507385851e-308)
-)
-(assert_return
-  (invoke "copysign" (f64.const -2.22507385851e-308) (f64.const -inf))
-  (f64.const -2.22507385851e-308)
-)
-(assert_return
-  (invoke "copysign" (f64.const -2.22507385851e-308) (f64.const inf))
-  (f64.const 2.22507385851e-308)
-)
-(assert_return
-  (invoke "copysign" (f64.const 2.22507385851e-308) (f64.const -inf))
-  (f64.const -2.22507385851e-308)
-)
-(assert_return
-  (invoke "copysign" (f64.const 2.22507385851e-308) (f64.const inf))
-  (f64.const 2.22507385851e-308)
+  (f64.const 0x1.921fb54442d18p+2)
 )
 (assert_return
   (invoke "copysign"
-    (f64.const -2.22507385851e-308)
+    (f64.const 0x1.921fb54442d18p+2)
+    (f64.const -0x1.fffffffffffffp+1023)
+  )
+  (f64.const -0x1.921fb54442d18p+2)
+)
+(assert_return
+  (invoke "copysign"
+    (f64.const 0x1.921fb54442d18p+2)
+    (f64.const 0x1.fffffffffffffp+1023)
+  )
+  (f64.const 0x1.921fb54442d18p+2)
+)
+(assert_return
+  (invoke "copysign" (f64.const -0x1.921fb54442d18p+2) (f64.const -inf))
+  (f64.const -0x1.921fb54442d18p+2)
+)
+(assert_return
+  (invoke "copysign" (f64.const -0x1.921fb54442d18p+2) (f64.const inf))
+  (f64.const 0x1.921fb54442d18p+2)
+)
+(assert_return
+  (invoke "copysign" (f64.const 0x1.921fb54442d18p+2) (f64.const -inf))
+  (f64.const -0x1.921fb54442d18p+2)
+)
+(assert_return
+  (invoke "copysign" (f64.const 0x1.921fb54442d18p+2) (f64.const inf))
+  (f64.const 0x1.921fb54442d18p+2)
+)
+(assert_return
+  (invoke "copysign"
+    (f64.const -0x1.921fb54442d18p+2)
     (f64.const -nan:0x8000000000000)
   )
-  (f64.const -2.22507385851e-308)
+  (f64.const -0x1.921fb54442d18p+2)
 )
 (assert_return
   (invoke "copysign"
-    (f64.const -2.22507385851e-308)
+    (f64.const -0x1.921fb54442d18p+2)
     (f64.const nan:0x8000000000000)
   )
-  (f64.const 2.22507385851e-308)
+  (f64.const 0x1.921fb54442d18p+2)
 )
 (assert_return
   (invoke "copysign"
-    (f64.const 2.22507385851e-308)
+    (f64.const 0x1.921fb54442d18p+2)
     (f64.const -nan:0x8000000000000)
   )
-  (f64.const -2.22507385851e-308)
+  (f64.const -0x1.921fb54442d18p+2)
 )
 (assert_return
   (invoke "copysign"
-    (f64.const 2.22507385851e-308)
+    (f64.const 0x1.921fb54442d18p+2)
     (f64.const nan:0x8000000000000)
   )
-  (f64.const 2.22507385851e-308)
+  (f64.const 0x1.921fb54442d18p+2)
 )
 (assert_return
-  (invoke "copysign" (f64.const -0.5) (f64.const -0.))
-  (f64.const -0.5)
+  (invoke "copysign" (f64.const -0x1.fffffffffffffp+1023) (f64.const -0x0p+0))
+  (f64.const -0x1.fffffffffffffp+1023)
 )
 (assert_return
-  (invoke "copysign" (f64.const -0.5) (f64.const 0.))
-  (f64.const 0.5)
+  (invoke "copysign" (f64.const -0x1.fffffffffffffp+1023) (f64.const 0x0p+0))
+  (f64.const 0x1.fffffffffffffp+1023)
 )
 (assert_return
-  (invoke "copysign" (f64.const 0.5) (f64.const -0.))
-  (f64.const -0.5)
+  (invoke "copysign" (f64.const 0x1.fffffffffffffp+1023) (f64.const -0x0p+0))
+  (f64.const -0x1.fffffffffffffp+1023)
 )
 (assert_return
-  (invoke "copysign" (f64.const 0.5) (f64.const 0.))
-  (f64.const 0.5)
-)
-(assert_return
-  (invoke "copysign" (f64.const -0.5) (f64.const -4.94065645841e-324))
-  (f64.const -0.5)
-)
-(assert_return
-  (invoke "copysign" (f64.const -0.5) (f64.const 4.94065645841e-324))
-  (f64.const 0.5)
-)
-(assert_return
-  (invoke "copysign" (f64.const 0.5) (f64.const -4.94065645841e-324))
-  (f64.const -0.5)
-)
-(assert_return
-  (invoke "copysign" (f64.const 0.5) (f64.const 4.94065645841e-324))
-  (f64.const 0.5)
-)
-(assert_return
-  (invoke "copysign" (f64.const -0.5) (f64.const -2.22507385851e-308))
-  (f64.const -0.5)
-)
-(assert_return
-  (invoke "copysign" (f64.const -0.5) (f64.const 2.22507385851e-308))
-  (f64.const 0.5)
-)
-(assert_return
-  (invoke "copysign" (f64.const 0.5) (f64.const -2.22507385851e-308))
-  (f64.const -0.5)
-)
-(assert_return
-  (invoke "copysign" (f64.const 0.5) (f64.const 2.22507385851e-308))
-  (f64.const 0.5)
-)
-(assert_return
-  (invoke "copysign" (f64.const -0.5) (f64.const -0.5))
-  (f64.const -0.5)
-)
-(assert_return
-  (invoke "copysign" (f64.const -0.5) (f64.const 0.5))
-  (f64.const 0.5)
-)
-(assert_return
-  (invoke "copysign" (f64.const 0.5) (f64.const -0.5))
-  (f64.const -0.5)
-)
-(assert_return
-  (invoke "copysign" (f64.const 0.5) (f64.const 0.5))
-  (f64.const 0.5)
-)
-(assert_return
-  (invoke "copysign" (f64.const -0.5) (f64.const -1.))
-  (f64.const -0.5)
-)
-(assert_return
-  (invoke "copysign" (f64.const -0.5) (f64.const 1.))
-  (f64.const 0.5)
-)
-(assert_return
-  (invoke "copysign" (f64.const 0.5) (f64.const -1.))
-  (f64.const -0.5)
-)
-(assert_return
-  (invoke "copysign" (f64.const 0.5) (f64.const 1.))
-  (f64.const 0.5)
-)
-(assert_return
-  (invoke "copysign" (f64.const -0.5) (f64.const -6.28318530718))
-  (f64.const -0.5)
-)
-(assert_return
-  (invoke "copysign" (f64.const -0.5) (f64.const 6.28318530718))
-  (f64.const 0.5)
-)
-(assert_return
-  (invoke "copysign" (f64.const 0.5) (f64.const -6.28318530718))
-  (f64.const -0.5)
-)
-(assert_return
-  (invoke "copysign" (f64.const 0.5) (f64.const 6.28318530718))
-  (f64.const 0.5)
-)
-(assert_return
-  (invoke "copysign" (f64.const -0.5) (f64.const -1.79769313486e+308))
-  (f64.const -0.5)
-)
-(assert_return
-  (invoke "copysign" (f64.const -0.5) (f64.const 1.79769313486e+308))
-  (f64.const 0.5)
-)
-(assert_return
-  (invoke "copysign" (f64.const 0.5) (f64.const -1.79769313486e+308))
-  (f64.const -0.5)
-)
-(assert_return
-  (invoke "copysign" (f64.const 0.5) (f64.const 1.79769313486e+308))
-  (f64.const 0.5)
-)
-(assert_return
-  (invoke "copysign" (f64.const -0.5) (f64.const -inf))
-  (f64.const -0.5)
-)
-(assert_return
-  (invoke "copysign" (f64.const -0.5) (f64.const inf))
-  (f64.const 0.5)
-)
-(assert_return
-  (invoke "copysign" (f64.const 0.5) (f64.const -inf))
-  (f64.const -0.5)
-)
-(assert_return
-  (invoke "copysign" (f64.const 0.5) (f64.const inf))
-  (f64.const 0.5)
-)
-(assert_return
-  (invoke "copysign" (f64.const -0.5) (f64.const -nan:0x8000000000000))
-  (f64.const -0.5)
-)
-(assert_return
-  (invoke "copysign" (f64.const -0.5) (f64.const nan:0x8000000000000))
-  (f64.const 0.5)
-)
-(assert_return
-  (invoke "copysign" (f64.const 0.5) (f64.const -nan:0x8000000000000))
-  (f64.const -0.5)
-)
-(assert_return
-  (invoke "copysign" (f64.const 0.5) (f64.const nan:0x8000000000000))
-  (f64.const 0.5)
-)
-(assert_return
-  (invoke "copysign" (f64.const -1.) (f64.const -0.))
-  (f64.const -1.)
-)
-(assert_return
-  (invoke "copysign" (f64.const -1.) (f64.const 0.))
-  (f64.const 1.)
-)
-(assert_return
-  (invoke "copysign" (f64.const 1.) (f64.const -0.))
-  (f64.const -1.)
-)
-(assert_return (invoke "copysign" (f64.const 1.) (f64.const 0.)) (f64.const 1.))
-(assert_return
-  (invoke "copysign" (f64.const -1.) (f64.const -4.94065645841e-324))
-  (f64.const -1.)
-)
-(assert_return
-  (invoke "copysign" (f64.const -1.) (f64.const 4.94065645841e-324))
-  (f64.const 1.)
-)
-(assert_return
-  (invoke "copysign" (f64.const 1.) (f64.const -4.94065645841e-324))
-  (f64.const -1.)
-)
-(assert_return
-  (invoke "copysign" (f64.const 1.) (f64.const 4.94065645841e-324))
-  (f64.const 1.)
-)
-(assert_return
-  (invoke "copysign" (f64.const -1.) (f64.const -2.22507385851e-308))
-  (f64.const -1.)
-)
-(assert_return
-  (invoke "copysign" (f64.const -1.) (f64.const 2.22507385851e-308))
-  (f64.const 1.)
-)
-(assert_return
-  (invoke "copysign" (f64.const 1.) (f64.const -2.22507385851e-308))
-  (f64.const -1.)
-)
-(assert_return
-  (invoke "copysign" (f64.const 1.) (f64.const 2.22507385851e-308))
-  (f64.const 1.)
-)
-(assert_return
-  (invoke "copysign" (f64.const -1.) (f64.const -0.5))
-  (f64.const -1.)
-)
-(assert_return
-  (invoke "copysign" (f64.const -1.) (f64.const 0.5))
-  (f64.const 1.)
-)
-(assert_return
-  (invoke "copysign" (f64.const 1.) (f64.const -0.5))
-  (f64.const -1.)
-)
-(assert_return
-  (invoke "copysign" (f64.const 1.) (f64.const 0.5))
-  (f64.const 1.)
-)
-(assert_return
-  (invoke "copysign" (f64.const -1.) (f64.const -1.))
-  (f64.const -1.)
-)
-(assert_return
-  (invoke "copysign" (f64.const -1.) (f64.const 1.))
-  (f64.const 1.)
-)
-(assert_return
-  (invoke "copysign" (f64.const 1.) (f64.const -1.))
-  (f64.const -1.)
-)
-(assert_return (invoke "copysign" (f64.const 1.) (f64.const 1.)) (f64.const 1.))
-(assert_return
-  (invoke "copysign" (f64.const -1.) (f64.const -6.28318530718))
-  (f64.const -1.)
-)
-(assert_return
-  (invoke "copysign" (f64.const -1.) (f64.const 6.28318530718))
-  (f64.const 1.)
-)
-(assert_return
-  (invoke "copysign" (f64.const 1.) (f64.const -6.28318530718))
-  (f64.const -1.)
-)
-(assert_return
-  (invoke "copysign" (f64.const 1.) (f64.const 6.28318530718))
-  (f64.const 1.)
-)
-(assert_return
-  (invoke "copysign" (f64.const -1.) (f64.const -1.79769313486e+308))
-  (f64.const -1.)
-)
-(assert_return
-  (invoke "copysign" (f64.const -1.) (f64.const 1.79769313486e+308))
-  (f64.const 1.)
-)
-(assert_return
-  (invoke "copysign" (f64.const 1.) (f64.const -1.79769313486e+308))
-  (f64.const -1.)
-)
-(assert_return
-  (invoke "copysign" (f64.const 1.) (f64.const 1.79769313486e+308))
-  (f64.const 1.)
-)
-(assert_return
-  (invoke "copysign" (f64.const -1.) (f64.const -inf))
-  (f64.const -1.)
-)
-(assert_return
-  (invoke "copysign" (f64.const -1.) (f64.const inf))
-  (f64.const 1.)
-)
-(assert_return
-  (invoke "copysign" (f64.const 1.) (f64.const -inf))
-  (f64.const -1.)
-)
-(assert_return
-  (invoke "copysign" (f64.const 1.) (f64.const inf))
-  (f64.const 1.)
-)
-(assert_return
-  (invoke "copysign" (f64.const -1.) (f64.const -nan:0x8000000000000))
-  (f64.const -1.)
-)
-(assert_return
-  (invoke "copysign" (f64.const -1.) (f64.const nan:0x8000000000000))
-  (f64.const 1.)
-)
-(assert_return
-  (invoke "copysign" (f64.const 1.) (f64.const -nan:0x8000000000000))
-  (f64.const -1.)
-)
-(assert_return
-  (invoke "copysign" (f64.const 1.) (f64.const nan:0x8000000000000))
-  (f64.const 1.)
-)
-(assert_return
-  (invoke "copysign" (f64.const -6.28318530718) (f64.const -0.))
-  (f64.const -6.28318530718)
-)
-(assert_return
-  (invoke "copysign" (f64.const -6.28318530718) (f64.const 0.))
-  (f64.const 6.28318530718)
-)
-(assert_return
-  (invoke "copysign" (f64.const 6.28318530718) (f64.const -0.))
-  (f64.const -6.28318530718)
-)
-(assert_return
-  (invoke "copysign" (f64.const 6.28318530718) (f64.const 0.))
-  (f64.const 6.28318530718)
-)
-(assert_return
-  (invoke "copysign" (f64.const -6.28318530718) (f64.const -4.94065645841e-324))
-  (f64.const -6.28318530718)
-)
-(assert_return
-  (invoke "copysign" (f64.const -6.28318530718) (f64.const 4.94065645841e-324))
-  (f64.const 6.28318530718)
-)
-(assert_return
-  (invoke "copysign" (f64.const 6.28318530718) (f64.const -4.94065645841e-324))
-  (f64.const -6.28318530718)
-)
-(assert_return
-  (invoke "copysign" (f64.const 6.28318530718) (f64.const 4.94065645841e-324))
-  (f64.const 6.28318530718)
-)
-(assert_return
-  (invoke "copysign" (f64.const -6.28318530718) (f64.const -2.22507385851e-308))
-  (f64.const -6.28318530718)
-)
-(assert_return
-  (invoke "copysign" (f64.const -6.28318530718) (f64.const 2.22507385851e-308))
-  (f64.const 6.28318530718)
-)
-(assert_return
-  (invoke "copysign" (f64.const 6.28318530718) (f64.const -2.22507385851e-308))
-  (f64.const -6.28318530718)
-)
-(assert_return
-  (invoke "copysign" (f64.const 6.28318530718) (f64.const 2.22507385851e-308))
-  (f64.const 6.28318530718)
-)
-(assert_return
-  (invoke "copysign" (f64.const -6.28318530718) (f64.const -0.5))
-  (f64.const -6.28318530718)
-)
-(assert_return
-  (invoke "copysign" (f64.const -6.28318530718) (f64.const 0.5))
-  (f64.const 6.28318530718)
-)
-(assert_return
-  (invoke "copysign" (f64.const 6.28318530718) (f64.const -0.5))
-  (f64.const -6.28318530718)
-)
-(assert_return
-  (invoke "copysign" (f64.const 6.28318530718) (f64.const 0.5))
-  (f64.const 6.28318530718)
-)
-(assert_return
-  (invoke "copysign" (f64.const -6.28318530718) (f64.const -1.))
-  (f64.const -6.28318530718)
-)
-(assert_return
-  (invoke "copysign" (f64.const -6.28318530718) (f64.const 1.))
-  (f64.const 6.28318530718)
-)
-(assert_return
-  (invoke "copysign" (f64.const 6.28318530718) (f64.const -1.))
-  (f64.const -6.28318530718)
-)
-(assert_return
-  (invoke "copysign" (f64.const 6.28318530718) (f64.const 1.))
-  (f64.const 6.28318530718)
-)
-(assert_return
-  (invoke "copysign" (f64.const -6.28318530718) (f64.const -6.28318530718))
-  (f64.const -6.28318530718)
-)
-(assert_return
-  (invoke "copysign" (f64.const -6.28318530718) (f64.const 6.28318530718))
-  (f64.const 6.28318530718)
-)
-(assert_return
-  (invoke "copysign" (f64.const 6.28318530718) (f64.const -6.28318530718))
-  (f64.const -6.28318530718)
-)
-(assert_return
-  (invoke "copysign" (f64.const 6.28318530718) (f64.const 6.28318530718))
-  (f64.const 6.28318530718)
-)
-(assert_return
-  (invoke "copysign" (f64.const -6.28318530718) (f64.const -1.79769313486e+308))
-  (f64.const -6.28318530718)
-)
-(assert_return
-  (invoke "copysign" (f64.const -6.28318530718) (f64.const 1.79769313486e+308))
-  (f64.const 6.28318530718)
-)
-(assert_return
-  (invoke "copysign" (f64.const 6.28318530718) (f64.const -1.79769313486e+308))
-  (f64.const -6.28318530718)
-)
-(assert_return
-  (invoke "copysign" (f64.const 6.28318530718) (f64.const 1.79769313486e+308))
-  (f64.const 6.28318530718)
-)
-(assert_return
-  (invoke "copysign" (f64.const -6.28318530718) (f64.const -inf))
-  (f64.const -6.28318530718)
-)
-(assert_return
-  (invoke "copysign" (f64.const -6.28318530718) (f64.const inf))
-  (f64.const 6.28318530718)
-)
-(assert_return
-  (invoke "copysign" (f64.const 6.28318530718) (f64.const -inf))
-  (f64.const -6.28318530718)
-)
-(assert_return
-  (invoke "copysign" (f64.const 6.28318530718) (f64.const inf))
-  (f64.const 6.28318530718)
+  (invoke "copysign" (f64.const 0x1.fffffffffffffp+1023) (f64.const 0x0p+0))
+  (f64.const 0x1.fffffffffffffp+1023)
 )
 (assert_return
   (invoke "copysign"
-    (f64.const -6.28318530718)
+    (f64.const -0x1.fffffffffffffp+1023)
+    (f64.const -0x0.0000000000001p-1022)
+  )
+  (f64.const -0x1.fffffffffffffp+1023)
+)
+(assert_return
+  (invoke "copysign"
+    (f64.const -0x1.fffffffffffffp+1023)
+    (f64.const 0x0.0000000000001p-1022)
+  )
+  (f64.const 0x1.fffffffffffffp+1023)
+)
+(assert_return
+  (invoke "copysign"
+    (f64.const 0x1.fffffffffffffp+1023)
+    (f64.const -0x0.0000000000001p-1022)
+  )
+  (f64.const -0x1.fffffffffffffp+1023)
+)
+(assert_return
+  (invoke "copysign"
+    (f64.const 0x1.fffffffffffffp+1023)
+    (f64.const 0x0.0000000000001p-1022)
+  )
+  (f64.const 0x1.fffffffffffffp+1023)
+)
+(assert_return
+  (invoke "copysign"
+    (f64.const -0x1.fffffffffffffp+1023)
+    (f64.const -0x1p-1022)
+  )
+  (f64.const -0x1.fffffffffffffp+1023)
+)
+(assert_return
+  (invoke "copysign" (f64.const -0x1.fffffffffffffp+1023) (f64.const 0x1p-1022))
+  (f64.const 0x1.fffffffffffffp+1023)
+)
+(assert_return
+  (invoke "copysign" (f64.const 0x1.fffffffffffffp+1023) (f64.const -0x1p-1022))
+  (f64.const -0x1.fffffffffffffp+1023)
+)
+(assert_return
+  (invoke "copysign" (f64.const 0x1.fffffffffffffp+1023) (f64.const 0x1p-1022))
+  (f64.const 0x1.fffffffffffffp+1023)
+)
+(assert_return
+  (invoke "copysign" (f64.const -0x1.fffffffffffffp+1023) (f64.const -0x1p-1))
+  (f64.const -0x1.fffffffffffffp+1023)
+)
+(assert_return
+  (invoke "copysign" (f64.const -0x1.fffffffffffffp+1023) (f64.const 0x1p-1))
+  (f64.const 0x1.fffffffffffffp+1023)
+)
+(assert_return
+  (invoke "copysign" (f64.const 0x1.fffffffffffffp+1023) (f64.const -0x1p-1))
+  (f64.const -0x1.fffffffffffffp+1023)
+)
+(assert_return
+  (invoke "copysign" (f64.const 0x1.fffffffffffffp+1023) (f64.const 0x1p-1))
+  (f64.const 0x1.fffffffffffffp+1023)
+)
+(assert_return
+  (invoke "copysign" (f64.const -0x1.fffffffffffffp+1023) (f64.const -0x1p+0))
+  (f64.const -0x1.fffffffffffffp+1023)
+)
+(assert_return
+  (invoke "copysign" (f64.const -0x1.fffffffffffffp+1023) (f64.const 0x1p+0))
+  (f64.const 0x1.fffffffffffffp+1023)
+)
+(assert_return
+  (invoke "copysign" (f64.const 0x1.fffffffffffffp+1023) (f64.const -0x1p+0))
+  (f64.const -0x1.fffffffffffffp+1023)
+)
+(assert_return
+  (invoke "copysign" (f64.const 0x1.fffffffffffffp+1023) (f64.const 0x1p+0))
+  (f64.const 0x1.fffffffffffffp+1023)
+)
+(assert_return
+  (invoke "copysign"
+    (f64.const -0x1.fffffffffffffp+1023)
+    (f64.const -0x1.921fb54442d18p+2)
+  )
+  (f64.const -0x1.fffffffffffffp+1023)
+)
+(assert_return
+  (invoke "copysign"
+    (f64.const -0x1.fffffffffffffp+1023)
+    (f64.const 0x1.921fb54442d18p+2)
+  )
+  (f64.const 0x1.fffffffffffffp+1023)
+)
+(assert_return
+  (invoke "copysign"
+    (f64.const 0x1.fffffffffffffp+1023)
+    (f64.const -0x1.921fb54442d18p+2)
+  )
+  (f64.const -0x1.fffffffffffffp+1023)
+)
+(assert_return
+  (invoke "copysign"
+    (f64.const 0x1.fffffffffffffp+1023)
+    (f64.const 0x1.921fb54442d18p+2)
+  )
+  (f64.const 0x1.fffffffffffffp+1023)
+)
+(assert_return
+  (invoke "copysign"
+    (f64.const -0x1.fffffffffffffp+1023)
+    (f64.const -0x1.fffffffffffffp+1023)
+  )
+  (f64.const -0x1.fffffffffffffp+1023)
+)
+(assert_return
+  (invoke "copysign"
+    (f64.const -0x1.fffffffffffffp+1023)
+    (f64.const 0x1.fffffffffffffp+1023)
+  )
+  (f64.const 0x1.fffffffffffffp+1023)
+)
+(assert_return
+  (invoke "copysign"
+    (f64.const 0x1.fffffffffffffp+1023)
+    (f64.const -0x1.fffffffffffffp+1023)
+  )
+  (f64.const -0x1.fffffffffffffp+1023)
+)
+(assert_return
+  (invoke "copysign"
+    (f64.const 0x1.fffffffffffffp+1023)
+    (f64.const 0x1.fffffffffffffp+1023)
+  )
+  (f64.const 0x1.fffffffffffffp+1023)
+)
+(assert_return
+  (invoke "copysign" (f64.const -0x1.fffffffffffffp+1023) (f64.const -inf))
+  (f64.const -0x1.fffffffffffffp+1023)
+)
+(assert_return
+  (invoke "copysign" (f64.const -0x1.fffffffffffffp+1023) (f64.const inf))
+  (f64.const 0x1.fffffffffffffp+1023)
+)
+(assert_return
+  (invoke "copysign" (f64.const 0x1.fffffffffffffp+1023) (f64.const -inf))
+  (f64.const -0x1.fffffffffffffp+1023)
+)
+(assert_return
+  (invoke "copysign" (f64.const 0x1.fffffffffffffp+1023) (f64.const inf))
+  (f64.const 0x1.fffffffffffffp+1023)
+)
+(assert_return
+  (invoke "copysign"
+    (f64.const -0x1.fffffffffffffp+1023)
     (f64.const -nan:0x8000000000000)
   )
-  (f64.const -6.28318530718)
-)
-(assert_return
-  (invoke "copysign" (f64.const -6.28318530718) (f64.const nan:0x8000000000000))
-  (f64.const 6.28318530718)
-)
-(assert_return
-  (invoke "copysign" (f64.const 6.28318530718) (f64.const -nan:0x8000000000000))
-  (f64.const -6.28318530718)
-)
-(assert_return
-  (invoke "copysign" (f64.const 6.28318530718) (f64.const nan:0x8000000000000))
-  (f64.const 6.28318530718)
-)
-(assert_return
-  (invoke "copysign" (f64.const -1.79769313486e+308) (f64.const -0.))
-  (f64.const -1.79769313486e+308)
-)
-(assert_return
-  (invoke "copysign" (f64.const -1.79769313486e+308) (f64.const 0.))
-  (f64.const 1.79769313486e+308)
-)
-(assert_return
-  (invoke "copysign" (f64.const 1.79769313486e+308) (f64.const -0.))
-  (f64.const -1.79769313486e+308)
-)
-(assert_return
-  (invoke "copysign" (f64.const 1.79769313486e+308) (f64.const 0.))
-  (f64.const 1.79769313486e+308)
+  (f64.const -0x1.fffffffffffffp+1023)
 )
 (assert_return
   (invoke "copysign"
-    (f64.const -1.79769313486e+308)
-    (f64.const -4.94065645841e-324)
-  )
-  (f64.const -1.79769313486e+308)
-)
-(assert_return
-  (invoke "copysign"
-    (f64.const -1.79769313486e+308)
-    (f64.const 4.94065645841e-324)
-  )
-  (f64.const 1.79769313486e+308)
-)
-(assert_return
-  (invoke "copysign"
-    (f64.const 1.79769313486e+308)
-    (f64.const -4.94065645841e-324)
-  )
-  (f64.const -1.79769313486e+308)
-)
-(assert_return
-  (invoke "copysign"
-    (f64.const 1.79769313486e+308)
-    (f64.const 4.94065645841e-324)
-  )
-  (f64.const 1.79769313486e+308)
-)
-(assert_return
-  (invoke "copysign"
-    (f64.const -1.79769313486e+308)
-    (f64.const -2.22507385851e-308)
-  )
-  (f64.const -1.79769313486e+308)
-)
-(assert_return
-  (invoke "copysign"
-    (f64.const -1.79769313486e+308)
-    (f64.const 2.22507385851e-308)
-  )
-  (f64.const 1.79769313486e+308)
-)
-(assert_return
-  (invoke "copysign"
-    (f64.const 1.79769313486e+308)
-    (f64.const -2.22507385851e-308)
-  )
-  (f64.const -1.79769313486e+308)
-)
-(assert_return
-  (invoke "copysign"
-    (f64.const 1.79769313486e+308)
-    (f64.const 2.22507385851e-308)
-  )
-  (f64.const 1.79769313486e+308)
-)
-(assert_return
-  (invoke "copysign" (f64.const -1.79769313486e+308) (f64.const -0.5))
-  (f64.const -1.79769313486e+308)
-)
-(assert_return
-  (invoke "copysign" (f64.const -1.79769313486e+308) (f64.const 0.5))
-  (f64.const 1.79769313486e+308)
-)
-(assert_return
-  (invoke "copysign" (f64.const 1.79769313486e+308) (f64.const -0.5))
-  (f64.const -1.79769313486e+308)
-)
-(assert_return
-  (invoke "copysign" (f64.const 1.79769313486e+308) (f64.const 0.5))
-  (f64.const 1.79769313486e+308)
-)
-(assert_return
-  (invoke "copysign" (f64.const -1.79769313486e+308) (f64.const -1.))
-  (f64.const -1.79769313486e+308)
-)
-(assert_return
-  (invoke "copysign" (f64.const -1.79769313486e+308) (f64.const 1.))
-  (f64.const 1.79769313486e+308)
-)
-(assert_return
-  (invoke "copysign" (f64.const 1.79769313486e+308) (f64.const -1.))
-  (f64.const -1.79769313486e+308)
-)
-(assert_return
-  (invoke "copysign" (f64.const 1.79769313486e+308) (f64.const 1.))
-  (f64.const 1.79769313486e+308)
-)
-(assert_return
-  (invoke "copysign" (f64.const -1.79769313486e+308) (f64.const -6.28318530718))
-  (f64.const -1.79769313486e+308)
-)
-(assert_return
-  (invoke "copysign" (f64.const -1.79769313486e+308) (f64.const 6.28318530718))
-  (f64.const 1.79769313486e+308)
-)
-(assert_return
-  (invoke "copysign" (f64.const 1.79769313486e+308) (f64.const -6.28318530718))
-  (f64.const -1.79769313486e+308)
-)
-(assert_return
-  (invoke "copysign" (f64.const 1.79769313486e+308) (f64.const 6.28318530718))
-  (f64.const 1.79769313486e+308)
-)
-(assert_return
-  (invoke "copysign"
-    (f64.const -1.79769313486e+308)
-    (f64.const -1.79769313486e+308)
-  )
-  (f64.const -1.79769313486e+308)
-)
-(assert_return
-  (invoke "copysign"
-    (f64.const -1.79769313486e+308)
-    (f64.const 1.79769313486e+308)
-  )
-  (f64.const 1.79769313486e+308)
-)
-(assert_return
-  (invoke "copysign"
-    (f64.const 1.79769313486e+308)
-    (f64.const -1.79769313486e+308)
-  )
-  (f64.const -1.79769313486e+308)
-)
-(assert_return
-  (invoke "copysign"
-    (f64.const 1.79769313486e+308)
-    (f64.const 1.79769313486e+308)
-  )
-  (f64.const 1.79769313486e+308)
-)
-(assert_return
-  (invoke "copysign" (f64.const -1.79769313486e+308) (f64.const -inf))
-  (f64.const -1.79769313486e+308)
-)
-(assert_return
-  (invoke "copysign" (f64.const -1.79769313486e+308) (f64.const inf))
-  (f64.const 1.79769313486e+308)
-)
-(assert_return
-  (invoke "copysign" (f64.const 1.79769313486e+308) (f64.const -inf))
-  (f64.const -1.79769313486e+308)
-)
-(assert_return
-  (invoke "copysign" (f64.const 1.79769313486e+308) (f64.const inf))
-  (f64.const 1.79769313486e+308)
-)
-(assert_return
-  (invoke "copysign"
-    (f64.const -1.79769313486e+308)
-    (f64.const -nan:0x8000000000000)
-  )
-  (f64.const -1.79769313486e+308)
-)
-(assert_return
-  (invoke "copysign"
-    (f64.const -1.79769313486e+308)
+    (f64.const -0x1.fffffffffffffp+1023)
     (f64.const nan:0x8000000000000)
   )
-  (f64.const 1.79769313486e+308)
+  (f64.const 0x1.fffffffffffffp+1023)
 )
 (assert_return
   (invoke "copysign"
-    (f64.const 1.79769313486e+308)
+    (f64.const 0x1.fffffffffffffp+1023)
     (f64.const -nan:0x8000000000000)
   )
-  (f64.const -1.79769313486e+308)
+  (f64.const -0x1.fffffffffffffp+1023)
 )
 (assert_return
   (invoke "copysign"
-    (f64.const 1.79769313486e+308)
+    (f64.const 0x1.fffffffffffffp+1023)
     (f64.const nan:0x8000000000000)
   )
-  (f64.const 1.79769313486e+308)
+  (f64.const 0x1.fffffffffffffp+1023)
 )
 (assert_return
-  (invoke "copysign" (f64.const -inf) (f64.const -0.))
+  (invoke "copysign" (f64.const -inf) (f64.const -0x0p+0))
   (f64.const -inf)
 )
 (assert_return
-  (invoke "copysign" (f64.const -inf) (f64.const 0.))
+  (invoke "copysign" (f64.const -inf) (f64.const 0x0p+0))
   (f64.const inf)
 )
 (assert_return
-  (invoke "copysign" (f64.const inf) (f64.const -0.))
+  (invoke "copysign" (f64.const inf) (f64.const -0x0p+0))
   (f64.const -inf)
 )
 (assert_return
-  (invoke "copysign" (f64.const inf) (f64.const 0.))
+  (invoke "copysign" (f64.const inf) (f64.const 0x0p+0))
   (f64.const inf)
 )
 (assert_return
-  (invoke "copysign" (f64.const -inf) (f64.const -4.94065645841e-324))
+  (invoke "copysign" (f64.const -inf) (f64.const -0x0.0000000000001p-1022))
   (f64.const -inf)
 )
 (assert_return
-  (invoke "copysign" (f64.const -inf) (f64.const 4.94065645841e-324))
+  (invoke "copysign" (f64.const -inf) (f64.const 0x0.0000000000001p-1022))
   (f64.const inf)
 )
 (assert_return
-  (invoke "copysign" (f64.const inf) (f64.const -4.94065645841e-324))
+  (invoke "copysign" (f64.const inf) (f64.const -0x0.0000000000001p-1022))
   (f64.const -inf)
 )
 (assert_return
-  (invoke "copysign" (f64.const inf) (f64.const 4.94065645841e-324))
+  (invoke "copysign" (f64.const inf) (f64.const 0x0.0000000000001p-1022))
   (f64.const inf)
 )
 (assert_return
-  (invoke "copysign" (f64.const -inf) (f64.const -2.22507385851e-308))
+  (invoke "copysign" (f64.const -inf) (f64.const -0x1p-1022))
   (f64.const -inf)
 )
 (assert_return
-  (invoke "copysign" (f64.const -inf) (f64.const 2.22507385851e-308))
+  (invoke "copysign" (f64.const -inf) (f64.const 0x1p-1022))
   (f64.const inf)
 )
 (assert_return
-  (invoke "copysign" (f64.const inf) (f64.const -2.22507385851e-308))
+  (invoke "copysign" (f64.const inf) (f64.const -0x1p-1022))
   (f64.const -inf)
 )
 (assert_return
-  (invoke "copysign" (f64.const inf) (f64.const 2.22507385851e-308))
+  (invoke "copysign" (f64.const inf) (f64.const 0x1p-1022))
   (f64.const inf)
 )
 (assert_return
-  (invoke "copysign" (f64.const -inf) (f64.const -0.5))
+  (invoke "copysign" (f64.const -inf) (f64.const -0x1p-1))
   (f64.const -inf)
 )
 (assert_return
-  (invoke "copysign" (f64.const -inf) (f64.const 0.5))
+  (invoke "copysign" (f64.const -inf) (f64.const 0x1p-1))
   (f64.const inf)
 )
 (assert_return
-  (invoke "copysign" (f64.const inf) (f64.const -0.5))
+  (invoke "copysign" (f64.const inf) (f64.const -0x1p-1))
   (f64.const -inf)
 )
 (assert_return
-  (invoke "copysign" (f64.const inf) (f64.const 0.5))
+  (invoke "copysign" (f64.const inf) (f64.const 0x1p-1))
   (f64.const inf)
 )
 (assert_return
-  (invoke "copysign" (f64.const -inf) (f64.const -1.))
+  (invoke "copysign" (f64.const -inf) (f64.const -0x1p+0))
   (f64.const -inf)
 )
 (assert_return
-  (invoke "copysign" (f64.const -inf) (f64.const 1.))
+  (invoke "copysign" (f64.const -inf) (f64.const 0x1p+0))
   (f64.const inf)
 )
 (assert_return
-  (invoke "copysign" (f64.const inf) (f64.const -1.))
+  (invoke "copysign" (f64.const inf) (f64.const -0x1p+0))
   (f64.const -inf)
 )
 (assert_return
-  (invoke "copysign" (f64.const inf) (f64.const 1.))
+  (invoke "copysign" (f64.const inf) (f64.const 0x1p+0))
   (f64.const inf)
 )
 (assert_return
-  (invoke "copysign" (f64.const -inf) (f64.const -6.28318530718))
+  (invoke "copysign" (f64.const -inf) (f64.const -0x1.921fb54442d18p+2))
   (f64.const -inf)
 )
 (assert_return
-  (invoke "copysign" (f64.const -inf) (f64.const 6.28318530718))
+  (invoke "copysign" (f64.const -inf) (f64.const 0x1.921fb54442d18p+2))
   (f64.const inf)
 )
 (assert_return
-  (invoke "copysign" (f64.const inf) (f64.const -6.28318530718))
+  (invoke "copysign" (f64.const inf) (f64.const -0x1.921fb54442d18p+2))
   (f64.const -inf)
 )
 (assert_return
-  (invoke "copysign" (f64.const inf) (f64.const 6.28318530718))
+  (invoke "copysign" (f64.const inf) (f64.const 0x1.921fb54442d18p+2))
   (f64.const inf)
 )
 (assert_return
-  (invoke "copysign" (f64.const -inf) (f64.const -1.79769313486e+308))
+  (invoke "copysign" (f64.const -inf) (f64.const -0x1.fffffffffffffp+1023))
   (f64.const -inf)
 )
 (assert_return
-  (invoke "copysign" (f64.const -inf) (f64.const 1.79769313486e+308))
+  (invoke "copysign" (f64.const -inf) (f64.const 0x1.fffffffffffffp+1023))
   (f64.const inf)
 )
 (assert_return
-  (invoke "copysign" (f64.const inf) (f64.const -1.79769313486e+308))
+  (invoke "copysign" (f64.const inf) (f64.const -0x1.fffffffffffffp+1023))
   (f64.const -inf)
 )
 (assert_return
-  (invoke "copysign" (f64.const inf) (f64.const 1.79769313486e+308))
+  (invoke "copysign" (f64.const inf) (f64.const 0x1.fffffffffffffp+1023))
   (f64.const inf)
 )
 (assert_return
@@ -1295,153 +1316,150 @@
   (f64.const inf)
 )
 (assert_return
-  (invoke "copysign" (f64.const -nan:0x8000000000000) (f64.const -0.))
+  (invoke "copysign" (f64.const -nan:0x8000000000000) (f64.const -0x0p+0))
   (f64.const -nan:0x8000000000000)
 )
 (assert_return
-  (invoke "copysign" (f64.const -nan:0x8000000000000) (f64.const 0.))
+  (invoke "copysign" (f64.const -nan:0x8000000000000) (f64.const 0x0p+0))
   (f64.const nan:0x8000000000000)
 )
 (assert_return
-  (invoke "copysign" (f64.const nan:0x8000000000000) (f64.const -0.))
+  (invoke "copysign" (f64.const nan:0x8000000000000) (f64.const -0x0p+0))
   (f64.const -nan:0x8000000000000)
 )
 (assert_return
-  (invoke "copysign" (f64.const nan:0x8000000000000) (f64.const 0.))
+  (invoke "copysign" (f64.const nan:0x8000000000000) (f64.const 0x0p+0))
   (f64.const nan:0x8000000000000)
 )
 (assert_return
   (invoke "copysign"
     (f64.const -nan:0x8000000000000)
-    (f64.const -4.94065645841e-324)
+    (f64.const -0x0.0000000000001p-1022)
   )
   (f64.const -nan:0x8000000000000)
 )
 (assert_return
   (invoke "copysign"
     (f64.const -nan:0x8000000000000)
-    (f64.const 4.94065645841e-324)
+    (f64.const 0x0.0000000000001p-1022)
   )
   (f64.const nan:0x8000000000000)
 )
 (assert_return
   (invoke "copysign"
     (f64.const nan:0x8000000000000)
-    (f64.const -4.94065645841e-324)
+    (f64.const -0x0.0000000000001p-1022)
   )
   (f64.const -nan:0x8000000000000)
 )
 (assert_return
   (invoke "copysign"
     (f64.const nan:0x8000000000000)
-    (f64.const 4.94065645841e-324)
+    (f64.const 0x0.0000000000001p-1022)
   )
+  (f64.const nan:0x8000000000000)
+)
+(assert_return
+  (invoke "copysign" (f64.const -nan:0x8000000000000) (f64.const -0x1p-1022))
+  (f64.const -nan:0x8000000000000)
+)
+(assert_return
+  (invoke "copysign" (f64.const -nan:0x8000000000000) (f64.const 0x1p-1022))
+  (f64.const nan:0x8000000000000)
+)
+(assert_return
+  (invoke "copysign" (f64.const nan:0x8000000000000) (f64.const -0x1p-1022))
+  (f64.const -nan:0x8000000000000)
+)
+(assert_return
+  (invoke "copysign" (f64.const nan:0x8000000000000) (f64.const 0x1p-1022))
+  (f64.const nan:0x8000000000000)
+)
+(assert_return
+  (invoke "copysign" (f64.const -nan:0x8000000000000) (f64.const -0x1p-1))
+  (f64.const -nan:0x8000000000000)
+)
+(assert_return
+  (invoke "copysign" (f64.const -nan:0x8000000000000) (f64.const 0x1p-1))
+  (f64.const nan:0x8000000000000)
+)
+(assert_return
+  (invoke "copysign" (f64.const nan:0x8000000000000) (f64.const -0x1p-1))
+  (f64.const -nan:0x8000000000000)
+)
+(assert_return
+  (invoke "copysign" (f64.const nan:0x8000000000000) (f64.const 0x1p-1))
+  (f64.const nan:0x8000000000000)
+)
+(assert_return
+  (invoke "copysign" (f64.const -nan:0x8000000000000) (f64.const -0x1p+0))
+  (f64.const -nan:0x8000000000000)
+)
+(assert_return
+  (invoke "copysign" (f64.const -nan:0x8000000000000) (f64.const 0x1p+0))
+  (f64.const nan:0x8000000000000)
+)
+(assert_return
+  (invoke "copysign" (f64.const nan:0x8000000000000) (f64.const -0x1p+0))
+  (f64.const -nan:0x8000000000000)
+)
+(assert_return
+  (invoke "copysign" (f64.const nan:0x8000000000000) (f64.const 0x1p+0))
   (f64.const nan:0x8000000000000)
 )
 (assert_return
   (invoke "copysign"
     (f64.const -nan:0x8000000000000)
-    (f64.const -2.22507385851e-308)
+    (f64.const -0x1.921fb54442d18p+2)
   )
   (f64.const -nan:0x8000000000000)
 )
 (assert_return
   (invoke "copysign"
     (f64.const -nan:0x8000000000000)
-    (f64.const 2.22507385851e-308)
+    (f64.const 0x1.921fb54442d18p+2)
   )
   (f64.const nan:0x8000000000000)
 )
 (assert_return
   (invoke "copysign"
     (f64.const nan:0x8000000000000)
-    (f64.const -2.22507385851e-308)
+    (f64.const -0x1.921fb54442d18p+2)
   )
   (f64.const -nan:0x8000000000000)
 )
 (assert_return
   (invoke "copysign"
     (f64.const nan:0x8000000000000)
-    (f64.const 2.22507385851e-308)
+    (f64.const 0x1.921fb54442d18p+2)
   )
-  (f64.const nan:0x8000000000000)
-)
-(assert_return
-  (invoke "copysign" (f64.const -nan:0x8000000000000) (f64.const -0.5))
-  (f64.const -nan:0x8000000000000)
-)
-(assert_return
-  (invoke "copysign" (f64.const -nan:0x8000000000000) (f64.const 0.5))
-  (f64.const nan:0x8000000000000)
-)
-(assert_return
-  (invoke "copysign" (f64.const nan:0x8000000000000) (f64.const -0.5))
-  (f64.const -nan:0x8000000000000)
-)
-(assert_return
-  (invoke "copysign" (f64.const nan:0x8000000000000) (f64.const 0.5))
-  (f64.const nan:0x8000000000000)
-)
-(assert_return
-  (invoke "copysign" (f64.const -nan:0x8000000000000) (f64.const -1.))
-  (f64.const -nan:0x8000000000000)
-)
-(assert_return
-  (invoke "copysign" (f64.const -nan:0x8000000000000) (f64.const 1.))
-  (f64.const nan:0x8000000000000)
-)
-(assert_return
-  (invoke "copysign" (f64.const nan:0x8000000000000) (f64.const -1.))
-  (f64.const -nan:0x8000000000000)
-)
-(assert_return
-  (invoke "copysign" (f64.const nan:0x8000000000000) (f64.const 1.))
   (f64.const nan:0x8000000000000)
 )
 (assert_return
   (invoke "copysign"
     (f64.const -nan:0x8000000000000)
-    (f64.const -6.28318530718)
-  )
-  (f64.const -nan:0x8000000000000)
-)
-(assert_return
-  (invoke "copysign" (f64.const -nan:0x8000000000000) (f64.const 6.28318530718))
-  (f64.const nan:0x8000000000000)
-)
-(assert_return
-  (invoke "copysign" (f64.const nan:0x8000000000000) (f64.const -6.28318530718))
-  (f64.const -nan:0x8000000000000)
-)
-(assert_return
-  (invoke "copysign" (f64.const nan:0x8000000000000) (f64.const 6.28318530718))
-  (f64.const nan:0x8000000000000)
-)
-(assert_return
-  (invoke "copysign"
-    (f64.const -nan:0x8000000000000)
-    (f64.const -1.79769313486e+308)
+    (f64.const -0x1.fffffffffffffp+1023)
   )
   (f64.const -nan:0x8000000000000)
 )
 (assert_return
   (invoke "copysign"
     (f64.const -nan:0x8000000000000)
-    (f64.const 1.79769313486e+308)
+    (f64.const 0x1.fffffffffffffp+1023)
   )
   (f64.const nan:0x8000000000000)
 )
 (assert_return
   (invoke "copysign"
     (f64.const nan:0x8000000000000)
-    (f64.const -1.79769313486e+308)
+    (f64.const -0x1.fffffffffffffp+1023)
   )
   (f64.const -nan:0x8000000000000)
 )
 (assert_return
   (invoke "copysign"
     (f64.const nan:0x8000000000000)
-    (f64.const 1.79769313486e+308)
+    (f64.const 0x1.fffffffffffffp+1023)
   )
   (f64.const nan:0x8000000000000)
 )
@@ -1489,43 +1507,37 @@
   )
   (f64.const nan:0x8000000000000)
 )
-(assert_return (invoke "abs" (f64.const -0.)) (f64.const 0.))
-(assert_return (invoke "abs" (f64.const 0.)) (f64.const 0.))
+(assert_return (invoke "abs" (f64.const -0x0p+0)) (f64.const 0x0p+0))
+(assert_return (invoke "abs" (f64.const 0x0p+0)) (f64.const 0x0p+0))
 (assert_return
-  (invoke "abs" (f64.const -4.94065645841e-324))
-  (f64.const 4.94065645841e-324)
+  (invoke "abs" (f64.const -0x0.0000000000001p-1022))
+  (f64.const 0x0.0000000000001p-1022)
 )
 (assert_return
-  (invoke "abs" (f64.const 4.94065645841e-324))
-  (f64.const 4.94065645841e-324)
+  (invoke "abs" (f64.const 0x0.0000000000001p-1022))
+  (f64.const 0x0.0000000000001p-1022)
+)
+(assert_return (invoke "abs" (f64.const -0x1p-1022)) (f64.const 0x1p-1022))
+(assert_return (invoke "abs" (f64.const 0x1p-1022)) (f64.const 0x1p-1022))
+(assert_return (invoke "abs" (f64.const -0x1p-1)) (f64.const 0x1p-1))
+(assert_return (invoke "abs" (f64.const 0x1p-1)) (f64.const 0x1p-1))
+(assert_return (invoke "abs" (f64.const -0x1p+0)) (f64.const 0x1p+0))
+(assert_return (invoke "abs" (f64.const 0x1p+0)) (f64.const 0x1p+0))
+(assert_return
+  (invoke "abs" (f64.const -0x1.921fb54442d18p+2))
+  (f64.const 0x1.921fb54442d18p+2)
 )
 (assert_return
-  (invoke "abs" (f64.const -2.22507385851e-308))
-  (f64.const 2.22507385851e-308)
+  (invoke "abs" (f64.const 0x1.921fb54442d18p+2))
+  (f64.const 0x1.921fb54442d18p+2)
 )
 (assert_return
-  (invoke "abs" (f64.const 2.22507385851e-308))
-  (f64.const 2.22507385851e-308)
-)
-(assert_return (invoke "abs" (f64.const -0.5)) (f64.const 0.5))
-(assert_return (invoke "abs" (f64.const 0.5)) (f64.const 0.5))
-(assert_return (invoke "abs" (f64.const -1.)) (f64.const 1.))
-(assert_return (invoke "abs" (f64.const 1.)) (f64.const 1.))
-(assert_return
-  (invoke "abs" (f64.const -6.28318530718))
-  (f64.const 6.28318530718)
+  (invoke "abs" (f64.const -0x1.fffffffffffffp+1023))
+  (f64.const 0x1.fffffffffffffp+1023)
 )
 (assert_return
-  (invoke "abs" (f64.const 6.28318530718))
-  (f64.const 6.28318530718)
-)
-(assert_return
-  (invoke "abs" (f64.const -1.79769313486e+308))
-  (f64.const 1.79769313486e+308)
-)
-(assert_return
-  (invoke "abs" (f64.const 1.79769313486e+308))
-  (f64.const 1.79769313486e+308)
+  (invoke "abs" (f64.const 0x1.fffffffffffffp+1023))
+  (f64.const 0x1.fffffffffffffp+1023)
 )
 (assert_return (invoke "abs" (f64.const -inf)) (f64.const inf))
 (assert_return (invoke "abs" (f64.const inf)) (f64.const inf))
@@ -1537,43 +1549,37 @@
   (invoke "abs" (f64.const nan:0x8000000000000))
   (f64.const nan:0x8000000000000)
 )
-(assert_return (invoke "neg" (f64.const -0.)) (f64.const 0.))
-(assert_return (invoke "neg" (f64.const 0.)) (f64.const -0.))
+(assert_return (invoke "neg" (f64.const -0x0p+0)) (f64.const 0x0p+0))
+(assert_return (invoke "neg" (f64.const 0x0p+0)) (f64.const -0x0p+0))
 (assert_return
-  (invoke "neg" (f64.const -4.94065645841e-324))
-  (f64.const 4.94065645841e-324)
+  (invoke "neg" (f64.const -0x0.0000000000001p-1022))
+  (f64.const 0x0.0000000000001p-1022)
 )
 (assert_return
-  (invoke "neg" (f64.const 4.94065645841e-324))
-  (f64.const -4.94065645841e-324)
+  (invoke "neg" (f64.const 0x0.0000000000001p-1022))
+  (f64.const -0x0.0000000000001p-1022)
+)
+(assert_return (invoke "neg" (f64.const -0x1p-1022)) (f64.const 0x1p-1022))
+(assert_return (invoke "neg" (f64.const 0x1p-1022)) (f64.const -0x1p-1022))
+(assert_return (invoke "neg" (f64.const -0x1p-1)) (f64.const 0x1p-1))
+(assert_return (invoke "neg" (f64.const 0x1p-1)) (f64.const -0x1p-1))
+(assert_return (invoke "neg" (f64.const -0x1p+0)) (f64.const 0x1p+0))
+(assert_return (invoke "neg" (f64.const 0x1p+0)) (f64.const -0x1p+0))
+(assert_return
+  (invoke "neg" (f64.const -0x1.921fb54442d18p+2))
+  (f64.const 0x1.921fb54442d18p+2)
 )
 (assert_return
-  (invoke "neg" (f64.const -2.22507385851e-308))
-  (f64.const 2.22507385851e-308)
+  (invoke "neg" (f64.const 0x1.921fb54442d18p+2))
+  (f64.const -0x1.921fb54442d18p+2)
 )
 (assert_return
-  (invoke "neg" (f64.const 2.22507385851e-308))
-  (f64.const -2.22507385851e-308)
-)
-(assert_return (invoke "neg" (f64.const -0.5)) (f64.const 0.5))
-(assert_return (invoke "neg" (f64.const 0.5)) (f64.const -0.5))
-(assert_return (invoke "neg" (f64.const -1.)) (f64.const 1.))
-(assert_return (invoke "neg" (f64.const 1.)) (f64.const -1.))
-(assert_return
-  (invoke "neg" (f64.const -6.28318530718))
-  (f64.const 6.28318530718)
+  (invoke "neg" (f64.const -0x1.fffffffffffffp+1023))
+  (f64.const 0x1.fffffffffffffp+1023)
 )
 (assert_return
-  (invoke "neg" (f64.const 6.28318530718))
-  (f64.const -6.28318530718)
-)
-(assert_return
-  (invoke "neg" (f64.const -1.79769313486e+308))
-  (f64.const 1.79769313486e+308)
-)
-(assert_return
-  (invoke "neg" (f64.const 1.79769313486e+308))
-  (f64.const -1.79769313486e+308)
+  (invoke "neg" (f64.const 0x1.fffffffffffffp+1023))
+  (f64.const -0x1.fffffffffffffp+1023)
 )
 (assert_return (invoke "neg" (f64.const -inf)) (f64.const inf))
 (assert_return (invoke "neg" (f64.const inf)) (f64.const -inf))

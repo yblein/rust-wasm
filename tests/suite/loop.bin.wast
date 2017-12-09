@@ -98,36 +98,69 @@
 (assert_return (invoke "for" (i64.const 3)) (i64.const 6))
 (assert_return (invoke "for" (i64.const 5)) (i64.const 120))
 (assert_return (invoke "for" (i64.const 20)) (i64.const 2432902008176640000))
-(assert_return (invoke "nesting" (f32.const 0.) (f32.const 7.)) (f32.const 0.))
-(assert_return (invoke "nesting" (f32.const 7.) (f32.const 0.)) (f32.const 0.))
-(assert_return (invoke "nesting" (f32.const 1.) (f32.const 1.)) (f32.const 1.))
-(assert_return (invoke "nesting" (f32.const 1.) (f32.const 2.)) (f32.const 2.))
-(assert_return (invoke "nesting" (f32.const 1.) (f32.const 3.)) (f32.const 4.))
-(assert_return (invoke "nesting" (f32.const 1.) (f32.const 4.)) (f32.const 6.))
 (assert_return
-  (invoke "nesting" (f32.const 1.) (f32.const 100.))
-  (f32.const 2550.)
+  (invoke "nesting" (f32.const 0x0p+0) (f32.const 0x1.cp+2))
+  (f32.const 0x0p+0)
 )
 (assert_return
-  (invoke "nesting" (f32.const 1.) (f32.const 101.))
-  (f32.const 2601.)
-)
-(assert_return (invoke "nesting" (f32.const 2.) (f32.const 1.)) (f32.const 1.))
-(assert_return (invoke "nesting" (f32.const 3.) (f32.const 1.)) (f32.const 1.))
-(assert_return (invoke "nesting" (f32.const 10.) (f32.const 1.)) (f32.const 1.))
-(assert_return (invoke "nesting" (f32.const 2.) (f32.const 2.)) (f32.const 3.))
-(assert_return (invoke "nesting" (f32.const 2.) (f32.const 3.)) (f32.const 4.))
-(assert_return
-  (invoke "nesting" (f32.const 7.) (f32.const 4.))
-  (f32.const 10.3095235825)
+  (invoke "nesting" (f32.const 0x1.cp+2) (f32.const 0x0p+0))
+  (f32.const 0x0p+0)
 )
 (assert_return
-  (invoke "nesting" (f32.const 7.) (f32.const 100.))
-  (f32.const 4381.54785156)
+  (invoke "nesting" (f32.const 0x1p+0) (f32.const 0x1p+0))
+  (f32.const 0x1p+0)
 )
 (assert_return
-  (invoke "nesting" (f32.const 7.) (f32.const 101.))
-  (f32.const 2601.)
+  (invoke "nesting" (f32.const 0x1p+0) (f32.const 0x1p+1))
+  (f32.const 0x1p+1)
+)
+(assert_return
+  (invoke "nesting" (f32.const 0x1p+0) (f32.const 0x1.8p+1))
+  (f32.const 0x1p+2)
+)
+(assert_return
+  (invoke "nesting" (f32.const 0x1p+0) (f32.const 0x1p+2))
+  (f32.const 0x1.8p+2)
+)
+(assert_return
+  (invoke "nesting" (f32.const 0x1p+0) (f32.const 0x1.9p+6))
+  (f32.const 0x1.3ecp+11)
+)
+(assert_return
+  (invoke "nesting" (f32.const 0x1p+0) (f32.const 0x1.94p+6))
+  (f32.const 0x1.452p+11)
+)
+(assert_return
+  (invoke "nesting" (f32.const 0x1p+1) (f32.const 0x1p+0))
+  (f32.const 0x1p+0)
+)
+(assert_return
+  (invoke "nesting" (f32.const 0x1.8p+1) (f32.const 0x1p+0))
+  (f32.const 0x1p+0)
+)
+(assert_return
+  (invoke "nesting" (f32.const 0x1.4p+3) (f32.const 0x1p+0))
+  (f32.const 0x1p+0)
+)
+(assert_return
+  (invoke "nesting" (f32.const 0x1p+1) (f32.const 0x1p+1))
+  (f32.const 0x1.8p+1)
+)
+(assert_return
+  (invoke "nesting" (f32.const 0x1p+1) (f32.const 0x1.8p+1))
+  (f32.const 0x1p+2)
+)
+(assert_return
+  (invoke "nesting" (f32.const 0x1.cp+2) (f32.const 0x1p+2))
+  (f32.const 0x1.49e79ep+3)
+)
+(assert_return
+  (invoke "nesting" (f32.const 0x1.cp+2) (f32.const 0x1.9p+6))
+  (f32.const 0x1.11d8c4p+12)
+)
+(assert_return
+  (invoke "nesting" (f32.const 0x1.cp+2) (f32.const 0x1.94p+6))
+  (f32.const 0x1.452p+11)
 )
 (assert_invalid
   (module binary

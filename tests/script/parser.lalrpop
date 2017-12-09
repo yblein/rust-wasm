@@ -2,6 +2,7 @@ use script::*;
 use rust_wasm::values::Value;
 use std::str::FromStr;
 use std::{f32, f64, mem};
+use hexf::{parse_hexf32, parse_hexf64};
 
 //! This grammar does not match exactly the one given informally in the
 //! official interpreter implementation, but it is good enough to parse the test
@@ -60,7 +61,6 @@ expr_int: Value = {
 int: i64 = <s:r"[+-]?\d+"> => i64::from_str(s).unwrap();
 
 float32: f32 = {
-	<s:r"[+-]?\d+((\.\d*)?[eE][+-]?\d+|\.\d*)"> => f32::from_str(s).unwrap(),
 	"-inf" => f32::NEG_INFINITY,
 	r"\+?inf" => f32::INFINITY,
 	<sign:r"[+-]"?> "nan:" <p:r"0x[[:xdigit:]]+"> => {
@@ -69,10 +69,16 @@ float32: f32 = {
 		};
 		if let Some("-") = sign { -z } else { z }
 	},
+	<s:r"[+-]?0x[[:xdigit:]]+((\.[[:xdigit:]]*)?[pP][+-]?[[:xdigit:]]+|\.[[:xdigit:]]*)"> => {
+		if !s.contains('.') {
+			parse_hexf32(&s.replace("p", ".p"), true).unwrap()
+		} else {
+			parse_hexf32(s, true).unwrap()
+		}
+	}
 };
 
 float64: f64 = {
-	<s:r"[+-]?\d+((\.\d*)?[eE][+-]?\d+|\.\d*)"> => f64::from_str(s).unwrap(),
 	"-inf" => f64::NEG_INFINITY,
 	r"\+?inf" => f64::INFINITY,
 	<sign:r"[+-]"?> "nan:" <p:r"0x[[:xdigit:]]+"> => {
@@ -81,6 +87,13 @@ float64: f64 = {
 		};
 		if let Some("-") = sign { -z } else { z }
 	},
+	<s:r"[+-]?0x[[:xdigit:]]+((\.[[:xdigit:]]*)?[pP][+-]?[[:xdigit:]]+|\.[[:xdigit:]]*)"> => {
+		if !s.contains('.') {
+			parse_hexf64(&s.replace("p", ".p"), true).unwrap()
+		} else {
+			parse_hexf64(s, true).unwrap()
+		}
+	}
 };
 
 string: String = {

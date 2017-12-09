@@ -10,1056 +10,1338 @@
   "\80\80\00\00\20\00\20\01\64\0b\87\80\80\80\00\00"
   "\20\00\20\01\66\0b"
 )
-(assert_return (invoke "eq" (f64.const -0.) (f64.const -0.)) (i32.const 1))
-(assert_return (invoke "eq" (f64.const -0.) (f64.const 0.)) (i32.const 1))
-(assert_return (invoke "eq" (f64.const 0.) (f64.const -0.)) (i32.const 1))
-(assert_return (invoke "eq" (f64.const 0.) (f64.const 0.)) (i32.const 1))
 (assert_return
-  (invoke "eq" (f64.const -0.) (f64.const -4.94065645841e-324))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const -0.) (f64.const 4.94065645841e-324))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const 0.) (f64.const -4.94065645841e-324))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const 0.) (f64.const 4.94065645841e-324))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const -0.) (f64.const -2.22507385851e-308))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const -0.) (f64.const 2.22507385851e-308))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const 0.) (f64.const -2.22507385851e-308))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const 0.) (f64.const 2.22507385851e-308))
-  (i32.const 0)
-)
-(assert_return (invoke "eq" (f64.const -0.) (f64.const -0.5)) (i32.const 0))
-(assert_return (invoke "eq" (f64.const -0.) (f64.const 0.5)) (i32.const 0))
-(assert_return (invoke "eq" (f64.const 0.) (f64.const -0.5)) (i32.const 0))
-(assert_return (invoke "eq" (f64.const 0.) (f64.const 0.5)) (i32.const 0))
-(assert_return (invoke "eq" (f64.const -0.) (f64.const -1.)) (i32.const 0))
-(assert_return (invoke "eq" (f64.const -0.) (f64.const 1.)) (i32.const 0))
-(assert_return (invoke "eq" (f64.const 0.) (f64.const -1.)) (i32.const 0))
-(assert_return (invoke "eq" (f64.const 0.) (f64.const 1.)) (i32.const 0))
-(assert_return
-  (invoke "eq" (f64.const -0.) (f64.const -6.28318530718))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const -0.) (f64.const 6.28318530718))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const 0.) (f64.const -6.28318530718))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const 0.) (f64.const 6.28318530718))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const -0.) (f64.const -1.79769313486e+308))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const -0.) (f64.const 1.79769313486e+308))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const 0.) (f64.const -1.79769313486e+308))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const 0.) (f64.const 1.79769313486e+308))
-  (i32.const 0)
-)
-(assert_return (invoke "eq" (f64.const -0.) (f64.const -inf)) (i32.const 0))
-(assert_return (invoke "eq" (f64.const -0.) (f64.const inf)) (i32.const 0))
-(assert_return (invoke "eq" (f64.const 0.) (f64.const -inf)) (i32.const 0))
-(assert_return (invoke "eq" (f64.const 0.) (f64.const inf)) (i32.const 0))
-(assert_return
-  (invoke "eq" (f64.const -0.) (f64.const -nan:0x8000000000000))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const -0.) (f64.const -nan:0x4000000000000))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const -0.) (f64.const nan:0x8000000000000))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const -0.) (f64.const nan:0x4000000000000))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const 0.) (f64.const -nan:0x8000000000000))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const 0.) (f64.const -nan:0x4000000000000))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const 0.) (f64.const nan:0x8000000000000))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const 0.) (f64.const nan:0x4000000000000))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const -4.94065645841e-324) (f64.const -0.))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const -4.94065645841e-324) (f64.const 0.))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const 4.94065645841e-324) (f64.const -0.))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const 4.94065645841e-324) (f64.const 0.))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const -4.94065645841e-324) (f64.const -4.94065645841e-324))
+  (invoke "eq" (f64.const -0x0p+0) (f64.const -0x0p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "eq" (f64.const -4.94065645841e-324) (f64.const 4.94065645841e-324))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const 4.94065645841e-324) (f64.const -4.94065645841e-324))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const 4.94065645841e-324) (f64.const 4.94065645841e-324))
+  (invoke "eq" (f64.const -0x0p+0) (f64.const 0x0p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "eq" (f64.const -4.94065645841e-324) (f64.const -2.22507385851e-308))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const -4.94065645841e-324) (f64.const 2.22507385851e-308))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const 4.94065645841e-324) (f64.const -2.22507385851e-308))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const 4.94065645841e-324) (f64.const 2.22507385851e-308))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const -4.94065645841e-324) (f64.const -0.5))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const -4.94065645841e-324) (f64.const 0.5))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const 4.94065645841e-324) (f64.const -0.5))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const 4.94065645841e-324) (f64.const 0.5))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const -4.94065645841e-324) (f64.const -1.))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const -4.94065645841e-324) (f64.const 1.))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const 4.94065645841e-324) (f64.const -1.))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const 4.94065645841e-324) (f64.const 1.))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const -4.94065645841e-324) (f64.const -6.28318530718))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const -4.94065645841e-324) (f64.const 6.28318530718))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const 4.94065645841e-324) (f64.const -6.28318530718))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const 4.94065645841e-324) (f64.const 6.28318530718))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const -4.94065645841e-324) (f64.const -1.79769313486e+308))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const -4.94065645841e-324) (f64.const 1.79769313486e+308))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const 4.94065645841e-324) (f64.const -1.79769313486e+308))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const 4.94065645841e-324) (f64.const 1.79769313486e+308))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const -4.94065645841e-324) (f64.const -inf))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const -4.94065645841e-324) (f64.const inf))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const 4.94065645841e-324) (f64.const -inf))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const 4.94065645841e-324) (f64.const inf))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const -4.94065645841e-324) (f64.const -nan:0x8000000000000))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const -4.94065645841e-324) (f64.const -nan:0x4000000000000))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const -4.94065645841e-324) (f64.const nan:0x8000000000000))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const -4.94065645841e-324) (f64.const nan:0x4000000000000))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const 4.94065645841e-324) (f64.const -nan:0x8000000000000))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const 4.94065645841e-324) (f64.const -nan:0x4000000000000))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const 4.94065645841e-324) (f64.const nan:0x8000000000000))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const 4.94065645841e-324) (f64.const nan:0x4000000000000))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const -2.22507385851e-308) (f64.const -0.))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const -2.22507385851e-308) (f64.const 0.))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const 2.22507385851e-308) (f64.const -0.))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const 2.22507385851e-308) (f64.const 0.))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const -2.22507385851e-308) (f64.const -4.94065645841e-324))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const -2.22507385851e-308) (f64.const 4.94065645841e-324))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const 2.22507385851e-308) (f64.const -4.94065645841e-324))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const 2.22507385851e-308) (f64.const 4.94065645841e-324))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const -2.22507385851e-308) (f64.const -2.22507385851e-308))
+  (invoke "eq" (f64.const 0x0p+0) (f64.const -0x0p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "eq" (f64.const -2.22507385851e-308) (f64.const 2.22507385851e-308))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const 2.22507385851e-308) (f64.const -2.22507385851e-308))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const 2.22507385851e-308) (f64.const 2.22507385851e-308))
+  (invoke "eq" (f64.const 0x0p+0) (f64.const 0x0p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "eq" (f64.const -2.22507385851e-308) (f64.const -0.5))
+  (invoke "eq" (f64.const -0x0p+0) (f64.const -0x0.0000000000001p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const -2.22507385851e-308) (f64.const 0.5))
+  (invoke "eq" (f64.const -0x0p+0) (f64.const 0x0.0000000000001p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const 2.22507385851e-308) (f64.const -0.5))
+  (invoke "eq" (f64.const 0x0p+0) (f64.const -0x0.0000000000001p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const 2.22507385851e-308) (f64.const 0.5))
+  (invoke "eq" (f64.const 0x0p+0) (f64.const 0x0.0000000000001p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const -2.22507385851e-308) (f64.const -1.))
+  (invoke "eq" (f64.const -0x0p+0) (f64.const -0x1p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const -2.22507385851e-308) (f64.const 1.))
+  (invoke "eq" (f64.const -0x0p+0) (f64.const 0x1p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const 2.22507385851e-308) (f64.const -1.))
+  (invoke "eq" (f64.const 0x0p+0) (f64.const -0x1p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const 2.22507385851e-308) (f64.const 1.))
+  (invoke "eq" (f64.const 0x0p+0) (f64.const 0x1p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const -2.22507385851e-308) (f64.const -6.28318530718))
+  (invoke "eq" (f64.const -0x0p+0) (f64.const -0x1p-1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const -2.22507385851e-308) (f64.const 6.28318530718))
+  (invoke "eq" (f64.const -0x0p+0) (f64.const 0x1p-1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const 2.22507385851e-308) (f64.const -6.28318530718))
+  (invoke "eq" (f64.const 0x0p+0) (f64.const -0x1p-1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const 2.22507385851e-308) (f64.const 6.28318530718))
+  (invoke "eq" (f64.const 0x0p+0) (f64.const 0x1p-1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const -2.22507385851e-308) (f64.const -1.79769313486e+308))
+  (invoke "eq" (f64.const -0x0p+0) (f64.const -0x1p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const -2.22507385851e-308) (f64.const 1.79769313486e+308))
+  (invoke "eq" (f64.const -0x0p+0) (f64.const 0x1p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const 2.22507385851e-308) (f64.const -1.79769313486e+308))
+  (invoke "eq" (f64.const 0x0p+0) (f64.const -0x1p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const 2.22507385851e-308) (f64.const 1.79769313486e+308))
+  (invoke "eq" (f64.const 0x0p+0) (f64.const 0x1p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const -2.22507385851e-308) (f64.const -inf))
+  (invoke "eq" (f64.const -0x0p+0) (f64.const -0x1.921fb54442d18p+2))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const -2.22507385851e-308) (f64.const inf))
+  (invoke "eq" (f64.const -0x0p+0) (f64.const 0x1.921fb54442d18p+2))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const 2.22507385851e-308) (f64.const -inf))
+  (invoke "eq" (f64.const 0x0p+0) (f64.const -0x1.921fb54442d18p+2))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const 2.22507385851e-308) (f64.const inf))
+  (invoke "eq" (f64.const 0x0p+0) (f64.const 0x1.921fb54442d18p+2))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const -2.22507385851e-308) (f64.const -nan:0x8000000000000))
+  (invoke "eq" (f64.const -0x0p+0) (f64.const -0x1.fffffffffffffp+1023))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const -2.22507385851e-308) (f64.const -nan:0x4000000000000))
+  (invoke "eq" (f64.const -0x0p+0) (f64.const 0x1.fffffffffffffp+1023))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const -2.22507385851e-308) (f64.const nan:0x8000000000000))
+  (invoke "eq" (f64.const 0x0p+0) (f64.const -0x1.fffffffffffffp+1023))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const -2.22507385851e-308) (f64.const nan:0x4000000000000))
+  (invoke "eq" (f64.const 0x0p+0) (f64.const 0x1.fffffffffffffp+1023))
   (i32.const 0)
 )
+(assert_return (invoke "eq" (f64.const -0x0p+0) (f64.const -inf)) (i32.const 0))
+(assert_return (invoke "eq" (f64.const -0x0p+0) (f64.const inf)) (i32.const 0))
+(assert_return (invoke "eq" (f64.const 0x0p+0) (f64.const -inf)) (i32.const 0))
+(assert_return (invoke "eq" (f64.const 0x0p+0) (f64.const inf)) (i32.const 0))
 (assert_return
-  (invoke "eq" (f64.const 2.22507385851e-308) (f64.const -nan:0x8000000000000))
+  (invoke "eq" (f64.const -0x0p+0) (f64.const -nan:0x8000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const 2.22507385851e-308) (f64.const -nan:0x4000000000000))
+  (invoke "eq" (f64.const -0x0p+0) (f64.const -nan:0x4000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const 2.22507385851e-308) (f64.const nan:0x8000000000000))
+  (invoke "eq" (f64.const -0x0p+0) (f64.const nan:0x8000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const 2.22507385851e-308) (f64.const nan:0x4000000000000))
+  (invoke "eq" (f64.const -0x0p+0) (f64.const nan:0x4000000000000))
   (i32.const 0)
 )
-(assert_return (invoke "eq" (f64.const -0.5) (f64.const -0.)) (i32.const 0))
-(assert_return (invoke "eq" (f64.const -0.5) (f64.const 0.)) (i32.const 0))
-(assert_return (invoke "eq" (f64.const 0.5) (f64.const -0.)) (i32.const 0))
-(assert_return (invoke "eq" (f64.const 0.5) (f64.const 0.)) (i32.const 0))
 (assert_return
-  (invoke "eq" (f64.const -0.5) (f64.const -4.94065645841e-324))
+  (invoke "eq" (f64.const 0x0p+0) (f64.const -nan:0x8000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const -0.5) (f64.const 4.94065645841e-324))
+  (invoke "eq" (f64.const 0x0p+0) (f64.const -nan:0x4000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const 0.5) (f64.const -4.94065645841e-324))
+  (invoke "eq" (f64.const 0x0p+0) (f64.const nan:0x8000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const 0.5) (f64.const 4.94065645841e-324))
+  (invoke "eq" (f64.const 0x0p+0) (f64.const nan:0x4000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const -0.5) (f64.const -2.22507385851e-308))
+  (invoke "eq" (f64.const -0x0.0000000000001p-1022) (f64.const -0x0p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const -0.5) (f64.const 2.22507385851e-308))
+  (invoke "eq" (f64.const -0x0.0000000000001p-1022) (f64.const 0x0p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const 0.5) (f64.const -2.22507385851e-308))
+  (invoke "eq" (f64.const 0x0.0000000000001p-1022) (f64.const -0x0p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const 0.5) (f64.const 2.22507385851e-308))
+  (invoke "eq" (f64.const 0x0.0000000000001p-1022) (f64.const 0x0p+0))
   (i32.const 0)
 )
-(assert_return (invoke "eq" (f64.const -0.5) (f64.const -0.5)) (i32.const 1))
-(assert_return (invoke "eq" (f64.const -0.5) (f64.const 0.5)) (i32.const 0))
-(assert_return (invoke "eq" (f64.const 0.5) (f64.const -0.5)) (i32.const 0))
-(assert_return (invoke "eq" (f64.const 0.5) (f64.const 0.5)) (i32.const 1))
-(assert_return (invoke "eq" (f64.const -0.5) (f64.const -1.)) (i32.const 0))
-(assert_return (invoke "eq" (f64.const -0.5) (f64.const 1.)) (i32.const 0))
-(assert_return (invoke "eq" (f64.const 0.5) (f64.const -1.)) (i32.const 0))
-(assert_return (invoke "eq" (f64.const 0.5) (f64.const 1.)) (i32.const 0))
 (assert_return
-  (invoke "eq" (f64.const -0.5) (f64.const -6.28318530718))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const -0.5) (f64.const 6.28318530718))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const 0.5) (f64.const -6.28318530718))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const 0.5) (f64.const 6.28318530718))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const -0.5) (f64.const -1.79769313486e+308))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const -0.5) (f64.const 1.79769313486e+308))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const 0.5) (f64.const -1.79769313486e+308))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const 0.5) (f64.const 1.79769313486e+308))
-  (i32.const 0)
-)
-(assert_return (invoke "eq" (f64.const -0.5) (f64.const -inf)) (i32.const 0))
-(assert_return (invoke "eq" (f64.const -0.5) (f64.const inf)) (i32.const 0))
-(assert_return (invoke "eq" (f64.const 0.5) (f64.const -inf)) (i32.const 0))
-(assert_return (invoke "eq" (f64.const 0.5) (f64.const inf)) (i32.const 0))
-(assert_return
-  (invoke "eq" (f64.const -0.5) (f64.const -nan:0x8000000000000))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const -0.5) (f64.const -nan:0x4000000000000))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const -0.5) (f64.const nan:0x8000000000000))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const -0.5) (f64.const nan:0x4000000000000))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const 0.5) (f64.const -nan:0x8000000000000))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const 0.5) (f64.const -nan:0x4000000000000))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const 0.5) (f64.const nan:0x8000000000000))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const 0.5) (f64.const nan:0x4000000000000))
-  (i32.const 0)
-)
-(assert_return (invoke "eq" (f64.const -1.) (f64.const -0.)) (i32.const 0))
-(assert_return (invoke "eq" (f64.const -1.) (f64.const 0.)) (i32.const 0))
-(assert_return (invoke "eq" (f64.const 1.) (f64.const -0.)) (i32.const 0))
-(assert_return (invoke "eq" (f64.const 1.) (f64.const 0.)) (i32.const 0))
-(assert_return
-  (invoke "eq" (f64.const -1.) (f64.const -4.94065645841e-324))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const -1.) (f64.const 4.94065645841e-324))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const 1.) (f64.const -4.94065645841e-324))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const 1.) (f64.const 4.94065645841e-324))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const -1.) (f64.const -2.22507385851e-308))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const -1.) (f64.const 2.22507385851e-308))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const 1.) (f64.const -2.22507385851e-308))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const 1.) (f64.const 2.22507385851e-308))
-  (i32.const 0)
-)
-(assert_return (invoke "eq" (f64.const -1.) (f64.const -0.5)) (i32.const 0))
-(assert_return (invoke "eq" (f64.const -1.) (f64.const 0.5)) (i32.const 0))
-(assert_return (invoke "eq" (f64.const 1.) (f64.const -0.5)) (i32.const 0))
-(assert_return (invoke "eq" (f64.const 1.) (f64.const 0.5)) (i32.const 0))
-(assert_return (invoke "eq" (f64.const -1.) (f64.const -1.)) (i32.const 1))
-(assert_return (invoke "eq" (f64.const -1.) (f64.const 1.)) (i32.const 0))
-(assert_return (invoke "eq" (f64.const 1.) (f64.const -1.)) (i32.const 0))
-(assert_return (invoke "eq" (f64.const 1.) (f64.const 1.)) (i32.const 1))
-(assert_return
-  (invoke "eq" (f64.const -1.) (f64.const -6.28318530718))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const -1.) (f64.const 6.28318530718))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const 1.) (f64.const -6.28318530718))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const 1.) (f64.const 6.28318530718))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const -1.) (f64.const -1.79769313486e+308))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const -1.) (f64.const 1.79769313486e+308))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const 1.) (f64.const -1.79769313486e+308))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const 1.) (f64.const 1.79769313486e+308))
-  (i32.const 0)
-)
-(assert_return (invoke "eq" (f64.const -1.) (f64.const -inf)) (i32.const 0))
-(assert_return (invoke "eq" (f64.const -1.) (f64.const inf)) (i32.const 0))
-(assert_return (invoke "eq" (f64.const 1.) (f64.const -inf)) (i32.const 0))
-(assert_return (invoke "eq" (f64.const 1.) (f64.const inf)) (i32.const 0))
-(assert_return
-  (invoke "eq" (f64.const -1.) (f64.const -nan:0x8000000000000))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const -1.) (f64.const -nan:0x4000000000000))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const -1.) (f64.const nan:0x8000000000000))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const -1.) (f64.const nan:0x4000000000000))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const 1.) (f64.const -nan:0x8000000000000))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const 1.) (f64.const -nan:0x4000000000000))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const 1.) (f64.const nan:0x8000000000000))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const 1.) (f64.const nan:0x4000000000000))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const -6.28318530718) (f64.const -0.))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const -6.28318530718) (f64.const 0.))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const 6.28318530718) (f64.const -0.))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const 6.28318530718) (f64.const 0.))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const -6.28318530718) (f64.const -4.94065645841e-324))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const -6.28318530718) (f64.const 4.94065645841e-324))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const 6.28318530718) (f64.const -4.94065645841e-324))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const 6.28318530718) (f64.const 4.94065645841e-324))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const -6.28318530718) (f64.const -2.22507385851e-308))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const -6.28318530718) (f64.const 2.22507385851e-308))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const 6.28318530718) (f64.const -2.22507385851e-308))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const 6.28318530718) (f64.const 2.22507385851e-308))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const -6.28318530718) (f64.const -0.5))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const -6.28318530718) (f64.const 0.5))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const 6.28318530718) (f64.const -0.5))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const 6.28318530718) (f64.const 0.5))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const -6.28318530718) (f64.const -1.))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const -6.28318530718) (f64.const 1.))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const 6.28318530718) (f64.const -1.))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const 6.28318530718) (f64.const 1.))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f64.const -6.28318530718) (f64.const -6.28318530718))
+  (invoke "eq"
+    (f64.const -0x0.0000000000001p-1022)
+    (f64.const -0x0.0000000000001p-1022)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "eq" (f64.const -6.28318530718) (f64.const 6.28318530718))
+  (invoke "eq"
+    (f64.const -0x0.0000000000001p-1022)
+    (f64.const 0x0.0000000000001p-1022)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const 6.28318530718) (f64.const -6.28318530718))
+  (invoke "eq"
+    (f64.const 0x0.0000000000001p-1022)
+    (f64.const -0x0.0000000000001p-1022)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const 6.28318530718) (f64.const 6.28318530718))
+  (invoke "eq"
+    (f64.const 0x0.0000000000001p-1022)
+    (f64.const 0x0.0000000000001p-1022)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "eq" (f64.const -6.28318530718) (f64.const -1.79769313486e+308))
+  (invoke "eq" (f64.const -0x0.0000000000001p-1022) (f64.const -0x1p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const -6.28318530718) (f64.const 1.79769313486e+308))
+  (invoke "eq" (f64.const -0x0.0000000000001p-1022) (f64.const 0x1p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const 6.28318530718) (f64.const -1.79769313486e+308))
+  (invoke "eq" (f64.const 0x0.0000000000001p-1022) (f64.const -0x1p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const 6.28318530718) (f64.const 1.79769313486e+308))
+  (invoke "eq" (f64.const 0x0.0000000000001p-1022) (f64.const 0x1p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const -6.28318530718) (f64.const -inf))
+  (invoke "eq" (f64.const -0x0.0000000000001p-1022) (f64.const -0x1p-1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const -6.28318530718) (f64.const inf))
+  (invoke "eq" (f64.const -0x0.0000000000001p-1022) (f64.const 0x1p-1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const 6.28318530718) (f64.const -inf))
+  (invoke "eq" (f64.const 0x0.0000000000001p-1022) (f64.const -0x1p-1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const 6.28318530718) (f64.const inf))
+  (invoke "eq" (f64.const 0x0.0000000000001p-1022) (f64.const 0x1p-1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const -6.28318530718) (f64.const -nan:0x8000000000000))
+  (invoke "eq" (f64.const -0x0.0000000000001p-1022) (f64.const -0x1p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const -6.28318530718) (f64.const -nan:0x4000000000000))
+  (invoke "eq" (f64.const -0x0.0000000000001p-1022) (f64.const 0x1p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const -6.28318530718) (f64.const nan:0x8000000000000))
+  (invoke "eq" (f64.const 0x0.0000000000001p-1022) (f64.const -0x1p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const -6.28318530718) (f64.const nan:0x4000000000000))
+  (invoke "eq" (f64.const 0x0.0000000000001p-1022) (f64.const 0x1p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const 6.28318530718) (f64.const -nan:0x8000000000000))
+  (invoke "eq"
+    (f64.const -0x0.0000000000001p-1022)
+    (f64.const -0x1.921fb54442d18p+2)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const 6.28318530718) (f64.const -nan:0x4000000000000))
+  (invoke "eq"
+    (f64.const -0x0.0000000000001p-1022)
+    (f64.const 0x1.921fb54442d18p+2)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const 6.28318530718) (f64.const nan:0x8000000000000))
+  (invoke "eq"
+    (f64.const 0x0.0000000000001p-1022)
+    (f64.const -0x1.921fb54442d18p+2)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const 6.28318530718) (f64.const nan:0x4000000000000))
+  (invoke "eq"
+    (f64.const 0x0.0000000000001p-1022)
+    (f64.const 0x1.921fb54442d18p+2)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const -1.79769313486e+308) (f64.const -0.))
+  (invoke "eq"
+    (f64.const -0x0.0000000000001p-1022)
+    (f64.const -0x1.fffffffffffffp+1023)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const -1.79769313486e+308) (f64.const 0.))
+  (invoke "eq"
+    (f64.const -0x0.0000000000001p-1022)
+    (f64.const 0x1.fffffffffffffp+1023)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const 1.79769313486e+308) (f64.const -0.))
+  (invoke "eq"
+    (f64.const 0x0.0000000000001p-1022)
+    (f64.const -0x1.fffffffffffffp+1023)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const 1.79769313486e+308) (f64.const 0.))
+  (invoke "eq"
+    (f64.const 0x0.0000000000001p-1022)
+    (f64.const 0x1.fffffffffffffp+1023)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const -1.79769313486e+308) (f64.const -4.94065645841e-324))
+  (invoke "eq" (f64.const -0x0.0000000000001p-1022) (f64.const -inf))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const -1.79769313486e+308) (f64.const 4.94065645841e-324))
+  (invoke "eq" (f64.const -0x0.0000000000001p-1022) (f64.const inf))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const 1.79769313486e+308) (f64.const -4.94065645841e-324))
+  (invoke "eq" (f64.const 0x0.0000000000001p-1022) (f64.const -inf))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const 1.79769313486e+308) (f64.const 4.94065645841e-324))
+  (invoke "eq" (f64.const 0x0.0000000000001p-1022) (f64.const inf))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const -1.79769313486e+308) (f64.const -2.22507385851e-308))
+  (invoke "eq"
+    (f64.const -0x0.0000000000001p-1022)
+    (f64.const -nan:0x8000000000000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const -1.79769313486e+308) (f64.const 2.22507385851e-308))
+  (invoke "eq"
+    (f64.const -0x0.0000000000001p-1022)
+    (f64.const -nan:0x4000000000000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const 1.79769313486e+308) (f64.const -2.22507385851e-308))
+  (invoke "eq"
+    (f64.const -0x0.0000000000001p-1022)
+    (f64.const nan:0x8000000000000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const 1.79769313486e+308) (f64.const 2.22507385851e-308))
+  (invoke "eq"
+    (f64.const -0x0.0000000000001p-1022)
+    (f64.const nan:0x4000000000000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const -1.79769313486e+308) (f64.const -0.5))
+  (invoke "eq"
+    (f64.const 0x0.0000000000001p-1022)
+    (f64.const -nan:0x8000000000000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const -1.79769313486e+308) (f64.const 0.5))
+  (invoke "eq"
+    (f64.const 0x0.0000000000001p-1022)
+    (f64.const -nan:0x4000000000000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const 1.79769313486e+308) (f64.const -0.5))
+  (invoke "eq"
+    (f64.const 0x0.0000000000001p-1022)
+    (f64.const nan:0x8000000000000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const 1.79769313486e+308) (f64.const 0.5))
+  (invoke "eq"
+    (f64.const 0x0.0000000000001p-1022)
+    (f64.const nan:0x4000000000000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const -1.79769313486e+308) (f64.const -1.))
+  (invoke "eq" (f64.const -0x1p-1022) (f64.const -0x0p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const -1.79769313486e+308) (f64.const 1.))
+  (invoke "eq" (f64.const -0x1p-1022) (f64.const 0x0p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const 1.79769313486e+308) (f64.const -1.))
+  (invoke "eq" (f64.const 0x1p-1022) (f64.const -0x0p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const 1.79769313486e+308) (f64.const 1.))
+  (invoke "eq" (f64.const 0x1p-1022) (f64.const 0x0p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const -1.79769313486e+308) (f64.const -6.28318530718))
+  (invoke "eq" (f64.const -0x1p-1022) (f64.const -0x0.0000000000001p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const -1.79769313486e+308) (f64.const 6.28318530718))
+  (invoke "eq" (f64.const -0x1p-1022) (f64.const 0x0.0000000000001p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const 1.79769313486e+308) (f64.const -6.28318530718))
+  (invoke "eq" (f64.const 0x1p-1022) (f64.const -0x0.0000000000001p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const 1.79769313486e+308) (f64.const 6.28318530718))
+  (invoke "eq" (f64.const 0x1p-1022) (f64.const 0x0.0000000000001p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const -1.79769313486e+308) (f64.const -1.79769313486e+308))
+  (invoke "eq" (f64.const -0x1p-1022) (f64.const -0x1p-1022))
   (i32.const 1)
 )
 (assert_return
-  (invoke "eq" (f64.const -1.79769313486e+308) (f64.const 1.79769313486e+308))
+  (invoke "eq" (f64.const -0x1p-1022) (f64.const 0x1p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const 1.79769313486e+308) (f64.const -1.79769313486e+308))
+  (invoke "eq" (f64.const 0x1p-1022) (f64.const -0x1p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const 1.79769313486e+308) (f64.const 1.79769313486e+308))
+  (invoke "eq" (f64.const 0x1p-1022) (f64.const 0x1p-1022))
   (i32.const 1)
 )
 (assert_return
-  (invoke "eq" (f64.const -1.79769313486e+308) (f64.const -inf))
+  (invoke "eq" (f64.const -0x1p-1022) (f64.const -0x1p-1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const -1.79769313486e+308) (f64.const inf))
+  (invoke "eq" (f64.const -0x1p-1022) (f64.const 0x1p-1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const 1.79769313486e+308) (f64.const -inf))
+  (invoke "eq" (f64.const 0x1p-1022) (f64.const -0x1p-1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const 1.79769313486e+308) (f64.const inf))
+  (invoke "eq" (f64.const 0x1p-1022) (f64.const 0x1p-1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const -1.79769313486e+308) (f64.const -nan:0x8000000000000))
+  (invoke "eq" (f64.const -0x1p-1022) (f64.const -0x1p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const -1.79769313486e+308) (f64.const -nan:0x4000000000000))
+  (invoke "eq" (f64.const -0x1p-1022) (f64.const 0x1p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const -1.79769313486e+308) (f64.const nan:0x8000000000000))
+  (invoke "eq" (f64.const 0x1p-1022) (f64.const -0x1p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const -1.79769313486e+308) (f64.const nan:0x4000000000000))
+  (invoke "eq" (f64.const 0x1p-1022) (f64.const 0x1p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const 1.79769313486e+308) (f64.const -nan:0x8000000000000))
+  (invoke "eq" (f64.const -0x1p-1022) (f64.const -0x1.921fb54442d18p+2))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const 1.79769313486e+308) (f64.const -nan:0x4000000000000))
+  (invoke "eq" (f64.const -0x1p-1022) (f64.const 0x1.921fb54442d18p+2))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const 1.79769313486e+308) (f64.const nan:0x8000000000000))
+  (invoke "eq" (f64.const 0x1p-1022) (f64.const -0x1.921fb54442d18p+2))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const 1.79769313486e+308) (f64.const nan:0x4000000000000))
-  (i32.const 0)
-)
-(assert_return (invoke "eq" (f64.const -inf) (f64.const -0.)) (i32.const 0))
-(assert_return (invoke "eq" (f64.const -inf) (f64.const 0.)) (i32.const 0))
-(assert_return (invoke "eq" (f64.const inf) (f64.const -0.)) (i32.const 0))
-(assert_return (invoke "eq" (f64.const inf) (f64.const 0.)) (i32.const 0))
-(assert_return
-  (invoke "eq" (f64.const -inf) (f64.const -4.94065645841e-324))
+  (invoke "eq" (f64.const 0x1p-1022) (f64.const 0x1.921fb54442d18p+2))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const -inf) (f64.const 4.94065645841e-324))
+  (invoke "eq" (f64.const -0x1p-1022) (f64.const -0x1.fffffffffffffp+1023))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const inf) (f64.const -4.94065645841e-324))
+  (invoke "eq" (f64.const -0x1p-1022) (f64.const 0x1.fffffffffffffp+1023))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const inf) (f64.const 4.94065645841e-324))
+  (invoke "eq" (f64.const 0x1p-1022) (f64.const -0x1.fffffffffffffp+1023))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const -inf) (f64.const -2.22507385851e-308))
+  (invoke "eq" (f64.const 0x1p-1022) (f64.const 0x1.fffffffffffffp+1023))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const -inf) (f64.const 2.22507385851e-308))
+  (invoke "eq" (f64.const -0x1p-1022) (f64.const -inf))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const inf) (f64.const -2.22507385851e-308))
+  (invoke "eq" (f64.const -0x1p-1022) (f64.const inf))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const inf) (f64.const 2.22507385851e-308))
-  (i32.const 0)
-)
-(assert_return (invoke "eq" (f64.const -inf) (f64.const -0.5)) (i32.const 0))
-(assert_return (invoke "eq" (f64.const -inf) (f64.const 0.5)) (i32.const 0))
-(assert_return (invoke "eq" (f64.const inf) (f64.const -0.5)) (i32.const 0))
-(assert_return (invoke "eq" (f64.const inf) (f64.const 0.5)) (i32.const 0))
-(assert_return (invoke "eq" (f64.const -inf) (f64.const -1.)) (i32.const 0))
-(assert_return (invoke "eq" (f64.const -inf) (f64.const 1.)) (i32.const 0))
-(assert_return (invoke "eq" (f64.const inf) (f64.const -1.)) (i32.const 0))
-(assert_return (invoke "eq" (f64.const inf) (f64.const 1.)) (i32.const 0))
-(assert_return
-  (invoke "eq" (f64.const -inf) (f64.const -6.28318530718))
+  (invoke "eq" (f64.const 0x1p-1022) (f64.const -inf))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const -inf) (f64.const 6.28318530718))
+  (invoke "eq" (f64.const 0x1p-1022) (f64.const inf))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const inf) (f64.const -6.28318530718))
+  (invoke "eq" (f64.const -0x1p-1022) (f64.const -nan:0x8000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const inf) (f64.const 6.28318530718))
+  (invoke "eq" (f64.const -0x1p-1022) (f64.const -nan:0x4000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const -inf) (f64.const -1.79769313486e+308))
+  (invoke "eq" (f64.const -0x1p-1022) (f64.const nan:0x8000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const -inf) (f64.const 1.79769313486e+308))
+  (invoke "eq" (f64.const -0x1p-1022) (f64.const nan:0x4000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const inf) (f64.const -1.79769313486e+308))
+  (invoke "eq" (f64.const 0x1p-1022) (f64.const -nan:0x8000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const inf) (f64.const 1.79769313486e+308))
+  (invoke "eq" (f64.const 0x1p-1022) (f64.const -nan:0x4000000000000))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const 0x1p-1022) (f64.const nan:0x8000000000000))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const 0x1p-1022) (f64.const nan:0x4000000000000))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const -0x1p-1) (f64.const -0x0p+0))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const -0x1p-1) (f64.const 0x0p+0))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const 0x1p-1) (f64.const -0x0p+0))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const 0x1p-1) (f64.const 0x0p+0))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const -0x1p-1) (f64.const -0x0.0000000000001p-1022))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const -0x1p-1) (f64.const 0x0.0000000000001p-1022))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const 0x1p-1) (f64.const -0x0.0000000000001p-1022))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const 0x1p-1) (f64.const 0x0.0000000000001p-1022))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const -0x1p-1) (f64.const -0x1p-1022))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const -0x1p-1) (f64.const 0x1p-1022))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const 0x1p-1) (f64.const -0x1p-1022))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const 0x1p-1) (f64.const 0x1p-1022))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const -0x1p-1) (f64.const -0x1p-1))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "eq" (f64.const -0x1p-1) (f64.const 0x1p-1))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const 0x1p-1) (f64.const -0x1p-1))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const 0x1p-1) (f64.const 0x1p-1))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "eq" (f64.const -0x1p-1) (f64.const -0x1p+0))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const -0x1p-1) (f64.const 0x1p+0))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const 0x1p-1) (f64.const -0x1p+0))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const 0x1p-1) (f64.const 0x1p+0))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const -0x1p-1) (f64.const -0x1.921fb54442d18p+2))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const -0x1p-1) (f64.const 0x1.921fb54442d18p+2))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const 0x1p-1) (f64.const -0x1.921fb54442d18p+2))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const 0x1p-1) (f64.const 0x1.921fb54442d18p+2))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const -0x1p-1) (f64.const -0x1.fffffffffffffp+1023))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const -0x1p-1) (f64.const 0x1.fffffffffffffp+1023))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const 0x1p-1) (f64.const -0x1.fffffffffffffp+1023))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const 0x1p-1) (f64.const 0x1.fffffffffffffp+1023))
+  (i32.const 0)
+)
+(assert_return (invoke "eq" (f64.const -0x1p-1) (f64.const -inf)) (i32.const 0))
+(assert_return (invoke "eq" (f64.const -0x1p-1) (f64.const inf)) (i32.const 0))
+(assert_return (invoke "eq" (f64.const 0x1p-1) (f64.const -inf)) (i32.const 0))
+(assert_return (invoke "eq" (f64.const 0x1p-1) (f64.const inf)) (i32.const 0))
+(assert_return
+  (invoke "eq" (f64.const -0x1p-1) (f64.const -nan:0x8000000000000))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const -0x1p-1) (f64.const -nan:0x4000000000000))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const -0x1p-1) (f64.const nan:0x8000000000000))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const -0x1p-1) (f64.const nan:0x4000000000000))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const 0x1p-1) (f64.const -nan:0x8000000000000))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const 0x1p-1) (f64.const -nan:0x4000000000000))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const 0x1p-1) (f64.const nan:0x8000000000000))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const 0x1p-1) (f64.const nan:0x4000000000000))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const -0x1p+0) (f64.const -0x0p+0))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const -0x1p+0) (f64.const 0x0p+0))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const 0x1p+0) (f64.const -0x0p+0))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const 0x1p+0) (f64.const 0x0p+0))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const -0x1p+0) (f64.const -0x0.0000000000001p-1022))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const -0x1p+0) (f64.const 0x0.0000000000001p-1022))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const 0x1p+0) (f64.const -0x0.0000000000001p-1022))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const 0x1p+0) (f64.const 0x0.0000000000001p-1022))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const -0x1p+0) (f64.const -0x1p-1022))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const -0x1p+0) (f64.const 0x1p-1022))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const 0x1p+0) (f64.const -0x1p-1022))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const 0x1p+0) (f64.const 0x1p-1022))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const -0x1p+0) (f64.const -0x1p-1))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const -0x1p+0) (f64.const 0x1p-1))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const 0x1p+0) (f64.const -0x1p-1))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const 0x1p+0) (f64.const 0x1p-1))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const -0x1p+0) (f64.const -0x1p+0))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "eq" (f64.const -0x1p+0) (f64.const 0x1p+0))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const 0x1p+0) (f64.const -0x1p+0))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const 0x1p+0) (f64.const 0x1p+0))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "eq" (f64.const -0x1p+0) (f64.const -0x1.921fb54442d18p+2))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const -0x1p+0) (f64.const 0x1.921fb54442d18p+2))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const 0x1p+0) (f64.const -0x1.921fb54442d18p+2))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const 0x1p+0) (f64.const 0x1.921fb54442d18p+2))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const -0x1p+0) (f64.const -0x1.fffffffffffffp+1023))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const -0x1p+0) (f64.const 0x1.fffffffffffffp+1023))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const 0x1p+0) (f64.const -0x1.fffffffffffffp+1023))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const 0x1p+0) (f64.const 0x1.fffffffffffffp+1023))
+  (i32.const 0)
+)
+(assert_return (invoke "eq" (f64.const -0x1p+0) (f64.const -inf)) (i32.const 0))
+(assert_return (invoke "eq" (f64.const -0x1p+0) (f64.const inf)) (i32.const 0))
+(assert_return (invoke "eq" (f64.const 0x1p+0) (f64.const -inf)) (i32.const 0))
+(assert_return (invoke "eq" (f64.const 0x1p+0) (f64.const inf)) (i32.const 0))
+(assert_return
+  (invoke "eq" (f64.const -0x1p+0) (f64.const -nan:0x8000000000000))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const -0x1p+0) (f64.const -nan:0x4000000000000))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const -0x1p+0) (f64.const nan:0x8000000000000))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const -0x1p+0) (f64.const nan:0x4000000000000))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const 0x1p+0) (f64.const -nan:0x8000000000000))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const 0x1p+0) (f64.const -nan:0x4000000000000))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const 0x1p+0) (f64.const nan:0x8000000000000))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const 0x1p+0) (f64.const nan:0x4000000000000))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const -0x1.921fb54442d18p+2) (f64.const -0x0p+0))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const -0x1.921fb54442d18p+2) (f64.const 0x0p+0))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const 0x1.921fb54442d18p+2) (f64.const -0x0p+0))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const 0x1.921fb54442d18p+2) (f64.const 0x0p+0))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq"
+    (f64.const -0x1.921fb54442d18p+2)
+    (f64.const -0x0.0000000000001p-1022)
+  )
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq"
+    (f64.const -0x1.921fb54442d18p+2)
+    (f64.const 0x0.0000000000001p-1022)
+  )
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq"
+    (f64.const 0x1.921fb54442d18p+2)
+    (f64.const -0x0.0000000000001p-1022)
+  )
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq"
+    (f64.const 0x1.921fb54442d18p+2)
+    (f64.const 0x0.0000000000001p-1022)
+  )
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const -0x1.921fb54442d18p+2) (f64.const -0x1p-1022))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const -0x1.921fb54442d18p+2) (f64.const 0x1p-1022))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const 0x1.921fb54442d18p+2) (f64.const -0x1p-1022))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const 0x1.921fb54442d18p+2) (f64.const 0x1p-1022))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const -0x1.921fb54442d18p+2) (f64.const -0x1p-1))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const -0x1.921fb54442d18p+2) (f64.const 0x1p-1))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const 0x1.921fb54442d18p+2) (f64.const -0x1p-1))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const 0x1.921fb54442d18p+2) (f64.const 0x1p-1))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const -0x1.921fb54442d18p+2) (f64.const -0x1p+0))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const -0x1.921fb54442d18p+2) (f64.const 0x1p+0))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const 0x1.921fb54442d18p+2) (f64.const -0x1p+0))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const 0x1.921fb54442d18p+2) (f64.const 0x1p+0))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq"
+    (f64.const -0x1.921fb54442d18p+2)
+    (f64.const -0x1.921fb54442d18p+2)
+  )
+  (i32.const 1)
+)
+(assert_return
+  (invoke "eq"
+    (f64.const -0x1.921fb54442d18p+2)
+    (f64.const 0x1.921fb54442d18p+2)
+  )
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq"
+    (f64.const 0x1.921fb54442d18p+2)
+    (f64.const -0x1.921fb54442d18p+2)
+  )
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq"
+    (f64.const 0x1.921fb54442d18p+2)
+    (f64.const 0x1.921fb54442d18p+2)
+  )
+  (i32.const 1)
+)
+(assert_return
+  (invoke "eq"
+    (f64.const -0x1.921fb54442d18p+2)
+    (f64.const -0x1.fffffffffffffp+1023)
+  )
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq"
+    (f64.const -0x1.921fb54442d18p+2)
+    (f64.const 0x1.fffffffffffffp+1023)
+  )
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq"
+    (f64.const 0x1.921fb54442d18p+2)
+    (f64.const -0x1.fffffffffffffp+1023)
+  )
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq"
+    (f64.const 0x1.921fb54442d18p+2)
+    (f64.const 0x1.fffffffffffffp+1023)
+  )
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const -0x1.921fb54442d18p+2) (f64.const -inf))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const -0x1.921fb54442d18p+2) (f64.const inf))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const 0x1.921fb54442d18p+2) (f64.const -inf))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const 0x1.921fb54442d18p+2) (f64.const inf))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq"
+    (f64.const -0x1.921fb54442d18p+2)
+    (f64.const -nan:0x8000000000000)
+  )
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq"
+    (f64.const -0x1.921fb54442d18p+2)
+    (f64.const -nan:0x4000000000000)
+  )
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq"
+    (f64.const -0x1.921fb54442d18p+2)
+    (f64.const nan:0x8000000000000)
+  )
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq"
+    (f64.const -0x1.921fb54442d18p+2)
+    (f64.const nan:0x4000000000000)
+  )
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq"
+    (f64.const 0x1.921fb54442d18p+2)
+    (f64.const -nan:0x8000000000000)
+  )
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq"
+    (f64.const 0x1.921fb54442d18p+2)
+    (f64.const -nan:0x4000000000000)
+  )
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const 0x1.921fb54442d18p+2) (f64.const nan:0x8000000000000))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const 0x1.921fb54442d18p+2) (f64.const nan:0x4000000000000))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const -0x1.fffffffffffffp+1023) (f64.const -0x0p+0))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const -0x1.fffffffffffffp+1023) (f64.const 0x0p+0))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const 0x1.fffffffffffffp+1023) (f64.const -0x0p+0))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const 0x1.fffffffffffffp+1023) (f64.const 0x0p+0))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq"
+    (f64.const -0x1.fffffffffffffp+1023)
+    (f64.const -0x0.0000000000001p-1022)
+  )
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq"
+    (f64.const -0x1.fffffffffffffp+1023)
+    (f64.const 0x0.0000000000001p-1022)
+  )
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq"
+    (f64.const 0x1.fffffffffffffp+1023)
+    (f64.const -0x0.0000000000001p-1022)
+  )
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq"
+    (f64.const 0x1.fffffffffffffp+1023)
+    (f64.const 0x0.0000000000001p-1022)
+  )
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const -0x1.fffffffffffffp+1023) (f64.const -0x1p-1022))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const -0x1.fffffffffffffp+1023) (f64.const 0x1p-1022))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const 0x1.fffffffffffffp+1023) (f64.const -0x1p-1022))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const 0x1.fffffffffffffp+1023) (f64.const 0x1p-1022))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const -0x1.fffffffffffffp+1023) (f64.const -0x1p-1))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const -0x1.fffffffffffffp+1023) (f64.const 0x1p-1))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const 0x1.fffffffffffffp+1023) (f64.const -0x1p-1))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const 0x1.fffffffffffffp+1023) (f64.const 0x1p-1))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const -0x1.fffffffffffffp+1023) (f64.const -0x1p+0))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const -0x1.fffffffffffffp+1023) (f64.const 0x1p+0))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const 0x1.fffffffffffffp+1023) (f64.const -0x1p+0))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const 0x1.fffffffffffffp+1023) (f64.const 0x1p+0))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq"
+    (f64.const -0x1.fffffffffffffp+1023)
+    (f64.const -0x1.921fb54442d18p+2)
+  )
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq"
+    (f64.const -0x1.fffffffffffffp+1023)
+    (f64.const 0x1.921fb54442d18p+2)
+  )
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq"
+    (f64.const 0x1.fffffffffffffp+1023)
+    (f64.const -0x1.921fb54442d18p+2)
+  )
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq"
+    (f64.const 0x1.fffffffffffffp+1023)
+    (f64.const 0x1.921fb54442d18p+2)
+  )
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq"
+    (f64.const -0x1.fffffffffffffp+1023)
+    (f64.const -0x1.fffffffffffffp+1023)
+  )
+  (i32.const 1)
+)
+(assert_return
+  (invoke "eq"
+    (f64.const -0x1.fffffffffffffp+1023)
+    (f64.const 0x1.fffffffffffffp+1023)
+  )
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq"
+    (f64.const 0x1.fffffffffffffp+1023)
+    (f64.const -0x1.fffffffffffffp+1023)
+  )
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq"
+    (f64.const 0x1.fffffffffffffp+1023)
+    (f64.const 0x1.fffffffffffffp+1023)
+  )
+  (i32.const 1)
+)
+(assert_return
+  (invoke "eq" (f64.const -0x1.fffffffffffffp+1023) (f64.const -inf))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const -0x1.fffffffffffffp+1023) (f64.const inf))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const 0x1.fffffffffffffp+1023) (f64.const -inf))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const 0x1.fffffffffffffp+1023) (f64.const inf))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq"
+    (f64.const -0x1.fffffffffffffp+1023)
+    (f64.const -nan:0x8000000000000)
+  )
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq"
+    (f64.const -0x1.fffffffffffffp+1023)
+    (f64.const -nan:0x4000000000000)
+  )
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq"
+    (f64.const -0x1.fffffffffffffp+1023)
+    (f64.const nan:0x8000000000000)
+  )
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq"
+    (f64.const -0x1.fffffffffffffp+1023)
+    (f64.const nan:0x4000000000000)
+  )
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq"
+    (f64.const 0x1.fffffffffffffp+1023)
+    (f64.const -nan:0x8000000000000)
+  )
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq"
+    (f64.const 0x1.fffffffffffffp+1023)
+    (f64.const -nan:0x4000000000000)
+  )
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq"
+    (f64.const 0x1.fffffffffffffp+1023)
+    (f64.const nan:0x8000000000000)
+  )
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq"
+    (f64.const 0x1.fffffffffffffp+1023)
+    (f64.const nan:0x4000000000000)
+  )
+  (i32.const 0)
+)
+(assert_return (invoke "eq" (f64.const -inf) (f64.const -0x0p+0)) (i32.const 0))
+(assert_return (invoke "eq" (f64.const -inf) (f64.const 0x0p+0)) (i32.const 0))
+(assert_return (invoke "eq" (f64.const inf) (f64.const -0x0p+0)) (i32.const 0))
+(assert_return (invoke "eq" (f64.const inf) (f64.const 0x0p+0)) (i32.const 0))
+(assert_return
+  (invoke "eq" (f64.const -inf) (f64.const -0x0.0000000000001p-1022))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const -inf) (f64.const 0x0.0000000000001p-1022))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const inf) (f64.const -0x0.0000000000001p-1022))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const inf) (f64.const 0x0.0000000000001p-1022))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const -inf) (f64.const -0x1p-1022))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const -inf) (f64.const 0x1p-1022))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const inf) (f64.const -0x1p-1022))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const inf) (f64.const 0x1p-1022))
+  (i32.const 0)
+)
+(assert_return (invoke "eq" (f64.const -inf) (f64.const -0x1p-1)) (i32.const 0))
+(assert_return (invoke "eq" (f64.const -inf) (f64.const 0x1p-1)) (i32.const 0))
+(assert_return (invoke "eq" (f64.const inf) (f64.const -0x1p-1)) (i32.const 0))
+(assert_return (invoke "eq" (f64.const inf) (f64.const 0x1p-1)) (i32.const 0))
+(assert_return (invoke "eq" (f64.const -inf) (f64.const -0x1p+0)) (i32.const 0))
+(assert_return (invoke "eq" (f64.const -inf) (f64.const 0x1p+0)) (i32.const 0))
+(assert_return (invoke "eq" (f64.const inf) (f64.const -0x1p+0)) (i32.const 0))
+(assert_return (invoke "eq" (f64.const inf) (f64.const 0x1p+0)) (i32.const 0))
+(assert_return
+  (invoke "eq" (f64.const -inf) (f64.const -0x1.921fb54442d18p+2))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const -inf) (f64.const 0x1.921fb54442d18p+2))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const inf) (f64.const -0x1.921fb54442d18p+2))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const inf) (f64.const 0x1.921fb54442d18p+2))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const -inf) (f64.const -0x1.fffffffffffffp+1023))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const -inf) (f64.const 0x1.fffffffffffffp+1023))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const inf) (f64.const -0x1.fffffffffffffp+1023))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f64.const inf) (f64.const 0x1.fffffffffffffp+1023))
   (i32.const 0)
 )
 (assert_return (invoke "eq" (f64.const -inf) (f64.const -inf)) (i32.const 1))
@@ -1099,227 +1381,293 @@
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const -nan:0x8000000000000) (f64.const -0.))
+  (invoke "eq" (f64.const -nan:0x8000000000000) (f64.const -0x0p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const -nan:0x4000000000000) (f64.const -0.))
+  (invoke "eq" (f64.const -nan:0x4000000000000) (f64.const -0x0p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const -nan:0x8000000000000) (f64.const 0.))
+  (invoke "eq" (f64.const -nan:0x8000000000000) (f64.const 0x0p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const -nan:0x4000000000000) (f64.const 0.))
+  (invoke "eq" (f64.const -nan:0x4000000000000) (f64.const 0x0p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const nan:0x8000000000000) (f64.const -0.))
+  (invoke "eq" (f64.const nan:0x8000000000000) (f64.const -0x0p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const nan:0x4000000000000) (f64.const -0.))
+  (invoke "eq" (f64.const nan:0x4000000000000) (f64.const -0x0p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const nan:0x8000000000000) (f64.const 0.))
+  (invoke "eq" (f64.const nan:0x8000000000000) (f64.const 0x0p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const nan:0x4000000000000) (f64.const 0.))
+  (invoke "eq" (f64.const nan:0x4000000000000) (f64.const 0x0p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const -nan:0x8000000000000) (f64.const -4.94065645841e-324))
+  (invoke "eq"
+    (f64.const -nan:0x8000000000000)
+    (f64.const -0x0.0000000000001p-1022)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const -nan:0x4000000000000) (f64.const -4.94065645841e-324))
+  (invoke "eq"
+    (f64.const -nan:0x4000000000000)
+    (f64.const -0x0.0000000000001p-1022)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const -nan:0x8000000000000) (f64.const 4.94065645841e-324))
+  (invoke "eq"
+    (f64.const -nan:0x8000000000000)
+    (f64.const 0x0.0000000000001p-1022)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const -nan:0x4000000000000) (f64.const 4.94065645841e-324))
+  (invoke "eq"
+    (f64.const -nan:0x4000000000000)
+    (f64.const 0x0.0000000000001p-1022)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const nan:0x8000000000000) (f64.const -4.94065645841e-324))
+  (invoke "eq"
+    (f64.const nan:0x8000000000000)
+    (f64.const -0x0.0000000000001p-1022)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const nan:0x4000000000000) (f64.const -4.94065645841e-324))
+  (invoke "eq"
+    (f64.const nan:0x4000000000000)
+    (f64.const -0x0.0000000000001p-1022)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const nan:0x8000000000000) (f64.const 4.94065645841e-324))
+  (invoke "eq"
+    (f64.const nan:0x8000000000000)
+    (f64.const 0x0.0000000000001p-1022)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const nan:0x4000000000000) (f64.const 4.94065645841e-324))
+  (invoke "eq"
+    (f64.const nan:0x4000000000000)
+    (f64.const 0x0.0000000000001p-1022)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const -nan:0x8000000000000) (f64.const -2.22507385851e-308))
+  (invoke "eq" (f64.const -nan:0x8000000000000) (f64.const -0x1p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const -nan:0x4000000000000) (f64.const -2.22507385851e-308))
+  (invoke "eq" (f64.const -nan:0x4000000000000) (f64.const -0x1p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const -nan:0x8000000000000) (f64.const 2.22507385851e-308))
+  (invoke "eq" (f64.const -nan:0x8000000000000) (f64.const 0x1p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const -nan:0x4000000000000) (f64.const 2.22507385851e-308))
+  (invoke "eq" (f64.const -nan:0x4000000000000) (f64.const 0x1p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const nan:0x8000000000000) (f64.const -2.22507385851e-308))
+  (invoke "eq" (f64.const nan:0x8000000000000) (f64.const -0x1p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const nan:0x4000000000000) (f64.const -2.22507385851e-308))
+  (invoke "eq" (f64.const nan:0x4000000000000) (f64.const -0x1p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const nan:0x8000000000000) (f64.const 2.22507385851e-308))
+  (invoke "eq" (f64.const nan:0x8000000000000) (f64.const 0x1p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const nan:0x4000000000000) (f64.const 2.22507385851e-308))
+  (invoke "eq" (f64.const nan:0x4000000000000) (f64.const 0x1p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const -nan:0x8000000000000) (f64.const -0.5))
+  (invoke "eq" (f64.const -nan:0x8000000000000) (f64.const -0x1p-1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const -nan:0x4000000000000) (f64.const -0.5))
+  (invoke "eq" (f64.const -nan:0x4000000000000) (f64.const -0x1p-1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const -nan:0x8000000000000) (f64.const 0.5))
+  (invoke "eq" (f64.const -nan:0x8000000000000) (f64.const 0x1p-1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const -nan:0x4000000000000) (f64.const 0.5))
+  (invoke "eq" (f64.const -nan:0x4000000000000) (f64.const 0x1p-1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const nan:0x8000000000000) (f64.const -0.5))
+  (invoke "eq" (f64.const nan:0x8000000000000) (f64.const -0x1p-1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const nan:0x4000000000000) (f64.const -0.5))
+  (invoke "eq" (f64.const nan:0x4000000000000) (f64.const -0x1p-1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const nan:0x8000000000000) (f64.const 0.5))
+  (invoke "eq" (f64.const nan:0x8000000000000) (f64.const 0x1p-1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const nan:0x4000000000000) (f64.const 0.5))
+  (invoke "eq" (f64.const nan:0x4000000000000) (f64.const 0x1p-1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const -nan:0x8000000000000) (f64.const -1.))
+  (invoke "eq" (f64.const -nan:0x8000000000000) (f64.const -0x1p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const -nan:0x4000000000000) (f64.const -1.))
+  (invoke "eq" (f64.const -nan:0x4000000000000) (f64.const -0x1p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const -nan:0x8000000000000) (f64.const 1.))
+  (invoke "eq" (f64.const -nan:0x8000000000000) (f64.const 0x1p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const -nan:0x4000000000000) (f64.const 1.))
+  (invoke "eq" (f64.const -nan:0x4000000000000) (f64.const 0x1p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const nan:0x8000000000000) (f64.const -1.))
+  (invoke "eq" (f64.const nan:0x8000000000000) (f64.const -0x1p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const nan:0x4000000000000) (f64.const -1.))
+  (invoke "eq" (f64.const nan:0x4000000000000) (f64.const -0x1p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const nan:0x8000000000000) (f64.const 1.))
+  (invoke "eq" (f64.const nan:0x8000000000000) (f64.const 0x1p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const nan:0x4000000000000) (f64.const 1.))
+  (invoke "eq" (f64.const nan:0x4000000000000) (f64.const 0x1p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const -nan:0x8000000000000) (f64.const -6.28318530718))
+  (invoke "eq"
+    (f64.const -nan:0x8000000000000)
+    (f64.const -0x1.921fb54442d18p+2)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const -nan:0x4000000000000) (f64.const -6.28318530718))
+  (invoke "eq"
+    (f64.const -nan:0x4000000000000)
+    (f64.const -0x1.921fb54442d18p+2)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const -nan:0x8000000000000) (f64.const 6.28318530718))
+  (invoke "eq"
+    (f64.const -nan:0x8000000000000)
+    (f64.const 0x1.921fb54442d18p+2)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const -nan:0x4000000000000) (f64.const 6.28318530718))
+  (invoke "eq"
+    (f64.const -nan:0x4000000000000)
+    (f64.const 0x1.921fb54442d18p+2)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const nan:0x8000000000000) (f64.const -6.28318530718))
+  (invoke "eq"
+    (f64.const nan:0x8000000000000)
+    (f64.const -0x1.921fb54442d18p+2)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const nan:0x4000000000000) (f64.const -6.28318530718))
+  (invoke "eq"
+    (f64.const nan:0x4000000000000)
+    (f64.const -0x1.921fb54442d18p+2)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const nan:0x8000000000000) (f64.const 6.28318530718))
+  (invoke "eq" (f64.const nan:0x8000000000000) (f64.const 0x1.921fb54442d18p+2))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const nan:0x4000000000000) (f64.const 6.28318530718))
+  (invoke "eq" (f64.const nan:0x4000000000000) (f64.const 0x1.921fb54442d18p+2))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const -nan:0x8000000000000) (f64.const -1.79769313486e+308))
+  (invoke "eq"
+    (f64.const -nan:0x8000000000000)
+    (f64.const -0x1.fffffffffffffp+1023)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const -nan:0x4000000000000) (f64.const -1.79769313486e+308))
+  (invoke "eq"
+    (f64.const -nan:0x4000000000000)
+    (f64.const -0x1.fffffffffffffp+1023)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const -nan:0x8000000000000) (f64.const 1.79769313486e+308))
+  (invoke "eq"
+    (f64.const -nan:0x8000000000000)
+    (f64.const 0x1.fffffffffffffp+1023)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const -nan:0x4000000000000) (f64.const 1.79769313486e+308))
+  (invoke "eq"
+    (f64.const -nan:0x4000000000000)
+    (f64.const 0x1.fffffffffffffp+1023)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const nan:0x8000000000000) (f64.const -1.79769313486e+308))
+  (invoke "eq"
+    (f64.const nan:0x8000000000000)
+    (f64.const -0x1.fffffffffffffp+1023)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const nan:0x4000000000000) (f64.const -1.79769313486e+308))
+  (invoke "eq"
+    (f64.const nan:0x4000000000000)
+    (f64.const -0x1.fffffffffffffp+1023)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const nan:0x8000000000000) (f64.const 1.79769313486e+308))
+  (invoke "eq"
+    (f64.const nan:0x8000000000000)
+    (f64.const 0x1.fffffffffffffp+1023)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f64.const nan:0x4000000000000) (f64.const 1.79769313486e+308))
+  (invoke "eq"
+    (f64.const nan:0x4000000000000)
+    (f64.const 0x1.fffffffffffffp+1023)
+  )
   (i32.const 0)
 )
 (assert_return
@@ -1430,1056 +1778,1338 @@
   (invoke "eq" (f64.const nan:0x4000000000000) (f64.const nan:0x4000000000000))
   (i32.const 0)
 )
-(assert_return (invoke "ne" (f64.const -0.) (f64.const -0.)) (i32.const 0))
-(assert_return (invoke "ne" (f64.const -0.) (f64.const 0.)) (i32.const 0))
-(assert_return (invoke "ne" (f64.const 0.) (f64.const -0.)) (i32.const 0))
-(assert_return (invoke "ne" (f64.const 0.) (f64.const 0.)) (i32.const 0))
 (assert_return
-  (invoke "ne" (f64.const -0.) (f64.const -4.94065645841e-324))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const -0.) (f64.const 4.94065645841e-324))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const 0.) (f64.const -4.94065645841e-324))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const 0.) (f64.const 4.94065645841e-324))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const -0.) (f64.const -2.22507385851e-308))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const -0.) (f64.const 2.22507385851e-308))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const 0.) (f64.const -2.22507385851e-308))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const 0.) (f64.const 2.22507385851e-308))
-  (i32.const 1)
-)
-(assert_return (invoke "ne" (f64.const -0.) (f64.const -0.5)) (i32.const 1))
-(assert_return (invoke "ne" (f64.const -0.) (f64.const 0.5)) (i32.const 1))
-(assert_return (invoke "ne" (f64.const 0.) (f64.const -0.5)) (i32.const 1))
-(assert_return (invoke "ne" (f64.const 0.) (f64.const 0.5)) (i32.const 1))
-(assert_return (invoke "ne" (f64.const -0.) (f64.const -1.)) (i32.const 1))
-(assert_return (invoke "ne" (f64.const -0.) (f64.const 1.)) (i32.const 1))
-(assert_return (invoke "ne" (f64.const 0.) (f64.const -1.)) (i32.const 1))
-(assert_return (invoke "ne" (f64.const 0.) (f64.const 1.)) (i32.const 1))
-(assert_return
-  (invoke "ne" (f64.const -0.) (f64.const -6.28318530718))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const -0.) (f64.const 6.28318530718))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const 0.) (f64.const -6.28318530718))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const 0.) (f64.const 6.28318530718))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const -0.) (f64.const -1.79769313486e+308))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const -0.) (f64.const 1.79769313486e+308))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const 0.) (f64.const -1.79769313486e+308))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const 0.) (f64.const 1.79769313486e+308))
-  (i32.const 1)
-)
-(assert_return (invoke "ne" (f64.const -0.) (f64.const -inf)) (i32.const 1))
-(assert_return (invoke "ne" (f64.const -0.) (f64.const inf)) (i32.const 1))
-(assert_return (invoke "ne" (f64.const 0.) (f64.const -inf)) (i32.const 1))
-(assert_return (invoke "ne" (f64.const 0.) (f64.const inf)) (i32.const 1))
-(assert_return
-  (invoke "ne" (f64.const -0.) (f64.const -nan:0x8000000000000))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const -0.) (f64.const -nan:0x4000000000000))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const -0.) (f64.const nan:0x8000000000000))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const -0.) (f64.const nan:0x4000000000000))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const 0.) (f64.const -nan:0x8000000000000))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const 0.) (f64.const -nan:0x4000000000000))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const 0.) (f64.const nan:0x8000000000000))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const 0.) (f64.const nan:0x4000000000000))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const -4.94065645841e-324) (f64.const -0.))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const -4.94065645841e-324) (f64.const 0.))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const 4.94065645841e-324) (f64.const -0.))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const 4.94065645841e-324) (f64.const 0.))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const -4.94065645841e-324) (f64.const -4.94065645841e-324))
+  (invoke "ne" (f64.const -0x0p+0) (f64.const -0x0p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ne" (f64.const -4.94065645841e-324) (f64.const 4.94065645841e-324))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const 4.94065645841e-324) (f64.const -4.94065645841e-324))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const 4.94065645841e-324) (f64.const 4.94065645841e-324))
+  (invoke "ne" (f64.const -0x0p+0) (f64.const 0x0p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ne" (f64.const -4.94065645841e-324) (f64.const -2.22507385851e-308))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const -4.94065645841e-324) (f64.const 2.22507385851e-308))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const 4.94065645841e-324) (f64.const -2.22507385851e-308))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const 4.94065645841e-324) (f64.const 2.22507385851e-308))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const -4.94065645841e-324) (f64.const -0.5))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const -4.94065645841e-324) (f64.const 0.5))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const 4.94065645841e-324) (f64.const -0.5))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const 4.94065645841e-324) (f64.const 0.5))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const -4.94065645841e-324) (f64.const -1.))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const -4.94065645841e-324) (f64.const 1.))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const 4.94065645841e-324) (f64.const -1.))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const 4.94065645841e-324) (f64.const 1.))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const -4.94065645841e-324) (f64.const -6.28318530718))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const -4.94065645841e-324) (f64.const 6.28318530718))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const 4.94065645841e-324) (f64.const -6.28318530718))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const 4.94065645841e-324) (f64.const 6.28318530718))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const -4.94065645841e-324) (f64.const -1.79769313486e+308))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const -4.94065645841e-324) (f64.const 1.79769313486e+308))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const 4.94065645841e-324) (f64.const -1.79769313486e+308))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const 4.94065645841e-324) (f64.const 1.79769313486e+308))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const -4.94065645841e-324) (f64.const -inf))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const -4.94065645841e-324) (f64.const inf))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const 4.94065645841e-324) (f64.const -inf))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const 4.94065645841e-324) (f64.const inf))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const -4.94065645841e-324) (f64.const -nan:0x8000000000000))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const -4.94065645841e-324) (f64.const -nan:0x4000000000000))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const -4.94065645841e-324) (f64.const nan:0x8000000000000))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const -4.94065645841e-324) (f64.const nan:0x4000000000000))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const 4.94065645841e-324) (f64.const -nan:0x8000000000000))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const 4.94065645841e-324) (f64.const -nan:0x4000000000000))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const 4.94065645841e-324) (f64.const nan:0x8000000000000))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const 4.94065645841e-324) (f64.const nan:0x4000000000000))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const -2.22507385851e-308) (f64.const -0.))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const -2.22507385851e-308) (f64.const 0.))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const 2.22507385851e-308) (f64.const -0.))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const 2.22507385851e-308) (f64.const 0.))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const -2.22507385851e-308) (f64.const -4.94065645841e-324))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const -2.22507385851e-308) (f64.const 4.94065645841e-324))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const 2.22507385851e-308) (f64.const -4.94065645841e-324))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const 2.22507385851e-308) (f64.const 4.94065645841e-324))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const -2.22507385851e-308) (f64.const -2.22507385851e-308))
+  (invoke "ne" (f64.const 0x0p+0) (f64.const -0x0p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ne" (f64.const -2.22507385851e-308) (f64.const 2.22507385851e-308))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const 2.22507385851e-308) (f64.const -2.22507385851e-308))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const 2.22507385851e-308) (f64.const 2.22507385851e-308))
+  (invoke "ne" (f64.const 0x0p+0) (f64.const 0x0p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ne" (f64.const -2.22507385851e-308) (f64.const -0.5))
+  (invoke "ne" (f64.const -0x0p+0) (f64.const -0x0.0000000000001p-1022))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const -2.22507385851e-308) (f64.const 0.5))
+  (invoke "ne" (f64.const -0x0p+0) (f64.const 0x0.0000000000001p-1022))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const 2.22507385851e-308) (f64.const -0.5))
+  (invoke "ne" (f64.const 0x0p+0) (f64.const -0x0.0000000000001p-1022))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const 2.22507385851e-308) (f64.const 0.5))
+  (invoke "ne" (f64.const 0x0p+0) (f64.const 0x0.0000000000001p-1022))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const -2.22507385851e-308) (f64.const -1.))
+  (invoke "ne" (f64.const -0x0p+0) (f64.const -0x1p-1022))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const -2.22507385851e-308) (f64.const 1.))
+  (invoke "ne" (f64.const -0x0p+0) (f64.const 0x1p-1022))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const 2.22507385851e-308) (f64.const -1.))
+  (invoke "ne" (f64.const 0x0p+0) (f64.const -0x1p-1022))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const 2.22507385851e-308) (f64.const 1.))
+  (invoke "ne" (f64.const 0x0p+0) (f64.const 0x1p-1022))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const -2.22507385851e-308) (f64.const -6.28318530718))
+  (invoke "ne" (f64.const -0x0p+0) (f64.const -0x1p-1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const -2.22507385851e-308) (f64.const 6.28318530718))
+  (invoke "ne" (f64.const -0x0p+0) (f64.const 0x1p-1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const 2.22507385851e-308) (f64.const -6.28318530718))
+  (invoke "ne" (f64.const 0x0p+0) (f64.const -0x1p-1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const 2.22507385851e-308) (f64.const 6.28318530718))
+  (invoke "ne" (f64.const 0x0p+0) (f64.const 0x1p-1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const -2.22507385851e-308) (f64.const -1.79769313486e+308))
+  (invoke "ne" (f64.const -0x0p+0) (f64.const -0x1p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const -2.22507385851e-308) (f64.const 1.79769313486e+308))
+  (invoke "ne" (f64.const -0x0p+0) (f64.const 0x1p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const 2.22507385851e-308) (f64.const -1.79769313486e+308))
+  (invoke "ne" (f64.const 0x0p+0) (f64.const -0x1p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const 2.22507385851e-308) (f64.const 1.79769313486e+308))
+  (invoke "ne" (f64.const 0x0p+0) (f64.const 0x1p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const -2.22507385851e-308) (f64.const -inf))
+  (invoke "ne" (f64.const -0x0p+0) (f64.const -0x1.921fb54442d18p+2))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const -2.22507385851e-308) (f64.const inf))
+  (invoke "ne" (f64.const -0x0p+0) (f64.const 0x1.921fb54442d18p+2))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const 2.22507385851e-308) (f64.const -inf))
+  (invoke "ne" (f64.const 0x0p+0) (f64.const -0x1.921fb54442d18p+2))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const 2.22507385851e-308) (f64.const inf))
+  (invoke "ne" (f64.const 0x0p+0) (f64.const 0x1.921fb54442d18p+2))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const -2.22507385851e-308) (f64.const -nan:0x8000000000000))
+  (invoke "ne" (f64.const -0x0p+0) (f64.const -0x1.fffffffffffffp+1023))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const -2.22507385851e-308) (f64.const -nan:0x4000000000000))
+  (invoke "ne" (f64.const -0x0p+0) (f64.const 0x1.fffffffffffffp+1023))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const -2.22507385851e-308) (f64.const nan:0x8000000000000))
+  (invoke "ne" (f64.const 0x0p+0) (f64.const -0x1.fffffffffffffp+1023))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const -2.22507385851e-308) (f64.const nan:0x4000000000000))
+  (invoke "ne" (f64.const 0x0p+0) (f64.const 0x1.fffffffffffffp+1023))
   (i32.const 1)
 )
+(assert_return (invoke "ne" (f64.const -0x0p+0) (f64.const -inf)) (i32.const 1))
+(assert_return (invoke "ne" (f64.const -0x0p+0) (f64.const inf)) (i32.const 1))
+(assert_return (invoke "ne" (f64.const 0x0p+0) (f64.const -inf)) (i32.const 1))
+(assert_return (invoke "ne" (f64.const 0x0p+0) (f64.const inf)) (i32.const 1))
 (assert_return
-  (invoke "ne" (f64.const 2.22507385851e-308) (f64.const -nan:0x8000000000000))
+  (invoke "ne" (f64.const -0x0p+0) (f64.const -nan:0x8000000000000))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const 2.22507385851e-308) (f64.const -nan:0x4000000000000))
+  (invoke "ne" (f64.const -0x0p+0) (f64.const -nan:0x4000000000000))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const 2.22507385851e-308) (f64.const nan:0x8000000000000))
+  (invoke "ne" (f64.const -0x0p+0) (f64.const nan:0x8000000000000))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const 2.22507385851e-308) (f64.const nan:0x4000000000000))
+  (invoke "ne" (f64.const -0x0p+0) (f64.const nan:0x4000000000000))
   (i32.const 1)
 )
-(assert_return (invoke "ne" (f64.const -0.5) (f64.const -0.)) (i32.const 1))
-(assert_return (invoke "ne" (f64.const -0.5) (f64.const 0.)) (i32.const 1))
-(assert_return (invoke "ne" (f64.const 0.5) (f64.const -0.)) (i32.const 1))
-(assert_return (invoke "ne" (f64.const 0.5) (f64.const 0.)) (i32.const 1))
 (assert_return
-  (invoke "ne" (f64.const -0.5) (f64.const -4.94065645841e-324))
+  (invoke "ne" (f64.const 0x0p+0) (f64.const -nan:0x8000000000000))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const -0.5) (f64.const 4.94065645841e-324))
+  (invoke "ne" (f64.const 0x0p+0) (f64.const -nan:0x4000000000000))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const 0.5) (f64.const -4.94065645841e-324))
+  (invoke "ne" (f64.const 0x0p+0) (f64.const nan:0x8000000000000))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const 0.5) (f64.const 4.94065645841e-324))
+  (invoke "ne" (f64.const 0x0p+0) (f64.const nan:0x4000000000000))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const -0.5) (f64.const -2.22507385851e-308))
+  (invoke "ne" (f64.const -0x0.0000000000001p-1022) (f64.const -0x0p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const -0.5) (f64.const 2.22507385851e-308))
+  (invoke "ne" (f64.const -0x0.0000000000001p-1022) (f64.const 0x0p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const 0.5) (f64.const -2.22507385851e-308))
+  (invoke "ne" (f64.const 0x0.0000000000001p-1022) (f64.const -0x0p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const 0.5) (f64.const 2.22507385851e-308))
+  (invoke "ne" (f64.const 0x0.0000000000001p-1022) (f64.const 0x0p+0))
   (i32.const 1)
 )
-(assert_return (invoke "ne" (f64.const -0.5) (f64.const -0.5)) (i32.const 0))
-(assert_return (invoke "ne" (f64.const -0.5) (f64.const 0.5)) (i32.const 1))
-(assert_return (invoke "ne" (f64.const 0.5) (f64.const -0.5)) (i32.const 1))
-(assert_return (invoke "ne" (f64.const 0.5) (f64.const 0.5)) (i32.const 0))
-(assert_return (invoke "ne" (f64.const -0.5) (f64.const -1.)) (i32.const 1))
-(assert_return (invoke "ne" (f64.const -0.5) (f64.const 1.)) (i32.const 1))
-(assert_return (invoke "ne" (f64.const 0.5) (f64.const -1.)) (i32.const 1))
-(assert_return (invoke "ne" (f64.const 0.5) (f64.const 1.)) (i32.const 1))
 (assert_return
-  (invoke "ne" (f64.const -0.5) (f64.const -6.28318530718))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const -0.5) (f64.const 6.28318530718))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const 0.5) (f64.const -6.28318530718))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const 0.5) (f64.const 6.28318530718))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const -0.5) (f64.const -1.79769313486e+308))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const -0.5) (f64.const 1.79769313486e+308))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const 0.5) (f64.const -1.79769313486e+308))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const 0.5) (f64.const 1.79769313486e+308))
-  (i32.const 1)
-)
-(assert_return (invoke "ne" (f64.const -0.5) (f64.const -inf)) (i32.const 1))
-(assert_return (invoke "ne" (f64.const -0.5) (f64.const inf)) (i32.const 1))
-(assert_return (invoke "ne" (f64.const 0.5) (f64.const -inf)) (i32.const 1))
-(assert_return (invoke "ne" (f64.const 0.5) (f64.const inf)) (i32.const 1))
-(assert_return
-  (invoke "ne" (f64.const -0.5) (f64.const -nan:0x8000000000000))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const -0.5) (f64.const -nan:0x4000000000000))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const -0.5) (f64.const nan:0x8000000000000))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const -0.5) (f64.const nan:0x4000000000000))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const 0.5) (f64.const -nan:0x8000000000000))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const 0.5) (f64.const -nan:0x4000000000000))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const 0.5) (f64.const nan:0x8000000000000))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const 0.5) (f64.const nan:0x4000000000000))
-  (i32.const 1)
-)
-(assert_return (invoke "ne" (f64.const -1.) (f64.const -0.)) (i32.const 1))
-(assert_return (invoke "ne" (f64.const -1.) (f64.const 0.)) (i32.const 1))
-(assert_return (invoke "ne" (f64.const 1.) (f64.const -0.)) (i32.const 1))
-(assert_return (invoke "ne" (f64.const 1.) (f64.const 0.)) (i32.const 1))
-(assert_return
-  (invoke "ne" (f64.const -1.) (f64.const -4.94065645841e-324))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const -1.) (f64.const 4.94065645841e-324))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const 1.) (f64.const -4.94065645841e-324))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const 1.) (f64.const 4.94065645841e-324))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const -1.) (f64.const -2.22507385851e-308))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const -1.) (f64.const 2.22507385851e-308))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const 1.) (f64.const -2.22507385851e-308))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const 1.) (f64.const 2.22507385851e-308))
-  (i32.const 1)
-)
-(assert_return (invoke "ne" (f64.const -1.) (f64.const -0.5)) (i32.const 1))
-(assert_return (invoke "ne" (f64.const -1.) (f64.const 0.5)) (i32.const 1))
-(assert_return (invoke "ne" (f64.const 1.) (f64.const -0.5)) (i32.const 1))
-(assert_return (invoke "ne" (f64.const 1.) (f64.const 0.5)) (i32.const 1))
-(assert_return (invoke "ne" (f64.const -1.) (f64.const -1.)) (i32.const 0))
-(assert_return (invoke "ne" (f64.const -1.) (f64.const 1.)) (i32.const 1))
-(assert_return (invoke "ne" (f64.const 1.) (f64.const -1.)) (i32.const 1))
-(assert_return (invoke "ne" (f64.const 1.) (f64.const 1.)) (i32.const 0))
-(assert_return
-  (invoke "ne" (f64.const -1.) (f64.const -6.28318530718))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const -1.) (f64.const 6.28318530718))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const 1.) (f64.const -6.28318530718))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const 1.) (f64.const 6.28318530718))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const -1.) (f64.const -1.79769313486e+308))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const -1.) (f64.const 1.79769313486e+308))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const 1.) (f64.const -1.79769313486e+308))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const 1.) (f64.const 1.79769313486e+308))
-  (i32.const 1)
-)
-(assert_return (invoke "ne" (f64.const -1.) (f64.const -inf)) (i32.const 1))
-(assert_return (invoke "ne" (f64.const -1.) (f64.const inf)) (i32.const 1))
-(assert_return (invoke "ne" (f64.const 1.) (f64.const -inf)) (i32.const 1))
-(assert_return (invoke "ne" (f64.const 1.) (f64.const inf)) (i32.const 1))
-(assert_return
-  (invoke "ne" (f64.const -1.) (f64.const -nan:0x8000000000000))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const -1.) (f64.const -nan:0x4000000000000))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const -1.) (f64.const nan:0x8000000000000))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const -1.) (f64.const nan:0x4000000000000))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const 1.) (f64.const -nan:0x8000000000000))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const 1.) (f64.const -nan:0x4000000000000))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const 1.) (f64.const nan:0x8000000000000))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const 1.) (f64.const nan:0x4000000000000))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const -6.28318530718) (f64.const -0.))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const -6.28318530718) (f64.const 0.))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const 6.28318530718) (f64.const -0.))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const 6.28318530718) (f64.const 0.))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const -6.28318530718) (f64.const -4.94065645841e-324))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const -6.28318530718) (f64.const 4.94065645841e-324))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const 6.28318530718) (f64.const -4.94065645841e-324))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const 6.28318530718) (f64.const 4.94065645841e-324))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const -6.28318530718) (f64.const -2.22507385851e-308))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const -6.28318530718) (f64.const 2.22507385851e-308))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const 6.28318530718) (f64.const -2.22507385851e-308))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const 6.28318530718) (f64.const 2.22507385851e-308))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const -6.28318530718) (f64.const -0.5))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const -6.28318530718) (f64.const 0.5))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const 6.28318530718) (f64.const -0.5))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const 6.28318530718) (f64.const 0.5))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const -6.28318530718) (f64.const -1.))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const -6.28318530718) (f64.const 1.))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const 6.28318530718) (f64.const -1.))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const 6.28318530718) (f64.const 1.))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f64.const -6.28318530718) (f64.const -6.28318530718))
+  (invoke "ne"
+    (f64.const -0x0.0000000000001p-1022)
+    (f64.const -0x0.0000000000001p-1022)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ne" (f64.const -6.28318530718) (f64.const 6.28318530718))
+  (invoke "ne"
+    (f64.const -0x0.0000000000001p-1022)
+    (f64.const 0x0.0000000000001p-1022)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const 6.28318530718) (f64.const -6.28318530718))
+  (invoke "ne"
+    (f64.const 0x0.0000000000001p-1022)
+    (f64.const -0x0.0000000000001p-1022)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const 6.28318530718) (f64.const 6.28318530718))
+  (invoke "ne"
+    (f64.const 0x0.0000000000001p-1022)
+    (f64.const 0x0.0000000000001p-1022)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ne" (f64.const -6.28318530718) (f64.const -1.79769313486e+308))
+  (invoke "ne" (f64.const -0x0.0000000000001p-1022) (f64.const -0x1p-1022))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const -6.28318530718) (f64.const 1.79769313486e+308))
+  (invoke "ne" (f64.const -0x0.0000000000001p-1022) (f64.const 0x1p-1022))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const 6.28318530718) (f64.const -1.79769313486e+308))
+  (invoke "ne" (f64.const 0x0.0000000000001p-1022) (f64.const -0x1p-1022))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const 6.28318530718) (f64.const 1.79769313486e+308))
+  (invoke "ne" (f64.const 0x0.0000000000001p-1022) (f64.const 0x1p-1022))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const -6.28318530718) (f64.const -inf))
+  (invoke "ne" (f64.const -0x0.0000000000001p-1022) (f64.const -0x1p-1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const -6.28318530718) (f64.const inf))
+  (invoke "ne" (f64.const -0x0.0000000000001p-1022) (f64.const 0x1p-1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const 6.28318530718) (f64.const -inf))
+  (invoke "ne" (f64.const 0x0.0000000000001p-1022) (f64.const -0x1p-1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const 6.28318530718) (f64.const inf))
+  (invoke "ne" (f64.const 0x0.0000000000001p-1022) (f64.const 0x1p-1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const -6.28318530718) (f64.const -nan:0x8000000000000))
+  (invoke "ne" (f64.const -0x0.0000000000001p-1022) (f64.const -0x1p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const -6.28318530718) (f64.const -nan:0x4000000000000))
+  (invoke "ne" (f64.const -0x0.0000000000001p-1022) (f64.const 0x1p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const -6.28318530718) (f64.const nan:0x8000000000000))
+  (invoke "ne" (f64.const 0x0.0000000000001p-1022) (f64.const -0x1p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const -6.28318530718) (f64.const nan:0x4000000000000))
+  (invoke "ne" (f64.const 0x0.0000000000001p-1022) (f64.const 0x1p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const 6.28318530718) (f64.const -nan:0x8000000000000))
+  (invoke "ne"
+    (f64.const -0x0.0000000000001p-1022)
+    (f64.const -0x1.921fb54442d18p+2)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const 6.28318530718) (f64.const -nan:0x4000000000000))
+  (invoke "ne"
+    (f64.const -0x0.0000000000001p-1022)
+    (f64.const 0x1.921fb54442d18p+2)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const 6.28318530718) (f64.const nan:0x8000000000000))
+  (invoke "ne"
+    (f64.const 0x0.0000000000001p-1022)
+    (f64.const -0x1.921fb54442d18p+2)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const 6.28318530718) (f64.const nan:0x4000000000000))
+  (invoke "ne"
+    (f64.const 0x0.0000000000001p-1022)
+    (f64.const 0x1.921fb54442d18p+2)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const -1.79769313486e+308) (f64.const -0.))
+  (invoke "ne"
+    (f64.const -0x0.0000000000001p-1022)
+    (f64.const -0x1.fffffffffffffp+1023)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const -1.79769313486e+308) (f64.const 0.))
+  (invoke "ne"
+    (f64.const -0x0.0000000000001p-1022)
+    (f64.const 0x1.fffffffffffffp+1023)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const 1.79769313486e+308) (f64.const -0.))
+  (invoke "ne"
+    (f64.const 0x0.0000000000001p-1022)
+    (f64.const -0x1.fffffffffffffp+1023)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const 1.79769313486e+308) (f64.const 0.))
+  (invoke "ne"
+    (f64.const 0x0.0000000000001p-1022)
+    (f64.const 0x1.fffffffffffffp+1023)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const -1.79769313486e+308) (f64.const -4.94065645841e-324))
+  (invoke "ne" (f64.const -0x0.0000000000001p-1022) (f64.const -inf))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const -1.79769313486e+308) (f64.const 4.94065645841e-324))
+  (invoke "ne" (f64.const -0x0.0000000000001p-1022) (f64.const inf))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const 1.79769313486e+308) (f64.const -4.94065645841e-324))
+  (invoke "ne" (f64.const 0x0.0000000000001p-1022) (f64.const -inf))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const 1.79769313486e+308) (f64.const 4.94065645841e-324))
+  (invoke "ne" (f64.const 0x0.0000000000001p-1022) (f64.const inf))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const -1.79769313486e+308) (f64.const -2.22507385851e-308))
+  (invoke "ne"
+    (f64.const -0x0.0000000000001p-1022)
+    (f64.const -nan:0x8000000000000)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const -1.79769313486e+308) (f64.const 2.22507385851e-308))
+  (invoke "ne"
+    (f64.const -0x0.0000000000001p-1022)
+    (f64.const -nan:0x4000000000000)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const 1.79769313486e+308) (f64.const -2.22507385851e-308))
+  (invoke "ne"
+    (f64.const -0x0.0000000000001p-1022)
+    (f64.const nan:0x8000000000000)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const 1.79769313486e+308) (f64.const 2.22507385851e-308))
+  (invoke "ne"
+    (f64.const -0x0.0000000000001p-1022)
+    (f64.const nan:0x4000000000000)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const -1.79769313486e+308) (f64.const -0.5))
+  (invoke "ne"
+    (f64.const 0x0.0000000000001p-1022)
+    (f64.const -nan:0x8000000000000)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const -1.79769313486e+308) (f64.const 0.5))
+  (invoke "ne"
+    (f64.const 0x0.0000000000001p-1022)
+    (f64.const -nan:0x4000000000000)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const 1.79769313486e+308) (f64.const -0.5))
+  (invoke "ne"
+    (f64.const 0x0.0000000000001p-1022)
+    (f64.const nan:0x8000000000000)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const 1.79769313486e+308) (f64.const 0.5))
+  (invoke "ne"
+    (f64.const 0x0.0000000000001p-1022)
+    (f64.const nan:0x4000000000000)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const -1.79769313486e+308) (f64.const -1.))
+  (invoke "ne" (f64.const -0x1p-1022) (f64.const -0x0p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const -1.79769313486e+308) (f64.const 1.))
+  (invoke "ne" (f64.const -0x1p-1022) (f64.const 0x0p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const 1.79769313486e+308) (f64.const -1.))
+  (invoke "ne" (f64.const 0x1p-1022) (f64.const -0x0p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const 1.79769313486e+308) (f64.const 1.))
+  (invoke "ne" (f64.const 0x1p-1022) (f64.const 0x0p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const -1.79769313486e+308) (f64.const -6.28318530718))
+  (invoke "ne" (f64.const -0x1p-1022) (f64.const -0x0.0000000000001p-1022))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const -1.79769313486e+308) (f64.const 6.28318530718))
+  (invoke "ne" (f64.const -0x1p-1022) (f64.const 0x0.0000000000001p-1022))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const 1.79769313486e+308) (f64.const -6.28318530718))
+  (invoke "ne" (f64.const 0x1p-1022) (f64.const -0x0.0000000000001p-1022))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const 1.79769313486e+308) (f64.const 6.28318530718))
+  (invoke "ne" (f64.const 0x1p-1022) (f64.const 0x0.0000000000001p-1022))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const -1.79769313486e+308) (f64.const -1.79769313486e+308))
+  (invoke "ne" (f64.const -0x1p-1022) (f64.const -0x1p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ne" (f64.const -1.79769313486e+308) (f64.const 1.79769313486e+308))
+  (invoke "ne" (f64.const -0x1p-1022) (f64.const 0x1p-1022))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const 1.79769313486e+308) (f64.const -1.79769313486e+308))
+  (invoke "ne" (f64.const 0x1p-1022) (f64.const -0x1p-1022))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const 1.79769313486e+308) (f64.const 1.79769313486e+308))
+  (invoke "ne" (f64.const 0x1p-1022) (f64.const 0x1p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ne" (f64.const -1.79769313486e+308) (f64.const -inf))
+  (invoke "ne" (f64.const -0x1p-1022) (f64.const -0x1p-1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const -1.79769313486e+308) (f64.const inf))
+  (invoke "ne" (f64.const -0x1p-1022) (f64.const 0x1p-1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const 1.79769313486e+308) (f64.const -inf))
+  (invoke "ne" (f64.const 0x1p-1022) (f64.const -0x1p-1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const 1.79769313486e+308) (f64.const inf))
+  (invoke "ne" (f64.const 0x1p-1022) (f64.const 0x1p-1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const -1.79769313486e+308) (f64.const -nan:0x8000000000000))
+  (invoke "ne" (f64.const -0x1p-1022) (f64.const -0x1p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const -1.79769313486e+308) (f64.const -nan:0x4000000000000))
+  (invoke "ne" (f64.const -0x1p-1022) (f64.const 0x1p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const -1.79769313486e+308) (f64.const nan:0x8000000000000))
+  (invoke "ne" (f64.const 0x1p-1022) (f64.const -0x1p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const -1.79769313486e+308) (f64.const nan:0x4000000000000))
+  (invoke "ne" (f64.const 0x1p-1022) (f64.const 0x1p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const 1.79769313486e+308) (f64.const -nan:0x8000000000000))
+  (invoke "ne" (f64.const -0x1p-1022) (f64.const -0x1.921fb54442d18p+2))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const 1.79769313486e+308) (f64.const -nan:0x4000000000000))
+  (invoke "ne" (f64.const -0x1p-1022) (f64.const 0x1.921fb54442d18p+2))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const 1.79769313486e+308) (f64.const nan:0x8000000000000))
+  (invoke "ne" (f64.const 0x1p-1022) (f64.const -0x1.921fb54442d18p+2))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const 1.79769313486e+308) (f64.const nan:0x4000000000000))
-  (i32.const 1)
-)
-(assert_return (invoke "ne" (f64.const -inf) (f64.const -0.)) (i32.const 1))
-(assert_return (invoke "ne" (f64.const -inf) (f64.const 0.)) (i32.const 1))
-(assert_return (invoke "ne" (f64.const inf) (f64.const -0.)) (i32.const 1))
-(assert_return (invoke "ne" (f64.const inf) (f64.const 0.)) (i32.const 1))
-(assert_return
-  (invoke "ne" (f64.const -inf) (f64.const -4.94065645841e-324))
+  (invoke "ne" (f64.const 0x1p-1022) (f64.const 0x1.921fb54442d18p+2))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const -inf) (f64.const 4.94065645841e-324))
+  (invoke "ne" (f64.const -0x1p-1022) (f64.const -0x1.fffffffffffffp+1023))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const inf) (f64.const -4.94065645841e-324))
+  (invoke "ne" (f64.const -0x1p-1022) (f64.const 0x1.fffffffffffffp+1023))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const inf) (f64.const 4.94065645841e-324))
+  (invoke "ne" (f64.const 0x1p-1022) (f64.const -0x1.fffffffffffffp+1023))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const -inf) (f64.const -2.22507385851e-308))
+  (invoke "ne" (f64.const 0x1p-1022) (f64.const 0x1.fffffffffffffp+1023))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const -inf) (f64.const 2.22507385851e-308))
+  (invoke "ne" (f64.const -0x1p-1022) (f64.const -inf))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const inf) (f64.const -2.22507385851e-308))
+  (invoke "ne" (f64.const -0x1p-1022) (f64.const inf))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const inf) (f64.const 2.22507385851e-308))
-  (i32.const 1)
-)
-(assert_return (invoke "ne" (f64.const -inf) (f64.const -0.5)) (i32.const 1))
-(assert_return (invoke "ne" (f64.const -inf) (f64.const 0.5)) (i32.const 1))
-(assert_return (invoke "ne" (f64.const inf) (f64.const -0.5)) (i32.const 1))
-(assert_return (invoke "ne" (f64.const inf) (f64.const 0.5)) (i32.const 1))
-(assert_return (invoke "ne" (f64.const -inf) (f64.const -1.)) (i32.const 1))
-(assert_return (invoke "ne" (f64.const -inf) (f64.const 1.)) (i32.const 1))
-(assert_return (invoke "ne" (f64.const inf) (f64.const -1.)) (i32.const 1))
-(assert_return (invoke "ne" (f64.const inf) (f64.const 1.)) (i32.const 1))
-(assert_return
-  (invoke "ne" (f64.const -inf) (f64.const -6.28318530718))
+  (invoke "ne" (f64.const 0x1p-1022) (f64.const -inf))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const -inf) (f64.const 6.28318530718))
+  (invoke "ne" (f64.const 0x1p-1022) (f64.const inf))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const inf) (f64.const -6.28318530718))
+  (invoke "ne" (f64.const -0x1p-1022) (f64.const -nan:0x8000000000000))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const inf) (f64.const 6.28318530718))
+  (invoke "ne" (f64.const -0x1p-1022) (f64.const -nan:0x4000000000000))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const -inf) (f64.const -1.79769313486e+308))
+  (invoke "ne" (f64.const -0x1p-1022) (f64.const nan:0x8000000000000))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const -inf) (f64.const 1.79769313486e+308))
+  (invoke "ne" (f64.const -0x1p-1022) (f64.const nan:0x4000000000000))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const inf) (f64.const -1.79769313486e+308))
+  (invoke "ne" (f64.const 0x1p-1022) (f64.const -nan:0x8000000000000))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const inf) (f64.const 1.79769313486e+308))
+  (invoke "ne" (f64.const 0x1p-1022) (f64.const -nan:0x4000000000000))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const 0x1p-1022) (f64.const nan:0x8000000000000))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const 0x1p-1022) (f64.const nan:0x4000000000000))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const -0x1p-1) (f64.const -0x0p+0))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const -0x1p-1) (f64.const 0x0p+0))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const 0x1p-1) (f64.const -0x0p+0))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const 0x1p-1) (f64.const 0x0p+0))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const -0x1p-1) (f64.const -0x0.0000000000001p-1022))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const -0x1p-1) (f64.const 0x0.0000000000001p-1022))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const 0x1p-1) (f64.const -0x0.0000000000001p-1022))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const 0x1p-1) (f64.const 0x0.0000000000001p-1022))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const -0x1p-1) (f64.const -0x1p-1022))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const -0x1p-1) (f64.const 0x1p-1022))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const 0x1p-1) (f64.const -0x1p-1022))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const 0x1p-1) (f64.const 0x1p-1022))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const -0x1p-1) (f64.const -0x1p-1))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "ne" (f64.const -0x1p-1) (f64.const 0x1p-1))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const 0x1p-1) (f64.const -0x1p-1))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const 0x1p-1) (f64.const 0x1p-1))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "ne" (f64.const -0x1p-1) (f64.const -0x1p+0))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const -0x1p-1) (f64.const 0x1p+0))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const 0x1p-1) (f64.const -0x1p+0))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const 0x1p-1) (f64.const 0x1p+0))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const -0x1p-1) (f64.const -0x1.921fb54442d18p+2))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const -0x1p-1) (f64.const 0x1.921fb54442d18p+2))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const 0x1p-1) (f64.const -0x1.921fb54442d18p+2))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const 0x1p-1) (f64.const 0x1.921fb54442d18p+2))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const -0x1p-1) (f64.const -0x1.fffffffffffffp+1023))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const -0x1p-1) (f64.const 0x1.fffffffffffffp+1023))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const 0x1p-1) (f64.const -0x1.fffffffffffffp+1023))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const 0x1p-1) (f64.const 0x1.fffffffffffffp+1023))
+  (i32.const 1)
+)
+(assert_return (invoke "ne" (f64.const -0x1p-1) (f64.const -inf)) (i32.const 1))
+(assert_return (invoke "ne" (f64.const -0x1p-1) (f64.const inf)) (i32.const 1))
+(assert_return (invoke "ne" (f64.const 0x1p-1) (f64.const -inf)) (i32.const 1))
+(assert_return (invoke "ne" (f64.const 0x1p-1) (f64.const inf)) (i32.const 1))
+(assert_return
+  (invoke "ne" (f64.const -0x1p-1) (f64.const -nan:0x8000000000000))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const -0x1p-1) (f64.const -nan:0x4000000000000))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const -0x1p-1) (f64.const nan:0x8000000000000))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const -0x1p-1) (f64.const nan:0x4000000000000))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const 0x1p-1) (f64.const -nan:0x8000000000000))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const 0x1p-1) (f64.const -nan:0x4000000000000))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const 0x1p-1) (f64.const nan:0x8000000000000))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const 0x1p-1) (f64.const nan:0x4000000000000))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const -0x1p+0) (f64.const -0x0p+0))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const -0x1p+0) (f64.const 0x0p+0))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const 0x1p+0) (f64.const -0x0p+0))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const 0x1p+0) (f64.const 0x0p+0))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const -0x1p+0) (f64.const -0x0.0000000000001p-1022))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const -0x1p+0) (f64.const 0x0.0000000000001p-1022))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const 0x1p+0) (f64.const -0x0.0000000000001p-1022))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const 0x1p+0) (f64.const 0x0.0000000000001p-1022))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const -0x1p+0) (f64.const -0x1p-1022))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const -0x1p+0) (f64.const 0x1p-1022))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const 0x1p+0) (f64.const -0x1p-1022))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const 0x1p+0) (f64.const 0x1p-1022))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const -0x1p+0) (f64.const -0x1p-1))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const -0x1p+0) (f64.const 0x1p-1))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const 0x1p+0) (f64.const -0x1p-1))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const 0x1p+0) (f64.const 0x1p-1))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const -0x1p+0) (f64.const -0x1p+0))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "ne" (f64.const -0x1p+0) (f64.const 0x1p+0))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const 0x1p+0) (f64.const -0x1p+0))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const 0x1p+0) (f64.const 0x1p+0))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "ne" (f64.const -0x1p+0) (f64.const -0x1.921fb54442d18p+2))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const -0x1p+0) (f64.const 0x1.921fb54442d18p+2))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const 0x1p+0) (f64.const -0x1.921fb54442d18p+2))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const 0x1p+0) (f64.const 0x1.921fb54442d18p+2))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const -0x1p+0) (f64.const -0x1.fffffffffffffp+1023))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const -0x1p+0) (f64.const 0x1.fffffffffffffp+1023))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const 0x1p+0) (f64.const -0x1.fffffffffffffp+1023))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const 0x1p+0) (f64.const 0x1.fffffffffffffp+1023))
+  (i32.const 1)
+)
+(assert_return (invoke "ne" (f64.const -0x1p+0) (f64.const -inf)) (i32.const 1))
+(assert_return (invoke "ne" (f64.const -0x1p+0) (f64.const inf)) (i32.const 1))
+(assert_return (invoke "ne" (f64.const 0x1p+0) (f64.const -inf)) (i32.const 1))
+(assert_return (invoke "ne" (f64.const 0x1p+0) (f64.const inf)) (i32.const 1))
+(assert_return
+  (invoke "ne" (f64.const -0x1p+0) (f64.const -nan:0x8000000000000))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const -0x1p+0) (f64.const -nan:0x4000000000000))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const -0x1p+0) (f64.const nan:0x8000000000000))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const -0x1p+0) (f64.const nan:0x4000000000000))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const 0x1p+0) (f64.const -nan:0x8000000000000))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const 0x1p+0) (f64.const -nan:0x4000000000000))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const 0x1p+0) (f64.const nan:0x8000000000000))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const 0x1p+0) (f64.const nan:0x4000000000000))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const -0x1.921fb54442d18p+2) (f64.const -0x0p+0))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const -0x1.921fb54442d18p+2) (f64.const 0x0p+0))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const 0x1.921fb54442d18p+2) (f64.const -0x0p+0))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const 0x1.921fb54442d18p+2) (f64.const 0x0p+0))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne"
+    (f64.const -0x1.921fb54442d18p+2)
+    (f64.const -0x0.0000000000001p-1022)
+  )
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne"
+    (f64.const -0x1.921fb54442d18p+2)
+    (f64.const 0x0.0000000000001p-1022)
+  )
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne"
+    (f64.const 0x1.921fb54442d18p+2)
+    (f64.const -0x0.0000000000001p-1022)
+  )
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne"
+    (f64.const 0x1.921fb54442d18p+2)
+    (f64.const 0x0.0000000000001p-1022)
+  )
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const -0x1.921fb54442d18p+2) (f64.const -0x1p-1022))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const -0x1.921fb54442d18p+2) (f64.const 0x1p-1022))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const 0x1.921fb54442d18p+2) (f64.const -0x1p-1022))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const 0x1.921fb54442d18p+2) (f64.const 0x1p-1022))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const -0x1.921fb54442d18p+2) (f64.const -0x1p-1))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const -0x1.921fb54442d18p+2) (f64.const 0x1p-1))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const 0x1.921fb54442d18p+2) (f64.const -0x1p-1))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const 0x1.921fb54442d18p+2) (f64.const 0x1p-1))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const -0x1.921fb54442d18p+2) (f64.const -0x1p+0))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const -0x1.921fb54442d18p+2) (f64.const 0x1p+0))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const 0x1.921fb54442d18p+2) (f64.const -0x1p+0))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const 0x1.921fb54442d18p+2) (f64.const 0x1p+0))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne"
+    (f64.const -0x1.921fb54442d18p+2)
+    (f64.const -0x1.921fb54442d18p+2)
+  )
+  (i32.const 0)
+)
+(assert_return
+  (invoke "ne"
+    (f64.const -0x1.921fb54442d18p+2)
+    (f64.const 0x1.921fb54442d18p+2)
+  )
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne"
+    (f64.const 0x1.921fb54442d18p+2)
+    (f64.const -0x1.921fb54442d18p+2)
+  )
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne"
+    (f64.const 0x1.921fb54442d18p+2)
+    (f64.const 0x1.921fb54442d18p+2)
+  )
+  (i32.const 0)
+)
+(assert_return
+  (invoke "ne"
+    (f64.const -0x1.921fb54442d18p+2)
+    (f64.const -0x1.fffffffffffffp+1023)
+  )
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne"
+    (f64.const -0x1.921fb54442d18p+2)
+    (f64.const 0x1.fffffffffffffp+1023)
+  )
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne"
+    (f64.const 0x1.921fb54442d18p+2)
+    (f64.const -0x1.fffffffffffffp+1023)
+  )
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne"
+    (f64.const 0x1.921fb54442d18p+2)
+    (f64.const 0x1.fffffffffffffp+1023)
+  )
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const -0x1.921fb54442d18p+2) (f64.const -inf))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const -0x1.921fb54442d18p+2) (f64.const inf))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const 0x1.921fb54442d18p+2) (f64.const -inf))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const 0x1.921fb54442d18p+2) (f64.const inf))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne"
+    (f64.const -0x1.921fb54442d18p+2)
+    (f64.const -nan:0x8000000000000)
+  )
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne"
+    (f64.const -0x1.921fb54442d18p+2)
+    (f64.const -nan:0x4000000000000)
+  )
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne"
+    (f64.const -0x1.921fb54442d18p+2)
+    (f64.const nan:0x8000000000000)
+  )
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne"
+    (f64.const -0x1.921fb54442d18p+2)
+    (f64.const nan:0x4000000000000)
+  )
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne"
+    (f64.const 0x1.921fb54442d18p+2)
+    (f64.const -nan:0x8000000000000)
+  )
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne"
+    (f64.const 0x1.921fb54442d18p+2)
+    (f64.const -nan:0x4000000000000)
+  )
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const 0x1.921fb54442d18p+2) (f64.const nan:0x8000000000000))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const 0x1.921fb54442d18p+2) (f64.const nan:0x4000000000000))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const -0x1.fffffffffffffp+1023) (f64.const -0x0p+0))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const -0x1.fffffffffffffp+1023) (f64.const 0x0p+0))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const 0x1.fffffffffffffp+1023) (f64.const -0x0p+0))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const 0x1.fffffffffffffp+1023) (f64.const 0x0p+0))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne"
+    (f64.const -0x1.fffffffffffffp+1023)
+    (f64.const -0x0.0000000000001p-1022)
+  )
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne"
+    (f64.const -0x1.fffffffffffffp+1023)
+    (f64.const 0x0.0000000000001p-1022)
+  )
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne"
+    (f64.const 0x1.fffffffffffffp+1023)
+    (f64.const -0x0.0000000000001p-1022)
+  )
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne"
+    (f64.const 0x1.fffffffffffffp+1023)
+    (f64.const 0x0.0000000000001p-1022)
+  )
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const -0x1.fffffffffffffp+1023) (f64.const -0x1p-1022))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const -0x1.fffffffffffffp+1023) (f64.const 0x1p-1022))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const 0x1.fffffffffffffp+1023) (f64.const -0x1p-1022))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const 0x1.fffffffffffffp+1023) (f64.const 0x1p-1022))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const -0x1.fffffffffffffp+1023) (f64.const -0x1p-1))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const -0x1.fffffffffffffp+1023) (f64.const 0x1p-1))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const 0x1.fffffffffffffp+1023) (f64.const -0x1p-1))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const 0x1.fffffffffffffp+1023) (f64.const 0x1p-1))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const -0x1.fffffffffffffp+1023) (f64.const -0x1p+0))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const -0x1.fffffffffffffp+1023) (f64.const 0x1p+0))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const 0x1.fffffffffffffp+1023) (f64.const -0x1p+0))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const 0x1.fffffffffffffp+1023) (f64.const 0x1p+0))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne"
+    (f64.const -0x1.fffffffffffffp+1023)
+    (f64.const -0x1.921fb54442d18p+2)
+  )
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne"
+    (f64.const -0x1.fffffffffffffp+1023)
+    (f64.const 0x1.921fb54442d18p+2)
+  )
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne"
+    (f64.const 0x1.fffffffffffffp+1023)
+    (f64.const -0x1.921fb54442d18p+2)
+  )
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne"
+    (f64.const 0x1.fffffffffffffp+1023)
+    (f64.const 0x1.921fb54442d18p+2)
+  )
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne"
+    (f64.const -0x1.fffffffffffffp+1023)
+    (f64.const -0x1.fffffffffffffp+1023)
+  )
+  (i32.const 0)
+)
+(assert_return
+  (invoke "ne"
+    (f64.const -0x1.fffffffffffffp+1023)
+    (f64.const 0x1.fffffffffffffp+1023)
+  )
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne"
+    (f64.const 0x1.fffffffffffffp+1023)
+    (f64.const -0x1.fffffffffffffp+1023)
+  )
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne"
+    (f64.const 0x1.fffffffffffffp+1023)
+    (f64.const 0x1.fffffffffffffp+1023)
+  )
+  (i32.const 0)
+)
+(assert_return
+  (invoke "ne" (f64.const -0x1.fffffffffffffp+1023) (f64.const -inf))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const -0x1.fffffffffffffp+1023) (f64.const inf))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const 0x1.fffffffffffffp+1023) (f64.const -inf))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const 0x1.fffffffffffffp+1023) (f64.const inf))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne"
+    (f64.const -0x1.fffffffffffffp+1023)
+    (f64.const -nan:0x8000000000000)
+  )
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne"
+    (f64.const -0x1.fffffffffffffp+1023)
+    (f64.const -nan:0x4000000000000)
+  )
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne"
+    (f64.const -0x1.fffffffffffffp+1023)
+    (f64.const nan:0x8000000000000)
+  )
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne"
+    (f64.const -0x1.fffffffffffffp+1023)
+    (f64.const nan:0x4000000000000)
+  )
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne"
+    (f64.const 0x1.fffffffffffffp+1023)
+    (f64.const -nan:0x8000000000000)
+  )
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne"
+    (f64.const 0x1.fffffffffffffp+1023)
+    (f64.const -nan:0x4000000000000)
+  )
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne"
+    (f64.const 0x1.fffffffffffffp+1023)
+    (f64.const nan:0x8000000000000)
+  )
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne"
+    (f64.const 0x1.fffffffffffffp+1023)
+    (f64.const nan:0x4000000000000)
+  )
+  (i32.const 1)
+)
+(assert_return (invoke "ne" (f64.const -inf) (f64.const -0x0p+0)) (i32.const 1))
+(assert_return (invoke "ne" (f64.const -inf) (f64.const 0x0p+0)) (i32.const 1))
+(assert_return (invoke "ne" (f64.const inf) (f64.const -0x0p+0)) (i32.const 1))
+(assert_return (invoke "ne" (f64.const inf) (f64.const 0x0p+0)) (i32.const 1))
+(assert_return
+  (invoke "ne" (f64.const -inf) (f64.const -0x0.0000000000001p-1022))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const -inf) (f64.const 0x0.0000000000001p-1022))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const inf) (f64.const -0x0.0000000000001p-1022))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const inf) (f64.const 0x0.0000000000001p-1022))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const -inf) (f64.const -0x1p-1022))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const -inf) (f64.const 0x1p-1022))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const inf) (f64.const -0x1p-1022))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const inf) (f64.const 0x1p-1022))
+  (i32.const 1)
+)
+(assert_return (invoke "ne" (f64.const -inf) (f64.const -0x1p-1)) (i32.const 1))
+(assert_return (invoke "ne" (f64.const -inf) (f64.const 0x1p-1)) (i32.const 1))
+(assert_return (invoke "ne" (f64.const inf) (f64.const -0x1p-1)) (i32.const 1))
+(assert_return (invoke "ne" (f64.const inf) (f64.const 0x1p-1)) (i32.const 1))
+(assert_return (invoke "ne" (f64.const -inf) (f64.const -0x1p+0)) (i32.const 1))
+(assert_return (invoke "ne" (f64.const -inf) (f64.const 0x1p+0)) (i32.const 1))
+(assert_return (invoke "ne" (f64.const inf) (f64.const -0x1p+0)) (i32.const 1))
+(assert_return (invoke "ne" (f64.const inf) (f64.const 0x1p+0)) (i32.const 1))
+(assert_return
+  (invoke "ne" (f64.const -inf) (f64.const -0x1.921fb54442d18p+2))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const -inf) (f64.const 0x1.921fb54442d18p+2))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const inf) (f64.const -0x1.921fb54442d18p+2))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const inf) (f64.const 0x1.921fb54442d18p+2))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const -inf) (f64.const -0x1.fffffffffffffp+1023))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const -inf) (f64.const 0x1.fffffffffffffp+1023))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const inf) (f64.const -0x1.fffffffffffffp+1023))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f64.const inf) (f64.const 0x1.fffffffffffffp+1023))
   (i32.const 1)
 )
 (assert_return (invoke "ne" (f64.const -inf) (f64.const -inf)) (i32.const 0))
@@ -2519,227 +3149,293 @@
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const -nan:0x8000000000000) (f64.const -0.))
+  (invoke "ne" (f64.const -nan:0x8000000000000) (f64.const -0x0p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const -nan:0x4000000000000) (f64.const -0.))
+  (invoke "ne" (f64.const -nan:0x4000000000000) (f64.const -0x0p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const -nan:0x8000000000000) (f64.const 0.))
+  (invoke "ne" (f64.const -nan:0x8000000000000) (f64.const 0x0p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const -nan:0x4000000000000) (f64.const 0.))
+  (invoke "ne" (f64.const -nan:0x4000000000000) (f64.const 0x0p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const nan:0x8000000000000) (f64.const -0.))
+  (invoke "ne" (f64.const nan:0x8000000000000) (f64.const -0x0p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const nan:0x4000000000000) (f64.const -0.))
+  (invoke "ne" (f64.const nan:0x4000000000000) (f64.const -0x0p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const nan:0x8000000000000) (f64.const 0.))
+  (invoke "ne" (f64.const nan:0x8000000000000) (f64.const 0x0p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const nan:0x4000000000000) (f64.const 0.))
+  (invoke "ne" (f64.const nan:0x4000000000000) (f64.const 0x0p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const -nan:0x8000000000000) (f64.const -4.94065645841e-324))
+  (invoke "ne"
+    (f64.const -nan:0x8000000000000)
+    (f64.const -0x0.0000000000001p-1022)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const -nan:0x4000000000000) (f64.const -4.94065645841e-324))
+  (invoke "ne"
+    (f64.const -nan:0x4000000000000)
+    (f64.const -0x0.0000000000001p-1022)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const -nan:0x8000000000000) (f64.const 4.94065645841e-324))
+  (invoke "ne"
+    (f64.const -nan:0x8000000000000)
+    (f64.const 0x0.0000000000001p-1022)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const -nan:0x4000000000000) (f64.const 4.94065645841e-324))
+  (invoke "ne"
+    (f64.const -nan:0x4000000000000)
+    (f64.const 0x0.0000000000001p-1022)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const nan:0x8000000000000) (f64.const -4.94065645841e-324))
+  (invoke "ne"
+    (f64.const nan:0x8000000000000)
+    (f64.const -0x0.0000000000001p-1022)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const nan:0x4000000000000) (f64.const -4.94065645841e-324))
+  (invoke "ne"
+    (f64.const nan:0x4000000000000)
+    (f64.const -0x0.0000000000001p-1022)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const nan:0x8000000000000) (f64.const 4.94065645841e-324))
+  (invoke "ne"
+    (f64.const nan:0x8000000000000)
+    (f64.const 0x0.0000000000001p-1022)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const nan:0x4000000000000) (f64.const 4.94065645841e-324))
+  (invoke "ne"
+    (f64.const nan:0x4000000000000)
+    (f64.const 0x0.0000000000001p-1022)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const -nan:0x8000000000000) (f64.const -2.22507385851e-308))
+  (invoke "ne" (f64.const -nan:0x8000000000000) (f64.const -0x1p-1022))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const -nan:0x4000000000000) (f64.const -2.22507385851e-308))
+  (invoke "ne" (f64.const -nan:0x4000000000000) (f64.const -0x1p-1022))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const -nan:0x8000000000000) (f64.const 2.22507385851e-308))
+  (invoke "ne" (f64.const -nan:0x8000000000000) (f64.const 0x1p-1022))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const -nan:0x4000000000000) (f64.const 2.22507385851e-308))
+  (invoke "ne" (f64.const -nan:0x4000000000000) (f64.const 0x1p-1022))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const nan:0x8000000000000) (f64.const -2.22507385851e-308))
+  (invoke "ne" (f64.const nan:0x8000000000000) (f64.const -0x1p-1022))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const nan:0x4000000000000) (f64.const -2.22507385851e-308))
+  (invoke "ne" (f64.const nan:0x4000000000000) (f64.const -0x1p-1022))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const nan:0x8000000000000) (f64.const 2.22507385851e-308))
+  (invoke "ne" (f64.const nan:0x8000000000000) (f64.const 0x1p-1022))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const nan:0x4000000000000) (f64.const 2.22507385851e-308))
+  (invoke "ne" (f64.const nan:0x4000000000000) (f64.const 0x1p-1022))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const -nan:0x8000000000000) (f64.const -0.5))
+  (invoke "ne" (f64.const -nan:0x8000000000000) (f64.const -0x1p-1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const -nan:0x4000000000000) (f64.const -0.5))
+  (invoke "ne" (f64.const -nan:0x4000000000000) (f64.const -0x1p-1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const -nan:0x8000000000000) (f64.const 0.5))
+  (invoke "ne" (f64.const -nan:0x8000000000000) (f64.const 0x1p-1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const -nan:0x4000000000000) (f64.const 0.5))
+  (invoke "ne" (f64.const -nan:0x4000000000000) (f64.const 0x1p-1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const nan:0x8000000000000) (f64.const -0.5))
+  (invoke "ne" (f64.const nan:0x8000000000000) (f64.const -0x1p-1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const nan:0x4000000000000) (f64.const -0.5))
+  (invoke "ne" (f64.const nan:0x4000000000000) (f64.const -0x1p-1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const nan:0x8000000000000) (f64.const 0.5))
+  (invoke "ne" (f64.const nan:0x8000000000000) (f64.const 0x1p-1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const nan:0x4000000000000) (f64.const 0.5))
+  (invoke "ne" (f64.const nan:0x4000000000000) (f64.const 0x1p-1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const -nan:0x8000000000000) (f64.const -1.))
+  (invoke "ne" (f64.const -nan:0x8000000000000) (f64.const -0x1p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const -nan:0x4000000000000) (f64.const -1.))
+  (invoke "ne" (f64.const -nan:0x4000000000000) (f64.const -0x1p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const -nan:0x8000000000000) (f64.const 1.))
+  (invoke "ne" (f64.const -nan:0x8000000000000) (f64.const 0x1p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const -nan:0x4000000000000) (f64.const 1.))
+  (invoke "ne" (f64.const -nan:0x4000000000000) (f64.const 0x1p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const nan:0x8000000000000) (f64.const -1.))
+  (invoke "ne" (f64.const nan:0x8000000000000) (f64.const -0x1p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const nan:0x4000000000000) (f64.const -1.))
+  (invoke "ne" (f64.const nan:0x4000000000000) (f64.const -0x1p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const nan:0x8000000000000) (f64.const 1.))
+  (invoke "ne" (f64.const nan:0x8000000000000) (f64.const 0x1p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const nan:0x4000000000000) (f64.const 1.))
+  (invoke "ne" (f64.const nan:0x4000000000000) (f64.const 0x1p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const -nan:0x8000000000000) (f64.const -6.28318530718))
+  (invoke "ne"
+    (f64.const -nan:0x8000000000000)
+    (f64.const -0x1.921fb54442d18p+2)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const -nan:0x4000000000000) (f64.const -6.28318530718))
+  (invoke "ne"
+    (f64.const -nan:0x4000000000000)
+    (f64.const -0x1.921fb54442d18p+2)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const -nan:0x8000000000000) (f64.const 6.28318530718))
+  (invoke "ne"
+    (f64.const -nan:0x8000000000000)
+    (f64.const 0x1.921fb54442d18p+2)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const -nan:0x4000000000000) (f64.const 6.28318530718))
+  (invoke "ne"
+    (f64.const -nan:0x4000000000000)
+    (f64.const 0x1.921fb54442d18p+2)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const nan:0x8000000000000) (f64.const -6.28318530718))
+  (invoke "ne"
+    (f64.const nan:0x8000000000000)
+    (f64.const -0x1.921fb54442d18p+2)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const nan:0x4000000000000) (f64.const -6.28318530718))
+  (invoke "ne"
+    (f64.const nan:0x4000000000000)
+    (f64.const -0x1.921fb54442d18p+2)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const nan:0x8000000000000) (f64.const 6.28318530718))
+  (invoke "ne" (f64.const nan:0x8000000000000) (f64.const 0x1.921fb54442d18p+2))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const nan:0x4000000000000) (f64.const 6.28318530718))
+  (invoke "ne" (f64.const nan:0x4000000000000) (f64.const 0x1.921fb54442d18p+2))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const -nan:0x8000000000000) (f64.const -1.79769313486e+308))
+  (invoke "ne"
+    (f64.const -nan:0x8000000000000)
+    (f64.const -0x1.fffffffffffffp+1023)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const -nan:0x4000000000000) (f64.const -1.79769313486e+308))
+  (invoke "ne"
+    (f64.const -nan:0x4000000000000)
+    (f64.const -0x1.fffffffffffffp+1023)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const -nan:0x8000000000000) (f64.const 1.79769313486e+308))
+  (invoke "ne"
+    (f64.const -nan:0x8000000000000)
+    (f64.const 0x1.fffffffffffffp+1023)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const -nan:0x4000000000000) (f64.const 1.79769313486e+308))
+  (invoke "ne"
+    (f64.const -nan:0x4000000000000)
+    (f64.const 0x1.fffffffffffffp+1023)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const nan:0x8000000000000) (f64.const -1.79769313486e+308))
+  (invoke "ne"
+    (f64.const nan:0x8000000000000)
+    (f64.const -0x1.fffffffffffffp+1023)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const nan:0x4000000000000) (f64.const -1.79769313486e+308))
+  (invoke "ne"
+    (f64.const nan:0x4000000000000)
+    (f64.const -0x1.fffffffffffffp+1023)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const nan:0x8000000000000) (f64.const 1.79769313486e+308))
+  (invoke "ne"
+    (f64.const nan:0x8000000000000)
+    (f64.const 0x1.fffffffffffffp+1023)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f64.const nan:0x4000000000000) (f64.const 1.79769313486e+308))
+  (invoke "ne"
+    (f64.const nan:0x4000000000000)
+    (f64.const 0x1.fffffffffffffp+1023)
+  )
   (i32.const 1)
 )
 (assert_return
@@ -2850,1056 +3546,1338 @@
   (invoke "ne" (f64.const nan:0x4000000000000) (f64.const nan:0x4000000000000))
   (i32.const 1)
 )
-(assert_return (invoke "lt" (f64.const -0.) (f64.const -0.)) (i32.const 0))
-(assert_return (invoke "lt" (f64.const -0.) (f64.const 0.)) (i32.const 0))
-(assert_return (invoke "lt" (f64.const 0.) (f64.const -0.)) (i32.const 0))
-(assert_return (invoke "lt" (f64.const 0.) (f64.const 0.)) (i32.const 0))
 (assert_return
-  (invoke "lt" (f64.const -0.) (f64.const -4.94065645841e-324))
+  (invoke "lt" (f64.const -0x0p+0) (f64.const -0x0p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const -0.) (f64.const 4.94065645841e-324))
+  (invoke "lt" (f64.const -0x0p+0) (f64.const 0x0p+0))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "lt" (f64.const 0x0p+0) (f64.const -0x0p+0))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "lt" (f64.const 0x0p+0) (f64.const 0x0p+0))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "lt" (f64.const -0x0p+0) (f64.const -0x0.0000000000001p-1022))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "lt" (f64.const -0x0p+0) (f64.const 0x0.0000000000001p-1022))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "lt" (f64.const 0x0p+0) (f64.const -0x0.0000000000001p-1022))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "lt" (f64.const 0x0p+0) (f64.const 0x0.0000000000001p-1022))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "lt" (f64.const -0x0p+0) (f64.const -0x1p-1022))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "lt" (f64.const -0x0p+0) (f64.const 0x1p-1022))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "lt" (f64.const 0x0p+0) (f64.const -0x1p-1022))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "lt" (f64.const 0x0p+0) (f64.const 0x1p-1022))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "lt" (f64.const -0x0p+0) (f64.const -0x1p-1))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "lt" (f64.const -0x0p+0) (f64.const 0x1p-1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f64.const 0.) (f64.const -4.94065645841e-324))
+  (invoke "lt" (f64.const 0x0p+0) (f64.const -0x1p-1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const 0.) (f64.const 4.94065645841e-324))
+  (invoke "lt" (f64.const 0x0p+0) (f64.const 0x1p-1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f64.const -0.) (f64.const -2.22507385851e-308))
+  (invoke "lt" (f64.const -0x0p+0) (f64.const -0x1p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const -0.) (f64.const 2.22507385851e-308))
+  (invoke "lt" (f64.const -0x0p+0) (f64.const 0x1p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f64.const 0.) (f64.const -2.22507385851e-308))
+  (invoke "lt" (f64.const 0x0p+0) (f64.const -0x1p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const 0.) (f64.const 2.22507385851e-308))
+  (invoke "lt" (f64.const 0x0p+0) (f64.const 0x1p+0))
   (i32.const 1)
 )
-(assert_return (invoke "lt" (f64.const -0.) (f64.const -0.5)) (i32.const 0))
-(assert_return (invoke "lt" (f64.const -0.) (f64.const 0.5)) (i32.const 1))
-(assert_return (invoke "lt" (f64.const 0.) (f64.const -0.5)) (i32.const 0))
-(assert_return (invoke "lt" (f64.const 0.) (f64.const 0.5)) (i32.const 1))
-(assert_return (invoke "lt" (f64.const -0.) (f64.const -1.)) (i32.const 0))
-(assert_return (invoke "lt" (f64.const -0.) (f64.const 1.)) (i32.const 1))
-(assert_return (invoke "lt" (f64.const 0.) (f64.const -1.)) (i32.const 0))
-(assert_return (invoke "lt" (f64.const 0.) (f64.const 1.)) (i32.const 1))
 (assert_return
-  (invoke "lt" (f64.const -0.) (f64.const -6.28318530718))
+  (invoke "lt" (f64.const -0x0p+0) (f64.const -0x1.921fb54442d18p+2))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const -0.) (f64.const 6.28318530718))
+  (invoke "lt" (f64.const -0x0p+0) (f64.const 0x1.921fb54442d18p+2))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f64.const 0.) (f64.const -6.28318530718))
+  (invoke "lt" (f64.const 0x0p+0) (f64.const -0x1.921fb54442d18p+2))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const 0.) (f64.const 6.28318530718))
+  (invoke "lt" (f64.const 0x0p+0) (f64.const 0x1.921fb54442d18p+2))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f64.const -0.) (f64.const -1.79769313486e+308))
+  (invoke "lt" (f64.const -0x0p+0) (f64.const -0x1.fffffffffffffp+1023))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const -0.) (f64.const 1.79769313486e+308))
+  (invoke "lt" (f64.const -0x0p+0) (f64.const 0x1.fffffffffffffp+1023))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f64.const 0.) (f64.const -1.79769313486e+308))
+  (invoke "lt" (f64.const 0x0p+0) (f64.const -0x1.fffffffffffffp+1023))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const 0.) (f64.const 1.79769313486e+308))
+  (invoke "lt" (f64.const 0x0p+0) (f64.const 0x1.fffffffffffffp+1023))
   (i32.const 1)
 )
-(assert_return (invoke "lt" (f64.const -0.) (f64.const -inf)) (i32.const 0))
-(assert_return (invoke "lt" (f64.const -0.) (f64.const inf)) (i32.const 1))
-(assert_return (invoke "lt" (f64.const 0.) (f64.const -inf)) (i32.const 0))
-(assert_return (invoke "lt" (f64.const 0.) (f64.const inf)) (i32.const 1))
+(assert_return (invoke "lt" (f64.const -0x0p+0) (f64.const -inf)) (i32.const 0))
+(assert_return (invoke "lt" (f64.const -0x0p+0) (f64.const inf)) (i32.const 1))
+(assert_return (invoke "lt" (f64.const 0x0p+0) (f64.const -inf)) (i32.const 0))
+(assert_return (invoke "lt" (f64.const 0x0p+0) (f64.const inf)) (i32.const 1))
 (assert_return
-  (invoke "lt" (f64.const -0.) (f64.const -nan:0x8000000000000))
+  (invoke "lt" (f64.const -0x0p+0) (f64.const -nan:0x8000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const -0.) (f64.const -nan:0x4000000000000))
+  (invoke "lt" (f64.const -0x0p+0) (f64.const -nan:0x4000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const -0.) (f64.const nan:0x8000000000000))
+  (invoke "lt" (f64.const -0x0p+0) (f64.const nan:0x8000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const -0.) (f64.const nan:0x4000000000000))
+  (invoke "lt" (f64.const -0x0p+0) (f64.const nan:0x4000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const 0.) (f64.const -nan:0x8000000000000))
+  (invoke "lt" (f64.const 0x0p+0) (f64.const -nan:0x8000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const 0.) (f64.const -nan:0x4000000000000))
+  (invoke "lt" (f64.const 0x0p+0) (f64.const -nan:0x4000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const 0.) (f64.const nan:0x8000000000000))
+  (invoke "lt" (f64.const 0x0p+0) (f64.const nan:0x8000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const 0.) (f64.const nan:0x4000000000000))
+  (invoke "lt" (f64.const 0x0p+0) (f64.const nan:0x4000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const -4.94065645841e-324) (f64.const -0.))
+  (invoke "lt" (f64.const -0x0.0000000000001p-1022) (f64.const -0x0p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f64.const -4.94065645841e-324) (f64.const 0.))
+  (invoke "lt" (f64.const -0x0.0000000000001p-1022) (f64.const 0x0p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f64.const 4.94065645841e-324) (f64.const -0.))
+  (invoke "lt" (f64.const 0x0.0000000000001p-1022) (f64.const -0x0p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const 4.94065645841e-324) (f64.const 0.))
+  (invoke "lt" (f64.const 0x0.0000000000001p-1022) (f64.const 0x0p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const -4.94065645841e-324) (f64.const -4.94065645841e-324))
+  (invoke "lt"
+    (f64.const -0x0.0000000000001p-1022)
+    (f64.const -0x0.0000000000001p-1022)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const -4.94065645841e-324) (f64.const 4.94065645841e-324))
+  (invoke "lt"
+    (f64.const -0x0.0000000000001p-1022)
+    (f64.const 0x0.0000000000001p-1022)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f64.const 4.94065645841e-324) (f64.const -4.94065645841e-324))
+  (invoke "lt"
+    (f64.const 0x0.0000000000001p-1022)
+    (f64.const -0x0.0000000000001p-1022)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const 4.94065645841e-324) (f64.const 4.94065645841e-324))
+  (invoke "lt"
+    (f64.const 0x0.0000000000001p-1022)
+    (f64.const 0x0.0000000000001p-1022)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const -4.94065645841e-324) (f64.const -2.22507385851e-308))
+  (invoke "lt" (f64.const -0x0.0000000000001p-1022) (f64.const -0x1p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const -4.94065645841e-324) (f64.const 2.22507385851e-308))
+  (invoke "lt" (f64.const -0x0.0000000000001p-1022) (f64.const 0x1p-1022))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f64.const 4.94065645841e-324) (f64.const -2.22507385851e-308))
+  (invoke "lt" (f64.const 0x0.0000000000001p-1022) (f64.const -0x1p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const 4.94065645841e-324) (f64.const 2.22507385851e-308))
+  (invoke "lt" (f64.const 0x0.0000000000001p-1022) (f64.const 0x1p-1022))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f64.const -4.94065645841e-324) (f64.const -0.5))
+  (invoke "lt" (f64.const -0x0.0000000000001p-1022) (f64.const -0x1p-1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const -4.94065645841e-324) (f64.const 0.5))
+  (invoke "lt" (f64.const -0x0.0000000000001p-1022) (f64.const 0x1p-1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f64.const 4.94065645841e-324) (f64.const -0.5))
+  (invoke "lt" (f64.const 0x0.0000000000001p-1022) (f64.const -0x1p-1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const 4.94065645841e-324) (f64.const 0.5))
+  (invoke "lt" (f64.const 0x0.0000000000001p-1022) (f64.const 0x1p-1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f64.const -4.94065645841e-324) (f64.const -1.))
+  (invoke "lt" (f64.const -0x0.0000000000001p-1022) (f64.const -0x1p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const -4.94065645841e-324) (f64.const 1.))
+  (invoke "lt" (f64.const -0x0.0000000000001p-1022) (f64.const 0x1p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f64.const 4.94065645841e-324) (f64.const -1.))
+  (invoke "lt" (f64.const 0x0.0000000000001p-1022) (f64.const -0x1p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const 4.94065645841e-324) (f64.const 1.))
+  (invoke "lt" (f64.const 0x0.0000000000001p-1022) (f64.const 0x1p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f64.const -4.94065645841e-324) (f64.const -6.28318530718))
+  (invoke "lt"
+    (f64.const -0x0.0000000000001p-1022)
+    (f64.const -0x1.921fb54442d18p+2)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const -4.94065645841e-324) (f64.const 6.28318530718))
+  (invoke "lt"
+    (f64.const -0x0.0000000000001p-1022)
+    (f64.const 0x1.921fb54442d18p+2)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f64.const 4.94065645841e-324) (f64.const -6.28318530718))
+  (invoke "lt"
+    (f64.const 0x0.0000000000001p-1022)
+    (f64.const -0x1.921fb54442d18p+2)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const 4.94065645841e-324) (f64.const 6.28318530718))
+  (invoke "lt"
+    (f64.const 0x0.0000000000001p-1022)
+    (f64.const 0x1.921fb54442d18p+2)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f64.const -4.94065645841e-324) (f64.const -1.79769313486e+308))
+  (invoke "lt"
+    (f64.const -0x0.0000000000001p-1022)
+    (f64.const -0x1.fffffffffffffp+1023)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const -4.94065645841e-324) (f64.const 1.79769313486e+308))
+  (invoke "lt"
+    (f64.const -0x0.0000000000001p-1022)
+    (f64.const 0x1.fffffffffffffp+1023)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f64.const 4.94065645841e-324) (f64.const -1.79769313486e+308))
+  (invoke "lt"
+    (f64.const 0x0.0000000000001p-1022)
+    (f64.const -0x1.fffffffffffffp+1023)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const 4.94065645841e-324) (f64.const 1.79769313486e+308))
+  (invoke "lt"
+    (f64.const 0x0.0000000000001p-1022)
+    (f64.const 0x1.fffffffffffffp+1023)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f64.const -4.94065645841e-324) (f64.const -inf))
+  (invoke "lt" (f64.const -0x0.0000000000001p-1022) (f64.const -inf))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const -4.94065645841e-324) (f64.const inf))
+  (invoke "lt" (f64.const -0x0.0000000000001p-1022) (f64.const inf))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f64.const 4.94065645841e-324) (f64.const -inf))
+  (invoke "lt" (f64.const 0x0.0000000000001p-1022) (f64.const -inf))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const 4.94065645841e-324) (f64.const inf))
+  (invoke "lt" (f64.const 0x0.0000000000001p-1022) (f64.const inf))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f64.const -4.94065645841e-324) (f64.const -nan:0x8000000000000))
+  (invoke "lt"
+    (f64.const -0x0.0000000000001p-1022)
+    (f64.const -nan:0x8000000000000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const -4.94065645841e-324) (f64.const -nan:0x4000000000000))
+  (invoke "lt"
+    (f64.const -0x0.0000000000001p-1022)
+    (f64.const -nan:0x4000000000000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const -4.94065645841e-324) (f64.const nan:0x8000000000000))
+  (invoke "lt"
+    (f64.const -0x0.0000000000001p-1022)
+    (f64.const nan:0x8000000000000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const -4.94065645841e-324) (f64.const nan:0x4000000000000))
+  (invoke "lt"
+    (f64.const -0x0.0000000000001p-1022)
+    (f64.const nan:0x4000000000000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const 4.94065645841e-324) (f64.const -nan:0x8000000000000))
+  (invoke "lt"
+    (f64.const 0x0.0000000000001p-1022)
+    (f64.const -nan:0x8000000000000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const 4.94065645841e-324) (f64.const -nan:0x4000000000000))
+  (invoke "lt"
+    (f64.const 0x0.0000000000001p-1022)
+    (f64.const -nan:0x4000000000000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const 4.94065645841e-324) (f64.const nan:0x8000000000000))
+  (invoke "lt"
+    (f64.const 0x0.0000000000001p-1022)
+    (f64.const nan:0x8000000000000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const 4.94065645841e-324) (f64.const nan:0x4000000000000))
+  (invoke "lt"
+    (f64.const 0x0.0000000000001p-1022)
+    (f64.const nan:0x4000000000000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const -2.22507385851e-308) (f64.const -0.))
+  (invoke "lt" (f64.const -0x1p-1022) (f64.const -0x0p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f64.const -2.22507385851e-308) (f64.const 0.))
+  (invoke "lt" (f64.const -0x1p-1022) (f64.const 0x0p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f64.const 2.22507385851e-308) (f64.const -0.))
+  (invoke "lt" (f64.const 0x1p-1022) (f64.const -0x0p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const 2.22507385851e-308) (f64.const 0.))
+  (invoke "lt" (f64.const 0x1p-1022) (f64.const 0x0p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const -2.22507385851e-308) (f64.const -4.94065645841e-324))
+  (invoke "lt" (f64.const -0x1p-1022) (f64.const -0x0.0000000000001p-1022))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f64.const -2.22507385851e-308) (f64.const 4.94065645841e-324))
+  (invoke "lt" (f64.const -0x1p-1022) (f64.const 0x0.0000000000001p-1022))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f64.const 2.22507385851e-308) (f64.const -4.94065645841e-324))
+  (invoke "lt" (f64.const 0x1p-1022) (f64.const -0x0.0000000000001p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const 2.22507385851e-308) (f64.const 4.94065645841e-324))
+  (invoke "lt" (f64.const 0x1p-1022) (f64.const 0x0.0000000000001p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const -2.22507385851e-308) (f64.const -2.22507385851e-308))
+  (invoke "lt" (f64.const -0x1p-1022) (f64.const -0x1p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const -2.22507385851e-308) (f64.const 2.22507385851e-308))
+  (invoke "lt" (f64.const -0x1p-1022) (f64.const 0x1p-1022))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f64.const 2.22507385851e-308) (f64.const -2.22507385851e-308))
+  (invoke "lt" (f64.const 0x1p-1022) (f64.const -0x1p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const 2.22507385851e-308) (f64.const 2.22507385851e-308))
+  (invoke "lt" (f64.const 0x1p-1022) (f64.const 0x1p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const -2.22507385851e-308) (f64.const -0.5))
+  (invoke "lt" (f64.const -0x1p-1022) (f64.const -0x1p-1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const -2.22507385851e-308) (f64.const 0.5))
+  (invoke "lt" (f64.const -0x1p-1022) (f64.const 0x1p-1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f64.const 2.22507385851e-308) (f64.const -0.5))
+  (invoke "lt" (f64.const 0x1p-1022) (f64.const -0x1p-1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const 2.22507385851e-308) (f64.const 0.5))
+  (invoke "lt" (f64.const 0x1p-1022) (f64.const 0x1p-1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f64.const -2.22507385851e-308) (f64.const -1.))
+  (invoke "lt" (f64.const -0x1p-1022) (f64.const -0x1p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const -2.22507385851e-308) (f64.const 1.))
+  (invoke "lt" (f64.const -0x1p-1022) (f64.const 0x1p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f64.const 2.22507385851e-308) (f64.const -1.))
+  (invoke "lt" (f64.const 0x1p-1022) (f64.const -0x1p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const 2.22507385851e-308) (f64.const 1.))
+  (invoke "lt" (f64.const 0x1p-1022) (f64.const 0x1p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f64.const -2.22507385851e-308) (f64.const -6.28318530718))
+  (invoke "lt" (f64.const -0x1p-1022) (f64.const -0x1.921fb54442d18p+2))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const -2.22507385851e-308) (f64.const 6.28318530718))
+  (invoke "lt" (f64.const -0x1p-1022) (f64.const 0x1.921fb54442d18p+2))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f64.const 2.22507385851e-308) (f64.const -6.28318530718))
+  (invoke "lt" (f64.const 0x1p-1022) (f64.const -0x1.921fb54442d18p+2))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const 2.22507385851e-308) (f64.const 6.28318530718))
+  (invoke "lt" (f64.const 0x1p-1022) (f64.const 0x1.921fb54442d18p+2))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f64.const -2.22507385851e-308) (f64.const -1.79769313486e+308))
+  (invoke "lt" (f64.const -0x1p-1022) (f64.const -0x1.fffffffffffffp+1023))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const -2.22507385851e-308) (f64.const 1.79769313486e+308))
+  (invoke "lt" (f64.const -0x1p-1022) (f64.const 0x1.fffffffffffffp+1023))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f64.const 2.22507385851e-308) (f64.const -1.79769313486e+308))
+  (invoke "lt" (f64.const 0x1p-1022) (f64.const -0x1.fffffffffffffp+1023))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const 2.22507385851e-308) (f64.const 1.79769313486e+308))
+  (invoke "lt" (f64.const 0x1p-1022) (f64.const 0x1.fffffffffffffp+1023))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f64.const -2.22507385851e-308) (f64.const -inf))
+  (invoke "lt" (f64.const -0x1p-1022) (f64.const -inf))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const -2.22507385851e-308) (f64.const inf))
+  (invoke "lt" (f64.const -0x1p-1022) (f64.const inf))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f64.const 2.22507385851e-308) (f64.const -inf))
+  (invoke "lt" (f64.const 0x1p-1022) (f64.const -inf))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const 2.22507385851e-308) (f64.const inf))
+  (invoke "lt" (f64.const 0x1p-1022) (f64.const inf))
   (i32.const 1)
+)
+(assert_return
+  (invoke "lt" (f64.const -0x1p-1022) (f64.const -nan:0x8000000000000))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "lt" (f64.const -0x1p-1022) (f64.const -nan:0x4000000000000))
+  (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const -2.22507385851e-308) (f64.const -nan:0x8000000000000))
+  (invoke "lt" (f64.const -0x1p-1022) (f64.const nan:0x8000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const -2.22507385851e-308) (f64.const -nan:0x4000000000000))
+  (invoke "lt" (f64.const -0x1p-1022) (f64.const nan:0x4000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const -2.22507385851e-308) (f64.const nan:0x8000000000000))
+  (invoke "lt" (f64.const 0x1p-1022) (f64.const -nan:0x8000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const -2.22507385851e-308) (f64.const nan:0x4000000000000))
+  (invoke "lt" (f64.const 0x1p-1022) (f64.const -nan:0x4000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const 2.22507385851e-308) (f64.const -nan:0x8000000000000))
+  (invoke "lt" (f64.const 0x1p-1022) (f64.const nan:0x8000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const 2.22507385851e-308) (f64.const -nan:0x4000000000000))
+  (invoke "lt" (f64.const 0x1p-1022) (f64.const nan:0x4000000000000))
   (i32.const 0)
+)
+(assert_return
+  (invoke "lt" (f64.const -0x1p-1) (f64.const -0x0p+0))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "lt" (f64.const -0x1p-1) (f64.const 0x0p+0))
+  (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f64.const 2.22507385851e-308) (f64.const nan:0x8000000000000))
+  (invoke "lt" (f64.const 0x1p-1) (f64.const -0x0p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const 2.22507385851e-308) (f64.const nan:0x4000000000000))
+  (invoke "lt" (f64.const 0x1p-1) (f64.const 0x0p+0))
   (i32.const 0)
 )
-(assert_return (invoke "lt" (f64.const -0.5) (f64.const -0.)) (i32.const 1))
-(assert_return (invoke "lt" (f64.const -0.5) (f64.const 0.)) (i32.const 1))
-(assert_return (invoke "lt" (f64.const 0.5) (f64.const -0.)) (i32.const 0))
-(assert_return (invoke "lt" (f64.const 0.5) (f64.const 0.)) (i32.const 0))
 (assert_return
-  (invoke "lt" (f64.const -0.5) (f64.const -4.94065645841e-324))
+  (invoke "lt" (f64.const -0x1p-1) (f64.const -0x0.0000000000001p-1022))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f64.const -0.5) (f64.const 4.94065645841e-324))
+  (invoke "lt" (f64.const -0x1p-1) (f64.const 0x0.0000000000001p-1022))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f64.const 0.5) (f64.const -4.94065645841e-324))
+  (invoke "lt" (f64.const 0x1p-1) (f64.const -0x0.0000000000001p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const 0.5) (f64.const 4.94065645841e-324))
+  (invoke "lt" (f64.const 0x1p-1) (f64.const 0x0.0000000000001p-1022))
   (i32.const 0)
+)
+(assert_return
+  (invoke "lt" (f64.const -0x1p-1) (f64.const -0x1p-1022))
+  (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f64.const -0.5) (f64.const -2.22507385851e-308))
+  (invoke "lt" (f64.const -0x1p-1) (f64.const 0x1p-1022))
   (i32.const 1)
+)
+(assert_return
+  (invoke "lt" (f64.const 0x1p-1) (f64.const -0x1p-1022))
+  (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const -0.5) (f64.const 2.22507385851e-308))
+  (invoke "lt" (f64.const 0x1p-1) (f64.const 0x1p-1022))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "lt" (f64.const -0x1p-1) (f64.const -0x1p-1))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "lt" (f64.const -0x1p-1) (f64.const 0x1p-1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f64.const 0.5) (f64.const -2.22507385851e-308))
+  (invoke "lt" (f64.const 0x1p-1) (f64.const -0x1p-1))
   (i32.const 0)
+)
+(assert_return
+  (invoke "lt" (f64.const 0x1p-1) (f64.const 0x1p-1))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "lt" (f64.const -0x1p-1) (f64.const -0x1p+0))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "lt" (f64.const -0x1p-1) (f64.const 0x1p+0))
+  (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f64.const 0.5) (f64.const 2.22507385851e-308))
+  (invoke "lt" (f64.const 0x1p-1) (f64.const -0x1p+0))
   (i32.const 0)
+)
+(assert_return
+  (invoke "lt" (f64.const 0x1p-1) (f64.const 0x1p+0))
+  (i32.const 1)
 )
-(assert_return (invoke "lt" (f64.const -0.5) (f64.const -0.5)) (i32.const 0))
-(assert_return (invoke "lt" (f64.const -0.5) (f64.const 0.5)) (i32.const 1))
-(assert_return (invoke "lt" (f64.const 0.5) (f64.const -0.5)) (i32.const 0))
-(assert_return (invoke "lt" (f64.const 0.5) (f64.const 0.5)) (i32.const 0))
-(assert_return (invoke "lt" (f64.const -0.5) (f64.const -1.)) (i32.const 0))
-(assert_return (invoke "lt" (f64.const -0.5) (f64.const 1.)) (i32.const 1))
-(assert_return (invoke "lt" (f64.const 0.5) (f64.const -1.)) (i32.const 0))
-(assert_return (invoke "lt" (f64.const 0.5) (f64.const 1.)) (i32.const 1))
 (assert_return
-  (invoke "lt" (f64.const -0.5) (f64.const -6.28318530718))
+  (invoke "lt" (f64.const -0x1p-1) (f64.const -0x1.921fb54442d18p+2))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const -0.5) (f64.const 6.28318530718))
+  (invoke "lt" (f64.const -0x1p-1) (f64.const 0x1.921fb54442d18p+2))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f64.const 0.5) (f64.const -6.28318530718))
+  (invoke "lt" (f64.const 0x1p-1) (f64.const -0x1.921fb54442d18p+2))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const 0.5) (f64.const 6.28318530718))
+  (invoke "lt" (f64.const 0x1p-1) (f64.const 0x1.921fb54442d18p+2))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f64.const -0.5) (f64.const -1.79769313486e+308))
+  (invoke "lt" (f64.const -0x1p-1) (f64.const -0x1.fffffffffffffp+1023))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const -0.5) (f64.const 1.79769313486e+308))
+  (invoke "lt" (f64.const -0x1p-1) (f64.const 0x1.fffffffffffffp+1023))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f64.const 0.5) (f64.const -1.79769313486e+308))
+  (invoke "lt" (f64.const 0x1p-1) (f64.const -0x1.fffffffffffffp+1023))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const 0.5) (f64.const 1.79769313486e+308))
+  (invoke "lt" (f64.const 0x1p-1) (f64.const 0x1.fffffffffffffp+1023))
   (i32.const 1)
+)
+(assert_return (invoke "lt" (f64.const -0x1p-1) (f64.const -inf)) (i32.const 0))
+(assert_return (invoke "lt" (f64.const -0x1p-1) (f64.const inf)) (i32.const 1))
+(assert_return (invoke "lt" (f64.const 0x1p-1) (f64.const -inf)) (i32.const 0))
+(assert_return (invoke "lt" (f64.const 0x1p-1) (f64.const inf)) (i32.const 1))
+(assert_return
+  (invoke "lt" (f64.const -0x1p-1) (f64.const -nan:0x8000000000000))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "lt" (f64.const -0x1p-1) (f64.const -nan:0x4000000000000))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "lt" (f64.const -0x1p-1) (f64.const nan:0x8000000000000))
+  (i32.const 0)
 )
-(assert_return (invoke "lt" (f64.const -0.5) (f64.const -inf)) (i32.const 0))
-(assert_return (invoke "lt" (f64.const -0.5) (f64.const inf)) (i32.const 1))
-(assert_return (invoke "lt" (f64.const 0.5) (f64.const -inf)) (i32.const 0))
-(assert_return (invoke "lt" (f64.const 0.5) (f64.const inf)) (i32.const 1))
 (assert_return
-  (invoke "lt" (f64.const -0.5) (f64.const -nan:0x8000000000000))
+  (invoke "lt" (f64.const -0x1p-1) (f64.const nan:0x4000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const -0.5) (f64.const -nan:0x4000000000000))
+  (invoke "lt" (f64.const 0x1p-1) (f64.const -nan:0x8000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const -0.5) (f64.const nan:0x8000000000000))
+  (invoke "lt" (f64.const 0x1p-1) (f64.const -nan:0x4000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const -0.5) (f64.const nan:0x4000000000000))
+  (invoke "lt" (f64.const 0x1p-1) (f64.const nan:0x8000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const 0.5) (f64.const -nan:0x8000000000000))
+  (invoke "lt" (f64.const 0x1p-1) (f64.const nan:0x4000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const 0.5) (f64.const -nan:0x4000000000000))
+  (invoke "lt" (f64.const -0x1p+0) (f64.const -0x0p+0))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "lt" (f64.const -0x1p+0) (f64.const 0x0p+0))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "lt" (f64.const 0x1p+0) (f64.const -0x0p+0))
   (i32.const 0)
+)
+(assert_return
+  (invoke "lt" (f64.const 0x1p+0) (f64.const 0x0p+0))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "lt" (f64.const -0x1p+0) (f64.const -0x0.0000000000001p-1022))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "lt" (f64.const -0x1p+0) (f64.const 0x0.0000000000001p-1022))
+  (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f64.const 0.5) (f64.const nan:0x8000000000000))
+  (invoke "lt" (f64.const 0x1p+0) (f64.const -0x0.0000000000001p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const 0.5) (f64.const nan:0x4000000000000))
+  (invoke "lt" (f64.const 0x1p+0) (f64.const 0x0.0000000000001p-1022))
   (i32.const 0)
 )
-(assert_return (invoke "lt" (f64.const -1.) (f64.const -0.)) (i32.const 1))
-(assert_return (invoke "lt" (f64.const -1.) (f64.const 0.)) (i32.const 1))
-(assert_return (invoke "lt" (f64.const 1.) (f64.const -0.)) (i32.const 0))
-(assert_return (invoke "lt" (f64.const 1.) (f64.const 0.)) (i32.const 0))
 (assert_return
-  (invoke "lt" (f64.const -1.) (f64.const -4.94065645841e-324))
+  (invoke "lt" (f64.const -0x1p+0) (f64.const -0x1p-1022))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f64.const -1.) (f64.const 4.94065645841e-324))
+  (invoke "lt" (f64.const -0x1p+0) (f64.const 0x1p-1022))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f64.const 1.) (f64.const -4.94065645841e-324))
+  (invoke "lt" (f64.const 0x1p+0) (f64.const -0x1p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const 1.) (f64.const 4.94065645841e-324))
+  (invoke "lt" (f64.const 0x1p+0) (f64.const 0x1p-1022))
   (i32.const 0)
+)
+(assert_return
+  (invoke "lt" (f64.const -0x1p+0) (f64.const -0x1p-1))
+  (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f64.const -1.) (f64.const -2.22507385851e-308))
+  (invoke "lt" (f64.const -0x1p+0) (f64.const 0x1p-1))
   (i32.const 1)
+)
+(assert_return
+  (invoke "lt" (f64.const 0x1p+0) (f64.const -0x1p-1))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "lt" (f64.const 0x1p+0) (f64.const 0x1p-1))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "lt" (f64.const -0x1p+0) (f64.const -0x1p+0))
+  (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const -1.) (f64.const 2.22507385851e-308))
+  (invoke "lt" (f64.const -0x1p+0) (f64.const 0x1p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f64.const 1.) (f64.const -2.22507385851e-308))
+  (invoke "lt" (f64.const 0x1p+0) (f64.const -0x1p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const 1.) (f64.const 2.22507385851e-308))
+  (invoke "lt" (f64.const 0x1p+0) (f64.const 0x1p+0))
   (i32.const 0)
 )
-(assert_return (invoke "lt" (f64.const -1.) (f64.const -0.5)) (i32.const 1))
-(assert_return (invoke "lt" (f64.const -1.) (f64.const 0.5)) (i32.const 1))
-(assert_return (invoke "lt" (f64.const 1.) (f64.const -0.5)) (i32.const 0))
-(assert_return (invoke "lt" (f64.const 1.) (f64.const 0.5)) (i32.const 0))
-(assert_return (invoke "lt" (f64.const -1.) (f64.const -1.)) (i32.const 0))
-(assert_return (invoke "lt" (f64.const -1.) (f64.const 1.)) (i32.const 1))
-(assert_return (invoke "lt" (f64.const 1.) (f64.const -1.)) (i32.const 0))
-(assert_return (invoke "lt" (f64.const 1.) (f64.const 1.)) (i32.const 0))
 (assert_return
-  (invoke "lt" (f64.const -1.) (f64.const -6.28318530718))
+  (invoke "lt" (f64.const -0x1p+0) (f64.const -0x1.921fb54442d18p+2))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const -1.) (f64.const 6.28318530718))
+  (invoke "lt" (f64.const -0x1p+0) (f64.const 0x1.921fb54442d18p+2))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f64.const 1.) (f64.const -6.28318530718))
+  (invoke "lt" (f64.const 0x1p+0) (f64.const -0x1.921fb54442d18p+2))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const 1.) (f64.const 6.28318530718))
+  (invoke "lt" (f64.const 0x1p+0) (f64.const 0x1.921fb54442d18p+2))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f64.const -1.) (f64.const -1.79769313486e+308))
+  (invoke "lt" (f64.const -0x1p+0) (f64.const -0x1.fffffffffffffp+1023))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const -1.) (f64.const 1.79769313486e+308))
+  (invoke "lt" (f64.const -0x1p+0) (f64.const 0x1.fffffffffffffp+1023))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f64.const 1.) (f64.const -1.79769313486e+308))
+  (invoke "lt" (f64.const 0x1p+0) (f64.const -0x1.fffffffffffffp+1023))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const 1.) (f64.const 1.79769313486e+308))
+  (invoke "lt" (f64.const 0x1p+0) (f64.const 0x1.fffffffffffffp+1023))
   (i32.const 1)
 )
-(assert_return (invoke "lt" (f64.const -1.) (f64.const -inf)) (i32.const 0))
-(assert_return (invoke "lt" (f64.const -1.) (f64.const inf)) (i32.const 1))
-(assert_return (invoke "lt" (f64.const 1.) (f64.const -inf)) (i32.const 0))
-(assert_return (invoke "lt" (f64.const 1.) (f64.const inf)) (i32.const 1))
+(assert_return (invoke "lt" (f64.const -0x1p+0) (f64.const -inf)) (i32.const 0))
+(assert_return (invoke "lt" (f64.const -0x1p+0) (f64.const inf)) (i32.const 1))
+(assert_return (invoke "lt" (f64.const 0x1p+0) (f64.const -inf)) (i32.const 0))
+(assert_return (invoke "lt" (f64.const 0x1p+0) (f64.const inf)) (i32.const 1))
 (assert_return
-  (invoke "lt" (f64.const -1.) (f64.const -nan:0x8000000000000))
+  (invoke "lt" (f64.const -0x1p+0) (f64.const -nan:0x8000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const -1.) (f64.const -nan:0x4000000000000))
+  (invoke "lt" (f64.const -0x1p+0) (f64.const -nan:0x4000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const -1.) (f64.const nan:0x8000000000000))
+  (invoke "lt" (f64.const -0x1p+0) (f64.const nan:0x8000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const -1.) (f64.const nan:0x4000000000000))
+  (invoke "lt" (f64.const -0x1p+0) (f64.const nan:0x4000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const 1.) (f64.const -nan:0x8000000000000))
+  (invoke "lt" (f64.const 0x1p+0) (f64.const -nan:0x8000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const 1.) (f64.const -nan:0x4000000000000))
+  (invoke "lt" (f64.const 0x1p+0) (f64.const -nan:0x4000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const 1.) (f64.const nan:0x8000000000000))
+  (invoke "lt" (f64.const 0x1p+0) (f64.const nan:0x8000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const 1.) (f64.const nan:0x4000000000000))
+  (invoke "lt" (f64.const 0x1p+0) (f64.const nan:0x4000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const -6.28318530718) (f64.const -0.))
+  (invoke "lt" (f64.const -0x1.921fb54442d18p+2) (f64.const -0x0p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f64.const -6.28318530718) (f64.const 0.))
+  (invoke "lt" (f64.const -0x1.921fb54442d18p+2) (f64.const 0x0p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f64.const 6.28318530718) (f64.const -0.))
+  (invoke "lt" (f64.const 0x1.921fb54442d18p+2) (f64.const -0x0p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const 6.28318530718) (f64.const 0.))
+  (invoke "lt" (f64.const 0x1.921fb54442d18p+2) (f64.const 0x0p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const -6.28318530718) (f64.const -4.94065645841e-324))
+  (invoke "lt"
+    (f64.const -0x1.921fb54442d18p+2)
+    (f64.const -0x0.0000000000001p-1022)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f64.const -6.28318530718) (f64.const 4.94065645841e-324))
+  (invoke "lt"
+    (f64.const -0x1.921fb54442d18p+2)
+    (f64.const 0x0.0000000000001p-1022)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f64.const 6.28318530718) (f64.const -4.94065645841e-324))
+  (invoke "lt"
+    (f64.const 0x1.921fb54442d18p+2)
+    (f64.const -0x0.0000000000001p-1022)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const 6.28318530718) (f64.const 4.94065645841e-324))
+  (invoke "lt"
+    (f64.const 0x1.921fb54442d18p+2)
+    (f64.const 0x0.0000000000001p-1022)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const -6.28318530718) (f64.const -2.22507385851e-308))
+  (invoke "lt" (f64.const -0x1.921fb54442d18p+2) (f64.const -0x1p-1022))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f64.const -6.28318530718) (f64.const 2.22507385851e-308))
+  (invoke "lt" (f64.const -0x1.921fb54442d18p+2) (f64.const 0x1p-1022))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f64.const 6.28318530718) (f64.const -2.22507385851e-308))
+  (invoke "lt" (f64.const 0x1.921fb54442d18p+2) (f64.const -0x1p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const 6.28318530718) (f64.const 2.22507385851e-308))
+  (invoke "lt" (f64.const 0x1.921fb54442d18p+2) (f64.const 0x1p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const -6.28318530718) (f64.const -0.5))
+  (invoke "lt" (f64.const -0x1.921fb54442d18p+2) (f64.const -0x1p-1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f64.const -6.28318530718) (f64.const 0.5))
+  (invoke "lt" (f64.const -0x1.921fb54442d18p+2) (f64.const 0x1p-1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f64.const 6.28318530718) (f64.const -0.5))
+  (invoke "lt" (f64.const 0x1.921fb54442d18p+2) (f64.const -0x1p-1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const 6.28318530718) (f64.const 0.5))
+  (invoke "lt" (f64.const 0x1.921fb54442d18p+2) (f64.const 0x1p-1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const -6.28318530718) (f64.const -1.))
+  (invoke "lt" (f64.const -0x1.921fb54442d18p+2) (f64.const -0x1p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f64.const -6.28318530718) (f64.const 1.))
+  (invoke "lt" (f64.const -0x1.921fb54442d18p+2) (f64.const 0x1p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f64.const 6.28318530718) (f64.const -1.))
+  (invoke "lt" (f64.const 0x1.921fb54442d18p+2) (f64.const -0x1p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const 6.28318530718) (f64.const 1.))
+  (invoke "lt" (f64.const 0x1.921fb54442d18p+2) (f64.const 0x1p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const -6.28318530718) (f64.const -6.28318530718))
+  (invoke "lt"
+    (f64.const -0x1.921fb54442d18p+2)
+    (f64.const -0x1.921fb54442d18p+2)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const -6.28318530718) (f64.const 6.28318530718))
+  (invoke "lt"
+    (f64.const -0x1.921fb54442d18p+2)
+    (f64.const 0x1.921fb54442d18p+2)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f64.const 6.28318530718) (f64.const -6.28318530718))
+  (invoke "lt"
+    (f64.const 0x1.921fb54442d18p+2)
+    (f64.const -0x1.921fb54442d18p+2)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const 6.28318530718) (f64.const 6.28318530718))
+  (invoke "lt"
+    (f64.const 0x1.921fb54442d18p+2)
+    (f64.const 0x1.921fb54442d18p+2)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const -6.28318530718) (f64.const -1.79769313486e+308))
+  (invoke "lt"
+    (f64.const -0x1.921fb54442d18p+2)
+    (f64.const -0x1.fffffffffffffp+1023)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const -6.28318530718) (f64.const 1.79769313486e+308))
+  (invoke "lt"
+    (f64.const -0x1.921fb54442d18p+2)
+    (f64.const 0x1.fffffffffffffp+1023)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f64.const 6.28318530718) (f64.const -1.79769313486e+308))
+  (invoke "lt"
+    (f64.const 0x1.921fb54442d18p+2)
+    (f64.const -0x1.fffffffffffffp+1023)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const 6.28318530718) (f64.const 1.79769313486e+308))
+  (invoke "lt"
+    (f64.const 0x1.921fb54442d18p+2)
+    (f64.const 0x1.fffffffffffffp+1023)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f64.const -6.28318530718) (f64.const -inf))
+  (invoke "lt" (f64.const -0x1.921fb54442d18p+2) (f64.const -inf))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const -6.28318530718) (f64.const inf))
+  (invoke "lt" (f64.const -0x1.921fb54442d18p+2) (f64.const inf))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f64.const 6.28318530718) (f64.const -inf))
+  (invoke "lt" (f64.const 0x1.921fb54442d18p+2) (f64.const -inf))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const 6.28318530718) (f64.const inf))
+  (invoke "lt" (f64.const 0x1.921fb54442d18p+2) (f64.const inf))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f64.const -6.28318530718) (f64.const -nan:0x8000000000000))
+  (invoke "lt"
+    (f64.const -0x1.921fb54442d18p+2)
+    (f64.const -nan:0x8000000000000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const -6.28318530718) (f64.const -nan:0x4000000000000))
+  (invoke "lt"
+    (f64.const -0x1.921fb54442d18p+2)
+    (f64.const -nan:0x4000000000000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const -6.28318530718) (f64.const nan:0x8000000000000))
+  (invoke "lt"
+    (f64.const -0x1.921fb54442d18p+2)
+    (f64.const nan:0x8000000000000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const -6.28318530718) (f64.const nan:0x4000000000000))
+  (invoke "lt"
+    (f64.const -0x1.921fb54442d18p+2)
+    (f64.const nan:0x4000000000000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const 6.28318530718) (f64.const -nan:0x8000000000000))
+  (invoke "lt"
+    (f64.const 0x1.921fb54442d18p+2)
+    (f64.const -nan:0x8000000000000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const 6.28318530718) (f64.const -nan:0x4000000000000))
+  (invoke "lt"
+    (f64.const 0x1.921fb54442d18p+2)
+    (f64.const -nan:0x4000000000000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const 6.28318530718) (f64.const nan:0x8000000000000))
+  (invoke "lt" (f64.const 0x1.921fb54442d18p+2) (f64.const nan:0x8000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const 6.28318530718) (f64.const nan:0x4000000000000))
+  (invoke "lt" (f64.const 0x1.921fb54442d18p+2) (f64.const nan:0x4000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const -1.79769313486e+308) (f64.const -0.))
+  (invoke "lt" (f64.const -0x1.fffffffffffffp+1023) (f64.const -0x0p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f64.const -1.79769313486e+308) (f64.const 0.))
+  (invoke "lt" (f64.const -0x1.fffffffffffffp+1023) (f64.const 0x0p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f64.const 1.79769313486e+308) (f64.const -0.))
+  (invoke "lt" (f64.const 0x1.fffffffffffffp+1023) (f64.const -0x0p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const 1.79769313486e+308) (f64.const 0.))
+  (invoke "lt" (f64.const 0x1.fffffffffffffp+1023) (f64.const 0x0p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const -1.79769313486e+308) (f64.const -4.94065645841e-324))
+  (invoke "lt"
+    (f64.const -0x1.fffffffffffffp+1023)
+    (f64.const -0x0.0000000000001p-1022)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f64.const -1.79769313486e+308) (f64.const 4.94065645841e-324))
+  (invoke "lt"
+    (f64.const -0x1.fffffffffffffp+1023)
+    (f64.const 0x0.0000000000001p-1022)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f64.const 1.79769313486e+308) (f64.const -4.94065645841e-324))
+  (invoke "lt"
+    (f64.const 0x1.fffffffffffffp+1023)
+    (f64.const -0x0.0000000000001p-1022)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const 1.79769313486e+308) (f64.const 4.94065645841e-324))
+  (invoke "lt"
+    (f64.const 0x1.fffffffffffffp+1023)
+    (f64.const 0x0.0000000000001p-1022)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const -1.79769313486e+308) (f64.const -2.22507385851e-308))
+  (invoke "lt" (f64.const -0x1.fffffffffffffp+1023) (f64.const -0x1p-1022))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f64.const -1.79769313486e+308) (f64.const 2.22507385851e-308))
+  (invoke "lt" (f64.const -0x1.fffffffffffffp+1023) (f64.const 0x1p-1022))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f64.const 1.79769313486e+308) (f64.const -2.22507385851e-308))
+  (invoke "lt" (f64.const 0x1.fffffffffffffp+1023) (f64.const -0x1p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const 1.79769313486e+308) (f64.const 2.22507385851e-308))
+  (invoke "lt" (f64.const 0x1.fffffffffffffp+1023) (f64.const 0x1p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const -1.79769313486e+308) (f64.const -0.5))
+  (invoke "lt" (f64.const -0x1.fffffffffffffp+1023) (f64.const -0x1p-1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f64.const -1.79769313486e+308) (f64.const 0.5))
+  (invoke "lt" (f64.const -0x1.fffffffffffffp+1023) (f64.const 0x1p-1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f64.const 1.79769313486e+308) (f64.const -0.5))
+  (invoke "lt" (f64.const 0x1.fffffffffffffp+1023) (f64.const -0x1p-1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const 1.79769313486e+308) (f64.const 0.5))
+  (invoke "lt" (f64.const 0x1.fffffffffffffp+1023) (f64.const 0x1p-1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const -1.79769313486e+308) (f64.const -1.))
+  (invoke "lt" (f64.const -0x1.fffffffffffffp+1023) (f64.const -0x1p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f64.const -1.79769313486e+308) (f64.const 1.))
+  (invoke "lt" (f64.const -0x1.fffffffffffffp+1023) (f64.const 0x1p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f64.const 1.79769313486e+308) (f64.const -1.))
+  (invoke "lt" (f64.const 0x1.fffffffffffffp+1023) (f64.const -0x1p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const 1.79769313486e+308) (f64.const 1.))
+  (invoke "lt" (f64.const 0x1.fffffffffffffp+1023) (f64.const 0x1p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const -1.79769313486e+308) (f64.const -6.28318530718))
+  (invoke "lt"
+    (f64.const -0x1.fffffffffffffp+1023)
+    (f64.const -0x1.921fb54442d18p+2)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f64.const -1.79769313486e+308) (f64.const 6.28318530718))
+  (invoke "lt"
+    (f64.const -0x1.fffffffffffffp+1023)
+    (f64.const 0x1.921fb54442d18p+2)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f64.const 1.79769313486e+308) (f64.const -6.28318530718))
+  (invoke "lt"
+    (f64.const 0x1.fffffffffffffp+1023)
+    (f64.const -0x1.921fb54442d18p+2)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const 1.79769313486e+308) (f64.const 6.28318530718))
+  (invoke "lt"
+    (f64.const 0x1.fffffffffffffp+1023)
+    (f64.const 0x1.921fb54442d18p+2)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const -1.79769313486e+308) (f64.const -1.79769313486e+308))
+  (invoke "lt"
+    (f64.const -0x1.fffffffffffffp+1023)
+    (f64.const -0x1.fffffffffffffp+1023)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const -1.79769313486e+308) (f64.const 1.79769313486e+308))
+  (invoke "lt"
+    (f64.const -0x1.fffffffffffffp+1023)
+    (f64.const 0x1.fffffffffffffp+1023)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f64.const 1.79769313486e+308) (f64.const -1.79769313486e+308))
+  (invoke "lt"
+    (f64.const 0x1.fffffffffffffp+1023)
+    (f64.const -0x1.fffffffffffffp+1023)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const 1.79769313486e+308) (f64.const 1.79769313486e+308))
+  (invoke "lt"
+    (f64.const 0x1.fffffffffffffp+1023)
+    (f64.const 0x1.fffffffffffffp+1023)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const -1.79769313486e+308) (f64.const -inf))
+  (invoke "lt" (f64.const -0x1.fffffffffffffp+1023) (f64.const -inf))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const -1.79769313486e+308) (f64.const inf))
+  (invoke "lt" (f64.const -0x1.fffffffffffffp+1023) (f64.const inf))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f64.const 1.79769313486e+308) (f64.const -inf))
+  (invoke "lt" (f64.const 0x1.fffffffffffffp+1023) (f64.const -inf))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const 1.79769313486e+308) (f64.const inf))
+  (invoke "lt" (f64.const 0x1.fffffffffffffp+1023) (f64.const inf))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f64.const -1.79769313486e+308) (f64.const -nan:0x8000000000000))
+  (invoke "lt"
+    (f64.const -0x1.fffffffffffffp+1023)
+    (f64.const -nan:0x8000000000000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const -1.79769313486e+308) (f64.const -nan:0x4000000000000))
+  (invoke "lt"
+    (f64.const -0x1.fffffffffffffp+1023)
+    (f64.const -nan:0x4000000000000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const -1.79769313486e+308) (f64.const nan:0x8000000000000))
+  (invoke "lt"
+    (f64.const -0x1.fffffffffffffp+1023)
+    (f64.const nan:0x8000000000000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const -1.79769313486e+308) (f64.const nan:0x4000000000000))
+  (invoke "lt"
+    (f64.const -0x1.fffffffffffffp+1023)
+    (f64.const nan:0x4000000000000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const 1.79769313486e+308) (f64.const -nan:0x8000000000000))
+  (invoke "lt"
+    (f64.const 0x1.fffffffffffffp+1023)
+    (f64.const -nan:0x8000000000000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const 1.79769313486e+308) (f64.const -nan:0x4000000000000))
+  (invoke "lt"
+    (f64.const 0x1.fffffffffffffp+1023)
+    (f64.const -nan:0x4000000000000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const 1.79769313486e+308) (f64.const nan:0x8000000000000))
+  (invoke "lt"
+    (f64.const 0x1.fffffffffffffp+1023)
+    (f64.const nan:0x8000000000000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const 1.79769313486e+308) (f64.const nan:0x4000000000000))
+  (invoke "lt"
+    (f64.const 0x1.fffffffffffffp+1023)
+    (f64.const nan:0x4000000000000)
+  )
   (i32.const 0)
 )
-(assert_return (invoke "lt" (f64.const -inf) (f64.const -0.)) (i32.const 1))
-(assert_return (invoke "lt" (f64.const -inf) (f64.const 0.)) (i32.const 1))
-(assert_return (invoke "lt" (f64.const inf) (f64.const -0.)) (i32.const 0))
-(assert_return (invoke "lt" (f64.const inf) (f64.const 0.)) (i32.const 0))
+(assert_return (invoke "lt" (f64.const -inf) (f64.const -0x0p+0)) (i32.const 1))
+(assert_return (invoke "lt" (f64.const -inf) (f64.const 0x0p+0)) (i32.const 1))
+(assert_return (invoke "lt" (f64.const inf) (f64.const -0x0p+0)) (i32.const 0))
+(assert_return (invoke "lt" (f64.const inf) (f64.const 0x0p+0)) (i32.const 0))
 (assert_return
-  (invoke "lt" (f64.const -inf) (f64.const -4.94065645841e-324))
+  (invoke "lt" (f64.const -inf) (f64.const -0x0.0000000000001p-1022))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f64.const -inf) (f64.const 4.94065645841e-324))
+  (invoke "lt" (f64.const -inf) (f64.const 0x0.0000000000001p-1022))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f64.const inf) (f64.const -4.94065645841e-324))
+  (invoke "lt" (f64.const inf) (f64.const -0x0.0000000000001p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const inf) (f64.const 4.94065645841e-324))
+  (invoke "lt" (f64.const inf) (f64.const 0x0.0000000000001p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const -inf) (f64.const -2.22507385851e-308))
+  (invoke "lt" (f64.const -inf) (f64.const -0x1p-1022))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f64.const -inf) (f64.const 2.22507385851e-308))
+  (invoke "lt" (f64.const -inf) (f64.const 0x1p-1022))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f64.const inf) (f64.const -2.22507385851e-308))
+  (invoke "lt" (f64.const inf) (f64.const -0x1p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const inf) (f64.const 2.22507385851e-308))
+  (invoke "lt" (f64.const inf) (f64.const 0x1p-1022))
   (i32.const 0)
 )
-(assert_return (invoke "lt" (f64.const -inf) (f64.const -0.5)) (i32.const 1))
-(assert_return (invoke "lt" (f64.const -inf) (f64.const 0.5)) (i32.const 1))
-(assert_return (invoke "lt" (f64.const inf) (f64.const -0.5)) (i32.const 0))
-(assert_return (invoke "lt" (f64.const inf) (f64.const 0.5)) (i32.const 0))
-(assert_return (invoke "lt" (f64.const -inf) (f64.const -1.)) (i32.const 1))
-(assert_return (invoke "lt" (f64.const -inf) (f64.const 1.)) (i32.const 1))
-(assert_return (invoke "lt" (f64.const inf) (f64.const -1.)) (i32.const 0))
-(assert_return (invoke "lt" (f64.const inf) (f64.const 1.)) (i32.const 0))
+(assert_return (invoke "lt" (f64.const -inf) (f64.const -0x1p-1)) (i32.const 1))
+(assert_return (invoke "lt" (f64.const -inf) (f64.const 0x1p-1)) (i32.const 1))
+(assert_return (invoke "lt" (f64.const inf) (f64.const -0x1p-1)) (i32.const 0))
+(assert_return (invoke "lt" (f64.const inf) (f64.const 0x1p-1)) (i32.const 0))
+(assert_return (invoke "lt" (f64.const -inf) (f64.const -0x1p+0)) (i32.const 1))
+(assert_return (invoke "lt" (f64.const -inf) (f64.const 0x1p+0)) (i32.const 1))
+(assert_return (invoke "lt" (f64.const inf) (f64.const -0x1p+0)) (i32.const 0))
+(assert_return (invoke "lt" (f64.const inf) (f64.const 0x1p+0)) (i32.const 0))
 (assert_return
-  (invoke "lt" (f64.const -inf) (f64.const -6.28318530718))
+  (invoke "lt" (f64.const -inf) (f64.const -0x1.921fb54442d18p+2))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f64.const -inf) (f64.const 6.28318530718))
+  (invoke "lt" (f64.const -inf) (f64.const 0x1.921fb54442d18p+2))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f64.const inf) (f64.const -6.28318530718))
+  (invoke "lt" (f64.const inf) (f64.const -0x1.921fb54442d18p+2))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const inf) (f64.const 6.28318530718))
+  (invoke "lt" (f64.const inf) (f64.const 0x1.921fb54442d18p+2))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const -inf) (f64.const -1.79769313486e+308))
+  (invoke "lt" (f64.const -inf) (f64.const -0x1.fffffffffffffp+1023))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f64.const -inf) (f64.const 1.79769313486e+308))
+  (invoke "lt" (f64.const -inf) (f64.const 0x1.fffffffffffffp+1023))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f64.const inf) (f64.const -1.79769313486e+308))
+  (invoke "lt" (f64.const inf) (f64.const -0x1.fffffffffffffp+1023))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const inf) (f64.const 1.79769313486e+308))
+  (invoke "lt" (f64.const inf) (f64.const 0x1.fffffffffffffp+1023))
   (i32.const 0)
 )
 (assert_return (invoke "lt" (f64.const -inf) (f64.const -inf)) (i32.const 0))
@@ -3939,227 +4917,293 @@
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const -nan:0x8000000000000) (f64.const -0.))
+  (invoke "lt" (f64.const -nan:0x8000000000000) (f64.const -0x0p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const -nan:0x4000000000000) (f64.const -0.))
+  (invoke "lt" (f64.const -nan:0x4000000000000) (f64.const -0x0p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const -nan:0x8000000000000) (f64.const 0.))
+  (invoke "lt" (f64.const -nan:0x8000000000000) (f64.const 0x0p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const -nan:0x4000000000000) (f64.const 0.))
+  (invoke "lt" (f64.const -nan:0x4000000000000) (f64.const 0x0p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const nan:0x8000000000000) (f64.const -0.))
+  (invoke "lt" (f64.const nan:0x8000000000000) (f64.const -0x0p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const nan:0x4000000000000) (f64.const -0.))
+  (invoke "lt" (f64.const nan:0x4000000000000) (f64.const -0x0p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const nan:0x8000000000000) (f64.const 0.))
+  (invoke "lt" (f64.const nan:0x8000000000000) (f64.const 0x0p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const nan:0x4000000000000) (f64.const 0.))
+  (invoke "lt" (f64.const nan:0x4000000000000) (f64.const 0x0p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const -nan:0x8000000000000) (f64.const -4.94065645841e-324))
+  (invoke "lt"
+    (f64.const -nan:0x8000000000000)
+    (f64.const -0x0.0000000000001p-1022)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const -nan:0x4000000000000) (f64.const -4.94065645841e-324))
+  (invoke "lt"
+    (f64.const -nan:0x4000000000000)
+    (f64.const -0x0.0000000000001p-1022)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const -nan:0x8000000000000) (f64.const 4.94065645841e-324))
+  (invoke "lt"
+    (f64.const -nan:0x8000000000000)
+    (f64.const 0x0.0000000000001p-1022)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const -nan:0x4000000000000) (f64.const 4.94065645841e-324))
+  (invoke "lt"
+    (f64.const -nan:0x4000000000000)
+    (f64.const 0x0.0000000000001p-1022)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const nan:0x8000000000000) (f64.const -4.94065645841e-324))
+  (invoke "lt"
+    (f64.const nan:0x8000000000000)
+    (f64.const -0x0.0000000000001p-1022)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const nan:0x4000000000000) (f64.const -4.94065645841e-324))
+  (invoke "lt"
+    (f64.const nan:0x4000000000000)
+    (f64.const -0x0.0000000000001p-1022)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const nan:0x8000000000000) (f64.const 4.94065645841e-324))
+  (invoke "lt"
+    (f64.const nan:0x8000000000000)
+    (f64.const 0x0.0000000000001p-1022)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const nan:0x4000000000000) (f64.const 4.94065645841e-324))
+  (invoke "lt"
+    (f64.const nan:0x4000000000000)
+    (f64.const 0x0.0000000000001p-1022)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const -nan:0x8000000000000) (f64.const -2.22507385851e-308))
+  (invoke "lt" (f64.const -nan:0x8000000000000) (f64.const -0x1p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const -nan:0x4000000000000) (f64.const -2.22507385851e-308))
+  (invoke "lt" (f64.const -nan:0x4000000000000) (f64.const -0x1p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const -nan:0x8000000000000) (f64.const 2.22507385851e-308))
+  (invoke "lt" (f64.const -nan:0x8000000000000) (f64.const 0x1p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const -nan:0x4000000000000) (f64.const 2.22507385851e-308))
+  (invoke "lt" (f64.const -nan:0x4000000000000) (f64.const 0x1p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const nan:0x8000000000000) (f64.const -2.22507385851e-308))
+  (invoke "lt" (f64.const nan:0x8000000000000) (f64.const -0x1p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const nan:0x4000000000000) (f64.const -2.22507385851e-308))
+  (invoke "lt" (f64.const nan:0x4000000000000) (f64.const -0x1p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const nan:0x8000000000000) (f64.const 2.22507385851e-308))
+  (invoke "lt" (f64.const nan:0x8000000000000) (f64.const 0x1p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const nan:0x4000000000000) (f64.const 2.22507385851e-308))
+  (invoke "lt" (f64.const nan:0x4000000000000) (f64.const 0x1p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const -nan:0x8000000000000) (f64.const -0.5))
+  (invoke "lt" (f64.const -nan:0x8000000000000) (f64.const -0x1p-1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const -nan:0x4000000000000) (f64.const -0.5))
+  (invoke "lt" (f64.const -nan:0x4000000000000) (f64.const -0x1p-1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const -nan:0x8000000000000) (f64.const 0.5))
+  (invoke "lt" (f64.const -nan:0x8000000000000) (f64.const 0x1p-1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const -nan:0x4000000000000) (f64.const 0.5))
+  (invoke "lt" (f64.const -nan:0x4000000000000) (f64.const 0x1p-1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const nan:0x8000000000000) (f64.const -0.5))
+  (invoke "lt" (f64.const nan:0x8000000000000) (f64.const -0x1p-1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const nan:0x4000000000000) (f64.const -0.5))
+  (invoke "lt" (f64.const nan:0x4000000000000) (f64.const -0x1p-1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const nan:0x8000000000000) (f64.const 0.5))
+  (invoke "lt" (f64.const nan:0x8000000000000) (f64.const 0x1p-1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const nan:0x4000000000000) (f64.const 0.5))
+  (invoke "lt" (f64.const nan:0x4000000000000) (f64.const 0x1p-1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const -nan:0x8000000000000) (f64.const -1.))
+  (invoke "lt" (f64.const -nan:0x8000000000000) (f64.const -0x1p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const -nan:0x4000000000000) (f64.const -1.))
+  (invoke "lt" (f64.const -nan:0x4000000000000) (f64.const -0x1p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const -nan:0x8000000000000) (f64.const 1.))
+  (invoke "lt" (f64.const -nan:0x8000000000000) (f64.const 0x1p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const -nan:0x4000000000000) (f64.const 1.))
+  (invoke "lt" (f64.const -nan:0x4000000000000) (f64.const 0x1p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const nan:0x8000000000000) (f64.const -1.))
+  (invoke "lt" (f64.const nan:0x8000000000000) (f64.const -0x1p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const nan:0x4000000000000) (f64.const -1.))
+  (invoke "lt" (f64.const nan:0x4000000000000) (f64.const -0x1p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const nan:0x8000000000000) (f64.const 1.))
+  (invoke "lt" (f64.const nan:0x8000000000000) (f64.const 0x1p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const nan:0x4000000000000) (f64.const 1.))
+  (invoke "lt" (f64.const nan:0x4000000000000) (f64.const 0x1p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const -nan:0x8000000000000) (f64.const -6.28318530718))
+  (invoke "lt"
+    (f64.const -nan:0x8000000000000)
+    (f64.const -0x1.921fb54442d18p+2)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const -nan:0x4000000000000) (f64.const -6.28318530718))
+  (invoke "lt"
+    (f64.const -nan:0x4000000000000)
+    (f64.const -0x1.921fb54442d18p+2)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const -nan:0x8000000000000) (f64.const 6.28318530718))
+  (invoke "lt"
+    (f64.const -nan:0x8000000000000)
+    (f64.const 0x1.921fb54442d18p+2)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const -nan:0x4000000000000) (f64.const 6.28318530718))
+  (invoke "lt"
+    (f64.const -nan:0x4000000000000)
+    (f64.const 0x1.921fb54442d18p+2)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const nan:0x8000000000000) (f64.const -6.28318530718))
+  (invoke "lt"
+    (f64.const nan:0x8000000000000)
+    (f64.const -0x1.921fb54442d18p+2)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const nan:0x4000000000000) (f64.const -6.28318530718))
+  (invoke "lt"
+    (f64.const nan:0x4000000000000)
+    (f64.const -0x1.921fb54442d18p+2)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const nan:0x8000000000000) (f64.const 6.28318530718))
+  (invoke "lt" (f64.const nan:0x8000000000000) (f64.const 0x1.921fb54442d18p+2))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const nan:0x4000000000000) (f64.const 6.28318530718))
+  (invoke "lt" (f64.const nan:0x4000000000000) (f64.const 0x1.921fb54442d18p+2))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const -nan:0x8000000000000) (f64.const -1.79769313486e+308))
+  (invoke "lt"
+    (f64.const -nan:0x8000000000000)
+    (f64.const -0x1.fffffffffffffp+1023)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const -nan:0x4000000000000) (f64.const -1.79769313486e+308))
+  (invoke "lt"
+    (f64.const -nan:0x4000000000000)
+    (f64.const -0x1.fffffffffffffp+1023)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const -nan:0x8000000000000) (f64.const 1.79769313486e+308))
+  (invoke "lt"
+    (f64.const -nan:0x8000000000000)
+    (f64.const 0x1.fffffffffffffp+1023)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const -nan:0x4000000000000) (f64.const 1.79769313486e+308))
+  (invoke "lt"
+    (f64.const -nan:0x4000000000000)
+    (f64.const 0x1.fffffffffffffp+1023)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const nan:0x8000000000000) (f64.const -1.79769313486e+308))
+  (invoke "lt"
+    (f64.const nan:0x8000000000000)
+    (f64.const -0x1.fffffffffffffp+1023)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const nan:0x4000000000000) (f64.const -1.79769313486e+308))
+  (invoke "lt"
+    (f64.const nan:0x4000000000000)
+    (f64.const -0x1.fffffffffffffp+1023)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const nan:0x8000000000000) (f64.const 1.79769313486e+308))
+  (invoke "lt"
+    (f64.const nan:0x8000000000000)
+    (f64.const 0x1.fffffffffffffp+1023)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f64.const nan:0x4000000000000) (f64.const 1.79769313486e+308))
+  (invoke "lt"
+    (f64.const nan:0x4000000000000)
+    (f64.const 0x1.fffffffffffffp+1023)
+  )
   (i32.const 0)
 )
 (assert_return
@@ -4270,1056 +5314,1338 @@
   (invoke "lt" (f64.const nan:0x4000000000000) (f64.const nan:0x4000000000000))
   (i32.const 0)
 )
-(assert_return (invoke "le" (f64.const -0.) (f64.const -0.)) (i32.const 1))
-(assert_return (invoke "le" (f64.const -0.) (f64.const 0.)) (i32.const 1))
-(assert_return (invoke "le" (f64.const 0.) (f64.const -0.)) (i32.const 1))
-(assert_return (invoke "le" (f64.const 0.) (f64.const 0.)) (i32.const 1))
 (assert_return
-  (invoke "le" (f64.const -0.) (f64.const -4.94065645841e-324))
+  (invoke "le" (f64.const -0x0p+0) (f64.const -0x0p+0))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "le" (f64.const -0x0p+0) (f64.const 0x0p+0))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "le" (f64.const 0x0p+0) (f64.const -0x0p+0))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "le" (f64.const 0x0p+0) (f64.const 0x0p+0))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "le" (f64.const -0x0p+0) (f64.const -0x0.0000000000001p-1022))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "le" (f64.const -0x0p+0) (f64.const 0x0.0000000000001p-1022))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "le" (f64.const 0x0p+0) (f64.const -0x0.0000000000001p-1022))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "le" (f64.const 0x0p+0) (f64.const 0x0.0000000000001p-1022))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "le" (f64.const -0x0p+0) (f64.const -0x1p-1022))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "le" (f64.const -0x0p+0) (f64.const 0x1p-1022))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "le" (f64.const 0x0p+0) (f64.const -0x1p-1022))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "le" (f64.const 0x0p+0) (f64.const 0x1p-1022))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "le" (f64.const -0x0p+0) (f64.const -0x1p-1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const -0.) (f64.const 4.94065645841e-324))
+  (invoke "le" (f64.const -0x0p+0) (f64.const 0x1p-1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f64.const 0.) (f64.const -4.94065645841e-324))
+  (invoke "le" (f64.const 0x0p+0) (f64.const -0x1p-1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const 0.) (f64.const 4.94065645841e-324))
+  (invoke "le" (f64.const 0x0p+0) (f64.const 0x1p-1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f64.const -0.) (f64.const -2.22507385851e-308))
+  (invoke "le" (f64.const -0x0p+0) (f64.const -0x1p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const -0.) (f64.const 2.22507385851e-308))
+  (invoke "le" (f64.const -0x0p+0) (f64.const 0x1p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f64.const 0.) (f64.const -2.22507385851e-308))
+  (invoke "le" (f64.const 0x0p+0) (f64.const -0x1p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const 0.) (f64.const 2.22507385851e-308))
+  (invoke "le" (f64.const 0x0p+0) (f64.const 0x1p+0))
   (i32.const 1)
 )
-(assert_return (invoke "le" (f64.const -0.) (f64.const -0.5)) (i32.const 0))
-(assert_return (invoke "le" (f64.const -0.) (f64.const 0.5)) (i32.const 1))
-(assert_return (invoke "le" (f64.const 0.) (f64.const -0.5)) (i32.const 0))
-(assert_return (invoke "le" (f64.const 0.) (f64.const 0.5)) (i32.const 1))
-(assert_return (invoke "le" (f64.const -0.) (f64.const -1.)) (i32.const 0))
-(assert_return (invoke "le" (f64.const -0.) (f64.const 1.)) (i32.const 1))
-(assert_return (invoke "le" (f64.const 0.) (f64.const -1.)) (i32.const 0))
-(assert_return (invoke "le" (f64.const 0.) (f64.const 1.)) (i32.const 1))
 (assert_return
-  (invoke "le" (f64.const -0.) (f64.const -6.28318530718))
+  (invoke "le" (f64.const -0x0p+0) (f64.const -0x1.921fb54442d18p+2))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const -0.) (f64.const 6.28318530718))
+  (invoke "le" (f64.const -0x0p+0) (f64.const 0x1.921fb54442d18p+2))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f64.const 0.) (f64.const -6.28318530718))
+  (invoke "le" (f64.const 0x0p+0) (f64.const -0x1.921fb54442d18p+2))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const 0.) (f64.const 6.28318530718))
+  (invoke "le" (f64.const 0x0p+0) (f64.const 0x1.921fb54442d18p+2))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f64.const -0.) (f64.const -1.79769313486e+308))
+  (invoke "le" (f64.const -0x0p+0) (f64.const -0x1.fffffffffffffp+1023))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const -0.) (f64.const 1.79769313486e+308))
+  (invoke "le" (f64.const -0x0p+0) (f64.const 0x1.fffffffffffffp+1023))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f64.const 0.) (f64.const -1.79769313486e+308))
+  (invoke "le" (f64.const 0x0p+0) (f64.const -0x1.fffffffffffffp+1023))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const 0.) (f64.const 1.79769313486e+308))
+  (invoke "le" (f64.const 0x0p+0) (f64.const 0x1.fffffffffffffp+1023))
   (i32.const 1)
 )
-(assert_return (invoke "le" (f64.const -0.) (f64.const -inf)) (i32.const 0))
-(assert_return (invoke "le" (f64.const -0.) (f64.const inf)) (i32.const 1))
-(assert_return (invoke "le" (f64.const 0.) (f64.const -inf)) (i32.const 0))
-(assert_return (invoke "le" (f64.const 0.) (f64.const inf)) (i32.const 1))
+(assert_return (invoke "le" (f64.const -0x0p+0) (f64.const -inf)) (i32.const 0))
+(assert_return (invoke "le" (f64.const -0x0p+0) (f64.const inf)) (i32.const 1))
+(assert_return (invoke "le" (f64.const 0x0p+0) (f64.const -inf)) (i32.const 0))
+(assert_return (invoke "le" (f64.const 0x0p+0) (f64.const inf)) (i32.const 1))
 (assert_return
-  (invoke "le" (f64.const -0.) (f64.const -nan:0x8000000000000))
+  (invoke "le" (f64.const -0x0p+0) (f64.const -nan:0x8000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const -0.) (f64.const -nan:0x4000000000000))
+  (invoke "le" (f64.const -0x0p+0) (f64.const -nan:0x4000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const -0.) (f64.const nan:0x8000000000000))
+  (invoke "le" (f64.const -0x0p+0) (f64.const nan:0x8000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const -0.) (f64.const nan:0x4000000000000))
+  (invoke "le" (f64.const -0x0p+0) (f64.const nan:0x4000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const 0.) (f64.const -nan:0x8000000000000))
+  (invoke "le" (f64.const 0x0p+0) (f64.const -nan:0x8000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const 0.) (f64.const -nan:0x4000000000000))
+  (invoke "le" (f64.const 0x0p+0) (f64.const -nan:0x4000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const 0.) (f64.const nan:0x8000000000000))
+  (invoke "le" (f64.const 0x0p+0) (f64.const nan:0x8000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const 0.) (f64.const nan:0x4000000000000))
+  (invoke "le" (f64.const 0x0p+0) (f64.const nan:0x4000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const -4.94065645841e-324) (f64.const -0.))
+  (invoke "le" (f64.const -0x0.0000000000001p-1022) (f64.const -0x0p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f64.const -4.94065645841e-324) (f64.const 0.))
+  (invoke "le" (f64.const -0x0.0000000000001p-1022) (f64.const 0x0p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f64.const 4.94065645841e-324) (f64.const -0.))
+  (invoke "le" (f64.const 0x0.0000000000001p-1022) (f64.const -0x0p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const 4.94065645841e-324) (f64.const 0.))
+  (invoke "le" (f64.const 0x0.0000000000001p-1022) (f64.const 0x0p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const -4.94065645841e-324) (f64.const -4.94065645841e-324))
+  (invoke "le"
+    (f64.const -0x0.0000000000001p-1022)
+    (f64.const -0x0.0000000000001p-1022)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f64.const -4.94065645841e-324) (f64.const 4.94065645841e-324))
+  (invoke "le"
+    (f64.const -0x0.0000000000001p-1022)
+    (f64.const 0x0.0000000000001p-1022)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f64.const 4.94065645841e-324) (f64.const -4.94065645841e-324))
+  (invoke "le"
+    (f64.const 0x0.0000000000001p-1022)
+    (f64.const -0x0.0000000000001p-1022)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const 4.94065645841e-324) (f64.const 4.94065645841e-324))
+  (invoke "le"
+    (f64.const 0x0.0000000000001p-1022)
+    (f64.const 0x0.0000000000001p-1022)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f64.const -4.94065645841e-324) (f64.const -2.22507385851e-308))
+  (invoke "le" (f64.const -0x0.0000000000001p-1022) (f64.const -0x1p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const -4.94065645841e-324) (f64.const 2.22507385851e-308))
+  (invoke "le" (f64.const -0x0.0000000000001p-1022) (f64.const 0x1p-1022))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f64.const 4.94065645841e-324) (f64.const -2.22507385851e-308))
+  (invoke "le" (f64.const 0x0.0000000000001p-1022) (f64.const -0x1p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const 4.94065645841e-324) (f64.const 2.22507385851e-308))
+  (invoke "le" (f64.const 0x0.0000000000001p-1022) (f64.const 0x1p-1022))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f64.const -4.94065645841e-324) (f64.const -0.5))
+  (invoke "le" (f64.const -0x0.0000000000001p-1022) (f64.const -0x1p-1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const -4.94065645841e-324) (f64.const 0.5))
+  (invoke "le" (f64.const -0x0.0000000000001p-1022) (f64.const 0x1p-1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f64.const 4.94065645841e-324) (f64.const -0.5))
+  (invoke "le" (f64.const 0x0.0000000000001p-1022) (f64.const -0x1p-1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const 4.94065645841e-324) (f64.const 0.5))
+  (invoke "le" (f64.const 0x0.0000000000001p-1022) (f64.const 0x1p-1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f64.const -4.94065645841e-324) (f64.const -1.))
+  (invoke "le" (f64.const -0x0.0000000000001p-1022) (f64.const -0x1p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const -4.94065645841e-324) (f64.const 1.))
+  (invoke "le" (f64.const -0x0.0000000000001p-1022) (f64.const 0x1p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f64.const 4.94065645841e-324) (f64.const -1.))
+  (invoke "le" (f64.const 0x0.0000000000001p-1022) (f64.const -0x1p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const 4.94065645841e-324) (f64.const 1.))
+  (invoke "le" (f64.const 0x0.0000000000001p-1022) (f64.const 0x1p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f64.const -4.94065645841e-324) (f64.const -6.28318530718))
+  (invoke "le"
+    (f64.const -0x0.0000000000001p-1022)
+    (f64.const -0x1.921fb54442d18p+2)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const -4.94065645841e-324) (f64.const 6.28318530718))
+  (invoke "le"
+    (f64.const -0x0.0000000000001p-1022)
+    (f64.const 0x1.921fb54442d18p+2)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f64.const 4.94065645841e-324) (f64.const -6.28318530718))
+  (invoke "le"
+    (f64.const 0x0.0000000000001p-1022)
+    (f64.const -0x1.921fb54442d18p+2)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const 4.94065645841e-324) (f64.const 6.28318530718))
+  (invoke "le"
+    (f64.const 0x0.0000000000001p-1022)
+    (f64.const 0x1.921fb54442d18p+2)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f64.const -4.94065645841e-324) (f64.const -1.79769313486e+308))
+  (invoke "le"
+    (f64.const -0x0.0000000000001p-1022)
+    (f64.const -0x1.fffffffffffffp+1023)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const -4.94065645841e-324) (f64.const 1.79769313486e+308))
+  (invoke "le"
+    (f64.const -0x0.0000000000001p-1022)
+    (f64.const 0x1.fffffffffffffp+1023)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f64.const 4.94065645841e-324) (f64.const -1.79769313486e+308))
+  (invoke "le"
+    (f64.const 0x0.0000000000001p-1022)
+    (f64.const -0x1.fffffffffffffp+1023)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const 4.94065645841e-324) (f64.const 1.79769313486e+308))
+  (invoke "le"
+    (f64.const 0x0.0000000000001p-1022)
+    (f64.const 0x1.fffffffffffffp+1023)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f64.const -4.94065645841e-324) (f64.const -inf))
+  (invoke "le" (f64.const -0x0.0000000000001p-1022) (f64.const -inf))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const -4.94065645841e-324) (f64.const inf))
+  (invoke "le" (f64.const -0x0.0000000000001p-1022) (f64.const inf))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f64.const 4.94065645841e-324) (f64.const -inf))
+  (invoke "le" (f64.const 0x0.0000000000001p-1022) (f64.const -inf))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const 4.94065645841e-324) (f64.const inf))
+  (invoke "le" (f64.const 0x0.0000000000001p-1022) (f64.const inf))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f64.const -4.94065645841e-324) (f64.const -nan:0x8000000000000))
+  (invoke "le"
+    (f64.const -0x0.0000000000001p-1022)
+    (f64.const -nan:0x8000000000000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const -4.94065645841e-324) (f64.const -nan:0x4000000000000))
+  (invoke "le"
+    (f64.const -0x0.0000000000001p-1022)
+    (f64.const -nan:0x4000000000000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const -4.94065645841e-324) (f64.const nan:0x8000000000000))
+  (invoke "le"
+    (f64.const -0x0.0000000000001p-1022)
+    (f64.const nan:0x8000000000000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const -4.94065645841e-324) (f64.const nan:0x4000000000000))
+  (invoke "le"
+    (f64.const -0x0.0000000000001p-1022)
+    (f64.const nan:0x4000000000000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const 4.94065645841e-324) (f64.const -nan:0x8000000000000))
+  (invoke "le"
+    (f64.const 0x0.0000000000001p-1022)
+    (f64.const -nan:0x8000000000000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const 4.94065645841e-324) (f64.const -nan:0x4000000000000))
+  (invoke "le"
+    (f64.const 0x0.0000000000001p-1022)
+    (f64.const -nan:0x4000000000000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const 4.94065645841e-324) (f64.const nan:0x8000000000000))
+  (invoke "le"
+    (f64.const 0x0.0000000000001p-1022)
+    (f64.const nan:0x8000000000000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const 4.94065645841e-324) (f64.const nan:0x4000000000000))
+  (invoke "le"
+    (f64.const 0x0.0000000000001p-1022)
+    (f64.const nan:0x4000000000000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const -2.22507385851e-308) (f64.const -0.))
+  (invoke "le" (f64.const -0x1p-1022) (f64.const -0x0p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f64.const -2.22507385851e-308) (f64.const 0.))
+  (invoke "le" (f64.const -0x1p-1022) (f64.const 0x0p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f64.const 2.22507385851e-308) (f64.const -0.))
+  (invoke "le" (f64.const 0x1p-1022) (f64.const -0x0p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const 2.22507385851e-308) (f64.const 0.))
+  (invoke "le" (f64.const 0x1p-1022) (f64.const 0x0p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const -2.22507385851e-308) (f64.const -4.94065645841e-324))
+  (invoke "le" (f64.const -0x1p-1022) (f64.const -0x0.0000000000001p-1022))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f64.const -2.22507385851e-308) (f64.const 4.94065645841e-324))
+  (invoke "le" (f64.const -0x1p-1022) (f64.const 0x0.0000000000001p-1022))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f64.const 2.22507385851e-308) (f64.const -4.94065645841e-324))
+  (invoke "le" (f64.const 0x1p-1022) (f64.const -0x0.0000000000001p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const 2.22507385851e-308) (f64.const 4.94065645841e-324))
+  (invoke "le" (f64.const 0x1p-1022) (f64.const 0x0.0000000000001p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const -2.22507385851e-308) (f64.const -2.22507385851e-308))
+  (invoke "le" (f64.const -0x1p-1022) (f64.const -0x1p-1022))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f64.const -2.22507385851e-308) (f64.const 2.22507385851e-308))
+  (invoke "le" (f64.const -0x1p-1022) (f64.const 0x1p-1022))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f64.const 2.22507385851e-308) (f64.const -2.22507385851e-308))
+  (invoke "le" (f64.const 0x1p-1022) (f64.const -0x1p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const 2.22507385851e-308) (f64.const 2.22507385851e-308))
+  (invoke "le" (f64.const 0x1p-1022) (f64.const 0x1p-1022))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f64.const -2.22507385851e-308) (f64.const -0.5))
+  (invoke "le" (f64.const -0x1p-1022) (f64.const -0x1p-1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const -2.22507385851e-308) (f64.const 0.5))
+  (invoke "le" (f64.const -0x1p-1022) (f64.const 0x1p-1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f64.const 2.22507385851e-308) (f64.const -0.5))
+  (invoke "le" (f64.const 0x1p-1022) (f64.const -0x1p-1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const 2.22507385851e-308) (f64.const 0.5))
+  (invoke "le" (f64.const 0x1p-1022) (f64.const 0x1p-1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f64.const -2.22507385851e-308) (f64.const -1.))
+  (invoke "le" (f64.const -0x1p-1022) (f64.const -0x1p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const -2.22507385851e-308) (f64.const 1.))
+  (invoke "le" (f64.const -0x1p-1022) (f64.const 0x1p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f64.const 2.22507385851e-308) (f64.const -1.))
+  (invoke "le" (f64.const 0x1p-1022) (f64.const -0x1p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const 2.22507385851e-308) (f64.const 1.))
+  (invoke "le" (f64.const 0x1p-1022) (f64.const 0x1p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f64.const -2.22507385851e-308) (f64.const -6.28318530718))
+  (invoke "le" (f64.const -0x1p-1022) (f64.const -0x1.921fb54442d18p+2))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const -2.22507385851e-308) (f64.const 6.28318530718))
+  (invoke "le" (f64.const -0x1p-1022) (f64.const 0x1.921fb54442d18p+2))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f64.const 2.22507385851e-308) (f64.const -6.28318530718))
+  (invoke "le" (f64.const 0x1p-1022) (f64.const -0x1.921fb54442d18p+2))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const 2.22507385851e-308) (f64.const 6.28318530718))
+  (invoke "le" (f64.const 0x1p-1022) (f64.const 0x1.921fb54442d18p+2))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f64.const -2.22507385851e-308) (f64.const -1.79769313486e+308))
+  (invoke "le" (f64.const -0x1p-1022) (f64.const -0x1.fffffffffffffp+1023))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const -2.22507385851e-308) (f64.const 1.79769313486e+308))
+  (invoke "le" (f64.const -0x1p-1022) (f64.const 0x1.fffffffffffffp+1023))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f64.const 2.22507385851e-308) (f64.const -1.79769313486e+308))
+  (invoke "le" (f64.const 0x1p-1022) (f64.const -0x1.fffffffffffffp+1023))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const 2.22507385851e-308) (f64.const 1.79769313486e+308))
+  (invoke "le" (f64.const 0x1p-1022) (f64.const 0x1.fffffffffffffp+1023))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f64.const -2.22507385851e-308) (f64.const -inf))
+  (invoke "le" (f64.const -0x1p-1022) (f64.const -inf))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const -2.22507385851e-308) (f64.const inf))
+  (invoke "le" (f64.const -0x1p-1022) (f64.const inf))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f64.const 2.22507385851e-308) (f64.const -inf))
+  (invoke "le" (f64.const 0x1p-1022) (f64.const -inf))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const 2.22507385851e-308) (f64.const inf))
+  (invoke "le" (f64.const 0x1p-1022) (f64.const inf))
   (i32.const 1)
+)
+(assert_return
+  (invoke "le" (f64.const -0x1p-1022) (f64.const -nan:0x8000000000000))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "le" (f64.const -0x1p-1022) (f64.const -nan:0x4000000000000))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "le" (f64.const -0x1p-1022) (f64.const nan:0x8000000000000))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "le" (f64.const -0x1p-1022) (f64.const nan:0x4000000000000))
+  (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const -2.22507385851e-308) (f64.const -nan:0x8000000000000))
+  (invoke "le" (f64.const 0x1p-1022) (f64.const -nan:0x8000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const -2.22507385851e-308) (f64.const -nan:0x4000000000000))
+  (invoke "le" (f64.const 0x1p-1022) (f64.const -nan:0x4000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const -2.22507385851e-308) (f64.const nan:0x8000000000000))
+  (invoke "le" (f64.const 0x1p-1022) (f64.const nan:0x8000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const -2.22507385851e-308) (f64.const nan:0x4000000000000))
+  (invoke "le" (f64.const 0x1p-1022) (f64.const nan:0x4000000000000))
   (i32.const 0)
+)
+(assert_return
+  (invoke "le" (f64.const -0x1p-1) (f64.const -0x0p+0))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "le" (f64.const -0x1p-1) (f64.const 0x0p+0))
+  (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f64.const 2.22507385851e-308) (f64.const -nan:0x8000000000000))
+  (invoke "le" (f64.const 0x1p-1) (f64.const -0x0p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const 2.22507385851e-308) (f64.const -nan:0x4000000000000))
+  (invoke "le" (f64.const 0x1p-1) (f64.const 0x0p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const 2.22507385851e-308) (f64.const nan:0x8000000000000))
+  (invoke "le" (f64.const -0x1p-1) (f64.const -0x0.0000000000001p-1022))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "le" (f64.const -0x1p-1) (f64.const 0x0.0000000000001p-1022))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "le" (f64.const 0x1p-1) (f64.const -0x0.0000000000001p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const 2.22507385851e-308) (f64.const nan:0x4000000000000))
+  (invoke "le" (f64.const 0x1p-1) (f64.const 0x0.0000000000001p-1022))
   (i32.const 0)
 )
-(assert_return (invoke "le" (f64.const -0.5) (f64.const -0.)) (i32.const 1))
-(assert_return (invoke "le" (f64.const -0.5) (f64.const 0.)) (i32.const 1))
-(assert_return (invoke "le" (f64.const 0.5) (f64.const -0.)) (i32.const 0))
-(assert_return (invoke "le" (f64.const 0.5) (f64.const 0.)) (i32.const 0))
 (assert_return
-  (invoke "le" (f64.const -0.5) (f64.const -4.94065645841e-324))
+  (invoke "le" (f64.const -0x1p-1) (f64.const -0x1p-1022))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f64.const -0.5) (f64.const 4.94065645841e-324))
+  (invoke "le" (f64.const -0x1p-1) (f64.const 0x1p-1022))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f64.const 0.5) (f64.const -4.94065645841e-324))
+  (invoke "le" (f64.const 0x1p-1) (f64.const -0x1p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const 0.5) (f64.const 4.94065645841e-324))
+  (invoke "le" (f64.const 0x1p-1) (f64.const 0x1p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const -0.5) (f64.const -2.22507385851e-308))
+  (invoke "le" (f64.const -0x1p-1) (f64.const -0x1p-1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f64.const -0.5) (f64.const 2.22507385851e-308))
+  (invoke "le" (f64.const -0x1p-1) (f64.const 0x1p-1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f64.const 0.5) (f64.const -2.22507385851e-308))
+  (invoke "le" (f64.const 0x1p-1) (f64.const -0x1p-1))
   (i32.const 0)
+)
+(assert_return
+  (invoke "le" (f64.const 0x1p-1) (f64.const 0x1p-1))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "le" (f64.const -0x1p-1) (f64.const -0x1p+0))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "le" (f64.const -0x1p-1) (f64.const 0x1p+0))
+  (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f64.const 0.5) (f64.const 2.22507385851e-308))
+  (invoke "le" (f64.const 0x1p-1) (f64.const -0x1p+0))
   (i32.const 0)
+)
+(assert_return
+  (invoke "le" (f64.const 0x1p-1) (f64.const 0x1p+0))
+  (i32.const 1)
 )
-(assert_return (invoke "le" (f64.const -0.5) (f64.const -0.5)) (i32.const 1))
-(assert_return (invoke "le" (f64.const -0.5) (f64.const 0.5)) (i32.const 1))
-(assert_return (invoke "le" (f64.const 0.5) (f64.const -0.5)) (i32.const 0))
-(assert_return (invoke "le" (f64.const 0.5) (f64.const 0.5)) (i32.const 1))
-(assert_return (invoke "le" (f64.const -0.5) (f64.const -1.)) (i32.const 0))
-(assert_return (invoke "le" (f64.const -0.5) (f64.const 1.)) (i32.const 1))
-(assert_return (invoke "le" (f64.const 0.5) (f64.const -1.)) (i32.const 0))
-(assert_return (invoke "le" (f64.const 0.5) (f64.const 1.)) (i32.const 1))
 (assert_return
-  (invoke "le" (f64.const -0.5) (f64.const -6.28318530718))
+  (invoke "le" (f64.const -0x1p-1) (f64.const -0x1.921fb54442d18p+2))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const -0.5) (f64.const 6.28318530718))
+  (invoke "le" (f64.const -0x1p-1) (f64.const 0x1.921fb54442d18p+2))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f64.const 0.5) (f64.const -6.28318530718))
+  (invoke "le" (f64.const 0x1p-1) (f64.const -0x1.921fb54442d18p+2))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const 0.5) (f64.const 6.28318530718))
+  (invoke "le" (f64.const 0x1p-1) (f64.const 0x1.921fb54442d18p+2))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f64.const -0.5) (f64.const -1.79769313486e+308))
+  (invoke "le" (f64.const -0x1p-1) (f64.const -0x1.fffffffffffffp+1023))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const -0.5) (f64.const 1.79769313486e+308))
+  (invoke "le" (f64.const -0x1p-1) (f64.const 0x1.fffffffffffffp+1023))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f64.const 0.5) (f64.const -1.79769313486e+308))
+  (invoke "le" (f64.const 0x1p-1) (f64.const -0x1.fffffffffffffp+1023))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const 0.5) (f64.const 1.79769313486e+308))
+  (invoke "le" (f64.const 0x1p-1) (f64.const 0x1.fffffffffffffp+1023))
   (i32.const 1)
+)
+(assert_return (invoke "le" (f64.const -0x1p-1) (f64.const -inf)) (i32.const 0))
+(assert_return (invoke "le" (f64.const -0x1p-1) (f64.const inf)) (i32.const 1))
+(assert_return (invoke "le" (f64.const 0x1p-1) (f64.const -inf)) (i32.const 0))
+(assert_return (invoke "le" (f64.const 0x1p-1) (f64.const inf)) (i32.const 1))
+(assert_return
+  (invoke "le" (f64.const -0x1p-1) (f64.const -nan:0x8000000000000))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "le" (f64.const -0x1p-1) (f64.const -nan:0x4000000000000))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "le" (f64.const -0x1p-1) (f64.const nan:0x8000000000000))
+  (i32.const 0)
 )
-(assert_return (invoke "le" (f64.const -0.5) (f64.const -inf)) (i32.const 0))
-(assert_return (invoke "le" (f64.const -0.5) (f64.const inf)) (i32.const 1))
-(assert_return (invoke "le" (f64.const 0.5) (f64.const -inf)) (i32.const 0))
-(assert_return (invoke "le" (f64.const 0.5) (f64.const inf)) (i32.const 1))
 (assert_return
-  (invoke "le" (f64.const -0.5) (f64.const -nan:0x8000000000000))
+  (invoke "le" (f64.const -0x1p-1) (f64.const nan:0x4000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const -0.5) (f64.const -nan:0x4000000000000))
+  (invoke "le" (f64.const 0x1p-1) (f64.const -nan:0x8000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const -0.5) (f64.const nan:0x8000000000000))
+  (invoke "le" (f64.const 0x1p-1) (f64.const -nan:0x4000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const -0.5) (f64.const nan:0x4000000000000))
+  (invoke "le" (f64.const 0x1p-1) (f64.const nan:0x8000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const 0.5) (f64.const -nan:0x8000000000000))
+  (invoke "le" (f64.const 0x1p-1) (f64.const nan:0x4000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const 0.5) (f64.const -nan:0x4000000000000))
+  (invoke "le" (f64.const -0x1p+0) (f64.const -0x0p+0))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "le" (f64.const -0x1p+0) (f64.const 0x0p+0))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "le" (f64.const 0x1p+0) (f64.const -0x0p+0))
   (i32.const 0)
+)
+(assert_return
+  (invoke "le" (f64.const 0x1p+0) (f64.const 0x0p+0))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "le" (f64.const -0x1p+0) (f64.const -0x0.0000000000001p-1022))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "le" (f64.const -0x1p+0) (f64.const 0x0.0000000000001p-1022))
+  (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f64.const 0.5) (f64.const nan:0x8000000000000))
+  (invoke "le" (f64.const 0x1p+0) (f64.const -0x0.0000000000001p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const 0.5) (f64.const nan:0x4000000000000))
+  (invoke "le" (f64.const 0x1p+0) (f64.const 0x0.0000000000001p-1022))
   (i32.const 0)
 )
-(assert_return (invoke "le" (f64.const -1.) (f64.const -0.)) (i32.const 1))
-(assert_return (invoke "le" (f64.const -1.) (f64.const 0.)) (i32.const 1))
-(assert_return (invoke "le" (f64.const 1.) (f64.const -0.)) (i32.const 0))
-(assert_return (invoke "le" (f64.const 1.) (f64.const 0.)) (i32.const 0))
 (assert_return
-  (invoke "le" (f64.const -1.) (f64.const -4.94065645841e-324))
+  (invoke "le" (f64.const -0x1p+0) (f64.const -0x1p-1022))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f64.const -1.) (f64.const 4.94065645841e-324))
+  (invoke "le" (f64.const -0x1p+0) (f64.const 0x1p-1022))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f64.const 1.) (f64.const -4.94065645841e-324))
+  (invoke "le" (f64.const 0x1p+0) (f64.const -0x1p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const 1.) (f64.const 4.94065645841e-324))
+  (invoke "le" (f64.const 0x1p+0) (f64.const 0x1p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const -1.) (f64.const -2.22507385851e-308))
+  (invoke "le" (f64.const -0x1p+0) (f64.const -0x1p-1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f64.const -1.) (f64.const 2.22507385851e-308))
+  (invoke "le" (f64.const -0x1p+0) (f64.const 0x1p-1))
   (i32.const 1)
+)
+(assert_return
+  (invoke "le" (f64.const 0x1p+0) (f64.const -0x1p-1))
+  (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const 1.) (f64.const -2.22507385851e-308))
+  (invoke "le" (f64.const 0x1p+0) (f64.const 0x1p-1))
   (i32.const 0)
+)
+(assert_return
+  (invoke "le" (f64.const -0x1p+0) (f64.const -0x1p+0))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "le" (f64.const -0x1p+0) (f64.const 0x1p+0))
+  (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f64.const 1.) (f64.const 2.22507385851e-308))
+  (invoke "le" (f64.const 0x1p+0) (f64.const -0x1p+0))
   (i32.const 0)
+)
+(assert_return
+  (invoke "le" (f64.const 0x1p+0) (f64.const 0x1p+0))
+  (i32.const 1)
 )
-(assert_return (invoke "le" (f64.const -1.) (f64.const -0.5)) (i32.const 1))
-(assert_return (invoke "le" (f64.const -1.) (f64.const 0.5)) (i32.const 1))
-(assert_return (invoke "le" (f64.const 1.) (f64.const -0.5)) (i32.const 0))
-(assert_return (invoke "le" (f64.const 1.) (f64.const 0.5)) (i32.const 0))
-(assert_return (invoke "le" (f64.const -1.) (f64.const -1.)) (i32.const 1))
-(assert_return (invoke "le" (f64.const -1.) (f64.const 1.)) (i32.const 1))
-(assert_return (invoke "le" (f64.const 1.) (f64.const -1.)) (i32.const 0))
-(assert_return (invoke "le" (f64.const 1.) (f64.const 1.)) (i32.const 1))
 (assert_return
-  (invoke "le" (f64.const -1.) (f64.const -6.28318530718))
+  (invoke "le" (f64.const -0x1p+0) (f64.const -0x1.921fb54442d18p+2))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const -1.) (f64.const 6.28318530718))
+  (invoke "le" (f64.const -0x1p+0) (f64.const 0x1.921fb54442d18p+2))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f64.const 1.) (f64.const -6.28318530718))
+  (invoke "le" (f64.const 0x1p+0) (f64.const -0x1.921fb54442d18p+2))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const 1.) (f64.const 6.28318530718))
+  (invoke "le" (f64.const 0x1p+0) (f64.const 0x1.921fb54442d18p+2))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f64.const -1.) (f64.const -1.79769313486e+308))
+  (invoke "le" (f64.const -0x1p+0) (f64.const -0x1.fffffffffffffp+1023))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const -1.) (f64.const 1.79769313486e+308))
+  (invoke "le" (f64.const -0x1p+0) (f64.const 0x1.fffffffffffffp+1023))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f64.const 1.) (f64.const -1.79769313486e+308))
+  (invoke "le" (f64.const 0x1p+0) (f64.const -0x1.fffffffffffffp+1023))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const 1.) (f64.const 1.79769313486e+308))
+  (invoke "le" (f64.const 0x1p+0) (f64.const 0x1.fffffffffffffp+1023))
   (i32.const 1)
 )
-(assert_return (invoke "le" (f64.const -1.) (f64.const -inf)) (i32.const 0))
-(assert_return (invoke "le" (f64.const -1.) (f64.const inf)) (i32.const 1))
-(assert_return (invoke "le" (f64.const 1.) (f64.const -inf)) (i32.const 0))
-(assert_return (invoke "le" (f64.const 1.) (f64.const inf)) (i32.const 1))
+(assert_return (invoke "le" (f64.const -0x1p+0) (f64.const -inf)) (i32.const 0))
+(assert_return (invoke "le" (f64.const -0x1p+0) (f64.const inf)) (i32.const 1))
+(assert_return (invoke "le" (f64.const 0x1p+0) (f64.const -inf)) (i32.const 0))
+(assert_return (invoke "le" (f64.const 0x1p+0) (f64.const inf)) (i32.const 1))
 (assert_return
-  (invoke "le" (f64.const -1.) (f64.const -nan:0x8000000000000))
+  (invoke "le" (f64.const -0x1p+0) (f64.const -nan:0x8000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const -1.) (f64.const -nan:0x4000000000000))
+  (invoke "le" (f64.const -0x1p+0) (f64.const -nan:0x4000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const -1.) (f64.const nan:0x8000000000000))
+  (invoke "le" (f64.const -0x1p+0) (f64.const nan:0x8000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const -1.) (f64.const nan:0x4000000000000))
+  (invoke "le" (f64.const -0x1p+0) (f64.const nan:0x4000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const 1.) (f64.const -nan:0x8000000000000))
+  (invoke "le" (f64.const 0x1p+0) (f64.const -nan:0x8000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const 1.) (f64.const -nan:0x4000000000000))
+  (invoke "le" (f64.const 0x1p+0) (f64.const -nan:0x4000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const 1.) (f64.const nan:0x8000000000000))
+  (invoke "le" (f64.const 0x1p+0) (f64.const nan:0x8000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const 1.) (f64.const nan:0x4000000000000))
+  (invoke "le" (f64.const 0x1p+0) (f64.const nan:0x4000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const -6.28318530718) (f64.const -0.))
+  (invoke "le" (f64.const -0x1.921fb54442d18p+2) (f64.const -0x0p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f64.const -6.28318530718) (f64.const 0.))
+  (invoke "le" (f64.const -0x1.921fb54442d18p+2) (f64.const 0x0p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f64.const 6.28318530718) (f64.const -0.))
+  (invoke "le" (f64.const 0x1.921fb54442d18p+2) (f64.const -0x0p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const 6.28318530718) (f64.const 0.))
+  (invoke "le" (f64.const 0x1.921fb54442d18p+2) (f64.const 0x0p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const -6.28318530718) (f64.const -4.94065645841e-324))
+  (invoke "le"
+    (f64.const -0x1.921fb54442d18p+2)
+    (f64.const -0x0.0000000000001p-1022)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f64.const -6.28318530718) (f64.const 4.94065645841e-324))
+  (invoke "le"
+    (f64.const -0x1.921fb54442d18p+2)
+    (f64.const 0x0.0000000000001p-1022)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f64.const 6.28318530718) (f64.const -4.94065645841e-324))
+  (invoke "le"
+    (f64.const 0x1.921fb54442d18p+2)
+    (f64.const -0x0.0000000000001p-1022)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const 6.28318530718) (f64.const 4.94065645841e-324))
+  (invoke "le"
+    (f64.const 0x1.921fb54442d18p+2)
+    (f64.const 0x0.0000000000001p-1022)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const -6.28318530718) (f64.const -2.22507385851e-308))
+  (invoke "le" (f64.const -0x1.921fb54442d18p+2) (f64.const -0x1p-1022))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f64.const -6.28318530718) (f64.const 2.22507385851e-308))
+  (invoke "le" (f64.const -0x1.921fb54442d18p+2) (f64.const 0x1p-1022))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f64.const 6.28318530718) (f64.const -2.22507385851e-308))
+  (invoke "le" (f64.const 0x1.921fb54442d18p+2) (f64.const -0x1p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const 6.28318530718) (f64.const 2.22507385851e-308))
+  (invoke "le" (f64.const 0x1.921fb54442d18p+2) (f64.const 0x1p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const -6.28318530718) (f64.const -0.5))
+  (invoke "le" (f64.const -0x1.921fb54442d18p+2) (f64.const -0x1p-1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f64.const -6.28318530718) (f64.const 0.5))
+  (invoke "le" (f64.const -0x1.921fb54442d18p+2) (f64.const 0x1p-1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f64.const 6.28318530718) (f64.const -0.5))
+  (invoke "le" (f64.const 0x1.921fb54442d18p+2) (f64.const -0x1p-1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const 6.28318530718) (f64.const 0.5))
+  (invoke "le" (f64.const 0x1.921fb54442d18p+2) (f64.const 0x1p-1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const -6.28318530718) (f64.const -1.))
+  (invoke "le" (f64.const -0x1.921fb54442d18p+2) (f64.const -0x1p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f64.const -6.28318530718) (f64.const 1.))
+  (invoke "le" (f64.const -0x1.921fb54442d18p+2) (f64.const 0x1p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f64.const 6.28318530718) (f64.const -1.))
+  (invoke "le" (f64.const 0x1.921fb54442d18p+2) (f64.const -0x1p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const 6.28318530718) (f64.const 1.))
+  (invoke "le" (f64.const 0x1.921fb54442d18p+2) (f64.const 0x1p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const -6.28318530718) (f64.const -6.28318530718))
+  (invoke "le"
+    (f64.const -0x1.921fb54442d18p+2)
+    (f64.const -0x1.921fb54442d18p+2)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f64.const -6.28318530718) (f64.const 6.28318530718))
+  (invoke "le"
+    (f64.const -0x1.921fb54442d18p+2)
+    (f64.const 0x1.921fb54442d18p+2)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f64.const 6.28318530718) (f64.const -6.28318530718))
+  (invoke "le"
+    (f64.const 0x1.921fb54442d18p+2)
+    (f64.const -0x1.921fb54442d18p+2)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const 6.28318530718) (f64.const 6.28318530718))
+  (invoke "le"
+    (f64.const 0x1.921fb54442d18p+2)
+    (f64.const 0x1.921fb54442d18p+2)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f64.const -6.28318530718) (f64.const -1.79769313486e+308))
+  (invoke "le"
+    (f64.const -0x1.921fb54442d18p+2)
+    (f64.const -0x1.fffffffffffffp+1023)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const -6.28318530718) (f64.const 1.79769313486e+308))
+  (invoke "le"
+    (f64.const -0x1.921fb54442d18p+2)
+    (f64.const 0x1.fffffffffffffp+1023)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f64.const 6.28318530718) (f64.const -1.79769313486e+308))
+  (invoke "le"
+    (f64.const 0x1.921fb54442d18p+2)
+    (f64.const -0x1.fffffffffffffp+1023)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const 6.28318530718) (f64.const 1.79769313486e+308))
+  (invoke "le"
+    (f64.const 0x1.921fb54442d18p+2)
+    (f64.const 0x1.fffffffffffffp+1023)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f64.const -6.28318530718) (f64.const -inf))
+  (invoke "le" (f64.const -0x1.921fb54442d18p+2) (f64.const -inf))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const -6.28318530718) (f64.const inf))
+  (invoke "le" (f64.const -0x1.921fb54442d18p+2) (f64.const inf))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f64.const 6.28318530718) (f64.const -inf))
+  (invoke "le" (f64.const 0x1.921fb54442d18p+2) (f64.const -inf))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const 6.28318530718) (f64.const inf))
+  (invoke "le" (f64.const 0x1.921fb54442d18p+2) (f64.const inf))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f64.const -6.28318530718) (f64.const -nan:0x8000000000000))
+  (invoke "le"
+    (f64.const -0x1.921fb54442d18p+2)
+    (f64.const -nan:0x8000000000000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const -6.28318530718) (f64.const -nan:0x4000000000000))
+  (invoke "le"
+    (f64.const -0x1.921fb54442d18p+2)
+    (f64.const -nan:0x4000000000000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const -6.28318530718) (f64.const nan:0x8000000000000))
+  (invoke "le"
+    (f64.const -0x1.921fb54442d18p+2)
+    (f64.const nan:0x8000000000000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const -6.28318530718) (f64.const nan:0x4000000000000))
+  (invoke "le"
+    (f64.const -0x1.921fb54442d18p+2)
+    (f64.const nan:0x4000000000000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const 6.28318530718) (f64.const -nan:0x8000000000000))
+  (invoke "le"
+    (f64.const 0x1.921fb54442d18p+2)
+    (f64.const -nan:0x8000000000000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const 6.28318530718) (f64.const -nan:0x4000000000000))
+  (invoke "le"
+    (f64.const 0x1.921fb54442d18p+2)
+    (f64.const -nan:0x4000000000000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const 6.28318530718) (f64.const nan:0x8000000000000))
+  (invoke "le" (f64.const 0x1.921fb54442d18p+2) (f64.const nan:0x8000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const 6.28318530718) (f64.const nan:0x4000000000000))
+  (invoke "le" (f64.const 0x1.921fb54442d18p+2) (f64.const nan:0x4000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const -1.79769313486e+308) (f64.const -0.))
+  (invoke "le" (f64.const -0x1.fffffffffffffp+1023) (f64.const -0x0p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f64.const -1.79769313486e+308) (f64.const 0.))
+  (invoke "le" (f64.const -0x1.fffffffffffffp+1023) (f64.const 0x0p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f64.const 1.79769313486e+308) (f64.const -0.))
+  (invoke "le" (f64.const 0x1.fffffffffffffp+1023) (f64.const -0x0p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const 1.79769313486e+308) (f64.const 0.))
+  (invoke "le" (f64.const 0x1.fffffffffffffp+1023) (f64.const 0x0p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const -1.79769313486e+308) (f64.const -4.94065645841e-324))
+  (invoke "le"
+    (f64.const -0x1.fffffffffffffp+1023)
+    (f64.const -0x0.0000000000001p-1022)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f64.const -1.79769313486e+308) (f64.const 4.94065645841e-324))
+  (invoke "le"
+    (f64.const -0x1.fffffffffffffp+1023)
+    (f64.const 0x0.0000000000001p-1022)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f64.const 1.79769313486e+308) (f64.const -4.94065645841e-324))
+  (invoke "le"
+    (f64.const 0x1.fffffffffffffp+1023)
+    (f64.const -0x0.0000000000001p-1022)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const 1.79769313486e+308) (f64.const 4.94065645841e-324))
+  (invoke "le"
+    (f64.const 0x1.fffffffffffffp+1023)
+    (f64.const 0x0.0000000000001p-1022)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const -1.79769313486e+308) (f64.const -2.22507385851e-308))
+  (invoke "le" (f64.const -0x1.fffffffffffffp+1023) (f64.const -0x1p-1022))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f64.const -1.79769313486e+308) (f64.const 2.22507385851e-308))
+  (invoke "le" (f64.const -0x1.fffffffffffffp+1023) (f64.const 0x1p-1022))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f64.const 1.79769313486e+308) (f64.const -2.22507385851e-308))
+  (invoke "le" (f64.const 0x1.fffffffffffffp+1023) (f64.const -0x1p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const 1.79769313486e+308) (f64.const 2.22507385851e-308))
+  (invoke "le" (f64.const 0x1.fffffffffffffp+1023) (f64.const 0x1p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const -1.79769313486e+308) (f64.const -0.5))
+  (invoke "le" (f64.const -0x1.fffffffffffffp+1023) (f64.const -0x1p-1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f64.const -1.79769313486e+308) (f64.const 0.5))
+  (invoke "le" (f64.const -0x1.fffffffffffffp+1023) (f64.const 0x1p-1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f64.const 1.79769313486e+308) (f64.const -0.5))
+  (invoke "le" (f64.const 0x1.fffffffffffffp+1023) (f64.const -0x1p-1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const 1.79769313486e+308) (f64.const 0.5))
+  (invoke "le" (f64.const 0x1.fffffffffffffp+1023) (f64.const 0x1p-1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const -1.79769313486e+308) (f64.const -1.))
+  (invoke "le" (f64.const -0x1.fffffffffffffp+1023) (f64.const -0x1p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f64.const -1.79769313486e+308) (f64.const 1.))
+  (invoke "le" (f64.const -0x1.fffffffffffffp+1023) (f64.const 0x1p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f64.const 1.79769313486e+308) (f64.const -1.))
+  (invoke "le" (f64.const 0x1.fffffffffffffp+1023) (f64.const -0x1p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const 1.79769313486e+308) (f64.const 1.))
+  (invoke "le" (f64.const 0x1.fffffffffffffp+1023) (f64.const 0x1p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const -1.79769313486e+308) (f64.const -6.28318530718))
+  (invoke "le"
+    (f64.const -0x1.fffffffffffffp+1023)
+    (f64.const -0x1.921fb54442d18p+2)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f64.const -1.79769313486e+308) (f64.const 6.28318530718))
+  (invoke "le"
+    (f64.const -0x1.fffffffffffffp+1023)
+    (f64.const 0x1.921fb54442d18p+2)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f64.const 1.79769313486e+308) (f64.const -6.28318530718))
+  (invoke "le"
+    (f64.const 0x1.fffffffffffffp+1023)
+    (f64.const -0x1.921fb54442d18p+2)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const 1.79769313486e+308) (f64.const 6.28318530718))
+  (invoke "le"
+    (f64.const 0x1.fffffffffffffp+1023)
+    (f64.const 0x1.921fb54442d18p+2)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const -1.79769313486e+308) (f64.const -1.79769313486e+308))
+  (invoke "le"
+    (f64.const -0x1.fffffffffffffp+1023)
+    (f64.const -0x1.fffffffffffffp+1023)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f64.const -1.79769313486e+308) (f64.const 1.79769313486e+308))
+  (invoke "le"
+    (f64.const -0x1.fffffffffffffp+1023)
+    (f64.const 0x1.fffffffffffffp+1023)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f64.const 1.79769313486e+308) (f64.const -1.79769313486e+308))
+  (invoke "le"
+    (f64.const 0x1.fffffffffffffp+1023)
+    (f64.const -0x1.fffffffffffffp+1023)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const 1.79769313486e+308) (f64.const 1.79769313486e+308))
+  (invoke "le"
+    (f64.const 0x1.fffffffffffffp+1023)
+    (f64.const 0x1.fffffffffffffp+1023)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f64.const -1.79769313486e+308) (f64.const -inf))
+  (invoke "le" (f64.const -0x1.fffffffffffffp+1023) (f64.const -inf))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const -1.79769313486e+308) (f64.const inf))
+  (invoke "le" (f64.const -0x1.fffffffffffffp+1023) (f64.const inf))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f64.const 1.79769313486e+308) (f64.const -inf))
+  (invoke "le" (f64.const 0x1.fffffffffffffp+1023) (f64.const -inf))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const 1.79769313486e+308) (f64.const inf))
+  (invoke "le" (f64.const 0x1.fffffffffffffp+1023) (f64.const inf))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f64.const -1.79769313486e+308) (f64.const -nan:0x8000000000000))
+  (invoke "le"
+    (f64.const -0x1.fffffffffffffp+1023)
+    (f64.const -nan:0x8000000000000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const -1.79769313486e+308) (f64.const -nan:0x4000000000000))
+  (invoke "le"
+    (f64.const -0x1.fffffffffffffp+1023)
+    (f64.const -nan:0x4000000000000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const -1.79769313486e+308) (f64.const nan:0x8000000000000))
+  (invoke "le"
+    (f64.const -0x1.fffffffffffffp+1023)
+    (f64.const nan:0x8000000000000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const -1.79769313486e+308) (f64.const nan:0x4000000000000))
+  (invoke "le"
+    (f64.const -0x1.fffffffffffffp+1023)
+    (f64.const nan:0x4000000000000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const 1.79769313486e+308) (f64.const -nan:0x8000000000000))
+  (invoke "le"
+    (f64.const 0x1.fffffffffffffp+1023)
+    (f64.const -nan:0x8000000000000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const 1.79769313486e+308) (f64.const -nan:0x4000000000000))
+  (invoke "le"
+    (f64.const 0x1.fffffffffffffp+1023)
+    (f64.const -nan:0x4000000000000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const 1.79769313486e+308) (f64.const nan:0x8000000000000))
+  (invoke "le"
+    (f64.const 0x1.fffffffffffffp+1023)
+    (f64.const nan:0x8000000000000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const 1.79769313486e+308) (f64.const nan:0x4000000000000))
+  (invoke "le"
+    (f64.const 0x1.fffffffffffffp+1023)
+    (f64.const nan:0x4000000000000)
+  )
   (i32.const 0)
 )
-(assert_return (invoke "le" (f64.const -inf) (f64.const -0.)) (i32.const 1))
-(assert_return (invoke "le" (f64.const -inf) (f64.const 0.)) (i32.const 1))
-(assert_return (invoke "le" (f64.const inf) (f64.const -0.)) (i32.const 0))
-(assert_return (invoke "le" (f64.const inf) (f64.const 0.)) (i32.const 0))
+(assert_return (invoke "le" (f64.const -inf) (f64.const -0x0p+0)) (i32.const 1))
+(assert_return (invoke "le" (f64.const -inf) (f64.const 0x0p+0)) (i32.const 1))
+(assert_return (invoke "le" (f64.const inf) (f64.const -0x0p+0)) (i32.const 0))
+(assert_return (invoke "le" (f64.const inf) (f64.const 0x0p+0)) (i32.const 0))
 (assert_return
-  (invoke "le" (f64.const -inf) (f64.const -4.94065645841e-324))
+  (invoke "le" (f64.const -inf) (f64.const -0x0.0000000000001p-1022))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f64.const -inf) (f64.const 4.94065645841e-324))
+  (invoke "le" (f64.const -inf) (f64.const 0x0.0000000000001p-1022))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f64.const inf) (f64.const -4.94065645841e-324))
+  (invoke "le" (f64.const inf) (f64.const -0x0.0000000000001p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const inf) (f64.const 4.94065645841e-324))
+  (invoke "le" (f64.const inf) (f64.const 0x0.0000000000001p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const -inf) (f64.const -2.22507385851e-308))
+  (invoke "le" (f64.const -inf) (f64.const -0x1p-1022))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f64.const -inf) (f64.const 2.22507385851e-308))
+  (invoke "le" (f64.const -inf) (f64.const 0x1p-1022))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f64.const inf) (f64.const -2.22507385851e-308))
+  (invoke "le" (f64.const inf) (f64.const -0x1p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const inf) (f64.const 2.22507385851e-308))
+  (invoke "le" (f64.const inf) (f64.const 0x1p-1022))
   (i32.const 0)
 )
-(assert_return (invoke "le" (f64.const -inf) (f64.const -0.5)) (i32.const 1))
-(assert_return (invoke "le" (f64.const -inf) (f64.const 0.5)) (i32.const 1))
-(assert_return (invoke "le" (f64.const inf) (f64.const -0.5)) (i32.const 0))
-(assert_return (invoke "le" (f64.const inf) (f64.const 0.5)) (i32.const 0))
-(assert_return (invoke "le" (f64.const -inf) (f64.const -1.)) (i32.const 1))
-(assert_return (invoke "le" (f64.const -inf) (f64.const 1.)) (i32.const 1))
-(assert_return (invoke "le" (f64.const inf) (f64.const -1.)) (i32.const 0))
-(assert_return (invoke "le" (f64.const inf) (f64.const 1.)) (i32.const 0))
+(assert_return (invoke "le" (f64.const -inf) (f64.const -0x1p-1)) (i32.const 1))
+(assert_return (invoke "le" (f64.const -inf) (f64.const 0x1p-1)) (i32.const 1))
+(assert_return (invoke "le" (f64.const inf) (f64.const -0x1p-1)) (i32.const 0))
+(assert_return (invoke "le" (f64.const inf) (f64.const 0x1p-1)) (i32.const 0))
+(assert_return (invoke "le" (f64.const -inf) (f64.const -0x1p+0)) (i32.const 1))
+(assert_return (invoke "le" (f64.const -inf) (f64.const 0x1p+0)) (i32.const 1))
+(assert_return (invoke "le" (f64.const inf) (f64.const -0x1p+0)) (i32.const 0))
+(assert_return (invoke "le" (f64.const inf) (f64.const 0x1p+0)) (i32.const 0))
 (assert_return
-  (invoke "le" (f64.const -inf) (f64.const -6.28318530718))
+  (invoke "le" (f64.const -inf) (f64.const -0x1.921fb54442d18p+2))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f64.const -inf) (f64.const 6.28318530718))
+  (invoke "le" (f64.const -inf) (f64.const 0x1.921fb54442d18p+2))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f64.const inf) (f64.const -6.28318530718))
+  (invoke "le" (f64.const inf) (f64.const -0x1.921fb54442d18p+2))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const inf) (f64.const 6.28318530718))
+  (invoke "le" (f64.const inf) (f64.const 0x1.921fb54442d18p+2))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const -inf) (f64.const -1.79769313486e+308))
+  (invoke "le" (f64.const -inf) (f64.const -0x1.fffffffffffffp+1023))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f64.const -inf) (f64.const 1.79769313486e+308))
+  (invoke "le" (f64.const -inf) (f64.const 0x1.fffffffffffffp+1023))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f64.const inf) (f64.const -1.79769313486e+308))
+  (invoke "le" (f64.const inf) (f64.const -0x1.fffffffffffffp+1023))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const inf) (f64.const 1.79769313486e+308))
+  (invoke "le" (f64.const inf) (f64.const 0x1.fffffffffffffp+1023))
   (i32.const 0)
 )
 (assert_return (invoke "le" (f64.const -inf) (f64.const -inf)) (i32.const 1))
@@ -5359,227 +6685,293 @@
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const -nan:0x8000000000000) (f64.const -0.))
+  (invoke "le" (f64.const -nan:0x8000000000000) (f64.const -0x0p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const -nan:0x4000000000000) (f64.const -0.))
+  (invoke "le" (f64.const -nan:0x4000000000000) (f64.const -0x0p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const -nan:0x8000000000000) (f64.const 0.))
+  (invoke "le" (f64.const -nan:0x8000000000000) (f64.const 0x0p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const -nan:0x4000000000000) (f64.const 0.))
+  (invoke "le" (f64.const -nan:0x4000000000000) (f64.const 0x0p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const nan:0x8000000000000) (f64.const -0.))
+  (invoke "le" (f64.const nan:0x8000000000000) (f64.const -0x0p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const nan:0x4000000000000) (f64.const -0.))
+  (invoke "le" (f64.const nan:0x4000000000000) (f64.const -0x0p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const nan:0x8000000000000) (f64.const 0.))
+  (invoke "le" (f64.const nan:0x8000000000000) (f64.const 0x0p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const nan:0x4000000000000) (f64.const 0.))
+  (invoke "le" (f64.const nan:0x4000000000000) (f64.const 0x0p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const -nan:0x8000000000000) (f64.const -4.94065645841e-324))
+  (invoke "le"
+    (f64.const -nan:0x8000000000000)
+    (f64.const -0x0.0000000000001p-1022)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const -nan:0x4000000000000) (f64.const -4.94065645841e-324))
+  (invoke "le"
+    (f64.const -nan:0x4000000000000)
+    (f64.const -0x0.0000000000001p-1022)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const -nan:0x8000000000000) (f64.const 4.94065645841e-324))
+  (invoke "le"
+    (f64.const -nan:0x8000000000000)
+    (f64.const 0x0.0000000000001p-1022)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const -nan:0x4000000000000) (f64.const 4.94065645841e-324))
+  (invoke "le"
+    (f64.const -nan:0x4000000000000)
+    (f64.const 0x0.0000000000001p-1022)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const nan:0x8000000000000) (f64.const -4.94065645841e-324))
+  (invoke "le"
+    (f64.const nan:0x8000000000000)
+    (f64.const -0x0.0000000000001p-1022)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const nan:0x4000000000000) (f64.const -4.94065645841e-324))
+  (invoke "le"
+    (f64.const nan:0x4000000000000)
+    (f64.const -0x0.0000000000001p-1022)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const nan:0x8000000000000) (f64.const 4.94065645841e-324))
+  (invoke "le"
+    (f64.const nan:0x8000000000000)
+    (f64.const 0x0.0000000000001p-1022)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const nan:0x4000000000000) (f64.const 4.94065645841e-324))
+  (invoke "le"
+    (f64.const nan:0x4000000000000)
+    (f64.const 0x0.0000000000001p-1022)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const -nan:0x8000000000000) (f64.const -2.22507385851e-308))
+  (invoke "le" (f64.const -nan:0x8000000000000) (f64.const -0x1p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const -nan:0x4000000000000) (f64.const -2.22507385851e-308))
+  (invoke "le" (f64.const -nan:0x4000000000000) (f64.const -0x1p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const -nan:0x8000000000000) (f64.const 2.22507385851e-308))
+  (invoke "le" (f64.const -nan:0x8000000000000) (f64.const 0x1p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const -nan:0x4000000000000) (f64.const 2.22507385851e-308))
+  (invoke "le" (f64.const -nan:0x4000000000000) (f64.const 0x1p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const nan:0x8000000000000) (f64.const -2.22507385851e-308))
+  (invoke "le" (f64.const nan:0x8000000000000) (f64.const -0x1p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const nan:0x4000000000000) (f64.const -2.22507385851e-308))
+  (invoke "le" (f64.const nan:0x4000000000000) (f64.const -0x1p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const nan:0x8000000000000) (f64.const 2.22507385851e-308))
+  (invoke "le" (f64.const nan:0x8000000000000) (f64.const 0x1p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const nan:0x4000000000000) (f64.const 2.22507385851e-308))
+  (invoke "le" (f64.const nan:0x4000000000000) (f64.const 0x1p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const -nan:0x8000000000000) (f64.const -0.5))
+  (invoke "le" (f64.const -nan:0x8000000000000) (f64.const -0x1p-1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const -nan:0x4000000000000) (f64.const -0.5))
+  (invoke "le" (f64.const -nan:0x4000000000000) (f64.const -0x1p-1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const -nan:0x8000000000000) (f64.const 0.5))
+  (invoke "le" (f64.const -nan:0x8000000000000) (f64.const 0x1p-1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const -nan:0x4000000000000) (f64.const 0.5))
+  (invoke "le" (f64.const -nan:0x4000000000000) (f64.const 0x1p-1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const nan:0x8000000000000) (f64.const -0.5))
+  (invoke "le" (f64.const nan:0x8000000000000) (f64.const -0x1p-1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const nan:0x4000000000000) (f64.const -0.5))
+  (invoke "le" (f64.const nan:0x4000000000000) (f64.const -0x1p-1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const nan:0x8000000000000) (f64.const 0.5))
+  (invoke "le" (f64.const nan:0x8000000000000) (f64.const 0x1p-1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const nan:0x4000000000000) (f64.const 0.5))
+  (invoke "le" (f64.const nan:0x4000000000000) (f64.const 0x1p-1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const -nan:0x8000000000000) (f64.const -1.))
+  (invoke "le" (f64.const -nan:0x8000000000000) (f64.const -0x1p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const -nan:0x4000000000000) (f64.const -1.))
+  (invoke "le" (f64.const -nan:0x4000000000000) (f64.const -0x1p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const -nan:0x8000000000000) (f64.const 1.))
+  (invoke "le" (f64.const -nan:0x8000000000000) (f64.const 0x1p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const -nan:0x4000000000000) (f64.const 1.))
+  (invoke "le" (f64.const -nan:0x4000000000000) (f64.const 0x1p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const nan:0x8000000000000) (f64.const -1.))
+  (invoke "le" (f64.const nan:0x8000000000000) (f64.const -0x1p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const nan:0x4000000000000) (f64.const -1.))
+  (invoke "le" (f64.const nan:0x4000000000000) (f64.const -0x1p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const nan:0x8000000000000) (f64.const 1.))
+  (invoke "le" (f64.const nan:0x8000000000000) (f64.const 0x1p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const nan:0x4000000000000) (f64.const 1.))
+  (invoke "le" (f64.const nan:0x4000000000000) (f64.const 0x1p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const -nan:0x8000000000000) (f64.const -6.28318530718))
+  (invoke "le"
+    (f64.const -nan:0x8000000000000)
+    (f64.const -0x1.921fb54442d18p+2)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const -nan:0x4000000000000) (f64.const -6.28318530718))
+  (invoke "le"
+    (f64.const -nan:0x4000000000000)
+    (f64.const -0x1.921fb54442d18p+2)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const -nan:0x8000000000000) (f64.const 6.28318530718))
+  (invoke "le"
+    (f64.const -nan:0x8000000000000)
+    (f64.const 0x1.921fb54442d18p+2)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const -nan:0x4000000000000) (f64.const 6.28318530718))
+  (invoke "le"
+    (f64.const -nan:0x4000000000000)
+    (f64.const 0x1.921fb54442d18p+2)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const nan:0x8000000000000) (f64.const -6.28318530718))
+  (invoke "le"
+    (f64.const nan:0x8000000000000)
+    (f64.const -0x1.921fb54442d18p+2)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const nan:0x4000000000000) (f64.const -6.28318530718))
+  (invoke "le"
+    (f64.const nan:0x4000000000000)
+    (f64.const -0x1.921fb54442d18p+2)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const nan:0x8000000000000) (f64.const 6.28318530718))
+  (invoke "le" (f64.const nan:0x8000000000000) (f64.const 0x1.921fb54442d18p+2))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const nan:0x4000000000000) (f64.const 6.28318530718))
+  (invoke "le" (f64.const nan:0x4000000000000) (f64.const 0x1.921fb54442d18p+2))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const -nan:0x8000000000000) (f64.const -1.79769313486e+308))
+  (invoke "le"
+    (f64.const -nan:0x8000000000000)
+    (f64.const -0x1.fffffffffffffp+1023)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const -nan:0x4000000000000) (f64.const -1.79769313486e+308))
+  (invoke "le"
+    (f64.const -nan:0x4000000000000)
+    (f64.const -0x1.fffffffffffffp+1023)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const -nan:0x8000000000000) (f64.const 1.79769313486e+308))
+  (invoke "le"
+    (f64.const -nan:0x8000000000000)
+    (f64.const 0x1.fffffffffffffp+1023)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const -nan:0x4000000000000) (f64.const 1.79769313486e+308))
+  (invoke "le"
+    (f64.const -nan:0x4000000000000)
+    (f64.const 0x1.fffffffffffffp+1023)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const nan:0x8000000000000) (f64.const -1.79769313486e+308))
+  (invoke "le"
+    (f64.const nan:0x8000000000000)
+    (f64.const -0x1.fffffffffffffp+1023)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const nan:0x4000000000000) (f64.const -1.79769313486e+308))
+  (invoke "le"
+    (f64.const nan:0x4000000000000)
+    (f64.const -0x1.fffffffffffffp+1023)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const nan:0x8000000000000) (f64.const 1.79769313486e+308))
+  (invoke "le"
+    (f64.const nan:0x8000000000000)
+    (f64.const 0x1.fffffffffffffp+1023)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f64.const nan:0x4000000000000) (f64.const 1.79769313486e+308))
+  (invoke "le"
+    (f64.const nan:0x4000000000000)
+    (f64.const 0x1.fffffffffffffp+1023)
+  )
   (i32.const 0)
 )
 (assert_return
@@ -5690,1056 +7082,1338 @@
   (invoke "le" (f64.const nan:0x4000000000000) (f64.const nan:0x4000000000000))
   (i32.const 0)
 )
-(assert_return (invoke "gt" (f64.const -0.) (f64.const -0.)) (i32.const 0))
-(assert_return (invoke "gt" (f64.const -0.) (f64.const 0.)) (i32.const 0))
-(assert_return (invoke "gt" (f64.const 0.) (f64.const -0.)) (i32.const 0))
-(assert_return (invoke "gt" (f64.const 0.) (f64.const 0.)) (i32.const 0))
 (assert_return
-  (invoke "gt" (f64.const -0.) (f64.const -4.94065645841e-324))
+  (invoke "gt" (f64.const -0x0p+0) (f64.const -0x0p+0))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "gt" (f64.const -0x0p+0) (f64.const 0x0p+0))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "gt" (f64.const 0x0p+0) (f64.const -0x0p+0))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "gt" (f64.const 0x0p+0) (f64.const 0x0p+0))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "gt" (f64.const -0x0p+0) (f64.const -0x0.0000000000001p-1022))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "gt" (f64.const -0x0p+0) (f64.const 0x0.0000000000001p-1022))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "gt" (f64.const 0x0p+0) (f64.const -0x0.0000000000001p-1022))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "gt" (f64.const 0x0p+0) (f64.const 0x0.0000000000001p-1022))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "gt" (f64.const -0x0p+0) (f64.const -0x1p-1022))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "gt" (f64.const -0x0p+0) (f64.const 0x1p-1022))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "gt" (f64.const 0x0p+0) (f64.const -0x1p-1022))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "gt" (f64.const 0x0p+0) (f64.const 0x1p-1022))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "gt" (f64.const -0x0p+0) (f64.const -0x1p-1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f64.const -0.) (f64.const 4.94065645841e-324))
+  (invoke "gt" (f64.const -0x0p+0) (f64.const 0x1p-1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const 0.) (f64.const -4.94065645841e-324))
+  (invoke "gt" (f64.const 0x0p+0) (f64.const -0x1p-1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f64.const 0.) (f64.const 4.94065645841e-324))
+  (invoke "gt" (f64.const 0x0p+0) (f64.const 0x1p-1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const -0.) (f64.const -2.22507385851e-308))
+  (invoke "gt" (f64.const -0x0p+0) (f64.const -0x1p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f64.const -0.) (f64.const 2.22507385851e-308))
+  (invoke "gt" (f64.const -0x0p+0) (f64.const 0x1p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const 0.) (f64.const -2.22507385851e-308))
+  (invoke "gt" (f64.const 0x0p+0) (f64.const -0x1p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f64.const 0.) (f64.const 2.22507385851e-308))
+  (invoke "gt" (f64.const 0x0p+0) (f64.const 0x1p+0))
   (i32.const 0)
 )
-(assert_return (invoke "gt" (f64.const -0.) (f64.const -0.5)) (i32.const 1))
-(assert_return (invoke "gt" (f64.const -0.) (f64.const 0.5)) (i32.const 0))
-(assert_return (invoke "gt" (f64.const 0.) (f64.const -0.5)) (i32.const 1))
-(assert_return (invoke "gt" (f64.const 0.) (f64.const 0.5)) (i32.const 0))
-(assert_return (invoke "gt" (f64.const -0.) (f64.const -1.)) (i32.const 1))
-(assert_return (invoke "gt" (f64.const -0.) (f64.const 1.)) (i32.const 0))
-(assert_return (invoke "gt" (f64.const 0.) (f64.const -1.)) (i32.const 1))
-(assert_return (invoke "gt" (f64.const 0.) (f64.const 1.)) (i32.const 0))
 (assert_return
-  (invoke "gt" (f64.const -0.) (f64.const -6.28318530718))
+  (invoke "gt" (f64.const -0x0p+0) (f64.const -0x1.921fb54442d18p+2))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f64.const -0.) (f64.const 6.28318530718))
+  (invoke "gt" (f64.const -0x0p+0) (f64.const 0x1.921fb54442d18p+2))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const 0.) (f64.const -6.28318530718))
+  (invoke "gt" (f64.const 0x0p+0) (f64.const -0x1.921fb54442d18p+2))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f64.const 0.) (f64.const 6.28318530718))
+  (invoke "gt" (f64.const 0x0p+0) (f64.const 0x1.921fb54442d18p+2))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const -0.) (f64.const -1.79769313486e+308))
+  (invoke "gt" (f64.const -0x0p+0) (f64.const -0x1.fffffffffffffp+1023))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f64.const -0.) (f64.const 1.79769313486e+308))
+  (invoke "gt" (f64.const -0x0p+0) (f64.const 0x1.fffffffffffffp+1023))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const 0.) (f64.const -1.79769313486e+308))
+  (invoke "gt" (f64.const 0x0p+0) (f64.const -0x1.fffffffffffffp+1023))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f64.const 0.) (f64.const 1.79769313486e+308))
+  (invoke "gt" (f64.const 0x0p+0) (f64.const 0x1.fffffffffffffp+1023))
   (i32.const 0)
 )
-(assert_return (invoke "gt" (f64.const -0.) (f64.const -inf)) (i32.const 1))
-(assert_return (invoke "gt" (f64.const -0.) (f64.const inf)) (i32.const 0))
-(assert_return (invoke "gt" (f64.const 0.) (f64.const -inf)) (i32.const 1))
-(assert_return (invoke "gt" (f64.const 0.) (f64.const inf)) (i32.const 0))
+(assert_return (invoke "gt" (f64.const -0x0p+0) (f64.const -inf)) (i32.const 1))
+(assert_return (invoke "gt" (f64.const -0x0p+0) (f64.const inf)) (i32.const 0))
+(assert_return (invoke "gt" (f64.const 0x0p+0) (f64.const -inf)) (i32.const 1))
+(assert_return (invoke "gt" (f64.const 0x0p+0) (f64.const inf)) (i32.const 0))
 (assert_return
-  (invoke "gt" (f64.const -0.) (f64.const -nan:0x8000000000000))
+  (invoke "gt" (f64.const -0x0p+0) (f64.const -nan:0x8000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const -0.) (f64.const -nan:0x4000000000000))
+  (invoke "gt" (f64.const -0x0p+0) (f64.const -nan:0x4000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const -0.) (f64.const nan:0x8000000000000))
+  (invoke "gt" (f64.const -0x0p+0) (f64.const nan:0x8000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const -0.) (f64.const nan:0x4000000000000))
+  (invoke "gt" (f64.const -0x0p+0) (f64.const nan:0x4000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const 0.) (f64.const -nan:0x8000000000000))
+  (invoke "gt" (f64.const 0x0p+0) (f64.const -nan:0x8000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const 0.) (f64.const -nan:0x4000000000000))
+  (invoke "gt" (f64.const 0x0p+0) (f64.const -nan:0x4000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const 0.) (f64.const nan:0x8000000000000))
+  (invoke "gt" (f64.const 0x0p+0) (f64.const nan:0x8000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const 0.) (f64.const nan:0x4000000000000))
+  (invoke "gt" (f64.const 0x0p+0) (f64.const nan:0x4000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const -4.94065645841e-324) (f64.const -0.))
+  (invoke "gt" (f64.const -0x0.0000000000001p-1022) (f64.const -0x0p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const -4.94065645841e-324) (f64.const 0.))
+  (invoke "gt" (f64.const -0x0.0000000000001p-1022) (f64.const 0x0p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const 4.94065645841e-324) (f64.const -0.))
+  (invoke "gt" (f64.const 0x0.0000000000001p-1022) (f64.const -0x0p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f64.const 4.94065645841e-324) (f64.const 0.))
+  (invoke "gt" (f64.const 0x0.0000000000001p-1022) (f64.const 0x0p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f64.const -4.94065645841e-324) (f64.const -4.94065645841e-324))
+  (invoke "gt"
+    (f64.const -0x0.0000000000001p-1022)
+    (f64.const -0x0.0000000000001p-1022)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const -4.94065645841e-324) (f64.const 4.94065645841e-324))
+  (invoke "gt"
+    (f64.const -0x0.0000000000001p-1022)
+    (f64.const 0x0.0000000000001p-1022)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const 4.94065645841e-324) (f64.const -4.94065645841e-324))
+  (invoke "gt"
+    (f64.const 0x0.0000000000001p-1022)
+    (f64.const -0x0.0000000000001p-1022)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f64.const 4.94065645841e-324) (f64.const 4.94065645841e-324))
+  (invoke "gt"
+    (f64.const 0x0.0000000000001p-1022)
+    (f64.const 0x0.0000000000001p-1022)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const -4.94065645841e-324) (f64.const -2.22507385851e-308))
+  (invoke "gt" (f64.const -0x0.0000000000001p-1022) (f64.const -0x1p-1022))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f64.const -4.94065645841e-324) (f64.const 2.22507385851e-308))
+  (invoke "gt" (f64.const -0x0.0000000000001p-1022) (f64.const 0x1p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const 4.94065645841e-324) (f64.const -2.22507385851e-308))
+  (invoke "gt" (f64.const 0x0.0000000000001p-1022) (f64.const -0x1p-1022))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f64.const 4.94065645841e-324) (f64.const 2.22507385851e-308))
+  (invoke "gt" (f64.const 0x0.0000000000001p-1022) (f64.const 0x1p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const -4.94065645841e-324) (f64.const -0.5))
+  (invoke "gt" (f64.const -0x0.0000000000001p-1022) (f64.const -0x1p-1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f64.const -4.94065645841e-324) (f64.const 0.5))
+  (invoke "gt" (f64.const -0x0.0000000000001p-1022) (f64.const 0x1p-1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const 4.94065645841e-324) (f64.const -0.5))
+  (invoke "gt" (f64.const 0x0.0000000000001p-1022) (f64.const -0x1p-1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f64.const 4.94065645841e-324) (f64.const 0.5))
+  (invoke "gt" (f64.const 0x0.0000000000001p-1022) (f64.const 0x1p-1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const -4.94065645841e-324) (f64.const -1.))
+  (invoke "gt" (f64.const -0x0.0000000000001p-1022) (f64.const -0x1p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f64.const -4.94065645841e-324) (f64.const 1.))
+  (invoke "gt" (f64.const -0x0.0000000000001p-1022) (f64.const 0x1p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const 4.94065645841e-324) (f64.const -1.))
+  (invoke "gt" (f64.const 0x0.0000000000001p-1022) (f64.const -0x1p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f64.const 4.94065645841e-324) (f64.const 1.))
+  (invoke "gt" (f64.const 0x0.0000000000001p-1022) (f64.const 0x1p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const -4.94065645841e-324) (f64.const -6.28318530718))
+  (invoke "gt"
+    (f64.const -0x0.0000000000001p-1022)
+    (f64.const -0x1.921fb54442d18p+2)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f64.const -4.94065645841e-324) (f64.const 6.28318530718))
+  (invoke "gt"
+    (f64.const -0x0.0000000000001p-1022)
+    (f64.const 0x1.921fb54442d18p+2)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const 4.94065645841e-324) (f64.const -6.28318530718))
+  (invoke "gt"
+    (f64.const 0x0.0000000000001p-1022)
+    (f64.const -0x1.921fb54442d18p+2)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f64.const 4.94065645841e-324) (f64.const 6.28318530718))
+  (invoke "gt"
+    (f64.const 0x0.0000000000001p-1022)
+    (f64.const 0x1.921fb54442d18p+2)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const -4.94065645841e-324) (f64.const -1.79769313486e+308))
+  (invoke "gt"
+    (f64.const -0x0.0000000000001p-1022)
+    (f64.const -0x1.fffffffffffffp+1023)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f64.const -4.94065645841e-324) (f64.const 1.79769313486e+308))
+  (invoke "gt"
+    (f64.const -0x0.0000000000001p-1022)
+    (f64.const 0x1.fffffffffffffp+1023)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const 4.94065645841e-324) (f64.const -1.79769313486e+308))
+  (invoke "gt"
+    (f64.const 0x0.0000000000001p-1022)
+    (f64.const -0x1.fffffffffffffp+1023)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f64.const 4.94065645841e-324) (f64.const 1.79769313486e+308))
+  (invoke "gt"
+    (f64.const 0x0.0000000000001p-1022)
+    (f64.const 0x1.fffffffffffffp+1023)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const -4.94065645841e-324) (f64.const -inf))
+  (invoke "gt" (f64.const -0x0.0000000000001p-1022) (f64.const -inf))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f64.const -4.94065645841e-324) (f64.const inf))
+  (invoke "gt" (f64.const -0x0.0000000000001p-1022) (f64.const inf))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const 4.94065645841e-324) (f64.const -inf))
+  (invoke "gt" (f64.const 0x0.0000000000001p-1022) (f64.const -inf))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f64.const 4.94065645841e-324) (f64.const inf))
+  (invoke "gt" (f64.const 0x0.0000000000001p-1022) (f64.const inf))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const -4.94065645841e-324) (f64.const -nan:0x8000000000000))
+  (invoke "gt"
+    (f64.const -0x0.0000000000001p-1022)
+    (f64.const -nan:0x8000000000000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const -4.94065645841e-324) (f64.const -nan:0x4000000000000))
+  (invoke "gt"
+    (f64.const -0x0.0000000000001p-1022)
+    (f64.const -nan:0x4000000000000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const -4.94065645841e-324) (f64.const nan:0x8000000000000))
+  (invoke "gt"
+    (f64.const -0x0.0000000000001p-1022)
+    (f64.const nan:0x8000000000000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const -4.94065645841e-324) (f64.const nan:0x4000000000000))
+  (invoke "gt"
+    (f64.const -0x0.0000000000001p-1022)
+    (f64.const nan:0x4000000000000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const 4.94065645841e-324) (f64.const -nan:0x8000000000000))
+  (invoke "gt"
+    (f64.const 0x0.0000000000001p-1022)
+    (f64.const -nan:0x8000000000000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const 4.94065645841e-324) (f64.const -nan:0x4000000000000))
+  (invoke "gt"
+    (f64.const 0x0.0000000000001p-1022)
+    (f64.const -nan:0x4000000000000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const 4.94065645841e-324) (f64.const nan:0x8000000000000))
+  (invoke "gt"
+    (f64.const 0x0.0000000000001p-1022)
+    (f64.const nan:0x8000000000000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const 4.94065645841e-324) (f64.const nan:0x4000000000000))
+  (invoke "gt"
+    (f64.const 0x0.0000000000001p-1022)
+    (f64.const nan:0x4000000000000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const -2.22507385851e-308) (f64.const -0.))
+  (invoke "gt" (f64.const -0x1p-1022) (f64.const -0x0p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const -2.22507385851e-308) (f64.const 0.))
+  (invoke "gt" (f64.const -0x1p-1022) (f64.const 0x0p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const 2.22507385851e-308) (f64.const -0.))
+  (invoke "gt" (f64.const 0x1p-1022) (f64.const -0x0p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f64.const 2.22507385851e-308) (f64.const 0.))
+  (invoke "gt" (f64.const 0x1p-1022) (f64.const 0x0p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f64.const -2.22507385851e-308) (f64.const -4.94065645841e-324))
+  (invoke "gt" (f64.const -0x1p-1022) (f64.const -0x0.0000000000001p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const -2.22507385851e-308) (f64.const 4.94065645841e-324))
+  (invoke "gt" (f64.const -0x1p-1022) (f64.const 0x0.0000000000001p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const 2.22507385851e-308) (f64.const -4.94065645841e-324))
+  (invoke "gt" (f64.const 0x1p-1022) (f64.const -0x0.0000000000001p-1022))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f64.const 2.22507385851e-308) (f64.const 4.94065645841e-324))
+  (invoke "gt" (f64.const 0x1p-1022) (f64.const 0x0.0000000000001p-1022))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f64.const -2.22507385851e-308) (f64.const -2.22507385851e-308))
+  (invoke "gt" (f64.const -0x1p-1022) (f64.const -0x1p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const -2.22507385851e-308) (f64.const 2.22507385851e-308))
+  (invoke "gt" (f64.const -0x1p-1022) (f64.const 0x1p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const 2.22507385851e-308) (f64.const -2.22507385851e-308))
+  (invoke "gt" (f64.const 0x1p-1022) (f64.const -0x1p-1022))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f64.const 2.22507385851e-308) (f64.const 2.22507385851e-308))
+  (invoke "gt" (f64.const 0x1p-1022) (f64.const 0x1p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const -2.22507385851e-308) (f64.const -0.5))
+  (invoke "gt" (f64.const -0x1p-1022) (f64.const -0x1p-1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f64.const -2.22507385851e-308) (f64.const 0.5))
+  (invoke "gt" (f64.const -0x1p-1022) (f64.const 0x1p-1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const 2.22507385851e-308) (f64.const -0.5))
+  (invoke "gt" (f64.const 0x1p-1022) (f64.const -0x1p-1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f64.const 2.22507385851e-308) (f64.const 0.5))
+  (invoke "gt" (f64.const 0x1p-1022) (f64.const 0x1p-1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const -2.22507385851e-308) (f64.const -1.))
+  (invoke "gt" (f64.const -0x1p-1022) (f64.const -0x1p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f64.const -2.22507385851e-308) (f64.const 1.))
+  (invoke "gt" (f64.const -0x1p-1022) (f64.const 0x1p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const 2.22507385851e-308) (f64.const -1.))
+  (invoke "gt" (f64.const 0x1p-1022) (f64.const -0x1p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f64.const 2.22507385851e-308) (f64.const 1.))
+  (invoke "gt" (f64.const 0x1p-1022) (f64.const 0x1p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const -2.22507385851e-308) (f64.const -6.28318530718))
+  (invoke "gt" (f64.const -0x1p-1022) (f64.const -0x1.921fb54442d18p+2))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f64.const -2.22507385851e-308) (f64.const 6.28318530718))
+  (invoke "gt" (f64.const -0x1p-1022) (f64.const 0x1.921fb54442d18p+2))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const 2.22507385851e-308) (f64.const -6.28318530718))
+  (invoke "gt" (f64.const 0x1p-1022) (f64.const -0x1.921fb54442d18p+2))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f64.const 2.22507385851e-308) (f64.const 6.28318530718))
+  (invoke "gt" (f64.const 0x1p-1022) (f64.const 0x1.921fb54442d18p+2))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const -2.22507385851e-308) (f64.const -1.79769313486e+308))
+  (invoke "gt" (f64.const -0x1p-1022) (f64.const -0x1.fffffffffffffp+1023))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f64.const -2.22507385851e-308) (f64.const 1.79769313486e+308))
+  (invoke "gt" (f64.const -0x1p-1022) (f64.const 0x1.fffffffffffffp+1023))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const 2.22507385851e-308) (f64.const -1.79769313486e+308))
+  (invoke "gt" (f64.const 0x1p-1022) (f64.const -0x1.fffffffffffffp+1023))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f64.const 2.22507385851e-308) (f64.const 1.79769313486e+308))
+  (invoke "gt" (f64.const 0x1p-1022) (f64.const 0x1.fffffffffffffp+1023))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const -2.22507385851e-308) (f64.const -inf))
+  (invoke "gt" (f64.const -0x1p-1022) (f64.const -inf))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f64.const -2.22507385851e-308) (f64.const inf))
+  (invoke "gt" (f64.const -0x1p-1022) (f64.const inf))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const 2.22507385851e-308) (f64.const -inf))
+  (invoke "gt" (f64.const 0x1p-1022) (f64.const -inf))
   (i32.const 1)
+)
+(assert_return
+  (invoke "gt" (f64.const 0x1p-1022) (f64.const inf))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "gt" (f64.const -0x1p-1022) (f64.const -nan:0x8000000000000))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "gt" (f64.const -0x1p-1022) (f64.const -nan:0x4000000000000))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "gt" (f64.const -0x1p-1022) (f64.const nan:0x8000000000000))
+  (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const 2.22507385851e-308) (f64.const inf))
+  (invoke "gt" (f64.const -0x1p-1022) (f64.const nan:0x4000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const -2.22507385851e-308) (f64.const -nan:0x8000000000000))
+  (invoke "gt" (f64.const 0x1p-1022) (f64.const -nan:0x8000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const -2.22507385851e-308) (f64.const -nan:0x4000000000000))
+  (invoke "gt" (f64.const 0x1p-1022) (f64.const -nan:0x4000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const -2.22507385851e-308) (f64.const nan:0x8000000000000))
+  (invoke "gt" (f64.const 0x1p-1022) (f64.const nan:0x8000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const -2.22507385851e-308) (f64.const nan:0x4000000000000))
+  (invoke "gt" (f64.const 0x1p-1022) (f64.const nan:0x4000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const 2.22507385851e-308) (f64.const -nan:0x8000000000000))
+  (invoke "gt" (f64.const -0x1p-1) (f64.const -0x0p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const 2.22507385851e-308) (f64.const -nan:0x4000000000000))
+  (invoke "gt" (f64.const -0x1p-1) (f64.const 0x0p+0))
   (i32.const 0)
+)
+(assert_return
+  (invoke "gt" (f64.const 0x1p-1) (f64.const -0x0p+0))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "gt" (f64.const 0x1p-1) (f64.const 0x0p+0))
+  (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f64.const 2.22507385851e-308) (f64.const nan:0x8000000000000))
+  (invoke "gt" (f64.const -0x1p-1) (f64.const -0x0.0000000000001p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const 2.22507385851e-308) (f64.const nan:0x4000000000000))
+  (invoke "gt" (f64.const -0x1p-1) (f64.const 0x0.0000000000001p-1022))
   (i32.const 0)
 )
-(assert_return (invoke "gt" (f64.const -0.5) (f64.const -0.)) (i32.const 0))
-(assert_return (invoke "gt" (f64.const -0.5) (f64.const 0.)) (i32.const 0))
-(assert_return (invoke "gt" (f64.const 0.5) (f64.const -0.)) (i32.const 1))
-(assert_return (invoke "gt" (f64.const 0.5) (f64.const 0.)) (i32.const 1))
 (assert_return
-  (invoke "gt" (f64.const -0.5) (f64.const -4.94065645841e-324))
+  (invoke "gt" (f64.const 0x1p-1) (f64.const -0x0.0000000000001p-1022))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "gt" (f64.const 0x1p-1) (f64.const 0x0.0000000000001p-1022))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "gt" (f64.const -0x1p-1) (f64.const -0x1p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const -0.5) (f64.const 4.94065645841e-324))
+  (invoke "gt" (f64.const -0x1p-1) (f64.const 0x1p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const 0.5) (f64.const -4.94065645841e-324))
+  (invoke "gt" (f64.const 0x1p-1) (f64.const -0x1p-1022))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f64.const 0.5) (f64.const 4.94065645841e-324))
+  (invoke "gt" (f64.const 0x1p-1) (f64.const 0x1p-1022))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f64.const -0.5) (f64.const -2.22507385851e-308))
+  (invoke "gt" (f64.const -0x1p-1) (f64.const -0x1p-1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const -0.5) (f64.const 2.22507385851e-308))
+  (invoke "gt" (f64.const -0x1p-1) (f64.const 0x1p-1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const 0.5) (f64.const -2.22507385851e-308))
+  (invoke "gt" (f64.const 0x1p-1) (f64.const -0x1p-1))
   (i32.const 1)
+)
+(assert_return
+  (invoke "gt" (f64.const 0x1p-1) (f64.const 0x1p-1))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "gt" (f64.const -0x1p-1) (f64.const -0x1p+0))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "gt" (f64.const -0x1p-1) (f64.const 0x1p+0))
+  (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const 0.5) (f64.const 2.22507385851e-308))
+  (invoke "gt" (f64.const 0x1p-1) (f64.const -0x1p+0))
   (i32.const 1)
+)
+(assert_return
+  (invoke "gt" (f64.const 0x1p-1) (f64.const 0x1p+0))
+  (i32.const 0)
 )
-(assert_return (invoke "gt" (f64.const -0.5) (f64.const -0.5)) (i32.const 0))
-(assert_return (invoke "gt" (f64.const -0.5) (f64.const 0.5)) (i32.const 0))
-(assert_return (invoke "gt" (f64.const 0.5) (f64.const -0.5)) (i32.const 1))
-(assert_return (invoke "gt" (f64.const 0.5) (f64.const 0.5)) (i32.const 0))
-(assert_return (invoke "gt" (f64.const -0.5) (f64.const -1.)) (i32.const 1))
-(assert_return (invoke "gt" (f64.const -0.5) (f64.const 1.)) (i32.const 0))
-(assert_return (invoke "gt" (f64.const 0.5) (f64.const -1.)) (i32.const 1))
-(assert_return (invoke "gt" (f64.const 0.5) (f64.const 1.)) (i32.const 0))
 (assert_return
-  (invoke "gt" (f64.const -0.5) (f64.const -6.28318530718))
+  (invoke "gt" (f64.const -0x1p-1) (f64.const -0x1.921fb54442d18p+2))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f64.const -0.5) (f64.const 6.28318530718))
+  (invoke "gt" (f64.const -0x1p-1) (f64.const 0x1.921fb54442d18p+2))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const 0.5) (f64.const -6.28318530718))
+  (invoke "gt" (f64.const 0x1p-1) (f64.const -0x1.921fb54442d18p+2))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f64.const 0.5) (f64.const 6.28318530718))
+  (invoke "gt" (f64.const 0x1p-1) (f64.const 0x1.921fb54442d18p+2))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const -0.5) (f64.const -1.79769313486e+308))
+  (invoke "gt" (f64.const -0x1p-1) (f64.const -0x1.fffffffffffffp+1023))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f64.const -0.5) (f64.const 1.79769313486e+308))
+  (invoke "gt" (f64.const -0x1p-1) (f64.const 0x1.fffffffffffffp+1023))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const 0.5) (f64.const -1.79769313486e+308))
+  (invoke "gt" (f64.const 0x1p-1) (f64.const -0x1.fffffffffffffp+1023))
   (i32.const 1)
+)
+(assert_return
+  (invoke "gt" (f64.const 0x1p-1) (f64.const 0x1.fffffffffffffp+1023))
+  (i32.const 0)
+)
+(assert_return (invoke "gt" (f64.const -0x1p-1) (f64.const -inf)) (i32.const 1))
+(assert_return (invoke "gt" (f64.const -0x1p-1) (f64.const inf)) (i32.const 0))
+(assert_return (invoke "gt" (f64.const 0x1p-1) (f64.const -inf)) (i32.const 1))
+(assert_return (invoke "gt" (f64.const 0x1p-1) (f64.const inf)) (i32.const 0))
+(assert_return
+  (invoke "gt" (f64.const -0x1p-1) (f64.const -nan:0x8000000000000))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "gt" (f64.const -0x1p-1) (f64.const -nan:0x4000000000000))
+  (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const 0.5) (f64.const 1.79769313486e+308))
+  (invoke "gt" (f64.const -0x1p-1) (f64.const nan:0x8000000000000))
   (i32.const 0)
 )
-(assert_return (invoke "gt" (f64.const -0.5) (f64.const -inf)) (i32.const 1))
-(assert_return (invoke "gt" (f64.const -0.5) (f64.const inf)) (i32.const 0))
-(assert_return (invoke "gt" (f64.const 0.5) (f64.const -inf)) (i32.const 1))
-(assert_return (invoke "gt" (f64.const 0.5) (f64.const inf)) (i32.const 0))
 (assert_return
-  (invoke "gt" (f64.const -0.5) (f64.const -nan:0x8000000000000))
+  (invoke "gt" (f64.const -0x1p-1) (f64.const nan:0x4000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const -0.5) (f64.const -nan:0x4000000000000))
+  (invoke "gt" (f64.const 0x1p-1) (f64.const -nan:0x8000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const -0.5) (f64.const nan:0x8000000000000))
+  (invoke "gt" (f64.const 0x1p-1) (f64.const -nan:0x4000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const -0.5) (f64.const nan:0x4000000000000))
+  (invoke "gt" (f64.const 0x1p-1) (f64.const nan:0x8000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const 0.5) (f64.const -nan:0x8000000000000))
+  (invoke "gt" (f64.const 0x1p-1) (f64.const nan:0x4000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const 0.5) (f64.const -nan:0x4000000000000))
+  (invoke "gt" (f64.const -0x1p+0) (f64.const -0x0p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const 0.5) (f64.const nan:0x8000000000000))
+  (invoke "gt" (f64.const -0x1p+0) (f64.const 0x0p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const 0.5) (f64.const nan:0x4000000000000))
+  (invoke "gt" (f64.const 0x1p+0) (f64.const -0x0p+0))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "gt" (f64.const 0x1p+0) (f64.const 0x0p+0))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "gt" (f64.const -0x1p+0) (f64.const -0x0.0000000000001p-1022))
   (i32.const 0)
+)
+(assert_return
+  (invoke "gt" (f64.const -0x1p+0) (f64.const 0x0.0000000000001p-1022))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "gt" (f64.const 0x1p+0) (f64.const -0x0.0000000000001p-1022))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "gt" (f64.const 0x1p+0) (f64.const 0x0.0000000000001p-1022))
+  (i32.const 1)
 )
-(assert_return (invoke "gt" (f64.const -1.) (f64.const -0.)) (i32.const 0))
-(assert_return (invoke "gt" (f64.const -1.) (f64.const 0.)) (i32.const 0))
-(assert_return (invoke "gt" (f64.const 1.) (f64.const -0.)) (i32.const 1))
-(assert_return (invoke "gt" (f64.const 1.) (f64.const 0.)) (i32.const 1))
 (assert_return
-  (invoke "gt" (f64.const -1.) (f64.const -4.94065645841e-324))
+  (invoke "gt" (f64.const -0x1p+0) (f64.const -0x1p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const -1.) (f64.const 4.94065645841e-324))
+  (invoke "gt" (f64.const -0x1p+0) (f64.const 0x1p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const 1.) (f64.const -4.94065645841e-324))
+  (invoke "gt" (f64.const 0x1p+0) (f64.const -0x1p-1022))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f64.const 1.) (f64.const 4.94065645841e-324))
+  (invoke "gt" (f64.const 0x1p+0) (f64.const 0x1p-1022))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f64.const -1.) (f64.const -2.22507385851e-308))
+  (invoke "gt" (f64.const -0x1p+0) (f64.const -0x1p-1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const -1.) (f64.const 2.22507385851e-308))
+  (invoke "gt" (f64.const -0x1p+0) (f64.const 0x1p-1))
   (i32.const 0)
+)
+(assert_return
+  (invoke "gt" (f64.const 0x1p+0) (f64.const -0x1p-1))
+  (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f64.const 1.) (f64.const -2.22507385851e-308))
+  (invoke "gt" (f64.const 0x1p+0) (f64.const 0x1p-1))
   (i32.const 1)
+)
+(assert_return
+  (invoke "gt" (f64.const -0x1p+0) (f64.const -0x1p+0))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "gt" (f64.const -0x1p+0) (f64.const 0x1p+0))
+  (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const 1.) (f64.const 2.22507385851e-308))
+  (invoke "gt" (f64.const 0x1p+0) (f64.const -0x1p+0))
   (i32.const 1)
+)
+(assert_return
+  (invoke "gt" (f64.const 0x1p+0) (f64.const 0x1p+0))
+  (i32.const 0)
 )
-(assert_return (invoke "gt" (f64.const -1.) (f64.const -0.5)) (i32.const 0))
-(assert_return (invoke "gt" (f64.const -1.) (f64.const 0.5)) (i32.const 0))
-(assert_return (invoke "gt" (f64.const 1.) (f64.const -0.5)) (i32.const 1))
-(assert_return (invoke "gt" (f64.const 1.) (f64.const 0.5)) (i32.const 1))
-(assert_return (invoke "gt" (f64.const -1.) (f64.const -1.)) (i32.const 0))
-(assert_return (invoke "gt" (f64.const -1.) (f64.const 1.)) (i32.const 0))
-(assert_return (invoke "gt" (f64.const 1.) (f64.const -1.)) (i32.const 1))
-(assert_return (invoke "gt" (f64.const 1.) (f64.const 1.)) (i32.const 0))
 (assert_return
-  (invoke "gt" (f64.const -1.) (f64.const -6.28318530718))
+  (invoke "gt" (f64.const -0x1p+0) (f64.const -0x1.921fb54442d18p+2))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f64.const -1.) (f64.const 6.28318530718))
+  (invoke "gt" (f64.const -0x1p+0) (f64.const 0x1.921fb54442d18p+2))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const 1.) (f64.const -6.28318530718))
+  (invoke "gt" (f64.const 0x1p+0) (f64.const -0x1.921fb54442d18p+2))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f64.const 1.) (f64.const 6.28318530718))
+  (invoke "gt" (f64.const 0x1p+0) (f64.const 0x1.921fb54442d18p+2))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const -1.) (f64.const -1.79769313486e+308))
+  (invoke "gt" (f64.const -0x1p+0) (f64.const -0x1.fffffffffffffp+1023))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f64.const -1.) (f64.const 1.79769313486e+308))
+  (invoke "gt" (f64.const -0x1p+0) (f64.const 0x1.fffffffffffffp+1023))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const 1.) (f64.const -1.79769313486e+308))
+  (invoke "gt" (f64.const 0x1p+0) (f64.const -0x1.fffffffffffffp+1023))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f64.const 1.) (f64.const 1.79769313486e+308))
+  (invoke "gt" (f64.const 0x1p+0) (f64.const 0x1.fffffffffffffp+1023))
   (i32.const 0)
 )
-(assert_return (invoke "gt" (f64.const -1.) (f64.const -inf)) (i32.const 1))
-(assert_return (invoke "gt" (f64.const -1.) (f64.const inf)) (i32.const 0))
-(assert_return (invoke "gt" (f64.const 1.) (f64.const -inf)) (i32.const 1))
-(assert_return (invoke "gt" (f64.const 1.) (f64.const inf)) (i32.const 0))
+(assert_return (invoke "gt" (f64.const -0x1p+0) (f64.const -inf)) (i32.const 1))
+(assert_return (invoke "gt" (f64.const -0x1p+0) (f64.const inf)) (i32.const 0))
+(assert_return (invoke "gt" (f64.const 0x1p+0) (f64.const -inf)) (i32.const 1))
+(assert_return (invoke "gt" (f64.const 0x1p+0) (f64.const inf)) (i32.const 0))
 (assert_return
-  (invoke "gt" (f64.const -1.) (f64.const -nan:0x8000000000000))
+  (invoke "gt" (f64.const -0x1p+0) (f64.const -nan:0x8000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const -1.) (f64.const -nan:0x4000000000000))
+  (invoke "gt" (f64.const -0x1p+0) (f64.const -nan:0x4000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const -1.) (f64.const nan:0x8000000000000))
+  (invoke "gt" (f64.const -0x1p+0) (f64.const nan:0x8000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const -1.) (f64.const nan:0x4000000000000))
+  (invoke "gt" (f64.const -0x1p+0) (f64.const nan:0x4000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const 1.) (f64.const -nan:0x8000000000000))
+  (invoke "gt" (f64.const 0x1p+0) (f64.const -nan:0x8000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const 1.) (f64.const -nan:0x4000000000000))
+  (invoke "gt" (f64.const 0x1p+0) (f64.const -nan:0x4000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const 1.) (f64.const nan:0x8000000000000))
+  (invoke "gt" (f64.const 0x1p+0) (f64.const nan:0x8000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const 1.) (f64.const nan:0x4000000000000))
+  (invoke "gt" (f64.const 0x1p+0) (f64.const nan:0x4000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const -6.28318530718) (f64.const -0.))
+  (invoke "gt" (f64.const -0x1.921fb54442d18p+2) (f64.const -0x0p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const -6.28318530718) (f64.const 0.))
+  (invoke "gt" (f64.const -0x1.921fb54442d18p+2) (f64.const 0x0p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const 6.28318530718) (f64.const -0.))
+  (invoke "gt" (f64.const 0x1.921fb54442d18p+2) (f64.const -0x0p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f64.const 6.28318530718) (f64.const 0.))
+  (invoke "gt" (f64.const 0x1.921fb54442d18p+2) (f64.const 0x0p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f64.const -6.28318530718) (f64.const -4.94065645841e-324))
+  (invoke "gt"
+    (f64.const -0x1.921fb54442d18p+2)
+    (f64.const -0x0.0000000000001p-1022)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const -6.28318530718) (f64.const 4.94065645841e-324))
+  (invoke "gt"
+    (f64.const -0x1.921fb54442d18p+2)
+    (f64.const 0x0.0000000000001p-1022)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const 6.28318530718) (f64.const -4.94065645841e-324))
+  (invoke "gt"
+    (f64.const 0x1.921fb54442d18p+2)
+    (f64.const -0x0.0000000000001p-1022)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f64.const 6.28318530718) (f64.const 4.94065645841e-324))
+  (invoke "gt"
+    (f64.const 0x1.921fb54442d18p+2)
+    (f64.const 0x0.0000000000001p-1022)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f64.const -6.28318530718) (f64.const -2.22507385851e-308))
+  (invoke "gt" (f64.const -0x1.921fb54442d18p+2) (f64.const -0x1p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const -6.28318530718) (f64.const 2.22507385851e-308))
+  (invoke "gt" (f64.const -0x1.921fb54442d18p+2) (f64.const 0x1p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const 6.28318530718) (f64.const -2.22507385851e-308))
+  (invoke "gt" (f64.const 0x1.921fb54442d18p+2) (f64.const -0x1p-1022))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f64.const 6.28318530718) (f64.const 2.22507385851e-308))
+  (invoke "gt" (f64.const 0x1.921fb54442d18p+2) (f64.const 0x1p-1022))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f64.const -6.28318530718) (f64.const -0.5))
+  (invoke "gt" (f64.const -0x1.921fb54442d18p+2) (f64.const -0x1p-1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const -6.28318530718) (f64.const 0.5))
+  (invoke "gt" (f64.const -0x1.921fb54442d18p+2) (f64.const 0x1p-1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const 6.28318530718) (f64.const -0.5))
+  (invoke "gt" (f64.const 0x1.921fb54442d18p+2) (f64.const -0x1p-1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f64.const 6.28318530718) (f64.const 0.5))
+  (invoke "gt" (f64.const 0x1.921fb54442d18p+2) (f64.const 0x1p-1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f64.const -6.28318530718) (f64.const -1.))
+  (invoke "gt" (f64.const -0x1.921fb54442d18p+2) (f64.const -0x1p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const -6.28318530718) (f64.const 1.))
+  (invoke "gt" (f64.const -0x1.921fb54442d18p+2) (f64.const 0x1p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const 6.28318530718) (f64.const -1.))
+  (invoke "gt" (f64.const 0x1.921fb54442d18p+2) (f64.const -0x1p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f64.const 6.28318530718) (f64.const 1.))
+  (invoke "gt" (f64.const 0x1.921fb54442d18p+2) (f64.const 0x1p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f64.const -6.28318530718) (f64.const -6.28318530718))
+  (invoke "gt"
+    (f64.const -0x1.921fb54442d18p+2)
+    (f64.const -0x1.921fb54442d18p+2)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const -6.28318530718) (f64.const 6.28318530718))
+  (invoke "gt"
+    (f64.const -0x1.921fb54442d18p+2)
+    (f64.const 0x1.921fb54442d18p+2)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const 6.28318530718) (f64.const -6.28318530718))
+  (invoke "gt"
+    (f64.const 0x1.921fb54442d18p+2)
+    (f64.const -0x1.921fb54442d18p+2)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f64.const 6.28318530718) (f64.const 6.28318530718))
+  (invoke "gt"
+    (f64.const 0x1.921fb54442d18p+2)
+    (f64.const 0x1.921fb54442d18p+2)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const -6.28318530718) (f64.const -1.79769313486e+308))
+  (invoke "gt"
+    (f64.const -0x1.921fb54442d18p+2)
+    (f64.const -0x1.fffffffffffffp+1023)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f64.const -6.28318530718) (f64.const 1.79769313486e+308))
+  (invoke "gt"
+    (f64.const -0x1.921fb54442d18p+2)
+    (f64.const 0x1.fffffffffffffp+1023)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const 6.28318530718) (f64.const -1.79769313486e+308))
+  (invoke "gt"
+    (f64.const 0x1.921fb54442d18p+2)
+    (f64.const -0x1.fffffffffffffp+1023)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f64.const 6.28318530718) (f64.const 1.79769313486e+308))
+  (invoke "gt"
+    (f64.const 0x1.921fb54442d18p+2)
+    (f64.const 0x1.fffffffffffffp+1023)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const -6.28318530718) (f64.const -inf))
+  (invoke "gt" (f64.const -0x1.921fb54442d18p+2) (f64.const -inf))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f64.const -6.28318530718) (f64.const inf))
+  (invoke "gt" (f64.const -0x1.921fb54442d18p+2) (f64.const inf))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const 6.28318530718) (f64.const -inf))
+  (invoke "gt" (f64.const 0x1.921fb54442d18p+2) (f64.const -inf))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f64.const 6.28318530718) (f64.const inf))
+  (invoke "gt" (f64.const 0x1.921fb54442d18p+2) (f64.const inf))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const -6.28318530718) (f64.const -nan:0x8000000000000))
+  (invoke "gt"
+    (f64.const -0x1.921fb54442d18p+2)
+    (f64.const -nan:0x8000000000000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const -6.28318530718) (f64.const -nan:0x4000000000000))
+  (invoke "gt"
+    (f64.const -0x1.921fb54442d18p+2)
+    (f64.const -nan:0x4000000000000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const -6.28318530718) (f64.const nan:0x8000000000000))
+  (invoke "gt"
+    (f64.const -0x1.921fb54442d18p+2)
+    (f64.const nan:0x8000000000000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const -6.28318530718) (f64.const nan:0x4000000000000))
+  (invoke "gt"
+    (f64.const -0x1.921fb54442d18p+2)
+    (f64.const nan:0x4000000000000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const 6.28318530718) (f64.const -nan:0x8000000000000))
+  (invoke "gt"
+    (f64.const 0x1.921fb54442d18p+2)
+    (f64.const -nan:0x8000000000000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const 6.28318530718) (f64.const -nan:0x4000000000000))
+  (invoke "gt"
+    (f64.const 0x1.921fb54442d18p+2)
+    (f64.const -nan:0x4000000000000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const 6.28318530718) (f64.const nan:0x8000000000000))
+  (invoke "gt" (f64.const 0x1.921fb54442d18p+2) (f64.const nan:0x8000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const 6.28318530718) (f64.const nan:0x4000000000000))
+  (invoke "gt" (f64.const 0x1.921fb54442d18p+2) (f64.const nan:0x4000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const -1.79769313486e+308) (f64.const -0.))
+  (invoke "gt" (f64.const -0x1.fffffffffffffp+1023) (f64.const -0x0p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const -1.79769313486e+308) (f64.const 0.))
+  (invoke "gt" (f64.const -0x1.fffffffffffffp+1023) (f64.const 0x0p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const 1.79769313486e+308) (f64.const -0.))
+  (invoke "gt" (f64.const 0x1.fffffffffffffp+1023) (f64.const -0x0p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f64.const 1.79769313486e+308) (f64.const 0.))
+  (invoke "gt" (f64.const 0x1.fffffffffffffp+1023) (f64.const 0x0p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f64.const -1.79769313486e+308) (f64.const -4.94065645841e-324))
+  (invoke "gt"
+    (f64.const -0x1.fffffffffffffp+1023)
+    (f64.const -0x0.0000000000001p-1022)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const -1.79769313486e+308) (f64.const 4.94065645841e-324))
+  (invoke "gt"
+    (f64.const -0x1.fffffffffffffp+1023)
+    (f64.const 0x0.0000000000001p-1022)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const 1.79769313486e+308) (f64.const -4.94065645841e-324))
+  (invoke "gt"
+    (f64.const 0x1.fffffffffffffp+1023)
+    (f64.const -0x0.0000000000001p-1022)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f64.const 1.79769313486e+308) (f64.const 4.94065645841e-324))
+  (invoke "gt"
+    (f64.const 0x1.fffffffffffffp+1023)
+    (f64.const 0x0.0000000000001p-1022)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f64.const -1.79769313486e+308) (f64.const -2.22507385851e-308))
+  (invoke "gt" (f64.const -0x1.fffffffffffffp+1023) (f64.const -0x1p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const -1.79769313486e+308) (f64.const 2.22507385851e-308))
+  (invoke "gt" (f64.const -0x1.fffffffffffffp+1023) (f64.const 0x1p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const 1.79769313486e+308) (f64.const -2.22507385851e-308))
+  (invoke "gt" (f64.const 0x1.fffffffffffffp+1023) (f64.const -0x1p-1022))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f64.const 1.79769313486e+308) (f64.const 2.22507385851e-308))
+  (invoke "gt" (f64.const 0x1.fffffffffffffp+1023) (f64.const 0x1p-1022))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f64.const -1.79769313486e+308) (f64.const -0.5))
+  (invoke "gt" (f64.const -0x1.fffffffffffffp+1023) (f64.const -0x1p-1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const -1.79769313486e+308) (f64.const 0.5))
+  (invoke "gt" (f64.const -0x1.fffffffffffffp+1023) (f64.const 0x1p-1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const 1.79769313486e+308) (f64.const -0.5))
+  (invoke "gt" (f64.const 0x1.fffffffffffffp+1023) (f64.const -0x1p-1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f64.const 1.79769313486e+308) (f64.const 0.5))
+  (invoke "gt" (f64.const 0x1.fffffffffffffp+1023) (f64.const 0x1p-1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f64.const -1.79769313486e+308) (f64.const -1.))
+  (invoke "gt" (f64.const -0x1.fffffffffffffp+1023) (f64.const -0x1p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const -1.79769313486e+308) (f64.const 1.))
+  (invoke "gt" (f64.const -0x1.fffffffffffffp+1023) (f64.const 0x1p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const 1.79769313486e+308) (f64.const -1.))
+  (invoke "gt" (f64.const 0x1.fffffffffffffp+1023) (f64.const -0x1p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f64.const 1.79769313486e+308) (f64.const 1.))
+  (invoke "gt" (f64.const 0x1.fffffffffffffp+1023) (f64.const 0x1p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f64.const -1.79769313486e+308) (f64.const -6.28318530718))
+  (invoke "gt"
+    (f64.const -0x1.fffffffffffffp+1023)
+    (f64.const -0x1.921fb54442d18p+2)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const -1.79769313486e+308) (f64.const 6.28318530718))
+  (invoke "gt"
+    (f64.const -0x1.fffffffffffffp+1023)
+    (f64.const 0x1.921fb54442d18p+2)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const 1.79769313486e+308) (f64.const -6.28318530718))
+  (invoke "gt"
+    (f64.const 0x1.fffffffffffffp+1023)
+    (f64.const -0x1.921fb54442d18p+2)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f64.const 1.79769313486e+308) (f64.const 6.28318530718))
+  (invoke "gt"
+    (f64.const 0x1.fffffffffffffp+1023)
+    (f64.const 0x1.921fb54442d18p+2)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f64.const -1.79769313486e+308) (f64.const -1.79769313486e+308))
+  (invoke "gt"
+    (f64.const -0x1.fffffffffffffp+1023)
+    (f64.const -0x1.fffffffffffffp+1023)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const -1.79769313486e+308) (f64.const 1.79769313486e+308))
+  (invoke "gt"
+    (f64.const -0x1.fffffffffffffp+1023)
+    (f64.const 0x1.fffffffffffffp+1023)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const 1.79769313486e+308) (f64.const -1.79769313486e+308))
+  (invoke "gt"
+    (f64.const 0x1.fffffffffffffp+1023)
+    (f64.const -0x1.fffffffffffffp+1023)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f64.const 1.79769313486e+308) (f64.const 1.79769313486e+308))
+  (invoke "gt"
+    (f64.const 0x1.fffffffffffffp+1023)
+    (f64.const 0x1.fffffffffffffp+1023)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const -1.79769313486e+308) (f64.const -inf))
+  (invoke "gt" (f64.const -0x1.fffffffffffffp+1023) (f64.const -inf))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f64.const -1.79769313486e+308) (f64.const inf))
+  (invoke "gt" (f64.const -0x1.fffffffffffffp+1023) (f64.const inf))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const 1.79769313486e+308) (f64.const -inf))
+  (invoke "gt" (f64.const 0x1.fffffffffffffp+1023) (f64.const -inf))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f64.const 1.79769313486e+308) (f64.const inf))
+  (invoke "gt" (f64.const 0x1.fffffffffffffp+1023) (f64.const inf))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const -1.79769313486e+308) (f64.const -nan:0x8000000000000))
+  (invoke "gt"
+    (f64.const -0x1.fffffffffffffp+1023)
+    (f64.const -nan:0x8000000000000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const -1.79769313486e+308) (f64.const -nan:0x4000000000000))
+  (invoke "gt"
+    (f64.const -0x1.fffffffffffffp+1023)
+    (f64.const -nan:0x4000000000000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const -1.79769313486e+308) (f64.const nan:0x8000000000000))
+  (invoke "gt"
+    (f64.const -0x1.fffffffffffffp+1023)
+    (f64.const nan:0x8000000000000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const -1.79769313486e+308) (f64.const nan:0x4000000000000))
+  (invoke "gt"
+    (f64.const -0x1.fffffffffffffp+1023)
+    (f64.const nan:0x4000000000000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const 1.79769313486e+308) (f64.const -nan:0x8000000000000))
+  (invoke "gt"
+    (f64.const 0x1.fffffffffffffp+1023)
+    (f64.const -nan:0x8000000000000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const 1.79769313486e+308) (f64.const -nan:0x4000000000000))
+  (invoke "gt"
+    (f64.const 0x1.fffffffffffffp+1023)
+    (f64.const -nan:0x4000000000000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const 1.79769313486e+308) (f64.const nan:0x8000000000000))
+  (invoke "gt"
+    (f64.const 0x1.fffffffffffffp+1023)
+    (f64.const nan:0x8000000000000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const 1.79769313486e+308) (f64.const nan:0x4000000000000))
+  (invoke "gt"
+    (f64.const 0x1.fffffffffffffp+1023)
+    (f64.const nan:0x4000000000000)
+  )
   (i32.const 0)
 )
-(assert_return (invoke "gt" (f64.const -inf) (f64.const -0.)) (i32.const 0))
-(assert_return (invoke "gt" (f64.const -inf) (f64.const 0.)) (i32.const 0))
-(assert_return (invoke "gt" (f64.const inf) (f64.const -0.)) (i32.const 1))
-(assert_return (invoke "gt" (f64.const inf) (f64.const 0.)) (i32.const 1))
+(assert_return (invoke "gt" (f64.const -inf) (f64.const -0x0p+0)) (i32.const 0))
+(assert_return (invoke "gt" (f64.const -inf) (f64.const 0x0p+0)) (i32.const 0))
+(assert_return (invoke "gt" (f64.const inf) (f64.const -0x0p+0)) (i32.const 1))
+(assert_return (invoke "gt" (f64.const inf) (f64.const 0x0p+0)) (i32.const 1))
 (assert_return
-  (invoke "gt" (f64.const -inf) (f64.const -4.94065645841e-324))
+  (invoke "gt" (f64.const -inf) (f64.const -0x0.0000000000001p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const -inf) (f64.const 4.94065645841e-324))
+  (invoke "gt" (f64.const -inf) (f64.const 0x0.0000000000001p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const inf) (f64.const -4.94065645841e-324))
+  (invoke "gt" (f64.const inf) (f64.const -0x0.0000000000001p-1022))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f64.const inf) (f64.const 4.94065645841e-324))
+  (invoke "gt" (f64.const inf) (f64.const 0x0.0000000000001p-1022))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f64.const -inf) (f64.const -2.22507385851e-308))
+  (invoke "gt" (f64.const -inf) (f64.const -0x1p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const -inf) (f64.const 2.22507385851e-308))
+  (invoke "gt" (f64.const -inf) (f64.const 0x1p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const inf) (f64.const -2.22507385851e-308))
+  (invoke "gt" (f64.const inf) (f64.const -0x1p-1022))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f64.const inf) (f64.const 2.22507385851e-308))
+  (invoke "gt" (f64.const inf) (f64.const 0x1p-1022))
   (i32.const 1)
 )
-(assert_return (invoke "gt" (f64.const -inf) (f64.const -0.5)) (i32.const 0))
-(assert_return (invoke "gt" (f64.const -inf) (f64.const 0.5)) (i32.const 0))
-(assert_return (invoke "gt" (f64.const inf) (f64.const -0.5)) (i32.const 1))
-(assert_return (invoke "gt" (f64.const inf) (f64.const 0.5)) (i32.const 1))
-(assert_return (invoke "gt" (f64.const -inf) (f64.const -1.)) (i32.const 0))
-(assert_return (invoke "gt" (f64.const -inf) (f64.const 1.)) (i32.const 0))
-(assert_return (invoke "gt" (f64.const inf) (f64.const -1.)) (i32.const 1))
-(assert_return (invoke "gt" (f64.const inf) (f64.const 1.)) (i32.const 1))
+(assert_return (invoke "gt" (f64.const -inf) (f64.const -0x1p-1)) (i32.const 0))
+(assert_return (invoke "gt" (f64.const -inf) (f64.const 0x1p-1)) (i32.const 0))
+(assert_return (invoke "gt" (f64.const inf) (f64.const -0x1p-1)) (i32.const 1))
+(assert_return (invoke "gt" (f64.const inf) (f64.const 0x1p-1)) (i32.const 1))
+(assert_return (invoke "gt" (f64.const -inf) (f64.const -0x1p+0)) (i32.const 0))
+(assert_return (invoke "gt" (f64.const -inf) (f64.const 0x1p+0)) (i32.const 0))
+(assert_return (invoke "gt" (f64.const inf) (f64.const -0x1p+0)) (i32.const 1))
+(assert_return (invoke "gt" (f64.const inf) (f64.const 0x1p+0)) (i32.const 1))
 (assert_return
-  (invoke "gt" (f64.const -inf) (f64.const -6.28318530718))
+  (invoke "gt" (f64.const -inf) (f64.const -0x1.921fb54442d18p+2))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const -inf) (f64.const 6.28318530718))
+  (invoke "gt" (f64.const -inf) (f64.const 0x1.921fb54442d18p+2))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const inf) (f64.const -6.28318530718))
+  (invoke "gt" (f64.const inf) (f64.const -0x1.921fb54442d18p+2))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f64.const inf) (f64.const 6.28318530718))
+  (invoke "gt" (f64.const inf) (f64.const 0x1.921fb54442d18p+2))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f64.const -inf) (f64.const -1.79769313486e+308))
+  (invoke "gt" (f64.const -inf) (f64.const -0x1.fffffffffffffp+1023))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const -inf) (f64.const 1.79769313486e+308))
+  (invoke "gt" (f64.const -inf) (f64.const 0x1.fffffffffffffp+1023))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const inf) (f64.const -1.79769313486e+308))
+  (invoke "gt" (f64.const inf) (f64.const -0x1.fffffffffffffp+1023))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f64.const inf) (f64.const 1.79769313486e+308))
+  (invoke "gt" (f64.const inf) (f64.const 0x1.fffffffffffffp+1023))
   (i32.const 1)
 )
 (assert_return (invoke "gt" (f64.const -inf) (f64.const -inf)) (i32.const 0))
@@ -6779,227 +8453,293 @@
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const -nan:0x8000000000000) (f64.const -0.))
+  (invoke "gt" (f64.const -nan:0x8000000000000) (f64.const -0x0p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const -nan:0x4000000000000) (f64.const -0.))
+  (invoke "gt" (f64.const -nan:0x4000000000000) (f64.const -0x0p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const -nan:0x8000000000000) (f64.const 0.))
+  (invoke "gt" (f64.const -nan:0x8000000000000) (f64.const 0x0p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const -nan:0x4000000000000) (f64.const 0.))
+  (invoke "gt" (f64.const -nan:0x4000000000000) (f64.const 0x0p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const nan:0x8000000000000) (f64.const -0.))
+  (invoke "gt" (f64.const nan:0x8000000000000) (f64.const -0x0p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const nan:0x4000000000000) (f64.const -0.))
+  (invoke "gt" (f64.const nan:0x4000000000000) (f64.const -0x0p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const nan:0x8000000000000) (f64.const 0.))
+  (invoke "gt" (f64.const nan:0x8000000000000) (f64.const 0x0p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const nan:0x4000000000000) (f64.const 0.))
+  (invoke "gt" (f64.const nan:0x4000000000000) (f64.const 0x0p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const -nan:0x8000000000000) (f64.const -4.94065645841e-324))
+  (invoke "gt"
+    (f64.const -nan:0x8000000000000)
+    (f64.const -0x0.0000000000001p-1022)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const -nan:0x4000000000000) (f64.const -4.94065645841e-324))
+  (invoke "gt"
+    (f64.const -nan:0x4000000000000)
+    (f64.const -0x0.0000000000001p-1022)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const -nan:0x8000000000000) (f64.const 4.94065645841e-324))
+  (invoke "gt"
+    (f64.const -nan:0x8000000000000)
+    (f64.const 0x0.0000000000001p-1022)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const -nan:0x4000000000000) (f64.const 4.94065645841e-324))
+  (invoke "gt"
+    (f64.const -nan:0x4000000000000)
+    (f64.const 0x0.0000000000001p-1022)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const nan:0x8000000000000) (f64.const -4.94065645841e-324))
+  (invoke "gt"
+    (f64.const nan:0x8000000000000)
+    (f64.const -0x0.0000000000001p-1022)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const nan:0x4000000000000) (f64.const -4.94065645841e-324))
+  (invoke "gt"
+    (f64.const nan:0x4000000000000)
+    (f64.const -0x0.0000000000001p-1022)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const nan:0x8000000000000) (f64.const 4.94065645841e-324))
+  (invoke "gt"
+    (f64.const nan:0x8000000000000)
+    (f64.const 0x0.0000000000001p-1022)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const nan:0x4000000000000) (f64.const 4.94065645841e-324))
+  (invoke "gt"
+    (f64.const nan:0x4000000000000)
+    (f64.const 0x0.0000000000001p-1022)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const -nan:0x8000000000000) (f64.const -2.22507385851e-308))
+  (invoke "gt" (f64.const -nan:0x8000000000000) (f64.const -0x1p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const -nan:0x4000000000000) (f64.const -2.22507385851e-308))
+  (invoke "gt" (f64.const -nan:0x4000000000000) (f64.const -0x1p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const -nan:0x8000000000000) (f64.const 2.22507385851e-308))
+  (invoke "gt" (f64.const -nan:0x8000000000000) (f64.const 0x1p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const -nan:0x4000000000000) (f64.const 2.22507385851e-308))
+  (invoke "gt" (f64.const -nan:0x4000000000000) (f64.const 0x1p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const nan:0x8000000000000) (f64.const -2.22507385851e-308))
+  (invoke "gt" (f64.const nan:0x8000000000000) (f64.const -0x1p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const nan:0x4000000000000) (f64.const -2.22507385851e-308))
+  (invoke "gt" (f64.const nan:0x4000000000000) (f64.const -0x1p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const nan:0x8000000000000) (f64.const 2.22507385851e-308))
+  (invoke "gt" (f64.const nan:0x8000000000000) (f64.const 0x1p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const nan:0x4000000000000) (f64.const 2.22507385851e-308))
+  (invoke "gt" (f64.const nan:0x4000000000000) (f64.const 0x1p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const -nan:0x8000000000000) (f64.const -0.5))
+  (invoke "gt" (f64.const -nan:0x8000000000000) (f64.const -0x1p-1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const -nan:0x4000000000000) (f64.const -0.5))
+  (invoke "gt" (f64.const -nan:0x4000000000000) (f64.const -0x1p-1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const -nan:0x8000000000000) (f64.const 0.5))
+  (invoke "gt" (f64.const -nan:0x8000000000000) (f64.const 0x1p-1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const -nan:0x4000000000000) (f64.const 0.5))
+  (invoke "gt" (f64.const -nan:0x4000000000000) (f64.const 0x1p-1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const nan:0x8000000000000) (f64.const -0.5))
+  (invoke "gt" (f64.const nan:0x8000000000000) (f64.const -0x1p-1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const nan:0x4000000000000) (f64.const -0.5))
+  (invoke "gt" (f64.const nan:0x4000000000000) (f64.const -0x1p-1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const nan:0x8000000000000) (f64.const 0.5))
+  (invoke "gt" (f64.const nan:0x8000000000000) (f64.const 0x1p-1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const nan:0x4000000000000) (f64.const 0.5))
+  (invoke "gt" (f64.const nan:0x4000000000000) (f64.const 0x1p-1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const -nan:0x8000000000000) (f64.const -1.))
+  (invoke "gt" (f64.const -nan:0x8000000000000) (f64.const -0x1p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const -nan:0x4000000000000) (f64.const -1.))
+  (invoke "gt" (f64.const -nan:0x4000000000000) (f64.const -0x1p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const -nan:0x8000000000000) (f64.const 1.))
+  (invoke "gt" (f64.const -nan:0x8000000000000) (f64.const 0x1p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const -nan:0x4000000000000) (f64.const 1.))
+  (invoke "gt" (f64.const -nan:0x4000000000000) (f64.const 0x1p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const nan:0x8000000000000) (f64.const -1.))
+  (invoke "gt" (f64.const nan:0x8000000000000) (f64.const -0x1p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const nan:0x4000000000000) (f64.const -1.))
+  (invoke "gt" (f64.const nan:0x4000000000000) (f64.const -0x1p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const nan:0x8000000000000) (f64.const 1.))
+  (invoke "gt" (f64.const nan:0x8000000000000) (f64.const 0x1p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const nan:0x4000000000000) (f64.const 1.))
+  (invoke "gt" (f64.const nan:0x4000000000000) (f64.const 0x1p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const -nan:0x8000000000000) (f64.const -6.28318530718))
+  (invoke "gt"
+    (f64.const -nan:0x8000000000000)
+    (f64.const -0x1.921fb54442d18p+2)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const -nan:0x4000000000000) (f64.const -6.28318530718))
+  (invoke "gt"
+    (f64.const -nan:0x4000000000000)
+    (f64.const -0x1.921fb54442d18p+2)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const -nan:0x8000000000000) (f64.const 6.28318530718))
+  (invoke "gt"
+    (f64.const -nan:0x8000000000000)
+    (f64.const 0x1.921fb54442d18p+2)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const -nan:0x4000000000000) (f64.const 6.28318530718))
+  (invoke "gt"
+    (f64.const -nan:0x4000000000000)
+    (f64.const 0x1.921fb54442d18p+2)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const nan:0x8000000000000) (f64.const -6.28318530718))
+  (invoke "gt"
+    (f64.const nan:0x8000000000000)
+    (f64.const -0x1.921fb54442d18p+2)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const nan:0x4000000000000) (f64.const -6.28318530718))
+  (invoke "gt"
+    (f64.const nan:0x4000000000000)
+    (f64.const -0x1.921fb54442d18p+2)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const nan:0x8000000000000) (f64.const 6.28318530718))
+  (invoke "gt" (f64.const nan:0x8000000000000) (f64.const 0x1.921fb54442d18p+2))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const nan:0x4000000000000) (f64.const 6.28318530718))
+  (invoke "gt" (f64.const nan:0x4000000000000) (f64.const 0x1.921fb54442d18p+2))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const -nan:0x8000000000000) (f64.const -1.79769313486e+308))
+  (invoke "gt"
+    (f64.const -nan:0x8000000000000)
+    (f64.const -0x1.fffffffffffffp+1023)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const -nan:0x4000000000000) (f64.const -1.79769313486e+308))
+  (invoke "gt"
+    (f64.const -nan:0x4000000000000)
+    (f64.const -0x1.fffffffffffffp+1023)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const -nan:0x8000000000000) (f64.const 1.79769313486e+308))
+  (invoke "gt"
+    (f64.const -nan:0x8000000000000)
+    (f64.const 0x1.fffffffffffffp+1023)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const -nan:0x4000000000000) (f64.const 1.79769313486e+308))
+  (invoke "gt"
+    (f64.const -nan:0x4000000000000)
+    (f64.const 0x1.fffffffffffffp+1023)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const nan:0x8000000000000) (f64.const -1.79769313486e+308))
+  (invoke "gt"
+    (f64.const nan:0x8000000000000)
+    (f64.const -0x1.fffffffffffffp+1023)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const nan:0x4000000000000) (f64.const -1.79769313486e+308))
+  (invoke "gt"
+    (f64.const nan:0x4000000000000)
+    (f64.const -0x1.fffffffffffffp+1023)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const nan:0x8000000000000) (f64.const 1.79769313486e+308))
+  (invoke "gt"
+    (f64.const nan:0x8000000000000)
+    (f64.const 0x1.fffffffffffffp+1023)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f64.const nan:0x4000000000000) (f64.const 1.79769313486e+308))
+  (invoke "gt"
+    (f64.const nan:0x4000000000000)
+    (f64.const 0x1.fffffffffffffp+1023)
+  )
   (i32.const 0)
 )
 (assert_return
@@ -7110,1056 +8850,1338 @@
   (invoke "gt" (f64.const nan:0x4000000000000) (f64.const nan:0x4000000000000))
   (i32.const 0)
 )
-(assert_return (invoke "ge" (f64.const -0.) (f64.const -0.)) (i32.const 1))
-(assert_return (invoke "ge" (f64.const -0.) (f64.const 0.)) (i32.const 1))
-(assert_return (invoke "ge" (f64.const 0.) (f64.const -0.)) (i32.const 1))
-(assert_return (invoke "ge" (f64.const 0.) (f64.const 0.)) (i32.const 1))
 (assert_return
-  (invoke "ge" (f64.const -0.) (f64.const -4.94065645841e-324))
+  (invoke "ge" (f64.const -0x0p+0) (f64.const -0x0p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f64.const -0.) (f64.const 4.94065645841e-324))
+  (invoke "ge" (f64.const -0x0p+0) (f64.const 0x0p+0))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ge" (f64.const 0x0p+0) (f64.const -0x0p+0))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ge" (f64.const 0x0p+0) (f64.const 0x0p+0))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ge" (f64.const -0x0p+0) (f64.const -0x0.0000000000001p-1022))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ge" (f64.const -0x0p+0) (f64.const 0x0.0000000000001p-1022))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "ge" (f64.const 0x0p+0) (f64.const -0x0.0000000000001p-1022))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ge" (f64.const 0x0p+0) (f64.const 0x0.0000000000001p-1022))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "ge" (f64.const -0x0p+0) (f64.const -0x1p-1022))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ge" (f64.const -0x0p+0) (f64.const 0x1p-1022))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "ge" (f64.const 0x0p+0) (f64.const -0x1p-1022))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ge" (f64.const 0x0p+0) (f64.const 0x1p-1022))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "ge" (f64.const -0x0p+0) (f64.const -0x1p-1))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ge" (f64.const -0x0p+0) (f64.const 0x1p-1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const 0.) (f64.const -4.94065645841e-324))
+  (invoke "ge" (f64.const 0x0p+0) (f64.const -0x1p-1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f64.const 0.) (f64.const 4.94065645841e-324))
+  (invoke "ge" (f64.const 0x0p+0) (f64.const 0x1p-1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const -0.) (f64.const -2.22507385851e-308))
+  (invoke "ge" (f64.const -0x0p+0) (f64.const -0x1p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f64.const -0.) (f64.const 2.22507385851e-308))
+  (invoke "ge" (f64.const -0x0p+0) (f64.const 0x1p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const 0.) (f64.const -2.22507385851e-308))
+  (invoke "ge" (f64.const 0x0p+0) (f64.const -0x1p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f64.const 0.) (f64.const 2.22507385851e-308))
+  (invoke "ge" (f64.const 0x0p+0) (f64.const 0x1p+0))
   (i32.const 0)
 )
-(assert_return (invoke "ge" (f64.const -0.) (f64.const -0.5)) (i32.const 1))
-(assert_return (invoke "ge" (f64.const -0.) (f64.const 0.5)) (i32.const 0))
-(assert_return (invoke "ge" (f64.const 0.) (f64.const -0.5)) (i32.const 1))
-(assert_return (invoke "ge" (f64.const 0.) (f64.const 0.5)) (i32.const 0))
-(assert_return (invoke "ge" (f64.const -0.) (f64.const -1.)) (i32.const 1))
-(assert_return (invoke "ge" (f64.const -0.) (f64.const 1.)) (i32.const 0))
-(assert_return (invoke "ge" (f64.const 0.) (f64.const -1.)) (i32.const 1))
-(assert_return (invoke "ge" (f64.const 0.) (f64.const 1.)) (i32.const 0))
 (assert_return
-  (invoke "ge" (f64.const -0.) (f64.const -6.28318530718))
+  (invoke "ge" (f64.const -0x0p+0) (f64.const -0x1.921fb54442d18p+2))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f64.const -0.) (f64.const 6.28318530718))
+  (invoke "ge" (f64.const -0x0p+0) (f64.const 0x1.921fb54442d18p+2))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const 0.) (f64.const -6.28318530718))
+  (invoke "ge" (f64.const 0x0p+0) (f64.const -0x1.921fb54442d18p+2))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f64.const 0.) (f64.const 6.28318530718))
+  (invoke "ge" (f64.const 0x0p+0) (f64.const 0x1.921fb54442d18p+2))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const -0.) (f64.const -1.79769313486e+308))
+  (invoke "ge" (f64.const -0x0p+0) (f64.const -0x1.fffffffffffffp+1023))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f64.const -0.) (f64.const 1.79769313486e+308))
+  (invoke "ge" (f64.const -0x0p+0) (f64.const 0x1.fffffffffffffp+1023))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const 0.) (f64.const -1.79769313486e+308))
+  (invoke "ge" (f64.const 0x0p+0) (f64.const -0x1.fffffffffffffp+1023))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f64.const 0.) (f64.const 1.79769313486e+308))
+  (invoke "ge" (f64.const 0x0p+0) (f64.const 0x1.fffffffffffffp+1023))
   (i32.const 0)
 )
-(assert_return (invoke "ge" (f64.const -0.) (f64.const -inf)) (i32.const 1))
-(assert_return (invoke "ge" (f64.const -0.) (f64.const inf)) (i32.const 0))
-(assert_return (invoke "ge" (f64.const 0.) (f64.const -inf)) (i32.const 1))
-(assert_return (invoke "ge" (f64.const 0.) (f64.const inf)) (i32.const 0))
+(assert_return (invoke "ge" (f64.const -0x0p+0) (f64.const -inf)) (i32.const 1))
+(assert_return (invoke "ge" (f64.const -0x0p+0) (f64.const inf)) (i32.const 0))
+(assert_return (invoke "ge" (f64.const 0x0p+0) (f64.const -inf)) (i32.const 1))
+(assert_return (invoke "ge" (f64.const 0x0p+0) (f64.const inf)) (i32.const 0))
 (assert_return
-  (invoke "ge" (f64.const -0.) (f64.const -nan:0x8000000000000))
+  (invoke "ge" (f64.const -0x0p+0) (f64.const -nan:0x8000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const -0.) (f64.const -nan:0x4000000000000))
+  (invoke "ge" (f64.const -0x0p+0) (f64.const -nan:0x4000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const -0.) (f64.const nan:0x8000000000000))
+  (invoke "ge" (f64.const -0x0p+0) (f64.const nan:0x8000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const -0.) (f64.const nan:0x4000000000000))
+  (invoke "ge" (f64.const -0x0p+0) (f64.const nan:0x4000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const 0.) (f64.const -nan:0x8000000000000))
+  (invoke "ge" (f64.const 0x0p+0) (f64.const -nan:0x8000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const 0.) (f64.const -nan:0x4000000000000))
+  (invoke "ge" (f64.const 0x0p+0) (f64.const -nan:0x4000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const 0.) (f64.const nan:0x8000000000000))
+  (invoke "ge" (f64.const 0x0p+0) (f64.const nan:0x8000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const 0.) (f64.const nan:0x4000000000000))
+  (invoke "ge" (f64.const 0x0p+0) (f64.const nan:0x4000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const -4.94065645841e-324) (f64.const -0.))
+  (invoke "ge" (f64.const -0x0.0000000000001p-1022) (f64.const -0x0p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const -4.94065645841e-324) (f64.const 0.))
+  (invoke "ge" (f64.const -0x0.0000000000001p-1022) (f64.const 0x0p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const 4.94065645841e-324) (f64.const -0.))
+  (invoke "ge" (f64.const 0x0.0000000000001p-1022) (f64.const -0x0p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f64.const 4.94065645841e-324) (f64.const 0.))
+  (invoke "ge" (f64.const 0x0.0000000000001p-1022) (f64.const 0x0p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f64.const -4.94065645841e-324) (f64.const -4.94065645841e-324))
+  (invoke "ge"
+    (f64.const -0x0.0000000000001p-1022)
+    (f64.const -0x0.0000000000001p-1022)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f64.const -4.94065645841e-324) (f64.const 4.94065645841e-324))
+  (invoke "ge"
+    (f64.const -0x0.0000000000001p-1022)
+    (f64.const 0x0.0000000000001p-1022)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const 4.94065645841e-324) (f64.const -4.94065645841e-324))
+  (invoke "ge"
+    (f64.const 0x0.0000000000001p-1022)
+    (f64.const -0x0.0000000000001p-1022)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f64.const 4.94065645841e-324) (f64.const 4.94065645841e-324))
+  (invoke "ge"
+    (f64.const 0x0.0000000000001p-1022)
+    (f64.const 0x0.0000000000001p-1022)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f64.const -4.94065645841e-324) (f64.const -2.22507385851e-308))
+  (invoke "ge" (f64.const -0x0.0000000000001p-1022) (f64.const -0x1p-1022))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f64.const -4.94065645841e-324) (f64.const 2.22507385851e-308))
+  (invoke "ge" (f64.const -0x0.0000000000001p-1022) (f64.const 0x1p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const 4.94065645841e-324) (f64.const -2.22507385851e-308))
+  (invoke "ge" (f64.const 0x0.0000000000001p-1022) (f64.const -0x1p-1022))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f64.const 4.94065645841e-324) (f64.const 2.22507385851e-308))
+  (invoke "ge" (f64.const 0x0.0000000000001p-1022) (f64.const 0x1p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const -4.94065645841e-324) (f64.const -0.5))
+  (invoke "ge" (f64.const -0x0.0000000000001p-1022) (f64.const -0x1p-1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f64.const -4.94065645841e-324) (f64.const 0.5))
+  (invoke "ge" (f64.const -0x0.0000000000001p-1022) (f64.const 0x1p-1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const 4.94065645841e-324) (f64.const -0.5))
+  (invoke "ge" (f64.const 0x0.0000000000001p-1022) (f64.const -0x1p-1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f64.const 4.94065645841e-324) (f64.const 0.5))
+  (invoke "ge" (f64.const 0x0.0000000000001p-1022) (f64.const 0x1p-1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const -4.94065645841e-324) (f64.const -1.))
+  (invoke "ge" (f64.const -0x0.0000000000001p-1022) (f64.const -0x1p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f64.const -4.94065645841e-324) (f64.const 1.))
+  (invoke "ge" (f64.const -0x0.0000000000001p-1022) (f64.const 0x1p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const 4.94065645841e-324) (f64.const -1.))
+  (invoke "ge" (f64.const 0x0.0000000000001p-1022) (f64.const -0x1p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f64.const 4.94065645841e-324) (f64.const 1.))
+  (invoke "ge" (f64.const 0x0.0000000000001p-1022) (f64.const 0x1p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const -4.94065645841e-324) (f64.const -6.28318530718))
+  (invoke "ge"
+    (f64.const -0x0.0000000000001p-1022)
+    (f64.const -0x1.921fb54442d18p+2)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f64.const -4.94065645841e-324) (f64.const 6.28318530718))
+  (invoke "ge"
+    (f64.const -0x0.0000000000001p-1022)
+    (f64.const 0x1.921fb54442d18p+2)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const 4.94065645841e-324) (f64.const -6.28318530718))
+  (invoke "ge"
+    (f64.const 0x0.0000000000001p-1022)
+    (f64.const -0x1.921fb54442d18p+2)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f64.const 4.94065645841e-324) (f64.const 6.28318530718))
+  (invoke "ge"
+    (f64.const 0x0.0000000000001p-1022)
+    (f64.const 0x1.921fb54442d18p+2)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const -4.94065645841e-324) (f64.const -1.79769313486e+308))
+  (invoke "ge"
+    (f64.const -0x0.0000000000001p-1022)
+    (f64.const -0x1.fffffffffffffp+1023)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f64.const -4.94065645841e-324) (f64.const 1.79769313486e+308))
+  (invoke "ge"
+    (f64.const -0x0.0000000000001p-1022)
+    (f64.const 0x1.fffffffffffffp+1023)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const 4.94065645841e-324) (f64.const -1.79769313486e+308))
+  (invoke "ge"
+    (f64.const 0x0.0000000000001p-1022)
+    (f64.const -0x1.fffffffffffffp+1023)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f64.const 4.94065645841e-324) (f64.const 1.79769313486e+308))
+  (invoke "ge"
+    (f64.const 0x0.0000000000001p-1022)
+    (f64.const 0x1.fffffffffffffp+1023)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const -4.94065645841e-324) (f64.const -inf))
+  (invoke "ge" (f64.const -0x0.0000000000001p-1022) (f64.const -inf))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f64.const -4.94065645841e-324) (f64.const inf))
+  (invoke "ge" (f64.const -0x0.0000000000001p-1022) (f64.const inf))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const 4.94065645841e-324) (f64.const -inf))
+  (invoke "ge" (f64.const 0x0.0000000000001p-1022) (f64.const -inf))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f64.const 4.94065645841e-324) (f64.const inf))
+  (invoke "ge" (f64.const 0x0.0000000000001p-1022) (f64.const inf))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const -4.94065645841e-324) (f64.const -nan:0x8000000000000))
+  (invoke "ge"
+    (f64.const -0x0.0000000000001p-1022)
+    (f64.const -nan:0x8000000000000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const -4.94065645841e-324) (f64.const -nan:0x4000000000000))
+  (invoke "ge"
+    (f64.const -0x0.0000000000001p-1022)
+    (f64.const -nan:0x4000000000000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const -4.94065645841e-324) (f64.const nan:0x8000000000000))
+  (invoke "ge"
+    (f64.const -0x0.0000000000001p-1022)
+    (f64.const nan:0x8000000000000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const -4.94065645841e-324) (f64.const nan:0x4000000000000))
+  (invoke "ge"
+    (f64.const -0x0.0000000000001p-1022)
+    (f64.const nan:0x4000000000000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const 4.94065645841e-324) (f64.const -nan:0x8000000000000))
+  (invoke "ge"
+    (f64.const 0x0.0000000000001p-1022)
+    (f64.const -nan:0x8000000000000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const 4.94065645841e-324) (f64.const -nan:0x4000000000000))
+  (invoke "ge"
+    (f64.const 0x0.0000000000001p-1022)
+    (f64.const -nan:0x4000000000000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const 4.94065645841e-324) (f64.const nan:0x8000000000000))
+  (invoke "ge"
+    (f64.const 0x0.0000000000001p-1022)
+    (f64.const nan:0x8000000000000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const 4.94065645841e-324) (f64.const nan:0x4000000000000))
+  (invoke "ge"
+    (f64.const 0x0.0000000000001p-1022)
+    (f64.const nan:0x4000000000000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const -2.22507385851e-308) (f64.const -0.))
+  (invoke "ge" (f64.const -0x1p-1022) (f64.const -0x0p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const -2.22507385851e-308) (f64.const 0.))
+  (invoke "ge" (f64.const -0x1p-1022) (f64.const 0x0p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const 2.22507385851e-308) (f64.const -0.))
+  (invoke "ge" (f64.const 0x1p-1022) (f64.const -0x0p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f64.const 2.22507385851e-308) (f64.const 0.))
+  (invoke "ge" (f64.const 0x1p-1022) (f64.const 0x0p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f64.const -2.22507385851e-308) (f64.const -4.94065645841e-324))
+  (invoke "ge" (f64.const -0x1p-1022) (f64.const -0x0.0000000000001p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const -2.22507385851e-308) (f64.const 4.94065645841e-324))
+  (invoke "ge" (f64.const -0x1p-1022) (f64.const 0x0.0000000000001p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const 2.22507385851e-308) (f64.const -4.94065645841e-324))
+  (invoke "ge" (f64.const 0x1p-1022) (f64.const -0x0.0000000000001p-1022))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f64.const 2.22507385851e-308) (f64.const 4.94065645841e-324))
+  (invoke "ge" (f64.const 0x1p-1022) (f64.const 0x0.0000000000001p-1022))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f64.const -2.22507385851e-308) (f64.const -2.22507385851e-308))
+  (invoke "ge" (f64.const -0x1p-1022) (f64.const -0x1p-1022))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f64.const -2.22507385851e-308) (f64.const 2.22507385851e-308))
+  (invoke "ge" (f64.const -0x1p-1022) (f64.const 0x1p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const 2.22507385851e-308) (f64.const -2.22507385851e-308))
+  (invoke "ge" (f64.const 0x1p-1022) (f64.const -0x1p-1022))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f64.const 2.22507385851e-308) (f64.const 2.22507385851e-308))
+  (invoke "ge" (f64.const 0x1p-1022) (f64.const 0x1p-1022))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f64.const -2.22507385851e-308) (f64.const -0.5))
+  (invoke "ge" (f64.const -0x1p-1022) (f64.const -0x1p-1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f64.const -2.22507385851e-308) (f64.const 0.5))
+  (invoke "ge" (f64.const -0x1p-1022) (f64.const 0x1p-1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const 2.22507385851e-308) (f64.const -0.5))
+  (invoke "ge" (f64.const 0x1p-1022) (f64.const -0x1p-1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f64.const 2.22507385851e-308) (f64.const 0.5))
+  (invoke "ge" (f64.const 0x1p-1022) (f64.const 0x1p-1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const -2.22507385851e-308) (f64.const -1.))
+  (invoke "ge" (f64.const -0x1p-1022) (f64.const -0x1p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f64.const -2.22507385851e-308) (f64.const 1.))
+  (invoke "ge" (f64.const -0x1p-1022) (f64.const 0x1p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const 2.22507385851e-308) (f64.const -1.))
+  (invoke "ge" (f64.const 0x1p-1022) (f64.const -0x1p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f64.const 2.22507385851e-308) (f64.const 1.))
+  (invoke "ge" (f64.const 0x1p-1022) (f64.const 0x1p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const -2.22507385851e-308) (f64.const -6.28318530718))
+  (invoke "ge" (f64.const -0x1p-1022) (f64.const -0x1.921fb54442d18p+2))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f64.const -2.22507385851e-308) (f64.const 6.28318530718))
+  (invoke "ge" (f64.const -0x1p-1022) (f64.const 0x1.921fb54442d18p+2))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const 2.22507385851e-308) (f64.const -6.28318530718))
+  (invoke "ge" (f64.const 0x1p-1022) (f64.const -0x1.921fb54442d18p+2))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f64.const 2.22507385851e-308) (f64.const 6.28318530718))
+  (invoke "ge" (f64.const 0x1p-1022) (f64.const 0x1.921fb54442d18p+2))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const -2.22507385851e-308) (f64.const -1.79769313486e+308))
+  (invoke "ge" (f64.const -0x1p-1022) (f64.const -0x1.fffffffffffffp+1023))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f64.const -2.22507385851e-308) (f64.const 1.79769313486e+308))
+  (invoke "ge" (f64.const -0x1p-1022) (f64.const 0x1.fffffffffffffp+1023))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const 2.22507385851e-308) (f64.const -1.79769313486e+308))
+  (invoke "ge" (f64.const 0x1p-1022) (f64.const -0x1.fffffffffffffp+1023))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f64.const 2.22507385851e-308) (f64.const 1.79769313486e+308))
+  (invoke "ge" (f64.const 0x1p-1022) (f64.const 0x1.fffffffffffffp+1023))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const -2.22507385851e-308) (f64.const -inf))
+  (invoke "ge" (f64.const -0x1p-1022) (f64.const -inf))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f64.const -2.22507385851e-308) (f64.const inf))
+  (invoke "ge" (f64.const -0x1p-1022) (f64.const inf))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const 2.22507385851e-308) (f64.const -inf))
+  (invoke "ge" (f64.const 0x1p-1022) (f64.const -inf))
   (i32.const 1)
+)
+(assert_return
+  (invoke "ge" (f64.const 0x1p-1022) (f64.const inf))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "ge" (f64.const -0x1p-1022) (f64.const -nan:0x8000000000000))
+  (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const 2.22507385851e-308) (f64.const inf))
+  (invoke "ge" (f64.const -0x1p-1022) (f64.const -nan:0x4000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const -2.22507385851e-308) (f64.const -nan:0x8000000000000))
+  (invoke "ge" (f64.const -0x1p-1022) (f64.const nan:0x8000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const -2.22507385851e-308) (f64.const -nan:0x4000000000000))
+  (invoke "ge" (f64.const -0x1p-1022) (f64.const nan:0x4000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const -2.22507385851e-308) (f64.const nan:0x8000000000000))
+  (invoke "ge" (f64.const 0x1p-1022) (f64.const -nan:0x8000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const -2.22507385851e-308) (f64.const nan:0x4000000000000))
+  (invoke "ge" (f64.const 0x1p-1022) (f64.const -nan:0x4000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const 2.22507385851e-308) (f64.const -nan:0x8000000000000))
+  (invoke "ge" (f64.const 0x1p-1022) (f64.const nan:0x8000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const 2.22507385851e-308) (f64.const -nan:0x4000000000000))
+  (invoke "ge" (f64.const 0x1p-1022) (f64.const nan:0x4000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const 2.22507385851e-308) (f64.const nan:0x8000000000000))
+  (invoke "ge" (f64.const -0x1p-1) (f64.const -0x0p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const 2.22507385851e-308) (f64.const nan:0x4000000000000))
+  (invoke "ge" (f64.const -0x1p-1) (f64.const 0x0p+0))
   (i32.const 0)
+)
+(assert_return
+  (invoke "ge" (f64.const 0x1p-1) (f64.const -0x0p+0))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ge" (f64.const 0x1p-1) (f64.const 0x0p+0))
+  (i32.const 1)
 )
-(assert_return (invoke "ge" (f64.const -0.5) (f64.const -0.)) (i32.const 0))
-(assert_return (invoke "ge" (f64.const -0.5) (f64.const 0.)) (i32.const 0))
-(assert_return (invoke "ge" (f64.const 0.5) (f64.const -0.)) (i32.const 1))
-(assert_return (invoke "ge" (f64.const 0.5) (f64.const 0.)) (i32.const 1))
 (assert_return
-  (invoke "ge" (f64.const -0.5) (f64.const -4.94065645841e-324))
+  (invoke "ge" (f64.const -0x1p-1) (f64.const -0x0.0000000000001p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const -0.5) (f64.const 4.94065645841e-324))
+  (invoke "ge" (f64.const -0x1p-1) (f64.const 0x0.0000000000001p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const 0.5) (f64.const -4.94065645841e-324))
+  (invoke "ge" (f64.const 0x1p-1) (f64.const -0x0.0000000000001p-1022))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f64.const 0.5) (f64.const 4.94065645841e-324))
+  (invoke "ge" (f64.const 0x1p-1) (f64.const 0x0.0000000000001p-1022))
   (i32.const 1)
+)
+(assert_return
+  (invoke "ge" (f64.const -0x1p-1) (f64.const -0x1p-1022))
+  (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const -0.5) (f64.const -2.22507385851e-308))
+  (invoke "ge" (f64.const -0x1p-1) (f64.const 0x1p-1022))
   (i32.const 0)
+)
+(assert_return
+  (invoke "ge" (f64.const 0x1p-1) (f64.const -0x1p-1022))
+  (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f64.const -0.5) (f64.const 2.22507385851e-308))
+  (invoke "ge" (f64.const 0x1p-1) (f64.const 0x1p-1022))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ge" (f64.const -0x1p-1) (f64.const -0x1p-1))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ge" (f64.const -0x1p-1) (f64.const 0x1p-1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const 0.5) (f64.const -2.22507385851e-308))
+  (invoke "ge" (f64.const 0x1p-1) (f64.const -0x1p-1))
   (i32.const 1)
+)
+(assert_return
+  (invoke "ge" (f64.const 0x1p-1) (f64.const 0x1p-1))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ge" (f64.const -0x1p-1) (f64.const -0x1p+0))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ge" (f64.const -0x1p-1) (f64.const 0x1p+0))
+  (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const 0.5) (f64.const 2.22507385851e-308))
+  (invoke "ge" (f64.const 0x1p-1) (f64.const -0x1p+0))
   (i32.const 1)
+)
+(assert_return
+  (invoke "ge" (f64.const 0x1p-1) (f64.const 0x1p+0))
+  (i32.const 0)
 )
-(assert_return (invoke "ge" (f64.const -0.5) (f64.const -0.5)) (i32.const 1))
-(assert_return (invoke "ge" (f64.const -0.5) (f64.const 0.5)) (i32.const 0))
-(assert_return (invoke "ge" (f64.const 0.5) (f64.const -0.5)) (i32.const 1))
-(assert_return (invoke "ge" (f64.const 0.5) (f64.const 0.5)) (i32.const 1))
-(assert_return (invoke "ge" (f64.const -0.5) (f64.const -1.)) (i32.const 1))
-(assert_return (invoke "ge" (f64.const -0.5) (f64.const 1.)) (i32.const 0))
-(assert_return (invoke "ge" (f64.const 0.5) (f64.const -1.)) (i32.const 1))
-(assert_return (invoke "ge" (f64.const 0.5) (f64.const 1.)) (i32.const 0))
 (assert_return
-  (invoke "ge" (f64.const -0.5) (f64.const -6.28318530718))
+  (invoke "ge" (f64.const -0x1p-1) (f64.const -0x1.921fb54442d18p+2))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f64.const -0.5) (f64.const 6.28318530718))
+  (invoke "ge" (f64.const -0x1p-1) (f64.const 0x1.921fb54442d18p+2))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const 0.5) (f64.const -6.28318530718))
+  (invoke "ge" (f64.const 0x1p-1) (f64.const -0x1.921fb54442d18p+2))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f64.const 0.5) (f64.const 6.28318530718))
+  (invoke "ge" (f64.const 0x1p-1) (f64.const 0x1.921fb54442d18p+2))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const -0.5) (f64.const -1.79769313486e+308))
+  (invoke "ge" (f64.const -0x1p-1) (f64.const -0x1.fffffffffffffp+1023))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f64.const -0.5) (f64.const 1.79769313486e+308))
+  (invoke "ge" (f64.const -0x1p-1) (f64.const 0x1.fffffffffffffp+1023))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const 0.5) (f64.const -1.79769313486e+308))
+  (invoke "ge" (f64.const 0x1p-1) (f64.const -0x1.fffffffffffffp+1023))
   (i32.const 1)
+)
+(assert_return
+  (invoke "ge" (f64.const 0x1p-1) (f64.const 0x1.fffffffffffffp+1023))
+  (i32.const 0)
+)
+(assert_return (invoke "ge" (f64.const -0x1p-1) (f64.const -inf)) (i32.const 1))
+(assert_return (invoke "ge" (f64.const -0x1p-1) (f64.const inf)) (i32.const 0))
+(assert_return (invoke "ge" (f64.const 0x1p-1) (f64.const -inf)) (i32.const 1))
+(assert_return (invoke "ge" (f64.const 0x1p-1) (f64.const inf)) (i32.const 0))
+(assert_return
+  (invoke "ge" (f64.const -0x1p-1) (f64.const -nan:0x8000000000000))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "ge" (f64.const -0x1p-1) (f64.const -nan:0x4000000000000))
+  (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const 0.5) (f64.const 1.79769313486e+308))
+  (invoke "ge" (f64.const -0x1p-1) (f64.const nan:0x8000000000000))
   (i32.const 0)
 )
-(assert_return (invoke "ge" (f64.const -0.5) (f64.const -inf)) (i32.const 1))
-(assert_return (invoke "ge" (f64.const -0.5) (f64.const inf)) (i32.const 0))
-(assert_return (invoke "ge" (f64.const 0.5) (f64.const -inf)) (i32.const 1))
-(assert_return (invoke "ge" (f64.const 0.5) (f64.const inf)) (i32.const 0))
 (assert_return
-  (invoke "ge" (f64.const -0.5) (f64.const -nan:0x8000000000000))
+  (invoke "ge" (f64.const -0x1p-1) (f64.const nan:0x4000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const -0.5) (f64.const -nan:0x4000000000000))
+  (invoke "ge" (f64.const 0x1p-1) (f64.const -nan:0x8000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const -0.5) (f64.const nan:0x8000000000000))
+  (invoke "ge" (f64.const 0x1p-1) (f64.const -nan:0x4000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const -0.5) (f64.const nan:0x4000000000000))
+  (invoke "ge" (f64.const 0x1p-1) (f64.const nan:0x8000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const 0.5) (f64.const -nan:0x8000000000000))
+  (invoke "ge" (f64.const 0x1p-1) (f64.const nan:0x4000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const 0.5) (f64.const -nan:0x4000000000000))
+  (invoke "ge" (f64.const -0x1p+0) (f64.const -0x0p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const 0.5) (f64.const nan:0x8000000000000))
+  (invoke "ge" (f64.const -0x1p+0) (f64.const 0x0p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const 0.5) (f64.const nan:0x4000000000000))
+  (invoke "ge" (f64.const 0x1p+0) (f64.const -0x0p+0))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ge" (f64.const 0x1p+0) (f64.const 0x0p+0))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ge" (f64.const -0x1p+0) (f64.const -0x0.0000000000001p-1022))
   (i32.const 0)
+)
+(assert_return
+  (invoke "ge" (f64.const -0x1p+0) (f64.const 0x0.0000000000001p-1022))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "ge" (f64.const 0x1p+0) (f64.const -0x0.0000000000001p-1022))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ge" (f64.const 0x1p+0) (f64.const 0x0.0000000000001p-1022))
+  (i32.const 1)
 )
-(assert_return (invoke "ge" (f64.const -1.) (f64.const -0.)) (i32.const 0))
-(assert_return (invoke "ge" (f64.const -1.) (f64.const 0.)) (i32.const 0))
-(assert_return (invoke "ge" (f64.const 1.) (f64.const -0.)) (i32.const 1))
-(assert_return (invoke "ge" (f64.const 1.) (f64.const 0.)) (i32.const 1))
 (assert_return
-  (invoke "ge" (f64.const -1.) (f64.const -4.94065645841e-324))
+  (invoke "ge" (f64.const -0x1p+0) (f64.const -0x1p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const -1.) (f64.const 4.94065645841e-324))
+  (invoke "ge" (f64.const -0x1p+0) (f64.const 0x1p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const 1.) (f64.const -4.94065645841e-324))
+  (invoke "ge" (f64.const 0x1p+0) (f64.const -0x1p-1022))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f64.const 1.) (f64.const 4.94065645841e-324))
+  (invoke "ge" (f64.const 0x1p+0) (f64.const 0x1p-1022))
   (i32.const 1)
+)
+(assert_return
+  (invoke "ge" (f64.const -0x1p+0) (f64.const -0x1p-1))
+  (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const -1.) (f64.const -2.22507385851e-308))
+  (invoke "ge" (f64.const -0x1p+0) (f64.const 0x1p-1))
   (i32.const 0)
+)
+(assert_return
+  (invoke "ge" (f64.const 0x1p+0) (f64.const -0x1p-1))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ge" (f64.const 0x1p+0) (f64.const 0x1p-1))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ge" (f64.const -0x1p+0) (f64.const -0x1p+0))
+  (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f64.const -1.) (f64.const 2.22507385851e-308))
+  (invoke "ge" (f64.const -0x1p+0) (f64.const 0x1p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const 1.) (f64.const -2.22507385851e-308))
+  (invoke "ge" (f64.const 0x1p+0) (f64.const -0x1p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f64.const 1.) (f64.const 2.22507385851e-308))
+  (invoke "ge" (f64.const 0x1p+0) (f64.const 0x1p+0))
   (i32.const 1)
 )
-(assert_return (invoke "ge" (f64.const -1.) (f64.const -0.5)) (i32.const 0))
-(assert_return (invoke "ge" (f64.const -1.) (f64.const 0.5)) (i32.const 0))
-(assert_return (invoke "ge" (f64.const 1.) (f64.const -0.5)) (i32.const 1))
-(assert_return (invoke "ge" (f64.const 1.) (f64.const 0.5)) (i32.const 1))
-(assert_return (invoke "ge" (f64.const -1.) (f64.const -1.)) (i32.const 1))
-(assert_return (invoke "ge" (f64.const -1.) (f64.const 1.)) (i32.const 0))
-(assert_return (invoke "ge" (f64.const 1.) (f64.const -1.)) (i32.const 1))
-(assert_return (invoke "ge" (f64.const 1.) (f64.const 1.)) (i32.const 1))
 (assert_return
-  (invoke "ge" (f64.const -1.) (f64.const -6.28318530718))
+  (invoke "ge" (f64.const -0x1p+0) (f64.const -0x1.921fb54442d18p+2))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f64.const -1.) (f64.const 6.28318530718))
+  (invoke "ge" (f64.const -0x1p+0) (f64.const 0x1.921fb54442d18p+2))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const 1.) (f64.const -6.28318530718))
+  (invoke "ge" (f64.const 0x1p+0) (f64.const -0x1.921fb54442d18p+2))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f64.const 1.) (f64.const 6.28318530718))
+  (invoke "ge" (f64.const 0x1p+0) (f64.const 0x1.921fb54442d18p+2))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const -1.) (f64.const -1.79769313486e+308))
+  (invoke "ge" (f64.const -0x1p+0) (f64.const -0x1.fffffffffffffp+1023))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f64.const -1.) (f64.const 1.79769313486e+308))
+  (invoke "ge" (f64.const -0x1p+0) (f64.const 0x1.fffffffffffffp+1023))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const 1.) (f64.const -1.79769313486e+308))
+  (invoke "ge" (f64.const 0x1p+0) (f64.const -0x1.fffffffffffffp+1023))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f64.const 1.) (f64.const 1.79769313486e+308))
+  (invoke "ge" (f64.const 0x1p+0) (f64.const 0x1.fffffffffffffp+1023))
   (i32.const 0)
 )
-(assert_return (invoke "ge" (f64.const -1.) (f64.const -inf)) (i32.const 1))
-(assert_return (invoke "ge" (f64.const -1.) (f64.const inf)) (i32.const 0))
-(assert_return (invoke "ge" (f64.const 1.) (f64.const -inf)) (i32.const 1))
-(assert_return (invoke "ge" (f64.const 1.) (f64.const inf)) (i32.const 0))
+(assert_return (invoke "ge" (f64.const -0x1p+0) (f64.const -inf)) (i32.const 1))
+(assert_return (invoke "ge" (f64.const -0x1p+0) (f64.const inf)) (i32.const 0))
+(assert_return (invoke "ge" (f64.const 0x1p+0) (f64.const -inf)) (i32.const 1))
+(assert_return (invoke "ge" (f64.const 0x1p+0) (f64.const inf)) (i32.const 0))
 (assert_return
-  (invoke "ge" (f64.const -1.) (f64.const -nan:0x8000000000000))
+  (invoke "ge" (f64.const -0x1p+0) (f64.const -nan:0x8000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const -1.) (f64.const -nan:0x4000000000000))
+  (invoke "ge" (f64.const -0x1p+0) (f64.const -nan:0x4000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const -1.) (f64.const nan:0x8000000000000))
+  (invoke "ge" (f64.const -0x1p+0) (f64.const nan:0x8000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const -1.) (f64.const nan:0x4000000000000))
+  (invoke "ge" (f64.const -0x1p+0) (f64.const nan:0x4000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const 1.) (f64.const -nan:0x8000000000000))
+  (invoke "ge" (f64.const 0x1p+0) (f64.const -nan:0x8000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const 1.) (f64.const -nan:0x4000000000000))
+  (invoke "ge" (f64.const 0x1p+0) (f64.const -nan:0x4000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const 1.) (f64.const nan:0x8000000000000))
+  (invoke "ge" (f64.const 0x1p+0) (f64.const nan:0x8000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const 1.) (f64.const nan:0x4000000000000))
+  (invoke "ge" (f64.const 0x1p+0) (f64.const nan:0x4000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const -6.28318530718) (f64.const -0.))
+  (invoke "ge" (f64.const -0x1.921fb54442d18p+2) (f64.const -0x0p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const -6.28318530718) (f64.const 0.))
+  (invoke "ge" (f64.const -0x1.921fb54442d18p+2) (f64.const 0x0p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const 6.28318530718) (f64.const -0.))
+  (invoke "ge" (f64.const 0x1.921fb54442d18p+2) (f64.const -0x0p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f64.const 6.28318530718) (f64.const 0.))
+  (invoke "ge" (f64.const 0x1.921fb54442d18p+2) (f64.const 0x0p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f64.const -6.28318530718) (f64.const -4.94065645841e-324))
+  (invoke "ge"
+    (f64.const -0x1.921fb54442d18p+2)
+    (f64.const -0x0.0000000000001p-1022)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const -6.28318530718) (f64.const 4.94065645841e-324))
+  (invoke "ge"
+    (f64.const -0x1.921fb54442d18p+2)
+    (f64.const 0x0.0000000000001p-1022)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const 6.28318530718) (f64.const -4.94065645841e-324))
+  (invoke "ge"
+    (f64.const 0x1.921fb54442d18p+2)
+    (f64.const -0x0.0000000000001p-1022)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f64.const 6.28318530718) (f64.const 4.94065645841e-324))
+  (invoke "ge"
+    (f64.const 0x1.921fb54442d18p+2)
+    (f64.const 0x0.0000000000001p-1022)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f64.const -6.28318530718) (f64.const -2.22507385851e-308))
+  (invoke "ge" (f64.const -0x1.921fb54442d18p+2) (f64.const -0x1p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const -6.28318530718) (f64.const 2.22507385851e-308))
+  (invoke "ge" (f64.const -0x1.921fb54442d18p+2) (f64.const 0x1p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const 6.28318530718) (f64.const -2.22507385851e-308))
+  (invoke "ge" (f64.const 0x1.921fb54442d18p+2) (f64.const -0x1p-1022))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f64.const 6.28318530718) (f64.const 2.22507385851e-308))
+  (invoke "ge" (f64.const 0x1.921fb54442d18p+2) (f64.const 0x1p-1022))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f64.const -6.28318530718) (f64.const -0.5))
+  (invoke "ge" (f64.const -0x1.921fb54442d18p+2) (f64.const -0x1p-1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const -6.28318530718) (f64.const 0.5))
+  (invoke "ge" (f64.const -0x1.921fb54442d18p+2) (f64.const 0x1p-1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const 6.28318530718) (f64.const -0.5))
+  (invoke "ge" (f64.const 0x1.921fb54442d18p+2) (f64.const -0x1p-1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f64.const 6.28318530718) (f64.const 0.5))
+  (invoke "ge" (f64.const 0x1.921fb54442d18p+2) (f64.const 0x1p-1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f64.const -6.28318530718) (f64.const -1.))
+  (invoke "ge" (f64.const -0x1.921fb54442d18p+2) (f64.const -0x1p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const -6.28318530718) (f64.const 1.))
+  (invoke "ge" (f64.const -0x1.921fb54442d18p+2) (f64.const 0x1p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const 6.28318530718) (f64.const -1.))
+  (invoke "ge" (f64.const 0x1.921fb54442d18p+2) (f64.const -0x1p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f64.const 6.28318530718) (f64.const 1.))
+  (invoke "ge" (f64.const 0x1.921fb54442d18p+2) (f64.const 0x1p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f64.const -6.28318530718) (f64.const -6.28318530718))
+  (invoke "ge"
+    (f64.const -0x1.921fb54442d18p+2)
+    (f64.const -0x1.921fb54442d18p+2)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f64.const -6.28318530718) (f64.const 6.28318530718))
+  (invoke "ge"
+    (f64.const -0x1.921fb54442d18p+2)
+    (f64.const 0x1.921fb54442d18p+2)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const 6.28318530718) (f64.const -6.28318530718))
+  (invoke "ge"
+    (f64.const 0x1.921fb54442d18p+2)
+    (f64.const -0x1.921fb54442d18p+2)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f64.const 6.28318530718) (f64.const 6.28318530718))
+  (invoke "ge"
+    (f64.const 0x1.921fb54442d18p+2)
+    (f64.const 0x1.921fb54442d18p+2)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f64.const -6.28318530718) (f64.const -1.79769313486e+308))
+  (invoke "ge"
+    (f64.const -0x1.921fb54442d18p+2)
+    (f64.const -0x1.fffffffffffffp+1023)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f64.const -6.28318530718) (f64.const 1.79769313486e+308))
+  (invoke "ge"
+    (f64.const -0x1.921fb54442d18p+2)
+    (f64.const 0x1.fffffffffffffp+1023)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const 6.28318530718) (f64.const -1.79769313486e+308))
+  (invoke "ge"
+    (f64.const 0x1.921fb54442d18p+2)
+    (f64.const -0x1.fffffffffffffp+1023)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f64.const 6.28318530718) (f64.const 1.79769313486e+308))
+  (invoke "ge"
+    (f64.const 0x1.921fb54442d18p+2)
+    (f64.const 0x1.fffffffffffffp+1023)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const -6.28318530718) (f64.const -inf))
+  (invoke "ge" (f64.const -0x1.921fb54442d18p+2) (f64.const -inf))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f64.const -6.28318530718) (f64.const inf))
+  (invoke "ge" (f64.const -0x1.921fb54442d18p+2) (f64.const inf))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const 6.28318530718) (f64.const -inf))
+  (invoke "ge" (f64.const 0x1.921fb54442d18p+2) (f64.const -inf))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f64.const 6.28318530718) (f64.const inf))
+  (invoke "ge" (f64.const 0x1.921fb54442d18p+2) (f64.const inf))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const -6.28318530718) (f64.const -nan:0x8000000000000))
+  (invoke "ge"
+    (f64.const -0x1.921fb54442d18p+2)
+    (f64.const -nan:0x8000000000000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const -6.28318530718) (f64.const -nan:0x4000000000000))
+  (invoke "ge"
+    (f64.const -0x1.921fb54442d18p+2)
+    (f64.const -nan:0x4000000000000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const -6.28318530718) (f64.const nan:0x8000000000000))
+  (invoke "ge"
+    (f64.const -0x1.921fb54442d18p+2)
+    (f64.const nan:0x8000000000000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const -6.28318530718) (f64.const nan:0x4000000000000))
+  (invoke "ge"
+    (f64.const -0x1.921fb54442d18p+2)
+    (f64.const nan:0x4000000000000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const 6.28318530718) (f64.const -nan:0x8000000000000))
+  (invoke "ge"
+    (f64.const 0x1.921fb54442d18p+2)
+    (f64.const -nan:0x8000000000000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const 6.28318530718) (f64.const -nan:0x4000000000000))
+  (invoke "ge"
+    (f64.const 0x1.921fb54442d18p+2)
+    (f64.const -nan:0x4000000000000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const 6.28318530718) (f64.const nan:0x8000000000000))
+  (invoke "ge" (f64.const 0x1.921fb54442d18p+2) (f64.const nan:0x8000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const 6.28318530718) (f64.const nan:0x4000000000000))
+  (invoke "ge" (f64.const 0x1.921fb54442d18p+2) (f64.const nan:0x4000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const -1.79769313486e+308) (f64.const -0.))
+  (invoke "ge" (f64.const -0x1.fffffffffffffp+1023) (f64.const -0x0p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const -1.79769313486e+308) (f64.const 0.))
+  (invoke "ge" (f64.const -0x1.fffffffffffffp+1023) (f64.const 0x0p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const 1.79769313486e+308) (f64.const -0.))
+  (invoke "ge" (f64.const 0x1.fffffffffffffp+1023) (f64.const -0x0p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f64.const 1.79769313486e+308) (f64.const 0.))
+  (invoke "ge" (f64.const 0x1.fffffffffffffp+1023) (f64.const 0x0p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f64.const -1.79769313486e+308) (f64.const -4.94065645841e-324))
+  (invoke "ge"
+    (f64.const -0x1.fffffffffffffp+1023)
+    (f64.const -0x0.0000000000001p-1022)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const -1.79769313486e+308) (f64.const 4.94065645841e-324))
+  (invoke "ge"
+    (f64.const -0x1.fffffffffffffp+1023)
+    (f64.const 0x0.0000000000001p-1022)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const 1.79769313486e+308) (f64.const -4.94065645841e-324))
+  (invoke "ge"
+    (f64.const 0x1.fffffffffffffp+1023)
+    (f64.const -0x0.0000000000001p-1022)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f64.const 1.79769313486e+308) (f64.const 4.94065645841e-324))
+  (invoke "ge"
+    (f64.const 0x1.fffffffffffffp+1023)
+    (f64.const 0x0.0000000000001p-1022)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f64.const -1.79769313486e+308) (f64.const -2.22507385851e-308))
+  (invoke "ge" (f64.const -0x1.fffffffffffffp+1023) (f64.const -0x1p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const -1.79769313486e+308) (f64.const 2.22507385851e-308))
+  (invoke "ge" (f64.const -0x1.fffffffffffffp+1023) (f64.const 0x1p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const 1.79769313486e+308) (f64.const -2.22507385851e-308))
+  (invoke "ge" (f64.const 0x1.fffffffffffffp+1023) (f64.const -0x1p-1022))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f64.const 1.79769313486e+308) (f64.const 2.22507385851e-308))
+  (invoke "ge" (f64.const 0x1.fffffffffffffp+1023) (f64.const 0x1p-1022))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f64.const -1.79769313486e+308) (f64.const -0.5))
+  (invoke "ge" (f64.const -0x1.fffffffffffffp+1023) (f64.const -0x1p-1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const -1.79769313486e+308) (f64.const 0.5))
+  (invoke "ge" (f64.const -0x1.fffffffffffffp+1023) (f64.const 0x1p-1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const 1.79769313486e+308) (f64.const -0.5))
+  (invoke "ge" (f64.const 0x1.fffffffffffffp+1023) (f64.const -0x1p-1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f64.const 1.79769313486e+308) (f64.const 0.5))
+  (invoke "ge" (f64.const 0x1.fffffffffffffp+1023) (f64.const 0x1p-1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f64.const -1.79769313486e+308) (f64.const -1.))
+  (invoke "ge" (f64.const -0x1.fffffffffffffp+1023) (f64.const -0x1p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const -1.79769313486e+308) (f64.const 1.))
+  (invoke "ge" (f64.const -0x1.fffffffffffffp+1023) (f64.const 0x1p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const 1.79769313486e+308) (f64.const -1.))
+  (invoke "ge" (f64.const 0x1.fffffffffffffp+1023) (f64.const -0x1p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f64.const 1.79769313486e+308) (f64.const 1.))
+  (invoke "ge" (f64.const 0x1.fffffffffffffp+1023) (f64.const 0x1p+0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f64.const -1.79769313486e+308) (f64.const -6.28318530718))
+  (invoke "ge"
+    (f64.const -0x1.fffffffffffffp+1023)
+    (f64.const -0x1.921fb54442d18p+2)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const -1.79769313486e+308) (f64.const 6.28318530718))
+  (invoke "ge"
+    (f64.const -0x1.fffffffffffffp+1023)
+    (f64.const 0x1.921fb54442d18p+2)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const 1.79769313486e+308) (f64.const -6.28318530718))
+  (invoke "ge"
+    (f64.const 0x1.fffffffffffffp+1023)
+    (f64.const -0x1.921fb54442d18p+2)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f64.const 1.79769313486e+308) (f64.const 6.28318530718))
+  (invoke "ge"
+    (f64.const 0x1.fffffffffffffp+1023)
+    (f64.const 0x1.921fb54442d18p+2)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f64.const -1.79769313486e+308) (f64.const -1.79769313486e+308))
+  (invoke "ge"
+    (f64.const -0x1.fffffffffffffp+1023)
+    (f64.const -0x1.fffffffffffffp+1023)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f64.const -1.79769313486e+308) (f64.const 1.79769313486e+308))
+  (invoke "ge"
+    (f64.const -0x1.fffffffffffffp+1023)
+    (f64.const 0x1.fffffffffffffp+1023)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const 1.79769313486e+308) (f64.const -1.79769313486e+308))
+  (invoke "ge"
+    (f64.const 0x1.fffffffffffffp+1023)
+    (f64.const -0x1.fffffffffffffp+1023)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f64.const 1.79769313486e+308) (f64.const 1.79769313486e+308))
+  (invoke "ge"
+    (f64.const 0x1.fffffffffffffp+1023)
+    (f64.const 0x1.fffffffffffffp+1023)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f64.const -1.79769313486e+308) (f64.const -inf))
+  (invoke "ge" (f64.const -0x1.fffffffffffffp+1023) (f64.const -inf))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f64.const -1.79769313486e+308) (f64.const inf))
+  (invoke "ge" (f64.const -0x1.fffffffffffffp+1023) (f64.const inf))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const 1.79769313486e+308) (f64.const -inf))
+  (invoke "ge" (f64.const 0x1.fffffffffffffp+1023) (f64.const -inf))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f64.const 1.79769313486e+308) (f64.const inf))
+  (invoke "ge" (f64.const 0x1.fffffffffffffp+1023) (f64.const inf))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const -1.79769313486e+308) (f64.const -nan:0x8000000000000))
+  (invoke "ge"
+    (f64.const -0x1.fffffffffffffp+1023)
+    (f64.const -nan:0x8000000000000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const -1.79769313486e+308) (f64.const -nan:0x4000000000000))
+  (invoke "ge"
+    (f64.const -0x1.fffffffffffffp+1023)
+    (f64.const -nan:0x4000000000000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const -1.79769313486e+308) (f64.const nan:0x8000000000000))
+  (invoke "ge"
+    (f64.const -0x1.fffffffffffffp+1023)
+    (f64.const nan:0x8000000000000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const -1.79769313486e+308) (f64.const nan:0x4000000000000))
+  (invoke "ge"
+    (f64.const -0x1.fffffffffffffp+1023)
+    (f64.const nan:0x4000000000000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const 1.79769313486e+308) (f64.const -nan:0x8000000000000))
+  (invoke "ge"
+    (f64.const 0x1.fffffffffffffp+1023)
+    (f64.const -nan:0x8000000000000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const 1.79769313486e+308) (f64.const -nan:0x4000000000000))
+  (invoke "ge"
+    (f64.const 0x1.fffffffffffffp+1023)
+    (f64.const -nan:0x4000000000000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const 1.79769313486e+308) (f64.const nan:0x8000000000000))
+  (invoke "ge"
+    (f64.const 0x1.fffffffffffffp+1023)
+    (f64.const nan:0x8000000000000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const 1.79769313486e+308) (f64.const nan:0x4000000000000))
+  (invoke "ge"
+    (f64.const 0x1.fffffffffffffp+1023)
+    (f64.const nan:0x4000000000000)
+  )
   (i32.const 0)
 )
-(assert_return (invoke "ge" (f64.const -inf) (f64.const -0.)) (i32.const 0))
-(assert_return (invoke "ge" (f64.const -inf) (f64.const 0.)) (i32.const 0))
-(assert_return (invoke "ge" (f64.const inf) (f64.const -0.)) (i32.const 1))
-(assert_return (invoke "ge" (f64.const inf) (f64.const 0.)) (i32.const 1))
+(assert_return (invoke "ge" (f64.const -inf) (f64.const -0x0p+0)) (i32.const 0))
+(assert_return (invoke "ge" (f64.const -inf) (f64.const 0x0p+0)) (i32.const 0))
+(assert_return (invoke "ge" (f64.const inf) (f64.const -0x0p+0)) (i32.const 1))
+(assert_return (invoke "ge" (f64.const inf) (f64.const 0x0p+0)) (i32.const 1))
 (assert_return
-  (invoke "ge" (f64.const -inf) (f64.const -4.94065645841e-324))
+  (invoke "ge" (f64.const -inf) (f64.const -0x0.0000000000001p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const -inf) (f64.const 4.94065645841e-324))
+  (invoke "ge" (f64.const -inf) (f64.const 0x0.0000000000001p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const inf) (f64.const -4.94065645841e-324))
+  (invoke "ge" (f64.const inf) (f64.const -0x0.0000000000001p-1022))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f64.const inf) (f64.const 4.94065645841e-324))
+  (invoke "ge" (f64.const inf) (f64.const 0x0.0000000000001p-1022))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f64.const -inf) (f64.const -2.22507385851e-308))
+  (invoke "ge" (f64.const -inf) (f64.const -0x1p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const -inf) (f64.const 2.22507385851e-308))
+  (invoke "ge" (f64.const -inf) (f64.const 0x1p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const inf) (f64.const -2.22507385851e-308))
+  (invoke "ge" (f64.const inf) (f64.const -0x1p-1022))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f64.const inf) (f64.const 2.22507385851e-308))
+  (invoke "ge" (f64.const inf) (f64.const 0x1p-1022))
   (i32.const 1)
 )
-(assert_return (invoke "ge" (f64.const -inf) (f64.const -0.5)) (i32.const 0))
-(assert_return (invoke "ge" (f64.const -inf) (f64.const 0.5)) (i32.const 0))
-(assert_return (invoke "ge" (f64.const inf) (f64.const -0.5)) (i32.const 1))
-(assert_return (invoke "ge" (f64.const inf) (f64.const 0.5)) (i32.const 1))
-(assert_return (invoke "ge" (f64.const -inf) (f64.const -1.)) (i32.const 0))
-(assert_return (invoke "ge" (f64.const -inf) (f64.const 1.)) (i32.const 0))
-(assert_return (invoke "ge" (f64.const inf) (f64.const -1.)) (i32.const 1))
-(assert_return (invoke "ge" (f64.const inf) (f64.const 1.)) (i32.const 1))
+(assert_return (invoke "ge" (f64.const -inf) (f64.const -0x1p-1)) (i32.const 0))
+(assert_return (invoke "ge" (f64.const -inf) (f64.const 0x1p-1)) (i32.const 0))
+(assert_return (invoke "ge" (f64.const inf) (f64.const -0x1p-1)) (i32.const 1))
+(assert_return (invoke "ge" (f64.const inf) (f64.const 0x1p-1)) (i32.const 1))
+(assert_return (invoke "ge" (f64.const -inf) (f64.const -0x1p+0)) (i32.const 0))
+(assert_return (invoke "ge" (f64.const -inf) (f64.const 0x1p+0)) (i32.const 0))
+(assert_return (invoke "ge" (f64.const inf) (f64.const -0x1p+0)) (i32.const 1))
+(assert_return (invoke "ge" (f64.const inf) (f64.const 0x1p+0)) (i32.const 1))
 (assert_return
-  (invoke "ge" (f64.const -inf) (f64.const -6.28318530718))
+  (invoke "ge" (f64.const -inf) (f64.const -0x1.921fb54442d18p+2))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const -inf) (f64.const 6.28318530718))
+  (invoke "ge" (f64.const -inf) (f64.const 0x1.921fb54442d18p+2))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const inf) (f64.const -6.28318530718))
+  (invoke "ge" (f64.const inf) (f64.const -0x1.921fb54442d18p+2))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f64.const inf) (f64.const 6.28318530718))
+  (invoke "ge" (f64.const inf) (f64.const 0x1.921fb54442d18p+2))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f64.const -inf) (f64.const -1.79769313486e+308))
+  (invoke "ge" (f64.const -inf) (f64.const -0x1.fffffffffffffp+1023))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const -inf) (f64.const 1.79769313486e+308))
+  (invoke "ge" (f64.const -inf) (f64.const 0x1.fffffffffffffp+1023))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const inf) (f64.const -1.79769313486e+308))
+  (invoke "ge" (f64.const inf) (f64.const -0x1.fffffffffffffp+1023))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f64.const inf) (f64.const 1.79769313486e+308))
+  (invoke "ge" (f64.const inf) (f64.const 0x1.fffffffffffffp+1023))
   (i32.const 1)
 )
 (assert_return (invoke "ge" (f64.const -inf) (f64.const -inf)) (i32.const 1))
@@ -8199,227 +10221,293 @@
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const -nan:0x8000000000000) (f64.const -0.))
+  (invoke "ge" (f64.const -nan:0x8000000000000) (f64.const -0x0p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const -nan:0x4000000000000) (f64.const -0.))
+  (invoke "ge" (f64.const -nan:0x4000000000000) (f64.const -0x0p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const -nan:0x8000000000000) (f64.const 0.))
+  (invoke "ge" (f64.const -nan:0x8000000000000) (f64.const 0x0p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const -nan:0x4000000000000) (f64.const 0.))
+  (invoke "ge" (f64.const -nan:0x4000000000000) (f64.const 0x0p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const nan:0x8000000000000) (f64.const -0.))
+  (invoke "ge" (f64.const nan:0x8000000000000) (f64.const -0x0p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const nan:0x4000000000000) (f64.const -0.))
+  (invoke "ge" (f64.const nan:0x4000000000000) (f64.const -0x0p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const nan:0x8000000000000) (f64.const 0.))
+  (invoke "ge" (f64.const nan:0x8000000000000) (f64.const 0x0p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const nan:0x4000000000000) (f64.const 0.))
+  (invoke "ge" (f64.const nan:0x4000000000000) (f64.const 0x0p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const -nan:0x8000000000000) (f64.const -4.94065645841e-324))
+  (invoke "ge"
+    (f64.const -nan:0x8000000000000)
+    (f64.const -0x0.0000000000001p-1022)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const -nan:0x4000000000000) (f64.const -4.94065645841e-324))
+  (invoke "ge"
+    (f64.const -nan:0x4000000000000)
+    (f64.const -0x0.0000000000001p-1022)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const -nan:0x8000000000000) (f64.const 4.94065645841e-324))
+  (invoke "ge"
+    (f64.const -nan:0x8000000000000)
+    (f64.const 0x0.0000000000001p-1022)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const -nan:0x4000000000000) (f64.const 4.94065645841e-324))
+  (invoke "ge"
+    (f64.const -nan:0x4000000000000)
+    (f64.const 0x0.0000000000001p-1022)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const nan:0x8000000000000) (f64.const -4.94065645841e-324))
+  (invoke "ge"
+    (f64.const nan:0x8000000000000)
+    (f64.const -0x0.0000000000001p-1022)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const nan:0x4000000000000) (f64.const -4.94065645841e-324))
+  (invoke "ge"
+    (f64.const nan:0x4000000000000)
+    (f64.const -0x0.0000000000001p-1022)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const nan:0x8000000000000) (f64.const 4.94065645841e-324))
+  (invoke "ge"
+    (f64.const nan:0x8000000000000)
+    (f64.const 0x0.0000000000001p-1022)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const nan:0x4000000000000) (f64.const 4.94065645841e-324))
+  (invoke "ge"
+    (f64.const nan:0x4000000000000)
+    (f64.const 0x0.0000000000001p-1022)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const -nan:0x8000000000000) (f64.const -2.22507385851e-308))
+  (invoke "ge" (f64.const -nan:0x8000000000000) (f64.const -0x1p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const -nan:0x4000000000000) (f64.const -2.22507385851e-308))
+  (invoke "ge" (f64.const -nan:0x4000000000000) (f64.const -0x1p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const -nan:0x8000000000000) (f64.const 2.22507385851e-308))
+  (invoke "ge" (f64.const -nan:0x8000000000000) (f64.const 0x1p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const -nan:0x4000000000000) (f64.const 2.22507385851e-308))
+  (invoke "ge" (f64.const -nan:0x4000000000000) (f64.const 0x1p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const nan:0x8000000000000) (f64.const -2.22507385851e-308))
+  (invoke "ge" (f64.const nan:0x8000000000000) (f64.const -0x1p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const nan:0x4000000000000) (f64.const -2.22507385851e-308))
+  (invoke "ge" (f64.const nan:0x4000000000000) (f64.const -0x1p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const nan:0x8000000000000) (f64.const 2.22507385851e-308))
+  (invoke "ge" (f64.const nan:0x8000000000000) (f64.const 0x1p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const nan:0x4000000000000) (f64.const 2.22507385851e-308))
+  (invoke "ge" (f64.const nan:0x4000000000000) (f64.const 0x1p-1022))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const -nan:0x8000000000000) (f64.const -0.5))
+  (invoke "ge" (f64.const -nan:0x8000000000000) (f64.const -0x1p-1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const -nan:0x4000000000000) (f64.const -0.5))
+  (invoke "ge" (f64.const -nan:0x4000000000000) (f64.const -0x1p-1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const -nan:0x8000000000000) (f64.const 0.5))
+  (invoke "ge" (f64.const -nan:0x8000000000000) (f64.const 0x1p-1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const -nan:0x4000000000000) (f64.const 0.5))
+  (invoke "ge" (f64.const -nan:0x4000000000000) (f64.const 0x1p-1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const nan:0x8000000000000) (f64.const -0.5))
+  (invoke "ge" (f64.const nan:0x8000000000000) (f64.const -0x1p-1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const nan:0x4000000000000) (f64.const -0.5))
+  (invoke "ge" (f64.const nan:0x4000000000000) (f64.const -0x1p-1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const nan:0x8000000000000) (f64.const 0.5))
+  (invoke "ge" (f64.const nan:0x8000000000000) (f64.const 0x1p-1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const nan:0x4000000000000) (f64.const 0.5))
+  (invoke "ge" (f64.const nan:0x4000000000000) (f64.const 0x1p-1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const -nan:0x8000000000000) (f64.const -1.))
+  (invoke "ge" (f64.const -nan:0x8000000000000) (f64.const -0x1p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const -nan:0x4000000000000) (f64.const -1.))
+  (invoke "ge" (f64.const -nan:0x4000000000000) (f64.const -0x1p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const -nan:0x8000000000000) (f64.const 1.))
+  (invoke "ge" (f64.const -nan:0x8000000000000) (f64.const 0x1p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const -nan:0x4000000000000) (f64.const 1.))
+  (invoke "ge" (f64.const -nan:0x4000000000000) (f64.const 0x1p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const nan:0x8000000000000) (f64.const -1.))
+  (invoke "ge" (f64.const nan:0x8000000000000) (f64.const -0x1p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const nan:0x4000000000000) (f64.const -1.))
+  (invoke "ge" (f64.const nan:0x4000000000000) (f64.const -0x1p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const nan:0x8000000000000) (f64.const 1.))
+  (invoke "ge" (f64.const nan:0x8000000000000) (f64.const 0x1p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const nan:0x4000000000000) (f64.const 1.))
+  (invoke "ge" (f64.const nan:0x4000000000000) (f64.const 0x1p+0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const -nan:0x8000000000000) (f64.const -6.28318530718))
+  (invoke "ge"
+    (f64.const -nan:0x8000000000000)
+    (f64.const -0x1.921fb54442d18p+2)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const -nan:0x4000000000000) (f64.const -6.28318530718))
+  (invoke "ge"
+    (f64.const -nan:0x4000000000000)
+    (f64.const -0x1.921fb54442d18p+2)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const -nan:0x8000000000000) (f64.const 6.28318530718))
+  (invoke "ge"
+    (f64.const -nan:0x8000000000000)
+    (f64.const 0x1.921fb54442d18p+2)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const -nan:0x4000000000000) (f64.const 6.28318530718))
+  (invoke "ge"
+    (f64.const -nan:0x4000000000000)
+    (f64.const 0x1.921fb54442d18p+2)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const nan:0x8000000000000) (f64.const -6.28318530718))
+  (invoke "ge"
+    (f64.const nan:0x8000000000000)
+    (f64.const -0x1.921fb54442d18p+2)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const nan:0x4000000000000) (f64.const -6.28318530718))
+  (invoke "ge"
+    (f64.const nan:0x4000000000000)
+    (f64.const -0x1.921fb54442d18p+2)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const nan:0x8000000000000) (f64.const 6.28318530718))
+  (invoke "ge" (f64.const nan:0x8000000000000) (f64.const 0x1.921fb54442d18p+2))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const nan:0x4000000000000) (f64.const 6.28318530718))
+  (invoke "ge" (f64.const nan:0x4000000000000) (f64.const 0x1.921fb54442d18p+2))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const -nan:0x8000000000000) (f64.const -1.79769313486e+308))
+  (invoke "ge"
+    (f64.const -nan:0x8000000000000)
+    (f64.const -0x1.fffffffffffffp+1023)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const -nan:0x4000000000000) (f64.const -1.79769313486e+308))
+  (invoke "ge"
+    (f64.const -nan:0x4000000000000)
+    (f64.const -0x1.fffffffffffffp+1023)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const -nan:0x8000000000000) (f64.const 1.79769313486e+308))
+  (invoke "ge"
+    (f64.const -nan:0x8000000000000)
+    (f64.const 0x1.fffffffffffffp+1023)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const -nan:0x4000000000000) (f64.const 1.79769313486e+308))
+  (invoke "ge"
+    (f64.const -nan:0x4000000000000)
+    (f64.const 0x1.fffffffffffffp+1023)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const nan:0x8000000000000) (f64.const -1.79769313486e+308))
+  (invoke "ge"
+    (f64.const nan:0x8000000000000)
+    (f64.const -0x1.fffffffffffffp+1023)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const nan:0x4000000000000) (f64.const -1.79769313486e+308))
+  (invoke "ge"
+    (f64.const nan:0x4000000000000)
+    (f64.const -0x1.fffffffffffffp+1023)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const nan:0x8000000000000) (f64.const 1.79769313486e+308))
+  (invoke "ge"
+    (f64.const nan:0x8000000000000)
+    (f64.const 0x1.fffffffffffffp+1023)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f64.const nan:0x4000000000000) (f64.const 1.79769313486e+308))
+  (invoke "ge"
+    (f64.const nan:0x4000000000000)
+    (f64.const 0x1.fffffffffffffp+1023)
+  )
   (i32.const 0)
 )
 (assert_return

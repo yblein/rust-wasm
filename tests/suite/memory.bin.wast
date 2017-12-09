@@ -459,7 +459,7 @@
 (assert_return (invoke "data") (i32.const 1))
 (assert_return (invoke "aligned") (i32.const 1))
 (assert_return (invoke "unaligned") (i32.const 1))
-(assert_return (invoke "cast") (f64.const 42.))
+(assert_return (invoke "cast") (f64.const 0x1.5p+5))
 (assert_return (invoke "i32_load8_s" (i32.const -1)) (i32.const -1))
 (assert_return (invoke "i32_load8_u" (i32.const -1)) (i32.const 255))
 (assert_return (invoke "i32_load16_s" (i32.const -1)) (i32.const -1))

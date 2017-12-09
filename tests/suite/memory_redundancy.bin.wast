@@ -27,6 +27,6 @@
 (invoke "zero_everything")
 (assert_return (invoke "test_redundant_load") (i32.const 128))
 (invoke "zero_everything")
-(assert_return (invoke "test_dead_store") (f32.const 4.90454462514e-44))
+(assert_return (invoke "test_dead_store") (f32.const 0x1.18p-144))
 (invoke "zero_everything")
 (assert_return (invoke "malloc_aliasing") (i32.const 43))

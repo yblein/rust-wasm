@@ -28,12 +28,12 @@
   (i64.const 2)
 )
 (assert_return
-  (invoke "select_f32" (f32.const 1.) (f32.const 2.) (i32.const 1))
-  (f32.const 1.)
+  (invoke "select_f32" (f32.const 0x1p+0) (f32.const 0x1p+1) (i32.const 1))
+  (f32.const 0x1p+0)
 )
 (assert_return
-  (invoke "select_f64" (f64.const 1.) (f64.const 2.) (i32.const 1))
-  (f64.const 1.)
+  (invoke "select_f64" (f64.const 0x1p+0) (f64.const 0x1p+1) (i32.const 1))
+  (f64.const 0x1p+0)
 )
 (assert_return
   (invoke "select_i32" (i32.const 1) (i32.const 2) (i32.const 0))
@@ -52,83 +52,99 @@
   (i64.const 2)
 )
 (assert_return
-  (invoke "select_f32" (f32.const nan:0x400000) (f32.const 1.) (i32.const 1))
+  (invoke "select_f32"
+    (f32.const nan:0x400000)
+    (f32.const 0x1p+0)
+    (i32.const 1)
+  )
   (f32.const nan:0x400000)
 )
 (assert_return
-  (invoke "select_f32" (f32.const nan:0x20304) (f32.const 1.) (i32.const 1))
+  (invoke "select_f32" (f32.const nan:0x20304) (f32.const 0x1p+0) (i32.const 1))
   (f32.const nan:0x20304)
 )
 (assert_return
-  (invoke "select_f32" (f32.const nan:0x400000) (f32.const 1.) (i32.const 0))
-  (f32.const 1.)
+  (invoke "select_f32"
+    (f32.const nan:0x400000)
+    (f32.const 0x1p+0)
+    (i32.const 0)
+  )
+  (f32.const 0x1p+0)
 )
 (assert_return
-  (invoke "select_f32" (f32.const nan:0x20304) (f32.const 1.) (i32.const 0))
-  (f32.const 1.)
+  (invoke "select_f32" (f32.const nan:0x20304) (f32.const 0x1p+0) (i32.const 0))
+  (f32.const 0x1p+0)
 )
 (assert_return
-  (invoke "select_f32" (f32.const 2.) (f32.const nan:0x400000) (i32.const 1))
-  (f32.const 2.)
+  (invoke "select_f32"
+    (f32.const 0x1p+1)
+    (f32.const nan:0x400000)
+    (i32.const 1)
+  )
+  (f32.const 0x1p+1)
 )
 (assert_return
-  (invoke "select_f32" (f32.const 2.) (f32.const nan:0x20304) (i32.const 1))
-  (f32.const 2.)
+  (invoke "select_f32" (f32.const 0x1p+1) (f32.const nan:0x20304) (i32.const 1))
+  (f32.const 0x1p+1)
 )
 (assert_return
-  (invoke "select_f32" (f32.const 2.) (f32.const nan:0x400000) (i32.const 0))
+  (invoke "select_f32"
+    (f32.const 0x1p+1)
+    (f32.const nan:0x400000)
+    (i32.const 0)
+  )
   (f32.const nan:0x400000)
 )
 (assert_return
-  (invoke "select_f32" (f32.const 2.) (f32.const nan:0x20304) (i32.const 0))
+  (invoke "select_f32" (f32.const 0x1p+1) (f32.const nan:0x20304) (i32.const 0))
   (f32.const nan:0x20304)
 )
 (assert_return
   (invoke "select_f64"
     (f64.const nan:0x8000000000000)
-    (f64.const 1.)
+    (f64.const 0x1p+0)
     (i32.const 1)
   )
   (f64.const nan:0x8000000000000)
 )
 (assert_return
-  (invoke "select_f64" (f64.const nan:0x20304) (f64.const 1.) (i32.const 1))
+  (invoke "select_f64" (f64.const nan:0x20304) (f64.const 0x1p+0) (i32.const 1))
   (f64.const nan:0x20304)
 )
 (assert_return
   (invoke "select_f64"
     (f64.const nan:0x8000000000000)
-    (f64.const 1.)
+    (f64.const 0x1p+0)
     (i32.const 0)
   )
-  (f64.const 1.)
+  (f64.const 0x1p+0)
 )
 (assert_return
-  (invoke "select_f64" (f64.const nan:0x20304) (f64.const 1.) (i32.const 0))
-  (f64.const 1.)
+  (invoke "select_f64" (f64.const nan:0x20304) (f64.const 0x1p+0) (i32.const 0))
+  (f64.const 0x1p+0)
 )
 (assert_return
   (invoke "select_f64"
-    (f64.const 2.)
+    (f64.const 0x1p+1)
     (f64.const nan:0x8000000000000)
     (i32.const 1)
   )
-  (f64.const 2.)
+  (f64.const 0x1p+1)
 )
 (assert_return
-  (invoke "select_f64" (f64.const 2.) (f64.const nan:0x20304) (i32.const 1))
-  (f64.const 2.)
+  (invoke "select_f64" (f64.const 0x1p+1) (f64.const nan:0x20304) (i32.const 1))
+  (f64.const 0x1p+1)
 )
 (assert_return
   (invoke "select_f64"
-    (f64.const 2.)
+    (f64.const 0x1p+1)
     (f64.const nan:0x8000000000000)
     (i32.const 0)
   )
   (f64.const nan:0x8000000000000)
 )
 (assert_return
-  (invoke "select_f64" (f64.const 2.) (f64.const nan:0x20304) (i32.const 0))
+  (invoke "select_f64" (f64.const 0x1p+1) (f64.const nan:0x20304) (i32.const 0))
   (f64.const nan:0x20304)
 )
 (assert_trap (invoke "select_trap_l" (i32.const 1)) "unreachable executed")
