@@ -1,5 +1,5 @@
 use std::{i32, i64, io};
-use std::io::{Read, Seek};
+use std::io::Read;
 use ops::IntOp;
 
 use types;
@@ -11,8 +11,8 @@ const MAGIC: u32 = 0x6d736100;
 pub const VERSION: u32 = 1;
 
 /// Decode a Web Assembly module from the given `reader`
-pub fn decode<R: Read + Seek>(reader: R) -> Result<Module, DecodeError> {
-	Decoder { reader }.read_module()
+pub fn decode<R: Read>(reader: R) -> Result<Module, DecodeError> {
+	Decoder { reader: reader, pos: 0 }.read_module()
 }
 
 #[derive(Debug)]
@@ -29,14 +29,16 @@ impl From<io::Error> for DecodeError {
 
 type DecodeResult<T> = Result<T, DecodeError>;
 
-struct Decoder<R: Read + Seek> {
+struct Decoder<R: Read> {
 	reader: R,
+	pos: usize,
 }
 
-impl<R: Read + Seek> Decoder<R> {
+impl<R: Read> Decoder<R> {
 	fn read_byte(&mut self) -> DecodeResult<u8> {
 		let mut buf = [0];
 		let _ = self.reader.read_exact(&mut buf)?;
+		self.pos += 1;
 		Ok(buf[0])
 	}
 
@@ -482,9 +484,15 @@ impl<R: Read + Seek> Decoder<R> {
 
 	fn skip_custom_section(&mut self, size: u32) -> DecodeResult<()> {
 		// Even if we ignore custom sections, we must ensure that its name is valid utf8.
-		let start_pos = self.reader.seek(io::SeekFrom::Current(0))?;
+		let start_pos = self.pos;
 		let _ = self.read_name()?;
-		let _ = self.reader.seek(io::SeekFrom::Start(start_pos + size as u64))?;
+		let nread = self.pos - start_pos;
+		let nskip = size as usize - nread;
+
+		for _ in 0..nskip {
+			let _ = self.read_byte()?;
+		}
+
 		Ok(())
 	}
 
