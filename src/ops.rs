@@ -349,8 +349,7 @@ pub trait FloatOp {
 	fn reinterpret(self) -> Self::IntType;
 
 	// Canonical NaN
-	fn canon() -> Self;
-	fn is_canon(self) -> bool;
+	fn is_canonical_nan(self) -> bool;
 }
 
 macro_rules! impl_convert_float {
@@ -521,13 +520,8 @@ macro_rules! impl_float_op {
 			}
 
 			#[inline]
-			fn canon() -> $T {
-				<$T>::from_bits(1 << ($SB - 1))
-			}
-
-			#[inline]
-			fn is_canon(self) -> bool {
-				self == <$T>::canon()
+			fn is_canonical_nan(self) -> bool {
+				self.to_bits() == $NAN.to_bits() || self.to_bits() == (-$NAN).to_bits()
 			}
 		}
 	)
