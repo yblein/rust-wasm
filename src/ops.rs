@@ -320,6 +320,7 @@ pub trait FloatOp {
 	fn ceil(self) -> Self;
 	fn floor(self) -> Self;
 	fn trunc(self) -> Self;
+	/// round-to-nearest ties-to-even
 	fn nearest(self) -> Self;
 	fn sqrt(self) -> Self;
 
@@ -402,7 +403,22 @@ macro_rules! impl_float_op {
 
 			#[inline]
 			fn nearest(self) -> $T {
-				<$T>::round(self)
+				// Implementation from
+				// https://github.com/WebAssembly/spec/blob/fb7e7e1e381ffc283c923a87fdfea5ebbd213737/interpreter/exec/float.ml#L148
+
+				// preserve the sign of 0
+				if self == 0.0 {
+					return self;
+				}
+				if self.is_nan() {
+					return $NAN
+				}
+				let u = self.ceil();
+				let d = self.floor();
+				let um = (self - u).abs();
+				let dm = (self - d).abs();
+				let half_u = u / 2.0;
+				if um < dm || um == dm && half_u.floor() == half_u { u } else { d }
 			}
 
 			#[inline]
