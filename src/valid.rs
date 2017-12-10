@@ -461,6 +461,13 @@ fn check_table(table: &ast::Table) -> Option<()> {
 }
 
 fn check_memory(mem: &ast::Memory) -> Option<()> {
+	// Can't allocate more than 4GB since its a 32-bits machine
+	let max = (1 << 32) / 65536;
+	if mem.type_.limits.min as usize > max ||
+		(mem.type_.limits.max.is_some() &&
+		 mem.type_.limits.max.unwrap() as usize > max) {
+		return None
+	}
 	check_limits(&mem.type_.limits)
 }
 

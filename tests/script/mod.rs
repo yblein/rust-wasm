@@ -181,12 +181,12 @@ fn run_assertion(store: &mut Store, instances: &ExportHashMap, assertion: Assert
 		Exhaustion(action, _) => {
 			unimplemented!("assert_exhaustion")
 		}
-		Invalid(module, _) => {
+		Invalid(module, reason) => {
 			let (_, m) = decode_module_src(&module);
 			// Do not resolve the imports for invalid modules
-			let res =  instantiate_module(store, m, &[]);
-			if !res.is_err() || res.err().unwrap() != Error::InvalidModule {
-				panic!("instantiating module `{:?}` should not be possible because it is invalid", module);
+			match (reason, instantiate_module(store, m, &[]).err()) {
+				(_, Some(Error::InvalidModule)) => (),
+				(reason, err) => panic!("instantiating module `{:?}` should not be valid (reason = {}, err = {:?})", module, reason, err),
 			}
 		}
 		Malformed(mod_src, _) => {
@@ -206,8 +206,6 @@ fn run_assertion(store: &mut Store, instances: &ExportHashMap, assertion: Assert
 			match (reason.as_ref(), instantiate_module(store, m, &extern_vals[..]).err()) {
 				("unknown import", Some(Error::NotEnoughExternVal)) => (),
 				("incompatible import type", Some(Error::ImportTypeMismatch)) => (),
-				// For host module, the ocaml impl returns an addr with the wrong
-				// type, while we returns import not found.
 				("elements segment does not fit", Some(Error::ElemOffsetTooLarge(_))) => (),
 				("data segment does not fit", Some(Error::DataOffsetTooLarge(_))) => (),
 				(reason, err) => panic!("instantiating module `{:?}` should not link (reason = {}, err = {:?})", module, reason, err),
