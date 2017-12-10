@@ -14,7 +14,6 @@ b"#![feature(try_from)]
 
 extern crate lalrpop_util;
 extern crate rust_wasm;
-#[macro_use]
 extern crate hexf;
 
 mod script;
