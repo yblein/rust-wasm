@@ -120,14 +120,67 @@ pub fn module_exports(module: &ast::Module) -> Vec<(String, types::Extern)> {
 	assert!(valid::is_valid(module));
 	let mut types = Vec::new();
 
+	// Imports can be exported
+	// "The index space for functions, tables, memories and globals includes respective imports declared in the same module."
+	// https://webassembly.github.io/spec/syntax/modules.html#indices
+	let mut func_import_types = Vec::new();
+	let mut table_import_types = Vec::new();
+	let mut mem_import_types = Vec::new();
+	let mut global_import_types = Vec::new();
+	for import in &module.imports {
+		use ast::*;
+		match import.desc {
+			ImportDesc::Func(idx) =>
+				func_import_types.push(module.types[idx as usize].clone()),
+			ImportDesc::Table(ref type_) =>
+				table_import_types.push(type_.clone()),
+			ImportDesc::Memory(ref type_) =>
+				mem_import_types.push(type_.clone()),
+			ImportDesc::Global(ref type_) =>
+				global_import_types.push(type_.clone()),
+		};
+	}
+
 	for export in &module.exports {
 		use types::*;
 		use ast::*;
 		let ex = match export.desc {
-			ExportDesc::Func(idx)   => Extern::Func(module.types[module.funcs[idx as usize].type_index as usize].clone()),
-			ExportDesc::Table(idx)  => Extern::Table(module.tables[idx as usize].type_.clone()),
-			ExportDesc::Memory(idx) => Extern::Memory(module.memories[idx as usize].type_.clone()),
-			ExportDesc::Global(idx) => Extern::Global(module.globals[idx as usize].type_.clone()),
+			ExportDesc::Func(idx) => {
+				let len = func_import_types.len();
+				let idx = idx as usize;
+				if idx < len {
+					Extern::Func(func_import_types[idx].clone())
+				} else {
+					Extern::Func(module.types[module.funcs[(idx - len)].type_index as usize].clone())
+				}
+			},
+			ExportDesc::Table(idx) => {
+				let len = table_import_types.len();
+				let idx = idx as usize;
+				if idx < len {
+					Extern::Table(table_import_types[idx].clone())
+				} else {
+					Extern::Table(module.tables[idx - len].type_.clone())
+				}
+			},
+			ExportDesc::Memory(idx) => {
+				let len = mem_import_types.len();
+				let idx = idx as usize;
+				if idx < len {
+					Extern::Memory(mem_import_types[idx].clone())
+				} else {
+					Extern::Memory(module.memories[idx - len].type_.clone())
+				}
+			},
+			ExportDesc::Global(idx) => {
+				let len = global_import_types.len();
+				let idx = idx as usize;
+				if idx < len {
+					Extern::Global(global_import_types[idx].clone())
+				} else {
+					Extern::Global(module.globals[idx - len].type_.clone())
+				}
+			},
 		};
 		types.push((export.name.clone(), ex));
 	}
