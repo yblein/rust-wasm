@@ -1,7 +1,7 @@
 use script::*;
 use rust_wasm::values::Value;
 use std::str::FromStr;
-use std::{f32, f64, mem};
+use std::{f32, f64};
 use hexf::{parse_hexf32, parse_hexf64};
 
 //! This grammar does not match exactly the one given informally in the
@@ -64,9 +64,7 @@ float32: f32 = {
 	"-inf" => f32::NEG_INFINITY,
 	r"\+?inf" => f32::INFINITY,
 	<sign:r"[+-]"?> "nan:" <p:r"0x[[:xdigit:]]+"> => {
-		let z = unsafe {
-			mem::transmute::<u32, f32>(f32::INFINITY.to_bits() | u32::from_str_radix(&p[2..], 16).unwrap())
-		};
+		let z = f32::from_bits(f32::INFINITY.to_bits() | u32::from_str_radix(&p[2..], 16).unwrap());
 		if let Some("-") = sign { -z } else { z }
 	},
 	<s:r"[+-]?0x[[:xdigit:]]+((\.[[:xdigit:]]*)?[pP][+-]?[[:xdigit:]]+|\.[[:xdigit:]]*)"> => {
@@ -82,9 +80,7 @@ float64: f64 = {
 	"-inf" => f64::NEG_INFINITY,
 	r"\+?inf" => f64::INFINITY,
 	<sign:r"[+-]"?> "nan:" <p:r"0x[[:xdigit:]]+"> => {
-		let z = unsafe {
-			mem::transmute::<u64, f64>(f64::INFINITY.to_bits() | u64::from_str_radix(&p[2..], 16).unwrap())
-		};
+		let z = f64::from_bits(f64::INFINITY.to_bits() | u64::from_str_radix(&p[2..], 16).unwrap());
 		if let Some("-") = sign { -z } else { z }
 	},
 	<s:r"[+-]?0x[[:xdigit:]]+((\.[[:xdigit:]]*)?[pP][+-]?[[:xdigit:]]+|\.[[:xdigit:]]*)"> => {
