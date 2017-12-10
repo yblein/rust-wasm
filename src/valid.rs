@@ -588,30 +588,3 @@ fn check_module(module: &ast::Module) -> Option<()> {
 
 	require(mod_ctx.tables.len() <= 1 && mod_ctx.memories.len() <= 1)
 }
-
-#[cfg(test)]
-mod tests {
-	use super::*;
-
-	#[test]
-	/// Test checking a simple function that performs the addition of its two arguments.
-	fn check_func_plus() {
-		use ast::Instr::*;
-		use types::Value::*;
-		use types::Int::*;
-
-		let body = vec![GetLocal(1), GetLocal(0), IBin(I32, ast::IBinOp::Add)];
-		let func = ast::Func { type_index: 0, locals: vec![], body: body };
-		let types = vec![types::Func { args: vec![Int(I32), Int(I32)], result: vec![Int(I32)] }];
-
-		let mod_ctx = ModContext {
-			types: &types,
-			funcs: vec![&types[0]],
-			tables: vec![],
-			memories: vec![],
-			globals: vec![],
-		};
-
-		assert_eq!(check_func(&mod_ctx, &func), Some(()));
-	}
-}
