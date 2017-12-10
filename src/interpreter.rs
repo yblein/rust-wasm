@@ -44,33 +44,28 @@ use self::Control::*;
 
 type IntResult = Result<Control, Trap>;
 
-/// Frame represents a frame of execution
-pub struct Frame {
-	module: Rc<ModuleInst>,
-}
-
 /// Stack frames tracks frame activation
-pub struct StackFrames {
-	frames: Vec<Frame>,
+pub struct StackFrame {
+	module: Option<Rc<ModuleInst>>,
 	stack_idx: usize, // The size of the stack before pushing args & locals for the Frame
+	nested_levels: usize,
 }
 
-impl StackFrames {
-	pub fn new() -> StackFrames {
-		StackFrames {
-			frames: Vec::new(),
+impl StackFrame {
+	pub fn new(module: Option<Rc<ModuleInst>>) -> StackFrame {
+		StackFrame {
+			module: module,
 			stack_idx: 0,
+			nested_levels: 0
 		}
 	}
 
-	pub fn push(&mut self, module: Rc<ModuleInst>, stack_idx: usize) {
-		self.frames.push(Frame { module });
-		self.stack_idx = stack_idx;
-	}
-
-	pub fn pop(&mut self, stack_idx: usize) {
-		self.frames.pop();
-		self.stack_idx = stack_idx;
+	pub fn push(&self, module: Option<Rc<ModuleInst>>, stack_idx: usize) -> StackFrame {
+		StackFrame {
+			module: module,
+			stack_idx: stack_idx,
+			nested_levels: self.nested_levels + 1
+		}
 	}
 }
 
@@ -86,7 +81,7 @@ impl Interpreter {
 	/// This is the main dispatching function of the interpreter.
 	pub fn instr(
 		&mut self,
-		sframe: &mut StackFrames,
+		sframe: &StackFrame,
 		instr: &Instr,
 		funcs: & FuncInstStore,
 		tables: &TableInstStore,
@@ -107,11 +102,11 @@ impl Interpreter {
 			BrTable(ref all_levels, default_level) => self.branch_table(all_levels, default_level),
 			Return => self.return_(),
 			Call(idx) => {
-				let f_addr = sframe.frames.last().unwrap().module.func_addrs[idx as usize];
+				let f_addr = sframe.module.as_ref().unwrap().func_addrs[idx as usize];
 				self.call(f_addr, sframe, funcs, tables, globals, mems)
 			},
 			CallIndirect(idx) => {
-				let mod_inst = sframe.frames.last().unwrap().module.clone();
+				let mod_inst = sframe.module.as_ref().unwrap().clone();
 				self.call_indirect(idx,
 								   sframe,
 								   funcs,
@@ -126,12 +121,12 @@ impl Interpreter {
 			GetLocal(idx) => self.get_local(idx, sframe.stack_idx),
 			SetLocal(idx) => self.set_local(idx, sframe.stack_idx),
 			TeeLocal(idx) => self.tee_local(idx, sframe.stack_idx),
-			GetGlobal(idx) => self.get_global(idx, &globals, &sframe.frames.last().unwrap().module.global_addrs),
-			SetGlobal(idx) => self.set_global(idx, globals, &sframe.frames.last().unwrap().module.global_addrs),
-			Load(ref memop) => self.load(memop, &mems, &sframe.frames.last().unwrap().module.mem_addrs),
-			Store(ref memop) => self.store(memop, mems, &sframe.frames.last().unwrap().module.mem_addrs),
-			CurrentMemory => self.current_memory(&mems, &sframe.frames.last().unwrap().module.mem_addrs),
-			GrowMemory => self.grow_memory(mems, &sframe.frames.last().unwrap().module.mem_addrs),
+			GetGlobal(idx) => self.get_global(idx, &globals, &sframe.module.as_ref().unwrap().global_addrs),
+			SetGlobal(idx) => self.set_global(idx, globals, &sframe.module.as_ref().unwrap().global_addrs),
+			Load(ref memop) => self.load(memop, &mems, &sframe.module.as_ref().unwrap().mem_addrs),
+			Store(ref memop) => self.store(memop, mems, &sframe.module.as_ref().unwrap().mem_addrs),
+			CurrentMemory => self.current_memory(&mems, &sframe.module.as_ref().unwrap().mem_addrs),
+			GrowMemory => self.grow_memory(mems, &sframe.module.as_ref().unwrap().mem_addrs),
 			Const(c) => self.const_(c),
 			IUnary(ref t, ref op) => self.iunary(t, op),
 			FUnary(ref t, ref op) => self.funary(t, op),
@@ -157,7 +152,7 @@ impl Interpreter {
 	/// Interpret a block
 	fn block(
 		&mut self,
-		sframe: &mut StackFrames,
+		sframe: &StackFrame,
 		result_type: &[types::Value],
 		instrs: &[Instr],
 		funcs: & FuncInstStore,
@@ -197,7 +192,7 @@ impl Interpreter {
 	/// Interpret a loop
 	fn loop_(
 		&mut self,
-		sframe: &mut StackFrames,
+		sframe: &StackFrame,
 		instrs: &[Instr],
 		funcs: &FuncInstStore,
 		tables: &TableInstStore,
@@ -261,7 +256,7 @@ impl Interpreter {
 	/// If/Else block (delegate to block)
 	fn if_(
 		&mut self,
-		sframe: &mut StackFrames,
+		sframe: &StackFrame,
 		result_type: &[types::Value],
 		if_instrs: &[Instr],
 		else_instrs: &[Instr],
@@ -590,7 +585,7 @@ impl Interpreter {
 	pub fn call(
 		&mut self,
 		f_addr: FuncAddr,
-		sframe: &mut StackFrames,
+		sframe: &StackFrame,
 		funcs: & FuncInstStore,
 		tables: &TableInstStore,
 		globals: &mut GlobalInstStore,
@@ -614,20 +609,17 @@ impl Interpreter {
 				}
 
 				// Push the frame
-				let old_stack_idx = sframe.stack_idx;
 				let frame_begin = self.stack.len() - f_num_args - f_inst.code.locals.len();
-				sframe.push(f_inst.module.clone(), frame_begin);
+				let new_frame = sframe.push(Some(f_inst.module.clone()), frame_begin);
 
 				// Execute the function inside a block
-				self.block(sframe,
+				self.block(&new_frame,
 						   &f_inst.type_.result,
 						   &f_inst.code.body,
 						   funcs,
 						   tables,
 						   globals,
 						   mems)?;
-				// Pop the context
-				sframe.pop(old_stack_idx);
 
 				// Remove locals/args
 				let drain_start = frame_begin;
@@ -668,7 +660,7 @@ impl Interpreter {
 	fn call_indirect(
 		&mut self,
 		idx: Index,
-		sframe: &mut StackFrames,
+		sframe: &StackFrame,
 		funcs: & FuncInstStore,
 		tables: &TableInstStore,
 		globals: &mut GlobalInstStore,
@@ -1190,27 +1182,27 @@ mod tests {
 	// Inspired from
 	// https://medium.com/@ericdreichert/test-setup-and-teardown-in-rust-without-a-framework-ba32d97aa5ab
 	fn t<F, T>(test: F) -> T
-		where F: FnOnce(Interpreter, Store, StackFrames) -> T
+		where F: FnOnce(Interpreter, Store, StackFrame) -> T
 	{
 		let store = init_store();
 		let int = Interpreter::new();
-		let sframe = StackFrames::new();
+		let sframe = StackFrame::new();
 
 		test(int, store, sframe)
 	}
 
 	/// Run a sequence of instructions in a new empty interpreter.
 	fn run_seq(instrs: &[Instr]) -> Result<(), Trap> {
-		t(|mut int: Interpreter, mut store: Store, mut sframe: StackFrames| {
-			interpreter_eval_expr!(&mut int, &mut sframe, store, instrs)
+		t(|mut int: Interpreter, mut store: Store, sframe: StackFrame| {
+			interpreter_eval_expr!(&mut int, sframe, store, instrs)
 		})
 	}
 
 	/// Assert that executing the sequence of instructions `instrs` in a clean context
 	/// is sucessful and that the resulting stack is equal to `final_stack`.
 	fn assert_seq_stack(instrs: &[Instr], final_stack: &[Value]) {
-		t(|mut int: Interpreter, mut store: Store, mut sframe: StackFrames| {
-			assert_eq!(interpreter_eval_expr!(&mut int, &mut sframe, store, instrs), Ok(()));
+		t(|mut int: Interpreter, mut store: Store, sframe: StackFrame| {
+			assert_eq!(interpreter_eval_expr!(&mut int, sframe, store, instrs), Ok(()));
 			assert_eq!(int.stack, final_stack);
 		})
 	}

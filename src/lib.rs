@@ -27,7 +27,7 @@ pub use runtime::{
 };
 
 use runtime::*;
-use interpreter::{Interpreter, StackFrames, Trap};
+use interpreter::{Interpreter, StackFrame, Trap};
 
 use std::rc::Rc;
 use std::io::{Read, Seek};
@@ -244,8 +244,8 @@ pub fn invoke_func(store: &mut Store, funcaddr: FuncAddr, args: Vec<values::Valu
 	}
 
 
-	let mut sframe = interpreter::StackFrames::new();
-	match int.call(funcaddr, &mut sframe, &store.funcs, &store.tables, &mut store.globals, &mut store.mems) {
+	let sframe = interpreter::StackFrame::new(None);
+	match int.call(funcaddr, &sframe, &store.funcs, &store.tables, &mut store.globals, &mut store.mems) {
 		Err(err) => Err(Error::CodeTrapped(err)),
 		_ => {
 			let end_drain = int.stack.len() - functype.result.len();
@@ -467,8 +467,7 @@ pub fn instantiate_module(store: &mut Store, module: ast::Module, extern_vals: &
 
 	// For sframe/mod_aux lifetime dependecy
 	let (global_vals, elem_offsets, data_offsets) = {
-		let mut sframe = StackFrames::new();
-		sframe.push(mod_aux.clone(), 0);
+		let sframe = StackFrame::new(Some(mod_aux.clone()));
 
 		// 8. Let globalidx_{new} be the global index that corresponds to the
 		// number of global imports in module.imports (i.e., the index of the
@@ -477,7 +476,7 @@ pub fn instantiate_module(store: &mut Store, module: ast::Module, extern_vals: &
 		// ...
 		// Note: we only compute vals here, we will create the GlobalInstance when we allocate globals
 		let vals = module.globals.iter().map(|g| {
-			interpreter_eval_expr_const!(&mut const_int, &mut sframe, store, &g.value).unwrap()
+			interpreter_eval_expr_const!(&mut const_int, &sframe, store, &g.value).unwrap()
 		}).collect();
 
 		// 10. For each element segment elemi in module.elem, do:
@@ -485,7 +484,7 @@ pub fn instantiate_module(store: &mut Store, module: ast::Module, extern_vals: &
 		// Intuition: check if the module does not try to init too many elements
 		let mut elem_offsets = Vec::new();
 		for elem in module.elems.iter() {
-			let offset = match interpreter_eval_expr_const!(&mut const_int, &mut sframe, store, &elem.offset).unwrap() {
+			let offset = match interpreter_eval_expr_const!(&mut const_int, &sframe, store, &elem.offset).unwrap() {
 				values::Value::I32(c) => c as usize,
 				_ => unreachable!(),
 			};
@@ -510,7 +509,7 @@ pub fn instantiate_module(store: &mut Store, module: ast::Module, extern_vals: &
 		// Intuition: check if the module does not try to init too much memory
 		let mut data_offsets = Vec::new();
 		for data in module.data.iter() {
-			let offset = match interpreter_eval_expr_const!(&mut const_int, &mut sframe, store, &data.offset).unwrap() {
+			let offset = match interpreter_eval_expr_const!(&mut const_int, &sframe, store, &data.offset).unwrap() {
 				values::Value::I32(c) => c as usize,
 				_ => unreachable!(),
 			};
