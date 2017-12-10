@@ -352,18 +352,34 @@ pub trait FloatOp {
 	fn is_canonical_nan(self) -> bool;
 }
 
-macro_rules! impl_convert_float {
+macro_rules! impl_convert_float_s {
 	($T:ty, $U:ty, $N:ident) => (
 		#[inline]
 		fn $N(self) -> Option<$U> {
-			if self.is_nan() || self.is_infinite() {
+			if self.is_nan() {
 				None
 			} else {
-				let trunc = self.trunc();
-				if (<$U>::min_value() as $T) > trunc || trunc > (<$U>::max_value() as $T) {
+				if self >= -(<$U>::min_value() as $T) || self < <$U>::min_value() as $T {
 					None
 				} else {
-					Some(trunc as $U)
+					Some(self.trunc() as $U)
+				}
+			}
+		}
+	)
+}
+
+macro_rules! impl_convert_float_u {
+	($T:ty, $U:ty, $S:ty, $N:ident) => (
+		#[inline]
+		fn $N(self) -> Option<$U> {
+			if self.is_nan() {
+				None
+			} else {
+				if self >= -(<$S>::min_value() as $T) * 2.0 || self <= -1.0 {
+					None
+				} else {
+					Some(self.trunc() as $U)
 				}
 			}
 		}
@@ -509,10 +525,10 @@ macro_rules! impl_float_op {
 				self >= rhs
 			}
 
-			impl_convert_float!($T, u32, to_u32);
-			impl_convert_float!($T, u64, to_u64);
-			impl_convert_float!($T, i32, to_i32);
-			impl_convert_float!($T, i64, to_i64);
+			impl_convert_float_s!($T, i32, to_i32);
+			impl_convert_float_s!($T, i64, to_i64);
+			impl_convert_float_u!($T, u32, i32, to_u32);
+			impl_convert_float_u!($T, u64, i64, to_u64);
 
 			#[inline]
 			fn reinterpret(self) -> $I {
