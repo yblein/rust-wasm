@@ -74,14 +74,7 @@ pub fn run(input: &str) {
 			Cmd::ModuleSource(src) => {
 				let (opt_name, m) = decode_module_src(&src);
 
-				let mut extern_vals = Vec::new();
-				for (mod_name, import_name, type_) in module_imports(&m) {
-					let val = match &instances.hm[&Some(mod_name)] {
-						&ExportHashValue::Module(ref hm) => hm[&import_name],
-						&ExportHashValue::Host(ref lookup) => lookup(&mut store, &import_name, &type_).unwrap(),
-					};
-					extern_vals.push(val.clone());
-				}
+				let extern_vals = resolve_imports(&m, &mut store, &mut instances);
 
 				let mut all_exports = Vec::new();
 				for (export_name, _) in module_exports(&m) {
@@ -179,8 +172,8 @@ fn run_assertion(store: &mut Store, instances: &ExportHashMap, assertion: Assert
 		}
 		TrapInstantiate(module, _) => {
 			let (_, m) = decode_module_src(&module);
-			// TODO: imports
-			if let Err(Error::CodeTrapped(_)) = instantiate_module(store, m, &[]) {
+			let extern_vals = resolve_imports(&m, store, instances);
+			if let Err(Error::CodeTrapped(_)) = instantiate_module(store, m, &extern_vals[..]) {
 			} else {
 				panic!("instantiating module `{:?}` should cause a trap", module);
 			}
@@ -190,7 +183,7 @@ fn run_assertion(store: &mut Store, instances: &ExportHashMap, assertion: Assert
 		}
 		Invalid(module, _) => {
 			let (_, m) = decode_module_src(&module);
-			// TODO: imports
+			// Do not resolve the imports for invalid modules
 			let res =  instantiate_module(store, m, &[]);
 			if !res.is_err() || res.err().unwrap() != Error::InvalidModule {
 				panic!("instantiating module `{:?}` should not be possible because it is invalid", module);
@@ -206,8 +199,19 @@ fn run_assertion(store: &mut Store, instances: &ExportHashMap, assertion: Assert
 				}
 			}
 		}
-		Unlinkable(module, _) => {
-			unimplemented!("assert_unlinkable")
+		Unlinkable(module, reason) => {
+			let (_, m) = decode_module_src(&module);
+
+			let extern_vals = resolve_imports(&m, store, instances);
+			match (reason.as_ref(), instantiate_module(store, m, &extern_vals[..]).err()) {
+				("unknown import", Some(Error::NotEnoughExternVal)) => (),
+				("incompatible import type", Some(Error::ImportTypeMismatch)) => (),
+				// For host module, the ocaml impl returns an addr with the wrong
+				// type, while we returns import not found.
+				("elements segment does not fit", Some(Error::ElemOffsetTooLarge(_))) => (),
+				("data segment does not fit", Some(Error::DataOffsetTooLarge(_))) => (),
+				(reason, err) => panic!("instantiating module `{:?}` should not link (reason = {}, err = {:?})", module, reason, err),
+			}
 		}
 	}
 }
@@ -352,6 +356,19 @@ fn init_spectest(store: &mut Store, instances: &mut ExportHashMap) {
 					)
 				))
 			},
+			("print", _) => {
+				let print = |_stack: &mut Vec<values::Value>| {
+					None
+				};
+
+				Some(ExternVal::Func(
+					alloc_func(
+						store,
+						&types::Func { args: Vec::new(), result: Vec::new() },
+						Box::new(print)
+					)
+				))
+			},
 			("global", &types::Extern::Global(ref t)) => {
 				Some(ExternVal::Global(
 					alloc_global(
@@ -366,6 +383,15 @@ fn init_spectest(store: &mut Store, instances: &mut ExportHashMap) {
 					)
 				))
 			},
+			("global", _) => {
+				Some(ExternVal::Global(
+					alloc_global(
+						store,
+						&types::Global { value: types::Value::Int(types::Int::I32), mutable: false },
+						values::Value::I32(666)
+					)
+				))
+			},
 			("table", _) => Some(table_addr),
 			("memory", _) => Some(memory_addr),
 			_ => None
@@ -373,4 +399,27 @@ fn init_spectest(store: &mut Store, instances: &mut ExportHashMap) {
 	};
 
 	instances.hm.insert(Some(String::from("spectest")), ExportHashValue::Host(Rc::new(lookup)));
+}
+
+fn resolve_imports(m: &ast::Module, store: &mut Store, instances: &ExportHashMap) -> Vec<ExternVal> {
+	let mut extern_vals = Vec::new();
+	for (mod_name, import_name, type_) in module_imports(m) {
+		let val = match &instances.hm.get(&Some(mod_name)) {
+			&Some(&ExportHashValue::Module(ref hm)) => {
+				match hm.get(&import_name) {
+					Some(val) => val.clone(),
+					None => continue,
+				}
+			},
+			&Some(&ExportHashValue::Host(ref lookup)) => {
+				match lookup(store, &import_name, &type_) {
+					Some(val) => val.clone(),
+					None => continue,
+				}
+			},
+			&None => continue,
+		};
+		extern_vals.push(val);
+	}
+	extern_vals
 }

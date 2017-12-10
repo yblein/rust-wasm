@@ -432,13 +432,13 @@ pub fn instantiate_module(store: &mut Store, module: ast::Module, extern_vals: &
 						if let &ExternVal::Table(addr) = value {
 							imported_tables.push(addr);
 						}
-						exported_type.elem == imported_type.elem && match_limits(&imported_type.limits, &exported_type.limits)
+						exported_type.elem == imported_type.elem && match_limits(&exported_type.limits, &imported_type.limits)
 					},
 					(&types::Extern::Memory(ref exported_type), &ast::ImportDesc::Memory(ref imported_type)) => {
 						if let &ExternVal::Memory(addr) = value {
 							imported_memories.push(addr);
 						}
-						match_limits(&imported_type.limits, &exported_type.limits)
+						match_limits(&exported_type.limits, &imported_type.limits)
 					},
 					(&types::Extern::Global(ref exported_type), &ast::ImportDesc::Global(ref imported_type)) => {
 						if let &ExternVal::Global(addr) = value {
