@@ -2,7 +2,9 @@ mod parser;
 
 use std::{f32, f64};
 use std::rc::Rc;
-use std::io::Cursor;
+use std::fs::File;
+use std::path::Path;
+use std::io::{Cursor, Read};
 use std::collections::HashMap;
 use std::convert::TryFrom;
 use rust_wasm::*;
@@ -58,8 +60,14 @@ struct ExportHashMap {
 	last_key: ExportHashKey,
 }
 
-pub fn run(input: &str) {
-	let script = parser::parse_script(input).unwrap();
+pub fn run<P: AsRef<Path>>(path: P) {
+	let script = {
+		let mut f = File::open(path).unwrap();
+		let mut src = String::new();
+		f.read_to_string(&mut src).unwrap();
+		parser::parse_script(&src).unwrap()
+	};
+
 	let mut store = init_store();
 	let mut instances = ExportHashMap {
 		hm: HashMap::new(),

@@ -17,9 +17,6 @@ extern crate rust_wasm;
 extern crate hexf;
 
 mod script;
-
-use std::fs::File;
-use std::io::Read;
 "
 	).unwrap();
 
@@ -30,10 +27,7 @@ use std::io::Read;
 		write!(f,
 "#[test]
 fn run_{}() {{
-	let mut f = File::open(\"{}\").unwrap();
-	let mut src = String::new();
-	f.read_to_string(&mut src).unwrap();
-	script::run(&src[..]);
+	script::run(\"{}\");
 }}\n",
 			name,
 			path.display(),
