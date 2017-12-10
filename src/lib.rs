@@ -27,7 +27,7 @@ pub use runtime::{
 };
 
 use runtime::*;
-use interpreter::{Interpreter, StackFrame, Trap};
+use interpreter::{Interpreter, StackFrame, Trap, TrapOrigin};
 
 use std::rc::Rc;
 use std::io::{Read, Seek};
@@ -63,6 +63,7 @@ pub enum Error {
 	InvalidMemoryWrite,
 	GlobalImmutable,
 	GrowMemoryFailed,
+	StackOverflow
 }
 
 /// Return the empty store
@@ -246,6 +247,7 @@ pub fn invoke_func(store: &mut Store, funcaddr: FuncAddr, args: Vec<values::Valu
 
 	let sframe = interpreter::StackFrame::new(None);
 	match int.call(funcaddr, &sframe, &store.funcs, &store.tables, &mut store.globals, &mut store.mems) {
+		Err(Trap { origin: TrapOrigin::StackOverflow }) => Err(Error::StackOverflow),
 		Err(err) => Err(Error::CodeTrapped(err)),
 		_ => {
 			let end_drain = int.stack.len() - functype.result.len();

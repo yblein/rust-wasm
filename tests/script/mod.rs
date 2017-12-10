@@ -178,8 +178,11 @@ fn run_assertion(store: &mut Store, instances: &ExportHashMap, assertion: Assert
 				panic!("instantiating module `{:?}` should cause a trap", module);
 			}
 		}
-		Exhaustion(action, _) => {
-			unimplemented!("assert_exhaustion")
+		Exhaustion(action, reason) => {
+			match (reason.as_ref(), run_action(store, instances, &action)) {
+				("call stack exhausted", Err(Error::StackOverflow)) => (),
+				(reason, err) => panic!("the action `{:?}` should cause a stack overflow (reason = {}, err = {:?})", action, reason, err),
+			};
 		}
 		Invalid(module, reason) => {
 			let (_, m) = decode_module_src(&module);

@@ -21,6 +21,7 @@ pub enum TrapOrigin {
 	CallIndirectTypesDiffer,
 	LoadOutOfMemory,
 	StoreOutOfMemory,
+	StackOverflow,
 	HostFunction(HostFunctionError),
 }
 
@@ -51,21 +52,28 @@ pub struct StackFrame {
 	nested_levels: usize,
 }
 
+// The stack budget (how many nested levels)
+const STACK_BUDGET: usize = 300;
+
 impl StackFrame {
 	pub fn new(module: Option<Rc<ModuleInst>>) -> StackFrame {
 		StackFrame {
 			module: module,
 			stack_idx: 0,
-			nested_levels: 0
+			nested_levels: STACK_BUDGET,
 		}
 	}
 
-	pub fn push(&self, module: Option<Rc<ModuleInst>>, stack_idx: usize) -> StackFrame {
-		StackFrame {
+	pub fn push(&self, module: Option<Rc<ModuleInst>>, stack_idx: usize) -> Option<StackFrame> {
+		if self.nested_levels == 0 {
+			return None;
+		}
+
+		Some(StackFrame {
 			module: module,
 			stack_idx: stack_idx,
-			nested_levels: self.nested_levels + 1
-		}
+			nested_levels: self.nested_levels - 1
+		})
 	}
 }
 
@@ -610,7 +618,7 @@ impl Interpreter {
 
 				// Push the frame
 				let frame_begin = self.stack.len() - f_num_args - f_inst.code.locals.len();
-				let new_frame = sframe.push(Some(f_inst.module.clone()), frame_begin);
+				let new_frame = sframe.push(Some(f_inst.module.clone()), frame_begin).ok_or(Trap { origin: TrapOrigin::StackOverflow })?;
 
 				// Execute the function inside a block
 				self.block(&new_frame,
