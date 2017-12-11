@@ -171,9 +171,7 @@ impl Interpreter {
 		let local_stack_begin = self.stack.len();
 
 		for instr in instrs {
-			let res = self.instr(sframe, instr, funcs, tables, globals, mems)?;
-
-			match res {
+			match self.instr(sframe, instr, funcs, tables, globals, mems)? {
 				Branch { nesting_levels } => {
 					// If the instruction caused a branch, we need to exit the block early on.
 					// The way to do so depends if the current block is the target of the branch.
@@ -589,6 +587,80 @@ impl Interpreter {
 		Ok(Continue)
 	}
 
+	fn call_module(
+		&mut self,
+		f_inst: &ModuleFuncInst,
+		sframe: &StackFrame,
+		funcs: & FuncInstStore,
+		tables: &TableInstStore,
+		globals: &mut GlobalInstStore,
+		mems: &mut MemInstStore
+	) -> IntResult {
+		// Push locals
+		for l in &f_inst.code.locals {
+			match *l {
+				types::Value::Int(types::Int::I32) => self.stack.push(Value::I32(0)),
+				types::Value::Int(types::Int::I64) => self.stack.push(Value::I64(0)),
+				types::Value::Float(types::Float::F32) => self.stack.push(Value::F32(0.0)),
+				types::Value::Float(types::Float::F64) => self.stack.push(Value::F64(0.0)),
+			}
+		}
+
+		// Push the frame
+		let frame_begin = self.stack.len() - f_inst.type_.args.len() - f_inst.code.locals.len();
+		let new_frame = sframe.push(Some(f_inst.module.clone()), frame_begin).ok_or(Trap { origin: TrapOrigin::StackOverflow })?;
+
+		// Execute the function inside a block
+		self.block(&new_frame,
+				   &f_inst.type_.result,
+				   &f_inst.code.body,
+				   funcs,
+				   tables,
+				   globals,
+				   mems)?;
+
+		// Remove locals/args
+		let drain_start = frame_begin;
+		let drain_end = self.stack.len() - f_inst.type_.result.len();
+		self.stack.drain(drain_start..drain_end);
+		Ok(Continue)
+	}
+
+	fn call_host(
+		&mut self,
+		f_inst: &HostFuncInst,
+		_sframe: &StackFrame,
+		_funcs: & FuncInstStore,
+		_tables: &TableInstStore,
+		_globals: &mut GlobalInstStore,
+		_mems: &mut MemInstStore
+	) -> IntResult {
+		let stack_before_call = self.stack.len();
+
+		if let Some(err) = (f_inst.hostcode)(&mut self.stack) {
+			return Err(Trap { origin: TrapOrigin::HostFunction(err) });
+		}
+
+		// Stack must be valid
+		assert_eq!(self.stack.len(), stack_before_call);
+		for (arg, type_) in self.stack[stack_before_call..].iter().zip(f_inst.type_.args.iter()) {
+			match (arg, type_) {
+				(&Value::I32(_), &types::Value::Int(types::Int::I32)) => (),
+				(&Value::I64(_), &types::Value::Int(types::Int::I64)) => (),
+				(&Value::F32(_), &types::Value::Float(types::Float::F32)) => (),
+				(&Value::F64(_), &types::Value::Float(types::Float::F64)) => (),
+				_ => { panic!("Invalid return value by host function."); },
+			};
+		}
+
+		// Remove args
+		let drain_end = self.stack.len() - f_inst.type_.result.len();
+		self.stack.drain((stack_before_call - f_inst.type_.args.len())..drain_end);
+
+		Ok(Continue)
+	}
+
+
 	/// Call a function directly
 	pub fn call(
 		&mut self,
@@ -603,62 +675,8 @@ impl Interpreter {
 		// first argument of the called function. When calling call, all
 		// arguments should already be on the stack (thanks to validation).
 		match funcs[f_addr] {
-			FuncInst::Module(ref f_inst) => {
-				let f_num_args = f_inst.type_.args.len();
-
-				// Push locals
-				for l in &f_inst.code.locals {
-					match *l {
-						types::Value::Int(types::Int::I32) => self.stack.push(Value::I32(0)),
-						types::Value::Int(types::Int::I64) => self.stack.push(Value::I64(0)),
-						types::Value::Float(types::Float::F32) => self.stack.push(Value::F32(0.0)),
-						types::Value::Float(types::Float::F64) => self.stack.push(Value::F64(0.0)),
-					}
-				}
-
-				// Push the frame
-				let frame_begin = self.stack.len() - f_num_args - f_inst.code.locals.len();
-				let new_frame = sframe.push(Some(f_inst.module.clone()), frame_begin).ok_or(Trap { origin: TrapOrigin::StackOverflow })?;
-
-				// Execute the function inside a block
-				self.block(&new_frame,
-						   &f_inst.type_.result,
-						   &f_inst.code.body,
-						   funcs,
-						   tables,
-						   globals,
-						   mems)?;
-
-				// Remove locals/args
-				let drain_start = frame_begin;
-				let drain_end = self.stack.len() - f_inst.type_.result.len();
-				self.stack.drain(drain_start..drain_end);
-			},
-			FuncInst::Host(ref f_inst) => {
-				let f_num_args = f_inst.type_.args.len();
-				let stack_before_call = self.stack.len();
-
-				if let Some(err) = (f_inst.hostcode)(&mut self.stack) {
-					return Err(Trap { origin: TrapOrigin::HostFunction(err) });
-				}
-
-				// Stack must be valid
-				assert_eq!(self.stack.len(), stack_before_call);
-				for (arg, type_) in self.stack[stack_before_call..].iter().zip(f_inst.type_.args.iter()) {
-					match (arg, type_) {
-						(&Value::I32(_), &types::Value::Int(types::Int::I32)) => (),
-						(&Value::I64(_), &types::Value::Int(types::Int::I64)) => (),
-						(&Value::F32(_), &types::Value::Float(types::Float::F32)) => (),
-						(&Value::F64(_), &types::Value::Float(types::Float::F64)) => (),
-						_ => { panic!("Invalid return value by host function."); },
-					};
-				}
-
-				// Remove args
-				let drain_start = stack_before_call - f_num_args;
-				let drain_end = self.stack.len() - f_inst.type_.result.len();
-				self.stack.drain(drain_start..drain_end);
-			},
+			FuncInst::Module(ref f_inst) => self.call_module(f_inst, sframe, funcs, tables, globals, mems)?,
+			FuncInst::Host(ref f_inst) => self.call_host(f_inst, sframe, funcs, tables, globals, mems)?,
 		};
 
 		Ok(Continue)
