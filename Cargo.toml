@@ -12,4 +12,4 @@ lalrpop = "0.13.1"
 [dev-dependencies]
 lalrpop-util = "0.13.1"
 regex = "0.2.1"
-hexf = "0.1.0"
+hexf-parse = "0.1.0"

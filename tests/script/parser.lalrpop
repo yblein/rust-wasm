@@ -2,7 +2,7 @@ use script::*;
 use rust_wasm::values::Value;
 use std::str::FromStr;
 use std::{f32, f64};
-use hexf::{parse_hexf32, parse_hexf64};
+use hexf_parse::{parse_hexf32, parse_hexf64};
 
 //! This grammar does not match exactly the one given informally in the
 //! official interpreter implementation, but it is good enough to parse the test
