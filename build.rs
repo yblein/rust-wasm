@@ -1,18 +1,12 @@
-extern crate lalrpop;
-
 use std::fs::{self, File};
 use std::io::prelude::*;
 
 fn main() {
-	// generate parsers
-	lalrpop::process_root().unwrap();
-
 	// generate a driver for the test suite
 	let mut f = File::create("tests/run.rs").unwrap();
 	f.write_all(
 b"#![feature(try_from)]
 
-extern crate lalrpop_util;
 extern crate rust_wasm;
 extern crate hexf_parse;
 

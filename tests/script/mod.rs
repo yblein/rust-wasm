@@ -6,10 +6,7 @@ use std::fs::File;
 use std::path::Path;
 use std::io::{Cursor, Read};
 use std::collections::HashMap;
-use std::convert::TryFrom;
 use rust_wasm::*;
-
-pub type Script = Vec<Cmd>;
 
 #[derive(Debug)]
 pub enum Cmd {
@@ -22,7 +19,7 @@ pub enum Cmd {
 #[derive(Debug)]
 pub enum ModuleSource {
 	Binary(Option<String>, Vec<u8>),
-	Text(Option<String>, String),
+	Quoted(Option<String>, Vec<u8>),
 }
 
 #[derive(Debug)]
@@ -61,12 +58,10 @@ struct ExportHashMap {
 }
 
 pub fn run<P: AsRef<Path>>(path: P) {
-	let script = {
-		let mut f = File::open(path).unwrap();
-		let mut src = String::new();
-		f.read_to_string(&mut src).unwrap();
-		parser::parse_script(&src).unwrap()
-	};
+	let mut f = File::open(path).unwrap();
+	let mut src = String::new();
+	f.read_to_string(&mut src).unwrap();
+	let parser = parser::Parser::new(&src);
 
 	let mut store = init_store();
 	let mut instances = ExportHashMap {
@@ -77,7 +72,7 @@ pub fn run<P: AsRef<Path>>(path: P) {
 	// Special test host module
 	init_spectest(&mut store, &mut instances);
 
-	for cmd in script {
+	parser.for_each(|cmd| {
 		match cmd {
 			Cmd::ModuleSource(src) => {
 				let (opt_name, m) = decode_module_src(&src);
@@ -115,13 +110,13 @@ pub fn run<P: AsRef<Path>>(path: P) {
 				instances.hm.insert(Some(name), inst);
 			}
 		}
-	}
+	});
 }
 
 fn decode_module_src(module: &ModuleSource) -> (Option<String>, ast::Module) {
 	match *module {
 		ModuleSource::Binary(ref name, ref bytes) => (name.clone(), decode_module(Cursor::new(bytes)).unwrap()),
-		ModuleSource::Text(_, _) => unimplemented!("quoted modules are not supported"),
+		ModuleSource::Quoted(_, _) => unimplemented!("quoted modules are not supported"),
 	}
 }
 
@@ -205,8 +200,8 @@ fn run_assertion(store: &mut Store, instances: &ExportHashMap, assertion: Assert
 				ModuleSource::Binary(_, bytes) => {
 					assert_eq!(decode_module(Cursor::new(bytes)).unwrap_err(), Error::DecodeModuleFailed);
 				},
-				ModuleSource::Text(_, _) => {
-					// NB: only quoted module may be malformed and we do not suport them
+				ModuleSource::Quoted(_, _) => {
+					// NB: quoted sources use text format, which we do not support
 				}
 			}
 		}
@@ -232,6 +227,7 @@ fn run_action(store: &mut Store, instances: &ExportHashMap, action: &Action) -> 
 				&None => &instances.last_key,
 				&Some(_) => mod_name,
 			};
+			println!("func {:?}", func);
 			let extern_val = match instances.hm[mod_name] {
 				ExportHashValue::Module(ref hm) => hm[func],
 				ExportHashValue::Host(_) => unreachable!(),
@@ -260,75 +256,6 @@ fn run_action(store: &mut Store, instances: &ExportHashMap, action: &Action) -> 
 			}
 		}
 	}
-}
-
-fn unescape<'a>(s: &'a str) -> String {
-	let mut res = String::new();
-
-	enum State {
-		Normal,
-		Esc,
-		Unicode,
-		Scalar(u32),
-	}
-
-	let mut state = State::Normal;
-
-	for c in s.chars() {
-		match state {
-			State::Normal => match c {
-				'\\' => state = State::Esc,
-				_ => res.push(c),
-			},
-			State::Esc => match c {
-				't' => {
-					res.push('\t');
-					state = State::Normal;
-				}
-				'n' => {
-					res.push('\n');
-					state = State::Normal;
-				}
-				'r' => {
-					res.push('\r');
-					state = State::Normal;
-				}
-				'\"' => {
-					res.push('\"');
-					state = State::Normal;
-				}
-				'\'' => {
-					res.push('\'');
-					state = State::Normal;
-				}
-				'\\' => {
-					res.push('\\');
-					state = State::Normal;
-				}
-				'u' => {
-					state = State::Unicode;
-				}
-				_ => panic!("unexpected escape `{}`", c),
-			},
-			State::Unicode => match c {
-				'{' => {
-					state = State::Scalar(0);
-				}
-				_ => panic!("expected `{{`, found `{}`", c),
-			}
-			State::Scalar(v) => match c {
-				'}' => {
-					res.push(char::try_from(v).expect("invalid unicode point"));
-					state = State::Normal;
-				}
-				_ => {
-					state = State::Scalar(v << 4 | c.to_digit(16).expect("expected hex digit"));
-				}
-			}
-		}
-	}
-
-	res
 }
 
 fn init_spectest(store: &mut Store, instances: &mut ExportHashMap) {
