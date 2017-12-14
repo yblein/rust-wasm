@@ -2,7 +2,7 @@
 
 A [WASM](http://webassembly.org/) interpreter written in Rust.
 
-Note: the implementation is complete, i.e., all the [specification](https://webassembly.github.io/spec/core/index.html) is implemented and the [official test suite](https://github.com/WebAssembly/spec/tree/master/test) is covered.
+Apart from parsing the text format, the implementation is complete, i.e., all the [specification](https://webassembly.github.io/spec/core/index.html) is implemented and the [official test suite](https://github.com/WebAssembly/spec/tree/master/test) is covered.
 
 ## Getting Started
 
@@ -27,7 +27,7 @@ cargo test
 ## Using the API
 
 The [official embedding API](https://webassembly.github.io/spec/core/appendix/embedding.html) is supported.
-Because the API is mostly written for a functionnal language, we slightly modified it to best fit Rust (e.g., using mutable reference instead of returning a new store each time).
+Because the API is written in a pure style, we slightly modified it to best fit Rust (e.g., using mutable reference instead of returning a new store each time).
 
 ### Invoking the `main` function
 
@@ -89,8 +89,3 @@ This is left to the embedder. Nonetheless, you can see a working example inside 
 
 * **[Yoann Blein](https://github.com/yblein)**
 * **[Hugo Guiroux](https://github.com/HugoGuiroux)**
-
-
-## License
-
-This project is licensed under the ISC License - see the [LICENSE.md](LICENSE.md) file for details.
