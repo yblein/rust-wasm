@@ -94,11 +94,11 @@
 (assert_return (invoke "dispatch" (i32.const 20) (i64.const 2)) (i64.const 2))
 (assert_trap
   (invoke "dispatch" (i32.const 0) (i64.const 2))
-  "indirect call signature mismatch"
+  "indirect call type mismatch"
 )
 (assert_trap
   (invoke "dispatch" (i32.const 15) (i64.const 2))
-  "indirect call signature mismatch"
+  "indirect call type mismatch"
 )
 (assert_trap
   (invoke "dispatch" (i32.const 23) (i64.const 2))
@@ -118,11 +118,11 @@
 (assert_return (invoke "dispatch-structural" (i32.const 20)) (i64.const 9))
 (assert_trap
   (invoke "dispatch-structural" (i32.const 11))
-  "indirect call signature mismatch"
+  "indirect call type mismatch"
 )
 (assert_trap
   (invoke "dispatch-structural" (i32.const 22))
-  "indirect call signature mismatch"
+  "indirect call type mismatch"
 )
 (assert_return (invoke "fac" (i64.const 0)) (i64.const 1))
 (assert_return (invoke "fac" (i64.const 1)) (i64.const 1))
