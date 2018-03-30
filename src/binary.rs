@@ -70,20 +70,25 @@ impl<R: Read> Decoder<R> {
 
 	/// Read a LEB128 encoded 32-bits unsigned integer
 	fn read_vu32(&mut self) -> DecodeResult<u32> {
-		Ok(self.read_vu64()? as u32)
-	}
-
-	/// Read a LEB128 encoded 64-bits unsigned integer
-	fn read_vu64(&mut self) -> DecodeResult<u64> {
 		let mut res = 0;
 		let mut shift = 0;
 		loop {
 			let b = self.read_byte()?;
-			res |= ((b & 0x7f) as u64) << shift;
+
+			// forbid unused bits
+			if shift >= 32 - 32 % 7 && (b & 0x7f >= 1 << (32 % 7)) {
+				return Err(DecodeError::MalformedBinary);
+			}
+
+			res |= ((b & 0x7f) as u32) << shift;
 			if b & 0x80 == 0 {
 				return Ok(res);
 			}
 			shift += 7;
+
+			if shift >= 32 {
+				return Err(DecodeError::MalformedBinary);
+			}
 		}
 	}
 
@@ -93,13 +98,26 @@ impl<R: Read> Decoder<R> {
 		let mut shift = 0;
 		loop {
 			let b = self.read_byte()?;
+
+			// forbid unused bits
+			if shift >= 32 - 32 % 7 {
+				let mask = ((-1 << (32 % 7) - 1) & 0x7f) as u8;
+				if b & mask != 0 && b & mask != mask {
+					return Err(DecodeError::MalformedBinary);
+				}
+			}
+
 			res |= ((b & 0x7f) as i32) << shift;
 			shift += 7;
 			if b & 0x80 == 0 {
 				if shift < 32 && (b & 0x40 != 0) {
-					res |= (1i32 << shift).wrapping_neg();
+					res |= -1 << shift;
 				}
 				return Ok(res);
+			}
+
+			if shift >= 32 {
+				return Err(DecodeError::MalformedBinary);
 			}
 		}
 	}
@@ -110,13 +128,26 @@ impl<R: Read> Decoder<R> {
 		let mut shift = 0;
 		loop {
 			let b = self.read_byte()?;
+
+			// forbid unused bits
+			if shift >= 64 - 64 % 7 {
+				let mask = (-1 & 0x7f) as u8;
+				if b & mask != 0 && b & mask != mask {
+					return Err(DecodeError::MalformedBinary);
+				}
+			}
+
 			res |= ((b & 0x7f) as i64) << shift;
 			shift += 7;
 			if b & 0x80 == 0 {
 				if shift < 64 && (b & 0x40 != 0) {
-					res |= (1i64 << shift).wrapping_neg();
+					res |= -1 << shift;
 				}
 				return Ok(res);
+			}
+
+			if shift >= 64 {
+				return Err(DecodeError::MalformedBinary);
 			}
 		}
 	}
