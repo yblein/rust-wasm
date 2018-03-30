@@ -123,6 +123,7 @@ fn decode_module_src(module: &ModuleSource) -> (Option<String>, ast::Module) {
 fn run_assertion(store: &mut Store, instances: &ExportHashMap, assertion: Assertion) {
 	use self::Assertion::*;
 
+	println!("run assertion {:?}", assertion);
 	match assertion {
 		Return(action, expected) => {
 			let result = run_action(store, instances, &action);
@@ -272,61 +273,45 @@ fn init_spectest(store: &mut Store, instances: &mut ExportHashMap) {
 		)
 	);
 
+	fn print(store: &mut Store, args_types: Vec<types::Value>) -> Option<ExternVal> {
+		let args_len = args_types.len();
+		let func = move |stack: &mut Vec<values::Value>| {
+			for val in &stack[(stack.len() - args_len)..stack.len()] {
+				println!("{:?}", val);
+			}
+			None
+		};
+
+		Some(ExternVal::Func(
+			alloc_func(
+				store,
+				&types::Func { args: args_types, result: Vec::new() },
+				Box::new(func)
+			)
+		))
+	}
+
+	fn global(store: &mut Store, val: values::Value) -> Option<ExternVal> {
+		Some(ExternVal::Global(
+			alloc_global(
+				store,
+				&types::Global { value: val.type_(), mutable: false },
+				val
+			)
+		))
+	}
+
 	let lookup = move |store: &mut Store, name: &String, type_: &types::Extern| {
 		match (name.as_ref(), type_) {
-			("print", &types::Extern::Func(ref t)) => {
-				let args_len = t.args.len();
-				let print = move |stack: &mut Vec<values::Value>| {
-					for val in &stack[(stack.len() - args_len)..stack.len()] {
-						println!("{:?}", val);
-					}
-					None
-				};
-
-				Some(ExternVal::Func(
-					alloc_func(
-						store,
-						&t,
-						Box::new(print)
-					)
-				))
-			},
-			("print", _) => {
-				let print = |_stack: &mut Vec<values::Value>| {
-					None
-				};
-
-				Some(ExternVal::Func(
-					alloc_func(
-						store,
-						&types::Func { args: Vec::new(), result: Vec::new() },
-						Box::new(print)
-					)
-				))
-			},
-			("global", &types::Extern::Global(ref t)) => {
-				Some(ExternVal::Global(
-					alloc_global(
-						store,
-						&t,
-						match t.value {
-							types::Value::Int(types::Int::I32) => values::Value::I32(666),
-							types::Value::Int(types::Int::I64) => values::Value::I64(666),
-							types::Value::Float(types::Float::F32) => values::Value::F32(666.0),
-							types::Value::Float(types::Float::F64) => values::Value::F64(666.0),
-						},
-					)
-				))
-			},
-			("global", _) => {
-				Some(ExternVal::Global(
-					alloc_global(
-						store,
-						&types::Global { value: types::Value::Int(types::Int::I32), mutable: false },
-						values::Value::I32(666)
-					)
-				))
-			},
+			("print", _) => print(store, vec![]),
+			("print_i32", _) => print(store, vec![types::Value::Int(types::Int::I32)]),
+			("print_i32_f32", _) => print(store, vec![types::Value::Int(types::Int::I32), types::Value::Float(types::Float::F32)]) ,
+			("print_f32", _) => print(store, vec![types::Value::Float(types::Float::F32)]),
+			("print_f64", _) => print(store, vec![types::Value::Float(types::Float::F64)]),
+			("print_f64_f64", _) => print(store, vec![types::Value::Float(types::Float::F64), types::Value::Float(types::Float::F64)]),
+			("global_i32", _) => global(store, values::Value::I32(666)),
+			("global_f32", _) => global(store, values::Value::F32(666.0)),
+			("global_f64", _) => global(store, values::Value::F64(666.0)),
 			("table", _) => Some(table_addr),
 			("memory", _) => Some(memory_addr),
 			_ => None

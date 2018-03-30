@@ -2,7 +2,7 @@
 
 A [WASM](http://webassembly.org/) interpreter written in Rust.
 
-Apart from parsing the text format, the implementation is complete, i.e., all the [specification](https://webassembly.github.io/spec/core/index.html) is implemented and the [official test suite](https://github.com/WebAssembly/spec/tree/master/test) is covered.
+Apart from parsing the text format, the implementation is complete, i.e., all the [specification](https://webassembly.github.io/spec/core/index.html) is implemented and the [official test suite](https://github.com/WebAssembly/spec/tree/master/test) is fully covered (as of 2018-03-29).
 
 ## Getting Started
 
