@@ -518,6 +518,10 @@ impl<R: Read> Decoder<R> {
 		let start_pos = self.pos;
 		let _ = self.read_name()?;
 		let nread = self.pos - start_pos;
+		// ensure that we didn't read more than the declared size of the section
+		if nread > size as usize {
+			return Err(DecodeError::MalformedBinary);
+		}
 		let nskip = size as usize - nread;
 
 		for _ in 0..nskip {
