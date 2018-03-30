@@ -72,7 +72,7 @@ pub fn run<P: AsRef<Path>>(path: P) {
 	// Special test host module
 	init_spectest(&mut store, &mut instances);
 
-	parser.for_each(|cmd| {
+	for cmd in parser {
 		match cmd {
 			Cmd::ModuleSource(src) => {
 				let (opt_name, m) = decode_module_src(&src);
@@ -110,7 +110,7 @@ pub fn run<P: AsRef<Path>>(path: P) {
 				instances.hm.insert(Some(name), inst);
 			}
 		}
-	});
+	}
 }
 
 fn decode_module_src(module: &ModuleSource) -> (Option<String>, ast::Module) {
@@ -227,7 +227,6 @@ fn run_action(store: &mut Store, instances: &ExportHashMap, action: &Action) -> 
 				&None => &instances.last_key,
 				&Some(_) => mod_name,
 			};
-			println!("func {:?}", func);
 			let extern_val = match instances.hm[mod_name] {
 				ExportHashValue::Module(ref hm) => hm[func],
 				ExportHashValue::Host(_) => unreachable!(),
