@@ -50,10 +50,10 @@ impl Value {
 
 	pub fn type_(&self) -> types::Value {
 		match *self {
-			Value::I32(_) => types::Value::Int(types::Int::I32),
-			Value::I64(_) => types::Value::Int(types::Int::I64),
-			Value::F32(_) => types::Value::Float(types::Float::F32),
-			Value::F64(_) => types::Value::Float(types::Float::F64),
+			Value::I32(_) => types::I32,
+			Value::I64(_) => types::I64,
+			Value::F32(_) => types::F32,
+			Value::F64(_) => types::F64,
 		}
 	}
 }

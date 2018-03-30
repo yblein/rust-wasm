@@ -304,11 +304,11 @@ fn init_spectest(store: &mut Store, instances: &mut ExportHashMap) {
 	let lookup = move |store: &mut Store, name: &String, type_: &types::Extern| {
 		match (name.as_ref(), type_) {
 			("print", _) => print(store, vec![]),
-			("print_i32", _) => print(store, vec![types::Value::Int(types::Int::I32)]),
-			("print_i32_f32", _) => print(store, vec![types::Value::Int(types::Int::I32), types::Value::Float(types::Float::F32)]) ,
-			("print_f32", _) => print(store, vec![types::Value::Float(types::Float::F32)]),
-			("print_f64", _) => print(store, vec![types::Value::Float(types::Float::F64)]),
-			("print_f64_f64", _) => print(store, vec![types::Value::Float(types::Float::F64), types::Value::Float(types::Float::F64)]),
+			("print_i32", _) => print(store, vec![types::I32]),
+			("print_i32_f32", _) => print(store, vec![types::I32, types::F32]) ,
+			("print_f32", _) => print(store, vec![types::F32]),
+			("print_f64", _) => print(store, vec![types::F64]),
+			("print_f64_f64", _) => print(store, vec![types::F64, types::F64]),
 			("global_i32", _) => global(store, values::Value::I32(666)),
 			("global_f32", _) => global(store, values::Value::F32(666.0)),
 			("global_f64", _) => global(store, values::Value::F64(666.0)),

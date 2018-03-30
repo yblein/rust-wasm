@@ -25,6 +25,12 @@ impl Value {
 	}
 }
 
+// Useful aliases for value types
+pub static I32: Value = Value::Int(Int::I32);
+pub static I64: Value = Value::Int(Int::I64);
+pub static F32: Value = Value::Float(Float::F32);
+pub static F64: Value = Value::Float(Float::F64);
+
 
 #[derive(Debug, Clone, PartialEq)]
 pub enum Elem {
