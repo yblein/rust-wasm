@@ -396,24 +396,17 @@ pub fn write_global(store: &mut Store, globaladdr: GlobalAddr, val: values::Valu
 
 /// Instantiate a module
 pub fn instantiate_module(store: &mut Store, module: ast::Module, extern_vals: &[ExternVal]) -> Result<Rc<ModuleInst>, Error> {
-
-	// 1. If module is not valid, then: Fail
+	// fail if module is invalid
 	if !valid::is_valid(&module) {
 		return Err(Error::InvalidModule)
 	}
 
-	// 2. Assert: module is valid with external types externtype^{m}_{im} classifying its import
-	// 3. If the number m of imports is not equal to the number n of provided external values, then: Fail
+	// ensure that the number of provided exports matches the number of imports
 	if extern_vals.len() != module.imports.len() {
 		return Err(Error::NotEnoughExternVal)
 	}
 
-	// 4. For each external value externval_i in externval^n and external
-	// type externtype'_i in externtype^{n}_{im}, do:
-	// a. Assert: externval_i is valid with external type externtype_i in store S.
-	// b. If externtype_i does not match externtype'_i, then: Fail
-	//
-	// Intuition: resolve imports by module name & fct name, check their types
+	// resolve imports, type-cheking them in the process
 	let mut imported_funcs = Vec::new();
 	let mut imported_tables = Vec::new();
 	let mut imported_memories = Vec::new();
@@ -434,24 +427,12 @@ pub fn instantiate_module(store: &mut Store, module: ast::Module, extern_vals: &
 		}
 	}
 
-	// 5. Let moduleinst_im be the auxiliary module instance {globaladdrs
-	// globals(externval∗)} that only consists of the imported globals.
-	// 6. Let F be the frame {module moduleinstim,locals ϵ}.
-	// 7. Push the frame F to the stack.
-
-	// 8. Let globalidx_{new} be the global index that corresponds to the
-	// number of global imports in module.imports (i.e., the index of the
-	// first non-imported global).
-	// 9. For each global globali in module.globals, do:
-	// ...
-	// Note: we only compute vals here, we will create the GlobalInstance when we allocate globals
+	// compute initial values for globals
 	let global_vals = module.globals.iter().map(|g| {
 		eval_const_expr(&store.globals, &imported_globals, &g.value)
 	}).collect();
 
-	// 10. For each element segment elemi in module.elem, do:
-	// ...
-	// Intuition: check if the module does not try to init too many elements
+	// check that the module does not try to init too many elements
 	let mut elem_offsets = Vec::new();
 	for elem in module.elems.iter() {
 		let offset = match eval_const_expr(&store.globals, &imported_globals, &elem.offset) {
@@ -461,22 +442,21 @@ pub fn instantiate_module(store: &mut Store, module: ast::Module, extern_vals: &
 		elem_offsets.push(offset);
 
 		let table_size = {
-			if (elem.index as usize) >= imported_tables.len() {
-				module.tables[(elem.index as usize) - imported_tables.len()].type_.limits.min as usize
-			} else {
+			let is_imported = (elem.index as usize) < imported_tables.len();
+			if is_imported {
 				store.tables[imported_tables[elem.index as usize]].elem.len()
+			} else {
+				let module_index = elem.index as usize - imported_tables.len();
+				module.tables[module_index].type_.limits.min as usize
 			}
 		};
 
-		// We will allocate limits.min empty elements when allocating the table
 		if offset + elem.init.len() > table_size {
 			return Err(Error::ElemOffsetTooLarge(elem.index as usize));
 		}
 	}
 
-	// 11. For each data segment datai in module.data, do:
-	// ...
-	// Intuition: check if the module does not try to init too much memory
+	// check that the module does not try to init too much memory
 	let mut data_offsets = Vec::new();
 	for data in module.data.iter() {
 		let offset = match eval_const_expr(&store.globals, &imported_globals, &data.offset) {
@@ -486,10 +466,12 @@ pub fn instantiate_module(store: &mut Store, module: ast::Module, extern_vals: &
 		data_offsets.push(offset);
 
 		let memory_size = {
-			if (data.index as usize) >= imported_memories.len() {
-				(module.memories[(data.index as usize) - imported_memories.len()].type_.limits.min as usize) * PAGE_SIZE
-			} else {
+			let is_imported = (data.index as usize) < imported_memories.len();
+			if is_imported {
 				store.mems[imported_memories[data.index as usize]].data.len()
+			} else {
+				let module_index = data.index as usize - imported_memories.len();
+				module.memories[module_index].type_.limits.min as usize * PAGE_SIZE
 			}
 		};
 
@@ -498,11 +480,18 @@ pub fn instantiate_module(store: &mut Store, module: ast::Module, extern_vals: &
 		}
 	}
 
-	// 14. Let moduleinst be a new module instance allocated from module in
-	// store S with imports externval∗ and glboal initializer values val∗.
-	// Note: module tables/data/globals initializations are performed in the
-	// following function
-	allocate_and_init_module(store, module, imported_funcs, imported_tables, imported_memories, imported_globals, global_vals, elem_offsets, data_offsets)
+	// everything is correct, allocate and initialize the module
+	allocate_and_init_module(
+		store,
+		module,
+		imported_funcs,
+		imported_tables,
+		imported_memories,
+		imported_globals,
+		global_vals,
+		elem_offsets,
+		data_offsets,
+	)
 }
 
 fn allocate_and_init_module(
