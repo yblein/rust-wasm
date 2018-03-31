@@ -106,34 +106,18 @@ impl ModuleInst {
 	}
 }
 
-pub trait InstStore<S=Self> {
-	type InnerType;
-	type AddrType;
-
-	fn new() -> Self;
-	fn len(&self) -> usize;
-	fn contains(&self, addr: Self::AddrType) -> bool;
-}
-
-pub trait AddrCtor {
-	fn new(addr: Addr) -> Self;
-}
-
 macro_rules! impl_inst_store {
 	($StoreType:tt, $InnerType:ty, $AddrType:tt) => (
-		impl InstStore for $StoreType {
-			type InnerType=$InnerType;
-			type AddrType=$AddrType;
-
-			fn new() -> Self {
+		impl $StoreType {
+			pub fn new() -> Self {
 				Self { 0: Vec::new() }
 			}
 
-			fn len(&self) -> usize {
+			pub fn len(&self) -> usize {
 				self.0.len()
 			}
 
-			fn contains(&self, addr: $AddrType) -> bool {
+			pub fn contains(&self, addr: $AddrType) -> bool {
 				self.0.len() >= addr.0
 			}
 		}
@@ -151,8 +135,8 @@ macro_rules! impl_inst_store {
 			}
 		}
 
-		impl AddrCtor for $AddrType {
-			fn new(addr: Addr) -> $AddrType {
+		impl $AddrType {
+			pub fn new(addr: Addr) -> $AddrType {
 				$AddrType { 0: addr }
 			}
 		}

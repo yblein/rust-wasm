@@ -21,7 +21,6 @@ pub use runtime::{
 	TableAddr,
 	MemAddr,
 	GlobalAddr,
-	AddrCtor,
 	HostFunc,
 	PAGE_SIZE
 };
