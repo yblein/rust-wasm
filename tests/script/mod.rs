@@ -68,22 +68,17 @@ pub fn run<P: AsRef<Path>>(path: P) {
 				let (opt_name, m) = decode_module_src(&src);
 
 				let imports = resolve_imports(&m, &mut registry);
-
-				let mut all_exports = Vec::new();
-				for (export_name, _) in module_exports(&m) {
-					all_exports.push(export_name);
-				}
+				let export_names: Vec<String> = module_exports(&m).into_iter().map(|(name, _)| name).collect();
 
 				let inst = instantiate_module(&mut store, m, &imports[..]).unwrap();
 
-				let mut exports: HashMap<String, ExternVal> = HashMap::new();
-				for export_name in all_exports {
-					let extern_val = get_export(&inst, &export_name).unwrap();
-					exports.insert(export_name, extern_val);
-				}
+				let exports = export_names.into_iter().map(|name| {
+					let export = get_export(&inst, &name).unwrap();
+					(name, export)
+				}).collect();
+
 				registry.last_key = opt_name.clone();
 				registry.mod_exports.insert(opt_name, exports);
-
 			}
 			Cmd::Assertion(a) => {
 				run_assertion(&mut store, &registry, a);
@@ -92,10 +87,7 @@ pub fn run<P: AsRef<Path>>(path: P) {
 				let _ = run_action(&mut store, &registry, &a);
 			}
 			Cmd::Register { name, mod_ref } => {
-				let mod_name = match mod_ref {
-					None => &registry.last_key,
-					Some(_) => &mod_ref,
-				};
+				let mod_name = if mod_ref.is_some() { &mod_ref } else { &registry.last_key };
 				let inst = registry.mod_exports[mod_name].clone();
 				registry.mod_exports.insert(Some(name), inst);
 			}
@@ -214,10 +206,7 @@ fn run_assertion(store: &mut Store, registry: &Registry, assertion: Assertion) {
 fn run_action(store: &mut Store, registry: &Registry, action: &Action) -> Result<Vec<values::Value>, Error> {
 	match *action {
 		Action::Invoke { mod_ref: ref mod_name, ref func, ref args } => {
-			let mod_name = match mod_name {
-				&None => &registry.last_key,
-				&Some(_) => mod_name,
-			};
+			let mod_name = if mod_name.is_some() { mod_name } else { &registry.last_key };
 			match registry.mod_exports[mod_name][func] {
 				ExternVal::Func(addr) => {
 					invoke_func(store, addr, args.clone())
@@ -226,10 +215,7 @@ fn run_action(store: &mut Store, registry: &Registry, action: &Action) -> Result
 			}
 		}
 		Action::Get { mod_ref: ref mod_name, ref global } => {
-			let mod_name = match mod_name {
-				&None => &registry.last_key,
-				&Some(_) => mod_name,
-			};
+			let mod_name = if mod_name.is_some() { mod_name } else { &registry.last_key };
 			match registry.mod_exports[mod_name][global] {
 				ExternVal::Global(addr) => {
 					Ok(vec![read_global(store, addr)])
