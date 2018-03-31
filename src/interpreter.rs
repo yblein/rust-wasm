@@ -833,46 +833,20 @@ impl Interpreter {
 	}
 }
 
-#[macro_export]
-macro_rules! interpreter_eval_expr {
-	($int: expr, $sframe: expr, $store: expr, $instrs: expr) => {
-		{
-			let mut cls = |funcs: &FuncInstStore, tables: &TableInstStore, globals: &mut GlobalInstStore, mems: &mut MemInstStore| {
-				for instr in $instrs {
-					// Cannot use ? because Rust is not able to infer the type
-					match $int.instr($sframe, instr, funcs, tables, globals, mems) {
-						Ok(_) => continue,
-						Err(c) => return Err(c),
-					};
-				}
-				Ok(())
-			};
-			cls(& $store.funcs, & $store.tables, &mut $store.globals, &mut $store.mems)
-		}
+/// Evaluate a constant expression (sequence of a single instruction) and return its value
+///
+/// While this functionality is already provided by the default interpreter
+/// mode, this version works with a more limited context and less allocations.
+///
+/// Panic if called with a sequence of instruction that is not a constant expression.
+pub fn eval_const_expr(globals: &GlobalInstStore, mod_globals: &[GlobalAddr], expr: &[Instr]) -> Value {
+	if expr.len() != 1 {
+		panic!("contant expressions must have exactly only one instruction");
 	}
-}
 
-/// Evaluate an ExprConst and return a given value, returning a Value::I32
-/// (validation)
-/// Used for global/segment initialization
-#[macro_export]
-macro_rules! interpreter_eval_expr_const {
-	($int: expr, $sframe: expr, $store: expr, $instrs: expr) => {
-		{
-			let mut cls = |globals: &mut GlobalInstStore| {
-				// Only the last value matters for ExprConst
-				$int.instr($sframe, $instrs.last().unwrap(), &FuncInstStore::new(), &TableInstStore::new(), globals, &mut MemInstStore::new()).ok()?;
-				$int.stack.pop()
-			};
-			cls(&mut $store.globals)
-		}
-	}
-}
-
-/// Evaluate a Func
-#[macro_export]
-macro_rules! interpreter_eval_func {
-	($int: expr, $sframe: expr, $store: expr, $func: expr) => {
-		interpreter_eval_expr!($int, $sframe, $store, &$func.body)
+	match expr[0] {
+		Instr::Const(c) => c,
+		Instr::GetGlobal(idx) => globals[mod_globals[idx as usize]].value,
+		_ => panic!("not a constant expression"),
 	}
 }

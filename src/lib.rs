@@ -26,7 +26,7 @@ pub use runtime::{
 };
 
 use runtime::*;
-use interpreter::{Interpreter, StackFrame, Trap, TrapOrigin};
+use interpreter::{eval_const_expr, Trap, TrapOrigin};
 
 use std::rc::Rc;
 use std::io::{Read, Seek};
@@ -461,83 +461,71 @@ pub fn instantiate_module(store: &mut Store, module: ast::Module, extern_vals: &
 	// globals(externval∗)} that only consists of the imported globals.
 	// 6. Let F be the frame {module moduleinstim,locals ϵ}.
 	// 7. Push the frame F to the stack.
-	let mut const_int = Interpreter::new();
-	let mut mod_aux_m = ModuleInst::new();
-	mod_aux_m.global_addrs = imported_globals;
-	let mod_aux = Rc::new(mod_aux_m);
 
-	// For sframe/mod_aux lifetime dependecy
-	let (global_vals, elem_offsets, data_offsets) = {
-		let sframe = StackFrame::new(Some(mod_aux.clone()));
+	// 8. Let globalidx_{new} be the global index that corresponds to the
+	// number of global imports in module.imports (i.e., the index of the
+	// first non-imported global).
+	// 9. For each global globali in module.globals, do:
+	// ...
+	// Note: we only compute vals here, we will create the GlobalInstance when we allocate globals
+	let global_vals = module.globals.iter().map(|g| {
+		eval_const_expr(&store.globals, &imported_globals, &g.value)
+	}).collect();
 
-		// 8. Let globalidx_{new} be the global index that corresponds to the
-		// number of global imports in module.imports (i.e., the index of the
-		// first non-imported global).
-		// 9. For each global globali in module.globals, do:
-		// ...
-		// Note: we only compute vals here, we will create the GlobalInstance when we allocate globals
-		let vals = module.globals.iter().map(|g| {
-			interpreter_eval_expr_const!(&mut const_int, &sframe, store, &g.value).unwrap()
-		}).collect();
+	// 10. For each element segment elemi in module.elem, do:
+	// ...
+	// Intuition: check if the module does not try to init too many elements
+	let mut elem_offsets = Vec::new();
+	for elem in module.elems.iter() {
+		let offset = match eval_const_expr(&store.globals, &imported_globals, &elem.offset) {
+			values::Value::I32(c) => c as usize,
+			_ => unreachable!(),
+		};
+		elem_offsets.push(offset);
 
-		// 10. For each element segment elemi in module.elem, do:
-		// ...
-		// Intuition: check if the module does not try to init too many elements
-		let mut elem_offsets = Vec::new();
-		for elem in module.elems.iter() {
-			let offset = match interpreter_eval_expr_const!(&mut const_int, &sframe, store, &elem.offset).unwrap() {
-				values::Value::I32(c) => c as usize,
-				_ => unreachable!(),
-			};
-			elem_offsets.push(offset);
-
-			let table_size = {
-				if (elem.index as usize) >= imported_tables.len() {
-					module.tables[(elem.index as usize) - imported_tables.len()].type_.limits.min as usize
-				} else {
-					store.tables[imported_tables[elem.index as usize]].elem.len()
-				}
-			};
-
-			// We will allocate limits.min empty elements when allocating the table
-			if offset + elem.init.len() > table_size {
-				return Err(Error::ElemOffsetTooLarge(elem.index as usize));
+		let table_size = {
+			if (elem.index as usize) >= imported_tables.len() {
+				module.tables[(elem.index as usize) - imported_tables.len()].type_.limits.min as usize
+			} else {
+				store.tables[imported_tables[elem.index as usize]].elem.len()
 			}
+		};
+
+		// We will allocate limits.min empty elements when allocating the table
+		if offset + elem.init.len() > table_size {
+			return Err(Error::ElemOffsetTooLarge(elem.index as usize));
 		}
+	}
 
-		// 11. For each data segment datai in module.data, do:
-		// ...
-		// Intuition: check if the module does not try to init too much memory
-		let mut data_offsets = Vec::new();
-		for data in module.data.iter() {
-			let offset = match interpreter_eval_expr_const!(&mut const_int, &sframe, store, &data.offset).unwrap() {
-				values::Value::I32(c) => c as usize,
-				_ => unreachable!(),
-			};
-			data_offsets.push(offset);
+	// 11. For each data segment datai in module.data, do:
+	// ...
+	// Intuition: check if the module does not try to init too much memory
+	let mut data_offsets = Vec::new();
+	for data in module.data.iter() {
+		let offset = match eval_const_expr(&store.globals, &imported_globals, &data.offset) {
+			values::Value::I32(c) => c as usize,
+			_ => unreachable!(),
+		};
+		data_offsets.push(offset);
 
-			let memory_size = {
-				if (data.index as usize) >= imported_memories.len() {
-					(module.memories[(data.index as usize) - imported_memories.len()].type_.limits.min as usize) * PAGE_SIZE
-				} else {
-					store.mems[imported_memories[data.index as usize]].data.len()
-				}
-			};
-
-			if offset + data.init.len() > memory_size {
-				return Err(Error::DataOffsetTooLarge(data.index as usize));
+		let memory_size = {
+			if (data.index as usize) >= imported_memories.len() {
+				(module.memories[(data.index as usize) - imported_memories.len()].type_.limits.min as usize) * PAGE_SIZE
+			} else {
+				store.mems[imported_memories[data.index as usize]].data.len()
 			}
-		}
+		};
 
-		(vals, elem_offsets, data_offsets)
-	};
+		if offset + data.init.len() > memory_size {
+			return Err(Error::DataOffsetTooLarge(data.index as usize));
+		}
+	}
 
 	// 14. Let moduleinst be a new module instance allocated from module in
 	// store S with imports externval∗ and glboal initializer values val∗.
 	// Note: module tables/data/globals initializations are performed in the
 	// following function
-	let global_addrs = Rc::try_unwrap(mod_aux).ok().unwrap().global_addrs;
-	allocate_and_init_module(store, module, imported_funcs, imported_tables, imported_memories, global_addrs, global_vals, elem_offsets, data_offsets)
+	allocate_and_init_module(store, module, imported_funcs, imported_tables, imported_memories, imported_globals, global_vals, elem_offsets, data_offsets)
 }
 
 fn allocate_and_init_module(
