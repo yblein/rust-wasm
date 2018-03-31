@@ -1,7 +1,6 @@
 mod parser;
 
 use std::{f32, f64};
-use std::rc::Rc;
 use std::fs::File;
 use std::path::Path;
 use std::io::{Cursor, Read};
@@ -41,20 +40,11 @@ pub enum Action {
 	Get { mod_ref: Option<String>, global: String },
 }
 
-// There are two kinds of export HashMaps.
-// 1. for module exports, where the requested import type does not matter
-// 2. for host exports, where the type of the import matters
-// https://github.com/WebAssembly/spec/blob/ad2fe24c7350ecba9dd804c91a7a38d79a373a22/interpreter/host/spectest.ml#L33
-type ExportHashKey = Option<String>;
-type HostLookupFunctionPointer = Rc<Fn(&mut Store, &String, &types::Extern) -> Option<ExternVal>>; // Use Rc to allow cloning the ExportHashValue
-#[derive(Clone)]
-enum ExportHashValue {
-	Module(HashMap<String, ExternVal>),
-	Host(HostLookupFunctionPointer),
-}
-struct ExportHashMap {
-	hm: HashMap<ExportHashKey, ExportHashValue>,
-	last_key: ExportHashKey,
+type Exports = HashMap<String, ExternVal>;
+
+struct Registry {
+	mod_exports: HashMap<Option<String>, Exports>,
+	last_key: Option<String>,
 }
 
 pub fn run<P: AsRef<Path>>(path: P) {
@@ -64,50 +54,50 @@ pub fn run<P: AsRef<Path>>(path: P) {
 	let parser = parser::Parser::new(&src);
 
 	let mut store = init_store();
-	let mut instances = ExportHashMap {
-		hm: HashMap::new(),
+	let mut registry = Registry {
+		mod_exports: HashMap::new(),
 		last_key: None,
 	};
 
 	// Special test host module
-	init_spectest(&mut store, &mut instances);
+	init_spectest(&mut store, &mut registry);
 
 	for cmd in parser {
 		match cmd {
 			Cmd::ModuleSource(src) => {
 				let (opt_name, m) = decode_module_src(&src);
 
-				let extern_vals = resolve_imports(&m, &mut store, &mut instances);
+				let imports = resolve_imports(&m, &mut registry);
 
 				let mut all_exports = Vec::new();
 				for (export_name, _) in module_exports(&m) {
 					all_exports.push(export_name);
 				}
 
-				let inst = instantiate_module(&mut store, m, &extern_vals[..]).unwrap();
+				let inst = instantiate_module(&mut store, m, &imports[..]).unwrap();
 
-				let mut export_vals_hm: HashMap<String, ExternVal> = HashMap::new();
+				let mut exports: HashMap<String, ExternVal> = HashMap::new();
 				for export_name in all_exports {
 					let extern_val = get_export(&inst, &export_name).unwrap();
-					export_vals_hm.insert(export_name, extern_val);
+					exports.insert(export_name, extern_val);
 				}
-				instances.last_key = opt_name.clone();
-				instances.hm.insert(opt_name, ExportHashValue::Module(export_vals_hm));
+				registry.last_key = opt_name.clone();
+				registry.mod_exports.insert(opt_name, exports);
 
 			}
 			Cmd::Assertion(a) => {
-				run_assertion(&mut store, &instances, a);
+				run_assertion(&mut store, &registry, a);
 			}
 			Cmd::Action(a) => {
-				let _ = run_action(&mut store, &instances, &a);
+				let _ = run_action(&mut store, &registry, &a);
 			}
 			Cmd::Register { name, mod_ref } => {
 				let mod_name = match mod_ref {
-					None => &instances.last_key,
+					None => &registry.last_key,
 					Some(_) => &mod_ref,
 				};
-				let inst = instances.hm[&mod_name].clone();
-				instances.hm.insert(Some(name), inst);
+				let inst = registry.mod_exports[mod_name].clone();
+				registry.mod_exports.insert(Some(name), inst);
 			}
 		}
 	}
@@ -120,13 +110,13 @@ fn decode_module_src(module: &ModuleSource) -> (Option<String>, ast::Module) {
 	}
 }
 
-fn run_assertion(store: &mut Store, instances: &ExportHashMap, assertion: Assertion) {
+fn run_assertion(store: &mut Store, registry: &Registry, assertion: Assertion) {
 	use self::Assertion::*;
 
 	println!("run assertion {:?}", assertion);
 	match assertion {
 		Return(action, expected) => {
-			let result = run_action(store, instances, &action);
+			let result = run_action(store, registry, &action);
 			match result {
 				Ok(ref actual) if *actual == expected => {}
 				_ => {
@@ -138,7 +128,7 @@ fn run_assertion(store: &mut Store, instances: &ExportHashMap, assertion: Assert
 			}
 		}
 		ReturnCanonicalNan(action) => {
-			let result = run_action(store, instances, &action).unwrap();
+			let result = run_action(store, registry, &action).unwrap();
 			assert!(result.len() == 1);
 			let val = result[0];
 			match val {
@@ -153,7 +143,7 @@ fn run_assertion(store: &mut Store, instances: &ExportHashMap, assertion: Assert
 			};
 		}
 		ReturnArithmeticNan(action) => {
-			let result = run_action(store, instances, &action).unwrap();
+			let result = run_action(store, registry, &action).unwrap();
 			assert!(result.len() == 1);
 			let val = result[0];
 			match val {
@@ -168,7 +158,7 @@ fn run_assertion(store: &mut Store, instances: &ExportHashMap, assertion: Assert
 			};
 		}
 		TrapAction(action, _) => {
-			if let Err(Error::CodeTrapped(_)) = run_action(store, instances, &action) {
+			if let Err(Error::CodeTrapped(_)) = run_action(store, registry, &action) {
 				// There is no if let != in Rust?
 			} else {
 				panic!("the action `{:?}` should cause a trap", action);
@@ -176,14 +166,14 @@ fn run_assertion(store: &mut Store, instances: &ExportHashMap, assertion: Assert
 		}
 		TrapInstantiate(module, _) => {
 			let (_, m) = decode_module_src(&module);
-			let extern_vals = resolve_imports(&m, store, instances);
-			if let Err(Error::CodeTrapped(_)) = instantiate_module(store, m, &extern_vals[..]) {
+			let imports = resolve_imports(&m, registry);
+			if let Err(Error::CodeTrapped(_)) = instantiate_module(store, m, &imports[..]) {
 			} else {
 				panic!("instantiating module `{:?}` should cause a trap", module);
 			}
 		}
 		Exhaustion(action, reason) => {
-			match (reason.as_ref(), run_action(store, instances, &action)) {
+			match (reason.as_ref(), run_action(store, registry, &action)) {
 				("call stack exhausted", Err(Error::StackOverflow)) => (),
 				(reason, err) => panic!("the action `{:?}` should cause a stack overflow (reason = {}, err = {:?})", action, reason, err),
 			};
@@ -209,8 +199,8 @@ fn run_assertion(store: &mut Store, instances: &ExportHashMap, assertion: Assert
 		Unlinkable(module, reason) => {
 			let (_, m) = decode_module_src(&module);
 
-			let extern_vals = resolve_imports(&m, store, instances);
-			match (reason.as_ref(), instantiate_module(store, m, &extern_vals[..]).err()) {
+			let imports = resolve_imports(&m, registry);
+			match (reason.as_ref(), instantiate_module(store, m, &imports[..]).err()) {
 				("unknown import", Some(Error::NotEnoughExternVal)) => (),
 				("incompatible import type", Some(Error::ImportTypeMismatch)) => (),
 				("elements segment does not fit", Some(Error::ElemOffsetTooLarge(_))) => (),
@@ -221,18 +211,14 @@ fn run_assertion(store: &mut Store, instances: &ExportHashMap, assertion: Assert
 	}
 }
 
-fn run_action(store: &mut Store, instances: &ExportHashMap, action: &Action) -> Result<Vec<values::Value>, Error> {
+fn run_action(store: &mut Store, registry: &Registry, action: &Action) -> Result<Vec<values::Value>, Error> {
 	match *action {
 		Action::Invoke { mod_ref: ref mod_name, ref func, ref args } => {
 			let mod_name = match mod_name {
-				&None => &instances.last_key,
+				&None => &registry.last_key,
 				&Some(_) => mod_name,
 			};
-			let extern_val = match instances.hm[mod_name] {
-				ExportHashValue::Module(ref hm) => hm[func],
-				ExportHashValue::Host(_) => unreachable!(),
-			};
-			match extern_val {
+			match registry.mod_exports[mod_name][func] {
 				ExternVal::Func(addr) => {
 					invoke_func(store, addr, args.clone())
 				}
@@ -241,14 +227,10 @@ fn run_action(store: &mut Store, instances: &ExportHashMap, action: &Action) -> 
 		}
 		Action::Get { mod_ref: ref mod_name, ref global } => {
 			let mod_name = match mod_name {
-				&None => &instances.last_key,
+				&None => &registry.last_key,
 				&Some(_) => mod_name,
 			};
-			let extern_val = match instances.hm[mod_name] {
-				ExportHashValue::Module(ref hm) => hm[global],
-				ExportHashValue::Host(_) => unreachable!(),
-			};
-			match extern_val {
+			match registry.mod_exports[mod_name][global] {
 				ExternVal::Global(addr) => {
 					Ok(vec![read_global(store, addr)])
 				}
@@ -258,22 +240,24 @@ fn run_action(store: &mut Store, instances: &ExportHashMap, action: &Action) -> 
 	}
 }
 
-fn init_spectest(store: &mut Store, instances: &mut ExportHashMap) {
-	let table_addr = ExternVal::Table(
+fn init_spectest(store: &mut Store, registry: &mut Registry) {
+	let mut symbols = HashMap::new();
+
+	symbols.insert("table".to_owned(), ExternVal::Table(
 		alloc_table(
 			store,
 			&types::Table { limits: types::Limits { min: 10, max: Some(20) }, elem: types::Elem::AnyFunc }
 		)
-	);
+	));
 
-	let memory_addr = ExternVal::Memory(
+	symbols.insert("memory".to_owned(), ExternVal::Memory(
 		alloc_mem(
 			store,
 			&types::Memory { limits: types::Limits { min: 1, max: Some(2) } }
 		)
-	);
+	));
 
-	fn print(store: &mut Store, args_types: Vec<types::Value>) -> Option<ExternVal> {
+	fn print(store: &mut Store, args_types: Vec<types::Value>) -> ExternVal {
 		let args_len = args_types.len();
 		let func = move |stack: &mut Vec<values::Value>| {
 			for val in &stack[(stack.len() - args_len)..stack.len()] {
@@ -282,64 +266,51 @@ fn init_spectest(store: &mut Store, instances: &mut ExportHashMap) {
 			None
 		};
 
-		Some(ExternVal::Func(
+		ExternVal::Func(
 			alloc_func(
 				store,
 				&types::Func { args: args_types, result: Vec::new() },
 				Box::new(func)
 			)
-		))
+		)
 	}
 
-	fn global(store: &mut Store, val: values::Value) -> Option<ExternVal> {
-		Some(ExternVal::Global(
+	fn global(store: &mut Store, val: values::Value) -> ExternVal {
+		ExternVal::Global(
 			alloc_global(
 				store,
 				&types::Global { value: val.type_(), mutable: false },
 				val
 			)
-		))
+		)
 	}
 
-	let lookup = move |store: &mut Store, name: &String, type_: &types::Extern| {
-		match (name.as_ref(), type_) {
-			("print", _) => print(store, vec![]),
-			("print_i32", _) => print(store, vec![types::I32]),
-			("print_i32_f32", _) => print(store, vec![types::I32, types::F32]) ,
-			("print_f32", _) => print(store, vec![types::F32]),
-			("print_f64", _) => print(store, vec![types::F64]),
-			("print_f64_f64", _) => print(store, vec![types::F64, types::F64]),
-			("global_i32", _) => global(store, values::Value::I32(666)),
-			("global_f32", _) => global(store, values::Value::F32(666.0)),
-			("global_f64", _) => global(store, values::Value::F64(666.0)),
-			("table", _) => Some(table_addr),
-			("memory", _) => Some(memory_addr),
-			_ => None
-		}
-	};
+	symbols.insert("print".to_owned(), print(store, vec![]));
+	symbols.insert("print_i32".to_owned(), print(store, vec![types::I32]));
+	symbols.insert("print_i32_f32".to_owned(), print(store, vec![types::I32, types::F32]));
+	symbols.insert("print_f32".to_owned(), print(store, vec![types::F32]));
+	symbols.insert("print_f64".to_owned(), print(store, vec![types::F64]));
+	symbols.insert("print_f64_f64".to_owned(), print(store, vec![types::F64, types::F64]));
+	symbols.insert("global_i32".to_owned(), global(store, values::Value::I32(666)));
+	symbols.insert("global_f32".to_owned(), global(store, values::Value::F32(666.0)));
+	symbols.insert("global_f64".to_owned(), global(store, values::Value::F64(666.0)));
 
-	instances.hm.insert(Some(String::from("spectest")), ExportHashValue::Host(Rc::new(lookup)));
+	registry.mod_exports.insert(Some(String::from("spectest")), symbols);
 }
 
-fn resolve_imports(m: &ast::Module, store: &mut Store, instances: &ExportHashMap) -> Vec<ExternVal> {
-	let mut extern_vals = Vec::new();
-	for (mod_name, import_name, type_) in module_imports(m) {
-		let val = match &instances.hm.get(&Some(mod_name)) {
-			&Some(&ExportHashValue::Module(ref hm)) => {
-				match hm.get(&import_name) {
-					Some(val) => val.clone(),
-					None => continue,
-				}
-			},
-			&Some(&ExportHashValue::Host(ref lookup)) => {
-				match lookup(store, &import_name, &type_) {
+fn resolve_imports(m: &ast::Module, registry: &Registry) -> Vec<ExternVal> {
+	let mut imports = Vec::new();
+	for (mod_name, import_name, _) in module_imports(m) {
+		let val = match &registry.mod_exports.get(&Some(mod_name)) {
+			&Some(ref mod_exports) => {
+				match mod_exports.get(&import_name) {
 					Some(val) => val.clone(),
 					None => continue,
 				}
 			},
 			&None => continue,
 		};
-		extern_vals.push(val);
+		imports.push(val);
 	}
-	extern_vals
+	imports
 }
