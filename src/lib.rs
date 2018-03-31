@@ -505,112 +505,91 @@ fn allocate_and_init_module(
 	elem_offsets: Vec<usize>,
 	data_offsets: Vec<usize>,
 ) -> Result<Rc<ModuleInst>, Error> {
-	// Two passes algorithms
-	// 1. do all modifications on the ModuleInst in a single scope
-	let mut mi = ModuleInst::new();
+	let mut inst = ModuleInst::new();
 
-	// Types copying
-	mi.types = module.types;
+	// init types
+	inst.types = module.types;
 
-	// Alloc steps 10-13
-	for addr in extern_funcs {
-		mi.func_addrs.push(addr);
-	}
+	// init imports
+	inst.func_addrs.extend(extern_funcs);
+	inst.table_addrs.extend(extern_tables);
+	inst.mem_addrs.extend(extern_memories);
+	inst.global_addrs.extend(extern_globals);
 
-	for addr in extern_tables {
-		mi.table_addrs.push(addr);
-	}
-
-	for addr in extern_memories {
-		mi.mem_addrs.push(addr);
-	}
-
-	for addr in extern_globals {
-		mi.global_addrs.push(addr);
-	}
-
-	// Functions allocation
-	// Only allocate indices, pushing to the store outside the mutable scope
+	// functions allocation
+	// only allocate indices; initialization comes when the module is fully instantiated
 	let fsi_min = store.funcs.len();
 	let fsi_max = fsi_min + module.funcs.len();
 	for addr in fsi_min..fsi_max {
-		mi.func_addrs.push(FuncAddr::new(addr));
+		inst.func_addrs.push(FuncAddr::new(addr));
 	}
 
-	// Tables allocation
+	// tables allocation
 	for tab in module.tables {
-		mi.table_addrs.push(store.tables.alloc(&mut store.types_map, &tab.type_));
+		inst.table_addrs.push(store.tables.alloc(&mut store.types_map, &tab.type_));
 	}
 
-	// 15. For each element segment elemi in module.elem, do:
-	// ...
-	// Intuition: tables initialization with elem segments
+	// tables initialization with elem segments
 	assert_eq!(module.elems.len(), elem_offsets.len());
 	for elem in module.elems.iter().zip(elem_offsets.iter()) {
 		let (elem, offset) = elem;
 
 		for i in 0..elem.init.len() {
 			let funcidx = elem.init[i] as usize;
-			let funcaddr = mi.func_addrs[funcidx];
-			store.tables[mi.table_addrs[elem.index as usize]].elem[*offset + i] = Some(funcaddr);
+			let funcaddr = inst.func_addrs[funcidx];
+			store.tables[inst.table_addrs[elem.index as usize]].elem[*offset + i] = Some(funcaddr);
 		}
 	}
 
-	// Memories allocation
+	// memories allocation
 	for mem in module.memories {
-		mi.mem_addrs.push(store.mems.alloc(&mut store.types_map, &mem.type_));
+		inst.mem_addrs.push(store.mems.alloc(&mut store.types_map, &mem.type_));
 	}
 
-	// 16. For each data segment datai in module.data, do:
-	// ...
-	// Intuition: memories initialization with data segments
+	// memories initialization with data segments
 	assert_eq!(module.data.len(), data_offsets.len());
 	for data in module.data.iter().zip(data_offsets.iter()) {
 		let (data, offset) = data;
 
 		for i in 0..data.init.len() {
-			store.mems[mi.mem_addrs[data.index as usize]].data[*offset + i] = data.init[i];
+			store.mems[inst.mem_addrs[data.index as usize]].data[*offset + i] = data.init[i];
 		}
 	}
 
-	// Globals allocation
+	// globals allocation
 	assert_eq!(module.globals.len(), vals.len());
 	let mut i = 0;
 	for global in module.globals {
-		mi.global_addrs.push(store.globals.alloc(&mut store.types_map, &global.type_, vals[i]));
+		inst.global_addrs.push(store.globals.alloc(&mut store.types_map, &global.type_, vals[i]));
 		i += 1;
 	}
 
-	// 14. For each export exporti in module.exports, do:
-	// ...
+	// init exports
 	for export in module.exports {
 		let extern_val = match export.desc {
-			ast::ExportDesc::Func(idx)   => ExternVal::Func(mi.func_addrs[idx as usize]),
-			ast::ExportDesc::Table(idx)  => ExternVal::Table(mi.table_addrs[idx as usize]),
-			ast::ExportDesc::Memory(idx) => ExternVal::Memory(mi.mem_addrs[idx as usize]),
-			ast::ExportDesc::Global(idx) => ExternVal::Global(mi.global_addrs[idx as usize]),
+			ast::ExportDesc::Func(idx)   => ExternVal::Func(inst.func_addrs[idx as usize]),
+			ast::ExportDesc::Table(idx)  => ExternVal::Table(inst.table_addrs[idx as usize]),
+			ast::ExportDesc::Memory(idx) => ExternVal::Memory(inst.mem_addrs[idx as usize]),
+			ast::ExportDesc::Global(idx) => ExternVal::Global(inst.global_addrs[idx as usize]),
 		};
-		mi.exports.push(ExportInst {
+		inst.exports.push(ExportInst {
 			name: export.name,
 			value: extern_val,
 		});
 	}
 
-	// 2. put the FuncInst (which have a ref to ModuleInst) into the store
-	let inst = Rc::new(mi);
+	// now that the module is fully instantiated, we can initialize the functions and put
+	// them into the store
+	let inst = Rc::new(inst);
 	for func in module.funcs {
 		let type_ = &inst.types[func.type_index as usize];
 		let _ = store.funcs.alloc_module(&mut store.types_map, type_, &inst, func);
 	}
 
-	// 17. If the start function module.start is not empty, then:
-	// ...
-	// Intuition: call the start function if it exists
+	// call the start function if it exists
 	if let Some(idx) = module.start {
 		let func_addr = inst.func_addrs[idx as usize];
-		if let Err(err) = invoke_func(store, func_addr, Vec::new()) {
-			return Err(err)
-		}
+		invoke_func(store, func_addr, Vec::new())?;
 	}
 
 	Ok(inst)
