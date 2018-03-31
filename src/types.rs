@@ -50,6 +50,13 @@ pub struct Limits {
 	pub max: Option<u32>,
 }
 
+impl Limits {
+	/// Check if a limit matches another according to import matching rule on limits
+	fn matches(&self, l2: &Limits) -> bool {
+		self.min >= l2.min && (l2.max.is_none() || (self.max.is_some() && self.max.unwrap() <= l2.max.unwrap()))
+	}
+}
+
 #[derive(Debug, Clone)]
 pub struct Table {
 	pub limits: Limits,
@@ -74,4 +81,23 @@ pub enum Extern {
 	Table(Table),
 	Memory(Memory),
 	Global(Global),
+}
+
+impl Extern {
+	/// Check if an external type matches another.
+	///
+	/// When instantiating a module, external values must be provided whose types
+	/// are matched against the respective external types classifying each import.
+	/// In some cases, this allows for a simple form of subtyping.
+	pub fn matches(&self, other: &Extern) -> bool {
+		use self::Extern::*;
+
+		match (self, other) {
+			(Func(f1), Func(f2)) => f1 == f2,
+			(Table(t1), Table(t2)) => t1.elem == t2.elem && t1.limits.matches(&t2.limits),
+			(Memory(m1), Memory(m2)) => m1.limits.matches(&m2.limits),
+			(Global(g1), Global(g2)) => g1 == g2,
+			_ => false,
+		}
+	}
 }

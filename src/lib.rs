@@ -419,41 +419,18 @@ pub fn instantiate_module(store: &mut Store, module: ast::Module, extern_vals: &
 	let mut imported_memories = Vec::new();
 	let mut imported_globals = Vec::new();
 
-	for (import, value) in module.imports.iter().zip(extern_vals.iter()) {
-		let type_match = match store.types_map.get(&TypeKey { extern_val: value.clone() }) {
-			Some(type_) => {
-				match (type_, &import.desc) {
-					(&types::Extern::Func(ref exported_type), &ast::ImportDesc::Func(idx)) => {
-						if let &ExternVal::Func(addr) = value {
-							imported_funcs.push(addr);
-						}
-						exported_type == &module.types[idx as usize]
-					},
-					(&types::Extern::Table(ref exported_type), &ast::ImportDesc::Table(ref imported_type)) => {
-						if let &ExternVal::Table(addr) = value {
-							imported_tables.push(addr);
-						}
-						exported_type.elem == imported_type.elem && match_limits(&exported_type.limits, &imported_type.limits)
-					},
-					(&types::Extern::Memory(ref exported_type), &ast::ImportDesc::Memory(ref imported_type)) => {
-						if let &ExternVal::Memory(addr) = value {
-							imported_memories.push(addr);
-						}
-						match_limits(&exported_type.limits, &imported_type.limits)
-					},
-					(&types::Extern::Global(ref exported_type), &ast::ImportDesc::Global(ref imported_type)) => {
-						if let &ExternVal::Global(addr) = value {
-							imported_globals.push(addr);
-						}
-						exported_type == imported_type
-					},
-					_ => return Err(Error::ImportTypeMismatch),
-				}
-			},
-			None => return Err(Error::UnknownImport),
-		};
-		if !type_match {
+	for (extern_val, import) in extern_vals.iter().zip(module.imports.iter()) {
+		let ext_type = store.types_map
+			.get(&TypeKey { extern_val: extern_val.clone() })
+			.ok_or(Error::UnknownImport)?;
+		if !ext_type.matches(&import.type_(&module)) {
 			return Err(Error::ImportTypeMismatch);
+		}
+		match extern_val {
+			&ExternVal::Func(addr) => imported_funcs.push(addr),
+			&ExternVal::Table(addr) => imported_tables.push(addr),
+			&ExternVal::Memory(addr) => imported_memories.push(addr),
+			&ExternVal::Global(addr) => imported_globals.push(addr),
 		}
 	}
 
@@ -648,9 +625,4 @@ fn allocate_and_init_module(
 	}
 
 	Ok(inst)
-}
-
-/// Check if l1 matches l2 according to import matching rule on limits
-fn match_limits(l1: &types::Limits, l2: &types::Limits) -> bool {
-	l1.min >= l2.min && (l2.max.is_none() || (l1.max.is_some() && l1.max.unwrap() <= l2.max.unwrap()))
 }
