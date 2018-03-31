@@ -174,6 +174,17 @@ pub enum ImportDesc {
 	Global(types::Global),
 }
 
+impl Import {
+	pub fn type_(&self, module: &Module) -> types::Extern {
+		match self.desc {
+			ImportDesc::Func(idx) => types::Extern::Func(module.types[idx as usize].clone()),
+			ImportDesc::Table(ref t) => types::Extern::Table(t.clone()),
+			ImportDesc::Memory(ref t) => types::Extern::Memory(t.clone()),
+			ImportDesc::Global(ref t) => types::Extern::Global(t.clone()),
+		}
+	}
+}
+
 
 // Helper function for tests
 impl Module {
