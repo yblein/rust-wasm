@@ -97,22 +97,10 @@ pub fn validate_module(module: &ast::Module) -> Option<Error> {
 }
 
 /// List module imports with their types
-pub fn module_imports(module: &ast::Module) -> Vec<(String, String, types::Extern)> {
+pub fn module_imports<'a>(module: &'a ast::Module) -> impl Iterator<Item = (&'a str, &'a str, types::Extern)> + 'a {
 	assert!(valid::is_valid(module));
-	let mut types = Vec::new();
 
-	for import in &module.imports {
-		use types::*;
-		use ast::*;
-		let ex = match import.desc {
-			ImportDesc::Func(idx)   => Extern::Func(module.types[idx as usize].clone()),
-			ImportDesc::Table(ref type_)  => Extern::Table(type_.clone()),
-			ImportDesc::Memory(ref type_) => Extern::Memory(type_.clone()),
-			ImportDesc::Global(ref type_) => Extern::Global(type_.clone()),
-		};
-		types.push((import.module.clone(), import.name.clone(), ex));
-	}
-	types
+	module.imports.iter().map(move |import| (import.module.as_str(), import.name.as_str(), import.type_(module)))
 }
 
 /// List module exports with their types

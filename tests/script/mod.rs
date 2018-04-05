@@ -287,9 +287,9 @@ fn init_spectest(store: &mut Store, registry: &mut Registry) {
 fn resolve_imports(m: &ast::Module, registry: &Registry) -> Vec<ExternVal> {
 	let mut imports = Vec::new();
 	for (mod_name, import_name, _) in module_imports(m) {
-		let val = match &registry.mod_exports.get(&Some(mod_name)) {
+		let val = match &registry.mod_exports.get(&Some(mod_name.to_owned())) {
 			&Some(ref mod_exports) => {
-				match mod_exports.get(&import_name) {
+				match mod_exports.get(import_name) {
 					Some(val) => val.clone(),
 					None => continue,
 				}
