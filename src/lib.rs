@@ -104,9 +104,8 @@ pub fn module_imports<'a>(module: &'a ast::Module) -> impl Iterator<Item = (&'a 
 }
 
 /// List module exports with their types
-pub fn module_exports(module: &ast::Module) -> Vec<(String, types::Extern)> {
+pub fn module_exports<'a>(module: &'a ast::Module) -> impl Iterator<Item = (&'a str, types::Extern)> + 'a {
 	assert!(valid::is_valid(module));
-	let mut types = Vec::new();
 
 	// Imports can be exported
 	// "The index space for functions, tables, memories and globals includes respective imports declared in the same module."
@@ -129,10 +128,10 @@ pub fn module_exports(module: &ast::Module) -> Vec<(String, types::Extern)> {
 		};
 	}
 
-	for export in &module.exports {
+	module.exports.iter().map(move |export| {
 		use types::*;
 		use ast::*;
-		let ex = match export.desc {
+		let export_type = match export.desc {
 			ExportDesc::Func(idx) => {
 				let len = func_import_types.len();
 				let idx = idx as usize;
@@ -170,9 +169,8 @@ pub fn module_exports(module: &ast::Module) -> Vec<(String, types::Extern)> {
 				}
 			},
 		};
-		types.push((export.name.clone(), ex));
-	}
-	types
+		(export.name.as_ref(), export_type)
+	})
 }
 
 /// Get an externval value according to the exported name

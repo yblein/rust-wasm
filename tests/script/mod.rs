@@ -68,7 +68,7 @@ pub fn run<P: AsRef<Path>>(path: P) {
 				let (opt_name, m) = decode_module_src(&src);
 
 				let imports = resolve_imports(&m, &mut registry);
-				let export_names: Vec<String> = module_exports(&m).into_iter().map(|(name, _)| name).collect();
+				let export_names: Vec<String> = module_exports(&m).map(|(name, _)| name.to_owned()).collect();
 
 				let inst = instantiate_module(&mut store, m, &imports[..]).unwrap();
 
