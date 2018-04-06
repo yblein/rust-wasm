@@ -37,7 +37,7 @@ struct Decoder<R: Read> {
 impl<R: Read> Decoder<R> {
 	fn read_byte(&mut self) -> DecodeResult<u8> {
 		let mut buf = [0];
-		let _ = self.reader.read_exact(&mut buf)?;
+		self.reader.read_exact(&mut buf)?;
 		self.pos += 1;
 		Ok(buf[0])
 	}
@@ -131,7 +131,7 @@ impl<R: Read> Decoder<R> {
 
 			// forbid unused bits
 			if shift >= 64 - 64 % 7 {
-				let mask = (-1 & 0x7f) as u8;
+				let mask = 0x7fu8;
 				if b & mask != 0 && b & mask != mask {
 					return Err(DecodeError::MalformedBinary);
 				}

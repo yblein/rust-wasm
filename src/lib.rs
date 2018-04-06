@@ -172,7 +172,7 @@ pub fn module_exports<'a>(module: &'a ast::Module) -> impl Iterator<Item = (&'a 
 pub fn get_export(inst: &ModuleInst, name: &str) -> Result<ExternVal, Error> {
 	for export in &inst.exports {
 		if export.name == name {
-			return Ok(export.value.clone());
+			return Ok(export.value);
 		}
 	}
 	Err(Error::ExportNotFound)
@@ -196,9 +196,9 @@ pub fn type_func(store: &Store, funcaddr: FuncAddr) -> types::Func {
 pub fn invoke_func(store: &mut Store, funcaddr: FuncAddr, args: Vec<values::Value>) -> Result<Vec<values::Value>, Error> {
 	assert!(store.funcs.contains(funcaddr));
 	let funcinst = &store.funcs[funcaddr];
-	let functype = match funcinst {
-		&FuncInst::Module(ref f) => &f.type_,
-		&FuncInst::Host(ref f) => &f.type_,
+	let functype = match *funcinst {
+		FuncInst::Module(ref f) => &f.type_,
+		FuncInst::Host(ref f) => &f.type_,
 	};
 
 	if functype.args.len() != args.len() {
@@ -393,18 +393,18 @@ pub fn instantiate_module(store: &mut Store, module: ast::Module, extern_vals: &
 	let mut imported_memories = Vec::new();
 	let mut imported_globals = Vec::new();
 
-	for (extern_val, import) in extern_vals.iter().zip(module.imports.iter()) {
+	for (&extern_val, import) in extern_vals.iter().zip(module.imports.iter()) {
 		let ext_type = store.types_map
-			.get(&TypeKey { extern_val: extern_val.clone() })
+			.get(&TypeKey { extern_val: extern_val })
 			.ok_or(Error::UnknownImport)?;
 		if !ext_type.matches(&import.type_(&module)) {
 			return Err(Error::ImportTypeMismatch);
 		}
 		match extern_val {
-			&ExternVal::Func(addr) => imported_funcs.push(addr),
-			&ExternVal::Table(addr) => imported_tables.push(addr),
-			&ExternVal::Memory(addr) => imported_memories.push(addr),
-			&ExternVal::Global(addr) => imported_globals.push(addr),
+			ExternVal::Func(addr) => imported_funcs.push(addr),
+			ExternVal::Table(addr) => imported_tables.push(addr),
+			ExternVal::Memory(addr) => imported_memories.push(addr),
+			ExternVal::Global(addr) => imported_globals.push(addr),
 		}
 	}
 
@@ -415,7 +415,7 @@ pub fn instantiate_module(store: &mut Store, module: ast::Module, extern_vals: &
 
 	// check that the module does not try to init too many elements
 	let mut elem_offsets = Vec::new();
-	for elem in module.elems.iter() {
+	for elem in &module.elems {
 		let offset = match eval_const_expr(&store.globals, &imported_globals, &elem.offset) {
 			values::Value::I32(c) => c as usize,
 			_ => unreachable!(),
@@ -439,7 +439,7 @@ pub fn instantiate_module(store: &mut Store, module: ast::Module, extern_vals: &
 
 	// check that the module does not try to init too much memory
 	let mut data_offsets = Vec::new();
-	for data in module.data.iter() {
+	for data in &module.data {
 		let offset = match eval_const_expr(&store.globals, &imported_globals, &data.offset) {
 			values::Value::I32(c) => c as usize,
 			_ => unreachable!(),
@@ -512,13 +512,11 @@ fn allocate_and_init_module(
 
 	// tables initialization with elem segments
 	assert_eq!(module.elems.len(), elem_offsets.len());
-	for elem in module.elems.iter().zip(elem_offsets.iter()) {
-		let (elem, offset) = elem;
-
+	for (elem, offset) in module.elems.iter().zip(elem_offsets.into_iter()) {
 		for i in 0..elem.init.len() {
 			let funcidx = elem.init[i] as usize;
 			let funcaddr = inst.func_addrs[funcidx];
-			store.tables[inst.table_addrs[elem.index as usize]].elem[*offset + i] = Some(funcaddr);
+			store.tables[inst.table_addrs[elem.index as usize]].elem[offset + i] = Some(funcaddr);
 		}
 	}
 
@@ -529,20 +527,15 @@ fn allocate_and_init_module(
 
 	// memories initialization with data segments
 	assert_eq!(module.data.len(), data_offsets.len());
-	for data in module.data.iter().zip(data_offsets.iter()) {
-		let (data, offset) = data;
-
-		for i in 0..data.init.len() {
-			store.mems[inst.mem_addrs[data.index as usize]].data[*offset + i] = data.init[i];
-		}
+	for (data, offset) in module.data.iter().zip(data_offsets.into_iter()) {
+		let mem = &mut store.mems[inst.mem_addrs[data.index as usize]];
+		mem.data[offset..offset + data.init.len()].copy_from_slice(&data.init);
 	}
 
 	// globals allocation
 	assert_eq!(module.globals.len(), vals.len());
-	let mut i = 0;
-	for global in module.globals {
-		inst.global_addrs.push(store.globals.alloc(&mut store.types_map, &global.type_, vals[i]));
-		i += 1;
+	for (global, val) in module.globals.iter().zip(vals.into_iter()) {
+		inst.global_addrs.push(store.globals.alloc(&mut store.types_map, &global.type_, val));
 	}
 
 	// init exports

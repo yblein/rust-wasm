@@ -129,11 +129,11 @@ impl Interpreter {
 			GetLocal(idx) => self.get_local(idx, sframe.stack_idx),
 			SetLocal(idx) => self.set_local(idx, sframe.stack_idx),
 			TeeLocal(idx) => self.tee_local(idx, sframe.stack_idx),
-			GetGlobal(idx) => self.get_global(idx, &globals, &sframe.module.as_ref().unwrap().global_addrs),
+			GetGlobal(idx) => self.get_global(idx, globals, &sframe.module.as_ref().unwrap().global_addrs),
 			SetGlobal(idx) => self.set_global(idx, globals, &sframe.module.as_ref().unwrap().global_addrs),
-			Load(ref memop) => self.load(memop, &mems, &sframe.module.as_ref().unwrap().mem_addrs),
+			Load(ref memop) => self.load(memop, mems, &sframe.module.as_ref().unwrap().mem_addrs),
 			Store(ref memop) => self.store(memop, mems, &sframe.module.as_ref().unwrap().mem_addrs),
-			CurrentMemory => self.current_memory(&mems, &sframe.module.as_ref().unwrap().mem_addrs),
+			CurrentMemory => self.current_memory(mems, &sframe.module.as_ref().unwrap().mem_addrs),
 			GrowMemory => self.grow_memory(mems, &sframe.module.as_ref().unwrap().mem_addrs),
 			Const(c) => self.const_(c),
 			IUnary(ref t, ref op) => self.iunary(t, op),
@@ -712,9 +712,9 @@ impl Interpreter {
 		};
 
 		let f = &funcs[func_addr];
-		let f_type_ = match f {
-			&FuncInst::Module(ref f) => &f.type_,
-			&FuncInst::Host(ref f) => &f.type_,
+		let f_type_ = match *f {
+			FuncInst::Module(ref f) => &f.type_,
+			FuncInst::Host(ref f) => &f.type_,
 		};
 		if f_type_ != type_ {
 			return Err(Trap { origin: TrapOrigin::CallIndirectTypesDiffer })

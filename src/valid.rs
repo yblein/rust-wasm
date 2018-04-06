@@ -132,7 +132,7 @@ fn pop_frame(frames: &mut Vec<Frame>, operands: &mut Vec<Operand>) -> Option<()>
 
 	let end_type_len = {
 		let end_type = &frames.last().unwrap().end_type[..];
-		exact_step(operands, frames, &end_type, &end_type)?;
+		exact_step(operands, frames, end_type, end_type)?;
 		end_type.len()
 	};
 	let frame = frames.pop().unwrap();
@@ -477,7 +477,7 @@ fn check_global(mod_ctx: &ModContext, global: &ast::Global) -> Option<()> {
 
 fn check_elem(mod_ctx: &ModContext, elem: &ast::Segment<ast::Index>) -> Option<()> {
 	let _ = mod_ctx.tables.get(elem.index as usize)?;
-	for index in elem.init.iter() {
+	for index in &elem.init {
 		let _ = mod_ctx.funcs.get(*index as usize)?;
 	}
 	check_const_expr(mod_ctx, &elem.offset, Int(I32))
@@ -540,47 +540,47 @@ fn check_module(module: &ast::Module) -> Option<()> {
 	};
 
 	// first resolve imports from the module
-	for import in module.imports.iter() {
+	for import in &module.imports {
 		check_import(&mut mod_ctx, import)?;
 	}
 
 	// then extend the context with funcs, tables and memories from the module
-	for func in module.funcs.iter() {
+	for func in &module.funcs {
 		mod_ctx.funcs.push(mod_ctx.types.get(func.type_index as usize)?);
 	}
 	mod_ctx.tables.extend(module.tables.iter().map(|table| &table.type_));
 	mod_ctx.memories.extend(module.memories.iter().map(|mem| &mem.type_));
 
 	// check globals before adding them to the context to prevent recursivity
-	for global in module.globals.iter() {
+	for global in &module.globals {
 		check_global(&mod_ctx, global)?;
 	}
 	mod_ctx.globals.extend(module.globals.iter().map(|global| &global.type_));
 
 	// finaly check everything else
-	for type_ in module.types.iter() {
+	for type_ in &module.types {
 		check_type(type_)?;
 	}
-	for func in module.funcs.iter() {
+	for func in &module.funcs {
 		check_func(&mod_ctx, func)?;
 	}
-	for table in module.tables.iter() {
+	for table in &module.tables {
 		check_table(table)?;
 	}
-	for mem in module.memories.iter() {
+	for mem in &module.memories {
 		check_memory(mem)?;
 	}
-	for elem in module.elems.iter() {
+	for elem in &module.elems {
 		check_elem(&mod_ctx, elem)?;
 	}
-	for data in module.data.iter() {
+	for data in &module.data {
 		check_data(&mod_ctx, data)?;
 	}
 	if let Some(ref func) = module.start {
 		check_start(&mod_ctx, func)?;
 	}
 	let mut unique_exports = HashSet::new();
-	for export in module.exports.iter() {
+	for export in &module.exports {
 		check_export(&mod_ctx, export)?;
 		require(!unique_exports.contains(&export.name))?;
 		unique_exports.insert(&export.name);
