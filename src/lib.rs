@@ -82,11 +82,6 @@ pub fn decode_module<R: Read + Seek>(reader: R) -> Result<ast::Module, Error> {
 	binary::decode(reader).map_err(|_| Error::DecodeModuleFailed)
 }
 
-/// Parse a S-Expr module
-pub fn parse_module(_codepoint: &str) -> Result<ast::Module, Error> {
-	unimplemented!();
-}
-
 /// Validate a module
 pub fn validate_module(module: &ast::Module) -> Option<Error> {
 	if valid::is_valid(module) {
