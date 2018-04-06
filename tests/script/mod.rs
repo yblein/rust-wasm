@@ -67,7 +67,7 @@ pub fn run<P: AsRef<Path>>(path: P) {
 			Cmd::ModuleSource(src) => {
 				let (opt_name, m) = decode_module_src(&src);
 
-				let imports = resolve_imports(&m, &mut registry);
+				let imports = resolve_imports(&m, &mut registry).unwrap();
 				let export_names: Vec<String> = module_exports(&m).map(|(name, _)| name.to_owned()).collect();
 
 				let inst = instantiate_module(&mut store, m, &imports[..]).unwrap();
@@ -158,7 +158,7 @@ fn run_assertion(store: &mut Store, registry: &Registry, assertion: Assertion) {
 		}
 		TrapInstantiate(module, _) => {
 			let (_, m) = decode_module_src(&module);
-			let imports = resolve_imports(&m, registry);
+			let imports = resolve_imports(&m, registry).unwrap();
 			if let Err(Error::CodeTrapped(_)) = instantiate_module(store, m, &imports[..]) {
 			} else {
 				panic!("instantiating module `{:?}` should cause a trap", module);
@@ -191,9 +191,13 @@ fn run_assertion(store: &mut Store, registry: &Registry, assertion: Assertion) {
 		Unlinkable(module, reason) => {
 			let (_, m) = decode_module_src(&module);
 
-			let imports = resolve_imports(&m, registry);
+			let imports = match (reason.as_ref(), resolve_imports(&m, registry)) {
+				("unknown import", Err(_)) => return,
+				(_, Err(err)) => panic!("failed to resolve import: `{:?}`", err),
+				(_, Ok(imports)) => imports,
+			};
+
 			match (reason.as_ref(), instantiate_module(store, m, &imports[..]).err()) {
-				("unknown import", Some(Error::NotEnoughExternVal)) => (),
 				("incompatible import type", Some(Error::ImportTypeMismatch)) => (),
 				("elements segment does not fit", Some(Error::ElemOffsetTooLarge(_))) => (),
 				("data segment does not fit", Some(Error::DataOffsetTooLarge(_))) => (),
@@ -284,19 +288,25 @@ fn init_spectest(store: &mut Store, registry: &mut Registry) {
 	registry.mod_exports.insert(Some(String::from("spectest")), symbols);
 }
 
-fn resolve_imports(m: &ast::Module, registry: &Registry) -> Vec<ExternVal> {
-	let mut imports = Vec::new();
-	for (mod_name, import_name, _) in module_imports(m) {
-		let val = match &registry.mod_exports.get(&Some(mod_name.to_owned())) {
-			&Some(ref mod_exports) => {
+#[derive(Debug)]
+enum UnknownImport {
+	UnknownModule { mod_name: String },
+	UnknownSymbol { mod_name: String, symbol_name: String },
+}
+
+fn resolve_imports(m: &ast::Module, registry: &Registry) -> Result<Vec<ExternVal>, UnknownImport> {
+	module_imports(m).map(|(mod_name, import_name, _)| {
+		match registry.mod_exports.get(&Some(mod_name.to_owned())) {
+			Some(ref mod_exports) => {
 				match mod_exports.get(import_name) {
-					Some(val) => val.clone(),
-					None => continue,
+					Some(val) => Ok(val.clone()),
+					None => Err(UnknownImport::UnknownSymbol {
+						mod_name: mod_name.to_owned(),
+						symbol_name: import_name.to_owned()
+					}),
 				}
 			},
-			&None => continue,
-		};
-		imports.push(val);
-	}
-	imports
+			None => Err(UnknownImport::UnknownModule { mod_name: mod_name.to_owned() }),
+		}
+	}).collect()
 }
