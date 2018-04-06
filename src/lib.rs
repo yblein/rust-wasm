@@ -205,25 +205,13 @@ pub fn invoke_func(store: &mut Store, funcaddr: FuncAddr, args: Vec<values::Valu
 		return Err(Error::NotEnoughArgument);
 	}
 
-	for types in functype.args.iter().zip(args.iter()) {
-		use values::Value;
-		use types as Tv;
-
-		// TODO: find a better way to do this
-		match types {
-			(&Tv::Value::Int(Tv::Int::I32), &Value::I32(_)) => (),
-			(&Tv::Value::Int(Tv::Int::I64), &Value::I64(_)) => (),
-			(&Tv::Value::Float(Tv::Float::F32), &Value::F32(_)) => (),
-			(&Tv::Value::Float(Tv::Float::F64), &Value::F64(_)) => (),
-			_ => return Err(Error::ArgumentTypeMismatch),
-		}
+	// typecheck arguments
+	if !args.iter().zip(&functype.args).all(|(val, &type_)| val.type_() == type_) {
+		return Err(Error::ArgumentTypeMismatch);
 	}
 
 	let mut int = interpreter::Interpreter::new();
-	for arg in args {
-		int.stack.push(arg);
-	}
-
+	int.stack.extend(args);
 
 	let sframe = interpreter::StackFrame::new(None);
 	match int.call(funcaddr, &sframe, &store.funcs, &store.tables, &mut store.globals, &mut store.mems) {
