@@ -1,18 +1,13 @@
 use std::fs::{self, File};
 use std::io::prelude::*;
+use std::env;
+use std::path::Path;
 
 fn main() {
 	// generate a driver for the test suite
-	let mut f = File::create("tests/run.rs").unwrap();
-	f.write_all(
-b"#![feature(try_from)]
-
-extern crate rust_wasm;
-extern crate hexf_parse;
-
-mod script;
-"
-	).unwrap();
+	let out_dir = env::var("OUT_DIR").unwrap();
+	let dest_path = Path::new(&out_dir).join("test_suite.rs");
+	let mut f = File::create(dest_path).unwrap();
 
 	for entry in fs::read_dir("tests/suite").unwrap() {
 		let path = entry.unwrap().path();
