@@ -2,7 +2,7 @@
 
 A [WASM](http://webassembly.org/) interpreter written in Rust.
 
-Apart from parsing the text format, the implementation is complete, i.e., all the [specification](https://webassembly.github.io/spec/core/index.html) is implemented and the [official test suite](https://github.com/WebAssembly/spec/tree/master/test) is fully covered (as of 2018-03-29).
+Expect for parsing the text format, the implementation is complete, i.e., all the [specification](https://webassembly.github.io/spec/core/index.html) is implemented and the [official test suite](https://github.com/WebAssembly/spec/tree/master/test) is fully covered (as of 2018-03-29).
 
 ## Getting Started
 
@@ -10,9 +10,9 @@ The project is composed of a library (`rust_wasm`) as well as a test suite.
 
 ### Prerequisites
 
-You need [Rust nightly (at least 1.24.0)](https://www.rustup.rs/) to build the project.
+You need [Rust (at least 1.34.0)](https://www.rustup.rs/) to build the project.
 
-### Installing
+### Building the library
 
 ```bash
 cargo build [--release]
@@ -27,7 +27,7 @@ cargo test
 ## Using the API
 
 The [official embedding API](https://webassembly.github.io/spec/core/appendix/embedding.html) is supported.
-Because the API is written in a pure style, we slightly modified it to best fit Rust (e.g., using mutable reference instead of returning a new store each time).
+Because the API specification is written in a pure style, we slightly modified it to best fit Rust (e.g., using mutable reference instead of returning a new store each time).
 
 ### Invoking the `main` function
 
@@ -83,7 +83,7 @@ fn main() {
 
 ### Managing imports resolution when instantiating multiple modules
 
-This is left to the embedder. Nonetheless, you can see a working example inside `tests/scripts/mod.rs`.
+This is left to the embedder. Nonetheless, you can see a working example inside `tests/scripts/run.rs`.
 
 ## Authors
 
