@@ -1,4 +1,5 @@
 use ast;
+use runtime::PAGE_SIZE;
 use types;
 use types::Value::*;
 use types::Int::*;
@@ -462,10 +463,10 @@ fn check_table(table: &ast::Table) -> Option<()> {
 
 fn check_memory(mem: &ast::Memory) -> Option<()> {
 	// Can't allocate more than 4GB since its a 32-bits machine
-	let max = (1 << 32) / 65536;
-	if mem.type_.limits.min as usize > max ||
+	let max = (1u64 << 32) / PAGE_SIZE as u64;
+	if mem.type_.limits.min as u64 > max ||
 		(mem.type_.limits.max.is_some() &&
-		 mem.type_.limits.max.unwrap() as usize > max) {
+		 mem.type_.limits.max.unwrap() as u64 > max) {
 		return None
 	}
 	check_limits(&mem.type_.limits)
