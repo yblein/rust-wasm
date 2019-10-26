@@ -72,12 +72,13 @@ use rust_wasm::*;
 
 fn main() {
 	let mut store = init_store();
-	let print_type = &types::Func { args: Vec::new(), result: Vec::new() };
-	let print_fct = |stack: &mut Vec<values::Value>| {
-		println!("{:?}", stack);
+	let func_type = types::Func { args: vec![types::I32, types::F64], result: vec![types::I64] };
+	let print_count_args = |args: &[values::Value], ret: &mut[values::Value]| {
+		println!("{:?}", args);
+		ret[0] = values::Value::I64(args.len() as u64);
 		None
 	};
-	let func_addr = alloc_func(&mut store, &print_type, Box::new(print_fct));
+	let func_addr = alloc_func(&mut store, &func_type, Box::new(print_count_args));
 }
 ```
 

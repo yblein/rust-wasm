@@ -178,7 +178,28 @@ pub fn get_export(inst: &ModuleInst, name: &str) -> Result<ExternVal, Error> {
 	Err(Error::ExportNotFound)
 }
 
-/// Allocate a host function
+/// Allocate a host function.
+///
+/// The function is expected to produce a result matching to its return type.
+///
+/// # Panics
+///
+/// Panics if the returned value types do not match the given function type.
+///
+/// # Examples
+///
+/// ```
+/// use rust_wasm::*;
+///
+/// let mut store = init_store();
+/// let func_type = types::Func { args: vec![types::I32, types::F64], result: vec![types::I64] };
+/// let print_count_args = |args: &[values::Value], ret: &mut[values::Value]| {
+/// 	println!("{:?}", args);
+/// 	ret[0] = values::Value::I64(args.len() as u64);
+/// 	None
+/// };
+/// let func_addr = alloc_func(&mut store, &func_type, Box::new(print_count_args));
+/// ```
 pub fn alloc_func(store: &mut Store, functype: &types::Func, hostfunc: HostFunc) -> FuncAddr {
 	store.funcs.alloc_host(&mut store.types_map, functype, hostfunc)
 }

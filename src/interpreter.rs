@@ -8,7 +8,9 @@ use std::rc::Rc;
 
 /// A struct storing the state of the current interpreted
 pub struct Interpreter {
-	pub stack: Vec<Value>,
+	pub(crate) stack: Vec<Value>,
+	/// Buffer to collect return values of host functions
+	return_buffer: Vec<Value>,
 }
 
 #[derive(Debug, PartialEq)]
@@ -81,7 +83,8 @@ impl Interpreter {
 	/// Instantiate a new interpreter
 	pub fn new() -> Interpreter {
 		Interpreter {
-			stack: Vec::new()
+			stack: Vec::new(),
+			return_buffer: Vec::new(),
 		}
 	}
 
@@ -630,21 +633,22 @@ impl Interpreter {
 		&mut self,
 		f_inst: &HostFuncInst,
 		_sframe: &StackFrame,
-		_funcs: & FuncInstStore,
+		_funcs: &FuncInstStore,
 		_tables: &TableInstStore,
 		_globals: &mut GlobalInstStore,
 		_mems: &mut MemInstStore
 	) -> IntResult {
-		let stack_before_call = self.stack.len();
+		let args_start = self.stack.len() - f_inst.type_.args.len();
+		self.return_buffer.resize(f_inst.type_.result.len(), Value::false_());
 
-		if let Some(err) = (f_inst.hostcode)(&mut self.stack) {
+		if let Some(err) = (f_inst.hostcode)(&self.stack[args_start..], &mut self.return_buffer) {
 			return Err(Trap { origin: TrapOrigin::HostFunction(err) });
 		}
 
-		// Stack must be valid
-		assert_eq!(self.stack.len(), stack_before_call);
-		for (arg, type_) in self.stack[stack_before_call..].iter().zip(f_inst.type_.args.iter()) {
-			match (arg, type_) {
+		// since host functions cannot be type-checked, we make sure at runtime
+		// that return values have the correct types
+		for (val, type_) in self.return_buffer.iter().zip(f_inst.type_.result.iter()) {
+			match (val, type_) {
 				(&Value::I32(_), &types::Value::Int(types::Int::I32)) => (),
 				(&Value::I64(_), &types::Value::Int(types::Int::I64)) => (),
 				(&Value::F32(_), &types::Value::Float(types::Float::F32)) => (),
@@ -653,9 +657,9 @@ impl Interpreter {
 			};
 		}
 
-		// Remove args
-		let drain_end = self.stack.len() - f_inst.type_.result.len();
-		self.stack.drain((stack_before_call - f_inst.type_.args.len())..drain_end);
+		// replace args with returned values
+		self.stack.drain(args_start..);
+		self.stack.extend(&self.return_buffer);
 
 		Ok(Continue)
 	}
@@ -666,7 +670,7 @@ impl Interpreter {
 		&mut self,
 		f_addr: FuncAddr,
 		sframe: &StackFrame,
-		funcs: & FuncInstStore,
+		funcs: &FuncInstStore,
 		tables: &TableInstStore,
 		globals: &mut GlobalInstStore,
 		mems: &mut MemInstStore
