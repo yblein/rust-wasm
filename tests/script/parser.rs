@@ -201,6 +201,7 @@ impl<'a> Parser<'a> {
 
 	fn values(&mut self) -> Vec<Value> {
 		let mut values = Vec::new();
+		let next_lit = |p: &mut Parser| p.next_token().replace("_", "");
 
 		loop {
 			match self.lexer.peek() {
@@ -209,10 +210,10 @@ impl<'a> Parser<'a> {
 			}
 			self.open();
 			values.push(match self.next_token() {
-				"i32.const" => Value::I32(i32::from_str(self.next_token()).expect("invalid i32 literal") as u32),
-				"i64.const" => Value::I64(i64::from_str(self.next_token()).expect("invalid i64 literal") as u64),
-				"f32.const" => Value::F32(parse_f32(self.next_token())),
-				"f64.const" => Value::F64(parse_f64(self.next_token())),
+				"i32.const" => Value::I32(i32::from_str(&next_lit(self)).expect("invalid i32 literal") as u32),
+				"i64.const" => Value::I64(i64::from_str(&next_lit(self)).expect("invalid i64 literal") as u64),
+				"f32.const" => Value::F32(parse_f32(&next_lit(self))),
+				"f64.const" => Value::F64(parse_f64(&next_lit(self))),
 				s => panic!(expected(s, &["i32.const", "i64.const", "f32.const", "f64.const"]))
 			});
 			self.close();
@@ -340,11 +341,18 @@ macro_rules! define_parse_f {
 				"+" => (false, &s[1..]),
 				_ => (false, s),
 			};
-			let z = match &s[..3] {
-				"inf" => $f::INFINITY,
-				"nan" => $f::from_bits($f::INFINITY.to_bits() | $i::from_str_radix(&s[6..], 16).unwrap()),
-				_ if s.contains('.') => $parse_hex(s, true).unwrap(),
-				_ => $parse_hex(&s.replace("p", ".p"), true).unwrap(),
+			let z = if s == "infinity" {
+				$f::INFINITY
+			} else if s.starts_with("nan") {
+				$f::from_bits($f::INFINITY.to_bits() | $i::from_str_radix(&s[6..], 16).unwrap())
+			} else if s.starts_with("0x") {
+				if s.contains('.') {
+					$parse_hex(s, true).unwrap()
+				} else {
+					$parse_hex(&s.replace("p", ".p"), true).unwrap()
+				}
+			} else {
+				$f::from_str(s).unwrap()
 			};
 			if negate { -z } else { z }
 		}
