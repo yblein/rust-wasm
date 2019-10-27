@@ -627,16 +627,26 @@ impl<R: Read> Decoder<R> {
 		self.read_vec(Decoder::read_elem)
 	}
 
-	fn read_locals(&mut self) -> DecodeResult<Vec<types::Value>> {
+	fn read_local_decl(&mut self) -> DecodeResult<(u32, types::Value)> {
 		let n = self.read_vu32()?;
 		let t = self.read_value_type()?;
-		Ok(vec![t; n as usize])
+		Ok((n, t))
 	}
 
 	fn read_code(&mut self) -> DecodeResult<(Vec<types::Value>, Expr)> {
 		let _size = self.read_vu32()?;
-		// TODO: do not create intermediate vectors just to concatenate them
-		let locals = self.read_vec(Decoder::read_locals)?.concat();
+		let local_decls = self.read_vec(Decoder::read_local_decl)?;
+		let n_total: u64 = local_decls.iter().map(|&(n, _)| n as u64).sum();
+		if n_total > std::u32::MAX as u64 {
+			return Err(DecodeError::MalformedBinary);
+		}
+
+		let mut locals = Vec::new();
+		locals.reserve(n_total as usize);
+		for (n, t) in local_decls {
+			locals.extend(std::iter::repeat(t).take(n as usize));
+		}
+
 		let body = self.read_expr()?;
 		Ok((locals, body))
 	}
