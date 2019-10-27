@@ -685,13 +685,18 @@ impl<R: Read> Decoder<R> {
 
 		// All sections are optional and they are ordered according to their
 		// id, except for custom section (id=0) that may appear anywhere.
-		// TODO: enforce sections ordering and uniqueness
 
+		let mut last_id = 0;
 		loop {
 			match self.read_byte() {
 				Err(DecodeError::Io(ref e)) if e.kind() == io::ErrorKind::UnexpectedEof => break,
 				Err(e) => return Err(e),
 				Ok(id) => {
+					if id != 0 && id <= last_id {
+						return Err(DecodeError::MalformedBinary);
+					}
+					last_id = id;
+
 					let size = self.read_vu32()?;
 
 					match id {
