@@ -245,7 +245,7 @@
     "\00\61\73\6d\01\00\00\00\0b\86\80\80\80\00\01\00"
     "\41\00\0b\00"
   )
-  "unknown memory 0"
+  "unknown memory"
 )
 (assert_invalid
   (module binary

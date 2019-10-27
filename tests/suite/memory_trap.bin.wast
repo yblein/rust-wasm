@@ -3,8 +3,8 @@
   "\00\01\7f\60\02\7f\7f\00\60\01\7f\01\7f\03\85\80"
   "\80\80\00\04\00\01\02\02\05\83\80\80\80\00\01\00"
   "\01\07\9e\80\80\80\00\03\05\73\74\6f\72\65\00\01"
-  "\04\6c\6f\61\64\00\02\0b\67\72\6f\77\5f\6d\65\6d"
-  "\6f\72\79\00\03\0a\ba\80\80\80\00\04\89\80\80\80"
+  "\04\6c\6f\61\64\00\02\0b\6d\65\6d\6f\72\79\2e\67"
+  "\72\6f\77\00\03\0a\ba\80\80\80\00\04\89\80\80\80"
   "\00\00\3f\00\41\80\80\04\6c\0b\8c\80\80\80\00\00"
   "\10\00\20\00\6a\20\01\36\02\00\0b\8a\80\80\80\00"
   "\00\10\00\20\00\6a\28\02\00\0b\86\80\80\80\00\00"
@@ -33,14 +33,14 @@
 )
 (assert_trap (invoke "load" (i32.const 0)) "out of bounds memory access")
 (assert_trap
-  (invoke "store" (i32.const -2147483648) (i32.const 13))
+  (invoke "store" (i32.const -2_147_483_648) (i32.const 13))
   "out of bounds memory access"
 )
 (assert_trap
-  (invoke "load" (i32.const -2147483648))
+  (invoke "load" (i32.const -2_147_483_648))
   "out of bounds memory access"
 )
-(assert_return (invoke "grow_memory" (i32.const 65537)) (i32.const -1))
+(assert_return (invoke "memory.grow" (i32.const 65_537)) (i32.const -1))
 (module binary
   "\00\61\73\6d\01\00\00\00\01\a9\80\80\80\00\08\60"
   "\01\7f\01\7f\60\01\7f\01\7e\60\01\7f\01\7d\60\01"
@@ -91,19 +91,19 @@
   "\62\63\64\65\66\67\68"
 )
 (assert_trap
-  (invoke "i32.store" (i32.const 65536) (i32.const 0))
+  (invoke "i32.store" (i32.const 65_536) (i32.const 0))
   "out of bounds memory access"
 )
 (assert_trap
-  (invoke "i32.store" (i32.const 65535) (i32.const 0))
+  (invoke "i32.store" (i32.const 65_535) (i32.const 0))
   "out of bounds memory access"
 )
 (assert_trap
-  (invoke "i32.store" (i32.const 65534) (i32.const 0))
+  (invoke "i32.store" (i32.const 65_534) (i32.const 0))
   "out of bounds memory access"
 )
 (assert_trap
-  (invoke "i32.store" (i32.const 65533) (i32.const 0))
+  (invoke "i32.store" (i32.const 65_533) (i32.const 0))
   "out of bounds memory access"
 )
 (assert_trap
@@ -123,35 +123,35 @@
   "out of bounds memory access"
 )
 (assert_trap
-  (invoke "i64.store" (i32.const 65536) (i64.const 0))
+  (invoke "i64.store" (i32.const 65_536) (i64.const 0))
   "out of bounds memory access"
 )
 (assert_trap
-  (invoke "i64.store" (i32.const 65535) (i64.const 0))
+  (invoke "i64.store" (i32.const 65_535) (i64.const 0))
   "out of bounds memory access"
 )
 (assert_trap
-  (invoke "i64.store" (i32.const 65534) (i64.const 0))
+  (invoke "i64.store" (i32.const 65_534) (i64.const 0))
   "out of bounds memory access"
 )
 (assert_trap
-  (invoke "i64.store" (i32.const 65533) (i64.const 0))
+  (invoke "i64.store" (i32.const 65_533) (i64.const 0))
   "out of bounds memory access"
 )
 (assert_trap
-  (invoke "i64.store" (i32.const 65532) (i64.const 0))
+  (invoke "i64.store" (i32.const 65_532) (i64.const 0))
   "out of bounds memory access"
 )
 (assert_trap
-  (invoke "i64.store" (i32.const 65531) (i64.const 0))
+  (invoke "i64.store" (i32.const 65_531) (i64.const 0))
   "out of bounds memory access"
 )
 (assert_trap
-  (invoke "i64.store" (i32.const 65530) (i64.const 0))
+  (invoke "i64.store" (i32.const 65_530) (i64.const 0))
   "out of bounds memory access"
 )
 (assert_trap
-  (invoke "i64.store" (i32.const 65529) (i64.const 0))
+  (invoke "i64.store" (i32.const 65_529) (i64.const 0))
   "out of bounds memory access"
 )
 (assert_trap
@@ -187,103 +187,103 @@
   "out of bounds memory access"
 )
 (assert_trap
-  (invoke "f32.store" (i32.const 65536) (f32.const 0x0p+0))
+  (invoke "f32.store" (i32.const 65_536) (f32.const 0))
   "out of bounds memory access"
 )
 (assert_trap
-  (invoke "f32.store" (i32.const 65535) (f32.const 0x0p+0))
+  (invoke "f32.store" (i32.const 65_535) (f32.const 0))
   "out of bounds memory access"
 )
 (assert_trap
-  (invoke "f32.store" (i32.const 65534) (f32.const 0x0p+0))
+  (invoke "f32.store" (i32.const 65_534) (f32.const 0))
   "out of bounds memory access"
 )
 (assert_trap
-  (invoke "f32.store" (i32.const 65533) (f32.const 0x0p+0))
+  (invoke "f32.store" (i32.const 65_533) (f32.const 0))
   "out of bounds memory access"
 )
 (assert_trap
-  (invoke "f32.store" (i32.const -1) (f32.const 0x0p+0))
+  (invoke "f32.store" (i32.const -1) (f32.const 0))
   "out of bounds memory access"
 )
 (assert_trap
-  (invoke "f32.store" (i32.const -2) (f32.const 0x0p+0))
+  (invoke "f32.store" (i32.const -2) (f32.const 0))
   "out of bounds memory access"
 )
 (assert_trap
-  (invoke "f32.store" (i32.const -3) (f32.const 0x0p+0))
+  (invoke "f32.store" (i32.const -3) (f32.const 0))
   "out of bounds memory access"
 )
 (assert_trap
-  (invoke "f32.store" (i32.const -4) (f32.const 0x0p+0))
+  (invoke "f32.store" (i32.const -4) (f32.const 0))
   "out of bounds memory access"
 )
 (assert_trap
-  (invoke "f64.store" (i32.const 65536) (f64.const 0x0p+0))
+  (invoke "f64.store" (i32.const 65_536) (f64.const 0))
   "out of bounds memory access"
 )
 (assert_trap
-  (invoke "f64.store" (i32.const 65535) (f64.const 0x0p+0))
+  (invoke "f64.store" (i32.const 65_535) (f64.const 0))
   "out of bounds memory access"
 )
 (assert_trap
-  (invoke "f64.store" (i32.const 65534) (f64.const 0x0p+0))
+  (invoke "f64.store" (i32.const 65_534) (f64.const 0))
   "out of bounds memory access"
 )
 (assert_trap
-  (invoke "f64.store" (i32.const 65533) (f64.const 0x0p+0))
+  (invoke "f64.store" (i32.const 65_533) (f64.const 0))
   "out of bounds memory access"
 )
 (assert_trap
-  (invoke "f64.store" (i32.const 65532) (f64.const 0x0p+0))
+  (invoke "f64.store" (i32.const 65_532) (f64.const 0))
   "out of bounds memory access"
 )
 (assert_trap
-  (invoke "f64.store" (i32.const 65531) (f64.const 0x0p+0))
+  (invoke "f64.store" (i32.const 65_531) (f64.const 0))
   "out of bounds memory access"
 )
 (assert_trap
-  (invoke "f64.store" (i32.const 65530) (f64.const 0x0p+0))
+  (invoke "f64.store" (i32.const 65_530) (f64.const 0))
   "out of bounds memory access"
 )
 (assert_trap
-  (invoke "f64.store" (i32.const 65529) (f64.const 0x0p+0))
+  (invoke "f64.store" (i32.const 65_529) (f64.const 0))
   "out of bounds memory access"
 )
 (assert_trap
-  (invoke "f64.store" (i32.const -1) (f64.const 0x0p+0))
+  (invoke "f64.store" (i32.const -1) (f64.const 0))
   "out of bounds memory access"
 )
 (assert_trap
-  (invoke "f64.store" (i32.const -2) (f64.const 0x0p+0))
+  (invoke "f64.store" (i32.const -2) (f64.const 0))
   "out of bounds memory access"
 )
 (assert_trap
-  (invoke "f64.store" (i32.const -3) (f64.const 0x0p+0))
+  (invoke "f64.store" (i32.const -3) (f64.const 0))
   "out of bounds memory access"
 )
 (assert_trap
-  (invoke "f64.store" (i32.const -4) (f64.const 0x0p+0))
+  (invoke "f64.store" (i32.const -4) (f64.const 0))
   "out of bounds memory access"
 )
 (assert_trap
-  (invoke "f64.store" (i32.const -5) (f64.const 0x0p+0))
+  (invoke "f64.store" (i32.const -5) (f64.const 0))
   "out of bounds memory access"
 )
 (assert_trap
-  (invoke "f64.store" (i32.const -6) (f64.const 0x0p+0))
+  (invoke "f64.store" (i32.const -6) (f64.const 0))
   "out of bounds memory access"
 )
 (assert_trap
-  (invoke "f64.store" (i32.const -7) (f64.const 0x0p+0))
+  (invoke "f64.store" (i32.const -7) (f64.const 0))
   "out of bounds memory access"
 )
 (assert_trap
-  (invoke "f64.store" (i32.const -8) (f64.const 0x0p+0))
+  (invoke "f64.store" (i32.const -8) (f64.const 0))
   "out of bounds memory access"
 )
 (assert_trap
-  (invoke "i32.store8" (i32.const 65536) (i32.const 0))
+  (invoke "i32.store8" (i32.const 65_536) (i32.const 0))
   "out of bounds memory access"
 )
 (assert_trap
@@ -291,11 +291,11 @@
   "out of bounds memory access"
 )
 (assert_trap
-  (invoke "i32.store16" (i32.const 65536) (i32.const 0))
+  (invoke "i32.store16" (i32.const 65_536) (i32.const 0))
   "out of bounds memory access"
 )
 (assert_trap
-  (invoke "i32.store16" (i32.const 65535) (i32.const 0))
+  (invoke "i32.store16" (i32.const 65_535) (i32.const 0))
   "out of bounds memory access"
 )
 (assert_trap
@@ -307,7 +307,7 @@
   "out of bounds memory access"
 )
 (assert_trap
-  (invoke "i64.store8" (i32.const 65536) (i64.const 0))
+  (invoke "i64.store8" (i32.const 65_536) (i64.const 0))
   "out of bounds memory access"
 )
 (assert_trap
@@ -315,11 +315,11 @@
   "out of bounds memory access"
 )
 (assert_trap
-  (invoke "i64.store16" (i32.const 65536) (i64.const 0))
+  (invoke "i64.store16" (i32.const 65_536) (i64.const 0))
   "out of bounds memory access"
 )
 (assert_trap
-  (invoke "i64.store16" (i32.const 65535) (i64.const 0))
+  (invoke "i64.store16" (i32.const 65_535) (i64.const 0))
   "out of bounds memory access"
 )
 (assert_trap
@@ -331,19 +331,19 @@
   "out of bounds memory access"
 )
 (assert_trap
-  (invoke "i64.store32" (i32.const 65536) (i64.const 0))
+  (invoke "i64.store32" (i32.const 65_536) (i64.const 0))
   "out of bounds memory access"
 )
 (assert_trap
-  (invoke "i64.store32" (i32.const 65535) (i64.const 0))
+  (invoke "i64.store32" (i32.const 65_535) (i64.const 0))
   "out of bounds memory access"
 )
 (assert_trap
-  (invoke "i64.store32" (i32.const 65534) (i64.const 0))
+  (invoke "i64.store32" (i32.const 65_534) (i64.const 0))
   "out of bounds memory access"
 )
 (assert_trap
-  (invoke "i64.store32" (i32.const 65533) (i64.const 0))
+  (invoke "i64.store32" (i32.const 65_533) (i64.const 0))
   "out of bounds memory access"
 )
 (assert_trap
@@ -363,19 +363,19 @@
   "out of bounds memory access"
 )
 (assert_trap
-  (invoke "i32.load" (i32.const 65536))
+  (invoke "i32.load" (i32.const 65_536))
   "out of bounds memory access"
 )
 (assert_trap
-  (invoke "i32.load" (i32.const 65535))
+  (invoke "i32.load" (i32.const 65_535))
   "out of bounds memory access"
 )
 (assert_trap
-  (invoke "i32.load" (i32.const 65534))
+  (invoke "i32.load" (i32.const 65_534))
   "out of bounds memory access"
 )
 (assert_trap
-  (invoke "i32.load" (i32.const 65533))
+  (invoke "i32.load" (i32.const 65_533))
   "out of bounds memory access"
 )
 (assert_trap (invoke "i32.load" (i32.const -1)) "out of bounds memory access")
@@ -383,35 +383,35 @@
 (assert_trap (invoke "i32.load" (i32.const -3)) "out of bounds memory access")
 (assert_trap (invoke "i32.load" (i32.const -4)) "out of bounds memory access")
 (assert_trap
-  (invoke "i64.load" (i32.const 65536))
+  (invoke "i64.load" (i32.const 65_536))
   "out of bounds memory access"
 )
 (assert_trap
-  (invoke "i64.load" (i32.const 65535))
+  (invoke "i64.load" (i32.const 65_535))
   "out of bounds memory access"
 )
 (assert_trap
-  (invoke "i64.load" (i32.const 65534))
+  (invoke "i64.load" (i32.const 65_534))
   "out of bounds memory access"
 )
 (assert_trap
-  (invoke "i64.load" (i32.const 65533))
+  (invoke "i64.load" (i32.const 65_533))
   "out of bounds memory access"
 )
 (assert_trap
-  (invoke "i64.load" (i32.const 65532))
+  (invoke "i64.load" (i32.const 65_532))
   "out of bounds memory access"
 )
 (assert_trap
-  (invoke "i64.load" (i32.const 65531))
+  (invoke "i64.load" (i32.const 65_531))
   "out of bounds memory access"
 )
 (assert_trap
-  (invoke "i64.load" (i32.const 65530))
+  (invoke "i64.load" (i32.const 65_530))
   "out of bounds memory access"
 )
 (assert_trap
-  (invoke "i64.load" (i32.const 65529))
+  (invoke "i64.load" (i32.const 65_529))
   "out of bounds memory access"
 )
 (assert_trap (invoke "i64.load" (i32.const -1)) "out of bounds memory access")
@@ -423,19 +423,19 @@
 (assert_trap (invoke "i64.load" (i32.const -7)) "out of bounds memory access")
 (assert_trap (invoke "i64.load" (i32.const -8)) "out of bounds memory access")
 (assert_trap
-  (invoke "f32.load" (i32.const 65536))
+  (invoke "f32.load" (i32.const 65_536))
   "out of bounds memory access"
 )
 (assert_trap
-  (invoke "f32.load" (i32.const 65535))
+  (invoke "f32.load" (i32.const 65_535))
   "out of bounds memory access"
 )
 (assert_trap
-  (invoke "f32.load" (i32.const 65534))
+  (invoke "f32.load" (i32.const 65_534))
   "out of bounds memory access"
 )
 (assert_trap
-  (invoke "f32.load" (i32.const 65533))
+  (invoke "f32.load" (i32.const 65_533))
   "out of bounds memory access"
 )
 (assert_trap (invoke "f32.load" (i32.const -1)) "out of bounds memory access")
@@ -443,35 +443,35 @@
 (assert_trap (invoke "f32.load" (i32.const -3)) "out of bounds memory access")
 (assert_trap (invoke "f32.load" (i32.const -4)) "out of bounds memory access")
 (assert_trap
-  (invoke "f64.load" (i32.const 65536))
+  (invoke "f64.load" (i32.const 65_536))
   "out of bounds memory access"
 )
 (assert_trap
-  (invoke "f64.load" (i32.const 65535))
+  (invoke "f64.load" (i32.const 65_535))
   "out of bounds memory access"
 )
 (assert_trap
-  (invoke "f64.load" (i32.const 65534))
+  (invoke "f64.load" (i32.const 65_534))
   "out of bounds memory access"
 )
 (assert_trap
-  (invoke "f64.load" (i32.const 65533))
+  (invoke "f64.load" (i32.const 65_533))
   "out of bounds memory access"
 )
 (assert_trap
-  (invoke "f64.load" (i32.const 65532))
+  (invoke "f64.load" (i32.const 65_532))
   "out of bounds memory access"
 )
 (assert_trap
-  (invoke "f64.load" (i32.const 65531))
+  (invoke "f64.load" (i32.const 65_531))
   "out of bounds memory access"
 )
 (assert_trap
-  (invoke "f64.load" (i32.const 65530))
+  (invoke "f64.load" (i32.const 65_530))
   "out of bounds memory access"
 )
 (assert_trap
-  (invoke "f64.load" (i32.const 65529))
+  (invoke "f64.load" (i32.const 65_529))
   "out of bounds memory access"
 )
 (assert_trap (invoke "f64.load" (i32.const -1)) "out of bounds memory access")
@@ -483,7 +483,7 @@
 (assert_trap (invoke "f64.load" (i32.const -7)) "out of bounds memory access")
 (assert_trap (invoke "f64.load" (i32.const -8)) "out of bounds memory access")
 (assert_trap
-  (invoke "i32.load8_s" (i32.const 65536))
+  (invoke "i32.load8_s" (i32.const 65_536))
   "out of bounds memory access"
 )
 (assert_trap
@@ -491,7 +491,7 @@
   "out of bounds memory access"
 )
 (assert_trap
-  (invoke "i32.load8_u" (i32.const 65536))
+  (invoke "i32.load8_u" (i32.const 65_536))
   "out of bounds memory access"
 )
 (assert_trap
@@ -499,11 +499,11 @@
   "out of bounds memory access"
 )
 (assert_trap
-  (invoke "i32.load16_s" (i32.const 65536))
+  (invoke "i32.load16_s" (i32.const 65_536))
   "out of bounds memory access"
 )
 (assert_trap
-  (invoke "i32.load16_s" (i32.const 65535))
+  (invoke "i32.load16_s" (i32.const 65_535))
   "out of bounds memory access"
 )
 (assert_trap
@@ -515,11 +515,11 @@
   "out of bounds memory access"
 )
 (assert_trap
-  (invoke "i32.load16_u" (i32.const 65536))
+  (invoke "i32.load16_u" (i32.const 65_536))
   "out of bounds memory access"
 )
 (assert_trap
-  (invoke "i32.load16_u" (i32.const 65535))
+  (invoke "i32.load16_u" (i32.const 65_535))
   "out of bounds memory access"
 )
 (assert_trap
@@ -531,7 +531,7 @@
   "out of bounds memory access"
 )
 (assert_trap
-  (invoke "i64.load8_s" (i32.const 65536))
+  (invoke "i64.load8_s" (i32.const 65_536))
   "out of bounds memory access"
 )
 (assert_trap
@@ -539,7 +539,7 @@
   "out of bounds memory access"
 )
 (assert_trap
-  (invoke "i64.load8_u" (i32.const 65536))
+  (invoke "i64.load8_u" (i32.const 65_536))
   "out of bounds memory access"
 )
 (assert_trap
@@ -547,11 +547,11 @@
   "out of bounds memory access"
 )
 (assert_trap
-  (invoke "i64.load16_s" (i32.const 65536))
+  (invoke "i64.load16_s" (i32.const 65_536))
   "out of bounds memory access"
 )
 (assert_trap
-  (invoke "i64.load16_s" (i32.const 65535))
+  (invoke "i64.load16_s" (i32.const 65_535))
   "out of bounds memory access"
 )
 (assert_trap
@@ -563,11 +563,11 @@
   "out of bounds memory access"
 )
 (assert_trap
-  (invoke "i64.load16_u" (i32.const 65536))
+  (invoke "i64.load16_u" (i32.const 65_536))
   "out of bounds memory access"
 )
 (assert_trap
-  (invoke "i64.load16_u" (i32.const 65535))
+  (invoke "i64.load16_u" (i32.const 65_535))
   "out of bounds memory access"
 )
 (assert_trap
@@ -579,19 +579,19 @@
   "out of bounds memory access"
 )
 (assert_trap
-  (invoke "i64.load32_s" (i32.const 65536))
+  (invoke "i64.load32_s" (i32.const 65_536))
   "out of bounds memory access"
 )
 (assert_trap
-  (invoke "i64.load32_s" (i32.const 65535))
+  (invoke "i64.load32_s" (i32.const 65_535))
   "out of bounds memory access"
 )
 (assert_trap
-  (invoke "i64.load32_s" (i32.const 65534))
+  (invoke "i64.load32_s" (i32.const 65_534))
   "out of bounds memory access"
 )
 (assert_trap
-  (invoke "i64.load32_s" (i32.const 65533))
+  (invoke "i64.load32_s" (i32.const 65_533))
   "out of bounds memory access"
 )
 (assert_trap
@@ -611,19 +611,19 @@
   "out of bounds memory access"
 )
 (assert_trap
-  (invoke "i64.load32_u" (i32.const 65536))
+  (invoke "i64.load32_u" (i32.const 65_536))
   "out of bounds memory access"
 )
 (assert_trap
-  (invoke "i64.load32_u" (i32.const 65535))
+  (invoke "i64.load32_u" (i32.const 65_535))
   "out of bounds memory access"
 )
 (assert_trap
-  (invoke "i64.load32_u" (i32.const 65534))
+  (invoke "i64.load32_u" (i32.const 65_534))
   "out of bounds memory access"
 )
 (assert_trap
-  (invoke "i64.load32_u" (i32.const 65533))
+  (invoke "i64.load32_u" (i32.const 65_533))
   "out of bounds memory access"
 )
 (assert_trap
@@ -643,10 +643,10 @@
   "out of bounds memory access"
 )
 (assert_return
-  (invoke "i64.load" (i32.const 65528))
-  (i64.const 7523094288207667809)
+  (invoke "i64.load" (i32.const 65_528))
+  (i64.const 7_523_094_288_207_667_809)
 )
 (assert_return
   (invoke "i64.load" (i32.const 0))
-  (i64.const 7523094288207667809)
+  (i64.const 7_523_094_288_207_667_809)
 )

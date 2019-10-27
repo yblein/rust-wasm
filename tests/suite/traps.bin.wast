@@ -29,11 +29,14 @@
   "integer divide by zero"
 )
 (assert_trap
-  (invoke "no_dce.i32.div_s" (i32.const -2147483648) (i32.const -1))
+  (invoke "no_dce.i32.div_s" (i32.const -2_147_483_648) (i32.const -1))
   "integer overflow"
 )
 (assert_trap
-  (invoke "no_dce.i64.div_s" (i64.const -9223372036854775808) (i64.const -1))
+  (invoke "no_dce.i64.div_s"
+    (i64.const -9_223_372_036_854_775_808)
+    (i64.const -1)
+  )
   "integer overflow"
 )
 (module binary
@@ -70,19 +73,19 @@
   "\00\61\73\6d\01\00\00\00\01\89\80\80\80\00\02\60"
   "\01\7d\00\60\01\7c\00\03\89\80\80\80\00\08\00\00"
   "\01\01\00\00\01\01\07\c9\81\80\80\00\08\16\6e\6f"
-  "\5f\64\63\65\2e\69\33\32\2e\74\72\75\6e\63\5f\73"
-  "\5f\66\33\32\00\00\16\6e\6f\5f\64\63\65\2e\69\33"
-  "\32\2e\74\72\75\6e\63\5f\75\5f\66\33\32\00\01\16"
+  "\5f\64\63\65\2e\69\33\32\2e\74\72\75\6e\63\5f\66"
+  "\33\32\5f\73\00\00\16\6e\6f\5f\64\63\65\2e\69\33"
+  "\32\2e\74\72\75\6e\63\5f\66\33\32\5f\75\00\01\16"
   "\6e\6f\5f\64\63\65\2e\69\33\32\2e\74\72\75\6e\63"
-  "\5f\73\5f\66\36\34\00\02\16\6e\6f\5f\64\63\65\2e"
-  "\69\33\32\2e\74\72\75\6e\63\5f\75\5f\66\36\34\00"
+  "\5f\66\36\34\5f\73\00\02\16\6e\6f\5f\64\63\65\2e"
+  "\69\33\32\2e\74\72\75\6e\63\5f\66\36\34\5f\75\00"
   "\03\16\6e\6f\5f\64\63\65\2e\69\36\34\2e\74\72\75"
-  "\6e\63\5f\73\5f\66\33\32\00\04\16\6e\6f\5f\64\63"
-  "\65\2e\69\36\34\2e\74\72\75\6e\63\5f\75\5f\66\33"
-  "\32\00\05\16\6e\6f\5f\64\63\65\2e\69\36\34\2e\74"
-  "\72\75\6e\63\5f\73\5f\66\36\34\00\06\16\6e\6f\5f"
-  "\64\63\65\2e\69\36\34\2e\74\72\75\6e\63\5f\75\5f"
-  "\66\36\34\00\07\0a\d9\80\80\80\00\08\86\80\80\80"
+  "\6e\63\5f\66\33\32\5f\73\00\04\16\6e\6f\5f\64\63"
+  "\65\2e\69\36\34\2e\74\72\75\6e\63\5f\66\33\32\5f"
+  "\75\00\05\16\6e\6f\5f\64\63\65\2e\69\36\34\2e\74"
+  "\72\75\6e\63\5f\66\36\34\5f\73\00\06\16\6e\6f\5f"
+  "\64\63\65\2e\69\36\34\2e\74\72\75\6e\63\5f\66\36"
+  "\34\5f\75\00\07\0a\d9\80\80\80\00\08\86\80\80\80"
   "\00\00\20\00\a8\1a\0b\86\80\80\80\00\00\20\00\a9"
   "\1a\0b\86\80\80\80\00\00\20\00\aa\1a\0b\86\80\80"
   "\80\00\00\20\00\ab\1a\0b\86\80\80\80\00\00\20\00"
@@ -91,35 +94,35 @@
   "\00\b1\1a\0b"
 )
 (assert_trap
-  (invoke "no_dce.i32.trunc_s_f32" (f32.const nan:0x400000))
+  (invoke "no_dce.i32.trunc_f32_s" (f32.const nan:0x400000))
   "invalid conversion to integer"
 )
 (assert_trap
-  (invoke "no_dce.i32.trunc_u_f32" (f32.const nan:0x400000))
+  (invoke "no_dce.i32.trunc_f32_u" (f32.const nan:0x400000))
   "invalid conversion to integer"
 )
 (assert_trap
-  (invoke "no_dce.i32.trunc_s_f64" (f64.const nan:0x8000000000000))
+  (invoke "no_dce.i32.trunc_f64_s" (f64.const nan:0x8000000000000))
   "invalid conversion to integer"
 )
 (assert_trap
-  (invoke "no_dce.i32.trunc_u_f64" (f64.const nan:0x8000000000000))
+  (invoke "no_dce.i32.trunc_f64_u" (f64.const nan:0x8000000000000))
   "invalid conversion to integer"
 )
 (assert_trap
-  (invoke "no_dce.i64.trunc_s_f32" (f32.const nan:0x400000))
+  (invoke "no_dce.i64.trunc_f32_s" (f32.const nan:0x400000))
   "invalid conversion to integer"
 )
 (assert_trap
-  (invoke "no_dce.i64.trunc_u_f32" (f32.const nan:0x400000))
+  (invoke "no_dce.i64.trunc_f32_u" (f32.const nan:0x400000))
   "invalid conversion to integer"
 )
 (assert_trap
-  (invoke "no_dce.i64.trunc_s_f64" (f64.const nan:0x8000000000000))
+  (invoke "no_dce.i64.trunc_f64_s" (f64.const nan:0x8000000000000))
   "invalid conversion to integer"
 )
 (assert_trap
-  (invoke "no_dce.i64.trunc_u_f64" (f64.const nan:0x8000000000000))
+  (invoke "no_dce.i64.trunc_f64_u" (f64.const nan:0x8000000000000))
   "invalid conversion to integer"
 )
 (module binary
@@ -159,58 +162,58 @@
   "\2b\03\00\1a\0b"
 )
 (assert_trap
-  (invoke "no_dce.i32.load" (i32.const 65536))
+  (invoke "no_dce.i32.load" (i32.const 65_536))
   "out of bounds memory access"
 )
 (assert_trap
-  (invoke "no_dce.i32.load16_s" (i32.const 65536))
+  (invoke "no_dce.i32.load16_s" (i32.const 65_536))
   "out of bounds memory access"
 )
 (assert_trap
-  (invoke "no_dce.i32.load16_u" (i32.const 65536))
+  (invoke "no_dce.i32.load16_u" (i32.const 65_536))
   "out of bounds memory access"
 )
 (assert_trap
-  (invoke "no_dce.i32.load8_s" (i32.const 65536))
+  (invoke "no_dce.i32.load8_s" (i32.const 65_536))
   "out of bounds memory access"
 )
 (assert_trap
-  (invoke "no_dce.i32.load8_u" (i32.const 65536))
+  (invoke "no_dce.i32.load8_u" (i32.const 65_536))
   "out of bounds memory access"
 )
 (assert_trap
-  (invoke "no_dce.i64.load" (i32.const 65536))
+  (invoke "no_dce.i64.load" (i32.const 65_536))
   "out of bounds memory access"
 )
 (assert_trap
-  (invoke "no_dce.i64.load32_s" (i32.const 65536))
+  (invoke "no_dce.i64.load32_s" (i32.const 65_536))
   "out of bounds memory access"
 )
 (assert_trap
-  (invoke "no_dce.i64.load32_u" (i32.const 65536))
+  (invoke "no_dce.i64.load32_u" (i32.const 65_536))
   "out of bounds memory access"
 )
 (assert_trap
-  (invoke "no_dce.i64.load16_s" (i32.const 65536))
+  (invoke "no_dce.i64.load16_s" (i32.const 65_536))
   "out of bounds memory access"
 )
 (assert_trap
-  (invoke "no_dce.i64.load16_u" (i32.const 65536))
+  (invoke "no_dce.i64.load16_u" (i32.const 65_536))
   "out of bounds memory access"
 )
 (assert_trap
-  (invoke "no_dce.i64.load8_s" (i32.const 65536))
+  (invoke "no_dce.i64.load8_s" (i32.const 65_536))
   "out of bounds memory access"
 )
 (assert_trap
-  (invoke "no_dce.i64.load8_u" (i32.const 65536))
+  (invoke "no_dce.i64.load8_u" (i32.const 65_536))
   "out of bounds memory access"
 )
 (assert_trap
-  (invoke "no_dce.f32.load" (i32.const 65536))
+  (invoke "no_dce.f32.load" (i32.const 65_536))
   "out of bounds memory access"
 )
 (assert_trap
-  (invoke "no_dce.f64.load" (i32.const 65536))
+  (invoke "no_dce.f64.load" (i32.const 65_536))
   "out of bounds memory access"
 )

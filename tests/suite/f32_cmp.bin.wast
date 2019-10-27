@@ -10,1152 +10,1302 @@
   "\80\80\00\00\20\00\20\01\5e\0b\87\80\80\80\00\00"
   "\20\00\20\01\60\0b"
 )
+(assert_return (invoke "eq" (f32.const -0) (f32.const -0)) (i32.const 1))
+(assert_return (invoke "eq" (f32.const -0) (f32.const 0)) (i32.const 1))
+(assert_return (invoke "eq" (f32.const 0) (f32.const -0)) (i32.const 1))
+(assert_return (invoke "eq" (f32.const 0) (f32.const 0)) (i32.const 1))
 (assert_return
-  (invoke "eq" (f32.const -0x0p+0) (f32.const -0x0p+0))
+  (invoke "eq" (f32.const -0) (f32.const -1.401_298_464_324_817_1e-45))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f32.const -0) (f32.const 1.401_298_464_324_817_1e-45))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f32.const 0) (f32.const -1.401_298_464_324_817_1e-45))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f32.const 0) (f32.const 1.401_298_464_324_817_1e-45))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f32.const -0) (f32.const -1.175_494_350_822_287_5e-38))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f32.const -0) (f32.const 1.175_494_350_822_287_5e-38))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f32.const 0) (f32.const -1.175_494_350_822_287_5e-38))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f32.const 0) (f32.const 1.175_494_350_822_287_5e-38))
+  (i32.const 0)
+)
+(assert_return (invoke "eq" (f32.const -0) (f32.const -0.5)) (i32.const 0))
+(assert_return (invoke "eq" (f32.const -0) (f32.const 0.5)) (i32.const 0))
+(assert_return (invoke "eq" (f32.const 0) (f32.const -0.5)) (i32.const 0))
+(assert_return (invoke "eq" (f32.const 0) (f32.const 0.5)) (i32.const 0))
+(assert_return (invoke "eq" (f32.const -0) (f32.const -1)) (i32.const 0))
+(assert_return (invoke "eq" (f32.const -0) (f32.const 1)) (i32.const 0))
+(assert_return (invoke "eq" (f32.const 0) (f32.const -1)) (i32.const 0))
+(assert_return (invoke "eq" (f32.const 0) (f32.const 1)) (i32.const 0))
+(assert_return
+  (invoke "eq" (f32.const -0) (f32.const -6.283_185_482_025_146_5))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f32.const -0) (f32.const 6.283_185_482_025_146_5))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f32.const 0) (f32.const -6.283_185_482_025_146_5))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f32.const 0) (f32.const 6.283_185_482_025_146_5))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f32.const -0) (f32.const -3.402_823_466_385_288_6e+38))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f32.const -0) (f32.const 3.402_823_466_385_288_6e+38))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f32.const 0) (f32.const -3.402_823_466_385_288_6e+38))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f32.const 0) (f32.const 3.402_823_466_385_288_6e+38))
+  (i32.const 0)
+)
+(assert_return (invoke "eq" (f32.const -0) (f32.const -inf)) (i32.const 0))
+(assert_return (invoke "eq" (f32.const -0) (f32.const inf)) (i32.const 0))
+(assert_return (invoke "eq" (f32.const 0) (f32.const -inf)) (i32.const 0))
+(assert_return (invoke "eq" (f32.const 0) (f32.const inf)) (i32.const 0))
+(assert_return
+  (invoke "eq" (f32.const -0) (f32.const -nan:0x400000))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f32.const -0) (f32.const -nan:0x200000))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f32.const -0) (f32.const nan:0x400000))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f32.const -0) (f32.const nan:0x200000))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f32.const 0) (f32.const -nan:0x400000))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f32.const 0) (f32.const -nan:0x200000))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f32.const 0) (f32.const nan:0x400000))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f32.const 0) (f32.const nan:0x200000))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f32.const -1.401_298_464_324_817_1e-45) (f32.const -0))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f32.const -1.401_298_464_324_817_1e-45) (f32.const 0))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f32.const 1.401_298_464_324_817_1e-45) (f32.const -0))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f32.const 1.401_298_464_324_817_1e-45) (f32.const 0))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq"
+    (f32.const -1.401_298_464_324_817_1e-45)
+    (f32.const -1.401_298_464_324_817_1e-45)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "eq" (f32.const -0x0p+0) (f32.const 0x0p+0))
+  (invoke "eq"
+    (f32.const -1.401_298_464_324_817_1e-45)
+    (f32.const 1.401_298_464_324_817_1e-45)
+  )
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq"
+    (f32.const 1.401_298_464_324_817_1e-45)
+    (f32.const -1.401_298_464_324_817_1e-45)
+  )
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq"
+    (f32.const 1.401_298_464_324_817_1e-45)
+    (f32.const 1.401_298_464_324_817_1e-45)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "eq" (f32.const 0x0p+0) (f32.const -0x0p+0))
+  (invoke "eq"
+    (f32.const -1.401_298_464_324_817_1e-45)
+    (f32.const -1.175_494_350_822_287_5e-38)
+  )
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq"
+    (f32.const -1.401_298_464_324_817_1e-45)
+    (f32.const 1.175_494_350_822_287_5e-38)
+  )
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq"
+    (f32.const 1.401_298_464_324_817_1e-45)
+    (f32.const -1.175_494_350_822_287_5e-38)
+  )
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq"
+    (f32.const 1.401_298_464_324_817_1e-45)
+    (f32.const 1.175_494_350_822_287_5e-38)
+  )
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f32.const -1.401_298_464_324_817_1e-45) (f32.const -0.5))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f32.const -1.401_298_464_324_817_1e-45) (f32.const 0.5))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f32.const 1.401_298_464_324_817_1e-45) (f32.const -0.5))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f32.const 1.401_298_464_324_817_1e-45) (f32.const 0.5))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f32.const -1.401_298_464_324_817_1e-45) (f32.const -1))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f32.const -1.401_298_464_324_817_1e-45) (f32.const 1))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f32.const 1.401_298_464_324_817_1e-45) (f32.const -1))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f32.const 1.401_298_464_324_817_1e-45) (f32.const 1))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq"
+    (f32.const -1.401_298_464_324_817_1e-45)
+    (f32.const -6.283_185_482_025_146_5)
+  )
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq"
+    (f32.const -1.401_298_464_324_817_1e-45)
+    (f32.const 6.283_185_482_025_146_5)
+  )
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq"
+    (f32.const 1.401_298_464_324_817_1e-45)
+    (f32.const -6.283_185_482_025_146_5)
+  )
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq"
+    (f32.const 1.401_298_464_324_817_1e-45)
+    (f32.const 6.283_185_482_025_146_5)
+  )
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq"
+    (f32.const -1.401_298_464_324_817_1e-45)
+    (f32.const -3.402_823_466_385_288_6e+38)
+  )
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq"
+    (f32.const -1.401_298_464_324_817_1e-45)
+    (f32.const 3.402_823_466_385_288_6e+38)
+  )
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq"
+    (f32.const 1.401_298_464_324_817_1e-45)
+    (f32.const -3.402_823_466_385_288_6e+38)
+  )
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq"
+    (f32.const 1.401_298_464_324_817_1e-45)
+    (f32.const 3.402_823_466_385_288_6e+38)
+  )
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f32.const -1.401_298_464_324_817_1e-45) (f32.const -inf))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f32.const -1.401_298_464_324_817_1e-45) (f32.const inf))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f32.const 1.401_298_464_324_817_1e-45) (f32.const -inf))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f32.const 1.401_298_464_324_817_1e-45) (f32.const inf))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq"
+    (f32.const -1.401_298_464_324_817_1e-45)
+    (f32.const -nan:0x400000)
+  )
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq"
+    (f32.const -1.401_298_464_324_817_1e-45)
+    (f32.const -nan:0x200000)
+  )
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq"
+    (f32.const -1.401_298_464_324_817_1e-45)
+    (f32.const nan:0x400000)
+  )
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq"
+    (f32.const -1.401_298_464_324_817_1e-45)
+    (f32.const nan:0x200000)
+  )
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq"
+    (f32.const 1.401_298_464_324_817_1e-45)
+    (f32.const -nan:0x400000)
+  )
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq"
+    (f32.const 1.401_298_464_324_817_1e-45)
+    (f32.const -nan:0x200000)
+  )
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f32.const 1.401_298_464_324_817_1e-45) (f32.const nan:0x400000))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f32.const 1.401_298_464_324_817_1e-45) (f32.const nan:0x200000))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f32.const -1.175_494_350_822_287_5e-38) (f32.const -0))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f32.const -1.175_494_350_822_287_5e-38) (f32.const 0))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f32.const 1.175_494_350_822_287_5e-38) (f32.const -0))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f32.const 1.175_494_350_822_287_5e-38) (f32.const 0))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq"
+    (f32.const -1.175_494_350_822_287_5e-38)
+    (f32.const -1.401_298_464_324_817_1e-45)
+  )
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq"
+    (f32.const -1.175_494_350_822_287_5e-38)
+    (f32.const 1.401_298_464_324_817_1e-45)
+  )
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq"
+    (f32.const 1.175_494_350_822_287_5e-38)
+    (f32.const -1.401_298_464_324_817_1e-45)
+  )
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq"
+    (f32.const 1.175_494_350_822_287_5e-38)
+    (f32.const 1.401_298_464_324_817_1e-45)
+  )
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq"
+    (f32.const -1.175_494_350_822_287_5e-38)
+    (f32.const -1.175_494_350_822_287_5e-38)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "eq" (f32.const 0x0p+0) (f32.const 0x0p+0))
+  (invoke "eq"
+    (f32.const -1.175_494_350_822_287_5e-38)
+    (f32.const 1.175_494_350_822_287_5e-38)
+  )
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq"
+    (f32.const 1.175_494_350_822_287_5e-38)
+    (f32.const -1.175_494_350_822_287_5e-38)
+  )
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq"
+    (f32.const 1.175_494_350_822_287_5e-38)
+    (f32.const 1.175_494_350_822_287_5e-38)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "eq" (f32.const -0x0p+0) (f32.const -0x1p-149))
+  (invoke "eq" (f32.const -1.175_494_350_822_287_5e-38) (f32.const -0.5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const -0x0p+0) (f32.const 0x1p-149))
+  (invoke "eq" (f32.const -1.175_494_350_822_287_5e-38) (f32.const 0.5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const 0x0p+0) (f32.const -0x1p-149))
+  (invoke "eq" (f32.const 1.175_494_350_822_287_5e-38) (f32.const -0.5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const 0x0p+0) (f32.const 0x1p-149))
+  (invoke "eq" (f32.const 1.175_494_350_822_287_5e-38) (f32.const 0.5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const -0x0p+0) (f32.const -0x1p-126))
+  (invoke "eq" (f32.const -1.175_494_350_822_287_5e-38) (f32.const -1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const -0x0p+0) (f32.const 0x1p-126))
+  (invoke "eq" (f32.const -1.175_494_350_822_287_5e-38) (f32.const 1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const 0x0p+0) (f32.const -0x1p-126))
+  (invoke "eq" (f32.const 1.175_494_350_822_287_5e-38) (f32.const -1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const 0x0p+0) (f32.const 0x1p-126))
+  (invoke "eq" (f32.const 1.175_494_350_822_287_5e-38) (f32.const 1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const -0x0p+0) (f32.const -0x1p-1))
+  (invoke "eq"
+    (f32.const -1.175_494_350_822_287_5e-38)
+    (f32.const -6.283_185_482_025_146_5)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const -0x0p+0) (f32.const 0x1p-1))
+  (invoke "eq"
+    (f32.const -1.175_494_350_822_287_5e-38)
+    (f32.const 6.283_185_482_025_146_5)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const 0x0p+0) (f32.const -0x1p-1))
+  (invoke "eq"
+    (f32.const 1.175_494_350_822_287_5e-38)
+    (f32.const -6.283_185_482_025_146_5)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const 0x0p+0) (f32.const 0x1p-1))
+  (invoke "eq"
+    (f32.const 1.175_494_350_822_287_5e-38)
+    (f32.const 6.283_185_482_025_146_5)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const -0x0p+0) (f32.const -0x1p+0))
+  (invoke "eq"
+    (f32.const -1.175_494_350_822_287_5e-38)
+    (f32.const -3.402_823_466_385_288_6e+38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const -0x0p+0) (f32.const 0x1p+0))
+  (invoke "eq"
+    (f32.const -1.175_494_350_822_287_5e-38)
+    (f32.const 3.402_823_466_385_288_6e+38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const 0x0p+0) (f32.const -0x1p+0))
+  (invoke "eq"
+    (f32.const 1.175_494_350_822_287_5e-38)
+    (f32.const -3.402_823_466_385_288_6e+38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const 0x0p+0) (f32.const 0x1p+0))
+  (invoke "eq"
+    (f32.const 1.175_494_350_822_287_5e-38)
+    (f32.const 3.402_823_466_385_288_6e+38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const -0x0p+0) (f32.const -0x1.921fb6p+2))
+  (invoke "eq" (f32.const -1.175_494_350_822_287_5e-38) (f32.const -inf))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const -0x0p+0) (f32.const 0x1.921fb6p+2))
+  (invoke "eq" (f32.const -1.175_494_350_822_287_5e-38) (f32.const inf))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const 0x0p+0) (f32.const -0x1.921fb6p+2))
+  (invoke "eq" (f32.const 1.175_494_350_822_287_5e-38) (f32.const -inf))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const 0x0p+0) (f32.const 0x1.921fb6p+2))
+  (invoke "eq" (f32.const 1.175_494_350_822_287_5e-38) (f32.const inf))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const -0x0p+0) (f32.const -0x1.fffffep+127))
+  (invoke "eq"
+    (f32.const -1.175_494_350_822_287_5e-38)
+    (f32.const -nan:0x400000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const -0x0p+0) (f32.const 0x1.fffffep+127))
+  (invoke "eq"
+    (f32.const -1.175_494_350_822_287_5e-38)
+    (f32.const -nan:0x200000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const 0x0p+0) (f32.const -0x1.fffffep+127))
+  (invoke "eq"
+    (f32.const -1.175_494_350_822_287_5e-38)
+    (f32.const nan:0x400000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const 0x0p+0) (f32.const 0x1.fffffep+127))
-  (i32.const 0)
-)
-(assert_return (invoke "eq" (f32.const -0x0p+0) (f32.const -inf)) (i32.const 0))
-(assert_return (invoke "eq" (f32.const -0x0p+0) (f32.const inf)) (i32.const 0))
-(assert_return (invoke "eq" (f32.const 0x0p+0) (f32.const -inf)) (i32.const 0))
-(assert_return (invoke "eq" (f32.const 0x0p+0) (f32.const inf)) (i32.const 0))
-(assert_return
-  (invoke "eq" (f32.const -0x0p+0) (f32.const -nan:0x400000))
+  (invoke "eq"
+    (f32.const -1.175_494_350_822_287_5e-38)
+    (f32.const nan:0x200000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const -0x0p+0) (f32.const -nan:0x200000))
+  (invoke "eq"
+    (f32.const 1.175_494_350_822_287_5e-38)
+    (f32.const -nan:0x400000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const -0x0p+0) (f32.const nan:0x400000))
+  (invoke "eq"
+    (f32.const 1.175_494_350_822_287_5e-38)
+    (f32.const -nan:0x200000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const -0x0p+0) (f32.const nan:0x200000))
+  (invoke "eq" (f32.const 1.175_494_350_822_287_5e-38) (f32.const nan:0x400000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const 0x0p+0) (f32.const -nan:0x400000))
+  (invoke "eq" (f32.const 1.175_494_350_822_287_5e-38) (f32.const nan:0x200000))
+  (i32.const 0)
+)
+(assert_return (invoke "eq" (f32.const -0.5) (f32.const -0)) (i32.const 0))
+(assert_return (invoke "eq" (f32.const -0.5) (f32.const 0)) (i32.const 0))
+(assert_return (invoke "eq" (f32.const 0.5) (f32.const -0)) (i32.const 0))
+(assert_return (invoke "eq" (f32.const 0.5) (f32.const 0)) (i32.const 0))
+(assert_return
+  (invoke "eq" (f32.const -0.5) (f32.const -1.401_298_464_324_817_1e-45))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const 0x0p+0) (f32.const -nan:0x200000))
+  (invoke "eq" (f32.const -0.5) (f32.const 1.401_298_464_324_817_1e-45))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const 0x0p+0) (f32.const nan:0x400000))
+  (invoke "eq" (f32.const 0.5) (f32.const -1.401_298_464_324_817_1e-45))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const 0x0p+0) (f32.const nan:0x200000))
+  (invoke "eq" (f32.const 0.5) (f32.const 1.401_298_464_324_817_1e-45))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const -0x1p-149) (f32.const -0x0p+0))
+  (invoke "eq" (f32.const -0.5) (f32.const -1.175_494_350_822_287_5e-38))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const -0x1p-149) (f32.const 0x0p+0))
+  (invoke "eq" (f32.const -0.5) (f32.const 1.175_494_350_822_287_5e-38))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const 0x1p-149) (f32.const -0x0p+0))
+  (invoke "eq" (f32.const 0.5) (f32.const -1.175_494_350_822_287_5e-38))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const 0x1p-149) (f32.const 0x0p+0))
+  (invoke "eq" (f32.const 0.5) (f32.const 1.175_494_350_822_287_5e-38))
+  (i32.const 0)
+)
+(assert_return (invoke "eq" (f32.const -0.5) (f32.const -0.5)) (i32.const 1))
+(assert_return (invoke "eq" (f32.const -0.5) (f32.const 0.5)) (i32.const 0))
+(assert_return (invoke "eq" (f32.const 0.5) (f32.const -0.5)) (i32.const 0))
+(assert_return (invoke "eq" (f32.const 0.5) (f32.const 0.5)) (i32.const 1))
+(assert_return (invoke "eq" (f32.const -0.5) (f32.const -1)) (i32.const 0))
+(assert_return (invoke "eq" (f32.const -0.5) (f32.const 1)) (i32.const 0))
+(assert_return (invoke "eq" (f32.const 0.5) (f32.const -1)) (i32.const 0))
+(assert_return (invoke "eq" (f32.const 0.5) (f32.const 1)) (i32.const 0))
+(assert_return
+  (invoke "eq" (f32.const -0.5) (f32.const -6.283_185_482_025_146_5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const -0x1p-149) (f32.const -0x1p-149))
+  (invoke "eq" (f32.const -0.5) (f32.const 6.283_185_482_025_146_5))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f32.const 0.5) (f32.const -6.283_185_482_025_146_5))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f32.const 0.5) (f32.const 6.283_185_482_025_146_5))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f32.const -0.5) (f32.const -3.402_823_466_385_288_6e+38))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f32.const -0.5) (f32.const 3.402_823_466_385_288_6e+38))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f32.const 0.5) (f32.const -3.402_823_466_385_288_6e+38))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f32.const 0.5) (f32.const 3.402_823_466_385_288_6e+38))
+  (i32.const 0)
+)
+(assert_return (invoke "eq" (f32.const -0.5) (f32.const -inf)) (i32.const 0))
+(assert_return (invoke "eq" (f32.const -0.5) (f32.const inf)) (i32.const 0))
+(assert_return (invoke "eq" (f32.const 0.5) (f32.const -inf)) (i32.const 0))
+(assert_return (invoke "eq" (f32.const 0.5) (f32.const inf)) (i32.const 0))
+(assert_return
+  (invoke "eq" (f32.const -0.5) (f32.const -nan:0x400000))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f32.const -0.5) (f32.const -nan:0x200000))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f32.const -0.5) (f32.const nan:0x400000))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f32.const -0.5) (f32.const nan:0x200000))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f32.const 0.5) (f32.const -nan:0x400000))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f32.const 0.5) (f32.const -nan:0x200000))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f32.const 0.5) (f32.const nan:0x400000))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f32.const 0.5) (f32.const nan:0x200000))
+  (i32.const 0)
+)
+(assert_return (invoke "eq" (f32.const -1) (f32.const -0)) (i32.const 0))
+(assert_return (invoke "eq" (f32.const -1) (f32.const 0)) (i32.const 0))
+(assert_return (invoke "eq" (f32.const 1) (f32.const -0)) (i32.const 0))
+(assert_return (invoke "eq" (f32.const 1) (f32.const 0)) (i32.const 0))
+(assert_return
+  (invoke "eq" (f32.const -1) (f32.const -1.401_298_464_324_817_1e-45))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f32.const -1) (f32.const 1.401_298_464_324_817_1e-45))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f32.const 1) (f32.const -1.401_298_464_324_817_1e-45))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f32.const 1) (f32.const 1.401_298_464_324_817_1e-45))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f32.const -1) (f32.const -1.175_494_350_822_287_5e-38))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f32.const -1) (f32.const 1.175_494_350_822_287_5e-38))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f32.const 1) (f32.const -1.175_494_350_822_287_5e-38))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f32.const 1) (f32.const 1.175_494_350_822_287_5e-38))
+  (i32.const 0)
+)
+(assert_return (invoke "eq" (f32.const -1) (f32.const -0.5)) (i32.const 0))
+(assert_return (invoke "eq" (f32.const -1) (f32.const 0.5)) (i32.const 0))
+(assert_return (invoke "eq" (f32.const 1) (f32.const -0.5)) (i32.const 0))
+(assert_return (invoke "eq" (f32.const 1) (f32.const 0.5)) (i32.const 0))
+(assert_return (invoke "eq" (f32.const -1) (f32.const -1)) (i32.const 1))
+(assert_return (invoke "eq" (f32.const -1) (f32.const 1)) (i32.const 0))
+(assert_return (invoke "eq" (f32.const 1) (f32.const -1)) (i32.const 0))
+(assert_return (invoke "eq" (f32.const 1) (f32.const 1)) (i32.const 1))
+(assert_return
+  (invoke "eq" (f32.const -1) (f32.const -6.283_185_482_025_146_5))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f32.const -1) (f32.const 6.283_185_482_025_146_5))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f32.const 1) (f32.const -6.283_185_482_025_146_5))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f32.const 1) (f32.const 6.283_185_482_025_146_5))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f32.const -1) (f32.const -3.402_823_466_385_288_6e+38))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f32.const -1) (f32.const 3.402_823_466_385_288_6e+38))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f32.const 1) (f32.const -3.402_823_466_385_288_6e+38))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f32.const 1) (f32.const 3.402_823_466_385_288_6e+38))
+  (i32.const 0)
+)
+(assert_return (invoke "eq" (f32.const -1) (f32.const -inf)) (i32.const 0))
+(assert_return (invoke "eq" (f32.const -1) (f32.const inf)) (i32.const 0))
+(assert_return (invoke "eq" (f32.const 1) (f32.const -inf)) (i32.const 0))
+(assert_return (invoke "eq" (f32.const 1) (f32.const inf)) (i32.const 0))
+(assert_return
+  (invoke "eq" (f32.const -1) (f32.const -nan:0x400000))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f32.const -1) (f32.const -nan:0x200000))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f32.const -1) (f32.const nan:0x400000))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f32.const -1) (f32.const nan:0x200000))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f32.const 1) (f32.const -nan:0x400000))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f32.const 1) (f32.const -nan:0x200000))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f32.const 1) (f32.const nan:0x400000))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f32.const 1) (f32.const nan:0x200000))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f32.const -6.283_185_482_025_146_5) (f32.const -0))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f32.const -6.283_185_482_025_146_5) (f32.const 0))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f32.const 6.283_185_482_025_146_5) (f32.const -0))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f32.const 6.283_185_482_025_146_5) (f32.const 0))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq"
+    (f32.const -6.283_185_482_025_146_5)
+    (f32.const -1.401_298_464_324_817_1e-45)
+  )
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq"
+    (f32.const -6.283_185_482_025_146_5)
+    (f32.const 1.401_298_464_324_817_1e-45)
+  )
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq"
+    (f32.const 6.283_185_482_025_146_5)
+    (f32.const -1.401_298_464_324_817_1e-45)
+  )
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq"
+    (f32.const 6.283_185_482_025_146_5)
+    (f32.const 1.401_298_464_324_817_1e-45)
+  )
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq"
+    (f32.const -6.283_185_482_025_146_5)
+    (f32.const -1.175_494_350_822_287_5e-38)
+  )
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq"
+    (f32.const -6.283_185_482_025_146_5)
+    (f32.const 1.175_494_350_822_287_5e-38)
+  )
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq"
+    (f32.const 6.283_185_482_025_146_5)
+    (f32.const -1.175_494_350_822_287_5e-38)
+  )
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq"
+    (f32.const 6.283_185_482_025_146_5)
+    (f32.const 1.175_494_350_822_287_5e-38)
+  )
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f32.const -6.283_185_482_025_146_5) (f32.const -0.5))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f32.const -6.283_185_482_025_146_5) (f32.const 0.5))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f32.const 6.283_185_482_025_146_5) (f32.const -0.5))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f32.const 6.283_185_482_025_146_5) (f32.const 0.5))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f32.const -6.283_185_482_025_146_5) (f32.const -1))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f32.const -6.283_185_482_025_146_5) (f32.const 1))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f32.const 6.283_185_482_025_146_5) (f32.const -1))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq" (f32.const 6.283_185_482_025_146_5) (f32.const 1))
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq"
+    (f32.const -6.283_185_482_025_146_5)
+    (f32.const -6.283_185_482_025_146_5)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "eq" (f32.const -0x1p-149) (f32.const 0x1p-149))
+  (invoke "eq"
+    (f32.const -6.283_185_482_025_146_5)
+    (f32.const 6.283_185_482_025_146_5)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const 0x1p-149) (f32.const -0x1p-149))
+  (invoke "eq"
+    (f32.const 6.283_185_482_025_146_5)
+    (f32.const -6.283_185_482_025_146_5)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const 0x1p-149) (f32.const 0x1p-149))
+  (invoke "eq"
+    (f32.const 6.283_185_482_025_146_5)
+    (f32.const 6.283_185_482_025_146_5)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "eq" (f32.const -0x1p-149) (f32.const -0x1p-126))
+  (invoke "eq"
+    (f32.const -6.283_185_482_025_146_5)
+    (f32.const -3.402_823_466_385_288_6e+38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const -0x1p-149) (f32.const 0x1p-126))
+  (invoke "eq"
+    (f32.const -6.283_185_482_025_146_5)
+    (f32.const 3.402_823_466_385_288_6e+38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const 0x1p-149) (f32.const -0x1p-126))
+  (invoke "eq"
+    (f32.const 6.283_185_482_025_146_5)
+    (f32.const -3.402_823_466_385_288_6e+38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const 0x1p-149) (f32.const 0x1p-126))
+  (invoke "eq"
+    (f32.const 6.283_185_482_025_146_5)
+    (f32.const 3.402_823_466_385_288_6e+38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const -0x1p-149) (f32.const -0x1p-1))
+  (invoke "eq" (f32.const -6.283_185_482_025_146_5) (f32.const -inf))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const -0x1p-149) (f32.const 0x1p-1))
+  (invoke "eq" (f32.const -6.283_185_482_025_146_5) (f32.const inf))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const 0x1p-149) (f32.const -0x1p-1))
+  (invoke "eq" (f32.const 6.283_185_482_025_146_5) (f32.const -inf))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const 0x1p-149) (f32.const 0x1p-1))
+  (invoke "eq" (f32.const 6.283_185_482_025_146_5) (f32.const inf))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const -0x1p-149) (f32.const -0x1p+0))
+  (invoke "eq" (f32.const -6.283_185_482_025_146_5) (f32.const -nan:0x400000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const -0x1p-149) (f32.const 0x1p+0))
+  (invoke "eq" (f32.const -6.283_185_482_025_146_5) (f32.const -nan:0x200000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const 0x1p-149) (f32.const -0x1p+0))
+  (invoke "eq" (f32.const -6.283_185_482_025_146_5) (f32.const nan:0x400000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const 0x1p-149) (f32.const 0x1p+0))
+  (invoke "eq" (f32.const -6.283_185_482_025_146_5) (f32.const nan:0x200000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const -0x1p-149) (f32.const -0x1.921fb6p+2))
+  (invoke "eq" (f32.const 6.283_185_482_025_146_5) (f32.const -nan:0x400000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const -0x1p-149) (f32.const 0x1.921fb6p+2))
+  (invoke "eq" (f32.const 6.283_185_482_025_146_5) (f32.const -nan:0x200000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const 0x1p-149) (f32.const -0x1.921fb6p+2))
+  (invoke "eq" (f32.const 6.283_185_482_025_146_5) (f32.const nan:0x400000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const 0x1p-149) (f32.const 0x1.921fb6p+2))
+  (invoke "eq" (f32.const 6.283_185_482_025_146_5) (f32.const nan:0x200000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const -0x1p-149) (f32.const -0x1.fffffep+127))
+  (invoke "eq" (f32.const -3.402_823_466_385_288_6e+38) (f32.const -0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const -0x1p-149) (f32.const 0x1.fffffep+127))
+  (invoke "eq" (f32.const -3.402_823_466_385_288_6e+38) (f32.const 0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const 0x1p-149) (f32.const -0x1.fffffep+127))
+  (invoke "eq" (f32.const 3.402_823_466_385_288_6e+38) (f32.const -0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const 0x1p-149) (f32.const 0x1.fffffep+127))
+  (invoke "eq" (f32.const 3.402_823_466_385_288_6e+38) (f32.const 0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const -0x1p-149) (f32.const -inf))
+  (invoke "eq"
+    (f32.const -3.402_823_466_385_288_6e+38)
+    (f32.const -1.401_298_464_324_817_1e-45)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const -0x1p-149) (f32.const inf))
+  (invoke "eq"
+    (f32.const -3.402_823_466_385_288_6e+38)
+    (f32.const 1.401_298_464_324_817_1e-45)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const 0x1p-149) (f32.const -inf))
-  (i32.const 0)
-)
-(assert_return (invoke "eq" (f32.const 0x1p-149) (f32.const inf)) (i32.const 0))
-(assert_return
-  (invoke "eq" (f32.const -0x1p-149) (f32.const -nan:0x400000))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const -0x1p-149) (f32.const -nan:0x200000))
+  (invoke "eq"
+    (f32.const 3.402_823_466_385_288_6e+38)
+    (f32.const -1.401_298_464_324_817_1e-45)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const -0x1p-149) (f32.const nan:0x400000))
+  (invoke "eq"
+    (f32.const 3.402_823_466_385_288_6e+38)
+    (f32.const 1.401_298_464_324_817_1e-45)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const -0x1p-149) (f32.const nan:0x200000))
+  (invoke "eq"
+    (f32.const -3.402_823_466_385_288_6e+38)
+    (f32.const -1.175_494_350_822_287_5e-38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const 0x1p-149) (f32.const -nan:0x400000))
+  (invoke "eq"
+    (f32.const -3.402_823_466_385_288_6e+38)
+    (f32.const 1.175_494_350_822_287_5e-38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const 0x1p-149) (f32.const -nan:0x200000))
+  (invoke "eq"
+    (f32.const 3.402_823_466_385_288_6e+38)
+    (f32.const -1.175_494_350_822_287_5e-38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const 0x1p-149) (f32.const nan:0x400000))
+  (invoke "eq"
+    (f32.const 3.402_823_466_385_288_6e+38)
+    (f32.const 1.175_494_350_822_287_5e-38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const 0x1p-149) (f32.const nan:0x200000))
+  (invoke "eq" (f32.const -3.402_823_466_385_288_6e+38) (f32.const -0.5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const -0x1p-126) (f32.const -0x0p+0))
+  (invoke "eq" (f32.const -3.402_823_466_385_288_6e+38) (f32.const 0.5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const -0x1p-126) (f32.const 0x0p+0))
+  (invoke "eq" (f32.const 3.402_823_466_385_288_6e+38) (f32.const -0.5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const 0x1p-126) (f32.const -0x0p+0))
+  (invoke "eq" (f32.const 3.402_823_466_385_288_6e+38) (f32.const 0.5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const 0x1p-126) (f32.const 0x0p+0))
+  (invoke "eq" (f32.const -3.402_823_466_385_288_6e+38) (f32.const -1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const -0x1p-126) (f32.const -0x1p-149))
+  (invoke "eq" (f32.const -3.402_823_466_385_288_6e+38) (f32.const 1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const -0x1p-126) (f32.const 0x1p-149))
+  (invoke "eq" (f32.const 3.402_823_466_385_288_6e+38) (f32.const -1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const 0x1p-126) (f32.const -0x1p-149))
+  (invoke "eq" (f32.const 3.402_823_466_385_288_6e+38) (f32.const 1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const 0x1p-126) (f32.const 0x1p-149))
+  (invoke "eq"
+    (f32.const -3.402_823_466_385_288_6e+38)
+    (f32.const -6.283_185_482_025_146_5)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const -0x1p-126) (f32.const -0x1p-126))
+  (invoke "eq"
+    (f32.const -3.402_823_466_385_288_6e+38)
+    (f32.const 6.283_185_482_025_146_5)
+  )
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq"
+    (f32.const 3.402_823_466_385_288_6e+38)
+    (f32.const -6.283_185_482_025_146_5)
+  )
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq"
+    (f32.const 3.402_823_466_385_288_6e+38)
+    (f32.const 6.283_185_482_025_146_5)
+  )
+  (i32.const 0)
+)
+(assert_return
+  (invoke "eq"
+    (f32.const -3.402_823_466_385_288_6e+38)
+    (f32.const -3.402_823_466_385_288_6e+38)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "eq" (f32.const -0x1p-126) (f32.const 0x1p-126))
+  (invoke "eq"
+    (f32.const -3.402_823_466_385_288_6e+38)
+    (f32.const 3.402_823_466_385_288_6e+38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const 0x1p-126) (f32.const -0x1p-126))
+  (invoke "eq"
+    (f32.const 3.402_823_466_385_288_6e+38)
+    (f32.const -3.402_823_466_385_288_6e+38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const 0x1p-126) (f32.const 0x1p-126))
+  (invoke "eq"
+    (f32.const 3.402_823_466_385_288_6e+38)
+    (f32.const 3.402_823_466_385_288_6e+38)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "eq" (f32.const -0x1p-126) (f32.const -0x1p-1))
+  (invoke "eq" (f32.const -3.402_823_466_385_288_6e+38) (f32.const -inf))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const -0x1p-126) (f32.const 0x1p-1))
+  (invoke "eq" (f32.const -3.402_823_466_385_288_6e+38) (f32.const inf))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const 0x1p-126) (f32.const -0x1p-1))
+  (invoke "eq" (f32.const 3.402_823_466_385_288_6e+38) (f32.const -inf))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const 0x1p-126) (f32.const 0x1p-1))
+  (invoke "eq" (f32.const 3.402_823_466_385_288_6e+38) (f32.const inf))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const -0x1p-126) (f32.const -0x1p+0))
+  (invoke "eq"
+    (f32.const -3.402_823_466_385_288_6e+38)
+    (f32.const -nan:0x400000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const -0x1p-126) (f32.const 0x1p+0))
+  (invoke "eq"
+    (f32.const -3.402_823_466_385_288_6e+38)
+    (f32.const -nan:0x200000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const 0x1p-126) (f32.const -0x1p+0))
+  (invoke "eq"
+    (f32.const -3.402_823_466_385_288_6e+38)
+    (f32.const nan:0x400000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const 0x1p-126) (f32.const 0x1p+0))
+  (invoke "eq"
+    (f32.const -3.402_823_466_385_288_6e+38)
+    (f32.const nan:0x200000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const -0x1p-126) (f32.const -0x1.921fb6p+2))
+  (invoke "eq"
+    (f32.const 3.402_823_466_385_288_6e+38)
+    (f32.const -nan:0x400000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const -0x1p-126) (f32.const 0x1.921fb6p+2))
+  (invoke "eq"
+    (f32.const 3.402_823_466_385_288_6e+38)
+    (f32.const -nan:0x200000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const 0x1p-126) (f32.const -0x1.921fb6p+2))
+  (invoke "eq" (f32.const 3.402_823_466_385_288_6e+38) (f32.const nan:0x400000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const 0x1p-126) (f32.const 0x1.921fb6p+2))
+  (invoke "eq" (f32.const 3.402_823_466_385_288_6e+38) (f32.const nan:0x200000))
   (i32.const 0)
 )
+(assert_return (invoke "eq" (f32.const -inf) (f32.const -0)) (i32.const 0))
+(assert_return (invoke "eq" (f32.const -inf) (f32.const 0)) (i32.const 0))
+(assert_return (invoke "eq" (f32.const inf) (f32.const -0)) (i32.const 0))
+(assert_return (invoke "eq" (f32.const inf) (f32.const 0)) (i32.const 0))
 (assert_return
-  (invoke "eq" (f32.const -0x1p-126) (f32.const -0x1.fffffep+127))
+  (invoke "eq" (f32.const -inf) (f32.const -1.401_298_464_324_817_1e-45))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const -0x1p-126) (f32.const 0x1.fffffep+127))
+  (invoke "eq" (f32.const -inf) (f32.const 1.401_298_464_324_817_1e-45))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const 0x1p-126) (f32.const -0x1.fffffep+127))
+  (invoke "eq" (f32.const inf) (f32.const -1.401_298_464_324_817_1e-45))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const 0x1p-126) (f32.const 0x1.fffffep+127))
+  (invoke "eq" (f32.const inf) (f32.const 1.401_298_464_324_817_1e-45))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const -0x1p-126) (f32.const -inf))
+  (invoke "eq" (f32.const -inf) (f32.const -1.175_494_350_822_287_5e-38))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const -0x1p-126) (f32.const inf))
+  (invoke "eq" (f32.const -inf) (f32.const 1.175_494_350_822_287_5e-38))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const 0x1p-126) (f32.const -inf))
+  (invoke "eq" (f32.const inf) (f32.const -1.175_494_350_822_287_5e-38))
   (i32.const 0)
 )
-(assert_return (invoke "eq" (f32.const 0x1p-126) (f32.const inf)) (i32.const 0))
 (assert_return
-  (invoke "eq" (f32.const -0x1p-126) (f32.const -nan:0x400000))
+  (invoke "eq" (f32.const inf) (f32.const 1.175_494_350_822_287_5e-38))
   (i32.const 0)
 )
+(assert_return (invoke "eq" (f32.const -inf) (f32.const -0.5)) (i32.const 0))
+(assert_return (invoke "eq" (f32.const -inf) (f32.const 0.5)) (i32.const 0))
+(assert_return (invoke "eq" (f32.const inf) (f32.const -0.5)) (i32.const 0))
+(assert_return (invoke "eq" (f32.const inf) (f32.const 0.5)) (i32.const 0))
+(assert_return (invoke "eq" (f32.const -inf) (f32.const -1)) (i32.const 0))
+(assert_return (invoke "eq" (f32.const -inf) (f32.const 1)) (i32.const 0))
+(assert_return (invoke "eq" (f32.const inf) (f32.const -1)) (i32.const 0))
+(assert_return (invoke "eq" (f32.const inf) (f32.const 1)) (i32.const 0))
 (assert_return
-  (invoke "eq" (f32.const -0x1p-126) (f32.const -nan:0x200000))
+  (invoke "eq" (f32.const -inf) (f32.const -6.283_185_482_025_146_5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const -0x1p-126) (f32.const nan:0x400000))
+  (invoke "eq" (f32.const -inf) (f32.const 6.283_185_482_025_146_5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const -0x1p-126) (f32.const nan:0x200000))
+  (invoke "eq" (f32.const inf) (f32.const -6.283_185_482_025_146_5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const 0x1p-126) (f32.const -nan:0x400000))
+  (invoke "eq" (f32.const inf) (f32.const 6.283_185_482_025_146_5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const 0x1p-126) (f32.const -nan:0x200000))
+  (invoke "eq" (f32.const -inf) (f32.const -3.402_823_466_385_288_6e+38))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const 0x1p-126) (f32.const nan:0x400000))
+  (invoke "eq" (f32.const -inf) (f32.const 3.402_823_466_385_288_6e+38))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const 0x1p-126) (f32.const nan:0x200000))
+  (invoke "eq" (f32.const inf) (f32.const -3.402_823_466_385_288_6e+38))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const -0x1p-1) (f32.const -0x0p+0))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const -0x1p-1) (f32.const 0x0p+0))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const 0x1p-1) (f32.const -0x0p+0))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const 0x1p-1) (f32.const 0x0p+0))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const -0x1p-1) (f32.const -0x1p-149))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const -0x1p-1) (f32.const 0x1p-149))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const 0x1p-1) (f32.const -0x1p-149))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const 0x1p-1) (f32.const 0x1p-149))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const -0x1p-1) (f32.const -0x1p-126))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const -0x1p-1) (f32.const 0x1p-126))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const 0x1p-1) (f32.const -0x1p-126))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const 0x1p-1) (f32.const 0x1p-126))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const -0x1p-1) (f32.const -0x1p-1))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "eq" (f32.const -0x1p-1) (f32.const 0x1p-1))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const 0x1p-1) (f32.const -0x1p-1))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const 0x1p-1) (f32.const 0x1p-1))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "eq" (f32.const -0x1p-1) (f32.const -0x1p+0))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const -0x1p-1) (f32.const 0x1p+0))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const 0x1p-1) (f32.const -0x1p+0))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const 0x1p-1) (f32.const 0x1p+0))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const -0x1p-1) (f32.const -0x1.921fb6p+2))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const -0x1p-1) (f32.const 0x1.921fb6p+2))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const 0x1p-1) (f32.const -0x1.921fb6p+2))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const 0x1p-1) (f32.const 0x1.921fb6p+2))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const -0x1p-1) (f32.const -0x1.fffffep+127))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const -0x1p-1) (f32.const 0x1.fffffep+127))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const 0x1p-1) (f32.const -0x1.fffffep+127))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const 0x1p-1) (f32.const 0x1.fffffep+127))
-  (i32.const 0)
-)
-(assert_return (invoke "eq" (f32.const -0x1p-1) (f32.const -inf)) (i32.const 0))
-(assert_return (invoke "eq" (f32.const -0x1p-1) (f32.const inf)) (i32.const 0))
-(assert_return (invoke "eq" (f32.const 0x1p-1) (f32.const -inf)) (i32.const 0))
-(assert_return (invoke "eq" (f32.const 0x1p-1) (f32.const inf)) (i32.const 0))
-(assert_return
-  (invoke "eq" (f32.const -0x1p-1) (f32.const -nan:0x400000))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const -0x1p-1) (f32.const -nan:0x200000))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const -0x1p-1) (f32.const nan:0x400000))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const -0x1p-1) (f32.const nan:0x200000))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const 0x1p-1) (f32.const -nan:0x400000))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const 0x1p-1) (f32.const -nan:0x200000))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const 0x1p-1) (f32.const nan:0x400000))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const 0x1p-1) (f32.const nan:0x200000))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const -0x1p+0) (f32.const -0x0p+0))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const -0x1p+0) (f32.const 0x0p+0))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const 0x1p+0) (f32.const -0x0p+0))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const 0x1p+0) (f32.const 0x0p+0))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const -0x1p+0) (f32.const -0x1p-149))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const -0x1p+0) (f32.const 0x1p-149))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const 0x1p+0) (f32.const -0x1p-149))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const 0x1p+0) (f32.const 0x1p-149))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const -0x1p+0) (f32.const -0x1p-126))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const -0x1p+0) (f32.const 0x1p-126))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const 0x1p+0) (f32.const -0x1p-126))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const 0x1p+0) (f32.const 0x1p-126))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const -0x1p+0) (f32.const -0x1p-1))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const -0x1p+0) (f32.const 0x1p-1))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const 0x1p+0) (f32.const -0x1p-1))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const 0x1p+0) (f32.const 0x1p-1))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const -0x1p+0) (f32.const -0x1p+0))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "eq" (f32.const -0x1p+0) (f32.const 0x1p+0))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const 0x1p+0) (f32.const -0x1p+0))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const 0x1p+0) (f32.const 0x1p+0))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "eq" (f32.const -0x1p+0) (f32.const -0x1.921fb6p+2))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const -0x1p+0) (f32.const 0x1.921fb6p+2))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const 0x1p+0) (f32.const -0x1.921fb6p+2))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const 0x1p+0) (f32.const 0x1.921fb6p+2))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const -0x1p+0) (f32.const -0x1.fffffep+127))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const -0x1p+0) (f32.const 0x1.fffffep+127))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const 0x1p+0) (f32.const -0x1.fffffep+127))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const 0x1p+0) (f32.const 0x1.fffffep+127))
-  (i32.const 0)
-)
-(assert_return (invoke "eq" (f32.const -0x1p+0) (f32.const -inf)) (i32.const 0))
-(assert_return (invoke "eq" (f32.const -0x1p+0) (f32.const inf)) (i32.const 0))
-(assert_return (invoke "eq" (f32.const 0x1p+0) (f32.const -inf)) (i32.const 0))
-(assert_return (invoke "eq" (f32.const 0x1p+0) (f32.const inf)) (i32.const 0))
-(assert_return
-  (invoke "eq" (f32.const -0x1p+0) (f32.const -nan:0x400000))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const -0x1p+0) (f32.const -nan:0x200000))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const -0x1p+0) (f32.const nan:0x400000))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const -0x1p+0) (f32.const nan:0x200000))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const 0x1p+0) (f32.const -nan:0x400000))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const 0x1p+0) (f32.const -nan:0x200000))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const 0x1p+0) (f32.const nan:0x400000))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const 0x1p+0) (f32.const nan:0x200000))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const -0x1.921fb6p+2) (f32.const -0x0p+0))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const -0x1.921fb6p+2) (f32.const 0x0p+0))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const 0x1.921fb6p+2) (f32.const -0x0p+0))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const 0x1.921fb6p+2) (f32.const 0x0p+0))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const -0x1.921fb6p+2) (f32.const -0x1p-149))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const -0x1.921fb6p+2) (f32.const 0x1p-149))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const 0x1.921fb6p+2) (f32.const -0x1p-149))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const 0x1.921fb6p+2) (f32.const 0x1p-149))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const -0x1.921fb6p+2) (f32.const -0x1p-126))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const -0x1.921fb6p+2) (f32.const 0x1p-126))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const 0x1.921fb6p+2) (f32.const -0x1p-126))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const 0x1.921fb6p+2) (f32.const 0x1p-126))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const -0x1.921fb6p+2) (f32.const -0x1p-1))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const -0x1.921fb6p+2) (f32.const 0x1p-1))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const 0x1.921fb6p+2) (f32.const -0x1p-1))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const 0x1.921fb6p+2) (f32.const 0x1p-1))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const -0x1.921fb6p+2) (f32.const -0x1p+0))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const -0x1.921fb6p+2) (f32.const 0x1p+0))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const 0x1.921fb6p+2) (f32.const -0x1p+0))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const 0x1.921fb6p+2) (f32.const 0x1p+0))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const -0x1.921fb6p+2) (f32.const -0x1.921fb6p+2))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "eq" (f32.const -0x1.921fb6p+2) (f32.const 0x1.921fb6p+2))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const 0x1.921fb6p+2) (f32.const -0x1.921fb6p+2))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const 0x1.921fb6p+2) (f32.const 0x1.921fb6p+2))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "eq" (f32.const -0x1.921fb6p+2) (f32.const -0x1.fffffep+127))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const -0x1.921fb6p+2) (f32.const 0x1.fffffep+127))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const 0x1.921fb6p+2) (f32.const -0x1.fffffep+127))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const 0x1.921fb6p+2) (f32.const 0x1.fffffep+127))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const -0x1.921fb6p+2) (f32.const -inf))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const -0x1.921fb6p+2) (f32.const inf))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const 0x1.921fb6p+2) (f32.const -inf))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const 0x1.921fb6p+2) (f32.const inf))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const -0x1.921fb6p+2) (f32.const -nan:0x400000))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const -0x1.921fb6p+2) (f32.const -nan:0x200000))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const -0x1.921fb6p+2) (f32.const nan:0x400000))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const -0x1.921fb6p+2) (f32.const nan:0x200000))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const 0x1.921fb6p+2) (f32.const -nan:0x400000))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const 0x1.921fb6p+2) (f32.const -nan:0x200000))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const 0x1.921fb6p+2) (f32.const nan:0x400000))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const 0x1.921fb6p+2) (f32.const nan:0x200000))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const -0x1.fffffep+127) (f32.const -0x0p+0))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const -0x1.fffffep+127) (f32.const 0x0p+0))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const 0x1.fffffep+127) (f32.const -0x0p+0))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const 0x1.fffffep+127) (f32.const 0x0p+0))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const -0x1.fffffep+127) (f32.const -0x1p-149))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const -0x1.fffffep+127) (f32.const 0x1p-149))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const 0x1.fffffep+127) (f32.const -0x1p-149))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const 0x1.fffffep+127) (f32.const 0x1p-149))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const -0x1.fffffep+127) (f32.const -0x1p-126))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const -0x1.fffffep+127) (f32.const 0x1p-126))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const 0x1.fffffep+127) (f32.const -0x1p-126))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const 0x1.fffffep+127) (f32.const 0x1p-126))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const -0x1.fffffep+127) (f32.const -0x1p-1))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const -0x1.fffffep+127) (f32.const 0x1p-1))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const 0x1.fffffep+127) (f32.const -0x1p-1))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const 0x1.fffffep+127) (f32.const 0x1p-1))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const -0x1.fffffep+127) (f32.const -0x1p+0))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const -0x1.fffffep+127) (f32.const 0x1p+0))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const 0x1.fffffep+127) (f32.const -0x1p+0))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const 0x1.fffffep+127) (f32.const 0x1p+0))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const -0x1.fffffep+127) (f32.const -0x1.921fb6p+2))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const -0x1.fffffep+127) (f32.const 0x1.921fb6p+2))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const 0x1.fffffep+127) (f32.const -0x1.921fb6p+2))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const 0x1.fffffep+127) (f32.const 0x1.921fb6p+2))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const -0x1.fffffep+127) (f32.const -0x1.fffffep+127))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "eq" (f32.const -0x1.fffffep+127) (f32.const 0x1.fffffep+127))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const 0x1.fffffep+127) (f32.const -0x1.fffffep+127))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const 0x1.fffffep+127) (f32.const 0x1.fffffep+127))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "eq" (f32.const -0x1.fffffep+127) (f32.const -inf))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const -0x1.fffffep+127) (f32.const inf))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const 0x1.fffffep+127) (f32.const -inf))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const 0x1.fffffep+127) (f32.const inf))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const -0x1.fffffep+127) (f32.const -nan:0x400000))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const -0x1.fffffep+127) (f32.const -nan:0x200000))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const -0x1.fffffep+127) (f32.const nan:0x400000))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const -0x1.fffffep+127) (f32.const nan:0x200000))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const 0x1.fffffep+127) (f32.const -nan:0x400000))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const 0x1.fffffep+127) (f32.const -nan:0x200000))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const 0x1.fffffep+127) (f32.const nan:0x400000))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const 0x1.fffffep+127) (f32.const nan:0x200000))
-  (i32.const 0)
-)
-(assert_return (invoke "eq" (f32.const -inf) (f32.const -0x0p+0)) (i32.const 0))
-(assert_return (invoke "eq" (f32.const -inf) (f32.const 0x0p+0)) (i32.const 0))
-(assert_return (invoke "eq" (f32.const inf) (f32.const -0x0p+0)) (i32.const 0))
-(assert_return (invoke "eq" (f32.const inf) (f32.const 0x0p+0)) (i32.const 0))
-(assert_return
-  (invoke "eq" (f32.const -inf) (f32.const -0x1p-149))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const -inf) (f32.const 0x1p-149))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const inf) (f32.const -0x1p-149))
-  (i32.const 0)
-)
-(assert_return (invoke "eq" (f32.const inf) (f32.const 0x1p-149)) (i32.const 0))
-(assert_return
-  (invoke "eq" (f32.const -inf) (f32.const -0x1p-126))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const -inf) (f32.const 0x1p-126))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const inf) (f32.const -0x1p-126))
-  (i32.const 0)
-)
-(assert_return (invoke "eq" (f32.const inf) (f32.const 0x1p-126)) (i32.const 0))
-(assert_return (invoke "eq" (f32.const -inf) (f32.const -0x1p-1)) (i32.const 0))
-(assert_return (invoke "eq" (f32.const -inf) (f32.const 0x1p-1)) (i32.const 0))
-(assert_return (invoke "eq" (f32.const inf) (f32.const -0x1p-1)) (i32.const 0))
-(assert_return (invoke "eq" (f32.const inf) (f32.const 0x1p-1)) (i32.const 0))
-(assert_return (invoke "eq" (f32.const -inf) (f32.const -0x1p+0)) (i32.const 0))
-(assert_return (invoke "eq" (f32.const -inf) (f32.const 0x1p+0)) (i32.const 0))
-(assert_return (invoke "eq" (f32.const inf) (f32.const -0x1p+0)) (i32.const 0))
-(assert_return (invoke "eq" (f32.const inf) (f32.const 0x1p+0)) (i32.const 0))
-(assert_return
-  (invoke "eq" (f32.const -inf) (f32.const -0x1.921fb6p+2))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const -inf) (f32.const 0x1.921fb6p+2))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const inf) (f32.const -0x1.921fb6p+2))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const inf) (f32.const 0x1.921fb6p+2))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const -inf) (f32.const -0x1.fffffep+127))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const -inf) (f32.const 0x1.fffffep+127))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const inf) (f32.const -0x1.fffffep+127))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "eq" (f32.const inf) (f32.const 0x1.fffffep+127))
+  (invoke "eq" (f32.const inf) (f32.const 3.402_823_466_385_288_6e+38))
   (i32.const 0)
 )
 (assert_return (invoke "eq" (f32.const -inf) (f32.const -inf)) (i32.const 1))
@@ -1195,227 +1345,281 @@
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const -nan:0x400000) (f32.const -0x0p+0))
+  (invoke "eq" (f32.const -nan:0x400000) (f32.const -0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const -nan:0x200000) (f32.const -0x0p+0))
+  (invoke "eq" (f32.const -nan:0x200000) (f32.const -0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const -nan:0x400000) (f32.const 0x0p+0))
+  (invoke "eq" (f32.const -nan:0x400000) (f32.const 0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const -nan:0x200000) (f32.const 0x0p+0))
+  (invoke "eq" (f32.const -nan:0x200000) (f32.const 0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const nan:0x400000) (f32.const -0x0p+0))
+  (invoke "eq" (f32.const nan:0x400000) (f32.const -0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const nan:0x200000) (f32.const -0x0p+0))
+  (invoke "eq" (f32.const nan:0x200000) (f32.const -0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const nan:0x400000) (f32.const 0x0p+0))
+  (invoke "eq" (f32.const nan:0x400000) (f32.const 0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const nan:0x200000) (f32.const 0x0p+0))
+  (invoke "eq" (f32.const nan:0x200000) (f32.const 0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const -nan:0x400000) (f32.const -0x1p-149))
+  (invoke "eq"
+    (f32.const -nan:0x400000)
+    (f32.const -1.401_298_464_324_817_1e-45)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const -nan:0x200000) (f32.const -0x1p-149))
+  (invoke "eq"
+    (f32.const -nan:0x200000)
+    (f32.const -1.401_298_464_324_817_1e-45)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const -nan:0x400000) (f32.const 0x1p-149))
+  (invoke "eq"
+    (f32.const -nan:0x400000)
+    (f32.const 1.401_298_464_324_817_1e-45)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const -nan:0x200000) (f32.const 0x1p-149))
+  (invoke "eq"
+    (f32.const -nan:0x200000)
+    (f32.const 1.401_298_464_324_817_1e-45)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const nan:0x400000) (f32.const -0x1p-149))
+  (invoke "eq"
+    (f32.const nan:0x400000)
+    (f32.const -1.401_298_464_324_817_1e-45)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const nan:0x200000) (f32.const -0x1p-149))
+  (invoke "eq"
+    (f32.const nan:0x200000)
+    (f32.const -1.401_298_464_324_817_1e-45)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const nan:0x400000) (f32.const 0x1p-149))
+  (invoke "eq" (f32.const nan:0x400000) (f32.const 1.401_298_464_324_817_1e-45))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const nan:0x200000) (f32.const 0x1p-149))
+  (invoke "eq" (f32.const nan:0x200000) (f32.const 1.401_298_464_324_817_1e-45))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const -nan:0x400000) (f32.const -0x1p-126))
+  (invoke "eq"
+    (f32.const -nan:0x400000)
+    (f32.const -1.175_494_350_822_287_5e-38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const -nan:0x200000) (f32.const -0x1p-126))
+  (invoke "eq"
+    (f32.const -nan:0x200000)
+    (f32.const -1.175_494_350_822_287_5e-38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const -nan:0x400000) (f32.const 0x1p-126))
+  (invoke "eq"
+    (f32.const -nan:0x400000)
+    (f32.const 1.175_494_350_822_287_5e-38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const -nan:0x200000) (f32.const 0x1p-126))
+  (invoke "eq"
+    (f32.const -nan:0x200000)
+    (f32.const 1.175_494_350_822_287_5e-38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const nan:0x400000) (f32.const -0x1p-126))
+  (invoke "eq"
+    (f32.const nan:0x400000)
+    (f32.const -1.175_494_350_822_287_5e-38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const nan:0x200000) (f32.const -0x1p-126))
+  (invoke "eq"
+    (f32.const nan:0x200000)
+    (f32.const -1.175_494_350_822_287_5e-38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const nan:0x400000) (f32.const 0x1p-126))
+  (invoke "eq" (f32.const nan:0x400000) (f32.const 1.175_494_350_822_287_5e-38))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const nan:0x200000) (f32.const 0x1p-126))
+  (invoke "eq" (f32.const nan:0x200000) (f32.const 1.175_494_350_822_287_5e-38))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const -nan:0x400000) (f32.const -0x1p-1))
+  (invoke "eq" (f32.const -nan:0x400000) (f32.const -0.5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const -nan:0x200000) (f32.const -0x1p-1))
+  (invoke "eq" (f32.const -nan:0x200000) (f32.const -0.5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const -nan:0x400000) (f32.const 0x1p-1))
+  (invoke "eq" (f32.const -nan:0x400000) (f32.const 0.5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const -nan:0x200000) (f32.const 0x1p-1))
+  (invoke "eq" (f32.const -nan:0x200000) (f32.const 0.5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const nan:0x400000) (f32.const -0x1p-1))
+  (invoke "eq" (f32.const nan:0x400000) (f32.const -0.5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const nan:0x200000) (f32.const -0x1p-1))
+  (invoke "eq" (f32.const nan:0x200000) (f32.const -0.5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const nan:0x400000) (f32.const 0x1p-1))
+  (invoke "eq" (f32.const nan:0x400000) (f32.const 0.5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const nan:0x200000) (f32.const 0x1p-1))
+  (invoke "eq" (f32.const nan:0x200000) (f32.const 0.5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const -nan:0x400000) (f32.const -0x1p+0))
+  (invoke "eq" (f32.const -nan:0x400000) (f32.const -1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const -nan:0x200000) (f32.const -0x1p+0))
+  (invoke "eq" (f32.const -nan:0x200000) (f32.const -1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const -nan:0x400000) (f32.const 0x1p+0))
+  (invoke "eq" (f32.const -nan:0x400000) (f32.const 1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const -nan:0x200000) (f32.const 0x1p+0))
+  (invoke "eq" (f32.const -nan:0x200000) (f32.const 1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const nan:0x400000) (f32.const -0x1p+0))
+  (invoke "eq" (f32.const nan:0x400000) (f32.const -1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const nan:0x200000) (f32.const -0x1p+0))
+  (invoke "eq" (f32.const nan:0x200000) (f32.const -1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const nan:0x400000) (f32.const 0x1p+0))
+  (invoke "eq" (f32.const nan:0x400000) (f32.const 1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const nan:0x200000) (f32.const 0x1p+0))
+  (invoke "eq" (f32.const nan:0x200000) (f32.const 1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const -nan:0x400000) (f32.const -0x1.921fb6p+2))
+  (invoke "eq" (f32.const -nan:0x400000) (f32.const -6.283_185_482_025_146_5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const -nan:0x200000) (f32.const -0x1.921fb6p+2))
+  (invoke "eq" (f32.const -nan:0x200000) (f32.const -6.283_185_482_025_146_5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const -nan:0x400000) (f32.const 0x1.921fb6p+2))
+  (invoke "eq" (f32.const -nan:0x400000) (f32.const 6.283_185_482_025_146_5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const -nan:0x200000) (f32.const 0x1.921fb6p+2))
+  (invoke "eq" (f32.const -nan:0x200000) (f32.const 6.283_185_482_025_146_5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const nan:0x400000) (f32.const -0x1.921fb6p+2))
+  (invoke "eq" (f32.const nan:0x400000) (f32.const -6.283_185_482_025_146_5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const nan:0x200000) (f32.const -0x1.921fb6p+2))
+  (invoke "eq" (f32.const nan:0x200000) (f32.const -6.283_185_482_025_146_5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const nan:0x400000) (f32.const 0x1.921fb6p+2))
+  (invoke "eq" (f32.const nan:0x400000) (f32.const 6.283_185_482_025_146_5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const nan:0x200000) (f32.const 0x1.921fb6p+2))
+  (invoke "eq" (f32.const nan:0x200000) (f32.const 6.283_185_482_025_146_5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const -nan:0x400000) (f32.const -0x1.fffffep+127))
+  (invoke "eq"
+    (f32.const -nan:0x400000)
+    (f32.const -3.402_823_466_385_288_6e+38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const -nan:0x200000) (f32.const -0x1.fffffep+127))
+  (invoke "eq"
+    (f32.const -nan:0x200000)
+    (f32.const -3.402_823_466_385_288_6e+38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const -nan:0x400000) (f32.const 0x1.fffffep+127))
+  (invoke "eq"
+    (f32.const -nan:0x400000)
+    (f32.const 3.402_823_466_385_288_6e+38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const -nan:0x200000) (f32.const 0x1.fffffep+127))
+  (invoke "eq"
+    (f32.const -nan:0x200000)
+    (f32.const 3.402_823_466_385_288_6e+38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const nan:0x400000) (f32.const -0x1.fffffep+127))
+  (invoke "eq"
+    (f32.const nan:0x400000)
+    (f32.const -3.402_823_466_385_288_6e+38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const nan:0x200000) (f32.const -0x1.fffffep+127))
+  (invoke "eq"
+    (f32.const nan:0x200000)
+    (f32.const -3.402_823_466_385_288_6e+38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const nan:0x400000) (f32.const 0x1.fffffep+127))
+  (invoke "eq" (f32.const nan:0x400000) (f32.const 3.402_823_466_385_288_6e+38))
   (i32.const 0)
 )
 (assert_return
-  (invoke "eq" (f32.const nan:0x200000) (f32.const 0x1.fffffep+127))
+  (invoke "eq" (f32.const nan:0x200000) (f32.const 3.402_823_466_385_288_6e+38))
   (i32.const 0)
 )
 (assert_return
@@ -1514,1152 +1718,1302 @@
   (invoke "eq" (f32.const nan:0x200000) (f32.const nan:0x200000))
   (i32.const 0)
 )
+(assert_return (invoke "ne" (f32.const -0) (f32.const -0)) (i32.const 0))
+(assert_return (invoke "ne" (f32.const -0) (f32.const 0)) (i32.const 0))
+(assert_return (invoke "ne" (f32.const 0) (f32.const -0)) (i32.const 0))
+(assert_return (invoke "ne" (f32.const 0) (f32.const 0)) (i32.const 0))
 (assert_return
-  (invoke "ne" (f32.const -0x0p+0) (f32.const -0x0p+0))
+  (invoke "ne" (f32.const -0) (f32.const -1.401_298_464_324_817_1e-45))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f32.const -0) (f32.const 1.401_298_464_324_817_1e-45))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f32.const 0) (f32.const -1.401_298_464_324_817_1e-45))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f32.const 0) (f32.const 1.401_298_464_324_817_1e-45))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f32.const -0) (f32.const -1.175_494_350_822_287_5e-38))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f32.const -0) (f32.const 1.175_494_350_822_287_5e-38))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f32.const 0) (f32.const -1.175_494_350_822_287_5e-38))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f32.const 0) (f32.const 1.175_494_350_822_287_5e-38))
+  (i32.const 1)
+)
+(assert_return (invoke "ne" (f32.const -0) (f32.const -0.5)) (i32.const 1))
+(assert_return (invoke "ne" (f32.const -0) (f32.const 0.5)) (i32.const 1))
+(assert_return (invoke "ne" (f32.const 0) (f32.const -0.5)) (i32.const 1))
+(assert_return (invoke "ne" (f32.const 0) (f32.const 0.5)) (i32.const 1))
+(assert_return (invoke "ne" (f32.const -0) (f32.const -1)) (i32.const 1))
+(assert_return (invoke "ne" (f32.const -0) (f32.const 1)) (i32.const 1))
+(assert_return (invoke "ne" (f32.const 0) (f32.const -1)) (i32.const 1))
+(assert_return (invoke "ne" (f32.const 0) (f32.const 1)) (i32.const 1))
+(assert_return
+  (invoke "ne" (f32.const -0) (f32.const -6.283_185_482_025_146_5))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f32.const -0) (f32.const 6.283_185_482_025_146_5))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f32.const 0) (f32.const -6.283_185_482_025_146_5))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f32.const 0) (f32.const 6.283_185_482_025_146_5))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f32.const -0) (f32.const -3.402_823_466_385_288_6e+38))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f32.const -0) (f32.const 3.402_823_466_385_288_6e+38))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f32.const 0) (f32.const -3.402_823_466_385_288_6e+38))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f32.const 0) (f32.const 3.402_823_466_385_288_6e+38))
+  (i32.const 1)
+)
+(assert_return (invoke "ne" (f32.const -0) (f32.const -inf)) (i32.const 1))
+(assert_return (invoke "ne" (f32.const -0) (f32.const inf)) (i32.const 1))
+(assert_return (invoke "ne" (f32.const 0) (f32.const -inf)) (i32.const 1))
+(assert_return (invoke "ne" (f32.const 0) (f32.const inf)) (i32.const 1))
+(assert_return
+  (invoke "ne" (f32.const -0) (f32.const -nan:0x400000))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f32.const -0) (f32.const -nan:0x200000))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f32.const -0) (f32.const nan:0x400000))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f32.const -0) (f32.const nan:0x200000))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f32.const 0) (f32.const -nan:0x400000))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f32.const 0) (f32.const -nan:0x200000))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f32.const 0) (f32.const nan:0x400000))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f32.const 0) (f32.const nan:0x200000))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f32.const -1.401_298_464_324_817_1e-45) (f32.const -0))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f32.const -1.401_298_464_324_817_1e-45) (f32.const 0))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f32.const 1.401_298_464_324_817_1e-45) (f32.const -0))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f32.const 1.401_298_464_324_817_1e-45) (f32.const 0))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne"
+    (f32.const -1.401_298_464_324_817_1e-45)
+    (f32.const -1.401_298_464_324_817_1e-45)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ne" (f32.const -0x0p+0) (f32.const 0x0p+0))
+  (invoke "ne"
+    (f32.const -1.401_298_464_324_817_1e-45)
+    (f32.const 1.401_298_464_324_817_1e-45)
+  )
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne"
+    (f32.const 1.401_298_464_324_817_1e-45)
+    (f32.const -1.401_298_464_324_817_1e-45)
+  )
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne"
+    (f32.const 1.401_298_464_324_817_1e-45)
+    (f32.const 1.401_298_464_324_817_1e-45)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ne" (f32.const 0x0p+0) (f32.const -0x0p+0))
+  (invoke "ne"
+    (f32.const -1.401_298_464_324_817_1e-45)
+    (f32.const -1.175_494_350_822_287_5e-38)
+  )
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne"
+    (f32.const -1.401_298_464_324_817_1e-45)
+    (f32.const 1.175_494_350_822_287_5e-38)
+  )
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne"
+    (f32.const 1.401_298_464_324_817_1e-45)
+    (f32.const -1.175_494_350_822_287_5e-38)
+  )
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne"
+    (f32.const 1.401_298_464_324_817_1e-45)
+    (f32.const 1.175_494_350_822_287_5e-38)
+  )
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f32.const -1.401_298_464_324_817_1e-45) (f32.const -0.5))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f32.const -1.401_298_464_324_817_1e-45) (f32.const 0.5))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f32.const 1.401_298_464_324_817_1e-45) (f32.const -0.5))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f32.const 1.401_298_464_324_817_1e-45) (f32.const 0.5))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f32.const -1.401_298_464_324_817_1e-45) (f32.const -1))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f32.const -1.401_298_464_324_817_1e-45) (f32.const 1))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f32.const 1.401_298_464_324_817_1e-45) (f32.const -1))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f32.const 1.401_298_464_324_817_1e-45) (f32.const 1))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne"
+    (f32.const -1.401_298_464_324_817_1e-45)
+    (f32.const -6.283_185_482_025_146_5)
+  )
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne"
+    (f32.const -1.401_298_464_324_817_1e-45)
+    (f32.const 6.283_185_482_025_146_5)
+  )
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne"
+    (f32.const 1.401_298_464_324_817_1e-45)
+    (f32.const -6.283_185_482_025_146_5)
+  )
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne"
+    (f32.const 1.401_298_464_324_817_1e-45)
+    (f32.const 6.283_185_482_025_146_5)
+  )
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne"
+    (f32.const -1.401_298_464_324_817_1e-45)
+    (f32.const -3.402_823_466_385_288_6e+38)
+  )
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne"
+    (f32.const -1.401_298_464_324_817_1e-45)
+    (f32.const 3.402_823_466_385_288_6e+38)
+  )
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne"
+    (f32.const 1.401_298_464_324_817_1e-45)
+    (f32.const -3.402_823_466_385_288_6e+38)
+  )
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne"
+    (f32.const 1.401_298_464_324_817_1e-45)
+    (f32.const 3.402_823_466_385_288_6e+38)
+  )
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f32.const -1.401_298_464_324_817_1e-45) (f32.const -inf))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f32.const -1.401_298_464_324_817_1e-45) (f32.const inf))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f32.const 1.401_298_464_324_817_1e-45) (f32.const -inf))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f32.const 1.401_298_464_324_817_1e-45) (f32.const inf))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne"
+    (f32.const -1.401_298_464_324_817_1e-45)
+    (f32.const -nan:0x400000)
+  )
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne"
+    (f32.const -1.401_298_464_324_817_1e-45)
+    (f32.const -nan:0x200000)
+  )
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne"
+    (f32.const -1.401_298_464_324_817_1e-45)
+    (f32.const nan:0x400000)
+  )
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne"
+    (f32.const -1.401_298_464_324_817_1e-45)
+    (f32.const nan:0x200000)
+  )
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne"
+    (f32.const 1.401_298_464_324_817_1e-45)
+    (f32.const -nan:0x400000)
+  )
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne"
+    (f32.const 1.401_298_464_324_817_1e-45)
+    (f32.const -nan:0x200000)
+  )
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f32.const 1.401_298_464_324_817_1e-45) (f32.const nan:0x400000))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f32.const 1.401_298_464_324_817_1e-45) (f32.const nan:0x200000))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f32.const -1.175_494_350_822_287_5e-38) (f32.const -0))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f32.const -1.175_494_350_822_287_5e-38) (f32.const 0))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f32.const 1.175_494_350_822_287_5e-38) (f32.const -0))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f32.const 1.175_494_350_822_287_5e-38) (f32.const 0))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne"
+    (f32.const -1.175_494_350_822_287_5e-38)
+    (f32.const -1.401_298_464_324_817_1e-45)
+  )
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne"
+    (f32.const -1.175_494_350_822_287_5e-38)
+    (f32.const 1.401_298_464_324_817_1e-45)
+  )
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne"
+    (f32.const 1.175_494_350_822_287_5e-38)
+    (f32.const -1.401_298_464_324_817_1e-45)
+  )
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne"
+    (f32.const 1.175_494_350_822_287_5e-38)
+    (f32.const 1.401_298_464_324_817_1e-45)
+  )
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne"
+    (f32.const -1.175_494_350_822_287_5e-38)
+    (f32.const -1.175_494_350_822_287_5e-38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ne" (f32.const 0x0p+0) (f32.const 0x0p+0))
+  (invoke "ne"
+    (f32.const -1.175_494_350_822_287_5e-38)
+    (f32.const 1.175_494_350_822_287_5e-38)
+  )
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne"
+    (f32.const 1.175_494_350_822_287_5e-38)
+    (f32.const -1.175_494_350_822_287_5e-38)
+  )
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne"
+    (f32.const 1.175_494_350_822_287_5e-38)
+    (f32.const 1.175_494_350_822_287_5e-38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ne" (f32.const -0x0p+0) (f32.const -0x1p-149))
+  (invoke "ne" (f32.const -1.175_494_350_822_287_5e-38) (f32.const -0.5))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const -0x0p+0) (f32.const 0x1p-149))
+  (invoke "ne" (f32.const -1.175_494_350_822_287_5e-38) (f32.const 0.5))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const 0x0p+0) (f32.const -0x1p-149))
+  (invoke "ne" (f32.const 1.175_494_350_822_287_5e-38) (f32.const -0.5))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const 0x0p+0) (f32.const 0x1p-149))
+  (invoke "ne" (f32.const 1.175_494_350_822_287_5e-38) (f32.const 0.5))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const -0x0p+0) (f32.const -0x1p-126))
+  (invoke "ne" (f32.const -1.175_494_350_822_287_5e-38) (f32.const -1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const -0x0p+0) (f32.const 0x1p-126))
+  (invoke "ne" (f32.const -1.175_494_350_822_287_5e-38) (f32.const 1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const 0x0p+0) (f32.const -0x1p-126))
+  (invoke "ne" (f32.const 1.175_494_350_822_287_5e-38) (f32.const -1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const 0x0p+0) (f32.const 0x1p-126))
+  (invoke "ne" (f32.const 1.175_494_350_822_287_5e-38) (f32.const 1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const -0x0p+0) (f32.const -0x1p-1))
+  (invoke "ne"
+    (f32.const -1.175_494_350_822_287_5e-38)
+    (f32.const -6.283_185_482_025_146_5)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const -0x0p+0) (f32.const 0x1p-1))
+  (invoke "ne"
+    (f32.const -1.175_494_350_822_287_5e-38)
+    (f32.const 6.283_185_482_025_146_5)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const 0x0p+0) (f32.const -0x1p-1))
+  (invoke "ne"
+    (f32.const 1.175_494_350_822_287_5e-38)
+    (f32.const -6.283_185_482_025_146_5)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const 0x0p+0) (f32.const 0x1p-1))
+  (invoke "ne"
+    (f32.const 1.175_494_350_822_287_5e-38)
+    (f32.const 6.283_185_482_025_146_5)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const -0x0p+0) (f32.const -0x1p+0))
+  (invoke "ne"
+    (f32.const -1.175_494_350_822_287_5e-38)
+    (f32.const -3.402_823_466_385_288_6e+38)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const -0x0p+0) (f32.const 0x1p+0))
+  (invoke "ne"
+    (f32.const -1.175_494_350_822_287_5e-38)
+    (f32.const 3.402_823_466_385_288_6e+38)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const 0x0p+0) (f32.const -0x1p+0))
+  (invoke "ne"
+    (f32.const 1.175_494_350_822_287_5e-38)
+    (f32.const -3.402_823_466_385_288_6e+38)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const 0x0p+0) (f32.const 0x1p+0))
+  (invoke "ne"
+    (f32.const 1.175_494_350_822_287_5e-38)
+    (f32.const 3.402_823_466_385_288_6e+38)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const -0x0p+0) (f32.const -0x1.921fb6p+2))
+  (invoke "ne" (f32.const -1.175_494_350_822_287_5e-38) (f32.const -inf))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const -0x0p+0) (f32.const 0x1.921fb6p+2))
+  (invoke "ne" (f32.const -1.175_494_350_822_287_5e-38) (f32.const inf))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const 0x0p+0) (f32.const -0x1.921fb6p+2))
+  (invoke "ne" (f32.const 1.175_494_350_822_287_5e-38) (f32.const -inf))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const 0x0p+0) (f32.const 0x1.921fb6p+2))
+  (invoke "ne" (f32.const 1.175_494_350_822_287_5e-38) (f32.const inf))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const -0x0p+0) (f32.const -0x1.fffffep+127))
+  (invoke "ne"
+    (f32.const -1.175_494_350_822_287_5e-38)
+    (f32.const -nan:0x400000)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const -0x0p+0) (f32.const 0x1.fffffep+127))
+  (invoke "ne"
+    (f32.const -1.175_494_350_822_287_5e-38)
+    (f32.const -nan:0x200000)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const 0x0p+0) (f32.const -0x1.fffffep+127))
+  (invoke "ne"
+    (f32.const -1.175_494_350_822_287_5e-38)
+    (f32.const nan:0x400000)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const 0x0p+0) (f32.const 0x1.fffffep+127))
-  (i32.const 1)
-)
-(assert_return (invoke "ne" (f32.const -0x0p+0) (f32.const -inf)) (i32.const 1))
-(assert_return (invoke "ne" (f32.const -0x0p+0) (f32.const inf)) (i32.const 1))
-(assert_return (invoke "ne" (f32.const 0x0p+0) (f32.const -inf)) (i32.const 1))
-(assert_return (invoke "ne" (f32.const 0x0p+0) (f32.const inf)) (i32.const 1))
-(assert_return
-  (invoke "ne" (f32.const -0x0p+0) (f32.const -nan:0x400000))
+  (invoke "ne"
+    (f32.const -1.175_494_350_822_287_5e-38)
+    (f32.const nan:0x200000)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const -0x0p+0) (f32.const -nan:0x200000))
+  (invoke "ne"
+    (f32.const 1.175_494_350_822_287_5e-38)
+    (f32.const -nan:0x400000)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const -0x0p+0) (f32.const nan:0x400000))
+  (invoke "ne"
+    (f32.const 1.175_494_350_822_287_5e-38)
+    (f32.const -nan:0x200000)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const -0x0p+0) (f32.const nan:0x200000))
+  (invoke "ne" (f32.const 1.175_494_350_822_287_5e-38) (f32.const nan:0x400000))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const 0x0p+0) (f32.const -nan:0x400000))
+  (invoke "ne" (f32.const 1.175_494_350_822_287_5e-38) (f32.const nan:0x200000))
+  (i32.const 1)
+)
+(assert_return (invoke "ne" (f32.const -0.5) (f32.const -0)) (i32.const 1))
+(assert_return (invoke "ne" (f32.const -0.5) (f32.const 0)) (i32.const 1))
+(assert_return (invoke "ne" (f32.const 0.5) (f32.const -0)) (i32.const 1))
+(assert_return (invoke "ne" (f32.const 0.5) (f32.const 0)) (i32.const 1))
+(assert_return
+  (invoke "ne" (f32.const -0.5) (f32.const -1.401_298_464_324_817_1e-45))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const 0x0p+0) (f32.const -nan:0x200000))
+  (invoke "ne" (f32.const -0.5) (f32.const 1.401_298_464_324_817_1e-45))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const 0x0p+0) (f32.const nan:0x400000))
+  (invoke "ne" (f32.const 0.5) (f32.const -1.401_298_464_324_817_1e-45))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const 0x0p+0) (f32.const nan:0x200000))
+  (invoke "ne" (f32.const 0.5) (f32.const 1.401_298_464_324_817_1e-45))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const -0x1p-149) (f32.const -0x0p+0))
+  (invoke "ne" (f32.const -0.5) (f32.const -1.175_494_350_822_287_5e-38))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const -0x1p-149) (f32.const 0x0p+0))
+  (invoke "ne" (f32.const -0.5) (f32.const 1.175_494_350_822_287_5e-38))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const 0x1p-149) (f32.const -0x0p+0))
+  (invoke "ne" (f32.const 0.5) (f32.const -1.175_494_350_822_287_5e-38))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const 0x1p-149) (f32.const 0x0p+0))
+  (invoke "ne" (f32.const 0.5) (f32.const 1.175_494_350_822_287_5e-38))
+  (i32.const 1)
+)
+(assert_return (invoke "ne" (f32.const -0.5) (f32.const -0.5)) (i32.const 0))
+(assert_return (invoke "ne" (f32.const -0.5) (f32.const 0.5)) (i32.const 1))
+(assert_return (invoke "ne" (f32.const 0.5) (f32.const -0.5)) (i32.const 1))
+(assert_return (invoke "ne" (f32.const 0.5) (f32.const 0.5)) (i32.const 0))
+(assert_return (invoke "ne" (f32.const -0.5) (f32.const -1)) (i32.const 1))
+(assert_return (invoke "ne" (f32.const -0.5) (f32.const 1)) (i32.const 1))
+(assert_return (invoke "ne" (f32.const 0.5) (f32.const -1)) (i32.const 1))
+(assert_return (invoke "ne" (f32.const 0.5) (f32.const 1)) (i32.const 1))
+(assert_return
+  (invoke "ne" (f32.const -0.5) (f32.const -6.283_185_482_025_146_5))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const -0x1p-149) (f32.const -0x1p-149))
+  (invoke "ne" (f32.const -0.5) (f32.const 6.283_185_482_025_146_5))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f32.const 0.5) (f32.const -6.283_185_482_025_146_5))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f32.const 0.5) (f32.const 6.283_185_482_025_146_5))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f32.const -0.5) (f32.const -3.402_823_466_385_288_6e+38))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f32.const -0.5) (f32.const 3.402_823_466_385_288_6e+38))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f32.const 0.5) (f32.const -3.402_823_466_385_288_6e+38))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f32.const 0.5) (f32.const 3.402_823_466_385_288_6e+38))
+  (i32.const 1)
+)
+(assert_return (invoke "ne" (f32.const -0.5) (f32.const -inf)) (i32.const 1))
+(assert_return (invoke "ne" (f32.const -0.5) (f32.const inf)) (i32.const 1))
+(assert_return (invoke "ne" (f32.const 0.5) (f32.const -inf)) (i32.const 1))
+(assert_return (invoke "ne" (f32.const 0.5) (f32.const inf)) (i32.const 1))
+(assert_return
+  (invoke "ne" (f32.const -0.5) (f32.const -nan:0x400000))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f32.const -0.5) (f32.const -nan:0x200000))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f32.const -0.5) (f32.const nan:0x400000))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f32.const -0.5) (f32.const nan:0x200000))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f32.const 0.5) (f32.const -nan:0x400000))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f32.const 0.5) (f32.const -nan:0x200000))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f32.const 0.5) (f32.const nan:0x400000))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f32.const 0.5) (f32.const nan:0x200000))
+  (i32.const 1)
+)
+(assert_return (invoke "ne" (f32.const -1) (f32.const -0)) (i32.const 1))
+(assert_return (invoke "ne" (f32.const -1) (f32.const 0)) (i32.const 1))
+(assert_return (invoke "ne" (f32.const 1) (f32.const -0)) (i32.const 1))
+(assert_return (invoke "ne" (f32.const 1) (f32.const 0)) (i32.const 1))
+(assert_return
+  (invoke "ne" (f32.const -1) (f32.const -1.401_298_464_324_817_1e-45))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f32.const -1) (f32.const 1.401_298_464_324_817_1e-45))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f32.const 1) (f32.const -1.401_298_464_324_817_1e-45))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f32.const 1) (f32.const 1.401_298_464_324_817_1e-45))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f32.const -1) (f32.const -1.175_494_350_822_287_5e-38))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f32.const -1) (f32.const 1.175_494_350_822_287_5e-38))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f32.const 1) (f32.const -1.175_494_350_822_287_5e-38))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f32.const 1) (f32.const 1.175_494_350_822_287_5e-38))
+  (i32.const 1)
+)
+(assert_return (invoke "ne" (f32.const -1) (f32.const -0.5)) (i32.const 1))
+(assert_return (invoke "ne" (f32.const -1) (f32.const 0.5)) (i32.const 1))
+(assert_return (invoke "ne" (f32.const 1) (f32.const -0.5)) (i32.const 1))
+(assert_return (invoke "ne" (f32.const 1) (f32.const 0.5)) (i32.const 1))
+(assert_return (invoke "ne" (f32.const -1) (f32.const -1)) (i32.const 0))
+(assert_return (invoke "ne" (f32.const -1) (f32.const 1)) (i32.const 1))
+(assert_return (invoke "ne" (f32.const 1) (f32.const -1)) (i32.const 1))
+(assert_return (invoke "ne" (f32.const 1) (f32.const 1)) (i32.const 0))
+(assert_return
+  (invoke "ne" (f32.const -1) (f32.const -6.283_185_482_025_146_5))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f32.const -1) (f32.const 6.283_185_482_025_146_5))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f32.const 1) (f32.const -6.283_185_482_025_146_5))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f32.const 1) (f32.const 6.283_185_482_025_146_5))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f32.const -1) (f32.const -3.402_823_466_385_288_6e+38))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f32.const -1) (f32.const 3.402_823_466_385_288_6e+38))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f32.const 1) (f32.const -3.402_823_466_385_288_6e+38))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f32.const 1) (f32.const 3.402_823_466_385_288_6e+38))
+  (i32.const 1)
+)
+(assert_return (invoke "ne" (f32.const -1) (f32.const -inf)) (i32.const 1))
+(assert_return (invoke "ne" (f32.const -1) (f32.const inf)) (i32.const 1))
+(assert_return (invoke "ne" (f32.const 1) (f32.const -inf)) (i32.const 1))
+(assert_return (invoke "ne" (f32.const 1) (f32.const inf)) (i32.const 1))
+(assert_return
+  (invoke "ne" (f32.const -1) (f32.const -nan:0x400000))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f32.const -1) (f32.const -nan:0x200000))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f32.const -1) (f32.const nan:0x400000))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f32.const -1) (f32.const nan:0x200000))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f32.const 1) (f32.const -nan:0x400000))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f32.const 1) (f32.const -nan:0x200000))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f32.const 1) (f32.const nan:0x400000))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f32.const 1) (f32.const nan:0x200000))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f32.const -6.283_185_482_025_146_5) (f32.const -0))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f32.const -6.283_185_482_025_146_5) (f32.const 0))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f32.const 6.283_185_482_025_146_5) (f32.const -0))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f32.const 6.283_185_482_025_146_5) (f32.const 0))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne"
+    (f32.const -6.283_185_482_025_146_5)
+    (f32.const -1.401_298_464_324_817_1e-45)
+  )
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne"
+    (f32.const -6.283_185_482_025_146_5)
+    (f32.const 1.401_298_464_324_817_1e-45)
+  )
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne"
+    (f32.const 6.283_185_482_025_146_5)
+    (f32.const -1.401_298_464_324_817_1e-45)
+  )
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne"
+    (f32.const 6.283_185_482_025_146_5)
+    (f32.const 1.401_298_464_324_817_1e-45)
+  )
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne"
+    (f32.const -6.283_185_482_025_146_5)
+    (f32.const -1.175_494_350_822_287_5e-38)
+  )
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne"
+    (f32.const -6.283_185_482_025_146_5)
+    (f32.const 1.175_494_350_822_287_5e-38)
+  )
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne"
+    (f32.const 6.283_185_482_025_146_5)
+    (f32.const -1.175_494_350_822_287_5e-38)
+  )
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne"
+    (f32.const 6.283_185_482_025_146_5)
+    (f32.const 1.175_494_350_822_287_5e-38)
+  )
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f32.const -6.283_185_482_025_146_5) (f32.const -0.5))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f32.const -6.283_185_482_025_146_5) (f32.const 0.5))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f32.const 6.283_185_482_025_146_5) (f32.const -0.5))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f32.const 6.283_185_482_025_146_5) (f32.const 0.5))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f32.const -6.283_185_482_025_146_5) (f32.const -1))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f32.const -6.283_185_482_025_146_5) (f32.const 1))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f32.const 6.283_185_482_025_146_5) (f32.const -1))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne" (f32.const 6.283_185_482_025_146_5) (f32.const 1))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne"
+    (f32.const -6.283_185_482_025_146_5)
+    (f32.const -6.283_185_482_025_146_5)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ne" (f32.const -0x1p-149) (f32.const 0x1p-149))
+  (invoke "ne"
+    (f32.const -6.283_185_482_025_146_5)
+    (f32.const 6.283_185_482_025_146_5)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const 0x1p-149) (f32.const -0x1p-149))
+  (invoke "ne"
+    (f32.const 6.283_185_482_025_146_5)
+    (f32.const -6.283_185_482_025_146_5)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const 0x1p-149) (f32.const 0x1p-149))
+  (invoke "ne"
+    (f32.const 6.283_185_482_025_146_5)
+    (f32.const 6.283_185_482_025_146_5)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ne" (f32.const -0x1p-149) (f32.const -0x1p-126))
+  (invoke "ne"
+    (f32.const -6.283_185_482_025_146_5)
+    (f32.const -3.402_823_466_385_288_6e+38)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const -0x1p-149) (f32.const 0x1p-126))
+  (invoke "ne"
+    (f32.const -6.283_185_482_025_146_5)
+    (f32.const 3.402_823_466_385_288_6e+38)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const 0x1p-149) (f32.const -0x1p-126))
+  (invoke "ne"
+    (f32.const 6.283_185_482_025_146_5)
+    (f32.const -3.402_823_466_385_288_6e+38)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const 0x1p-149) (f32.const 0x1p-126))
+  (invoke "ne"
+    (f32.const 6.283_185_482_025_146_5)
+    (f32.const 3.402_823_466_385_288_6e+38)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const -0x1p-149) (f32.const -0x1p-1))
+  (invoke "ne" (f32.const -6.283_185_482_025_146_5) (f32.const -inf))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const -0x1p-149) (f32.const 0x1p-1))
+  (invoke "ne" (f32.const -6.283_185_482_025_146_5) (f32.const inf))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const 0x1p-149) (f32.const -0x1p-1))
+  (invoke "ne" (f32.const 6.283_185_482_025_146_5) (f32.const -inf))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const 0x1p-149) (f32.const 0x1p-1))
+  (invoke "ne" (f32.const 6.283_185_482_025_146_5) (f32.const inf))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const -0x1p-149) (f32.const -0x1p+0))
+  (invoke "ne" (f32.const -6.283_185_482_025_146_5) (f32.const -nan:0x400000))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const -0x1p-149) (f32.const 0x1p+0))
+  (invoke "ne" (f32.const -6.283_185_482_025_146_5) (f32.const -nan:0x200000))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const 0x1p-149) (f32.const -0x1p+0))
+  (invoke "ne" (f32.const -6.283_185_482_025_146_5) (f32.const nan:0x400000))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const 0x1p-149) (f32.const 0x1p+0))
+  (invoke "ne" (f32.const -6.283_185_482_025_146_5) (f32.const nan:0x200000))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const -0x1p-149) (f32.const -0x1.921fb6p+2))
+  (invoke "ne" (f32.const 6.283_185_482_025_146_5) (f32.const -nan:0x400000))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const -0x1p-149) (f32.const 0x1.921fb6p+2))
+  (invoke "ne" (f32.const 6.283_185_482_025_146_5) (f32.const -nan:0x200000))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const 0x1p-149) (f32.const -0x1.921fb6p+2))
+  (invoke "ne" (f32.const 6.283_185_482_025_146_5) (f32.const nan:0x400000))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const 0x1p-149) (f32.const 0x1.921fb6p+2))
+  (invoke "ne" (f32.const 6.283_185_482_025_146_5) (f32.const nan:0x200000))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const -0x1p-149) (f32.const -0x1.fffffep+127))
+  (invoke "ne" (f32.const -3.402_823_466_385_288_6e+38) (f32.const -0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const -0x1p-149) (f32.const 0x1.fffffep+127))
+  (invoke "ne" (f32.const -3.402_823_466_385_288_6e+38) (f32.const 0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const 0x1p-149) (f32.const -0x1.fffffep+127))
+  (invoke "ne" (f32.const 3.402_823_466_385_288_6e+38) (f32.const -0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const 0x1p-149) (f32.const 0x1.fffffep+127))
+  (invoke "ne" (f32.const 3.402_823_466_385_288_6e+38) (f32.const 0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const -0x1p-149) (f32.const -inf))
+  (invoke "ne"
+    (f32.const -3.402_823_466_385_288_6e+38)
+    (f32.const -1.401_298_464_324_817_1e-45)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const -0x1p-149) (f32.const inf))
+  (invoke "ne"
+    (f32.const -3.402_823_466_385_288_6e+38)
+    (f32.const 1.401_298_464_324_817_1e-45)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const 0x1p-149) (f32.const -inf))
-  (i32.const 1)
-)
-(assert_return (invoke "ne" (f32.const 0x1p-149) (f32.const inf)) (i32.const 1))
-(assert_return
-  (invoke "ne" (f32.const -0x1p-149) (f32.const -nan:0x400000))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const -0x1p-149) (f32.const -nan:0x200000))
+  (invoke "ne"
+    (f32.const 3.402_823_466_385_288_6e+38)
+    (f32.const -1.401_298_464_324_817_1e-45)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const -0x1p-149) (f32.const nan:0x400000))
+  (invoke "ne"
+    (f32.const 3.402_823_466_385_288_6e+38)
+    (f32.const 1.401_298_464_324_817_1e-45)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const -0x1p-149) (f32.const nan:0x200000))
+  (invoke "ne"
+    (f32.const -3.402_823_466_385_288_6e+38)
+    (f32.const -1.175_494_350_822_287_5e-38)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const 0x1p-149) (f32.const -nan:0x400000))
+  (invoke "ne"
+    (f32.const -3.402_823_466_385_288_6e+38)
+    (f32.const 1.175_494_350_822_287_5e-38)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const 0x1p-149) (f32.const -nan:0x200000))
+  (invoke "ne"
+    (f32.const 3.402_823_466_385_288_6e+38)
+    (f32.const -1.175_494_350_822_287_5e-38)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const 0x1p-149) (f32.const nan:0x400000))
+  (invoke "ne"
+    (f32.const 3.402_823_466_385_288_6e+38)
+    (f32.const 1.175_494_350_822_287_5e-38)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const 0x1p-149) (f32.const nan:0x200000))
+  (invoke "ne" (f32.const -3.402_823_466_385_288_6e+38) (f32.const -0.5))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const -0x1p-126) (f32.const -0x0p+0))
+  (invoke "ne" (f32.const -3.402_823_466_385_288_6e+38) (f32.const 0.5))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const -0x1p-126) (f32.const 0x0p+0))
+  (invoke "ne" (f32.const 3.402_823_466_385_288_6e+38) (f32.const -0.5))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const 0x1p-126) (f32.const -0x0p+0))
+  (invoke "ne" (f32.const 3.402_823_466_385_288_6e+38) (f32.const 0.5))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const 0x1p-126) (f32.const 0x0p+0))
+  (invoke "ne" (f32.const -3.402_823_466_385_288_6e+38) (f32.const -1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const -0x1p-126) (f32.const -0x1p-149))
+  (invoke "ne" (f32.const -3.402_823_466_385_288_6e+38) (f32.const 1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const -0x1p-126) (f32.const 0x1p-149))
+  (invoke "ne" (f32.const 3.402_823_466_385_288_6e+38) (f32.const -1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const 0x1p-126) (f32.const -0x1p-149))
+  (invoke "ne" (f32.const 3.402_823_466_385_288_6e+38) (f32.const 1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const 0x1p-126) (f32.const 0x1p-149))
+  (invoke "ne"
+    (f32.const -3.402_823_466_385_288_6e+38)
+    (f32.const -6.283_185_482_025_146_5)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const -0x1p-126) (f32.const -0x1p-126))
+  (invoke "ne"
+    (f32.const -3.402_823_466_385_288_6e+38)
+    (f32.const 6.283_185_482_025_146_5)
+  )
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne"
+    (f32.const 3.402_823_466_385_288_6e+38)
+    (f32.const -6.283_185_482_025_146_5)
+  )
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne"
+    (f32.const 3.402_823_466_385_288_6e+38)
+    (f32.const 6.283_185_482_025_146_5)
+  )
+  (i32.const 1)
+)
+(assert_return
+  (invoke "ne"
+    (f32.const -3.402_823_466_385_288_6e+38)
+    (f32.const -3.402_823_466_385_288_6e+38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ne" (f32.const -0x1p-126) (f32.const 0x1p-126))
+  (invoke "ne"
+    (f32.const -3.402_823_466_385_288_6e+38)
+    (f32.const 3.402_823_466_385_288_6e+38)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const 0x1p-126) (f32.const -0x1p-126))
+  (invoke "ne"
+    (f32.const 3.402_823_466_385_288_6e+38)
+    (f32.const -3.402_823_466_385_288_6e+38)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const 0x1p-126) (f32.const 0x1p-126))
+  (invoke "ne"
+    (f32.const 3.402_823_466_385_288_6e+38)
+    (f32.const 3.402_823_466_385_288_6e+38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ne" (f32.const -0x1p-126) (f32.const -0x1p-1))
+  (invoke "ne" (f32.const -3.402_823_466_385_288_6e+38) (f32.const -inf))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const -0x1p-126) (f32.const 0x1p-1))
+  (invoke "ne" (f32.const -3.402_823_466_385_288_6e+38) (f32.const inf))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const 0x1p-126) (f32.const -0x1p-1))
+  (invoke "ne" (f32.const 3.402_823_466_385_288_6e+38) (f32.const -inf))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const 0x1p-126) (f32.const 0x1p-1))
+  (invoke "ne" (f32.const 3.402_823_466_385_288_6e+38) (f32.const inf))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const -0x1p-126) (f32.const -0x1p+0))
+  (invoke "ne"
+    (f32.const -3.402_823_466_385_288_6e+38)
+    (f32.const -nan:0x400000)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const -0x1p-126) (f32.const 0x1p+0))
+  (invoke "ne"
+    (f32.const -3.402_823_466_385_288_6e+38)
+    (f32.const -nan:0x200000)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const 0x1p-126) (f32.const -0x1p+0))
+  (invoke "ne"
+    (f32.const -3.402_823_466_385_288_6e+38)
+    (f32.const nan:0x400000)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const 0x1p-126) (f32.const 0x1p+0))
+  (invoke "ne"
+    (f32.const -3.402_823_466_385_288_6e+38)
+    (f32.const nan:0x200000)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const -0x1p-126) (f32.const -0x1.921fb6p+2))
+  (invoke "ne"
+    (f32.const 3.402_823_466_385_288_6e+38)
+    (f32.const -nan:0x400000)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const -0x1p-126) (f32.const 0x1.921fb6p+2))
+  (invoke "ne"
+    (f32.const 3.402_823_466_385_288_6e+38)
+    (f32.const -nan:0x200000)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const 0x1p-126) (f32.const -0x1.921fb6p+2))
+  (invoke "ne" (f32.const 3.402_823_466_385_288_6e+38) (f32.const nan:0x400000))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const 0x1p-126) (f32.const 0x1.921fb6p+2))
+  (invoke "ne" (f32.const 3.402_823_466_385_288_6e+38) (f32.const nan:0x200000))
   (i32.const 1)
 )
+(assert_return (invoke "ne" (f32.const -inf) (f32.const -0)) (i32.const 1))
+(assert_return (invoke "ne" (f32.const -inf) (f32.const 0)) (i32.const 1))
+(assert_return (invoke "ne" (f32.const inf) (f32.const -0)) (i32.const 1))
+(assert_return (invoke "ne" (f32.const inf) (f32.const 0)) (i32.const 1))
 (assert_return
-  (invoke "ne" (f32.const -0x1p-126) (f32.const -0x1.fffffep+127))
+  (invoke "ne" (f32.const -inf) (f32.const -1.401_298_464_324_817_1e-45))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const -0x1p-126) (f32.const 0x1.fffffep+127))
+  (invoke "ne" (f32.const -inf) (f32.const 1.401_298_464_324_817_1e-45))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const 0x1p-126) (f32.const -0x1.fffffep+127))
+  (invoke "ne" (f32.const inf) (f32.const -1.401_298_464_324_817_1e-45))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const 0x1p-126) (f32.const 0x1.fffffep+127))
+  (invoke "ne" (f32.const inf) (f32.const 1.401_298_464_324_817_1e-45))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const -0x1p-126) (f32.const -inf))
+  (invoke "ne" (f32.const -inf) (f32.const -1.175_494_350_822_287_5e-38))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const -0x1p-126) (f32.const inf))
+  (invoke "ne" (f32.const -inf) (f32.const 1.175_494_350_822_287_5e-38))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const 0x1p-126) (f32.const -inf))
+  (invoke "ne" (f32.const inf) (f32.const -1.175_494_350_822_287_5e-38))
   (i32.const 1)
 )
-(assert_return (invoke "ne" (f32.const 0x1p-126) (f32.const inf)) (i32.const 1))
 (assert_return
-  (invoke "ne" (f32.const -0x1p-126) (f32.const -nan:0x400000))
+  (invoke "ne" (f32.const inf) (f32.const 1.175_494_350_822_287_5e-38))
   (i32.const 1)
 )
+(assert_return (invoke "ne" (f32.const -inf) (f32.const -0.5)) (i32.const 1))
+(assert_return (invoke "ne" (f32.const -inf) (f32.const 0.5)) (i32.const 1))
+(assert_return (invoke "ne" (f32.const inf) (f32.const -0.5)) (i32.const 1))
+(assert_return (invoke "ne" (f32.const inf) (f32.const 0.5)) (i32.const 1))
+(assert_return (invoke "ne" (f32.const -inf) (f32.const -1)) (i32.const 1))
+(assert_return (invoke "ne" (f32.const -inf) (f32.const 1)) (i32.const 1))
+(assert_return (invoke "ne" (f32.const inf) (f32.const -1)) (i32.const 1))
+(assert_return (invoke "ne" (f32.const inf) (f32.const 1)) (i32.const 1))
 (assert_return
-  (invoke "ne" (f32.const -0x1p-126) (f32.const -nan:0x200000))
+  (invoke "ne" (f32.const -inf) (f32.const -6.283_185_482_025_146_5))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const -0x1p-126) (f32.const nan:0x400000))
+  (invoke "ne" (f32.const -inf) (f32.const 6.283_185_482_025_146_5))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const -0x1p-126) (f32.const nan:0x200000))
+  (invoke "ne" (f32.const inf) (f32.const -6.283_185_482_025_146_5))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const 0x1p-126) (f32.const -nan:0x400000))
+  (invoke "ne" (f32.const inf) (f32.const 6.283_185_482_025_146_5))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const 0x1p-126) (f32.const -nan:0x200000))
+  (invoke "ne" (f32.const -inf) (f32.const -3.402_823_466_385_288_6e+38))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const 0x1p-126) (f32.const nan:0x400000))
+  (invoke "ne" (f32.const -inf) (f32.const 3.402_823_466_385_288_6e+38))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const 0x1p-126) (f32.const nan:0x200000))
+  (invoke "ne" (f32.const inf) (f32.const -3.402_823_466_385_288_6e+38))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const -0x1p-1) (f32.const -0x0p+0))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const -0x1p-1) (f32.const 0x0p+0))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const 0x1p-1) (f32.const -0x0p+0))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const 0x1p-1) (f32.const 0x0p+0))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const -0x1p-1) (f32.const -0x1p-149))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const -0x1p-1) (f32.const 0x1p-149))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const 0x1p-1) (f32.const -0x1p-149))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const 0x1p-1) (f32.const 0x1p-149))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const -0x1p-1) (f32.const -0x1p-126))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const -0x1p-1) (f32.const 0x1p-126))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const 0x1p-1) (f32.const -0x1p-126))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const 0x1p-1) (f32.const 0x1p-126))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const -0x1p-1) (f32.const -0x1p-1))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "ne" (f32.const -0x1p-1) (f32.const 0x1p-1))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const 0x1p-1) (f32.const -0x1p-1))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const 0x1p-1) (f32.const 0x1p-1))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "ne" (f32.const -0x1p-1) (f32.const -0x1p+0))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const -0x1p-1) (f32.const 0x1p+0))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const 0x1p-1) (f32.const -0x1p+0))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const 0x1p-1) (f32.const 0x1p+0))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const -0x1p-1) (f32.const -0x1.921fb6p+2))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const -0x1p-1) (f32.const 0x1.921fb6p+2))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const 0x1p-1) (f32.const -0x1.921fb6p+2))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const 0x1p-1) (f32.const 0x1.921fb6p+2))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const -0x1p-1) (f32.const -0x1.fffffep+127))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const -0x1p-1) (f32.const 0x1.fffffep+127))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const 0x1p-1) (f32.const -0x1.fffffep+127))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const 0x1p-1) (f32.const 0x1.fffffep+127))
-  (i32.const 1)
-)
-(assert_return (invoke "ne" (f32.const -0x1p-1) (f32.const -inf)) (i32.const 1))
-(assert_return (invoke "ne" (f32.const -0x1p-1) (f32.const inf)) (i32.const 1))
-(assert_return (invoke "ne" (f32.const 0x1p-1) (f32.const -inf)) (i32.const 1))
-(assert_return (invoke "ne" (f32.const 0x1p-1) (f32.const inf)) (i32.const 1))
-(assert_return
-  (invoke "ne" (f32.const -0x1p-1) (f32.const -nan:0x400000))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const -0x1p-1) (f32.const -nan:0x200000))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const -0x1p-1) (f32.const nan:0x400000))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const -0x1p-1) (f32.const nan:0x200000))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const 0x1p-1) (f32.const -nan:0x400000))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const 0x1p-1) (f32.const -nan:0x200000))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const 0x1p-1) (f32.const nan:0x400000))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const 0x1p-1) (f32.const nan:0x200000))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const -0x1p+0) (f32.const -0x0p+0))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const -0x1p+0) (f32.const 0x0p+0))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const 0x1p+0) (f32.const -0x0p+0))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const 0x1p+0) (f32.const 0x0p+0))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const -0x1p+0) (f32.const -0x1p-149))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const -0x1p+0) (f32.const 0x1p-149))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const 0x1p+0) (f32.const -0x1p-149))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const 0x1p+0) (f32.const 0x1p-149))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const -0x1p+0) (f32.const -0x1p-126))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const -0x1p+0) (f32.const 0x1p-126))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const 0x1p+0) (f32.const -0x1p-126))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const 0x1p+0) (f32.const 0x1p-126))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const -0x1p+0) (f32.const -0x1p-1))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const -0x1p+0) (f32.const 0x1p-1))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const 0x1p+0) (f32.const -0x1p-1))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const 0x1p+0) (f32.const 0x1p-1))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const -0x1p+0) (f32.const -0x1p+0))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "ne" (f32.const -0x1p+0) (f32.const 0x1p+0))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const 0x1p+0) (f32.const -0x1p+0))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const 0x1p+0) (f32.const 0x1p+0))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "ne" (f32.const -0x1p+0) (f32.const -0x1.921fb6p+2))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const -0x1p+0) (f32.const 0x1.921fb6p+2))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const 0x1p+0) (f32.const -0x1.921fb6p+2))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const 0x1p+0) (f32.const 0x1.921fb6p+2))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const -0x1p+0) (f32.const -0x1.fffffep+127))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const -0x1p+0) (f32.const 0x1.fffffep+127))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const 0x1p+0) (f32.const -0x1.fffffep+127))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const 0x1p+0) (f32.const 0x1.fffffep+127))
-  (i32.const 1)
-)
-(assert_return (invoke "ne" (f32.const -0x1p+0) (f32.const -inf)) (i32.const 1))
-(assert_return (invoke "ne" (f32.const -0x1p+0) (f32.const inf)) (i32.const 1))
-(assert_return (invoke "ne" (f32.const 0x1p+0) (f32.const -inf)) (i32.const 1))
-(assert_return (invoke "ne" (f32.const 0x1p+0) (f32.const inf)) (i32.const 1))
-(assert_return
-  (invoke "ne" (f32.const -0x1p+0) (f32.const -nan:0x400000))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const -0x1p+0) (f32.const -nan:0x200000))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const -0x1p+0) (f32.const nan:0x400000))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const -0x1p+0) (f32.const nan:0x200000))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const 0x1p+0) (f32.const -nan:0x400000))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const 0x1p+0) (f32.const -nan:0x200000))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const 0x1p+0) (f32.const nan:0x400000))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const 0x1p+0) (f32.const nan:0x200000))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const -0x1.921fb6p+2) (f32.const -0x0p+0))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const -0x1.921fb6p+2) (f32.const 0x0p+0))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const 0x1.921fb6p+2) (f32.const -0x0p+0))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const 0x1.921fb6p+2) (f32.const 0x0p+0))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const -0x1.921fb6p+2) (f32.const -0x1p-149))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const -0x1.921fb6p+2) (f32.const 0x1p-149))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const 0x1.921fb6p+2) (f32.const -0x1p-149))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const 0x1.921fb6p+2) (f32.const 0x1p-149))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const -0x1.921fb6p+2) (f32.const -0x1p-126))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const -0x1.921fb6p+2) (f32.const 0x1p-126))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const 0x1.921fb6p+2) (f32.const -0x1p-126))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const 0x1.921fb6p+2) (f32.const 0x1p-126))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const -0x1.921fb6p+2) (f32.const -0x1p-1))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const -0x1.921fb6p+2) (f32.const 0x1p-1))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const 0x1.921fb6p+2) (f32.const -0x1p-1))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const 0x1.921fb6p+2) (f32.const 0x1p-1))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const -0x1.921fb6p+2) (f32.const -0x1p+0))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const -0x1.921fb6p+2) (f32.const 0x1p+0))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const 0x1.921fb6p+2) (f32.const -0x1p+0))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const 0x1.921fb6p+2) (f32.const 0x1p+0))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const -0x1.921fb6p+2) (f32.const -0x1.921fb6p+2))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "ne" (f32.const -0x1.921fb6p+2) (f32.const 0x1.921fb6p+2))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const 0x1.921fb6p+2) (f32.const -0x1.921fb6p+2))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const 0x1.921fb6p+2) (f32.const 0x1.921fb6p+2))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "ne" (f32.const -0x1.921fb6p+2) (f32.const -0x1.fffffep+127))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const -0x1.921fb6p+2) (f32.const 0x1.fffffep+127))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const 0x1.921fb6p+2) (f32.const -0x1.fffffep+127))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const 0x1.921fb6p+2) (f32.const 0x1.fffffep+127))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const -0x1.921fb6p+2) (f32.const -inf))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const -0x1.921fb6p+2) (f32.const inf))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const 0x1.921fb6p+2) (f32.const -inf))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const 0x1.921fb6p+2) (f32.const inf))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const -0x1.921fb6p+2) (f32.const -nan:0x400000))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const -0x1.921fb6p+2) (f32.const -nan:0x200000))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const -0x1.921fb6p+2) (f32.const nan:0x400000))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const -0x1.921fb6p+2) (f32.const nan:0x200000))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const 0x1.921fb6p+2) (f32.const -nan:0x400000))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const 0x1.921fb6p+2) (f32.const -nan:0x200000))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const 0x1.921fb6p+2) (f32.const nan:0x400000))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const 0x1.921fb6p+2) (f32.const nan:0x200000))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const -0x1.fffffep+127) (f32.const -0x0p+0))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const -0x1.fffffep+127) (f32.const 0x0p+0))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const 0x1.fffffep+127) (f32.const -0x0p+0))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const 0x1.fffffep+127) (f32.const 0x0p+0))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const -0x1.fffffep+127) (f32.const -0x1p-149))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const -0x1.fffffep+127) (f32.const 0x1p-149))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const 0x1.fffffep+127) (f32.const -0x1p-149))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const 0x1.fffffep+127) (f32.const 0x1p-149))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const -0x1.fffffep+127) (f32.const -0x1p-126))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const -0x1.fffffep+127) (f32.const 0x1p-126))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const 0x1.fffffep+127) (f32.const -0x1p-126))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const 0x1.fffffep+127) (f32.const 0x1p-126))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const -0x1.fffffep+127) (f32.const -0x1p-1))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const -0x1.fffffep+127) (f32.const 0x1p-1))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const 0x1.fffffep+127) (f32.const -0x1p-1))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const 0x1.fffffep+127) (f32.const 0x1p-1))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const -0x1.fffffep+127) (f32.const -0x1p+0))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const -0x1.fffffep+127) (f32.const 0x1p+0))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const 0x1.fffffep+127) (f32.const -0x1p+0))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const 0x1.fffffep+127) (f32.const 0x1p+0))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const -0x1.fffffep+127) (f32.const -0x1.921fb6p+2))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const -0x1.fffffep+127) (f32.const 0x1.921fb6p+2))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const 0x1.fffffep+127) (f32.const -0x1.921fb6p+2))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const 0x1.fffffep+127) (f32.const 0x1.921fb6p+2))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const -0x1.fffffep+127) (f32.const -0x1.fffffep+127))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "ne" (f32.const -0x1.fffffep+127) (f32.const 0x1.fffffep+127))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const 0x1.fffffep+127) (f32.const -0x1.fffffep+127))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const 0x1.fffffep+127) (f32.const 0x1.fffffep+127))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "ne" (f32.const -0x1.fffffep+127) (f32.const -inf))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const -0x1.fffffep+127) (f32.const inf))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const 0x1.fffffep+127) (f32.const -inf))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const 0x1.fffffep+127) (f32.const inf))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const -0x1.fffffep+127) (f32.const -nan:0x400000))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const -0x1.fffffep+127) (f32.const -nan:0x200000))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const -0x1.fffffep+127) (f32.const nan:0x400000))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const -0x1.fffffep+127) (f32.const nan:0x200000))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const 0x1.fffffep+127) (f32.const -nan:0x400000))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const 0x1.fffffep+127) (f32.const -nan:0x200000))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const 0x1.fffffep+127) (f32.const nan:0x400000))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const 0x1.fffffep+127) (f32.const nan:0x200000))
-  (i32.const 1)
-)
-(assert_return (invoke "ne" (f32.const -inf) (f32.const -0x0p+0)) (i32.const 1))
-(assert_return (invoke "ne" (f32.const -inf) (f32.const 0x0p+0)) (i32.const 1))
-(assert_return (invoke "ne" (f32.const inf) (f32.const -0x0p+0)) (i32.const 1))
-(assert_return (invoke "ne" (f32.const inf) (f32.const 0x0p+0)) (i32.const 1))
-(assert_return
-  (invoke "ne" (f32.const -inf) (f32.const -0x1p-149))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const -inf) (f32.const 0x1p-149))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const inf) (f32.const -0x1p-149))
-  (i32.const 1)
-)
-(assert_return (invoke "ne" (f32.const inf) (f32.const 0x1p-149)) (i32.const 1))
-(assert_return
-  (invoke "ne" (f32.const -inf) (f32.const -0x1p-126))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const -inf) (f32.const 0x1p-126))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const inf) (f32.const -0x1p-126))
-  (i32.const 1)
-)
-(assert_return (invoke "ne" (f32.const inf) (f32.const 0x1p-126)) (i32.const 1))
-(assert_return (invoke "ne" (f32.const -inf) (f32.const -0x1p-1)) (i32.const 1))
-(assert_return (invoke "ne" (f32.const -inf) (f32.const 0x1p-1)) (i32.const 1))
-(assert_return (invoke "ne" (f32.const inf) (f32.const -0x1p-1)) (i32.const 1))
-(assert_return (invoke "ne" (f32.const inf) (f32.const 0x1p-1)) (i32.const 1))
-(assert_return (invoke "ne" (f32.const -inf) (f32.const -0x1p+0)) (i32.const 1))
-(assert_return (invoke "ne" (f32.const -inf) (f32.const 0x1p+0)) (i32.const 1))
-(assert_return (invoke "ne" (f32.const inf) (f32.const -0x1p+0)) (i32.const 1))
-(assert_return (invoke "ne" (f32.const inf) (f32.const 0x1p+0)) (i32.const 1))
-(assert_return
-  (invoke "ne" (f32.const -inf) (f32.const -0x1.921fb6p+2))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const -inf) (f32.const 0x1.921fb6p+2))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const inf) (f32.const -0x1.921fb6p+2))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const inf) (f32.const 0x1.921fb6p+2))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const -inf) (f32.const -0x1.fffffep+127))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const -inf) (f32.const 0x1.fffffep+127))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const inf) (f32.const -0x1.fffffep+127))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ne" (f32.const inf) (f32.const 0x1.fffffep+127))
+  (invoke "ne" (f32.const inf) (f32.const 3.402_823_466_385_288_6e+38))
   (i32.const 1)
 )
 (assert_return (invoke "ne" (f32.const -inf) (f32.const -inf)) (i32.const 0))
@@ -2699,227 +3053,281 @@
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const -nan:0x400000) (f32.const -0x0p+0))
+  (invoke "ne" (f32.const -nan:0x400000) (f32.const -0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const -nan:0x200000) (f32.const -0x0p+0))
+  (invoke "ne" (f32.const -nan:0x200000) (f32.const -0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const -nan:0x400000) (f32.const 0x0p+0))
+  (invoke "ne" (f32.const -nan:0x400000) (f32.const 0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const -nan:0x200000) (f32.const 0x0p+0))
+  (invoke "ne" (f32.const -nan:0x200000) (f32.const 0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const nan:0x400000) (f32.const -0x0p+0))
+  (invoke "ne" (f32.const nan:0x400000) (f32.const -0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const nan:0x200000) (f32.const -0x0p+0))
+  (invoke "ne" (f32.const nan:0x200000) (f32.const -0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const nan:0x400000) (f32.const 0x0p+0))
+  (invoke "ne" (f32.const nan:0x400000) (f32.const 0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const nan:0x200000) (f32.const 0x0p+0))
+  (invoke "ne" (f32.const nan:0x200000) (f32.const 0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const -nan:0x400000) (f32.const -0x1p-149))
+  (invoke "ne"
+    (f32.const -nan:0x400000)
+    (f32.const -1.401_298_464_324_817_1e-45)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const -nan:0x200000) (f32.const -0x1p-149))
+  (invoke "ne"
+    (f32.const -nan:0x200000)
+    (f32.const -1.401_298_464_324_817_1e-45)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const -nan:0x400000) (f32.const 0x1p-149))
+  (invoke "ne"
+    (f32.const -nan:0x400000)
+    (f32.const 1.401_298_464_324_817_1e-45)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const -nan:0x200000) (f32.const 0x1p-149))
+  (invoke "ne"
+    (f32.const -nan:0x200000)
+    (f32.const 1.401_298_464_324_817_1e-45)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const nan:0x400000) (f32.const -0x1p-149))
+  (invoke "ne"
+    (f32.const nan:0x400000)
+    (f32.const -1.401_298_464_324_817_1e-45)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const nan:0x200000) (f32.const -0x1p-149))
+  (invoke "ne"
+    (f32.const nan:0x200000)
+    (f32.const -1.401_298_464_324_817_1e-45)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const nan:0x400000) (f32.const 0x1p-149))
+  (invoke "ne" (f32.const nan:0x400000) (f32.const 1.401_298_464_324_817_1e-45))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const nan:0x200000) (f32.const 0x1p-149))
+  (invoke "ne" (f32.const nan:0x200000) (f32.const 1.401_298_464_324_817_1e-45))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const -nan:0x400000) (f32.const -0x1p-126))
+  (invoke "ne"
+    (f32.const -nan:0x400000)
+    (f32.const -1.175_494_350_822_287_5e-38)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const -nan:0x200000) (f32.const -0x1p-126))
+  (invoke "ne"
+    (f32.const -nan:0x200000)
+    (f32.const -1.175_494_350_822_287_5e-38)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const -nan:0x400000) (f32.const 0x1p-126))
+  (invoke "ne"
+    (f32.const -nan:0x400000)
+    (f32.const 1.175_494_350_822_287_5e-38)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const -nan:0x200000) (f32.const 0x1p-126))
+  (invoke "ne"
+    (f32.const -nan:0x200000)
+    (f32.const 1.175_494_350_822_287_5e-38)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const nan:0x400000) (f32.const -0x1p-126))
+  (invoke "ne"
+    (f32.const nan:0x400000)
+    (f32.const -1.175_494_350_822_287_5e-38)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const nan:0x200000) (f32.const -0x1p-126))
+  (invoke "ne"
+    (f32.const nan:0x200000)
+    (f32.const -1.175_494_350_822_287_5e-38)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const nan:0x400000) (f32.const 0x1p-126))
+  (invoke "ne" (f32.const nan:0x400000) (f32.const 1.175_494_350_822_287_5e-38))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const nan:0x200000) (f32.const 0x1p-126))
+  (invoke "ne" (f32.const nan:0x200000) (f32.const 1.175_494_350_822_287_5e-38))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const -nan:0x400000) (f32.const -0x1p-1))
+  (invoke "ne" (f32.const -nan:0x400000) (f32.const -0.5))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const -nan:0x200000) (f32.const -0x1p-1))
+  (invoke "ne" (f32.const -nan:0x200000) (f32.const -0.5))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const -nan:0x400000) (f32.const 0x1p-1))
+  (invoke "ne" (f32.const -nan:0x400000) (f32.const 0.5))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const -nan:0x200000) (f32.const 0x1p-1))
+  (invoke "ne" (f32.const -nan:0x200000) (f32.const 0.5))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const nan:0x400000) (f32.const -0x1p-1))
+  (invoke "ne" (f32.const nan:0x400000) (f32.const -0.5))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const nan:0x200000) (f32.const -0x1p-1))
+  (invoke "ne" (f32.const nan:0x200000) (f32.const -0.5))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const nan:0x400000) (f32.const 0x1p-1))
+  (invoke "ne" (f32.const nan:0x400000) (f32.const 0.5))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const nan:0x200000) (f32.const 0x1p-1))
+  (invoke "ne" (f32.const nan:0x200000) (f32.const 0.5))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const -nan:0x400000) (f32.const -0x1p+0))
+  (invoke "ne" (f32.const -nan:0x400000) (f32.const -1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const -nan:0x200000) (f32.const -0x1p+0))
+  (invoke "ne" (f32.const -nan:0x200000) (f32.const -1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const -nan:0x400000) (f32.const 0x1p+0))
+  (invoke "ne" (f32.const -nan:0x400000) (f32.const 1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const -nan:0x200000) (f32.const 0x1p+0))
+  (invoke "ne" (f32.const -nan:0x200000) (f32.const 1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const nan:0x400000) (f32.const -0x1p+0))
+  (invoke "ne" (f32.const nan:0x400000) (f32.const -1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const nan:0x200000) (f32.const -0x1p+0))
+  (invoke "ne" (f32.const nan:0x200000) (f32.const -1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const nan:0x400000) (f32.const 0x1p+0))
+  (invoke "ne" (f32.const nan:0x400000) (f32.const 1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const nan:0x200000) (f32.const 0x1p+0))
+  (invoke "ne" (f32.const nan:0x200000) (f32.const 1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const -nan:0x400000) (f32.const -0x1.921fb6p+2))
+  (invoke "ne" (f32.const -nan:0x400000) (f32.const -6.283_185_482_025_146_5))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const -nan:0x200000) (f32.const -0x1.921fb6p+2))
+  (invoke "ne" (f32.const -nan:0x200000) (f32.const -6.283_185_482_025_146_5))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const -nan:0x400000) (f32.const 0x1.921fb6p+2))
+  (invoke "ne" (f32.const -nan:0x400000) (f32.const 6.283_185_482_025_146_5))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const -nan:0x200000) (f32.const 0x1.921fb6p+2))
+  (invoke "ne" (f32.const -nan:0x200000) (f32.const 6.283_185_482_025_146_5))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const nan:0x400000) (f32.const -0x1.921fb6p+2))
+  (invoke "ne" (f32.const nan:0x400000) (f32.const -6.283_185_482_025_146_5))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const nan:0x200000) (f32.const -0x1.921fb6p+2))
+  (invoke "ne" (f32.const nan:0x200000) (f32.const -6.283_185_482_025_146_5))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const nan:0x400000) (f32.const 0x1.921fb6p+2))
+  (invoke "ne" (f32.const nan:0x400000) (f32.const 6.283_185_482_025_146_5))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const nan:0x200000) (f32.const 0x1.921fb6p+2))
+  (invoke "ne" (f32.const nan:0x200000) (f32.const 6.283_185_482_025_146_5))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const -nan:0x400000) (f32.const -0x1.fffffep+127))
+  (invoke "ne"
+    (f32.const -nan:0x400000)
+    (f32.const -3.402_823_466_385_288_6e+38)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const -nan:0x200000) (f32.const -0x1.fffffep+127))
+  (invoke "ne"
+    (f32.const -nan:0x200000)
+    (f32.const -3.402_823_466_385_288_6e+38)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const -nan:0x400000) (f32.const 0x1.fffffep+127))
+  (invoke "ne"
+    (f32.const -nan:0x400000)
+    (f32.const 3.402_823_466_385_288_6e+38)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const -nan:0x200000) (f32.const 0x1.fffffep+127))
+  (invoke "ne"
+    (f32.const -nan:0x200000)
+    (f32.const 3.402_823_466_385_288_6e+38)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const nan:0x400000) (f32.const -0x1.fffffep+127))
+  (invoke "ne"
+    (f32.const nan:0x400000)
+    (f32.const -3.402_823_466_385_288_6e+38)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const nan:0x200000) (f32.const -0x1.fffffep+127))
+  (invoke "ne"
+    (f32.const nan:0x200000)
+    (f32.const -3.402_823_466_385_288_6e+38)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const nan:0x400000) (f32.const 0x1.fffffep+127))
+  (invoke "ne" (f32.const nan:0x400000) (f32.const 3.402_823_466_385_288_6e+38))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ne" (f32.const nan:0x200000) (f32.const 0x1.fffffep+127))
+  (invoke "ne" (f32.const nan:0x200000) (f32.const 3.402_823_466_385_288_6e+38))
   (i32.const 1)
 )
 (assert_return
@@ -3018,1152 +3426,1302 @@
   (invoke "ne" (f32.const nan:0x200000) (f32.const nan:0x200000))
   (i32.const 1)
 )
+(assert_return (invoke "lt" (f32.const -0) (f32.const -0)) (i32.const 0))
+(assert_return (invoke "lt" (f32.const -0) (f32.const 0)) (i32.const 0))
+(assert_return (invoke "lt" (f32.const 0) (f32.const -0)) (i32.const 0))
+(assert_return (invoke "lt" (f32.const 0) (f32.const 0)) (i32.const 0))
 (assert_return
-  (invoke "lt" (f32.const -0x0p+0) (f32.const -0x0p+0))
+  (invoke "lt" (f32.const -0) (f32.const -1.401_298_464_324_817_1e-45))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const -0x0p+0) (f32.const 0x0p+0))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "lt" (f32.const 0x0p+0) (f32.const -0x0p+0))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "lt" (f32.const 0x0p+0) (f32.const 0x0p+0))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "lt" (f32.const -0x0p+0) (f32.const -0x1p-149))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "lt" (f32.const -0x0p+0) (f32.const 0x1p-149))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "lt" (f32.const 0x0p+0) (f32.const -0x1p-149))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "lt" (f32.const 0x0p+0) (f32.const 0x1p-149))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "lt" (f32.const -0x0p+0) (f32.const -0x1p-126))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "lt" (f32.const -0x0p+0) (f32.const 0x1p-126))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "lt" (f32.const 0x0p+0) (f32.const -0x1p-126))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "lt" (f32.const 0x0p+0) (f32.const 0x1p-126))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "lt" (f32.const -0x0p+0) (f32.const -0x1p-1))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "lt" (f32.const -0x0p+0) (f32.const 0x1p-1))
+  (invoke "lt" (f32.const -0) (f32.const 1.401_298_464_324_817_1e-45))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x0p+0) (f32.const -0x1p-1))
+  (invoke "lt" (f32.const 0) (f32.const -1.401_298_464_324_817_1e-45))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x0p+0) (f32.const 0x1p-1))
+  (invoke "lt" (f32.const 0) (f32.const 1.401_298_464_324_817_1e-45))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f32.const -0x0p+0) (f32.const -0x1p+0))
+  (invoke "lt" (f32.const -0) (f32.const -1.175_494_350_822_287_5e-38))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const -0x0p+0) (f32.const 0x1p+0))
+  (invoke "lt" (f32.const -0) (f32.const 1.175_494_350_822_287_5e-38))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x0p+0) (f32.const -0x1p+0))
+  (invoke "lt" (f32.const 0) (f32.const -1.175_494_350_822_287_5e-38))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x0p+0) (f32.const 0x1p+0))
+  (invoke "lt" (f32.const 0) (f32.const 1.175_494_350_822_287_5e-38))
   (i32.const 1)
 )
+(assert_return (invoke "lt" (f32.const -0) (f32.const -0.5)) (i32.const 0))
+(assert_return (invoke "lt" (f32.const -0) (f32.const 0.5)) (i32.const 1))
+(assert_return (invoke "lt" (f32.const 0) (f32.const -0.5)) (i32.const 0))
+(assert_return (invoke "lt" (f32.const 0) (f32.const 0.5)) (i32.const 1))
+(assert_return (invoke "lt" (f32.const -0) (f32.const -1)) (i32.const 0))
+(assert_return (invoke "lt" (f32.const -0) (f32.const 1)) (i32.const 1))
+(assert_return (invoke "lt" (f32.const 0) (f32.const -1)) (i32.const 0))
+(assert_return (invoke "lt" (f32.const 0) (f32.const 1)) (i32.const 1))
 (assert_return
-  (invoke "lt" (f32.const -0x0p+0) (f32.const -0x1.921fb6p+2))
+  (invoke "lt" (f32.const -0) (f32.const -6.283_185_482_025_146_5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const -0x0p+0) (f32.const 0x1.921fb6p+2))
+  (invoke "lt" (f32.const -0) (f32.const 6.283_185_482_025_146_5))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x0p+0) (f32.const -0x1.921fb6p+2))
+  (invoke "lt" (f32.const 0) (f32.const -6.283_185_482_025_146_5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x0p+0) (f32.const 0x1.921fb6p+2))
+  (invoke "lt" (f32.const 0) (f32.const 6.283_185_482_025_146_5))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f32.const -0x0p+0) (f32.const -0x1.fffffep+127))
+  (invoke "lt" (f32.const -0) (f32.const -3.402_823_466_385_288_6e+38))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const -0x0p+0) (f32.const 0x1.fffffep+127))
+  (invoke "lt" (f32.const -0) (f32.const 3.402_823_466_385_288_6e+38))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x0p+0) (f32.const -0x1.fffffep+127))
+  (invoke "lt" (f32.const 0) (f32.const -3.402_823_466_385_288_6e+38))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x0p+0) (f32.const 0x1.fffffep+127))
+  (invoke "lt" (f32.const 0) (f32.const 3.402_823_466_385_288_6e+38))
   (i32.const 1)
 )
-(assert_return (invoke "lt" (f32.const -0x0p+0) (f32.const -inf)) (i32.const 0))
-(assert_return (invoke "lt" (f32.const -0x0p+0) (f32.const inf)) (i32.const 1))
-(assert_return (invoke "lt" (f32.const 0x0p+0) (f32.const -inf)) (i32.const 0))
-(assert_return (invoke "lt" (f32.const 0x0p+0) (f32.const inf)) (i32.const 1))
+(assert_return (invoke "lt" (f32.const -0) (f32.const -inf)) (i32.const 0))
+(assert_return (invoke "lt" (f32.const -0) (f32.const inf)) (i32.const 1))
+(assert_return (invoke "lt" (f32.const 0) (f32.const -inf)) (i32.const 0))
+(assert_return (invoke "lt" (f32.const 0) (f32.const inf)) (i32.const 1))
 (assert_return
-  (invoke "lt" (f32.const -0x0p+0) (f32.const -nan:0x400000))
+  (invoke "lt" (f32.const -0) (f32.const -nan:0x400000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const -0x0p+0) (f32.const -nan:0x200000))
+  (invoke "lt" (f32.const -0) (f32.const -nan:0x200000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const -0x0p+0) (f32.const nan:0x400000))
+  (invoke "lt" (f32.const -0) (f32.const nan:0x400000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const -0x0p+0) (f32.const nan:0x200000))
+  (invoke "lt" (f32.const -0) (f32.const nan:0x200000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x0p+0) (f32.const -nan:0x400000))
+  (invoke "lt" (f32.const 0) (f32.const -nan:0x400000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x0p+0) (f32.const -nan:0x200000))
+  (invoke "lt" (f32.const 0) (f32.const -nan:0x200000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x0p+0) (f32.const nan:0x400000))
+  (invoke "lt" (f32.const 0) (f32.const nan:0x400000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x0p+0) (f32.const nan:0x200000))
+  (invoke "lt" (f32.const 0) (f32.const nan:0x200000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const -0x1p-149) (f32.const -0x0p+0))
+  (invoke "lt" (f32.const -1.401_298_464_324_817_1e-45) (f32.const -0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f32.const -0x1p-149) (f32.const 0x0p+0))
+  (invoke "lt" (f32.const -1.401_298_464_324_817_1e-45) (f32.const 0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1p-149) (f32.const -0x0p+0))
+  (invoke "lt" (f32.const 1.401_298_464_324_817_1e-45) (f32.const -0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1p-149) (f32.const 0x0p+0))
+  (invoke "lt" (f32.const 1.401_298_464_324_817_1e-45) (f32.const 0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const -0x1p-149) (f32.const -0x1p-149))
+  (invoke "lt"
+    (f32.const -1.401_298_464_324_817_1e-45)
+    (f32.const -1.401_298_464_324_817_1e-45)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const -0x1p-149) (f32.const 0x1p-149))
+  (invoke "lt"
+    (f32.const -1.401_298_464_324_817_1e-45)
+    (f32.const 1.401_298_464_324_817_1e-45)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1p-149) (f32.const -0x1p-149))
+  (invoke "lt"
+    (f32.const 1.401_298_464_324_817_1e-45)
+    (f32.const -1.401_298_464_324_817_1e-45)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1p-149) (f32.const 0x1p-149))
+  (invoke "lt"
+    (f32.const 1.401_298_464_324_817_1e-45)
+    (f32.const 1.401_298_464_324_817_1e-45)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const -0x1p-149) (f32.const -0x1p-126))
+  (invoke "lt"
+    (f32.const -1.401_298_464_324_817_1e-45)
+    (f32.const -1.175_494_350_822_287_5e-38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const -0x1p-149) (f32.const 0x1p-126))
+  (invoke "lt"
+    (f32.const -1.401_298_464_324_817_1e-45)
+    (f32.const 1.175_494_350_822_287_5e-38)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1p-149) (f32.const -0x1p-126))
+  (invoke "lt"
+    (f32.const 1.401_298_464_324_817_1e-45)
+    (f32.const -1.175_494_350_822_287_5e-38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1p-149) (f32.const 0x1p-126))
+  (invoke "lt"
+    (f32.const 1.401_298_464_324_817_1e-45)
+    (f32.const 1.175_494_350_822_287_5e-38)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f32.const -0x1p-149) (f32.const -0x1p-1))
+  (invoke "lt" (f32.const -1.401_298_464_324_817_1e-45) (f32.const -0.5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const -0x1p-149) (f32.const 0x1p-1))
+  (invoke "lt" (f32.const -1.401_298_464_324_817_1e-45) (f32.const 0.5))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1p-149) (f32.const -0x1p-1))
+  (invoke "lt" (f32.const 1.401_298_464_324_817_1e-45) (f32.const -0.5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1p-149) (f32.const 0x1p-1))
+  (invoke "lt" (f32.const 1.401_298_464_324_817_1e-45) (f32.const 0.5))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f32.const -0x1p-149) (f32.const -0x1p+0))
+  (invoke "lt" (f32.const -1.401_298_464_324_817_1e-45) (f32.const -1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const -0x1p-149) (f32.const 0x1p+0))
+  (invoke "lt" (f32.const -1.401_298_464_324_817_1e-45) (f32.const 1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1p-149) (f32.const -0x1p+0))
+  (invoke "lt" (f32.const 1.401_298_464_324_817_1e-45) (f32.const -1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1p-149) (f32.const 0x1p+0))
+  (invoke "lt" (f32.const 1.401_298_464_324_817_1e-45) (f32.const 1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f32.const -0x1p-149) (f32.const -0x1.921fb6p+2))
+  (invoke "lt"
+    (f32.const -1.401_298_464_324_817_1e-45)
+    (f32.const -6.283_185_482_025_146_5)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const -0x1p-149) (f32.const 0x1.921fb6p+2))
+  (invoke "lt"
+    (f32.const -1.401_298_464_324_817_1e-45)
+    (f32.const 6.283_185_482_025_146_5)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1p-149) (f32.const -0x1.921fb6p+2))
+  (invoke "lt"
+    (f32.const 1.401_298_464_324_817_1e-45)
+    (f32.const -6.283_185_482_025_146_5)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1p-149) (f32.const 0x1.921fb6p+2))
+  (invoke "lt"
+    (f32.const 1.401_298_464_324_817_1e-45)
+    (f32.const 6.283_185_482_025_146_5)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f32.const -0x1p-149) (f32.const -0x1.fffffep+127))
+  (invoke "lt"
+    (f32.const -1.401_298_464_324_817_1e-45)
+    (f32.const -3.402_823_466_385_288_6e+38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const -0x1p-149) (f32.const 0x1.fffffep+127))
+  (invoke "lt"
+    (f32.const -1.401_298_464_324_817_1e-45)
+    (f32.const 3.402_823_466_385_288_6e+38)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1p-149) (f32.const -0x1.fffffep+127))
+  (invoke "lt"
+    (f32.const 1.401_298_464_324_817_1e-45)
+    (f32.const -3.402_823_466_385_288_6e+38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1p-149) (f32.const 0x1.fffffep+127))
+  (invoke "lt"
+    (f32.const 1.401_298_464_324_817_1e-45)
+    (f32.const 3.402_823_466_385_288_6e+38)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f32.const -0x1p-149) (f32.const -inf))
+  (invoke "lt" (f32.const -1.401_298_464_324_817_1e-45) (f32.const -inf))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const -0x1p-149) (f32.const inf))
+  (invoke "lt" (f32.const -1.401_298_464_324_817_1e-45) (f32.const inf))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1p-149) (f32.const -inf))
+  (invoke "lt" (f32.const 1.401_298_464_324_817_1e-45) (f32.const -inf))
   (i32.const 0)
 )
-(assert_return (invoke "lt" (f32.const 0x1p-149) (f32.const inf)) (i32.const 1))
 (assert_return
-  (invoke "lt" (f32.const -0x1p-149) (f32.const -nan:0x400000))
+  (invoke "lt" (f32.const 1.401_298_464_324_817_1e-45) (f32.const inf))
+  (i32.const 1)
+)
+(assert_return
+  (invoke "lt"
+    (f32.const -1.401_298_464_324_817_1e-45)
+    (f32.const -nan:0x400000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const -0x1p-149) (f32.const -nan:0x200000))
+  (invoke "lt"
+    (f32.const -1.401_298_464_324_817_1e-45)
+    (f32.const -nan:0x200000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const -0x1p-149) (f32.const nan:0x400000))
+  (invoke "lt"
+    (f32.const -1.401_298_464_324_817_1e-45)
+    (f32.const nan:0x400000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const -0x1p-149) (f32.const nan:0x200000))
+  (invoke "lt"
+    (f32.const -1.401_298_464_324_817_1e-45)
+    (f32.const nan:0x200000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1p-149) (f32.const -nan:0x400000))
+  (invoke "lt"
+    (f32.const 1.401_298_464_324_817_1e-45)
+    (f32.const -nan:0x400000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1p-149) (f32.const -nan:0x200000))
+  (invoke "lt"
+    (f32.const 1.401_298_464_324_817_1e-45)
+    (f32.const -nan:0x200000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1p-149) (f32.const nan:0x400000))
+  (invoke "lt" (f32.const 1.401_298_464_324_817_1e-45) (f32.const nan:0x400000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1p-149) (f32.const nan:0x200000))
+  (invoke "lt" (f32.const 1.401_298_464_324_817_1e-45) (f32.const nan:0x200000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const -0x1p-126) (f32.const -0x0p+0))
+  (invoke "lt" (f32.const -1.175_494_350_822_287_5e-38) (f32.const -0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f32.const -0x1p-126) (f32.const 0x0p+0))
+  (invoke "lt" (f32.const -1.175_494_350_822_287_5e-38) (f32.const 0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1p-126) (f32.const -0x0p+0))
+  (invoke "lt" (f32.const 1.175_494_350_822_287_5e-38) (f32.const -0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1p-126) (f32.const 0x0p+0))
+  (invoke "lt" (f32.const 1.175_494_350_822_287_5e-38) (f32.const 0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const -0x1p-126) (f32.const -0x1p-149))
+  (invoke "lt"
+    (f32.const -1.175_494_350_822_287_5e-38)
+    (f32.const -1.401_298_464_324_817_1e-45)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f32.const -0x1p-126) (f32.const 0x1p-149))
+  (invoke "lt"
+    (f32.const -1.175_494_350_822_287_5e-38)
+    (f32.const 1.401_298_464_324_817_1e-45)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1p-126) (f32.const -0x1p-149))
+  (invoke "lt"
+    (f32.const 1.175_494_350_822_287_5e-38)
+    (f32.const -1.401_298_464_324_817_1e-45)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1p-126) (f32.const 0x1p-149))
+  (invoke "lt"
+    (f32.const 1.175_494_350_822_287_5e-38)
+    (f32.const 1.401_298_464_324_817_1e-45)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const -0x1p-126) (f32.const -0x1p-126))
+  (invoke "lt"
+    (f32.const -1.175_494_350_822_287_5e-38)
+    (f32.const -1.175_494_350_822_287_5e-38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const -0x1p-126) (f32.const 0x1p-126))
+  (invoke "lt"
+    (f32.const -1.175_494_350_822_287_5e-38)
+    (f32.const 1.175_494_350_822_287_5e-38)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1p-126) (f32.const -0x1p-126))
+  (invoke "lt"
+    (f32.const 1.175_494_350_822_287_5e-38)
+    (f32.const -1.175_494_350_822_287_5e-38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1p-126) (f32.const 0x1p-126))
+  (invoke "lt"
+    (f32.const 1.175_494_350_822_287_5e-38)
+    (f32.const 1.175_494_350_822_287_5e-38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const -0x1p-126) (f32.const -0x1p-1))
+  (invoke "lt" (f32.const -1.175_494_350_822_287_5e-38) (f32.const -0.5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const -0x1p-126) (f32.const 0x1p-1))
+  (invoke "lt" (f32.const -1.175_494_350_822_287_5e-38) (f32.const 0.5))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1p-126) (f32.const -0x1p-1))
+  (invoke "lt" (f32.const 1.175_494_350_822_287_5e-38) (f32.const -0.5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1p-126) (f32.const 0x1p-1))
+  (invoke "lt" (f32.const 1.175_494_350_822_287_5e-38) (f32.const 0.5))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f32.const -0x1p-126) (f32.const -0x1p+0))
+  (invoke "lt" (f32.const -1.175_494_350_822_287_5e-38) (f32.const -1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const -0x1p-126) (f32.const 0x1p+0))
+  (invoke "lt" (f32.const -1.175_494_350_822_287_5e-38) (f32.const 1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1p-126) (f32.const -0x1p+0))
+  (invoke "lt" (f32.const 1.175_494_350_822_287_5e-38) (f32.const -1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1p-126) (f32.const 0x1p+0))
+  (invoke "lt" (f32.const 1.175_494_350_822_287_5e-38) (f32.const 1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f32.const -0x1p-126) (f32.const -0x1.921fb6p+2))
+  (invoke "lt"
+    (f32.const -1.175_494_350_822_287_5e-38)
+    (f32.const -6.283_185_482_025_146_5)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const -0x1p-126) (f32.const 0x1.921fb6p+2))
+  (invoke "lt"
+    (f32.const -1.175_494_350_822_287_5e-38)
+    (f32.const 6.283_185_482_025_146_5)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1p-126) (f32.const -0x1.921fb6p+2))
+  (invoke "lt"
+    (f32.const 1.175_494_350_822_287_5e-38)
+    (f32.const -6.283_185_482_025_146_5)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1p-126) (f32.const 0x1.921fb6p+2))
+  (invoke "lt"
+    (f32.const 1.175_494_350_822_287_5e-38)
+    (f32.const 6.283_185_482_025_146_5)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f32.const -0x1p-126) (f32.const -0x1.fffffep+127))
+  (invoke "lt"
+    (f32.const -1.175_494_350_822_287_5e-38)
+    (f32.const -3.402_823_466_385_288_6e+38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const -0x1p-126) (f32.const 0x1.fffffep+127))
+  (invoke "lt"
+    (f32.const -1.175_494_350_822_287_5e-38)
+    (f32.const 3.402_823_466_385_288_6e+38)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1p-126) (f32.const -0x1.fffffep+127))
+  (invoke "lt"
+    (f32.const 1.175_494_350_822_287_5e-38)
+    (f32.const -3.402_823_466_385_288_6e+38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1p-126) (f32.const 0x1.fffffep+127))
+  (invoke "lt"
+    (f32.const 1.175_494_350_822_287_5e-38)
+    (f32.const 3.402_823_466_385_288_6e+38)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f32.const -0x1p-126) (f32.const -inf))
+  (invoke "lt" (f32.const -1.175_494_350_822_287_5e-38) (f32.const -inf))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const -0x1p-126) (f32.const inf))
+  (invoke "lt" (f32.const -1.175_494_350_822_287_5e-38) (f32.const inf))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1p-126) (f32.const -inf))
+  (invoke "lt" (f32.const 1.175_494_350_822_287_5e-38) (f32.const -inf))
   (i32.const 0)
 )
-(assert_return (invoke "lt" (f32.const 0x1p-126) (f32.const inf)) (i32.const 1))
 (assert_return
-  (invoke "lt" (f32.const -0x1p-126) (f32.const -nan:0x400000))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "lt" (f32.const -0x1p-126) (f32.const -nan:0x200000))
-  (i32.const 0)
+  (invoke "lt" (f32.const 1.175_494_350_822_287_5e-38) (f32.const inf))
+  (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f32.const -0x1p-126) (f32.const nan:0x400000))
+  (invoke "lt"
+    (f32.const -1.175_494_350_822_287_5e-38)
+    (f32.const -nan:0x400000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const -0x1p-126) (f32.const nan:0x200000))
+  (invoke "lt"
+    (f32.const -1.175_494_350_822_287_5e-38)
+    (f32.const -nan:0x200000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1p-126) (f32.const -nan:0x400000))
+  (invoke "lt"
+    (f32.const -1.175_494_350_822_287_5e-38)
+    (f32.const nan:0x400000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1p-126) (f32.const -nan:0x200000))
+  (invoke "lt"
+    (f32.const -1.175_494_350_822_287_5e-38)
+    (f32.const nan:0x200000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1p-126) (f32.const nan:0x400000))
+  (invoke "lt"
+    (f32.const 1.175_494_350_822_287_5e-38)
+    (f32.const -nan:0x400000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1p-126) (f32.const nan:0x200000))
+  (invoke "lt"
+    (f32.const 1.175_494_350_822_287_5e-38)
+    (f32.const -nan:0x200000)
+  )
   (i32.const 0)
-)
-(assert_return
-  (invoke "lt" (f32.const -0x1p-1) (f32.const -0x0p+0))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "lt" (f32.const -0x1p-1) (f32.const 0x0p+0))
-  (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1p-1) (f32.const -0x0p+0))
+  (invoke "lt" (f32.const 1.175_494_350_822_287_5e-38) (f32.const nan:0x400000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1p-1) (f32.const 0x0p+0))
+  (invoke "lt" (f32.const 1.175_494_350_822_287_5e-38) (f32.const nan:0x200000))
   (i32.const 0)
 )
+(assert_return (invoke "lt" (f32.const -0.5) (f32.const -0)) (i32.const 1))
+(assert_return (invoke "lt" (f32.const -0.5) (f32.const 0)) (i32.const 1))
+(assert_return (invoke "lt" (f32.const 0.5) (f32.const -0)) (i32.const 0))
+(assert_return (invoke "lt" (f32.const 0.5) (f32.const 0)) (i32.const 0))
 (assert_return
-  (invoke "lt" (f32.const -0x1p-1) (f32.const -0x1p-149))
+  (invoke "lt" (f32.const -0.5) (f32.const -1.401_298_464_324_817_1e-45))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f32.const -0x1p-1) (f32.const 0x1p-149))
+  (invoke "lt" (f32.const -0.5) (f32.const 1.401_298_464_324_817_1e-45))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1p-1) (f32.const -0x1p-149))
+  (invoke "lt" (f32.const 0.5) (f32.const -1.401_298_464_324_817_1e-45))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1p-1) (f32.const 0x1p-149))
+  (invoke "lt" (f32.const 0.5) (f32.const 1.401_298_464_324_817_1e-45))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const -0x1p-1) (f32.const -0x1p-126))
+  (invoke "lt" (f32.const -0.5) (f32.const -1.175_494_350_822_287_5e-38))
   (i32.const 1)
-)
-(assert_return
-  (invoke "lt" (f32.const -0x1p-1) (f32.const 0x1p-126))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "lt" (f32.const 0x1p-1) (f32.const -0x1p-126))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "lt" (f32.const 0x1p-1) (f32.const 0x1p-126))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "lt" (f32.const -0x1p-1) (f32.const -0x1p-1))
-  (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const -0x1p-1) (f32.const 0x1p-1))
+  (invoke "lt" (f32.const -0.5) (f32.const 1.175_494_350_822_287_5e-38))
   (i32.const 1)
-)
-(assert_return
-  (invoke "lt" (f32.const 0x1p-1) (f32.const -0x1p-1))
-  (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1p-1) (f32.const 0x1p-1))
+  (invoke "lt" (f32.const 0.5) (f32.const -1.175_494_350_822_287_5e-38))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const -0x1p-1) (f32.const -0x1p+0))
+  (invoke "lt" (f32.const 0.5) (f32.const 1.175_494_350_822_287_5e-38))
   (i32.const 0)
-)
-(assert_return
-  (invoke "lt" (f32.const -0x1p-1) (f32.const 0x1p+0))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "lt" (f32.const 0x1p-1) (f32.const -0x1p+0))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "lt" (f32.const 0x1p-1) (f32.const 0x1p+0))
-  (i32.const 1)
 )
+(assert_return (invoke "lt" (f32.const -0.5) (f32.const -0.5)) (i32.const 0))
+(assert_return (invoke "lt" (f32.const -0.5) (f32.const 0.5)) (i32.const 1))
+(assert_return (invoke "lt" (f32.const 0.5) (f32.const -0.5)) (i32.const 0))
+(assert_return (invoke "lt" (f32.const 0.5) (f32.const 0.5)) (i32.const 0))
+(assert_return (invoke "lt" (f32.const -0.5) (f32.const -1)) (i32.const 0))
+(assert_return (invoke "lt" (f32.const -0.5) (f32.const 1)) (i32.const 1))
+(assert_return (invoke "lt" (f32.const 0.5) (f32.const -1)) (i32.const 0))
+(assert_return (invoke "lt" (f32.const 0.5) (f32.const 1)) (i32.const 1))
 (assert_return
-  (invoke "lt" (f32.const -0x1p-1) (f32.const -0x1.921fb6p+2))
+  (invoke "lt" (f32.const -0.5) (f32.const -6.283_185_482_025_146_5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const -0x1p-1) (f32.const 0x1.921fb6p+2))
+  (invoke "lt" (f32.const -0.5) (f32.const 6.283_185_482_025_146_5))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1p-1) (f32.const -0x1.921fb6p+2))
+  (invoke "lt" (f32.const 0.5) (f32.const -6.283_185_482_025_146_5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1p-1) (f32.const 0x1.921fb6p+2))
+  (invoke "lt" (f32.const 0.5) (f32.const 6.283_185_482_025_146_5))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f32.const -0x1p-1) (f32.const -0x1.fffffep+127))
+  (invoke "lt" (f32.const -0.5) (f32.const -3.402_823_466_385_288_6e+38))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const -0x1p-1) (f32.const 0x1.fffffep+127))
+  (invoke "lt" (f32.const -0.5) (f32.const 3.402_823_466_385_288_6e+38))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1p-1) (f32.const -0x1.fffffep+127))
+  (invoke "lt" (f32.const 0.5) (f32.const -3.402_823_466_385_288_6e+38))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1p-1) (f32.const 0x1.fffffep+127))
+  (invoke "lt" (f32.const 0.5) (f32.const 3.402_823_466_385_288_6e+38))
   (i32.const 1)
-)
-(assert_return (invoke "lt" (f32.const -0x1p-1) (f32.const -inf)) (i32.const 0))
-(assert_return (invoke "lt" (f32.const -0x1p-1) (f32.const inf)) (i32.const 1))
-(assert_return (invoke "lt" (f32.const 0x1p-1) (f32.const -inf)) (i32.const 0))
-(assert_return (invoke "lt" (f32.const 0x1p-1) (f32.const inf)) (i32.const 1))
-(assert_return
-  (invoke "lt" (f32.const -0x1p-1) (f32.const -nan:0x400000))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "lt" (f32.const -0x1p-1) (f32.const -nan:0x200000))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "lt" (f32.const -0x1p-1) (f32.const nan:0x400000))
-  (i32.const 0)
 )
+(assert_return (invoke "lt" (f32.const -0.5) (f32.const -inf)) (i32.const 0))
+(assert_return (invoke "lt" (f32.const -0.5) (f32.const inf)) (i32.const 1))
+(assert_return (invoke "lt" (f32.const 0.5) (f32.const -inf)) (i32.const 0))
+(assert_return (invoke "lt" (f32.const 0.5) (f32.const inf)) (i32.const 1))
 (assert_return
-  (invoke "lt" (f32.const -0x1p-1) (f32.const nan:0x200000))
+  (invoke "lt" (f32.const -0.5) (f32.const -nan:0x400000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1p-1) (f32.const -nan:0x400000))
+  (invoke "lt" (f32.const -0.5) (f32.const -nan:0x200000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1p-1) (f32.const -nan:0x200000))
+  (invoke "lt" (f32.const -0.5) (f32.const nan:0x400000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1p-1) (f32.const nan:0x400000))
+  (invoke "lt" (f32.const -0.5) (f32.const nan:0x200000))
   (i32.const 0)
-)
-(assert_return
-  (invoke "lt" (f32.const 0x1p-1) (f32.const nan:0x200000))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "lt" (f32.const -0x1p+0) (f32.const -0x0p+0))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "lt" (f32.const -0x1p+0) (f32.const 0x0p+0))
-  (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1p+0) (f32.const -0x0p+0))
+  (invoke "lt" (f32.const 0.5) (f32.const -nan:0x400000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1p+0) (f32.const 0x0p+0))
+  (invoke "lt" (f32.const 0.5) (f32.const -nan:0x200000))
   (i32.const 0)
-)
-(assert_return
-  (invoke "lt" (f32.const -0x1p+0) (f32.const -0x1p-149))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "lt" (f32.const -0x1p+0) (f32.const 0x1p-149))
-  (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1p+0) (f32.const -0x1p-149))
+  (invoke "lt" (f32.const 0.5) (f32.const nan:0x400000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1p+0) (f32.const 0x1p-149))
+  (invoke "lt" (f32.const 0.5) (f32.const nan:0x200000))
   (i32.const 0)
 )
+(assert_return (invoke "lt" (f32.const -1) (f32.const -0)) (i32.const 1))
+(assert_return (invoke "lt" (f32.const -1) (f32.const 0)) (i32.const 1))
+(assert_return (invoke "lt" (f32.const 1) (f32.const -0)) (i32.const 0))
+(assert_return (invoke "lt" (f32.const 1) (f32.const 0)) (i32.const 0))
 (assert_return
-  (invoke "lt" (f32.const -0x1p+0) (f32.const -0x1p-126))
+  (invoke "lt" (f32.const -1) (f32.const -1.401_298_464_324_817_1e-45))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f32.const -0x1p+0) (f32.const 0x1p-126))
+  (invoke "lt" (f32.const -1) (f32.const 1.401_298_464_324_817_1e-45))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1p+0) (f32.const -0x1p-126))
+  (invoke "lt" (f32.const 1) (f32.const -1.401_298_464_324_817_1e-45))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1p+0) (f32.const 0x1p-126))
+  (invoke "lt" (f32.const 1) (f32.const 1.401_298_464_324_817_1e-45))
   (i32.const 0)
-)
-(assert_return
-  (invoke "lt" (f32.const -0x1p+0) (f32.const -0x1p-1))
-  (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f32.const -0x1p+0) (f32.const 0x1p-1))
+  (invoke "lt" (f32.const -1) (f32.const -1.175_494_350_822_287_5e-38))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1p+0) (f32.const -0x1p-1))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "lt" (f32.const 0x1p+0) (f32.const 0x1p-1))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "lt" (f32.const -0x1p+0) (f32.const -0x1p+0))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "lt" (f32.const -0x1p+0) (f32.const 0x1p+0))
+  (invoke "lt" (f32.const -1) (f32.const 1.175_494_350_822_287_5e-38))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1p+0) (f32.const -0x1p+0))
+  (invoke "lt" (f32.const 1) (f32.const -1.175_494_350_822_287_5e-38))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1p+0) (f32.const 0x1p+0))
+  (invoke "lt" (f32.const 1) (f32.const 1.175_494_350_822_287_5e-38))
   (i32.const 0)
 )
+(assert_return (invoke "lt" (f32.const -1) (f32.const -0.5)) (i32.const 1))
+(assert_return (invoke "lt" (f32.const -1) (f32.const 0.5)) (i32.const 1))
+(assert_return (invoke "lt" (f32.const 1) (f32.const -0.5)) (i32.const 0))
+(assert_return (invoke "lt" (f32.const 1) (f32.const 0.5)) (i32.const 0))
+(assert_return (invoke "lt" (f32.const -1) (f32.const -1)) (i32.const 0))
+(assert_return (invoke "lt" (f32.const -1) (f32.const 1)) (i32.const 1))
+(assert_return (invoke "lt" (f32.const 1) (f32.const -1)) (i32.const 0))
+(assert_return (invoke "lt" (f32.const 1) (f32.const 1)) (i32.const 0))
 (assert_return
-  (invoke "lt" (f32.const -0x1p+0) (f32.const -0x1.921fb6p+2))
+  (invoke "lt" (f32.const -1) (f32.const -6.283_185_482_025_146_5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const -0x1p+0) (f32.const 0x1.921fb6p+2))
+  (invoke "lt" (f32.const -1) (f32.const 6.283_185_482_025_146_5))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1p+0) (f32.const -0x1.921fb6p+2))
+  (invoke "lt" (f32.const 1) (f32.const -6.283_185_482_025_146_5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1p+0) (f32.const 0x1.921fb6p+2))
+  (invoke "lt" (f32.const 1) (f32.const 6.283_185_482_025_146_5))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f32.const -0x1p+0) (f32.const -0x1.fffffep+127))
+  (invoke "lt" (f32.const -1) (f32.const -3.402_823_466_385_288_6e+38))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const -0x1p+0) (f32.const 0x1.fffffep+127))
+  (invoke "lt" (f32.const -1) (f32.const 3.402_823_466_385_288_6e+38))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1p+0) (f32.const -0x1.fffffep+127))
+  (invoke "lt" (f32.const 1) (f32.const -3.402_823_466_385_288_6e+38))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1p+0) (f32.const 0x1.fffffep+127))
+  (invoke "lt" (f32.const 1) (f32.const 3.402_823_466_385_288_6e+38))
   (i32.const 1)
 )
-(assert_return (invoke "lt" (f32.const -0x1p+0) (f32.const -inf)) (i32.const 0))
-(assert_return (invoke "lt" (f32.const -0x1p+0) (f32.const inf)) (i32.const 1))
-(assert_return (invoke "lt" (f32.const 0x1p+0) (f32.const -inf)) (i32.const 0))
-(assert_return (invoke "lt" (f32.const 0x1p+0) (f32.const inf)) (i32.const 1))
+(assert_return (invoke "lt" (f32.const -1) (f32.const -inf)) (i32.const 0))
+(assert_return (invoke "lt" (f32.const -1) (f32.const inf)) (i32.const 1))
+(assert_return (invoke "lt" (f32.const 1) (f32.const -inf)) (i32.const 0))
+(assert_return (invoke "lt" (f32.const 1) (f32.const inf)) (i32.const 1))
 (assert_return
-  (invoke "lt" (f32.const -0x1p+0) (f32.const -nan:0x400000))
+  (invoke "lt" (f32.const -1) (f32.const -nan:0x400000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const -0x1p+0) (f32.const -nan:0x200000))
+  (invoke "lt" (f32.const -1) (f32.const -nan:0x200000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const -0x1p+0) (f32.const nan:0x400000))
+  (invoke "lt" (f32.const -1) (f32.const nan:0x400000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const -0x1p+0) (f32.const nan:0x200000))
+  (invoke "lt" (f32.const -1) (f32.const nan:0x200000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1p+0) (f32.const -nan:0x400000))
+  (invoke "lt" (f32.const 1) (f32.const -nan:0x400000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1p+0) (f32.const -nan:0x200000))
+  (invoke "lt" (f32.const 1) (f32.const -nan:0x200000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1p+0) (f32.const nan:0x400000))
+  (invoke "lt" (f32.const 1) (f32.const nan:0x400000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1p+0) (f32.const nan:0x200000))
+  (invoke "lt" (f32.const 1) (f32.const nan:0x200000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const -0x1.921fb6p+2) (f32.const -0x0p+0))
+  (invoke "lt" (f32.const -6.283_185_482_025_146_5) (f32.const -0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f32.const -0x1.921fb6p+2) (f32.const 0x0p+0))
+  (invoke "lt" (f32.const -6.283_185_482_025_146_5) (f32.const 0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1.921fb6p+2) (f32.const -0x0p+0))
+  (invoke "lt" (f32.const 6.283_185_482_025_146_5) (f32.const -0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1.921fb6p+2) (f32.const 0x0p+0))
+  (invoke "lt" (f32.const 6.283_185_482_025_146_5) (f32.const 0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const -0x1.921fb6p+2) (f32.const -0x1p-149))
+  (invoke "lt"
+    (f32.const -6.283_185_482_025_146_5)
+    (f32.const -1.401_298_464_324_817_1e-45)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f32.const -0x1.921fb6p+2) (f32.const 0x1p-149))
+  (invoke "lt"
+    (f32.const -6.283_185_482_025_146_5)
+    (f32.const 1.401_298_464_324_817_1e-45)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1.921fb6p+2) (f32.const -0x1p-149))
+  (invoke "lt"
+    (f32.const 6.283_185_482_025_146_5)
+    (f32.const -1.401_298_464_324_817_1e-45)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1.921fb6p+2) (f32.const 0x1p-149))
+  (invoke "lt"
+    (f32.const 6.283_185_482_025_146_5)
+    (f32.const 1.401_298_464_324_817_1e-45)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const -0x1.921fb6p+2) (f32.const -0x1p-126))
+  (invoke "lt"
+    (f32.const -6.283_185_482_025_146_5)
+    (f32.const -1.175_494_350_822_287_5e-38)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f32.const -0x1.921fb6p+2) (f32.const 0x1p-126))
+  (invoke "lt"
+    (f32.const -6.283_185_482_025_146_5)
+    (f32.const 1.175_494_350_822_287_5e-38)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1.921fb6p+2) (f32.const -0x1p-126))
+  (invoke "lt"
+    (f32.const 6.283_185_482_025_146_5)
+    (f32.const -1.175_494_350_822_287_5e-38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1.921fb6p+2) (f32.const 0x1p-126))
+  (invoke "lt"
+    (f32.const 6.283_185_482_025_146_5)
+    (f32.const 1.175_494_350_822_287_5e-38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const -0x1.921fb6p+2) (f32.const -0x1p-1))
+  (invoke "lt" (f32.const -6.283_185_482_025_146_5) (f32.const -0.5))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f32.const -0x1.921fb6p+2) (f32.const 0x1p-1))
+  (invoke "lt" (f32.const -6.283_185_482_025_146_5) (f32.const 0.5))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1.921fb6p+2) (f32.const -0x1p-1))
+  (invoke "lt" (f32.const 6.283_185_482_025_146_5) (f32.const -0.5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1.921fb6p+2) (f32.const 0x1p-1))
+  (invoke "lt" (f32.const 6.283_185_482_025_146_5) (f32.const 0.5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const -0x1.921fb6p+2) (f32.const -0x1p+0))
+  (invoke "lt" (f32.const -6.283_185_482_025_146_5) (f32.const -1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f32.const -0x1.921fb6p+2) (f32.const 0x1p+0))
+  (invoke "lt" (f32.const -6.283_185_482_025_146_5) (f32.const 1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1.921fb6p+2) (f32.const -0x1p+0))
+  (invoke "lt" (f32.const 6.283_185_482_025_146_5) (f32.const -1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1.921fb6p+2) (f32.const 0x1p+0))
+  (invoke "lt" (f32.const 6.283_185_482_025_146_5) (f32.const 1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const -0x1.921fb6p+2) (f32.const -0x1.921fb6p+2))
+  (invoke "lt"
+    (f32.const -6.283_185_482_025_146_5)
+    (f32.const -6.283_185_482_025_146_5)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const -0x1.921fb6p+2) (f32.const 0x1.921fb6p+2))
+  (invoke "lt"
+    (f32.const -6.283_185_482_025_146_5)
+    (f32.const 6.283_185_482_025_146_5)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1.921fb6p+2) (f32.const -0x1.921fb6p+2))
+  (invoke "lt"
+    (f32.const 6.283_185_482_025_146_5)
+    (f32.const -6.283_185_482_025_146_5)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1.921fb6p+2) (f32.const 0x1.921fb6p+2))
+  (invoke "lt"
+    (f32.const 6.283_185_482_025_146_5)
+    (f32.const 6.283_185_482_025_146_5)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const -0x1.921fb6p+2) (f32.const -0x1.fffffep+127))
+  (invoke "lt"
+    (f32.const -6.283_185_482_025_146_5)
+    (f32.const -3.402_823_466_385_288_6e+38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const -0x1.921fb6p+2) (f32.const 0x1.fffffep+127))
+  (invoke "lt"
+    (f32.const -6.283_185_482_025_146_5)
+    (f32.const 3.402_823_466_385_288_6e+38)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1.921fb6p+2) (f32.const -0x1.fffffep+127))
+  (invoke "lt"
+    (f32.const 6.283_185_482_025_146_5)
+    (f32.const -3.402_823_466_385_288_6e+38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1.921fb6p+2) (f32.const 0x1.fffffep+127))
+  (invoke "lt"
+    (f32.const 6.283_185_482_025_146_5)
+    (f32.const 3.402_823_466_385_288_6e+38)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f32.const -0x1.921fb6p+2) (f32.const -inf))
+  (invoke "lt" (f32.const -6.283_185_482_025_146_5) (f32.const -inf))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const -0x1.921fb6p+2) (f32.const inf))
+  (invoke "lt" (f32.const -6.283_185_482_025_146_5) (f32.const inf))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1.921fb6p+2) (f32.const -inf))
+  (invoke "lt" (f32.const 6.283_185_482_025_146_5) (f32.const -inf))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1.921fb6p+2) (f32.const inf))
+  (invoke "lt" (f32.const 6.283_185_482_025_146_5) (f32.const inf))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f32.const -0x1.921fb6p+2) (f32.const -nan:0x400000))
+  (invoke "lt" (f32.const -6.283_185_482_025_146_5) (f32.const -nan:0x400000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const -0x1.921fb6p+2) (f32.const -nan:0x200000))
+  (invoke "lt" (f32.const -6.283_185_482_025_146_5) (f32.const -nan:0x200000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const -0x1.921fb6p+2) (f32.const nan:0x400000))
+  (invoke "lt" (f32.const -6.283_185_482_025_146_5) (f32.const nan:0x400000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const -0x1.921fb6p+2) (f32.const nan:0x200000))
+  (invoke "lt" (f32.const -6.283_185_482_025_146_5) (f32.const nan:0x200000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1.921fb6p+2) (f32.const -nan:0x400000))
+  (invoke "lt" (f32.const 6.283_185_482_025_146_5) (f32.const -nan:0x400000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1.921fb6p+2) (f32.const -nan:0x200000))
+  (invoke "lt" (f32.const 6.283_185_482_025_146_5) (f32.const -nan:0x200000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1.921fb6p+2) (f32.const nan:0x400000))
+  (invoke "lt" (f32.const 6.283_185_482_025_146_5) (f32.const nan:0x400000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1.921fb6p+2) (f32.const nan:0x200000))
+  (invoke "lt" (f32.const 6.283_185_482_025_146_5) (f32.const nan:0x200000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const -0x1.fffffep+127) (f32.const -0x0p+0))
+  (invoke "lt" (f32.const -3.402_823_466_385_288_6e+38) (f32.const -0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f32.const -0x1.fffffep+127) (f32.const 0x0p+0))
+  (invoke "lt" (f32.const -3.402_823_466_385_288_6e+38) (f32.const 0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1.fffffep+127) (f32.const -0x0p+0))
+  (invoke "lt" (f32.const 3.402_823_466_385_288_6e+38) (f32.const -0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1.fffffep+127) (f32.const 0x0p+0))
+  (invoke "lt" (f32.const 3.402_823_466_385_288_6e+38) (f32.const 0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const -0x1.fffffep+127) (f32.const -0x1p-149))
+  (invoke "lt"
+    (f32.const -3.402_823_466_385_288_6e+38)
+    (f32.const -1.401_298_464_324_817_1e-45)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f32.const -0x1.fffffep+127) (f32.const 0x1p-149))
+  (invoke "lt"
+    (f32.const -3.402_823_466_385_288_6e+38)
+    (f32.const 1.401_298_464_324_817_1e-45)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1.fffffep+127) (f32.const -0x1p-149))
+  (invoke "lt"
+    (f32.const 3.402_823_466_385_288_6e+38)
+    (f32.const -1.401_298_464_324_817_1e-45)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1.fffffep+127) (f32.const 0x1p-149))
+  (invoke "lt"
+    (f32.const 3.402_823_466_385_288_6e+38)
+    (f32.const 1.401_298_464_324_817_1e-45)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const -0x1.fffffep+127) (f32.const -0x1p-126))
+  (invoke "lt"
+    (f32.const -3.402_823_466_385_288_6e+38)
+    (f32.const -1.175_494_350_822_287_5e-38)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f32.const -0x1.fffffep+127) (f32.const 0x1p-126))
+  (invoke "lt"
+    (f32.const -3.402_823_466_385_288_6e+38)
+    (f32.const 1.175_494_350_822_287_5e-38)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1.fffffep+127) (f32.const -0x1p-126))
+  (invoke "lt"
+    (f32.const 3.402_823_466_385_288_6e+38)
+    (f32.const -1.175_494_350_822_287_5e-38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1.fffffep+127) (f32.const 0x1p-126))
+  (invoke "lt"
+    (f32.const 3.402_823_466_385_288_6e+38)
+    (f32.const 1.175_494_350_822_287_5e-38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const -0x1.fffffep+127) (f32.const -0x1p-1))
+  (invoke "lt" (f32.const -3.402_823_466_385_288_6e+38) (f32.const -0.5))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f32.const -0x1.fffffep+127) (f32.const 0x1p-1))
+  (invoke "lt" (f32.const -3.402_823_466_385_288_6e+38) (f32.const 0.5))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1.fffffep+127) (f32.const -0x1p-1))
+  (invoke "lt" (f32.const 3.402_823_466_385_288_6e+38) (f32.const -0.5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1.fffffep+127) (f32.const 0x1p-1))
+  (invoke "lt" (f32.const 3.402_823_466_385_288_6e+38) (f32.const 0.5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const -0x1.fffffep+127) (f32.const -0x1p+0))
+  (invoke "lt" (f32.const -3.402_823_466_385_288_6e+38) (f32.const -1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f32.const -0x1.fffffep+127) (f32.const 0x1p+0))
+  (invoke "lt" (f32.const -3.402_823_466_385_288_6e+38) (f32.const 1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1.fffffep+127) (f32.const -0x1p+0))
+  (invoke "lt" (f32.const 3.402_823_466_385_288_6e+38) (f32.const -1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1.fffffep+127) (f32.const 0x1p+0))
+  (invoke "lt" (f32.const 3.402_823_466_385_288_6e+38) (f32.const 1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const -0x1.fffffep+127) (f32.const -0x1.921fb6p+2))
+  (invoke "lt"
+    (f32.const -3.402_823_466_385_288_6e+38)
+    (f32.const -6.283_185_482_025_146_5)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f32.const -0x1.fffffep+127) (f32.const 0x1.921fb6p+2))
+  (invoke "lt"
+    (f32.const -3.402_823_466_385_288_6e+38)
+    (f32.const 6.283_185_482_025_146_5)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1.fffffep+127) (f32.const -0x1.921fb6p+2))
+  (invoke "lt"
+    (f32.const 3.402_823_466_385_288_6e+38)
+    (f32.const -6.283_185_482_025_146_5)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1.fffffep+127) (f32.const 0x1.921fb6p+2))
+  (invoke "lt"
+    (f32.const 3.402_823_466_385_288_6e+38)
+    (f32.const 6.283_185_482_025_146_5)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const -0x1.fffffep+127) (f32.const -0x1.fffffep+127))
+  (invoke "lt"
+    (f32.const -3.402_823_466_385_288_6e+38)
+    (f32.const -3.402_823_466_385_288_6e+38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const -0x1.fffffep+127) (f32.const 0x1.fffffep+127))
+  (invoke "lt"
+    (f32.const -3.402_823_466_385_288_6e+38)
+    (f32.const 3.402_823_466_385_288_6e+38)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1.fffffep+127) (f32.const -0x1.fffffep+127))
+  (invoke "lt"
+    (f32.const 3.402_823_466_385_288_6e+38)
+    (f32.const -3.402_823_466_385_288_6e+38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1.fffffep+127) (f32.const 0x1.fffffep+127))
+  (invoke "lt"
+    (f32.const 3.402_823_466_385_288_6e+38)
+    (f32.const 3.402_823_466_385_288_6e+38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const -0x1.fffffep+127) (f32.const -inf))
+  (invoke "lt" (f32.const -3.402_823_466_385_288_6e+38) (f32.const -inf))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const -0x1.fffffep+127) (f32.const inf))
+  (invoke "lt" (f32.const -3.402_823_466_385_288_6e+38) (f32.const inf))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1.fffffep+127) (f32.const -inf))
+  (invoke "lt" (f32.const 3.402_823_466_385_288_6e+38) (f32.const -inf))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1.fffffep+127) (f32.const inf))
+  (invoke "lt" (f32.const 3.402_823_466_385_288_6e+38) (f32.const inf))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f32.const -0x1.fffffep+127) (f32.const -nan:0x400000))
+  (invoke "lt"
+    (f32.const -3.402_823_466_385_288_6e+38)
+    (f32.const -nan:0x400000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const -0x1.fffffep+127) (f32.const -nan:0x200000))
+  (invoke "lt"
+    (f32.const -3.402_823_466_385_288_6e+38)
+    (f32.const -nan:0x200000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const -0x1.fffffep+127) (f32.const nan:0x400000))
+  (invoke "lt"
+    (f32.const -3.402_823_466_385_288_6e+38)
+    (f32.const nan:0x400000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const -0x1.fffffep+127) (f32.const nan:0x200000))
+  (invoke "lt"
+    (f32.const -3.402_823_466_385_288_6e+38)
+    (f32.const nan:0x200000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1.fffffep+127) (f32.const -nan:0x400000))
+  (invoke "lt"
+    (f32.const 3.402_823_466_385_288_6e+38)
+    (f32.const -nan:0x400000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1.fffffep+127) (f32.const -nan:0x200000))
+  (invoke "lt"
+    (f32.const 3.402_823_466_385_288_6e+38)
+    (f32.const -nan:0x200000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1.fffffep+127) (f32.const nan:0x400000))
+  (invoke "lt" (f32.const 3.402_823_466_385_288_6e+38) (f32.const nan:0x400000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const 0x1.fffffep+127) (f32.const nan:0x200000))
+  (invoke "lt" (f32.const 3.402_823_466_385_288_6e+38) (f32.const nan:0x200000))
   (i32.const 0)
 )
-(assert_return (invoke "lt" (f32.const -inf) (f32.const -0x0p+0)) (i32.const 1))
-(assert_return (invoke "lt" (f32.const -inf) (f32.const 0x0p+0)) (i32.const 1))
-(assert_return (invoke "lt" (f32.const inf) (f32.const -0x0p+0)) (i32.const 0))
-(assert_return (invoke "lt" (f32.const inf) (f32.const 0x0p+0)) (i32.const 0))
+(assert_return (invoke "lt" (f32.const -inf) (f32.const -0)) (i32.const 1))
+(assert_return (invoke "lt" (f32.const -inf) (f32.const 0)) (i32.const 1))
+(assert_return (invoke "lt" (f32.const inf) (f32.const -0)) (i32.const 0))
+(assert_return (invoke "lt" (f32.const inf) (f32.const 0)) (i32.const 0))
 (assert_return
-  (invoke "lt" (f32.const -inf) (f32.const -0x1p-149))
+  (invoke "lt" (f32.const -inf) (f32.const -1.401_298_464_324_817_1e-45))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f32.const -inf) (f32.const 0x1p-149))
+  (invoke "lt" (f32.const -inf) (f32.const 1.401_298_464_324_817_1e-45))
   (i32.const 1)
+)
+(assert_return
+  (invoke "lt" (f32.const inf) (f32.const -1.401_298_464_324_817_1e-45))
+  (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const inf) (f32.const -0x1p-149))
+  (invoke "lt" (f32.const inf) (f32.const 1.401_298_464_324_817_1e-45))
   (i32.const 0)
 )
-(assert_return (invoke "lt" (f32.const inf) (f32.const 0x1p-149)) (i32.const 0))
 (assert_return
-  (invoke "lt" (f32.const -inf) (f32.const -0x1p-126))
+  (invoke "lt" (f32.const -inf) (f32.const -1.175_494_350_822_287_5e-38))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f32.const -inf) (f32.const 0x1p-126))
+  (invoke "lt" (f32.const -inf) (f32.const 1.175_494_350_822_287_5e-38))
   (i32.const 1)
+)
+(assert_return
+  (invoke "lt" (f32.const inf) (f32.const -1.175_494_350_822_287_5e-38))
+  (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const inf) (f32.const -0x1p-126))
+  (invoke "lt" (f32.const inf) (f32.const 1.175_494_350_822_287_5e-38))
   (i32.const 0)
 )
-(assert_return (invoke "lt" (f32.const inf) (f32.const 0x1p-126)) (i32.const 0))
-(assert_return (invoke "lt" (f32.const -inf) (f32.const -0x1p-1)) (i32.const 1))
-(assert_return (invoke "lt" (f32.const -inf) (f32.const 0x1p-1)) (i32.const 1))
-(assert_return (invoke "lt" (f32.const inf) (f32.const -0x1p-1)) (i32.const 0))
-(assert_return (invoke "lt" (f32.const inf) (f32.const 0x1p-1)) (i32.const 0))
-(assert_return (invoke "lt" (f32.const -inf) (f32.const -0x1p+0)) (i32.const 1))
-(assert_return (invoke "lt" (f32.const -inf) (f32.const 0x1p+0)) (i32.const 1))
-(assert_return (invoke "lt" (f32.const inf) (f32.const -0x1p+0)) (i32.const 0))
-(assert_return (invoke "lt" (f32.const inf) (f32.const 0x1p+0)) (i32.const 0))
+(assert_return (invoke "lt" (f32.const -inf) (f32.const -0.5)) (i32.const 1))
+(assert_return (invoke "lt" (f32.const -inf) (f32.const 0.5)) (i32.const 1))
+(assert_return (invoke "lt" (f32.const inf) (f32.const -0.5)) (i32.const 0))
+(assert_return (invoke "lt" (f32.const inf) (f32.const 0.5)) (i32.const 0))
+(assert_return (invoke "lt" (f32.const -inf) (f32.const -1)) (i32.const 1))
+(assert_return (invoke "lt" (f32.const -inf) (f32.const 1)) (i32.const 1))
+(assert_return (invoke "lt" (f32.const inf) (f32.const -1)) (i32.const 0))
+(assert_return (invoke "lt" (f32.const inf) (f32.const 1)) (i32.const 0))
 (assert_return
-  (invoke "lt" (f32.const -inf) (f32.const -0x1.921fb6p+2))
+  (invoke "lt" (f32.const -inf) (f32.const -6.283_185_482_025_146_5))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f32.const -inf) (f32.const 0x1.921fb6p+2))
+  (invoke "lt" (f32.const -inf) (f32.const 6.283_185_482_025_146_5))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f32.const inf) (f32.const -0x1.921fb6p+2))
+  (invoke "lt" (f32.const inf) (f32.const -6.283_185_482_025_146_5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const inf) (f32.const 0x1.921fb6p+2))
+  (invoke "lt" (f32.const inf) (f32.const 6.283_185_482_025_146_5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const -inf) (f32.const -0x1.fffffep+127))
+  (invoke "lt" (f32.const -inf) (f32.const -3.402_823_466_385_288_6e+38))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f32.const -inf) (f32.const 0x1.fffffep+127))
+  (invoke "lt" (f32.const -inf) (f32.const 3.402_823_466_385_288_6e+38))
   (i32.const 1)
 )
 (assert_return
-  (invoke "lt" (f32.const inf) (f32.const -0x1.fffffep+127))
+  (invoke "lt" (f32.const inf) (f32.const -3.402_823_466_385_288_6e+38))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const inf) (f32.const 0x1.fffffep+127))
+  (invoke "lt" (f32.const inf) (f32.const 3.402_823_466_385_288_6e+38))
   (i32.const 0)
 )
 (assert_return (invoke "lt" (f32.const -inf) (f32.const -inf)) (i32.const 0))
@@ -4203,227 +4761,281 @@
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const -nan:0x400000) (f32.const -0x0p+0))
+  (invoke "lt" (f32.const -nan:0x400000) (f32.const -0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const -nan:0x200000) (f32.const -0x0p+0))
+  (invoke "lt" (f32.const -nan:0x200000) (f32.const -0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const -nan:0x400000) (f32.const 0x0p+0))
+  (invoke "lt" (f32.const -nan:0x400000) (f32.const 0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const -nan:0x200000) (f32.const 0x0p+0))
+  (invoke "lt" (f32.const -nan:0x200000) (f32.const 0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const nan:0x400000) (f32.const -0x0p+0))
+  (invoke "lt" (f32.const nan:0x400000) (f32.const -0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const nan:0x200000) (f32.const -0x0p+0))
+  (invoke "lt" (f32.const nan:0x200000) (f32.const -0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const nan:0x400000) (f32.const 0x0p+0))
+  (invoke "lt" (f32.const nan:0x400000) (f32.const 0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const nan:0x200000) (f32.const 0x0p+0))
+  (invoke "lt" (f32.const nan:0x200000) (f32.const 0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const -nan:0x400000) (f32.const -0x1p-149))
+  (invoke "lt"
+    (f32.const -nan:0x400000)
+    (f32.const -1.401_298_464_324_817_1e-45)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const -nan:0x200000) (f32.const -0x1p-149))
+  (invoke "lt"
+    (f32.const -nan:0x200000)
+    (f32.const -1.401_298_464_324_817_1e-45)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const -nan:0x400000) (f32.const 0x1p-149))
+  (invoke "lt"
+    (f32.const -nan:0x400000)
+    (f32.const 1.401_298_464_324_817_1e-45)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const -nan:0x200000) (f32.const 0x1p-149))
+  (invoke "lt"
+    (f32.const -nan:0x200000)
+    (f32.const 1.401_298_464_324_817_1e-45)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const nan:0x400000) (f32.const -0x1p-149))
+  (invoke "lt"
+    (f32.const nan:0x400000)
+    (f32.const -1.401_298_464_324_817_1e-45)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const nan:0x200000) (f32.const -0x1p-149))
+  (invoke "lt"
+    (f32.const nan:0x200000)
+    (f32.const -1.401_298_464_324_817_1e-45)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const nan:0x400000) (f32.const 0x1p-149))
+  (invoke "lt" (f32.const nan:0x400000) (f32.const 1.401_298_464_324_817_1e-45))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const nan:0x200000) (f32.const 0x1p-149))
+  (invoke "lt" (f32.const nan:0x200000) (f32.const 1.401_298_464_324_817_1e-45))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const -nan:0x400000) (f32.const -0x1p-126))
+  (invoke "lt"
+    (f32.const -nan:0x400000)
+    (f32.const -1.175_494_350_822_287_5e-38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const -nan:0x200000) (f32.const -0x1p-126))
+  (invoke "lt"
+    (f32.const -nan:0x200000)
+    (f32.const -1.175_494_350_822_287_5e-38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const -nan:0x400000) (f32.const 0x1p-126))
+  (invoke "lt"
+    (f32.const -nan:0x400000)
+    (f32.const 1.175_494_350_822_287_5e-38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const -nan:0x200000) (f32.const 0x1p-126))
+  (invoke "lt"
+    (f32.const -nan:0x200000)
+    (f32.const 1.175_494_350_822_287_5e-38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const nan:0x400000) (f32.const -0x1p-126))
+  (invoke "lt"
+    (f32.const nan:0x400000)
+    (f32.const -1.175_494_350_822_287_5e-38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const nan:0x200000) (f32.const -0x1p-126))
+  (invoke "lt"
+    (f32.const nan:0x200000)
+    (f32.const -1.175_494_350_822_287_5e-38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const nan:0x400000) (f32.const 0x1p-126))
+  (invoke "lt" (f32.const nan:0x400000) (f32.const 1.175_494_350_822_287_5e-38))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const nan:0x200000) (f32.const 0x1p-126))
+  (invoke "lt" (f32.const nan:0x200000) (f32.const 1.175_494_350_822_287_5e-38))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const -nan:0x400000) (f32.const -0x1p-1))
+  (invoke "lt" (f32.const -nan:0x400000) (f32.const -0.5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const -nan:0x200000) (f32.const -0x1p-1))
+  (invoke "lt" (f32.const -nan:0x200000) (f32.const -0.5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const -nan:0x400000) (f32.const 0x1p-1))
+  (invoke "lt" (f32.const -nan:0x400000) (f32.const 0.5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const -nan:0x200000) (f32.const 0x1p-1))
+  (invoke "lt" (f32.const -nan:0x200000) (f32.const 0.5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const nan:0x400000) (f32.const -0x1p-1))
+  (invoke "lt" (f32.const nan:0x400000) (f32.const -0.5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const nan:0x200000) (f32.const -0x1p-1))
+  (invoke "lt" (f32.const nan:0x200000) (f32.const -0.5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const nan:0x400000) (f32.const 0x1p-1))
+  (invoke "lt" (f32.const nan:0x400000) (f32.const 0.5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const nan:0x200000) (f32.const 0x1p-1))
+  (invoke "lt" (f32.const nan:0x200000) (f32.const 0.5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const -nan:0x400000) (f32.const -0x1p+0))
+  (invoke "lt" (f32.const -nan:0x400000) (f32.const -1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const -nan:0x200000) (f32.const -0x1p+0))
+  (invoke "lt" (f32.const -nan:0x200000) (f32.const -1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const -nan:0x400000) (f32.const 0x1p+0))
+  (invoke "lt" (f32.const -nan:0x400000) (f32.const 1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const -nan:0x200000) (f32.const 0x1p+0))
+  (invoke "lt" (f32.const -nan:0x200000) (f32.const 1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const nan:0x400000) (f32.const -0x1p+0))
+  (invoke "lt" (f32.const nan:0x400000) (f32.const -1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const nan:0x200000) (f32.const -0x1p+0))
+  (invoke "lt" (f32.const nan:0x200000) (f32.const -1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const nan:0x400000) (f32.const 0x1p+0))
+  (invoke "lt" (f32.const nan:0x400000) (f32.const 1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const nan:0x200000) (f32.const 0x1p+0))
+  (invoke "lt" (f32.const nan:0x200000) (f32.const 1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const -nan:0x400000) (f32.const -0x1.921fb6p+2))
+  (invoke "lt" (f32.const -nan:0x400000) (f32.const -6.283_185_482_025_146_5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const -nan:0x200000) (f32.const -0x1.921fb6p+2))
+  (invoke "lt" (f32.const -nan:0x200000) (f32.const -6.283_185_482_025_146_5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const -nan:0x400000) (f32.const 0x1.921fb6p+2))
+  (invoke "lt" (f32.const -nan:0x400000) (f32.const 6.283_185_482_025_146_5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const -nan:0x200000) (f32.const 0x1.921fb6p+2))
+  (invoke "lt" (f32.const -nan:0x200000) (f32.const 6.283_185_482_025_146_5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const nan:0x400000) (f32.const -0x1.921fb6p+2))
+  (invoke "lt" (f32.const nan:0x400000) (f32.const -6.283_185_482_025_146_5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const nan:0x200000) (f32.const -0x1.921fb6p+2))
+  (invoke "lt" (f32.const nan:0x200000) (f32.const -6.283_185_482_025_146_5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const nan:0x400000) (f32.const 0x1.921fb6p+2))
+  (invoke "lt" (f32.const nan:0x400000) (f32.const 6.283_185_482_025_146_5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const nan:0x200000) (f32.const 0x1.921fb6p+2))
+  (invoke "lt" (f32.const nan:0x200000) (f32.const 6.283_185_482_025_146_5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const -nan:0x400000) (f32.const -0x1.fffffep+127))
+  (invoke "lt"
+    (f32.const -nan:0x400000)
+    (f32.const -3.402_823_466_385_288_6e+38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const -nan:0x200000) (f32.const -0x1.fffffep+127))
+  (invoke "lt"
+    (f32.const -nan:0x200000)
+    (f32.const -3.402_823_466_385_288_6e+38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const -nan:0x400000) (f32.const 0x1.fffffep+127))
+  (invoke "lt"
+    (f32.const -nan:0x400000)
+    (f32.const 3.402_823_466_385_288_6e+38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const -nan:0x200000) (f32.const 0x1.fffffep+127))
+  (invoke "lt"
+    (f32.const -nan:0x200000)
+    (f32.const 3.402_823_466_385_288_6e+38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const nan:0x400000) (f32.const -0x1.fffffep+127))
+  (invoke "lt"
+    (f32.const nan:0x400000)
+    (f32.const -3.402_823_466_385_288_6e+38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const nan:0x200000) (f32.const -0x1.fffffep+127))
+  (invoke "lt"
+    (f32.const nan:0x200000)
+    (f32.const -3.402_823_466_385_288_6e+38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const nan:0x400000) (f32.const 0x1.fffffep+127))
+  (invoke "lt" (f32.const nan:0x400000) (f32.const 3.402_823_466_385_288_6e+38))
   (i32.const 0)
 )
 (assert_return
-  (invoke "lt" (f32.const nan:0x200000) (f32.const 0x1.fffffep+127))
+  (invoke "lt" (f32.const nan:0x200000) (f32.const 3.402_823_466_385_288_6e+38))
   (i32.const 0)
 )
 (assert_return
@@ -4522,1152 +5134,1302 @@
   (invoke "lt" (f32.const nan:0x200000) (f32.const nan:0x200000))
   (i32.const 0)
 )
+(assert_return (invoke "le" (f32.const -0) (f32.const -0)) (i32.const 1))
+(assert_return (invoke "le" (f32.const -0) (f32.const 0)) (i32.const 1))
+(assert_return (invoke "le" (f32.const 0) (f32.const -0)) (i32.const 1))
+(assert_return (invoke "le" (f32.const 0) (f32.const 0)) (i32.const 1))
 (assert_return
-  (invoke "le" (f32.const -0x0p+0) (f32.const -0x0p+0))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "le" (f32.const -0x0p+0) (f32.const 0x0p+0))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "le" (f32.const 0x0p+0) (f32.const -0x0p+0))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "le" (f32.const 0x0p+0) (f32.const 0x0p+0))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "le" (f32.const -0x0p+0) (f32.const -0x1p-149))
+  (invoke "le" (f32.const -0) (f32.const -1.401_298_464_324_817_1e-45))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const -0x0p+0) (f32.const 0x1p-149))
+  (invoke "le" (f32.const -0) (f32.const 1.401_298_464_324_817_1e-45))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f32.const 0x0p+0) (f32.const -0x1p-149))
+  (invoke "le" (f32.const 0) (f32.const -1.401_298_464_324_817_1e-45))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const 0x0p+0) (f32.const 0x1p-149))
+  (invoke "le" (f32.const 0) (f32.const 1.401_298_464_324_817_1e-45))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f32.const -0x0p+0) (f32.const -0x1p-126))
+  (invoke "le" (f32.const -0) (f32.const -1.175_494_350_822_287_5e-38))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const -0x0p+0) (f32.const 0x1p-126))
+  (invoke "le" (f32.const -0) (f32.const 1.175_494_350_822_287_5e-38))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f32.const 0x0p+0) (f32.const -0x1p-126))
+  (invoke "le" (f32.const 0) (f32.const -1.175_494_350_822_287_5e-38))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const 0x0p+0) (f32.const 0x1p-126))
+  (invoke "le" (f32.const 0) (f32.const 1.175_494_350_822_287_5e-38))
   (i32.const 1)
 )
+(assert_return (invoke "le" (f32.const -0) (f32.const -0.5)) (i32.const 0))
+(assert_return (invoke "le" (f32.const -0) (f32.const 0.5)) (i32.const 1))
+(assert_return (invoke "le" (f32.const 0) (f32.const -0.5)) (i32.const 0))
+(assert_return (invoke "le" (f32.const 0) (f32.const 0.5)) (i32.const 1))
+(assert_return (invoke "le" (f32.const -0) (f32.const -1)) (i32.const 0))
+(assert_return (invoke "le" (f32.const -0) (f32.const 1)) (i32.const 1))
+(assert_return (invoke "le" (f32.const 0) (f32.const -1)) (i32.const 0))
+(assert_return (invoke "le" (f32.const 0) (f32.const 1)) (i32.const 1))
 (assert_return
-  (invoke "le" (f32.const -0x0p+0) (f32.const -0x1p-1))
+  (invoke "le" (f32.const -0) (f32.const -6.283_185_482_025_146_5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const -0x0p+0) (f32.const 0x1p-1))
+  (invoke "le" (f32.const -0) (f32.const 6.283_185_482_025_146_5))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f32.const 0x0p+0) (f32.const -0x1p-1))
+  (invoke "le" (f32.const 0) (f32.const -6.283_185_482_025_146_5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const 0x0p+0) (f32.const 0x1p-1))
+  (invoke "le" (f32.const 0) (f32.const 6.283_185_482_025_146_5))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f32.const -0x0p+0) (f32.const -0x1p+0))
+  (invoke "le" (f32.const -0) (f32.const -3.402_823_466_385_288_6e+38))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const -0x0p+0) (f32.const 0x1p+0))
+  (invoke "le" (f32.const -0) (f32.const 3.402_823_466_385_288_6e+38))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f32.const 0x0p+0) (f32.const -0x1p+0))
+  (invoke "le" (f32.const 0) (f32.const -3.402_823_466_385_288_6e+38))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const 0x0p+0) (f32.const 0x1p+0))
+  (invoke "le" (f32.const 0) (f32.const 3.402_823_466_385_288_6e+38))
   (i32.const 1)
 )
+(assert_return (invoke "le" (f32.const -0) (f32.const -inf)) (i32.const 0))
+(assert_return (invoke "le" (f32.const -0) (f32.const inf)) (i32.const 1))
+(assert_return (invoke "le" (f32.const 0) (f32.const -inf)) (i32.const 0))
+(assert_return (invoke "le" (f32.const 0) (f32.const inf)) (i32.const 1))
 (assert_return
-  (invoke "le" (f32.const -0x0p+0) (f32.const -0x1.921fb6p+2))
+  (invoke "le" (f32.const -0) (f32.const -nan:0x400000))
   (i32.const 0)
-)
-(assert_return
-  (invoke "le" (f32.const -0x0p+0) (f32.const 0x1.921fb6p+2))
-  (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f32.const 0x0p+0) (f32.const -0x1.921fb6p+2))
+  (invoke "le" (f32.const -0) (f32.const -nan:0x200000))
   (i32.const 0)
-)
-(assert_return
-  (invoke "le" (f32.const 0x0p+0) (f32.const 0x1.921fb6p+2))
-  (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f32.const -0x0p+0) (f32.const -0x1.fffffep+127))
+  (invoke "le" (f32.const -0) (f32.const nan:0x400000))
   (i32.const 0)
-)
-(assert_return
-  (invoke "le" (f32.const -0x0p+0) (f32.const 0x1.fffffep+127))
-  (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f32.const 0x0p+0) (f32.const -0x1.fffffep+127))
+  (invoke "le" (f32.const -0) (f32.const nan:0x200000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const 0x0p+0) (f32.const 0x1.fffffep+127))
-  (i32.const 1)
-)
-(assert_return (invoke "le" (f32.const -0x0p+0) (f32.const -inf)) (i32.const 0))
-(assert_return (invoke "le" (f32.const -0x0p+0) (f32.const inf)) (i32.const 1))
-(assert_return (invoke "le" (f32.const 0x0p+0) (f32.const -inf)) (i32.const 0))
-(assert_return (invoke "le" (f32.const 0x0p+0) (f32.const inf)) (i32.const 1))
-(assert_return
-  (invoke "le" (f32.const -0x0p+0) (f32.const -nan:0x400000))
+  (invoke "le" (f32.const 0) (f32.const -nan:0x400000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const -0x0p+0) (f32.const -nan:0x200000))
+  (invoke "le" (f32.const 0) (f32.const -nan:0x200000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const -0x0p+0) (f32.const nan:0x400000))
+  (invoke "le" (f32.const 0) (f32.const nan:0x400000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const -0x0p+0) (f32.const nan:0x200000))
+  (invoke "le" (f32.const 0) (f32.const nan:0x200000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const 0x0p+0) (f32.const -nan:0x400000))
-  (i32.const 0)
+  (invoke "le" (f32.const -1.401_298_464_324_817_1e-45) (f32.const -0))
+  (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f32.const 0x0p+0) (f32.const -nan:0x200000))
-  (i32.const 0)
+  (invoke "le" (f32.const -1.401_298_464_324_817_1e-45) (f32.const 0))
+  (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f32.const 0x0p+0) (f32.const nan:0x400000))
+  (invoke "le" (f32.const 1.401_298_464_324_817_1e-45) (f32.const -0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const 0x0p+0) (f32.const nan:0x200000))
+  (invoke "le" (f32.const 1.401_298_464_324_817_1e-45) (f32.const 0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const -0x1p-149) (f32.const -0x0p+0))
+  (invoke "le"
+    (f32.const -1.401_298_464_324_817_1e-45)
+    (f32.const -1.401_298_464_324_817_1e-45)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f32.const -0x1p-149) (f32.const 0x0p+0))
+  (invoke "le"
+    (f32.const -1.401_298_464_324_817_1e-45)
+    (f32.const 1.401_298_464_324_817_1e-45)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f32.const 0x1p-149) (f32.const -0x0p+0))
+  (invoke "le"
+    (f32.const 1.401_298_464_324_817_1e-45)
+    (f32.const -1.401_298_464_324_817_1e-45)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const 0x1p-149) (f32.const 0x0p+0))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "le" (f32.const -0x1p-149) (f32.const -0x1p-149))
+  (invoke "le"
+    (f32.const 1.401_298_464_324_817_1e-45)
+    (f32.const 1.401_298_464_324_817_1e-45)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f32.const -0x1p-149) (f32.const 0x1p-149))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "le" (f32.const 0x1p-149) (f32.const -0x1p-149))
+  (invoke "le"
+    (f32.const -1.401_298_464_324_817_1e-45)
+    (f32.const -1.175_494_350_822_287_5e-38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const 0x1p-149) (f32.const 0x1p-149))
+  (invoke "le"
+    (f32.const -1.401_298_464_324_817_1e-45)
+    (f32.const 1.175_494_350_822_287_5e-38)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f32.const -0x1p-149) (f32.const -0x1p-126))
+  (invoke "le"
+    (f32.const 1.401_298_464_324_817_1e-45)
+    (f32.const -1.175_494_350_822_287_5e-38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const -0x1p-149) (f32.const 0x1p-126))
+  (invoke "le"
+    (f32.const 1.401_298_464_324_817_1e-45)
+    (f32.const 1.175_494_350_822_287_5e-38)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f32.const 0x1p-149) (f32.const -0x1p-126))
+  (invoke "le" (f32.const -1.401_298_464_324_817_1e-45) (f32.const -0.5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const 0x1p-149) (f32.const 0x1p-126))
+  (invoke "le" (f32.const -1.401_298_464_324_817_1e-45) (f32.const 0.5))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f32.const -0x1p-149) (f32.const -0x1p-1))
+  (invoke "le" (f32.const 1.401_298_464_324_817_1e-45) (f32.const -0.5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const -0x1p-149) (f32.const 0x1p-1))
+  (invoke "le" (f32.const 1.401_298_464_324_817_1e-45) (f32.const 0.5))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f32.const 0x1p-149) (f32.const -0x1p-1))
+  (invoke "le" (f32.const -1.401_298_464_324_817_1e-45) (f32.const -1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const 0x1p-149) (f32.const 0x1p-1))
+  (invoke "le" (f32.const -1.401_298_464_324_817_1e-45) (f32.const 1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f32.const -0x1p-149) (f32.const -0x1p+0))
+  (invoke "le" (f32.const 1.401_298_464_324_817_1e-45) (f32.const -1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const -0x1p-149) (f32.const 0x1p+0))
+  (invoke "le" (f32.const 1.401_298_464_324_817_1e-45) (f32.const 1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f32.const 0x1p-149) (f32.const -0x1p+0))
+  (invoke "le"
+    (f32.const -1.401_298_464_324_817_1e-45)
+    (f32.const -6.283_185_482_025_146_5)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const 0x1p-149) (f32.const 0x1p+0))
+  (invoke "le"
+    (f32.const -1.401_298_464_324_817_1e-45)
+    (f32.const 6.283_185_482_025_146_5)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f32.const -0x1p-149) (f32.const -0x1.921fb6p+2))
+  (invoke "le"
+    (f32.const 1.401_298_464_324_817_1e-45)
+    (f32.const -6.283_185_482_025_146_5)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const -0x1p-149) (f32.const 0x1.921fb6p+2))
+  (invoke "le"
+    (f32.const 1.401_298_464_324_817_1e-45)
+    (f32.const 6.283_185_482_025_146_5)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f32.const 0x1p-149) (f32.const -0x1.921fb6p+2))
+  (invoke "le"
+    (f32.const -1.401_298_464_324_817_1e-45)
+    (f32.const -3.402_823_466_385_288_6e+38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const 0x1p-149) (f32.const 0x1.921fb6p+2))
+  (invoke "le"
+    (f32.const -1.401_298_464_324_817_1e-45)
+    (f32.const 3.402_823_466_385_288_6e+38)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f32.const -0x1p-149) (f32.const -0x1.fffffep+127))
+  (invoke "le"
+    (f32.const 1.401_298_464_324_817_1e-45)
+    (f32.const -3.402_823_466_385_288_6e+38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const -0x1p-149) (f32.const 0x1.fffffep+127))
+  (invoke "le"
+    (f32.const 1.401_298_464_324_817_1e-45)
+    (f32.const 3.402_823_466_385_288_6e+38)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f32.const 0x1p-149) (f32.const -0x1.fffffep+127))
+  (invoke "le" (f32.const -1.401_298_464_324_817_1e-45) (f32.const -inf))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const 0x1p-149) (f32.const 0x1.fffffep+127))
+  (invoke "le" (f32.const -1.401_298_464_324_817_1e-45) (f32.const inf))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f32.const -0x1p-149) (f32.const -inf))
+  (invoke "le" (f32.const 1.401_298_464_324_817_1e-45) (f32.const -inf))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const -0x1p-149) (f32.const inf))
+  (invoke "le" (f32.const 1.401_298_464_324_817_1e-45) (f32.const inf))
   (i32.const 1)
-)
-(assert_return
-  (invoke "le" (f32.const 0x1p-149) (f32.const -inf))
-  (i32.const 0)
 )
-(assert_return (invoke "le" (f32.const 0x1p-149) (f32.const inf)) (i32.const 1))
 (assert_return
-  (invoke "le" (f32.const -0x1p-149) (f32.const -nan:0x400000))
+  (invoke "le"
+    (f32.const -1.401_298_464_324_817_1e-45)
+    (f32.const -nan:0x400000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const -0x1p-149) (f32.const -nan:0x200000))
+  (invoke "le"
+    (f32.const -1.401_298_464_324_817_1e-45)
+    (f32.const -nan:0x200000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const -0x1p-149) (f32.const nan:0x400000))
+  (invoke "le"
+    (f32.const -1.401_298_464_324_817_1e-45)
+    (f32.const nan:0x400000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const -0x1p-149) (f32.const nan:0x200000))
+  (invoke "le"
+    (f32.const -1.401_298_464_324_817_1e-45)
+    (f32.const nan:0x200000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const 0x1p-149) (f32.const -nan:0x400000))
+  (invoke "le"
+    (f32.const 1.401_298_464_324_817_1e-45)
+    (f32.const -nan:0x400000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const 0x1p-149) (f32.const -nan:0x200000))
+  (invoke "le"
+    (f32.const 1.401_298_464_324_817_1e-45)
+    (f32.const -nan:0x200000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const 0x1p-149) (f32.const nan:0x400000))
+  (invoke "le" (f32.const 1.401_298_464_324_817_1e-45) (f32.const nan:0x400000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const 0x1p-149) (f32.const nan:0x200000))
+  (invoke "le" (f32.const 1.401_298_464_324_817_1e-45) (f32.const nan:0x200000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const -0x1p-126) (f32.const -0x0p+0))
+  (invoke "le" (f32.const -1.175_494_350_822_287_5e-38) (f32.const -0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f32.const -0x1p-126) (f32.const 0x0p+0))
+  (invoke "le" (f32.const -1.175_494_350_822_287_5e-38) (f32.const 0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f32.const 0x1p-126) (f32.const -0x0p+0))
+  (invoke "le" (f32.const 1.175_494_350_822_287_5e-38) (f32.const -0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const 0x1p-126) (f32.const 0x0p+0))
+  (invoke "le" (f32.const 1.175_494_350_822_287_5e-38) (f32.const 0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const -0x1p-126) (f32.const -0x1p-149))
+  (invoke "le"
+    (f32.const -1.175_494_350_822_287_5e-38)
+    (f32.const -1.401_298_464_324_817_1e-45)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f32.const -0x1p-126) (f32.const 0x1p-149))
+  (invoke "le"
+    (f32.const -1.175_494_350_822_287_5e-38)
+    (f32.const 1.401_298_464_324_817_1e-45)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f32.const 0x1p-126) (f32.const -0x1p-149))
+  (invoke "le"
+    (f32.const 1.175_494_350_822_287_5e-38)
+    (f32.const -1.401_298_464_324_817_1e-45)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const 0x1p-126) (f32.const 0x1p-149))
+  (invoke "le"
+    (f32.const 1.175_494_350_822_287_5e-38)
+    (f32.const 1.401_298_464_324_817_1e-45)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const -0x1p-126) (f32.const -0x1p-126))
+  (invoke "le"
+    (f32.const -1.175_494_350_822_287_5e-38)
+    (f32.const -1.175_494_350_822_287_5e-38)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f32.const -0x1p-126) (f32.const 0x1p-126))
+  (invoke "le"
+    (f32.const -1.175_494_350_822_287_5e-38)
+    (f32.const 1.175_494_350_822_287_5e-38)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f32.const 0x1p-126) (f32.const -0x1p-126))
+  (invoke "le"
+    (f32.const 1.175_494_350_822_287_5e-38)
+    (f32.const -1.175_494_350_822_287_5e-38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const 0x1p-126) (f32.const 0x1p-126))
+  (invoke "le"
+    (f32.const 1.175_494_350_822_287_5e-38)
+    (f32.const 1.175_494_350_822_287_5e-38)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f32.const -0x1p-126) (f32.const -0x1p-1))
+  (invoke "le" (f32.const -1.175_494_350_822_287_5e-38) (f32.const -0.5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const -0x1p-126) (f32.const 0x1p-1))
+  (invoke "le" (f32.const -1.175_494_350_822_287_5e-38) (f32.const 0.5))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f32.const 0x1p-126) (f32.const -0x1p-1))
+  (invoke "le" (f32.const 1.175_494_350_822_287_5e-38) (f32.const -0.5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const 0x1p-126) (f32.const 0x1p-1))
+  (invoke "le" (f32.const 1.175_494_350_822_287_5e-38) (f32.const 0.5))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f32.const -0x1p-126) (f32.const -0x1p+0))
+  (invoke "le" (f32.const -1.175_494_350_822_287_5e-38) (f32.const -1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const -0x1p-126) (f32.const 0x1p+0))
+  (invoke "le" (f32.const -1.175_494_350_822_287_5e-38) (f32.const 1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f32.const 0x1p-126) (f32.const -0x1p+0))
+  (invoke "le" (f32.const 1.175_494_350_822_287_5e-38) (f32.const -1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const 0x1p-126) (f32.const 0x1p+0))
+  (invoke "le" (f32.const 1.175_494_350_822_287_5e-38) (f32.const 1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f32.const -0x1p-126) (f32.const -0x1.921fb6p+2))
+  (invoke "le"
+    (f32.const -1.175_494_350_822_287_5e-38)
+    (f32.const -6.283_185_482_025_146_5)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const -0x1p-126) (f32.const 0x1.921fb6p+2))
+  (invoke "le"
+    (f32.const -1.175_494_350_822_287_5e-38)
+    (f32.const 6.283_185_482_025_146_5)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f32.const 0x1p-126) (f32.const -0x1.921fb6p+2))
+  (invoke "le"
+    (f32.const 1.175_494_350_822_287_5e-38)
+    (f32.const -6.283_185_482_025_146_5)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const 0x1p-126) (f32.const 0x1.921fb6p+2))
+  (invoke "le"
+    (f32.const 1.175_494_350_822_287_5e-38)
+    (f32.const 6.283_185_482_025_146_5)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f32.const -0x1p-126) (f32.const -0x1.fffffep+127))
+  (invoke "le"
+    (f32.const -1.175_494_350_822_287_5e-38)
+    (f32.const -3.402_823_466_385_288_6e+38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const -0x1p-126) (f32.const 0x1.fffffep+127))
+  (invoke "le"
+    (f32.const -1.175_494_350_822_287_5e-38)
+    (f32.const 3.402_823_466_385_288_6e+38)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f32.const 0x1p-126) (f32.const -0x1.fffffep+127))
+  (invoke "le"
+    (f32.const 1.175_494_350_822_287_5e-38)
+    (f32.const -3.402_823_466_385_288_6e+38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const 0x1p-126) (f32.const 0x1.fffffep+127))
+  (invoke "le"
+    (f32.const 1.175_494_350_822_287_5e-38)
+    (f32.const 3.402_823_466_385_288_6e+38)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f32.const -0x1p-126) (f32.const -inf))
+  (invoke "le" (f32.const -1.175_494_350_822_287_5e-38) (f32.const -inf))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const -0x1p-126) (f32.const inf))
+  (invoke "le" (f32.const -1.175_494_350_822_287_5e-38) (f32.const inf))
   (i32.const 1)
-)
-(assert_return
-  (invoke "le" (f32.const 0x1p-126) (f32.const -inf))
-  (i32.const 0)
-)
-(assert_return (invoke "le" (f32.const 0x1p-126) (f32.const inf)) (i32.const 1))
-(assert_return
-  (invoke "le" (f32.const -0x1p-126) (f32.const -nan:0x400000))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "le" (f32.const -0x1p-126) (f32.const -nan:0x200000))
-  (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const -0x1p-126) (f32.const nan:0x400000))
+  (invoke "le" (f32.const 1.175_494_350_822_287_5e-38) (f32.const -inf))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const -0x1p-126) (f32.const nan:0x200000))
-  (i32.const 0)
+  (invoke "le" (f32.const 1.175_494_350_822_287_5e-38) (f32.const inf))
+  (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f32.const 0x1p-126) (f32.const -nan:0x400000))
+  (invoke "le"
+    (f32.const -1.175_494_350_822_287_5e-38)
+    (f32.const -nan:0x400000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const 0x1p-126) (f32.const -nan:0x200000))
+  (invoke "le"
+    (f32.const -1.175_494_350_822_287_5e-38)
+    (f32.const -nan:0x200000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const 0x1p-126) (f32.const nan:0x400000))
+  (invoke "le"
+    (f32.const -1.175_494_350_822_287_5e-38)
+    (f32.const nan:0x400000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const 0x1p-126) (f32.const nan:0x200000))
+  (invoke "le"
+    (f32.const -1.175_494_350_822_287_5e-38)
+    (f32.const nan:0x200000)
+  )
   (i32.const 0)
-)
-(assert_return
-  (invoke "le" (f32.const -0x1p-1) (f32.const -0x0p+0))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "le" (f32.const -0x1p-1) (f32.const 0x0p+0))
-  (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f32.const 0x1p-1) (f32.const -0x0p+0))
+  (invoke "le"
+    (f32.const 1.175_494_350_822_287_5e-38)
+    (f32.const -nan:0x400000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const 0x1p-1) (f32.const 0x0p+0))
+  (invoke "le"
+    (f32.const 1.175_494_350_822_287_5e-38)
+    (f32.const -nan:0x200000)
+  )
   (i32.const 0)
-)
-(assert_return
-  (invoke "le" (f32.const -0x1p-1) (f32.const -0x1p-149))
-  (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f32.const -0x1p-1) (f32.const 0x1p-149))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "le" (f32.const 0x1p-1) (f32.const -0x1p-149))
+  (invoke "le" (f32.const 1.175_494_350_822_287_5e-38) (f32.const nan:0x400000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const 0x1p-1) (f32.const 0x1p-149))
+  (invoke "le" (f32.const 1.175_494_350_822_287_5e-38) (f32.const nan:0x200000))
   (i32.const 0)
 )
+(assert_return (invoke "le" (f32.const -0.5) (f32.const -0)) (i32.const 1))
+(assert_return (invoke "le" (f32.const -0.5) (f32.const 0)) (i32.const 1))
+(assert_return (invoke "le" (f32.const 0.5) (f32.const -0)) (i32.const 0))
+(assert_return (invoke "le" (f32.const 0.5) (f32.const 0)) (i32.const 0))
 (assert_return
-  (invoke "le" (f32.const -0x1p-1) (f32.const -0x1p-126))
+  (invoke "le" (f32.const -0.5) (f32.const -1.401_298_464_324_817_1e-45))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f32.const -0x1p-1) (f32.const 0x1p-126))
+  (invoke "le" (f32.const -0.5) (f32.const 1.401_298_464_324_817_1e-45))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f32.const 0x1p-1) (f32.const -0x1p-126))
+  (invoke "le" (f32.const 0.5) (f32.const -1.401_298_464_324_817_1e-45))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const 0x1p-1) (f32.const 0x1p-126))
+  (invoke "le" (f32.const 0.5) (f32.const 1.401_298_464_324_817_1e-45))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const -0x1p-1) (f32.const -0x1p-1))
+  (invoke "le" (f32.const -0.5) (f32.const -1.175_494_350_822_287_5e-38))
   (i32.const 1)
-)
-(assert_return
-  (invoke "le" (f32.const -0x1p-1) (f32.const 0x1p-1))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "le" (f32.const 0x1p-1) (f32.const -0x1p-1))
-  (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const 0x1p-1) (f32.const 0x1p-1))
+  (invoke "le" (f32.const -0.5) (f32.const 1.175_494_350_822_287_5e-38))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f32.const -0x1p-1) (f32.const -0x1p+0))
+  (invoke "le" (f32.const 0.5) (f32.const -1.175_494_350_822_287_5e-38))
   (i32.const 0)
-)
-(assert_return
-  (invoke "le" (f32.const -0x1p-1) (f32.const 0x1p+0))
-  (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f32.const 0x1p-1) (f32.const -0x1p+0))
+  (invoke "le" (f32.const 0.5) (f32.const 1.175_494_350_822_287_5e-38))
   (i32.const 0)
-)
-(assert_return
-  (invoke "le" (f32.const 0x1p-1) (f32.const 0x1p+0))
-  (i32.const 1)
 )
+(assert_return (invoke "le" (f32.const -0.5) (f32.const -0.5)) (i32.const 1))
+(assert_return (invoke "le" (f32.const -0.5) (f32.const 0.5)) (i32.const 1))
+(assert_return (invoke "le" (f32.const 0.5) (f32.const -0.5)) (i32.const 0))
+(assert_return (invoke "le" (f32.const 0.5) (f32.const 0.5)) (i32.const 1))
+(assert_return (invoke "le" (f32.const -0.5) (f32.const -1)) (i32.const 0))
+(assert_return (invoke "le" (f32.const -0.5) (f32.const 1)) (i32.const 1))
+(assert_return (invoke "le" (f32.const 0.5) (f32.const -1)) (i32.const 0))
+(assert_return (invoke "le" (f32.const 0.5) (f32.const 1)) (i32.const 1))
 (assert_return
-  (invoke "le" (f32.const -0x1p-1) (f32.const -0x1.921fb6p+2))
+  (invoke "le" (f32.const -0.5) (f32.const -6.283_185_482_025_146_5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const -0x1p-1) (f32.const 0x1.921fb6p+2))
+  (invoke "le" (f32.const -0.5) (f32.const 6.283_185_482_025_146_5))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f32.const 0x1p-1) (f32.const -0x1.921fb6p+2))
+  (invoke "le" (f32.const 0.5) (f32.const -6.283_185_482_025_146_5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const 0x1p-1) (f32.const 0x1.921fb6p+2))
+  (invoke "le" (f32.const 0.5) (f32.const 6.283_185_482_025_146_5))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f32.const -0x1p-1) (f32.const -0x1.fffffep+127))
+  (invoke "le" (f32.const -0.5) (f32.const -3.402_823_466_385_288_6e+38))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const -0x1p-1) (f32.const 0x1.fffffep+127))
+  (invoke "le" (f32.const -0.5) (f32.const 3.402_823_466_385_288_6e+38))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f32.const 0x1p-1) (f32.const -0x1.fffffep+127))
+  (invoke "le" (f32.const 0.5) (f32.const -3.402_823_466_385_288_6e+38))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const 0x1p-1) (f32.const 0x1.fffffep+127))
+  (invoke "le" (f32.const 0.5) (f32.const 3.402_823_466_385_288_6e+38))
   (i32.const 1)
-)
-(assert_return (invoke "le" (f32.const -0x1p-1) (f32.const -inf)) (i32.const 0))
-(assert_return (invoke "le" (f32.const -0x1p-1) (f32.const inf)) (i32.const 1))
-(assert_return (invoke "le" (f32.const 0x1p-1) (f32.const -inf)) (i32.const 0))
-(assert_return (invoke "le" (f32.const 0x1p-1) (f32.const inf)) (i32.const 1))
-(assert_return
-  (invoke "le" (f32.const -0x1p-1) (f32.const -nan:0x400000))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "le" (f32.const -0x1p-1) (f32.const -nan:0x200000))
-  (i32.const 0)
 )
+(assert_return (invoke "le" (f32.const -0.5) (f32.const -inf)) (i32.const 0))
+(assert_return (invoke "le" (f32.const -0.5) (f32.const inf)) (i32.const 1))
+(assert_return (invoke "le" (f32.const 0.5) (f32.const -inf)) (i32.const 0))
+(assert_return (invoke "le" (f32.const 0.5) (f32.const inf)) (i32.const 1))
 (assert_return
-  (invoke "le" (f32.const -0x1p-1) (f32.const nan:0x400000))
+  (invoke "le" (f32.const -0.5) (f32.const -nan:0x400000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const -0x1p-1) (f32.const nan:0x200000))
+  (invoke "le" (f32.const -0.5) (f32.const -nan:0x200000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const 0x1p-1) (f32.const -nan:0x400000))
+  (invoke "le" (f32.const -0.5) (f32.const nan:0x400000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const 0x1p-1) (f32.const -nan:0x200000))
+  (invoke "le" (f32.const -0.5) (f32.const nan:0x200000))
   (i32.const 0)
-)
-(assert_return
-  (invoke "le" (f32.const 0x1p-1) (f32.const nan:0x400000))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "le" (f32.const 0x1p-1) (f32.const nan:0x200000))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "le" (f32.const -0x1p+0) (f32.const -0x0p+0))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "le" (f32.const -0x1p+0) (f32.const 0x0p+0))
-  (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f32.const 0x1p+0) (f32.const -0x0p+0))
+  (invoke "le" (f32.const 0.5) (f32.const -nan:0x400000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const 0x1p+0) (f32.const 0x0p+0))
+  (invoke "le" (f32.const 0.5) (f32.const -nan:0x200000))
   (i32.const 0)
-)
-(assert_return
-  (invoke "le" (f32.const -0x1p+0) (f32.const -0x1p-149))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "le" (f32.const -0x1p+0) (f32.const 0x1p-149))
-  (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f32.const 0x1p+0) (f32.const -0x1p-149))
+  (invoke "le" (f32.const 0.5) (f32.const nan:0x400000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const 0x1p+0) (f32.const 0x1p-149))
+  (invoke "le" (f32.const 0.5) (f32.const nan:0x200000))
   (i32.const 0)
 )
+(assert_return (invoke "le" (f32.const -1) (f32.const -0)) (i32.const 1))
+(assert_return (invoke "le" (f32.const -1) (f32.const 0)) (i32.const 1))
+(assert_return (invoke "le" (f32.const 1) (f32.const -0)) (i32.const 0))
+(assert_return (invoke "le" (f32.const 1) (f32.const 0)) (i32.const 0))
 (assert_return
-  (invoke "le" (f32.const -0x1p+0) (f32.const -0x1p-126))
+  (invoke "le" (f32.const -1) (f32.const -1.401_298_464_324_817_1e-45))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f32.const -0x1p+0) (f32.const 0x1p-126))
+  (invoke "le" (f32.const -1) (f32.const 1.401_298_464_324_817_1e-45))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f32.const 0x1p+0) (f32.const -0x1p-126))
+  (invoke "le" (f32.const 1) (f32.const -1.401_298_464_324_817_1e-45))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const 0x1p+0) (f32.const 0x1p-126))
+  (invoke "le" (f32.const 1) (f32.const 1.401_298_464_324_817_1e-45))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const -0x1p+0) (f32.const -0x1p-1))
+  (invoke "le" (f32.const -1) (f32.const -1.175_494_350_822_287_5e-38))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f32.const -0x1p+0) (f32.const 0x1p-1))
+  (invoke "le" (f32.const -1) (f32.const 1.175_494_350_822_287_5e-38))
   (i32.const 1)
-)
-(assert_return
-  (invoke "le" (f32.const 0x1p+0) (f32.const -0x1p-1))
-  (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const 0x1p+0) (f32.const 0x1p-1))
+  (invoke "le" (f32.const 1) (f32.const -1.175_494_350_822_287_5e-38))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const -0x1p+0) (f32.const -0x1p+0))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "le" (f32.const -0x1p+0) (f32.const 0x1p+0))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "le" (f32.const 0x1p+0) (f32.const -0x1p+0))
+  (invoke "le" (f32.const 1) (f32.const 1.175_494_350_822_287_5e-38))
   (i32.const 0)
-)
-(assert_return
-  (invoke "le" (f32.const 0x1p+0) (f32.const 0x1p+0))
-  (i32.const 1)
 )
+(assert_return (invoke "le" (f32.const -1) (f32.const -0.5)) (i32.const 1))
+(assert_return (invoke "le" (f32.const -1) (f32.const 0.5)) (i32.const 1))
+(assert_return (invoke "le" (f32.const 1) (f32.const -0.5)) (i32.const 0))
+(assert_return (invoke "le" (f32.const 1) (f32.const 0.5)) (i32.const 0))
+(assert_return (invoke "le" (f32.const -1) (f32.const -1)) (i32.const 1))
+(assert_return (invoke "le" (f32.const -1) (f32.const 1)) (i32.const 1))
+(assert_return (invoke "le" (f32.const 1) (f32.const -1)) (i32.const 0))
+(assert_return (invoke "le" (f32.const 1) (f32.const 1)) (i32.const 1))
 (assert_return
-  (invoke "le" (f32.const -0x1p+0) (f32.const -0x1.921fb6p+2))
+  (invoke "le" (f32.const -1) (f32.const -6.283_185_482_025_146_5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const -0x1p+0) (f32.const 0x1.921fb6p+2))
+  (invoke "le" (f32.const -1) (f32.const 6.283_185_482_025_146_5))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f32.const 0x1p+0) (f32.const -0x1.921fb6p+2))
+  (invoke "le" (f32.const 1) (f32.const -6.283_185_482_025_146_5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const 0x1p+0) (f32.const 0x1.921fb6p+2))
+  (invoke "le" (f32.const 1) (f32.const 6.283_185_482_025_146_5))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f32.const -0x1p+0) (f32.const -0x1.fffffep+127))
+  (invoke "le" (f32.const -1) (f32.const -3.402_823_466_385_288_6e+38))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const -0x1p+0) (f32.const 0x1.fffffep+127))
+  (invoke "le" (f32.const -1) (f32.const 3.402_823_466_385_288_6e+38))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f32.const 0x1p+0) (f32.const -0x1.fffffep+127))
+  (invoke "le" (f32.const 1) (f32.const -3.402_823_466_385_288_6e+38))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const 0x1p+0) (f32.const 0x1.fffffep+127))
+  (invoke "le" (f32.const 1) (f32.const 3.402_823_466_385_288_6e+38))
   (i32.const 1)
 )
-(assert_return (invoke "le" (f32.const -0x1p+0) (f32.const -inf)) (i32.const 0))
-(assert_return (invoke "le" (f32.const -0x1p+0) (f32.const inf)) (i32.const 1))
-(assert_return (invoke "le" (f32.const 0x1p+0) (f32.const -inf)) (i32.const 0))
-(assert_return (invoke "le" (f32.const 0x1p+0) (f32.const inf)) (i32.const 1))
+(assert_return (invoke "le" (f32.const -1) (f32.const -inf)) (i32.const 0))
+(assert_return (invoke "le" (f32.const -1) (f32.const inf)) (i32.const 1))
+(assert_return (invoke "le" (f32.const 1) (f32.const -inf)) (i32.const 0))
+(assert_return (invoke "le" (f32.const 1) (f32.const inf)) (i32.const 1))
 (assert_return
-  (invoke "le" (f32.const -0x1p+0) (f32.const -nan:0x400000))
+  (invoke "le" (f32.const -1) (f32.const -nan:0x400000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const -0x1p+0) (f32.const -nan:0x200000))
+  (invoke "le" (f32.const -1) (f32.const -nan:0x200000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const -0x1p+0) (f32.const nan:0x400000))
+  (invoke "le" (f32.const -1) (f32.const nan:0x400000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const -0x1p+0) (f32.const nan:0x200000))
+  (invoke "le" (f32.const -1) (f32.const nan:0x200000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const 0x1p+0) (f32.const -nan:0x400000))
+  (invoke "le" (f32.const 1) (f32.const -nan:0x400000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const 0x1p+0) (f32.const -nan:0x200000))
+  (invoke "le" (f32.const 1) (f32.const -nan:0x200000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const 0x1p+0) (f32.const nan:0x400000))
+  (invoke "le" (f32.const 1) (f32.const nan:0x400000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const 0x1p+0) (f32.const nan:0x200000))
+  (invoke "le" (f32.const 1) (f32.const nan:0x200000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const -0x1.921fb6p+2) (f32.const -0x0p+0))
+  (invoke "le" (f32.const -6.283_185_482_025_146_5) (f32.const -0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f32.const -0x1.921fb6p+2) (f32.const 0x0p+0))
+  (invoke "le" (f32.const -6.283_185_482_025_146_5) (f32.const 0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f32.const 0x1.921fb6p+2) (f32.const -0x0p+0))
+  (invoke "le" (f32.const 6.283_185_482_025_146_5) (f32.const -0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const 0x1.921fb6p+2) (f32.const 0x0p+0))
+  (invoke "le" (f32.const 6.283_185_482_025_146_5) (f32.const 0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const -0x1.921fb6p+2) (f32.const -0x1p-149))
+  (invoke "le"
+    (f32.const -6.283_185_482_025_146_5)
+    (f32.const -1.401_298_464_324_817_1e-45)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f32.const -0x1.921fb6p+2) (f32.const 0x1p-149))
+  (invoke "le"
+    (f32.const -6.283_185_482_025_146_5)
+    (f32.const 1.401_298_464_324_817_1e-45)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f32.const 0x1.921fb6p+2) (f32.const -0x1p-149))
+  (invoke "le"
+    (f32.const 6.283_185_482_025_146_5)
+    (f32.const -1.401_298_464_324_817_1e-45)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const 0x1.921fb6p+2) (f32.const 0x1p-149))
+  (invoke "le"
+    (f32.const 6.283_185_482_025_146_5)
+    (f32.const 1.401_298_464_324_817_1e-45)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const -0x1.921fb6p+2) (f32.const -0x1p-126))
+  (invoke "le"
+    (f32.const -6.283_185_482_025_146_5)
+    (f32.const -1.175_494_350_822_287_5e-38)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f32.const -0x1.921fb6p+2) (f32.const 0x1p-126))
+  (invoke "le"
+    (f32.const -6.283_185_482_025_146_5)
+    (f32.const 1.175_494_350_822_287_5e-38)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f32.const 0x1.921fb6p+2) (f32.const -0x1p-126))
+  (invoke "le"
+    (f32.const 6.283_185_482_025_146_5)
+    (f32.const -1.175_494_350_822_287_5e-38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const 0x1.921fb6p+2) (f32.const 0x1p-126))
+  (invoke "le"
+    (f32.const 6.283_185_482_025_146_5)
+    (f32.const 1.175_494_350_822_287_5e-38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const -0x1.921fb6p+2) (f32.const -0x1p-1))
+  (invoke "le" (f32.const -6.283_185_482_025_146_5) (f32.const -0.5))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f32.const -0x1.921fb6p+2) (f32.const 0x1p-1))
+  (invoke "le" (f32.const -6.283_185_482_025_146_5) (f32.const 0.5))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f32.const 0x1.921fb6p+2) (f32.const -0x1p-1))
+  (invoke "le" (f32.const 6.283_185_482_025_146_5) (f32.const -0.5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const 0x1.921fb6p+2) (f32.const 0x1p-1))
+  (invoke "le" (f32.const 6.283_185_482_025_146_5) (f32.const 0.5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const -0x1.921fb6p+2) (f32.const -0x1p+0))
+  (invoke "le" (f32.const -6.283_185_482_025_146_5) (f32.const -1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f32.const -0x1.921fb6p+2) (f32.const 0x1p+0))
+  (invoke "le" (f32.const -6.283_185_482_025_146_5) (f32.const 1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f32.const 0x1.921fb6p+2) (f32.const -0x1p+0))
+  (invoke "le" (f32.const 6.283_185_482_025_146_5) (f32.const -1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const 0x1.921fb6p+2) (f32.const 0x1p+0))
+  (invoke "le" (f32.const 6.283_185_482_025_146_5) (f32.const 1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const -0x1.921fb6p+2) (f32.const -0x1.921fb6p+2))
+  (invoke "le"
+    (f32.const -6.283_185_482_025_146_5)
+    (f32.const -6.283_185_482_025_146_5)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f32.const -0x1.921fb6p+2) (f32.const 0x1.921fb6p+2))
+  (invoke "le"
+    (f32.const -6.283_185_482_025_146_5)
+    (f32.const 6.283_185_482_025_146_5)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f32.const 0x1.921fb6p+2) (f32.const -0x1.921fb6p+2))
+  (invoke "le"
+    (f32.const 6.283_185_482_025_146_5)
+    (f32.const -6.283_185_482_025_146_5)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const 0x1.921fb6p+2) (f32.const 0x1.921fb6p+2))
+  (invoke "le"
+    (f32.const 6.283_185_482_025_146_5)
+    (f32.const 6.283_185_482_025_146_5)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f32.const -0x1.921fb6p+2) (f32.const -0x1.fffffep+127))
+  (invoke "le"
+    (f32.const -6.283_185_482_025_146_5)
+    (f32.const -3.402_823_466_385_288_6e+38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const -0x1.921fb6p+2) (f32.const 0x1.fffffep+127))
+  (invoke "le"
+    (f32.const -6.283_185_482_025_146_5)
+    (f32.const 3.402_823_466_385_288_6e+38)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f32.const 0x1.921fb6p+2) (f32.const -0x1.fffffep+127))
+  (invoke "le"
+    (f32.const 6.283_185_482_025_146_5)
+    (f32.const -3.402_823_466_385_288_6e+38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const 0x1.921fb6p+2) (f32.const 0x1.fffffep+127))
+  (invoke "le"
+    (f32.const 6.283_185_482_025_146_5)
+    (f32.const 3.402_823_466_385_288_6e+38)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f32.const -0x1.921fb6p+2) (f32.const -inf))
+  (invoke "le" (f32.const -6.283_185_482_025_146_5) (f32.const -inf))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const -0x1.921fb6p+2) (f32.const inf))
+  (invoke "le" (f32.const -6.283_185_482_025_146_5) (f32.const inf))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f32.const 0x1.921fb6p+2) (f32.const -inf))
+  (invoke "le" (f32.const 6.283_185_482_025_146_5) (f32.const -inf))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const 0x1.921fb6p+2) (f32.const inf))
+  (invoke "le" (f32.const 6.283_185_482_025_146_5) (f32.const inf))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f32.const -0x1.921fb6p+2) (f32.const -nan:0x400000))
+  (invoke "le" (f32.const -6.283_185_482_025_146_5) (f32.const -nan:0x400000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const -0x1.921fb6p+2) (f32.const -nan:0x200000))
+  (invoke "le" (f32.const -6.283_185_482_025_146_5) (f32.const -nan:0x200000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const -0x1.921fb6p+2) (f32.const nan:0x400000))
+  (invoke "le" (f32.const -6.283_185_482_025_146_5) (f32.const nan:0x400000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const -0x1.921fb6p+2) (f32.const nan:0x200000))
+  (invoke "le" (f32.const -6.283_185_482_025_146_5) (f32.const nan:0x200000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const 0x1.921fb6p+2) (f32.const -nan:0x400000))
+  (invoke "le" (f32.const 6.283_185_482_025_146_5) (f32.const -nan:0x400000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const 0x1.921fb6p+2) (f32.const -nan:0x200000))
+  (invoke "le" (f32.const 6.283_185_482_025_146_5) (f32.const -nan:0x200000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const 0x1.921fb6p+2) (f32.const nan:0x400000))
+  (invoke "le" (f32.const 6.283_185_482_025_146_5) (f32.const nan:0x400000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const 0x1.921fb6p+2) (f32.const nan:0x200000))
+  (invoke "le" (f32.const 6.283_185_482_025_146_5) (f32.const nan:0x200000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const -0x1.fffffep+127) (f32.const -0x0p+0))
+  (invoke "le" (f32.const -3.402_823_466_385_288_6e+38) (f32.const -0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f32.const -0x1.fffffep+127) (f32.const 0x0p+0))
+  (invoke "le" (f32.const -3.402_823_466_385_288_6e+38) (f32.const 0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f32.const 0x1.fffffep+127) (f32.const -0x0p+0))
+  (invoke "le" (f32.const 3.402_823_466_385_288_6e+38) (f32.const -0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const 0x1.fffffep+127) (f32.const 0x0p+0))
+  (invoke "le" (f32.const 3.402_823_466_385_288_6e+38) (f32.const 0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const -0x1.fffffep+127) (f32.const -0x1p-149))
+  (invoke "le"
+    (f32.const -3.402_823_466_385_288_6e+38)
+    (f32.const -1.401_298_464_324_817_1e-45)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f32.const -0x1.fffffep+127) (f32.const 0x1p-149))
+  (invoke "le"
+    (f32.const -3.402_823_466_385_288_6e+38)
+    (f32.const 1.401_298_464_324_817_1e-45)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f32.const 0x1.fffffep+127) (f32.const -0x1p-149))
+  (invoke "le"
+    (f32.const 3.402_823_466_385_288_6e+38)
+    (f32.const -1.401_298_464_324_817_1e-45)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const 0x1.fffffep+127) (f32.const 0x1p-149))
+  (invoke "le"
+    (f32.const 3.402_823_466_385_288_6e+38)
+    (f32.const 1.401_298_464_324_817_1e-45)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const -0x1.fffffep+127) (f32.const -0x1p-126))
+  (invoke "le"
+    (f32.const -3.402_823_466_385_288_6e+38)
+    (f32.const -1.175_494_350_822_287_5e-38)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f32.const -0x1.fffffep+127) (f32.const 0x1p-126))
+  (invoke "le"
+    (f32.const -3.402_823_466_385_288_6e+38)
+    (f32.const 1.175_494_350_822_287_5e-38)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f32.const 0x1.fffffep+127) (f32.const -0x1p-126))
+  (invoke "le"
+    (f32.const 3.402_823_466_385_288_6e+38)
+    (f32.const -1.175_494_350_822_287_5e-38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const 0x1.fffffep+127) (f32.const 0x1p-126))
+  (invoke "le"
+    (f32.const 3.402_823_466_385_288_6e+38)
+    (f32.const 1.175_494_350_822_287_5e-38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const -0x1.fffffep+127) (f32.const -0x1p-1))
+  (invoke "le" (f32.const -3.402_823_466_385_288_6e+38) (f32.const -0.5))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f32.const -0x1.fffffep+127) (f32.const 0x1p-1))
+  (invoke "le" (f32.const -3.402_823_466_385_288_6e+38) (f32.const 0.5))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f32.const 0x1.fffffep+127) (f32.const -0x1p-1))
+  (invoke "le" (f32.const 3.402_823_466_385_288_6e+38) (f32.const -0.5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const 0x1.fffffep+127) (f32.const 0x1p-1))
+  (invoke "le" (f32.const 3.402_823_466_385_288_6e+38) (f32.const 0.5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const -0x1.fffffep+127) (f32.const -0x1p+0))
+  (invoke "le" (f32.const -3.402_823_466_385_288_6e+38) (f32.const -1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f32.const -0x1.fffffep+127) (f32.const 0x1p+0))
+  (invoke "le" (f32.const -3.402_823_466_385_288_6e+38) (f32.const 1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f32.const 0x1.fffffep+127) (f32.const -0x1p+0))
+  (invoke "le" (f32.const 3.402_823_466_385_288_6e+38) (f32.const -1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const 0x1.fffffep+127) (f32.const 0x1p+0))
+  (invoke "le" (f32.const 3.402_823_466_385_288_6e+38) (f32.const 1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const -0x1.fffffep+127) (f32.const -0x1.921fb6p+2))
+  (invoke "le"
+    (f32.const -3.402_823_466_385_288_6e+38)
+    (f32.const -6.283_185_482_025_146_5)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f32.const -0x1.fffffep+127) (f32.const 0x1.921fb6p+2))
+  (invoke "le"
+    (f32.const -3.402_823_466_385_288_6e+38)
+    (f32.const 6.283_185_482_025_146_5)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f32.const 0x1.fffffep+127) (f32.const -0x1.921fb6p+2))
+  (invoke "le"
+    (f32.const 3.402_823_466_385_288_6e+38)
+    (f32.const -6.283_185_482_025_146_5)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const 0x1.fffffep+127) (f32.const 0x1.921fb6p+2))
+  (invoke "le"
+    (f32.const 3.402_823_466_385_288_6e+38)
+    (f32.const 6.283_185_482_025_146_5)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const -0x1.fffffep+127) (f32.const -0x1.fffffep+127))
+  (invoke "le"
+    (f32.const -3.402_823_466_385_288_6e+38)
+    (f32.const -3.402_823_466_385_288_6e+38)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f32.const -0x1.fffffep+127) (f32.const 0x1.fffffep+127))
+  (invoke "le"
+    (f32.const -3.402_823_466_385_288_6e+38)
+    (f32.const 3.402_823_466_385_288_6e+38)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f32.const 0x1.fffffep+127) (f32.const -0x1.fffffep+127))
+  (invoke "le"
+    (f32.const 3.402_823_466_385_288_6e+38)
+    (f32.const -3.402_823_466_385_288_6e+38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const 0x1.fffffep+127) (f32.const 0x1.fffffep+127))
+  (invoke "le"
+    (f32.const 3.402_823_466_385_288_6e+38)
+    (f32.const 3.402_823_466_385_288_6e+38)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f32.const -0x1.fffffep+127) (f32.const -inf))
+  (invoke "le" (f32.const -3.402_823_466_385_288_6e+38) (f32.const -inf))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const -0x1.fffffep+127) (f32.const inf))
+  (invoke "le" (f32.const -3.402_823_466_385_288_6e+38) (f32.const inf))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f32.const 0x1.fffffep+127) (f32.const -inf))
+  (invoke "le" (f32.const 3.402_823_466_385_288_6e+38) (f32.const -inf))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const 0x1.fffffep+127) (f32.const inf))
+  (invoke "le" (f32.const 3.402_823_466_385_288_6e+38) (f32.const inf))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f32.const -0x1.fffffep+127) (f32.const -nan:0x400000))
+  (invoke "le"
+    (f32.const -3.402_823_466_385_288_6e+38)
+    (f32.const -nan:0x400000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const -0x1.fffffep+127) (f32.const -nan:0x200000))
+  (invoke "le"
+    (f32.const -3.402_823_466_385_288_6e+38)
+    (f32.const -nan:0x200000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const -0x1.fffffep+127) (f32.const nan:0x400000))
+  (invoke "le"
+    (f32.const -3.402_823_466_385_288_6e+38)
+    (f32.const nan:0x400000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const -0x1.fffffep+127) (f32.const nan:0x200000))
+  (invoke "le"
+    (f32.const -3.402_823_466_385_288_6e+38)
+    (f32.const nan:0x200000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const 0x1.fffffep+127) (f32.const -nan:0x400000))
+  (invoke "le"
+    (f32.const 3.402_823_466_385_288_6e+38)
+    (f32.const -nan:0x400000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const 0x1.fffffep+127) (f32.const -nan:0x200000))
+  (invoke "le"
+    (f32.const 3.402_823_466_385_288_6e+38)
+    (f32.const -nan:0x200000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const 0x1.fffffep+127) (f32.const nan:0x400000))
+  (invoke "le" (f32.const 3.402_823_466_385_288_6e+38) (f32.const nan:0x400000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const 0x1.fffffep+127) (f32.const nan:0x200000))
+  (invoke "le" (f32.const 3.402_823_466_385_288_6e+38) (f32.const nan:0x200000))
   (i32.const 0)
 )
-(assert_return (invoke "le" (f32.const -inf) (f32.const -0x0p+0)) (i32.const 1))
-(assert_return (invoke "le" (f32.const -inf) (f32.const 0x0p+0)) (i32.const 1))
-(assert_return (invoke "le" (f32.const inf) (f32.const -0x0p+0)) (i32.const 0))
-(assert_return (invoke "le" (f32.const inf) (f32.const 0x0p+0)) (i32.const 0))
+(assert_return (invoke "le" (f32.const -inf) (f32.const -0)) (i32.const 1))
+(assert_return (invoke "le" (f32.const -inf) (f32.const 0)) (i32.const 1))
+(assert_return (invoke "le" (f32.const inf) (f32.const -0)) (i32.const 0))
+(assert_return (invoke "le" (f32.const inf) (f32.const 0)) (i32.const 0))
 (assert_return
-  (invoke "le" (f32.const -inf) (f32.const -0x1p-149))
+  (invoke "le" (f32.const -inf) (f32.const -1.401_298_464_324_817_1e-45))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f32.const -inf) (f32.const 0x1p-149))
+  (invoke "le" (f32.const -inf) (f32.const 1.401_298_464_324_817_1e-45))
   (i32.const 1)
+)
+(assert_return
+  (invoke "le" (f32.const inf) (f32.const -1.401_298_464_324_817_1e-45))
+  (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const inf) (f32.const -0x1p-149))
+  (invoke "le" (f32.const inf) (f32.const 1.401_298_464_324_817_1e-45))
   (i32.const 0)
 )
-(assert_return (invoke "le" (f32.const inf) (f32.const 0x1p-149)) (i32.const 0))
 (assert_return
-  (invoke "le" (f32.const -inf) (f32.const -0x1p-126))
+  (invoke "le" (f32.const -inf) (f32.const -1.175_494_350_822_287_5e-38))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f32.const -inf) (f32.const 0x1p-126))
+  (invoke "le" (f32.const -inf) (f32.const 1.175_494_350_822_287_5e-38))
   (i32.const 1)
+)
+(assert_return
+  (invoke "le" (f32.const inf) (f32.const -1.175_494_350_822_287_5e-38))
+  (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const inf) (f32.const -0x1p-126))
+  (invoke "le" (f32.const inf) (f32.const 1.175_494_350_822_287_5e-38))
   (i32.const 0)
 )
-(assert_return (invoke "le" (f32.const inf) (f32.const 0x1p-126)) (i32.const 0))
-(assert_return (invoke "le" (f32.const -inf) (f32.const -0x1p-1)) (i32.const 1))
-(assert_return (invoke "le" (f32.const -inf) (f32.const 0x1p-1)) (i32.const 1))
-(assert_return (invoke "le" (f32.const inf) (f32.const -0x1p-1)) (i32.const 0))
-(assert_return (invoke "le" (f32.const inf) (f32.const 0x1p-1)) (i32.const 0))
-(assert_return (invoke "le" (f32.const -inf) (f32.const -0x1p+0)) (i32.const 1))
-(assert_return (invoke "le" (f32.const -inf) (f32.const 0x1p+0)) (i32.const 1))
-(assert_return (invoke "le" (f32.const inf) (f32.const -0x1p+0)) (i32.const 0))
-(assert_return (invoke "le" (f32.const inf) (f32.const 0x1p+0)) (i32.const 0))
+(assert_return (invoke "le" (f32.const -inf) (f32.const -0.5)) (i32.const 1))
+(assert_return (invoke "le" (f32.const -inf) (f32.const 0.5)) (i32.const 1))
+(assert_return (invoke "le" (f32.const inf) (f32.const -0.5)) (i32.const 0))
+(assert_return (invoke "le" (f32.const inf) (f32.const 0.5)) (i32.const 0))
+(assert_return (invoke "le" (f32.const -inf) (f32.const -1)) (i32.const 1))
+(assert_return (invoke "le" (f32.const -inf) (f32.const 1)) (i32.const 1))
+(assert_return (invoke "le" (f32.const inf) (f32.const -1)) (i32.const 0))
+(assert_return (invoke "le" (f32.const inf) (f32.const 1)) (i32.const 0))
 (assert_return
-  (invoke "le" (f32.const -inf) (f32.const -0x1.921fb6p+2))
+  (invoke "le" (f32.const -inf) (f32.const -6.283_185_482_025_146_5))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f32.const -inf) (f32.const 0x1.921fb6p+2))
+  (invoke "le" (f32.const -inf) (f32.const 6.283_185_482_025_146_5))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f32.const inf) (f32.const -0x1.921fb6p+2))
+  (invoke "le" (f32.const inf) (f32.const -6.283_185_482_025_146_5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const inf) (f32.const 0x1.921fb6p+2))
+  (invoke "le" (f32.const inf) (f32.const 6.283_185_482_025_146_5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const -inf) (f32.const -0x1.fffffep+127))
+  (invoke "le" (f32.const -inf) (f32.const -3.402_823_466_385_288_6e+38))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f32.const -inf) (f32.const 0x1.fffffep+127))
+  (invoke "le" (f32.const -inf) (f32.const 3.402_823_466_385_288_6e+38))
   (i32.const 1)
 )
 (assert_return
-  (invoke "le" (f32.const inf) (f32.const -0x1.fffffep+127))
+  (invoke "le" (f32.const inf) (f32.const -3.402_823_466_385_288_6e+38))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const inf) (f32.const 0x1.fffffep+127))
+  (invoke "le" (f32.const inf) (f32.const 3.402_823_466_385_288_6e+38))
   (i32.const 0)
 )
 (assert_return (invoke "le" (f32.const -inf) (f32.const -inf)) (i32.const 1))
@@ -5707,227 +6469,281 @@
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const -nan:0x400000) (f32.const -0x0p+0))
+  (invoke "le" (f32.const -nan:0x400000) (f32.const -0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const -nan:0x200000) (f32.const -0x0p+0))
+  (invoke "le" (f32.const -nan:0x200000) (f32.const -0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const -nan:0x400000) (f32.const 0x0p+0))
+  (invoke "le" (f32.const -nan:0x400000) (f32.const 0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const -nan:0x200000) (f32.const 0x0p+0))
+  (invoke "le" (f32.const -nan:0x200000) (f32.const 0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const nan:0x400000) (f32.const -0x0p+0))
+  (invoke "le" (f32.const nan:0x400000) (f32.const -0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const nan:0x200000) (f32.const -0x0p+0))
+  (invoke "le" (f32.const nan:0x200000) (f32.const -0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const nan:0x400000) (f32.const 0x0p+0))
+  (invoke "le" (f32.const nan:0x400000) (f32.const 0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const nan:0x200000) (f32.const 0x0p+0))
+  (invoke "le" (f32.const nan:0x200000) (f32.const 0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const -nan:0x400000) (f32.const -0x1p-149))
+  (invoke "le"
+    (f32.const -nan:0x400000)
+    (f32.const -1.401_298_464_324_817_1e-45)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const -nan:0x200000) (f32.const -0x1p-149))
+  (invoke "le"
+    (f32.const -nan:0x200000)
+    (f32.const -1.401_298_464_324_817_1e-45)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const -nan:0x400000) (f32.const 0x1p-149))
+  (invoke "le"
+    (f32.const -nan:0x400000)
+    (f32.const 1.401_298_464_324_817_1e-45)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const -nan:0x200000) (f32.const 0x1p-149))
+  (invoke "le"
+    (f32.const -nan:0x200000)
+    (f32.const 1.401_298_464_324_817_1e-45)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const nan:0x400000) (f32.const -0x1p-149))
+  (invoke "le"
+    (f32.const nan:0x400000)
+    (f32.const -1.401_298_464_324_817_1e-45)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const nan:0x200000) (f32.const -0x1p-149))
+  (invoke "le"
+    (f32.const nan:0x200000)
+    (f32.const -1.401_298_464_324_817_1e-45)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const nan:0x400000) (f32.const 0x1p-149))
+  (invoke "le" (f32.const nan:0x400000) (f32.const 1.401_298_464_324_817_1e-45))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const nan:0x200000) (f32.const 0x1p-149))
+  (invoke "le" (f32.const nan:0x200000) (f32.const 1.401_298_464_324_817_1e-45))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const -nan:0x400000) (f32.const -0x1p-126))
+  (invoke "le"
+    (f32.const -nan:0x400000)
+    (f32.const -1.175_494_350_822_287_5e-38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const -nan:0x200000) (f32.const -0x1p-126))
+  (invoke "le"
+    (f32.const -nan:0x200000)
+    (f32.const -1.175_494_350_822_287_5e-38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const -nan:0x400000) (f32.const 0x1p-126))
+  (invoke "le"
+    (f32.const -nan:0x400000)
+    (f32.const 1.175_494_350_822_287_5e-38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const -nan:0x200000) (f32.const 0x1p-126))
+  (invoke "le"
+    (f32.const -nan:0x200000)
+    (f32.const 1.175_494_350_822_287_5e-38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const nan:0x400000) (f32.const -0x1p-126))
+  (invoke "le"
+    (f32.const nan:0x400000)
+    (f32.const -1.175_494_350_822_287_5e-38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const nan:0x200000) (f32.const -0x1p-126))
+  (invoke "le"
+    (f32.const nan:0x200000)
+    (f32.const -1.175_494_350_822_287_5e-38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const nan:0x400000) (f32.const 0x1p-126))
+  (invoke "le" (f32.const nan:0x400000) (f32.const 1.175_494_350_822_287_5e-38))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const nan:0x200000) (f32.const 0x1p-126))
+  (invoke "le" (f32.const nan:0x200000) (f32.const 1.175_494_350_822_287_5e-38))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const -nan:0x400000) (f32.const -0x1p-1))
+  (invoke "le" (f32.const -nan:0x400000) (f32.const -0.5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const -nan:0x200000) (f32.const -0x1p-1))
+  (invoke "le" (f32.const -nan:0x200000) (f32.const -0.5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const -nan:0x400000) (f32.const 0x1p-1))
+  (invoke "le" (f32.const -nan:0x400000) (f32.const 0.5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const -nan:0x200000) (f32.const 0x1p-1))
+  (invoke "le" (f32.const -nan:0x200000) (f32.const 0.5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const nan:0x400000) (f32.const -0x1p-1))
+  (invoke "le" (f32.const nan:0x400000) (f32.const -0.5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const nan:0x200000) (f32.const -0x1p-1))
+  (invoke "le" (f32.const nan:0x200000) (f32.const -0.5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const nan:0x400000) (f32.const 0x1p-1))
+  (invoke "le" (f32.const nan:0x400000) (f32.const 0.5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const nan:0x200000) (f32.const 0x1p-1))
+  (invoke "le" (f32.const nan:0x200000) (f32.const 0.5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const -nan:0x400000) (f32.const -0x1p+0))
+  (invoke "le" (f32.const -nan:0x400000) (f32.const -1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const -nan:0x200000) (f32.const -0x1p+0))
+  (invoke "le" (f32.const -nan:0x200000) (f32.const -1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const -nan:0x400000) (f32.const 0x1p+0))
+  (invoke "le" (f32.const -nan:0x400000) (f32.const 1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const -nan:0x200000) (f32.const 0x1p+0))
+  (invoke "le" (f32.const -nan:0x200000) (f32.const 1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const nan:0x400000) (f32.const -0x1p+0))
+  (invoke "le" (f32.const nan:0x400000) (f32.const -1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const nan:0x200000) (f32.const -0x1p+0))
+  (invoke "le" (f32.const nan:0x200000) (f32.const -1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const nan:0x400000) (f32.const 0x1p+0))
+  (invoke "le" (f32.const nan:0x400000) (f32.const 1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const nan:0x200000) (f32.const 0x1p+0))
+  (invoke "le" (f32.const nan:0x200000) (f32.const 1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const -nan:0x400000) (f32.const -0x1.921fb6p+2))
+  (invoke "le" (f32.const -nan:0x400000) (f32.const -6.283_185_482_025_146_5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const -nan:0x200000) (f32.const -0x1.921fb6p+2))
+  (invoke "le" (f32.const -nan:0x200000) (f32.const -6.283_185_482_025_146_5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const -nan:0x400000) (f32.const 0x1.921fb6p+2))
+  (invoke "le" (f32.const -nan:0x400000) (f32.const 6.283_185_482_025_146_5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const -nan:0x200000) (f32.const 0x1.921fb6p+2))
+  (invoke "le" (f32.const -nan:0x200000) (f32.const 6.283_185_482_025_146_5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const nan:0x400000) (f32.const -0x1.921fb6p+2))
+  (invoke "le" (f32.const nan:0x400000) (f32.const -6.283_185_482_025_146_5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const nan:0x200000) (f32.const -0x1.921fb6p+2))
+  (invoke "le" (f32.const nan:0x200000) (f32.const -6.283_185_482_025_146_5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const nan:0x400000) (f32.const 0x1.921fb6p+2))
+  (invoke "le" (f32.const nan:0x400000) (f32.const 6.283_185_482_025_146_5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const nan:0x200000) (f32.const 0x1.921fb6p+2))
+  (invoke "le" (f32.const nan:0x200000) (f32.const 6.283_185_482_025_146_5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const -nan:0x400000) (f32.const -0x1.fffffep+127))
+  (invoke "le"
+    (f32.const -nan:0x400000)
+    (f32.const -3.402_823_466_385_288_6e+38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const -nan:0x200000) (f32.const -0x1.fffffep+127))
+  (invoke "le"
+    (f32.const -nan:0x200000)
+    (f32.const -3.402_823_466_385_288_6e+38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const -nan:0x400000) (f32.const 0x1.fffffep+127))
+  (invoke "le"
+    (f32.const -nan:0x400000)
+    (f32.const 3.402_823_466_385_288_6e+38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const -nan:0x200000) (f32.const 0x1.fffffep+127))
+  (invoke "le"
+    (f32.const -nan:0x200000)
+    (f32.const 3.402_823_466_385_288_6e+38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const nan:0x400000) (f32.const -0x1.fffffep+127))
+  (invoke "le"
+    (f32.const nan:0x400000)
+    (f32.const -3.402_823_466_385_288_6e+38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const nan:0x200000) (f32.const -0x1.fffffep+127))
+  (invoke "le"
+    (f32.const nan:0x200000)
+    (f32.const -3.402_823_466_385_288_6e+38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const nan:0x400000) (f32.const 0x1.fffffep+127))
+  (invoke "le" (f32.const nan:0x400000) (f32.const 3.402_823_466_385_288_6e+38))
   (i32.const 0)
 )
 (assert_return
-  (invoke "le" (f32.const nan:0x200000) (f32.const 0x1.fffffep+127))
+  (invoke "le" (f32.const nan:0x200000) (f32.const 3.402_823_466_385_288_6e+38))
   (i32.const 0)
 )
 (assert_return
@@ -6026,1152 +6842,1302 @@
   (invoke "le" (f32.const nan:0x200000) (f32.const nan:0x200000))
   (i32.const 0)
 )
+(assert_return (invoke "gt" (f32.const -0) (f32.const -0)) (i32.const 0))
+(assert_return (invoke "gt" (f32.const -0) (f32.const 0)) (i32.const 0))
+(assert_return (invoke "gt" (f32.const 0) (f32.const -0)) (i32.const 0))
+(assert_return (invoke "gt" (f32.const 0) (f32.const 0)) (i32.const 0))
 (assert_return
-  (invoke "gt" (f32.const -0x0p+0) (f32.const -0x0p+0))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "gt" (f32.const -0x0p+0) (f32.const 0x0p+0))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "gt" (f32.const 0x0p+0) (f32.const -0x0p+0))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "gt" (f32.const 0x0p+0) (f32.const 0x0p+0))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "gt" (f32.const -0x0p+0) (f32.const -0x1p-149))
+  (invoke "gt" (f32.const -0) (f32.const -1.401_298_464_324_817_1e-45))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x0p+0) (f32.const 0x1p-149))
+  (invoke "gt" (f32.const -0) (f32.const 1.401_298_464_324_817_1e-45))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x0p+0) (f32.const -0x1p-149))
+  (invoke "gt" (f32.const 0) (f32.const -1.401_298_464_324_817_1e-45))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x0p+0) (f32.const 0x1p-149))
+  (invoke "gt" (f32.const 0) (f32.const 1.401_298_464_324_817_1e-45))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x0p+0) (f32.const -0x1p-126))
+  (invoke "gt" (f32.const -0) (f32.const -1.175_494_350_822_287_5e-38))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x0p+0) (f32.const 0x1p-126))
+  (invoke "gt" (f32.const -0) (f32.const 1.175_494_350_822_287_5e-38))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x0p+0) (f32.const -0x1p-126))
+  (invoke "gt" (f32.const 0) (f32.const -1.175_494_350_822_287_5e-38))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x0p+0) (f32.const 0x1p-126))
+  (invoke "gt" (f32.const 0) (f32.const 1.175_494_350_822_287_5e-38))
   (i32.const 0)
 )
+(assert_return (invoke "gt" (f32.const -0) (f32.const -0.5)) (i32.const 1))
+(assert_return (invoke "gt" (f32.const -0) (f32.const 0.5)) (i32.const 0))
+(assert_return (invoke "gt" (f32.const 0) (f32.const -0.5)) (i32.const 1))
+(assert_return (invoke "gt" (f32.const 0) (f32.const 0.5)) (i32.const 0))
+(assert_return (invoke "gt" (f32.const -0) (f32.const -1)) (i32.const 1))
+(assert_return (invoke "gt" (f32.const -0) (f32.const 1)) (i32.const 0))
+(assert_return (invoke "gt" (f32.const 0) (f32.const -1)) (i32.const 1))
+(assert_return (invoke "gt" (f32.const 0) (f32.const 1)) (i32.const 0))
 (assert_return
-  (invoke "gt" (f32.const -0x0p+0) (f32.const -0x1p-1))
+  (invoke "gt" (f32.const -0) (f32.const -6.283_185_482_025_146_5))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x0p+0) (f32.const 0x1p-1))
+  (invoke "gt" (f32.const -0) (f32.const 6.283_185_482_025_146_5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x0p+0) (f32.const -0x1p-1))
+  (invoke "gt" (f32.const 0) (f32.const -6.283_185_482_025_146_5))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x0p+0) (f32.const 0x1p-1))
+  (invoke "gt" (f32.const 0) (f32.const 6.283_185_482_025_146_5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x0p+0) (f32.const -0x1p+0))
+  (invoke "gt" (f32.const -0) (f32.const -3.402_823_466_385_288_6e+38))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x0p+0) (f32.const 0x1p+0))
+  (invoke "gt" (f32.const -0) (f32.const 3.402_823_466_385_288_6e+38))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x0p+0) (f32.const -0x1p+0))
+  (invoke "gt" (f32.const 0) (f32.const -3.402_823_466_385_288_6e+38))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x0p+0) (f32.const 0x1p+0))
+  (invoke "gt" (f32.const 0) (f32.const 3.402_823_466_385_288_6e+38))
   (i32.const 0)
-)
-(assert_return
-  (invoke "gt" (f32.const -0x0p+0) (f32.const -0x1.921fb6p+2))
-  (i32.const 1)
 )
+(assert_return (invoke "gt" (f32.const -0) (f32.const -inf)) (i32.const 1))
+(assert_return (invoke "gt" (f32.const -0) (f32.const inf)) (i32.const 0))
+(assert_return (invoke "gt" (f32.const 0) (f32.const -inf)) (i32.const 1))
+(assert_return (invoke "gt" (f32.const 0) (f32.const inf)) (i32.const 0))
 (assert_return
-  (invoke "gt" (f32.const -0x0p+0) (f32.const 0x1.921fb6p+2))
+  (invoke "gt" (f32.const -0) (f32.const -nan:0x400000))
   (i32.const 0)
-)
-(assert_return
-  (invoke "gt" (f32.const 0x0p+0) (f32.const -0x1.921fb6p+2))
-  (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x0p+0) (f32.const 0x1.921fb6p+2))
+  (invoke "gt" (f32.const -0) (f32.const -nan:0x200000))
   (i32.const 0)
-)
-(assert_return
-  (invoke "gt" (f32.const -0x0p+0) (f32.const -0x1.fffffep+127))
-  (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x0p+0) (f32.const 0x1.fffffep+127))
+  (invoke "gt" (f32.const -0) (f32.const nan:0x400000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x0p+0) (f32.const -0x1.fffffep+127))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "gt" (f32.const 0x0p+0) (f32.const 0x1.fffffep+127))
+  (invoke "gt" (f32.const -0) (f32.const nan:0x200000))
   (i32.const 0)
 )
-(assert_return (invoke "gt" (f32.const -0x0p+0) (f32.const -inf)) (i32.const 1))
-(assert_return (invoke "gt" (f32.const -0x0p+0) (f32.const inf)) (i32.const 0))
-(assert_return (invoke "gt" (f32.const 0x0p+0) (f32.const -inf)) (i32.const 1))
-(assert_return (invoke "gt" (f32.const 0x0p+0) (f32.const inf)) (i32.const 0))
 (assert_return
-  (invoke "gt" (f32.const -0x0p+0) (f32.const -nan:0x400000))
+  (invoke "gt" (f32.const 0) (f32.const -nan:0x400000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x0p+0) (f32.const -nan:0x200000))
+  (invoke "gt" (f32.const 0) (f32.const -nan:0x200000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x0p+0) (f32.const nan:0x400000))
+  (invoke "gt" (f32.const 0) (f32.const nan:0x400000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x0p+0) (f32.const nan:0x200000))
+  (invoke "gt" (f32.const 0) (f32.const nan:0x200000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x0p+0) (f32.const -nan:0x400000))
+  (invoke "gt" (f32.const -1.401_298_464_324_817_1e-45) (f32.const -0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x0p+0) (f32.const -nan:0x200000))
+  (invoke "gt" (f32.const -1.401_298_464_324_817_1e-45) (f32.const 0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x0p+0) (f32.const nan:0x400000))
-  (i32.const 0)
+  (invoke "gt" (f32.const 1.401_298_464_324_817_1e-45) (f32.const -0))
+  (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x0p+0) (f32.const nan:0x200000))
-  (i32.const 0)
+  (invoke "gt" (f32.const 1.401_298_464_324_817_1e-45) (f32.const 0))
+  (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x1p-149) (f32.const -0x0p+0))
+  (invoke "gt"
+    (f32.const -1.401_298_464_324_817_1e-45)
+    (f32.const -1.401_298_464_324_817_1e-45)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x1p-149) (f32.const 0x0p+0))
+  (invoke "gt"
+    (f32.const -1.401_298_464_324_817_1e-45)
+    (f32.const 1.401_298_464_324_817_1e-45)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x1p-149) (f32.const -0x0p+0))
+  (invoke "gt"
+    (f32.const 1.401_298_464_324_817_1e-45)
+    (f32.const -1.401_298_464_324_817_1e-45)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x1p-149) (f32.const 0x0p+0))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "gt" (f32.const -0x1p-149) (f32.const -0x1p-149))
+  (invoke "gt"
+    (f32.const 1.401_298_464_324_817_1e-45)
+    (f32.const 1.401_298_464_324_817_1e-45)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x1p-149) (f32.const 0x1p-149))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "gt" (f32.const 0x1p-149) (f32.const -0x1p-149))
+  (invoke "gt"
+    (f32.const -1.401_298_464_324_817_1e-45)
+    (f32.const -1.175_494_350_822_287_5e-38)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x1p-149) (f32.const 0x1p-149))
+  (invoke "gt"
+    (f32.const -1.401_298_464_324_817_1e-45)
+    (f32.const 1.175_494_350_822_287_5e-38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x1p-149) (f32.const -0x1p-126))
+  (invoke "gt"
+    (f32.const 1.401_298_464_324_817_1e-45)
+    (f32.const -1.175_494_350_822_287_5e-38)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x1p-149) (f32.const 0x1p-126))
+  (invoke "gt"
+    (f32.const 1.401_298_464_324_817_1e-45)
+    (f32.const 1.175_494_350_822_287_5e-38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x1p-149) (f32.const -0x1p-126))
+  (invoke "gt" (f32.const -1.401_298_464_324_817_1e-45) (f32.const -0.5))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x1p-149) (f32.const 0x1p-126))
+  (invoke "gt" (f32.const -1.401_298_464_324_817_1e-45) (f32.const 0.5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x1p-149) (f32.const -0x1p-1))
+  (invoke "gt" (f32.const 1.401_298_464_324_817_1e-45) (f32.const -0.5))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x1p-149) (f32.const 0x1p-1))
+  (invoke "gt" (f32.const 1.401_298_464_324_817_1e-45) (f32.const 0.5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x1p-149) (f32.const -0x1p-1))
+  (invoke "gt" (f32.const -1.401_298_464_324_817_1e-45) (f32.const -1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x1p-149) (f32.const 0x1p-1))
+  (invoke "gt" (f32.const -1.401_298_464_324_817_1e-45) (f32.const 1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x1p-149) (f32.const -0x1p+0))
+  (invoke "gt" (f32.const 1.401_298_464_324_817_1e-45) (f32.const -1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x1p-149) (f32.const 0x1p+0))
+  (invoke "gt" (f32.const 1.401_298_464_324_817_1e-45) (f32.const 1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x1p-149) (f32.const -0x1p+0))
+  (invoke "gt"
+    (f32.const -1.401_298_464_324_817_1e-45)
+    (f32.const -6.283_185_482_025_146_5)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x1p-149) (f32.const 0x1p+0))
+  (invoke "gt"
+    (f32.const -1.401_298_464_324_817_1e-45)
+    (f32.const 6.283_185_482_025_146_5)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x1p-149) (f32.const -0x1.921fb6p+2))
+  (invoke "gt"
+    (f32.const 1.401_298_464_324_817_1e-45)
+    (f32.const -6.283_185_482_025_146_5)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x1p-149) (f32.const 0x1.921fb6p+2))
+  (invoke "gt"
+    (f32.const 1.401_298_464_324_817_1e-45)
+    (f32.const 6.283_185_482_025_146_5)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x1p-149) (f32.const -0x1.921fb6p+2))
+  (invoke "gt"
+    (f32.const -1.401_298_464_324_817_1e-45)
+    (f32.const -3.402_823_466_385_288_6e+38)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x1p-149) (f32.const 0x1.921fb6p+2))
+  (invoke "gt"
+    (f32.const -1.401_298_464_324_817_1e-45)
+    (f32.const 3.402_823_466_385_288_6e+38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x1p-149) (f32.const -0x1.fffffep+127))
+  (invoke "gt"
+    (f32.const 1.401_298_464_324_817_1e-45)
+    (f32.const -3.402_823_466_385_288_6e+38)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x1p-149) (f32.const 0x1.fffffep+127))
+  (invoke "gt"
+    (f32.const 1.401_298_464_324_817_1e-45)
+    (f32.const 3.402_823_466_385_288_6e+38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x1p-149) (f32.const -0x1.fffffep+127))
+  (invoke "gt" (f32.const -1.401_298_464_324_817_1e-45) (f32.const -inf))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x1p-149) (f32.const 0x1.fffffep+127))
+  (invoke "gt" (f32.const -1.401_298_464_324_817_1e-45) (f32.const inf))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x1p-149) (f32.const -inf))
+  (invoke "gt" (f32.const 1.401_298_464_324_817_1e-45) (f32.const -inf))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x1p-149) (f32.const inf))
+  (invoke "gt" (f32.const 1.401_298_464_324_817_1e-45) (f32.const inf))
   (i32.const 0)
-)
-(assert_return
-  (invoke "gt" (f32.const 0x1p-149) (f32.const -inf))
-  (i32.const 1)
 )
-(assert_return (invoke "gt" (f32.const 0x1p-149) (f32.const inf)) (i32.const 0))
 (assert_return
-  (invoke "gt" (f32.const -0x1p-149) (f32.const -nan:0x400000))
+  (invoke "gt"
+    (f32.const -1.401_298_464_324_817_1e-45)
+    (f32.const -nan:0x400000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x1p-149) (f32.const -nan:0x200000))
+  (invoke "gt"
+    (f32.const -1.401_298_464_324_817_1e-45)
+    (f32.const -nan:0x200000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x1p-149) (f32.const nan:0x400000))
+  (invoke "gt"
+    (f32.const -1.401_298_464_324_817_1e-45)
+    (f32.const nan:0x400000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x1p-149) (f32.const nan:0x200000))
+  (invoke "gt"
+    (f32.const -1.401_298_464_324_817_1e-45)
+    (f32.const nan:0x200000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x1p-149) (f32.const -nan:0x400000))
+  (invoke "gt"
+    (f32.const 1.401_298_464_324_817_1e-45)
+    (f32.const -nan:0x400000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x1p-149) (f32.const -nan:0x200000))
+  (invoke "gt"
+    (f32.const 1.401_298_464_324_817_1e-45)
+    (f32.const -nan:0x200000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x1p-149) (f32.const nan:0x400000))
+  (invoke "gt" (f32.const 1.401_298_464_324_817_1e-45) (f32.const nan:0x400000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x1p-149) (f32.const nan:0x200000))
+  (invoke "gt" (f32.const 1.401_298_464_324_817_1e-45) (f32.const nan:0x200000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x1p-126) (f32.const -0x0p+0))
+  (invoke "gt" (f32.const -1.175_494_350_822_287_5e-38) (f32.const -0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x1p-126) (f32.const 0x0p+0))
+  (invoke "gt" (f32.const -1.175_494_350_822_287_5e-38) (f32.const 0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x1p-126) (f32.const -0x0p+0))
+  (invoke "gt" (f32.const 1.175_494_350_822_287_5e-38) (f32.const -0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x1p-126) (f32.const 0x0p+0))
+  (invoke "gt" (f32.const 1.175_494_350_822_287_5e-38) (f32.const 0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x1p-126) (f32.const -0x1p-149))
+  (invoke "gt"
+    (f32.const -1.175_494_350_822_287_5e-38)
+    (f32.const -1.401_298_464_324_817_1e-45)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x1p-126) (f32.const 0x1p-149))
+  (invoke "gt"
+    (f32.const -1.175_494_350_822_287_5e-38)
+    (f32.const 1.401_298_464_324_817_1e-45)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x1p-126) (f32.const -0x1p-149))
+  (invoke "gt"
+    (f32.const 1.175_494_350_822_287_5e-38)
+    (f32.const -1.401_298_464_324_817_1e-45)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x1p-126) (f32.const 0x1p-149))
+  (invoke "gt"
+    (f32.const 1.175_494_350_822_287_5e-38)
+    (f32.const 1.401_298_464_324_817_1e-45)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x1p-126) (f32.const -0x1p-126))
+  (invoke "gt"
+    (f32.const -1.175_494_350_822_287_5e-38)
+    (f32.const -1.175_494_350_822_287_5e-38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x1p-126) (f32.const 0x1p-126))
+  (invoke "gt"
+    (f32.const -1.175_494_350_822_287_5e-38)
+    (f32.const 1.175_494_350_822_287_5e-38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x1p-126) (f32.const -0x1p-126))
+  (invoke "gt"
+    (f32.const 1.175_494_350_822_287_5e-38)
+    (f32.const -1.175_494_350_822_287_5e-38)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x1p-126) (f32.const 0x1p-126))
+  (invoke "gt"
+    (f32.const 1.175_494_350_822_287_5e-38)
+    (f32.const 1.175_494_350_822_287_5e-38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x1p-126) (f32.const -0x1p-1))
+  (invoke "gt" (f32.const -1.175_494_350_822_287_5e-38) (f32.const -0.5))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x1p-126) (f32.const 0x1p-1))
+  (invoke "gt" (f32.const -1.175_494_350_822_287_5e-38) (f32.const 0.5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x1p-126) (f32.const -0x1p-1))
+  (invoke "gt" (f32.const 1.175_494_350_822_287_5e-38) (f32.const -0.5))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x1p-126) (f32.const 0x1p-1))
+  (invoke "gt" (f32.const 1.175_494_350_822_287_5e-38) (f32.const 0.5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x1p-126) (f32.const -0x1p+0))
+  (invoke "gt" (f32.const -1.175_494_350_822_287_5e-38) (f32.const -1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x1p-126) (f32.const 0x1p+0))
+  (invoke "gt" (f32.const -1.175_494_350_822_287_5e-38) (f32.const 1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x1p-126) (f32.const -0x1p+0))
+  (invoke "gt" (f32.const 1.175_494_350_822_287_5e-38) (f32.const -1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x1p-126) (f32.const 0x1p+0))
+  (invoke "gt" (f32.const 1.175_494_350_822_287_5e-38) (f32.const 1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x1p-126) (f32.const -0x1.921fb6p+2))
+  (invoke "gt"
+    (f32.const -1.175_494_350_822_287_5e-38)
+    (f32.const -6.283_185_482_025_146_5)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x1p-126) (f32.const 0x1.921fb6p+2))
+  (invoke "gt"
+    (f32.const -1.175_494_350_822_287_5e-38)
+    (f32.const 6.283_185_482_025_146_5)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x1p-126) (f32.const -0x1.921fb6p+2))
+  (invoke "gt"
+    (f32.const 1.175_494_350_822_287_5e-38)
+    (f32.const -6.283_185_482_025_146_5)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x1p-126) (f32.const 0x1.921fb6p+2))
+  (invoke "gt"
+    (f32.const 1.175_494_350_822_287_5e-38)
+    (f32.const 6.283_185_482_025_146_5)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x1p-126) (f32.const -0x1.fffffep+127))
+  (invoke "gt"
+    (f32.const -1.175_494_350_822_287_5e-38)
+    (f32.const -3.402_823_466_385_288_6e+38)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x1p-126) (f32.const 0x1.fffffep+127))
+  (invoke "gt"
+    (f32.const -1.175_494_350_822_287_5e-38)
+    (f32.const 3.402_823_466_385_288_6e+38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x1p-126) (f32.const -0x1.fffffep+127))
+  (invoke "gt"
+    (f32.const 1.175_494_350_822_287_5e-38)
+    (f32.const -3.402_823_466_385_288_6e+38)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x1p-126) (f32.const 0x1.fffffep+127))
+  (invoke "gt"
+    (f32.const 1.175_494_350_822_287_5e-38)
+    (f32.const 3.402_823_466_385_288_6e+38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x1p-126) (f32.const -inf))
+  (invoke "gt" (f32.const -1.175_494_350_822_287_5e-38) (f32.const -inf))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x1p-126) (f32.const inf))
+  (invoke "gt" (f32.const -1.175_494_350_822_287_5e-38) (f32.const inf))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x1p-126) (f32.const -inf))
+  (invoke "gt" (f32.const 1.175_494_350_822_287_5e-38) (f32.const -inf))
   (i32.const 1)
-)
-(assert_return (invoke "gt" (f32.const 0x1p-126) (f32.const inf)) (i32.const 0))
-(assert_return
-  (invoke "gt" (f32.const -0x1p-126) (f32.const -nan:0x400000))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "gt" (f32.const -0x1p-126) (f32.const -nan:0x200000))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "gt" (f32.const -0x1p-126) (f32.const nan:0x400000))
-  (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x1p-126) (f32.const nan:0x200000))
+  (invoke "gt" (f32.const 1.175_494_350_822_287_5e-38) (f32.const inf))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x1p-126) (f32.const -nan:0x400000))
+  (invoke "gt"
+    (f32.const -1.175_494_350_822_287_5e-38)
+    (f32.const -nan:0x400000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x1p-126) (f32.const -nan:0x200000))
+  (invoke "gt"
+    (f32.const -1.175_494_350_822_287_5e-38)
+    (f32.const -nan:0x200000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x1p-126) (f32.const nan:0x400000))
+  (invoke "gt"
+    (f32.const -1.175_494_350_822_287_5e-38)
+    (f32.const nan:0x400000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x1p-126) (f32.const nan:0x200000))
+  (invoke "gt"
+    (f32.const -1.175_494_350_822_287_5e-38)
+    (f32.const nan:0x200000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x1p-1) (f32.const -0x0p+0))
+  (invoke "gt"
+    (f32.const 1.175_494_350_822_287_5e-38)
+    (f32.const -nan:0x400000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x1p-1) (f32.const 0x0p+0))
+  (invoke "gt"
+    (f32.const 1.175_494_350_822_287_5e-38)
+    (f32.const -nan:0x200000)
+  )
   (i32.const 0)
-)
-(assert_return
-  (invoke "gt" (f32.const 0x1p-1) (f32.const -0x0p+0))
-  (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x1p-1) (f32.const 0x0p+0))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "gt" (f32.const -0x1p-1) (f32.const -0x1p-149))
+  (invoke "gt" (f32.const 1.175_494_350_822_287_5e-38) (f32.const nan:0x400000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x1p-1) (f32.const 0x1p-149))
+  (invoke "gt" (f32.const 1.175_494_350_822_287_5e-38) (f32.const nan:0x200000))
   (i32.const 0)
-)
-(assert_return
-  (invoke "gt" (f32.const 0x1p-1) (f32.const -0x1p-149))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "gt" (f32.const 0x1p-1) (f32.const 0x1p-149))
-  (i32.const 1)
 )
+(assert_return (invoke "gt" (f32.const -0.5) (f32.const -0)) (i32.const 0))
+(assert_return (invoke "gt" (f32.const -0.5) (f32.const 0)) (i32.const 0))
+(assert_return (invoke "gt" (f32.const 0.5) (f32.const -0)) (i32.const 1))
+(assert_return (invoke "gt" (f32.const 0.5) (f32.const 0)) (i32.const 1))
 (assert_return
-  (invoke "gt" (f32.const -0x1p-1) (f32.const -0x1p-126))
+  (invoke "gt" (f32.const -0.5) (f32.const -1.401_298_464_324_817_1e-45))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x1p-1) (f32.const 0x1p-126))
+  (invoke "gt" (f32.const -0.5) (f32.const 1.401_298_464_324_817_1e-45))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x1p-1) (f32.const -0x1p-126))
+  (invoke "gt" (f32.const 0.5) (f32.const -1.401_298_464_324_817_1e-45))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x1p-1) (f32.const 0x1p-126))
+  (invoke "gt" (f32.const 0.5) (f32.const 1.401_298_464_324_817_1e-45))
   (i32.const 1)
-)
-(assert_return
-  (invoke "gt" (f32.const -0x1p-1) (f32.const -0x1p-1))
-  (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x1p-1) (f32.const 0x1p-1))
+  (invoke "gt" (f32.const -0.5) (f32.const -1.175_494_350_822_287_5e-38))
   (i32.const 0)
-)
-(assert_return
-  (invoke "gt" (f32.const 0x1p-1) (f32.const -0x1p-1))
-  (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x1p-1) (f32.const 0x1p-1))
+  (invoke "gt" (f32.const -0.5) (f32.const 1.175_494_350_822_287_5e-38))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x1p-1) (f32.const -0x1p+0))
+  (invoke "gt" (f32.const 0.5) (f32.const -1.175_494_350_822_287_5e-38))
   (i32.const 1)
-)
-(assert_return
-  (invoke "gt" (f32.const -0x1p-1) (f32.const 0x1p+0))
-  (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x1p-1) (f32.const -0x1p+0))
+  (invoke "gt" (f32.const 0.5) (f32.const 1.175_494_350_822_287_5e-38))
   (i32.const 1)
-)
-(assert_return
-  (invoke "gt" (f32.const 0x1p-1) (f32.const 0x1p+0))
-  (i32.const 0)
 )
+(assert_return (invoke "gt" (f32.const -0.5) (f32.const -0.5)) (i32.const 0))
+(assert_return (invoke "gt" (f32.const -0.5) (f32.const 0.5)) (i32.const 0))
+(assert_return (invoke "gt" (f32.const 0.5) (f32.const -0.5)) (i32.const 1))
+(assert_return (invoke "gt" (f32.const 0.5) (f32.const 0.5)) (i32.const 0))
+(assert_return (invoke "gt" (f32.const -0.5) (f32.const -1)) (i32.const 1))
+(assert_return (invoke "gt" (f32.const -0.5) (f32.const 1)) (i32.const 0))
+(assert_return (invoke "gt" (f32.const 0.5) (f32.const -1)) (i32.const 1))
+(assert_return (invoke "gt" (f32.const 0.5) (f32.const 1)) (i32.const 0))
 (assert_return
-  (invoke "gt" (f32.const -0x1p-1) (f32.const -0x1.921fb6p+2))
+  (invoke "gt" (f32.const -0.5) (f32.const -6.283_185_482_025_146_5))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x1p-1) (f32.const 0x1.921fb6p+2))
+  (invoke "gt" (f32.const -0.5) (f32.const 6.283_185_482_025_146_5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x1p-1) (f32.const -0x1.921fb6p+2))
+  (invoke "gt" (f32.const 0.5) (f32.const -6.283_185_482_025_146_5))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x1p-1) (f32.const 0x1.921fb6p+2))
+  (invoke "gt" (f32.const 0.5) (f32.const 6.283_185_482_025_146_5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x1p-1) (f32.const -0x1.fffffep+127))
+  (invoke "gt" (f32.const -0.5) (f32.const -3.402_823_466_385_288_6e+38))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x1p-1) (f32.const 0x1.fffffep+127))
+  (invoke "gt" (f32.const -0.5) (f32.const 3.402_823_466_385_288_6e+38))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x1p-1) (f32.const -0x1.fffffep+127))
+  (invoke "gt" (f32.const 0.5) (f32.const -3.402_823_466_385_288_6e+38))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x1p-1) (f32.const 0x1.fffffep+127))
+  (invoke "gt" (f32.const 0.5) (f32.const 3.402_823_466_385_288_6e+38))
   (i32.const 0)
 )
-(assert_return (invoke "gt" (f32.const -0x1p-1) (f32.const -inf)) (i32.const 1))
-(assert_return (invoke "gt" (f32.const -0x1p-1) (f32.const inf)) (i32.const 0))
-(assert_return (invoke "gt" (f32.const 0x1p-1) (f32.const -inf)) (i32.const 1))
-(assert_return (invoke "gt" (f32.const 0x1p-1) (f32.const inf)) (i32.const 0))
+(assert_return (invoke "gt" (f32.const -0.5) (f32.const -inf)) (i32.const 1))
+(assert_return (invoke "gt" (f32.const -0.5) (f32.const inf)) (i32.const 0))
+(assert_return (invoke "gt" (f32.const 0.5) (f32.const -inf)) (i32.const 1))
+(assert_return (invoke "gt" (f32.const 0.5) (f32.const inf)) (i32.const 0))
 (assert_return
-  (invoke "gt" (f32.const -0x1p-1) (f32.const -nan:0x400000))
+  (invoke "gt" (f32.const -0.5) (f32.const -nan:0x400000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x1p-1) (f32.const -nan:0x200000))
+  (invoke "gt" (f32.const -0.5) (f32.const -nan:0x200000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x1p-1) (f32.const nan:0x400000))
+  (invoke "gt" (f32.const -0.5) (f32.const nan:0x400000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x1p-1) (f32.const nan:0x200000))
+  (invoke "gt" (f32.const -0.5) (f32.const nan:0x200000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x1p-1) (f32.const -nan:0x400000))
+  (invoke "gt" (f32.const 0.5) (f32.const -nan:0x400000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x1p-1) (f32.const -nan:0x200000))
+  (invoke "gt" (f32.const 0.5) (f32.const -nan:0x200000))
   (i32.const 0)
-)
-(assert_return
-  (invoke "gt" (f32.const 0x1p-1) (f32.const nan:0x400000))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "gt" (f32.const 0x1p-1) (f32.const nan:0x200000))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "gt" (f32.const -0x1p+0) (f32.const -0x0p+0))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "gt" (f32.const -0x1p+0) (f32.const 0x0p+0))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "gt" (f32.const 0x1p+0) (f32.const -0x0p+0))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "gt" (f32.const 0x1p+0) (f32.const 0x0p+0))
-  (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x1p+0) (f32.const -0x1p-149))
+  (invoke "gt" (f32.const 0.5) (f32.const nan:0x400000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x1p+0) (f32.const 0x1p-149))
+  (invoke "gt" (f32.const 0.5) (f32.const nan:0x200000))
   (i32.const 0)
-)
-(assert_return
-  (invoke "gt" (f32.const 0x1p+0) (f32.const -0x1p-149))
-  (i32.const 1)
 )
+(assert_return (invoke "gt" (f32.const -1) (f32.const -0)) (i32.const 0))
+(assert_return (invoke "gt" (f32.const -1) (f32.const 0)) (i32.const 0))
+(assert_return (invoke "gt" (f32.const 1) (f32.const -0)) (i32.const 1))
+(assert_return (invoke "gt" (f32.const 1) (f32.const 0)) (i32.const 1))
 (assert_return
-  (invoke "gt" (f32.const 0x1p+0) (f32.const 0x1p-149))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "gt" (f32.const -0x1p+0) (f32.const -0x1p-126))
+  (invoke "gt" (f32.const -1) (f32.const -1.401_298_464_324_817_1e-45))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x1p+0) (f32.const 0x1p-126))
+  (invoke "gt" (f32.const -1) (f32.const 1.401_298_464_324_817_1e-45))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x1p+0) (f32.const -0x1p-126))
+  (invoke "gt" (f32.const 1) (f32.const -1.401_298_464_324_817_1e-45))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x1p+0) (f32.const 0x1p-126))
+  (invoke "gt" (f32.const 1) (f32.const 1.401_298_464_324_817_1e-45))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x1p+0) (f32.const -0x1p-1))
+  (invoke "gt" (f32.const -1) (f32.const -1.175_494_350_822_287_5e-38))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x1p+0) (f32.const 0x1p-1))
+  (invoke "gt" (f32.const -1) (f32.const 1.175_494_350_822_287_5e-38))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x1p+0) (f32.const -0x1p-1))
+  (invoke "gt" (f32.const 1) (f32.const -1.175_494_350_822_287_5e-38))
   (i32.const 1)
-)
-(assert_return
-  (invoke "gt" (f32.const 0x1p+0) (f32.const 0x1p-1))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "gt" (f32.const -0x1p+0) (f32.const -0x1p+0))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "gt" (f32.const -0x1p+0) (f32.const 0x1p+0))
-  (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x1p+0) (f32.const -0x1p+0))
+  (invoke "gt" (f32.const 1) (f32.const 1.175_494_350_822_287_5e-38))
   (i32.const 1)
-)
-(assert_return
-  (invoke "gt" (f32.const 0x1p+0) (f32.const 0x1p+0))
-  (i32.const 0)
 )
+(assert_return (invoke "gt" (f32.const -1) (f32.const -0.5)) (i32.const 0))
+(assert_return (invoke "gt" (f32.const -1) (f32.const 0.5)) (i32.const 0))
+(assert_return (invoke "gt" (f32.const 1) (f32.const -0.5)) (i32.const 1))
+(assert_return (invoke "gt" (f32.const 1) (f32.const 0.5)) (i32.const 1))
+(assert_return (invoke "gt" (f32.const -1) (f32.const -1)) (i32.const 0))
+(assert_return (invoke "gt" (f32.const -1) (f32.const 1)) (i32.const 0))
+(assert_return (invoke "gt" (f32.const 1) (f32.const -1)) (i32.const 1))
+(assert_return (invoke "gt" (f32.const 1) (f32.const 1)) (i32.const 0))
 (assert_return
-  (invoke "gt" (f32.const -0x1p+0) (f32.const -0x1.921fb6p+2))
+  (invoke "gt" (f32.const -1) (f32.const -6.283_185_482_025_146_5))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x1p+0) (f32.const 0x1.921fb6p+2))
+  (invoke "gt" (f32.const -1) (f32.const 6.283_185_482_025_146_5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x1p+0) (f32.const -0x1.921fb6p+2))
+  (invoke "gt" (f32.const 1) (f32.const -6.283_185_482_025_146_5))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x1p+0) (f32.const 0x1.921fb6p+2))
+  (invoke "gt" (f32.const 1) (f32.const 6.283_185_482_025_146_5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x1p+0) (f32.const -0x1.fffffep+127))
+  (invoke "gt" (f32.const -1) (f32.const -3.402_823_466_385_288_6e+38))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x1p+0) (f32.const 0x1.fffffep+127))
+  (invoke "gt" (f32.const -1) (f32.const 3.402_823_466_385_288_6e+38))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x1p+0) (f32.const -0x1.fffffep+127))
+  (invoke "gt" (f32.const 1) (f32.const -3.402_823_466_385_288_6e+38))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x1p+0) (f32.const 0x1.fffffep+127))
+  (invoke "gt" (f32.const 1) (f32.const 3.402_823_466_385_288_6e+38))
   (i32.const 0)
 )
-(assert_return (invoke "gt" (f32.const -0x1p+0) (f32.const -inf)) (i32.const 1))
-(assert_return (invoke "gt" (f32.const -0x1p+0) (f32.const inf)) (i32.const 0))
-(assert_return (invoke "gt" (f32.const 0x1p+0) (f32.const -inf)) (i32.const 1))
-(assert_return (invoke "gt" (f32.const 0x1p+0) (f32.const inf)) (i32.const 0))
+(assert_return (invoke "gt" (f32.const -1) (f32.const -inf)) (i32.const 1))
+(assert_return (invoke "gt" (f32.const -1) (f32.const inf)) (i32.const 0))
+(assert_return (invoke "gt" (f32.const 1) (f32.const -inf)) (i32.const 1))
+(assert_return (invoke "gt" (f32.const 1) (f32.const inf)) (i32.const 0))
 (assert_return
-  (invoke "gt" (f32.const -0x1p+0) (f32.const -nan:0x400000))
+  (invoke "gt" (f32.const -1) (f32.const -nan:0x400000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x1p+0) (f32.const -nan:0x200000))
+  (invoke "gt" (f32.const -1) (f32.const -nan:0x200000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x1p+0) (f32.const nan:0x400000))
+  (invoke "gt" (f32.const -1) (f32.const nan:0x400000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x1p+0) (f32.const nan:0x200000))
+  (invoke "gt" (f32.const -1) (f32.const nan:0x200000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x1p+0) (f32.const -nan:0x400000))
+  (invoke "gt" (f32.const 1) (f32.const -nan:0x400000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x1p+0) (f32.const -nan:0x200000))
+  (invoke "gt" (f32.const 1) (f32.const -nan:0x200000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x1p+0) (f32.const nan:0x400000))
+  (invoke "gt" (f32.const 1) (f32.const nan:0x400000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x1p+0) (f32.const nan:0x200000))
+  (invoke "gt" (f32.const 1) (f32.const nan:0x200000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x1.921fb6p+2) (f32.const -0x0p+0))
+  (invoke "gt" (f32.const -6.283_185_482_025_146_5) (f32.const -0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x1.921fb6p+2) (f32.const 0x0p+0))
+  (invoke "gt" (f32.const -6.283_185_482_025_146_5) (f32.const 0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x1.921fb6p+2) (f32.const -0x0p+0))
+  (invoke "gt" (f32.const 6.283_185_482_025_146_5) (f32.const -0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x1.921fb6p+2) (f32.const 0x0p+0))
+  (invoke "gt" (f32.const 6.283_185_482_025_146_5) (f32.const 0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x1.921fb6p+2) (f32.const -0x1p-149))
+  (invoke "gt"
+    (f32.const -6.283_185_482_025_146_5)
+    (f32.const -1.401_298_464_324_817_1e-45)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x1.921fb6p+2) (f32.const 0x1p-149))
+  (invoke "gt"
+    (f32.const -6.283_185_482_025_146_5)
+    (f32.const 1.401_298_464_324_817_1e-45)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x1.921fb6p+2) (f32.const -0x1p-149))
+  (invoke "gt"
+    (f32.const 6.283_185_482_025_146_5)
+    (f32.const -1.401_298_464_324_817_1e-45)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x1.921fb6p+2) (f32.const 0x1p-149))
+  (invoke "gt"
+    (f32.const 6.283_185_482_025_146_5)
+    (f32.const 1.401_298_464_324_817_1e-45)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x1.921fb6p+2) (f32.const -0x1p-126))
+  (invoke "gt"
+    (f32.const -6.283_185_482_025_146_5)
+    (f32.const -1.175_494_350_822_287_5e-38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x1.921fb6p+2) (f32.const 0x1p-126))
+  (invoke "gt"
+    (f32.const -6.283_185_482_025_146_5)
+    (f32.const 1.175_494_350_822_287_5e-38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x1.921fb6p+2) (f32.const -0x1p-126))
+  (invoke "gt"
+    (f32.const 6.283_185_482_025_146_5)
+    (f32.const -1.175_494_350_822_287_5e-38)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x1.921fb6p+2) (f32.const 0x1p-126))
+  (invoke "gt"
+    (f32.const 6.283_185_482_025_146_5)
+    (f32.const 1.175_494_350_822_287_5e-38)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x1.921fb6p+2) (f32.const -0x1p-1))
+  (invoke "gt" (f32.const -6.283_185_482_025_146_5) (f32.const -0.5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x1.921fb6p+2) (f32.const 0x1p-1))
+  (invoke "gt" (f32.const -6.283_185_482_025_146_5) (f32.const 0.5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x1.921fb6p+2) (f32.const -0x1p-1))
+  (invoke "gt" (f32.const 6.283_185_482_025_146_5) (f32.const -0.5))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x1.921fb6p+2) (f32.const 0x1p-1))
+  (invoke "gt" (f32.const 6.283_185_482_025_146_5) (f32.const 0.5))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x1.921fb6p+2) (f32.const -0x1p+0))
+  (invoke "gt" (f32.const -6.283_185_482_025_146_5) (f32.const -1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x1.921fb6p+2) (f32.const 0x1p+0))
+  (invoke "gt" (f32.const -6.283_185_482_025_146_5) (f32.const 1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x1.921fb6p+2) (f32.const -0x1p+0))
+  (invoke "gt" (f32.const 6.283_185_482_025_146_5) (f32.const -1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x1.921fb6p+2) (f32.const 0x1p+0))
+  (invoke "gt" (f32.const 6.283_185_482_025_146_5) (f32.const 1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x1.921fb6p+2) (f32.const -0x1.921fb6p+2))
+  (invoke "gt"
+    (f32.const -6.283_185_482_025_146_5)
+    (f32.const -6.283_185_482_025_146_5)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x1.921fb6p+2) (f32.const 0x1.921fb6p+2))
+  (invoke "gt"
+    (f32.const -6.283_185_482_025_146_5)
+    (f32.const 6.283_185_482_025_146_5)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x1.921fb6p+2) (f32.const -0x1.921fb6p+2))
+  (invoke "gt"
+    (f32.const 6.283_185_482_025_146_5)
+    (f32.const -6.283_185_482_025_146_5)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x1.921fb6p+2) (f32.const 0x1.921fb6p+2))
+  (invoke "gt"
+    (f32.const 6.283_185_482_025_146_5)
+    (f32.const 6.283_185_482_025_146_5)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x1.921fb6p+2) (f32.const -0x1.fffffep+127))
+  (invoke "gt"
+    (f32.const -6.283_185_482_025_146_5)
+    (f32.const -3.402_823_466_385_288_6e+38)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x1.921fb6p+2) (f32.const 0x1.fffffep+127))
+  (invoke "gt"
+    (f32.const -6.283_185_482_025_146_5)
+    (f32.const 3.402_823_466_385_288_6e+38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x1.921fb6p+2) (f32.const -0x1.fffffep+127))
+  (invoke "gt"
+    (f32.const 6.283_185_482_025_146_5)
+    (f32.const -3.402_823_466_385_288_6e+38)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x1.921fb6p+2) (f32.const 0x1.fffffep+127))
+  (invoke "gt"
+    (f32.const 6.283_185_482_025_146_5)
+    (f32.const 3.402_823_466_385_288_6e+38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x1.921fb6p+2) (f32.const -inf))
+  (invoke "gt" (f32.const -6.283_185_482_025_146_5) (f32.const -inf))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x1.921fb6p+2) (f32.const inf))
+  (invoke "gt" (f32.const -6.283_185_482_025_146_5) (f32.const inf))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x1.921fb6p+2) (f32.const -inf))
+  (invoke "gt" (f32.const 6.283_185_482_025_146_5) (f32.const -inf))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x1.921fb6p+2) (f32.const inf))
+  (invoke "gt" (f32.const 6.283_185_482_025_146_5) (f32.const inf))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x1.921fb6p+2) (f32.const -nan:0x400000))
+  (invoke "gt" (f32.const -6.283_185_482_025_146_5) (f32.const -nan:0x400000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x1.921fb6p+2) (f32.const -nan:0x200000))
+  (invoke "gt" (f32.const -6.283_185_482_025_146_5) (f32.const -nan:0x200000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x1.921fb6p+2) (f32.const nan:0x400000))
+  (invoke "gt" (f32.const -6.283_185_482_025_146_5) (f32.const nan:0x400000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x1.921fb6p+2) (f32.const nan:0x200000))
+  (invoke "gt" (f32.const -6.283_185_482_025_146_5) (f32.const nan:0x200000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x1.921fb6p+2) (f32.const -nan:0x400000))
+  (invoke "gt" (f32.const 6.283_185_482_025_146_5) (f32.const -nan:0x400000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x1.921fb6p+2) (f32.const -nan:0x200000))
+  (invoke "gt" (f32.const 6.283_185_482_025_146_5) (f32.const -nan:0x200000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x1.921fb6p+2) (f32.const nan:0x400000))
+  (invoke "gt" (f32.const 6.283_185_482_025_146_5) (f32.const nan:0x400000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x1.921fb6p+2) (f32.const nan:0x200000))
+  (invoke "gt" (f32.const 6.283_185_482_025_146_5) (f32.const nan:0x200000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x1.fffffep+127) (f32.const -0x0p+0))
+  (invoke "gt" (f32.const -3.402_823_466_385_288_6e+38) (f32.const -0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x1.fffffep+127) (f32.const 0x0p+0))
+  (invoke "gt" (f32.const -3.402_823_466_385_288_6e+38) (f32.const 0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x1.fffffep+127) (f32.const -0x0p+0))
+  (invoke "gt" (f32.const 3.402_823_466_385_288_6e+38) (f32.const -0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x1.fffffep+127) (f32.const 0x0p+0))
+  (invoke "gt" (f32.const 3.402_823_466_385_288_6e+38) (f32.const 0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x1.fffffep+127) (f32.const -0x1p-149))
+  (invoke "gt"
+    (f32.const -3.402_823_466_385_288_6e+38)
+    (f32.const -1.401_298_464_324_817_1e-45)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x1.fffffep+127) (f32.const 0x1p-149))
+  (invoke "gt"
+    (f32.const -3.402_823_466_385_288_6e+38)
+    (f32.const 1.401_298_464_324_817_1e-45)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x1.fffffep+127) (f32.const -0x1p-149))
+  (invoke "gt"
+    (f32.const 3.402_823_466_385_288_6e+38)
+    (f32.const -1.401_298_464_324_817_1e-45)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x1.fffffep+127) (f32.const 0x1p-149))
+  (invoke "gt"
+    (f32.const 3.402_823_466_385_288_6e+38)
+    (f32.const 1.401_298_464_324_817_1e-45)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x1.fffffep+127) (f32.const -0x1p-126))
+  (invoke "gt"
+    (f32.const -3.402_823_466_385_288_6e+38)
+    (f32.const -1.175_494_350_822_287_5e-38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x1.fffffep+127) (f32.const 0x1p-126))
+  (invoke "gt"
+    (f32.const -3.402_823_466_385_288_6e+38)
+    (f32.const 1.175_494_350_822_287_5e-38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x1.fffffep+127) (f32.const -0x1p-126))
+  (invoke "gt"
+    (f32.const 3.402_823_466_385_288_6e+38)
+    (f32.const -1.175_494_350_822_287_5e-38)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x1.fffffep+127) (f32.const 0x1p-126))
+  (invoke "gt"
+    (f32.const 3.402_823_466_385_288_6e+38)
+    (f32.const 1.175_494_350_822_287_5e-38)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x1.fffffep+127) (f32.const -0x1p-1))
+  (invoke "gt" (f32.const -3.402_823_466_385_288_6e+38) (f32.const -0.5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x1.fffffep+127) (f32.const 0x1p-1))
+  (invoke "gt" (f32.const -3.402_823_466_385_288_6e+38) (f32.const 0.5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x1.fffffep+127) (f32.const -0x1p-1))
+  (invoke "gt" (f32.const 3.402_823_466_385_288_6e+38) (f32.const -0.5))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x1.fffffep+127) (f32.const 0x1p-1))
+  (invoke "gt" (f32.const 3.402_823_466_385_288_6e+38) (f32.const 0.5))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x1.fffffep+127) (f32.const -0x1p+0))
+  (invoke "gt" (f32.const -3.402_823_466_385_288_6e+38) (f32.const -1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x1.fffffep+127) (f32.const 0x1p+0))
+  (invoke "gt" (f32.const -3.402_823_466_385_288_6e+38) (f32.const 1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x1.fffffep+127) (f32.const -0x1p+0))
+  (invoke "gt" (f32.const 3.402_823_466_385_288_6e+38) (f32.const -1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x1.fffffep+127) (f32.const 0x1p+0))
+  (invoke "gt" (f32.const 3.402_823_466_385_288_6e+38) (f32.const 1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x1.fffffep+127) (f32.const -0x1.921fb6p+2))
+  (invoke "gt"
+    (f32.const -3.402_823_466_385_288_6e+38)
+    (f32.const -6.283_185_482_025_146_5)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x1.fffffep+127) (f32.const 0x1.921fb6p+2))
+  (invoke "gt"
+    (f32.const -3.402_823_466_385_288_6e+38)
+    (f32.const 6.283_185_482_025_146_5)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x1.fffffep+127) (f32.const -0x1.921fb6p+2))
+  (invoke "gt"
+    (f32.const 3.402_823_466_385_288_6e+38)
+    (f32.const -6.283_185_482_025_146_5)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x1.fffffep+127) (f32.const 0x1.921fb6p+2))
+  (invoke "gt"
+    (f32.const 3.402_823_466_385_288_6e+38)
+    (f32.const 6.283_185_482_025_146_5)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x1.fffffep+127) (f32.const -0x1.fffffep+127))
+  (invoke "gt"
+    (f32.const -3.402_823_466_385_288_6e+38)
+    (f32.const -3.402_823_466_385_288_6e+38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x1.fffffep+127) (f32.const 0x1.fffffep+127))
+  (invoke "gt"
+    (f32.const -3.402_823_466_385_288_6e+38)
+    (f32.const 3.402_823_466_385_288_6e+38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x1.fffffep+127) (f32.const -0x1.fffffep+127))
+  (invoke "gt"
+    (f32.const 3.402_823_466_385_288_6e+38)
+    (f32.const -3.402_823_466_385_288_6e+38)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x1.fffffep+127) (f32.const 0x1.fffffep+127))
+  (invoke "gt"
+    (f32.const 3.402_823_466_385_288_6e+38)
+    (f32.const 3.402_823_466_385_288_6e+38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x1.fffffep+127) (f32.const -inf))
+  (invoke "gt" (f32.const -3.402_823_466_385_288_6e+38) (f32.const -inf))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x1.fffffep+127) (f32.const inf))
+  (invoke "gt" (f32.const -3.402_823_466_385_288_6e+38) (f32.const inf))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x1.fffffep+127) (f32.const -inf))
+  (invoke "gt" (f32.const 3.402_823_466_385_288_6e+38) (f32.const -inf))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x1.fffffep+127) (f32.const inf))
+  (invoke "gt" (f32.const 3.402_823_466_385_288_6e+38) (f32.const inf))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x1.fffffep+127) (f32.const -nan:0x400000))
+  (invoke "gt"
+    (f32.const -3.402_823_466_385_288_6e+38)
+    (f32.const -nan:0x400000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x1.fffffep+127) (f32.const -nan:0x200000))
+  (invoke "gt"
+    (f32.const -3.402_823_466_385_288_6e+38)
+    (f32.const -nan:0x200000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x1.fffffep+127) (f32.const nan:0x400000))
+  (invoke "gt"
+    (f32.const -3.402_823_466_385_288_6e+38)
+    (f32.const nan:0x400000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const -0x1.fffffep+127) (f32.const nan:0x200000))
+  (invoke "gt"
+    (f32.const -3.402_823_466_385_288_6e+38)
+    (f32.const nan:0x200000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x1.fffffep+127) (f32.const -nan:0x400000))
+  (invoke "gt"
+    (f32.const 3.402_823_466_385_288_6e+38)
+    (f32.const -nan:0x400000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x1.fffffep+127) (f32.const -nan:0x200000))
+  (invoke "gt"
+    (f32.const 3.402_823_466_385_288_6e+38)
+    (f32.const -nan:0x200000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x1.fffffep+127) (f32.const nan:0x400000))
+  (invoke "gt" (f32.const 3.402_823_466_385_288_6e+38) (f32.const nan:0x400000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const 0x1.fffffep+127) (f32.const nan:0x200000))
+  (invoke "gt" (f32.const 3.402_823_466_385_288_6e+38) (f32.const nan:0x200000))
   (i32.const 0)
 )
-(assert_return (invoke "gt" (f32.const -inf) (f32.const -0x0p+0)) (i32.const 0))
-(assert_return (invoke "gt" (f32.const -inf) (f32.const 0x0p+0)) (i32.const 0))
-(assert_return (invoke "gt" (f32.const inf) (f32.const -0x0p+0)) (i32.const 1))
-(assert_return (invoke "gt" (f32.const inf) (f32.const 0x0p+0)) (i32.const 1))
+(assert_return (invoke "gt" (f32.const -inf) (f32.const -0)) (i32.const 0))
+(assert_return (invoke "gt" (f32.const -inf) (f32.const 0)) (i32.const 0))
+(assert_return (invoke "gt" (f32.const inf) (f32.const -0)) (i32.const 1))
+(assert_return (invoke "gt" (f32.const inf) (f32.const 0)) (i32.const 1))
 (assert_return
-  (invoke "gt" (f32.const -inf) (f32.const -0x1p-149))
+  (invoke "gt" (f32.const -inf) (f32.const -1.401_298_464_324_817_1e-45))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const -inf) (f32.const 0x1p-149))
+  (invoke "gt" (f32.const -inf) (f32.const 1.401_298_464_324_817_1e-45))
   (i32.const 0)
+)
+(assert_return
+  (invoke "gt" (f32.const inf) (f32.const -1.401_298_464_324_817_1e-45))
+  (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f32.const inf) (f32.const -0x1p-149))
+  (invoke "gt" (f32.const inf) (f32.const 1.401_298_464_324_817_1e-45))
   (i32.const 1)
 )
-(assert_return (invoke "gt" (f32.const inf) (f32.const 0x1p-149)) (i32.const 1))
 (assert_return
-  (invoke "gt" (f32.const -inf) (f32.const -0x1p-126))
+  (invoke "gt" (f32.const -inf) (f32.const -1.175_494_350_822_287_5e-38))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const -inf) (f32.const 0x1p-126))
+  (invoke "gt" (f32.const -inf) (f32.const 1.175_494_350_822_287_5e-38))
   (i32.const 0)
+)
+(assert_return
+  (invoke "gt" (f32.const inf) (f32.const -1.175_494_350_822_287_5e-38))
+  (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f32.const inf) (f32.const -0x1p-126))
+  (invoke "gt" (f32.const inf) (f32.const 1.175_494_350_822_287_5e-38))
   (i32.const 1)
 )
-(assert_return (invoke "gt" (f32.const inf) (f32.const 0x1p-126)) (i32.const 1))
-(assert_return (invoke "gt" (f32.const -inf) (f32.const -0x1p-1)) (i32.const 0))
-(assert_return (invoke "gt" (f32.const -inf) (f32.const 0x1p-1)) (i32.const 0))
-(assert_return (invoke "gt" (f32.const inf) (f32.const -0x1p-1)) (i32.const 1))
-(assert_return (invoke "gt" (f32.const inf) (f32.const 0x1p-1)) (i32.const 1))
-(assert_return (invoke "gt" (f32.const -inf) (f32.const -0x1p+0)) (i32.const 0))
-(assert_return (invoke "gt" (f32.const -inf) (f32.const 0x1p+0)) (i32.const 0))
-(assert_return (invoke "gt" (f32.const inf) (f32.const -0x1p+0)) (i32.const 1))
-(assert_return (invoke "gt" (f32.const inf) (f32.const 0x1p+0)) (i32.const 1))
+(assert_return (invoke "gt" (f32.const -inf) (f32.const -0.5)) (i32.const 0))
+(assert_return (invoke "gt" (f32.const -inf) (f32.const 0.5)) (i32.const 0))
+(assert_return (invoke "gt" (f32.const inf) (f32.const -0.5)) (i32.const 1))
+(assert_return (invoke "gt" (f32.const inf) (f32.const 0.5)) (i32.const 1))
+(assert_return (invoke "gt" (f32.const -inf) (f32.const -1)) (i32.const 0))
+(assert_return (invoke "gt" (f32.const -inf) (f32.const 1)) (i32.const 0))
+(assert_return (invoke "gt" (f32.const inf) (f32.const -1)) (i32.const 1))
+(assert_return (invoke "gt" (f32.const inf) (f32.const 1)) (i32.const 1))
 (assert_return
-  (invoke "gt" (f32.const -inf) (f32.const -0x1.921fb6p+2))
+  (invoke "gt" (f32.const -inf) (f32.const -6.283_185_482_025_146_5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const -inf) (f32.const 0x1.921fb6p+2))
+  (invoke "gt" (f32.const -inf) (f32.const 6.283_185_482_025_146_5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const inf) (f32.const -0x1.921fb6p+2))
+  (invoke "gt" (f32.const inf) (f32.const -6.283_185_482_025_146_5))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f32.const inf) (f32.const 0x1.921fb6p+2))
+  (invoke "gt" (f32.const inf) (f32.const 6.283_185_482_025_146_5))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f32.const -inf) (f32.const -0x1.fffffep+127))
+  (invoke "gt" (f32.const -inf) (f32.const -3.402_823_466_385_288_6e+38))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const -inf) (f32.const 0x1.fffffep+127))
+  (invoke "gt" (f32.const -inf) (f32.const 3.402_823_466_385_288_6e+38))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const inf) (f32.const -0x1.fffffep+127))
+  (invoke "gt" (f32.const inf) (f32.const -3.402_823_466_385_288_6e+38))
   (i32.const 1)
 )
 (assert_return
-  (invoke "gt" (f32.const inf) (f32.const 0x1.fffffep+127))
+  (invoke "gt" (f32.const inf) (f32.const 3.402_823_466_385_288_6e+38))
   (i32.const 1)
 )
 (assert_return (invoke "gt" (f32.const -inf) (f32.const -inf)) (i32.const 0))
@@ -7211,227 +8177,281 @@
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const -nan:0x400000) (f32.const -0x0p+0))
+  (invoke "gt" (f32.const -nan:0x400000) (f32.const -0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const -nan:0x200000) (f32.const -0x0p+0))
+  (invoke "gt" (f32.const -nan:0x200000) (f32.const -0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const -nan:0x400000) (f32.const 0x0p+0))
+  (invoke "gt" (f32.const -nan:0x400000) (f32.const 0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const -nan:0x200000) (f32.const 0x0p+0))
+  (invoke "gt" (f32.const -nan:0x200000) (f32.const 0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const nan:0x400000) (f32.const -0x0p+0))
+  (invoke "gt" (f32.const nan:0x400000) (f32.const -0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const nan:0x200000) (f32.const -0x0p+0))
+  (invoke "gt" (f32.const nan:0x200000) (f32.const -0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const nan:0x400000) (f32.const 0x0p+0))
+  (invoke "gt" (f32.const nan:0x400000) (f32.const 0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const nan:0x200000) (f32.const 0x0p+0))
+  (invoke "gt" (f32.const nan:0x200000) (f32.const 0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const -nan:0x400000) (f32.const -0x1p-149))
+  (invoke "gt"
+    (f32.const -nan:0x400000)
+    (f32.const -1.401_298_464_324_817_1e-45)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const -nan:0x200000) (f32.const -0x1p-149))
+  (invoke "gt"
+    (f32.const -nan:0x200000)
+    (f32.const -1.401_298_464_324_817_1e-45)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const -nan:0x400000) (f32.const 0x1p-149))
+  (invoke "gt"
+    (f32.const -nan:0x400000)
+    (f32.const 1.401_298_464_324_817_1e-45)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const -nan:0x200000) (f32.const 0x1p-149))
+  (invoke "gt"
+    (f32.const -nan:0x200000)
+    (f32.const 1.401_298_464_324_817_1e-45)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const nan:0x400000) (f32.const -0x1p-149))
+  (invoke "gt"
+    (f32.const nan:0x400000)
+    (f32.const -1.401_298_464_324_817_1e-45)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const nan:0x200000) (f32.const -0x1p-149))
+  (invoke "gt"
+    (f32.const nan:0x200000)
+    (f32.const -1.401_298_464_324_817_1e-45)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const nan:0x400000) (f32.const 0x1p-149))
+  (invoke "gt" (f32.const nan:0x400000) (f32.const 1.401_298_464_324_817_1e-45))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const nan:0x200000) (f32.const 0x1p-149))
+  (invoke "gt" (f32.const nan:0x200000) (f32.const 1.401_298_464_324_817_1e-45))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const -nan:0x400000) (f32.const -0x1p-126))
+  (invoke "gt"
+    (f32.const -nan:0x400000)
+    (f32.const -1.175_494_350_822_287_5e-38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const -nan:0x200000) (f32.const -0x1p-126))
+  (invoke "gt"
+    (f32.const -nan:0x200000)
+    (f32.const -1.175_494_350_822_287_5e-38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const -nan:0x400000) (f32.const 0x1p-126))
+  (invoke "gt"
+    (f32.const -nan:0x400000)
+    (f32.const 1.175_494_350_822_287_5e-38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const -nan:0x200000) (f32.const 0x1p-126))
+  (invoke "gt"
+    (f32.const -nan:0x200000)
+    (f32.const 1.175_494_350_822_287_5e-38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const nan:0x400000) (f32.const -0x1p-126))
+  (invoke "gt"
+    (f32.const nan:0x400000)
+    (f32.const -1.175_494_350_822_287_5e-38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const nan:0x200000) (f32.const -0x1p-126))
+  (invoke "gt"
+    (f32.const nan:0x200000)
+    (f32.const -1.175_494_350_822_287_5e-38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const nan:0x400000) (f32.const 0x1p-126))
+  (invoke "gt" (f32.const nan:0x400000) (f32.const 1.175_494_350_822_287_5e-38))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const nan:0x200000) (f32.const 0x1p-126))
+  (invoke "gt" (f32.const nan:0x200000) (f32.const 1.175_494_350_822_287_5e-38))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const -nan:0x400000) (f32.const -0x1p-1))
+  (invoke "gt" (f32.const -nan:0x400000) (f32.const -0.5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const -nan:0x200000) (f32.const -0x1p-1))
+  (invoke "gt" (f32.const -nan:0x200000) (f32.const -0.5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const -nan:0x400000) (f32.const 0x1p-1))
+  (invoke "gt" (f32.const -nan:0x400000) (f32.const 0.5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const -nan:0x200000) (f32.const 0x1p-1))
+  (invoke "gt" (f32.const -nan:0x200000) (f32.const 0.5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const nan:0x400000) (f32.const -0x1p-1))
+  (invoke "gt" (f32.const nan:0x400000) (f32.const -0.5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const nan:0x200000) (f32.const -0x1p-1))
+  (invoke "gt" (f32.const nan:0x200000) (f32.const -0.5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const nan:0x400000) (f32.const 0x1p-1))
+  (invoke "gt" (f32.const nan:0x400000) (f32.const 0.5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const nan:0x200000) (f32.const 0x1p-1))
+  (invoke "gt" (f32.const nan:0x200000) (f32.const 0.5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const -nan:0x400000) (f32.const -0x1p+0))
+  (invoke "gt" (f32.const -nan:0x400000) (f32.const -1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const -nan:0x200000) (f32.const -0x1p+0))
+  (invoke "gt" (f32.const -nan:0x200000) (f32.const -1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const -nan:0x400000) (f32.const 0x1p+0))
+  (invoke "gt" (f32.const -nan:0x400000) (f32.const 1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const -nan:0x200000) (f32.const 0x1p+0))
+  (invoke "gt" (f32.const -nan:0x200000) (f32.const 1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const nan:0x400000) (f32.const -0x1p+0))
+  (invoke "gt" (f32.const nan:0x400000) (f32.const -1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const nan:0x200000) (f32.const -0x1p+0))
+  (invoke "gt" (f32.const nan:0x200000) (f32.const -1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const nan:0x400000) (f32.const 0x1p+0))
+  (invoke "gt" (f32.const nan:0x400000) (f32.const 1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const nan:0x200000) (f32.const 0x1p+0))
+  (invoke "gt" (f32.const nan:0x200000) (f32.const 1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const -nan:0x400000) (f32.const -0x1.921fb6p+2))
+  (invoke "gt" (f32.const -nan:0x400000) (f32.const -6.283_185_482_025_146_5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const -nan:0x200000) (f32.const -0x1.921fb6p+2))
+  (invoke "gt" (f32.const -nan:0x200000) (f32.const -6.283_185_482_025_146_5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const -nan:0x400000) (f32.const 0x1.921fb6p+2))
+  (invoke "gt" (f32.const -nan:0x400000) (f32.const 6.283_185_482_025_146_5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const -nan:0x200000) (f32.const 0x1.921fb6p+2))
+  (invoke "gt" (f32.const -nan:0x200000) (f32.const 6.283_185_482_025_146_5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const nan:0x400000) (f32.const -0x1.921fb6p+2))
+  (invoke "gt" (f32.const nan:0x400000) (f32.const -6.283_185_482_025_146_5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const nan:0x200000) (f32.const -0x1.921fb6p+2))
+  (invoke "gt" (f32.const nan:0x200000) (f32.const -6.283_185_482_025_146_5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const nan:0x400000) (f32.const 0x1.921fb6p+2))
+  (invoke "gt" (f32.const nan:0x400000) (f32.const 6.283_185_482_025_146_5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const nan:0x200000) (f32.const 0x1.921fb6p+2))
+  (invoke "gt" (f32.const nan:0x200000) (f32.const 6.283_185_482_025_146_5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const -nan:0x400000) (f32.const -0x1.fffffep+127))
+  (invoke "gt"
+    (f32.const -nan:0x400000)
+    (f32.const -3.402_823_466_385_288_6e+38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const -nan:0x200000) (f32.const -0x1.fffffep+127))
+  (invoke "gt"
+    (f32.const -nan:0x200000)
+    (f32.const -3.402_823_466_385_288_6e+38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const -nan:0x400000) (f32.const 0x1.fffffep+127))
+  (invoke "gt"
+    (f32.const -nan:0x400000)
+    (f32.const 3.402_823_466_385_288_6e+38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const -nan:0x200000) (f32.const 0x1.fffffep+127))
+  (invoke "gt"
+    (f32.const -nan:0x200000)
+    (f32.const 3.402_823_466_385_288_6e+38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const nan:0x400000) (f32.const -0x1.fffffep+127))
+  (invoke "gt"
+    (f32.const nan:0x400000)
+    (f32.const -3.402_823_466_385_288_6e+38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const nan:0x200000) (f32.const -0x1.fffffep+127))
+  (invoke "gt"
+    (f32.const nan:0x200000)
+    (f32.const -3.402_823_466_385_288_6e+38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const nan:0x400000) (f32.const 0x1.fffffep+127))
+  (invoke "gt" (f32.const nan:0x400000) (f32.const 3.402_823_466_385_288_6e+38))
   (i32.const 0)
 )
 (assert_return
-  (invoke "gt" (f32.const nan:0x200000) (f32.const 0x1.fffffep+127))
+  (invoke "gt" (f32.const nan:0x200000) (f32.const 3.402_823_466_385_288_6e+38))
   (i32.const 0)
 )
 (assert_return
@@ -7530,1152 +8550,1302 @@
   (invoke "gt" (f32.const nan:0x200000) (f32.const nan:0x200000))
   (i32.const 0)
 )
+(assert_return (invoke "ge" (f32.const -0) (f32.const -0)) (i32.const 1))
+(assert_return (invoke "ge" (f32.const -0) (f32.const 0)) (i32.const 1))
+(assert_return (invoke "ge" (f32.const 0) (f32.const -0)) (i32.const 1))
+(assert_return (invoke "ge" (f32.const 0) (f32.const 0)) (i32.const 1))
 (assert_return
-  (invoke "ge" (f32.const -0x0p+0) (f32.const -0x0p+0))
+  (invoke "ge" (f32.const -0) (f32.const -1.401_298_464_324_817_1e-45))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x0p+0) (f32.const 0x0p+0))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ge" (f32.const 0x0p+0) (f32.const -0x0p+0))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ge" (f32.const 0x0p+0) (f32.const 0x0p+0))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ge" (f32.const -0x0p+0) (f32.const -0x1p-149))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ge" (f32.const -0x0p+0) (f32.const 0x1p-149))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "ge" (f32.const 0x0p+0) (f32.const -0x1p-149))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ge" (f32.const 0x0p+0) (f32.const 0x1p-149))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "ge" (f32.const -0x0p+0) (f32.const -0x1p-126))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ge" (f32.const -0x0p+0) (f32.const 0x1p-126))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "ge" (f32.const 0x0p+0) (f32.const -0x1p-126))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ge" (f32.const 0x0p+0) (f32.const 0x1p-126))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "ge" (f32.const -0x0p+0) (f32.const -0x1p-1))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ge" (f32.const -0x0p+0) (f32.const 0x1p-1))
+  (invoke "ge" (f32.const -0) (f32.const 1.401_298_464_324_817_1e-45))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x0p+0) (f32.const -0x1p-1))
+  (invoke "ge" (f32.const 0) (f32.const -1.401_298_464_324_817_1e-45))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x0p+0) (f32.const 0x1p-1))
+  (invoke "ge" (f32.const 0) (f32.const 1.401_298_464_324_817_1e-45))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x0p+0) (f32.const -0x1p+0))
+  (invoke "ge" (f32.const -0) (f32.const -1.175_494_350_822_287_5e-38))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x0p+0) (f32.const 0x1p+0))
+  (invoke "ge" (f32.const -0) (f32.const 1.175_494_350_822_287_5e-38))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x0p+0) (f32.const -0x1p+0))
+  (invoke "ge" (f32.const 0) (f32.const -1.175_494_350_822_287_5e-38))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x0p+0) (f32.const 0x1p+0))
+  (invoke "ge" (f32.const 0) (f32.const 1.175_494_350_822_287_5e-38))
   (i32.const 0)
 )
+(assert_return (invoke "ge" (f32.const -0) (f32.const -0.5)) (i32.const 1))
+(assert_return (invoke "ge" (f32.const -0) (f32.const 0.5)) (i32.const 0))
+(assert_return (invoke "ge" (f32.const 0) (f32.const -0.5)) (i32.const 1))
+(assert_return (invoke "ge" (f32.const 0) (f32.const 0.5)) (i32.const 0))
+(assert_return (invoke "ge" (f32.const -0) (f32.const -1)) (i32.const 1))
+(assert_return (invoke "ge" (f32.const -0) (f32.const 1)) (i32.const 0))
+(assert_return (invoke "ge" (f32.const 0) (f32.const -1)) (i32.const 1))
+(assert_return (invoke "ge" (f32.const 0) (f32.const 1)) (i32.const 0))
 (assert_return
-  (invoke "ge" (f32.const -0x0p+0) (f32.const -0x1.921fb6p+2))
+  (invoke "ge" (f32.const -0) (f32.const -6.283_185_482_025_146_5))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x0p+0) (f32.const 0x1.921fb6p+2))
+  (invoke "ge" (f32.const -0) (f32.const 6.283_185_482_025_146_5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x0p+0) (f32.const -0x1.921fb6p+2))
+  (invoke "ge" (f32.const 0) (f32.const -6.283_185_482_025_146_5))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x0p+0) (f32.const 0x1.921fb6p+2))
+  (invoke "ge" (f32.const 0) (f32.const 6.283_185_482_025_146_5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x0p+0) (f32.const -0x1.fffffep+127))
+  (invoke "ge" (f32.const -0) (f32.const -3.402_823_466_385_288_6e+38))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x0p+0) (f32.const 0x1.fffffep+127))
+  (invoke "ge" (f32.const -0) (f32.const 3.402_823_466_385_288_6e+38))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x0p+0) (f32.const -0x1.fffffep+127))
+  (invoke "ge" (f32.const 0) (f32.const -3.402_823_466_385_288_6e+38))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x0p+0) (f32.const 0x1.fffffep+127))
+  (invoke "ge" (f32.const 0) (f32.const 3.402_823_466_385_288_6e+38))
   (i32.const 0)
 )
-(assert_return (invoke "ge" (f32.const -0x0p+0) (f32.const -inf)) (i32.const 1))
-(assert_return (invoke "ge" (f32.const -0x0p+0) (f32.const inf)) (i32.const 0))
-(assert_return (invoke "ge" (f32.const 0x0p+0) (f32.const -inf)) (i32.const 1))
-(assert_return (invoke "ge" (f32.const 0x0p+0) (f32.const inf)) (i32.const 0))
+(assert_return (invoke "ge" (f32.const -0) (f32.const -inf)) (i32.const 1))
+(assert_return (invoke "ge" (f32.const -0) (f32.const inf)) (i32.const 0))
+(assert_return (invoke "ge" (f32.const 0) (f32.const -inf)) (i32.const 1))
+(assert_return (invoke "ge" (f32.const 0) (f32.const inf)) (i32.const 0))
 (assert_return
-  (invoke "ge" (f32.const -0x0p+0) (f32.const -nan:0x400000))
+  (invoke "ge" (f32.const -0) (f32.const -nan:0x400000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x0p+0) (f32.const -nan:0x200000))
+  (invoke "ge" (f32.const -0) (f32.const -nan:0x200000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x0p+0) (f32.const nan:0x400000))
+  (invoke "ge" (f32.const -0) (f32.const nan:0x400000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x0p+0) (f32.const nan:0x200000))
+  (invoke "ge" (f32.const -0) (f32.const nan:0x200000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x0p+0) (f32.const -nan:0x400000))
+  (invoke "ge" (f32.const 0) (f32.const -nan:0x400000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x0p+0) (f32.const -nan:0x200000))
+  (invoke "ge" (f32.const 0) (f32.const -nan:0x200000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x0p+0) (f32.const nan:0x400000))
+  (invoke "ge" (f32.const 0) (f32.const nan:0x400000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x0p+0) (f32.const nan:0x200000))
+  (invoke "ge" (f32.const 0) (f32.const nan:0x200000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x1p-149) (f32.const -0x0p+0))
+  (invoke "ge" (f32.const -1.401_298_464_324_817_1e-45) (f32.const -0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x1p-149) (f32.const 0x0p+0))
+  (invoke "ge" (f32.const -1.401_298_464_324_817_1e-45) (f32.const 0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x1p-149) (f32.const -0x0p+0))
+  (invoke "ge" (f32.const 1.401_298_464_324_817_1e-45) (f32.const -0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x1p-149) (f32.const 0x0p+0))
+  (invoke "ge" (f32.const 1.401_298_464_324_817_1e-45) (f32.const 0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x1p-149) (f32.const -0x1p-149))
+  (invoke "ge"
+    (f32.const -1.401_298_464_324_817_1e-45)
+    (f32.const -1.401_298_464_324_817_1e-45)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x1p-149) (f32.const 0x1p-149))
+  (invoke "ge"
+    (f32.const -1.401_298_464_324_817_1e-45)
+    (f32.const 1.401_298_464_324_817_1e-45)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x1p-149) (f32.const -0x1p-149))
+  (invoke "ge"
+    (f32.const 1.401_298_464_324_817_1e-45)
+    (f32.const -1.401_298_464_324_817_1e-45)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x1p-149) (f32.const 0x1p-149))
+  (invoke "ge"
+    (f32.const 1.401_298_464_324_817_1e-45)
+    (f32.const 1.401_298_464_324_817_1e-45)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x1p-149) (f32.const -0x1p-126))
+  (invoke "ge"
+    (f32.const -1.401_298_464_324_817_1e-45)
+    (f32.const -1.175_494_350_822_287_5e-38)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x1p-149) (f32.const 0x1p-126))
+  (invoke "ge"
+    (f32.const -1.401_298_464_324_817_1e-45)
+    (f32.const 1.175_494_350_822_287_5e-38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x1p-149) (f32.const -0x1p-126))
+  (invoke "ge"
+    (f32.const 1.401_298_464_324_817_1e-45)
+    (f32.const -1.175_494_350_822_287_5e-38)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x1p-149) (f32.const 0x1p-126))
+  (invoke "ge"
+    (f32.const 1.401_298_464_324_817_1e-45)
+    (f32.const 1.175_494_350_822_287_5e-38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x1p-149) (f32.const -0x1p-1))
+  (invoke "ge" (f32.const -1.401_298_464_324_817_1e-45) (f32.const -0.5))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x1p-149) (f32.const 0x1p-1))
+  (invoke "ge" (f32.const -1.401_298_464_324_817_1e-45) (f32.const 0.5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x1p-149) (f32.const -0x1p-1))
+  (invoke "ge" (f32.const 1.401_298_464_324_817_1e-45) (f32.const -0.5))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x1p-149) (f32.const 0x1p-1))
+  (invoke "ge" (f32.const 1.401_298_464_324_817_1e-45) (f32.const 0.5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x1p-149) (f32.const -0x1p+0))
+  (invoke "ge" (f32.const -1.401_298_464_324_817_1e-45) (f32.const -1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x1p-149) (f32.const 0x1p+0))
+  (invoke "ge" (f32.const -1.401_298_464_324_817_1e-45) (f32.const 1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x1p-149) (f32.const -0x1p+0))
+  (invoke "ge" (f32.const 1.401_298_464_324_817_1e-45) (f32.const -1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x1p-149) (f32.const 0x1p+0))
+  (invoke "ge" (f32.const 1.401_298_464_324_817_1e-45) (f32.const 1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x1p-149) (f32.const -0x1.921fb6p+2))
+  (invoke "ge"
+    (f32.const -1.401_298_464_324_817_1e-45)
+    (f32.const -6.283_185_482_025_146_5)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x1p-149) (f32.const 0x1.921fb6p+2))
+  (invoke "ge"
+    (f32.const -1.401_298_464_324_817_1e-45)
+    (f32.const 6.283_185_482_025_146_5)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x1p-149) (f32.const -0x1.921fb6p+2))
+  (invoke "ge"
+    (f32.const 1.401_298_464_324_817_1e-45)
+    (f32.const -6.283_185_482_025_146_5)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x1p-149) (f32.const 0x1.921fb6p+2))
+  (invoke "ge"
+    (f32.const 1.401_298_464_324_817_1e-45)
+    (f32.const 6.283_185_482_025_146_5)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x1p-149) (f32.const -0x1.fffffep+127))
+  (invoke "ge"
+    (f32.const -1.401_298_464_324_817_1e-45)
+    (f32.const -3.402_823_466_385_288_6e+38)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x1p-149) (f32.const 0x1.fffffep+127))
+  (invoke "ge"
+    (f32.const -1.401_298_464_324_817_1e-45)
+    (f32.const 3.402_823_466_385_288_6e+38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x1p-149) (f32.const -0x1.fffffep+127))
+  (invoke "ge"
+    (f32.const 1.401_298_464_324_817_1e-45)
+    (f32.const -3.402_823_466_385_288_6e+38)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x1p-149) (f32.const 0x1.fffffep+127))
+  (invoke "ge"
+    (f32.const 1.401_298_464_324_817_1e-45)
+    (f32.const 3.402_823_466_385_288_6e+38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x1p-149) (f32.const -inf))
+  (invoke "ge" (f32.const -1.401_298_464_324_817_1e-45) (f32.const -inf))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x1p-149) (f32.const inf))
+  (invoke "ge" (f32.const -1.401_298_464_324_817_1e-45) (f32.const inf))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x1p-149) (f32.const -inf))
+  (invoke "ge" (f32.const 1.401_298_464_324_817_1e-45) (f32.const -inf))
   (i32.const 1)
+)
+(assert_return
+  (invoke "ge" (f32.const 1.401_298_464_324_817_1e-45) (f32.const inf))
+  (i32.const 0)
 )
-(assert_return (invoke "ge" (f32.const 0x1p-149) (f32.const inf)) (i32.const 0))
 (assert_return
-  (invoke "ge" (f32.const -0x1p-149) (f32.const -nan:0x400000))
+  (invoke "ge"
+    (f32.const -1.401_298_464_324_817_1e-45)
+    (f32.const -nan:0x400000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x1p-149) (f32.const -nan:0x200000))
+  (invoke "ge"
+    (f32.const -1.401_298_464_324_817_1e-45)
+    (f32.const -nan:0x200000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x1p-149) (f32.const nan:0x400000))
+  (invoke "ge"
+    (f32.const -1.401_298_464_324_817_1e-45)
+    (f32.const nan:0x400000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x1p-149) (f32.const nan:0x200000))
+  (invoke "ge"
+    (f32.const -1.401_298_464_324_817_1e-45)
+    (f32.const nan:0x200000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x1p-149) (f32.const -nan:0x400000))
+  (invoke "ge"
+    (f32.const 1.401_298_464_324_817_1e-45)
+    (f32.const -nan:0x400000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x1p-149) (f32.const -nan:0x200000))
+  (invoke "ge"
+    (f32.const 1.401_298_464_324_817_1e-45)
+    (f32.const -nan:0x200000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x1p-149) (f32.const nan:0x400000))
+  (invoke "ge" (f32.const 1.401_298_464_324_817_1e-45) (f32.const nan:0x400000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x1p-149) (f32.const nan:0x200000))
+  (invoke "ge" (f32.const 1.401_298_464_324_817_1e-45) (f32.const nan:0x200000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x1p-126) (f32.const -0x0p+0))
+  (invoke "ge" (f32.const -1.175_494_350_822_287_5e-38) (f32.const -0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x1p-126) (f32.const 0x0p+0))
+  (invoke "ge" (f32.const -1.175_494_350_822_287_5e-38) (f32.const 0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x1p-126) (f32.const -0x0p+0))
+  (invoke "ge" (f32.const 1.175_494_350_822_287_5e-38) (f32.const -0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x1p-126) (f32.const 0x0p+0))
+  (invoke "ge" (f32.const 1.175_494_350_822_287_5e-38) (f32.const 0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x1p-126) (f32.const -0x1p-149))
+  (invoke "ge"
+    (f32.const -1.175_494_350_822_287_5e-38)
+    (f32.const -1.401_298_464_324_817_1e-45)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x1p-126) (f32.const 0x1p-149))
+  (invoke "ge"
+    (f32.const -1.175_494_350_822_287_5e-38)
+    (f32.const 1.401_298_464_324_817_1e-45)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x1p-126) (f32.const -0x1p-149))
+  (invoke "ge"
+    (f32.const 1.175_494_350_822_287_5e-38)
+    (f32.const -1.401_298_464_324_817_1e-45)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x1p-126) (f32.const 0x1p-149))
+  (invoke "ge"
+    (f32.const 1.175_494_350_822_287_5e-38)
+    (f32.const 1.401_298_464_324_817_1e-45)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x1p-126) (f32.const -0x1p-126))
+  (invoke "ge"
+    (f32.const -1.175_494_350_822_287_5e-38)
+    (f32.const -1.175_494_350_822_287_5e-38)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x1p-126) (f32.const 0x1p-126))
+  (invoke "ge"
+    (f32.const -1.175_494_350_822_287_5e-38)
+    (f32.const 1.175_494_350_822_287_5e-38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x1p-126) (f32.const -0x1p-126))
+  (invoke "ge"
+    (f32.const 1.175_494_350_822_287_5e-38)
+    (f32.const -1.175_494_350_822_287_5e-38)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x1p-126) (f32.const 0x1p-126))
+  (invoke "ge"
+    (f32.const 1.175_494_350_822_287_5e-38)
+    (f32.const 1.175_494_350_822_287_5e-38)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x1p-126) (f32.const -0x1p-1))
+  (invoke "ge" (f32.const -1.175_494_350_822_287_5e-38) (f32.const -0.5))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x1p-126) (f32.const 0x1p-1))
+  (invoke "ge" (f32.const -1.175_494_350_822_287_5e-38) (f32.const 0.5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x1p-126) (f32.const -0x1p-1))
+  (invoke "ge" (f32.const 1.175_494_350_822_287_5e-38) (f32.const -0.5))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x1p-126) (f32.const 0x1p-1))
+  (invoke "ge" (f32.const 1.175_494_350_822_287_5e-38) (f32.const 0.5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x1p-126) (f32.const -0x1p+0))
+  (invoke "ge" (f32.const -1.175_494_350_822_287_5e-38) (f32.const -1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x1p-126) (f32.const 0x1p+0))
+  (invoke "ge" (f32.const -1.175_494_350_822_287_5e-38) (f32.const 1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x1p-126) (f32.const -0x1p+0))
+  (invoke "ge" (f32.const 1.175_494_350_822_287_5e-38) (f32.const -1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x1p-126) (f32.const 0x1p+0))
+  (invoke "ge" (f32.const 1.175_494_350_822_287_5e-38) (f32.const 1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x1p-126) (f32.const -0x1.921fb6p+2))
+  (invoke "ge"
+    (f32.const -1.175_494_350_822_287_5e-38)
+    (f32.const -6.283_185_482_025_146_5)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x1p-126) (f32.const 0x1.921fb6p+2))
+  (invoke "ge"
+    (f32.const -1.175_494_350_822_287_5e-38)
+    (f32.const 6.283_185_482_025_146_5)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x1p-126) (f32.const -0x1.921fb6p+2))
+  (invoke "ge"
+    (f32.const 1.175_494_350_822_287_5e-38)
+    (f32.const -6.283_185_482_025_146_5)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x1p-126) (f32.const 0x1.921fb6p+2))
+  (invoke "ge"
+    (f32.const 1.175_494_350_822_287_5e-38)
+    (f32.const 6.283_185_482_025_146_5)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x1p-126) (f32.const -0x1.fffffep+127))
+  (invoke "ge"
+    (f32.const -1.175_494_350_822_287_5e-38)
+    (f32.const -3.402_823_466_385_288_6e+38)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x1p-126) (f32.const 0x1.fffffep+127))
+  (invoke "ge"
+    (f32.const -1.175_494_350_822_287_5e-38)
+    (f32.const 3.402_823_466_385_288_6e+38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x1p-126) (f32.const -0x1.fffffep+127))
+  (invoke "ge"
+    (f32.const 1.175_494_350_822_287_5e-38)
+    (f32.const -3.402_823_466_385_288_6e+38)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x1p-126) (f32.const 0x1.fffffep+127))
+  (invoke "ge"
+    (f32.const 1.175_494_350_822_287_5e-38)
+    (f32.const 3.402_823_466_385_288_6e+38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x1p-126) (f32.const -inf))
+  (invoke "ge" (f32.const -1.175_494_350_822_287_5e-38) (f32.const -inf))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x1p-126) (f32.const inf))
+  (invoke "ge" (f32.const -1.175_494_350_822_287_5e-38) (f32.const inf))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x1p-126) (f32.const -inf))
+  (invoke "ge" (f32.const 1.175_494_350_822_287_5e-38) (f32.const -inf))
   (i32.const 1)
-)
-(assert_return (invoke "ge" (f32.const 0x1p-126) (f32.const inf)) (i32.const 0))
-(assert_return
-  (invoke "ge" (f32.const -0x1p-126) (f32.const -nan:0x400000))
-  (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x1p-126) (f32.const -nan:0x200000))
+  (invoke "ge" (f32.const 1.175_494_350_822_287_5e-38) (f32.const inf))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x1p-126) (f32.const nan:0x400000))
+  (invoke "ge"
+    (f32.const -1.175_494_350_822_287_5e-38)
+    (f32.const -nan:0x400000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x1p-126) (f32.const nan:0x200000))
+  (invoke "ge"
+    (f32.const -1.175_494_350_822_287_5e-38)
+    (f32.const -nan:0x200000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x1p-126) (f32.const -nan:0x400000))
+  (invoke "ge"
+    (f32.const -1.175_494_350_822_287_5e-38)
+    (f32.const nan:0x400000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x1p-126) (f32.const -nan:0x200000))
+  (invoke "ge"
+    (f32.const -1.175_494_350_822_287_5e-38)
+    (f32.const nan:0x200000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x1p-126) (f32.const nan:0x400000))
+  (invoke "ge"
+    (f32.const 1.175_494_350_822_287_5e-38)
+    (f32.const -nan:0x400000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x1p-126) (f32.const nan:0x200000))
+  (invoke "ge"
+    (f32.const 1.175_494_350_822_287_5e-38)
+    (f32.const -nan:0x200000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x1p-1) (f32.const -0x0p+0))
+  (invoke "ge" (f32.const 1.175_494_350_822_287_5e-38) (f32.const nan:0x400000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x1p-1) (f32.const 0x0p+0))
+  (invoke "ge" (f32.const 1.175_494_350_822_287_5e-38) (f32.const nan:0x200000))
   (i32.const 0)
 )
+(assert_return (invoke "ge" (f32.const -0.5) (f32.const -0)) (i32.const 0))
+(assert_return (invoke "ge" (f32.const -0.5) (f32.const 0)) (i32.const 0))
+(assert_return (invoke "ge" (f32.const 0.5) (f32.const -0)) (i32.const 1))
+(assert_return (invoke "ge" (f32.const 0.5) (f32.const 0)) (i32.const 1))
 (assert_return
-  (invoke "ge" (f32.const 0x1p-1) (f32.const -0x0p+0))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ge" (f32.const 0x1p-1) (f32.const 0x0p+0))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ge" (f32.const -0x1p-1) (f32.const -0x1p-149))
+  (invoke "ge" (f32.const -0.5) (f32.const -1.401_298_464_324_817_1e-45))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x1p-1) (f32.const 0x1p-149))
+  (invoke "ge" (f32.const -0.5) (f32.const 1.401_298_464_324_817_1e-45))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x1p-1) (f32.const -0x1p-149))
+  (invoke "ge" (f32.const 0.5) (f32.const -1.401_298_464_324_817_1e-45))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x1p-1) (f32.const 0x1p-149))
+  (invoke "ge" (f32.const 0.5) (f32.const 1.401_298_464_324_817_1e-45))
   (i32.const 1)
-)
-(assert_return
-  (invoke "ge" (f32.const -0x1p-1) (f32.const -0x1p-126))
-  (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x1p-1) (f32.const 0x1p-126))
+  (invoke "ge" (f32.const -0.5) (f32.const -1.175_494_350_822_287_5e-38))
   (i32.const 0)
-)
-(assert_return
-  (invoke "ge" (f32.const 0x1p-1) (f32.const -0x1p-126))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ge" (f32.const 0x1p-1) (f32.const 0x1p-126))
-  (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x1p-1) (f32.const -0x1p-1))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ge" (f32.const -0x1p-1) (f32.const 0x1p-1))
+  (invoke "ge" (f32.const -0.5) (f32.const 1.175_494_350_822_287_5e-38))
   (i32.const 0)
-)
-(assert_return
-  (invoke "ge" (f32.const 0x1p-1) (f32.const -0x1p-1))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ge" (f32.const 0x1p-1) (f32.const 0x1p-1))
-  (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x1p-1) (f32.const -0x1p+0))
+  (invoke "ge" (f32.const 0.5) (f32.const -1.175_494_350_822_287_5e-38))
   (i32.const 1)
-)
-(assert_return
-  (invoke "ge" (f32.const -0x1p-1) (f32.const 0x1p+0))
-  (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x1p-1) (f32.const -0x1p+0))
+  (invoke "ge" (f32.const 0.5) (f32.const 1.175_494_350_822_287_5e-38))
   (i32.const 1)
-)
-(assert_return
-  (invoke "ge" (f32.const 0x1p-1) (f32.const 0x1p+0))
-  (i32.const 0)
 )
+(assert_return (invoke "ge" (f32.const -0.5) (f32.const -0.5)) (i32.const 1))
+(assert_return (invoke "ge" (f32.const -0.5) (f32.const 0.5)) (i32.const 0))
+(assert_return (invoke "ge" (f32.const 0.5) (f32.const -0.5)) (i32.const 1))
+(assert_return (invoke "ge" (f32.const 0.5) (f32.const 0.5)) (i32.const 1))
+(assert_return (invoke "ge" (f32.const -0.5) (f32.const -1)) (i32.const 1))
+(assert_return (invoke "ge" (f32.const -0.5) (f32.const 1)) (i32.const 0))
+(assert_return (invoke "ge" (f32.const 0.5) (f32.const -1)) (i32.const 1))
+(assert_return (invoke "ge" (f32.const 0.5) (f32.const 1)) (i32.const 0))
 (assert_return
-  (invoke "ge" (f32.const -0x1p-1) (f32.const -0x1.921fb6p+2))
+  (invoke "ge" (f32.const -0.5) (f32.const -6.283_185_482_025_146_5))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x1p-1) (f32.const 0x1.921fb6p+2))
+  (invoke "ge" (f32.const -0.5) (f32.const 6.283_185_482_025_146_5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x1p-1) (f32.const -0x1.921fb6p+2))
+  (invoke "ge" (f32.const 0.5) (f32.const -6.283_185_482_025_146_5))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x1p-1) (f32.const 0x1.921fb6p+2))
+  (invoke "ge" (f32.const 0.5) (f32.const 6.283_185_482_025_146_5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x1p-1) (f32.const -0x1.fffffep+127))
+  (invoke "ge" (f32.const -0.5) (f32.const -3.402_823_466_385_288_6e+38))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x1p-1) (f32.const 0x1.fffffep+127))
+  (invoke "ge" (f32.const -0.5) (f32.const 3.402_823_466_385_288_6e+38))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x1p-1) (f32.const -0x1.fffffep+127))
+  (invoke "ge" (f32.const 0.5) (f32.const -3.402_823_466_385_288_6e+38))
   (i32.const 1)
-)
-(assert_return
-  (invoke "ge" (f32.const 0x1p-1) (f32.const 0x1.fffffep+127))
-  (i32.const 0)
-)
-(assert_return (invoke "ge" (f32.const -0x1p-1) (f32.const -inf)) (i32.const 1))
-(assert_return (invoke "ge" (f32.const -0x1p-1) (f32.const inf)) (i32.const 0))
-(assert_return (invoke "ge" (f32.const 0x1p-1) (f32.const -inf)) (i32.const 1))
-(assert_return (invoke "ge" (f32.const 0x1p-1) (f32.const inf)) (i32.const 0))
-(assert_return
-  (invoke "ge" (f32.const -0x1p-1) (f32.const -nan:0x400000))
-  (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x1p-1) (f32.const -nan:0x200000))
+  (invoke "ge" (f32.const 0.5) (f32.const 3.402_823_466_385_288_6e+38))
   (i32.const 0)
 )
+(assert_return (invoke "ge" (f32.const -0.5) (f32.const -inf)) (i32.const 1))
+(assert_return (invoke "ge" (f32.const -0.5) (f32.const inf)) (i32.const 0))
+(assert_return (invoke "ge" (f32.const 0.5) (f32.const -inf)) (i32.const 1))
+(assert_return (invoke "ge" (f32.const 0.5) (f32.const inf)) (i32.const 0))
 (assert_return
-  (invoke "ge" (f32.const -0x1p-1) (f32.const nan:0x400000))
+  (invoke "ge" (f32.const -0.5) (f32.const -nan:0x400000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x1p-1) (f32.const nan:0x200000))
+  (invoke "ge" (f32.const -0.5) (f32.const -nan:0x200000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x1p-1) (f32.const -nan:0x400000))
+  (invoke "ge" (f32.const -0.5) (f32.const nan:0x400000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x1p-1) (f32.const -nan:0x200000))
+  (invoke "ge" (f32.const -0.5) (f32.const nan:0x200000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x1p-1) (f32.const nan:0x400000))
+  (invoke "ge" (f32.const 0.5) (f32.const -nan:0x400000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x1p-1) (f32.const nan:0x200000))
+  (invoke "ge" (f32.const 0.5) (f32.const -nan:0x200000))
   (i32.const 0)
-)
-(assert_return
-  (invoke "ge" (f32.const -0x1p+0) (f32.const -0x0p+0))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "ge" (f32.const -0x1p+0) (f32.const 0x0p+0))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "ge" (f32.const 0x1p+0) (f32.const -0x0p+0))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ge" (f32.const 0x1p+0) (f32.const 0x0p+0))
-  (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x1p+0) (f32.const -0x1p-149))
+  (invoke "ge" (f32.const 0.5) (f32.const nan:0x400000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x1p+0) (f32.const 0x1p-149))
+  (invoke "ge" (f32.const 0.5) (f32.const nan:0x200000))
   (i32.const 0)
-)
-(assert_return
-  (invoke "ge" (f32.const 0x1p+0) (f32.const -0x1p-149))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ge" (f32.const 0x1p+0) (f32.const 0x1p-149))
-  (i32.const 1)
 )
+(assert_return (invoke "ge" (f32.const -1) (f32.const -0)) (i32.const 0))
+(assert_return (invoke "ge" (f32.const -1) (f32.const 0)) (i32.const 0))
+(assert_return (invoke "ge" (f32.const 1) (f32.const -0)) (i32.const 1))
+(assert_return (invoke "ge" (f32.const 1) (f32.const 0)) (i32.const 1))
 (assert_return
-  (invoke "ge" (f32.const -0x1p+0) (f32.const -0x1p-126))
+  (invoke "ge" (f32.const -1) (f32.const -1.401_298_464_324_817_1e-45))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x1p+0) (f32.const 0x1p-126))
+  (invoke "ge" (f32.const -1) (f32.const 1.401_298_464_324_817_1e-45))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x1p+0) (f32.const -0x1p-126))
+  (invoke "ge" (f32.const 1) (f32.const -1.401_298_464_324_817_1e-45))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x1p+0) (f32.const 0x1p-126))
+  (invoke "ge" (f32.const 1) (f32.const 1.401_298_464_324_817_1e-45))
   (i32.const 1)
-)
-(assert_return
-  (invoke "ge" (f32.const -0x1p+0) (f32.const -0x1p-1))
-  (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x1p+0) (f32.const 0x1p-1))
+  (invoke "ge" (f32.const -1) (f32.const -1.175_494_350_822_287_5e-38))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x1p+0) (f32.const -0x1p-1))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ge" (f32.const 0x1p+0) (f32.const 0x1p-1))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ge" (f32.const -0x1p+0) (f32.const -0x1p+0))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "ge" (f32.const -0x1p+0) (f32.const 0x1p+0))
+  (invoke "ge" (f32.const -1) (f32.const 1.175_494_350_822_287_5e-38))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x1p+0) (f32.const -0x1p+0))
+  (invoke "ge" (f32.const 1) (f32.const -1.175_494_350_822_287_5e-38))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x1p+0) (f32.const 0x1p+0))
+  (invoke "ge" (f32.const 1) (f32.const 1.175_494_350_822_287_5e-38))
   (i32.const 1)
 )
+(assert_return (invoke "ge" (f32.const -1) (f32.const -0.5)) (i32.const 0))
+(assert_return (invoke "ge" (f32.const -1) (f32.const 0.5)) (i32.const 0))
+(assert_return (invoke "ge" (f32.const 1) (f32.const -0.5)) (i32.const 1))
+(assert_return (invoke "ge" (f32.const 1) (f32.const 0.5)) (i32.const 1))
+(assert_return (invoke "ge" (f32.const -1) (f32.const -1)) (i32.const 1))
+(assert_return (invoke "ge" (f32.const -1) (f32.const 1)) (i32.const 0))
+(assert_return (invoke "ge" (f32.const 1) (f32.const -1)) (i32.const 1))
+(assert_return (invoke "ge" (f32.const 1) (f32.const 1)) (i32.const 1))
 (assert_return
-  (invoke "ge" (f32.const -0x1p+0) (f32.const -0x1.921fb6p+2))
+  (invoke "ge" (f32.const -1) (f32.const -6.283_185_482_025_146_5))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x1p+0) (f32.const 0x1.921fb6p+2))
+  (invoke "ge" (f32.const -1) (f32.const 6.283_185_482_025_146_5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x1p+0) (f32.const -0x1.921fb6p+2))
+  (invoke "ge" (f32.const 1) (f32.const -6.283_185_482_025_146_5))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x1p+0) (f32.const 0x1.921fb6p+2))
+  (invoke "ge" (f32.const 1) (f32.const 6.283_185_482_025_146_5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x1p+0) (f32.const -0x1.fffffep+127))
+  (invoke "ge" (f32.const -1) (f32.const -3.402_823_466_385_288_6e+38))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x1p+0) (f32.const 0x1.fffffep+127))
+  (invoke "ge" (f32.const -1) (f32.const 3.402_823_466_385_288_6e+38))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x1p+0) (f32.const -0x1.fffffep+127))
+  (invoke "ge" (f32.const 1) (f32.const -3.402_823_466_385_288_6e+38))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x1p+0) (f32.const 0x1.fffffep+127))
+  (invoke "ge" (f32.const 1) (f32.const 3.402_823_466_385_288_6e+38))
   (i32.const 0)
 )
-(assert_return (invoke "ge" (f32.const -0x1p+0) (f32.const -inf)) (i32.const 1))
-(assert_return (invoke "ge" (f32.const -0x1p+0) (f32.const inf)) (i32.const 0))
-(assert_return (invoke "ge" (f32.const 0x1p+0) (f32.const -inf)) (i32.const 1))
-(assert_return (invoke "ge" (f32.const 0x1p+0) (f32.const inf)) (i32.const 0))
+(assert_return (invoke "ge" (f32.const -1) (f32.const -inf)) (i32.const 1))
+(assert_return (invoke "ge" (f32.const -1) (f32.const inf)) (i32.const 0))
+(assert_return (invoke "ge" (f32.const 1) (f32.const -inf)) (i32.const 1))
+(assert_return (invoke "ge" (f32.const 1) (f32.const inf)) (i32.const 0))
 (assert_return
-  (invoke "ge" (f32.const -0x1p+0) (f32.const -nan:0x400000))
+  (invoke "ge" (f32.const -1) (f32.const -nan:0x400000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x1p+0) (f32.const -nan:0x200000))
+  (invoke "ge" (f32.const -1) (f32.const -nan:0x200000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x1p+0) (f32.const nan:0x400000))
+  (invoke "ge" (f32.const -1) (f32.const nan:0x400000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x1p+0) (f32.const nan:0x200000))
+  (invoke "ge" (f32.const -1) (f32.const nan:0x200000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x1p+0) (f32.const -nan:0x400000))
+  (invoke "ge" (f32.const 1) (f32.const -nan:0x400000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x1p+0) (f32.const -nan:0x200000))
+  (invoke "ge" (f32.const 1) (f32.const -nan:0x200000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x1p+0) (f32.const nan:0x400000))
+  (invoke "ge" (f32.const 1) (f32.const nan:0x400000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x1p+0) (f32.const nan:0x200000))
+  (invoke "ge" (f32.const 1) (f32.const nan:0x200000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x1.921fb6p+2) (f32.const -0x0p+0))
+  (invoke "ge" (f32.const -6.283_185_482_025_146_5) (f32.const -0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x1.921fb6p+2) (f32.const 0x0p+0))
+  (invoke "ge" (f32.const -6.283_185_482_025_146_5) (f32.const 0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x1.921fb6p+2) (f32.const -0x0p+0))
+  (invoke "ge" (f32.const 6.283_185_482_025_146_5) (f32.const -0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x1.921fb6p+2) (f32.const 0x0p+0))
+  (invoke "ge" (f32.const 6.283_185_482_025_146_5) (f32.const 0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x1.921fb6p+2) (f32.const -0x1p-149))
+  (invoke "ge"
+    (f32.const -6.283_185_482_025_146_5)
+    (f32.const -1.401_298_464_324_817_1e-45)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x1.921fb6p+2) (f32.const 0x1p-149))
+  (invoke "ge"
+    (f32.const -6.283_185_482_025_146_5)
+    (f32.const 1.401_298_464_324_817_1e-45)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x1.921fb6p+2) (f32.const -0x1p-149))
+  (invoke "ge"
+    (f32.const 6.283_185_482_025_146_5)
+    (f32.const -1.401_298_464_324_817_1e-45)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x1.921fb6p+2) (f32.const 0x1p-149))
+  (invoke "ge"
+    (f32.const 6.283_185_482_025_146_5)
+    (f32.const 1.401_298_464_324_817_1e-45)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x1.921fb6p+2) (f32.const -0x1p-126))
+  (invoke "ge"
+    (f32.const -6.283_185_482_025_146_5)
+    (f32.const -1.175_494_350_822_287_5e-38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x1.921fb6p+2) (f32.const 0x1p-126))
+  (invoke "ge"
+    (f32.const -6.283_185_482_025_146_5)
+    (f32.const 1.175_494_350_822_287_5e-38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x1.921fb6p+2) (f32.const -0x1p-126))
+  (invoke "ge"
+    (f32.const 6.283_185_482_025_146_5)
+    (f32.const -1.175_494_350_822_287_5e-38)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x1.921fb6p+2) (f32.const 0x1p-126))
+  (invoke "ge"
+    (f32.const 6.283_185_482_025_146_5)
+    (f32.const 1.175_494_350_822_287_5e-38)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x1.921fb6p+2) (f32.const -0x1p-1))
+  (invoke "ge" (f32.const -6.283_185_482_025_146_5) (f32.const -0.5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x1.921fb6p+2) (f32.const 0x1p-1))
+  (invoke "ge" (f32.const -6.283_185_482_025_146_5) (f32.const 0.5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x1.921fb6p+2) (f32.const -0x1p-1))
+  (invoke "ge" (f32.const 6.283_185_482_025_146_5) (f32.const -0.5))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x1.921fb6p+2) (f32.const 0x1p-1))
+  (invoke "ge" (f32.const 6.283_185_482_025_146_5) (f32.const 0.5))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x1.921fb6p+2) (f32.const -0x1p+0))
+  (invoke "ge" (f32.const -6.283_185_482_025_146_5) (f32.const -1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x1.921fb6p+2) (f32.const 0x1p+0))
+  (invoke "ge" (f32.const -6.283_185_482_025_146_5) (f32.const 1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x1.921fb6p+2) (f32.const -0x1p+0))
+  (invoke "ge" (f32.const 6.283_185_482_025_146_5) (f32.const -1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x1.921fb6p+2) (f32.const 0x1p+0))
+  (invoke "ge" (f32.const 6.283_185_482_025_146_5) (f32.const 1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x1.921fb6p+2) (f32.const -0x1.921fb6p+2))
+  (invoke "ge"
+    (f32.const -6.283_185_482_025_146_5)
+    (f32.const -6.283_185_482_025_146_5)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x1.921fb6p+2) (f32.const 0x1.921fb6p+2))
+  (invoke "ge"
+    (f32.const -6.283_185_482_025_146_5)
+    (f32.const 6.283_185_482_025_146_5)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x1.921fb6p+2) (f32.const -0x1.921fb6p+2))
+  (invoke "ge"
+    (f32.const 6.283_185_482_025_146_5)
+    (f32.const -6.283_185_482_025_146_5)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x1.921fb6p+2) (f32.const 0x1.921fb6p+2))
+  (invoke "ge"
+    (f32.const 6.283_185_482_025_146_5)
+    (f32.const 6.283_185_482_025_146_5)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x1.921fb6p+2) (f32.const -0x1.fffffep+127))
+  (invoke "ge"
+    (f32.const -6.283_185_482_025_146_5)
+    (f32.const -3.402_823_466_385_288_6e+38)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x1.921fb6p+2) (f32.const 0x1.fffffep+127))
+  (invoke "ge"
+    (f32.const -6.283_185_482_025_146_5)
+    (f32.const 3.402_823_466_385_288_6e+38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x1.921fb6p+2) (f32.const -0x1.fffffep+127))
+  (invoke "ge"
+    (f32.const 6.283_185_482_025_146_5)
+    (f32.const -3.402_823_466_385_288_6e+38)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x1.921fb6p+2) (f32.const 0x1.fffffep+127))
+  (invoke "ge"
+    (f32.const 6.283_185_482_025_146_5)
+    (f32.const 3.402_823_466_385_288_6e+38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x1.921fb6p+2) (f32.const -inf))
+  (invoke "ge" (f32.const -6.283_185_482_025_146_5) (f32.const -inf))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x1.921fb6p+2) (f32.const inf))
+  (invoke "ge" (f32.const -6.283_185_482_025_146_5) (f32.const inf))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x1.921fb6p+2) (f32.const -inf))
+  (invoke "ge" (f32.const 6.283_185_482_025_146_5) (f32.const -inf))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x1.921fb6p+2) (f32.const inf))
+  (invoke "ge" (f32.const 6.283_185_482_025_146_5) (f32.const inf))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x1.921fb6p+2) (f32.const -nan:0x400000))
+  (invoke "ge" (f32.const -6.283_185_482_025_146_5) (f32.const -nan:0x400000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x1.921fb6p+2) (f32.const -nan:0x200000))
+  (invoke "ge" (f32.const -6.283_185_482_025_146_5) (f32.const -nan:0x200000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x1.921fb6p+2) (f32.const nan:0x400000))
+  (invoke "ge" (f32.const -6.283_185_482_025_146_5) (f32.const nan:0x400000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x1.921fb6p+2) (f32.const nan:0x200000))
+  (invoke "ge" (f32.const -6.283_185_482_025_146_5) (f32.const nan:0x200000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x1.921fb6p+2) (f32.const -nan:0x400000))
+  (invoke "ge" (f32.const 6.283_185_482_025_146_5) (f32.const -nan:0x400000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x1.921fb6p+2) (f32.const -nan:0x200000))
+  (invoke "ge" (f32.const 6.283_185_482_025_146_5) (f32.const -nan:0x200000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x1.921fb6p+2) (f32.const nan:0x400000))
+  (invoke "ge" (f32.const 6.283_185_482_025_146_5) (f32.const nan:0x400000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x1.921fb6p+2) (f32.const nan:0x200000))
+  (invoke "ge" (f32.const 6.283_185_482_025_146_5) (f32.const nan:0x200000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x1.fffffep+127) (f32.const -0x0p+0))
+  (invoke "ge" (f32.const -3.402_823_466_385_288_6e+38) (f32.const -0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x1.fffffep+127) (f32.const 0x0p+0))
+  (invoke "ge" (f32.const -3.402_823_466_385_288_6e+38) (f32.const 0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x1.fffffep+127) (f32.const -0x0p+0))
+  (invoke "ge" (f32.const 3.402_823_466_385_288_6e+38) (f32.const -0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x1.fffffep+127) (f32.const 0x0p+0))
+  (invoke "ge" (f32.const 3.402_823_466_385_288_6e+38) (f32.const 0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x1.fffffep+127) (f32.const -0x1p-149))
+  (invoke "ge"
+    (f32.const -3.402_823_466_385_288_6e+38)
+    (f32.const -1.401_298_464_324_817_1e-45)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x1.fffffep+127) (f32.const 0x1p-149))
+  (invoke "ge"
+    (f32.const -3.402_823_466_385_288_6e+38)
+    (f32.const 1.401_298_464_324_817_1e-45)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x1.fffffep+127) (f32.const -0x1p-149))
+  (invoke "ge"
+    (f32.const 3.402_823_466_385_288_6e+38)
+    (f32.const -1.401_298_464_324_817_1e-45)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x1.fffffep+127) (f32.const 0x1p-149))
+  (invoke "ge"
+    (f32.const 3.402_823_466_385_288_6e+38)
+    (f32.const 1.401_298_464_324_817_1e-45)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x1.fffffep+127) (f32.const -0x1p-126))
+  (invoke "ge"
+    (f32.const -3.402_823_466_385_288_6e+38)
+    (f32.const -1.175_494_350_822_287_5e-38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x1.fffffep+127) (f32.const 0x1p-126))
+  (invoke "ge"
+    (f32.const -3.402_823_466_385_288_6e+38)
+    (f32.const 1.175_494_350_822_287_5e-38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x1.fffffep+127) (f32.const -0x1p-126))
+  (invoke "ge"
+    (f32.const 3.402_823_466_385_288_6e+38)
+    (f32.const -1.175_494_350_822_287_5e-38)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x1.fffffep+127) (f32.const 0x1p-126))
+  (invoke "ge"
+    (f32.const 3.402_823_466_385_288_6e+38)
+    (f32.const 1.175_494_350_822_287_5e-38)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x1.fffffep+127) (f32.const -0x1p-1))
+  (invoke "ge" (f32.const -3.402_823_466_385_288_6e+38) (f32.const -0.5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x1.fffffep+127) (f32.const 0x1p-1))
+  (invoke "ge" (f32.const -3.402_823_466_385_288_6e+38) (f32.const 0.5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x1.fffffep+127) (f32.const -0x1p-1))
+  (invoke "ge" (f32.const 3.402_823_466_385_288_6e+38) (f32.const -0.5))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x1.fffffep+127) (f32.const 0x1p-1))
+  (invoke "ge" (f32.const 3.402_823_466_385_288_6e+38) (f32.const 0.5))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x1.fffffep+127) (f32.const -0x1p+0))
+  (invoke "ge" (f32.const -3.402_823_466_385_288_6e+38) (f32.const -1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x1.fffffep+127) (f32.const 0x1p+0))
+  (invoke "ge" (f32.const -3.402_823_466_385_288_6e+38) (f32.const 1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x1.fffffep+127) (f32.const -0x1p+0))
+  (invoke "ge" (f32.const 3.402_823_466_385_288_6e+38) (f32.const -1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x1.fffffep+127) (f32.const 0x1p+0))
+  (invoke "ge" (f32.const 3.402_823_466_385_288_6e+38) (f32.const 1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x1.fffffep+127) (f32.const -0x1.921fb6p+2))
+  (invoke "ge"
+    (f32.const -3.402_823_466_385_288_6e+38)
+    (f32.const -6.283_185_482_025_146_5)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x1.fffffep+127) (f32.const 0x1.921fb6p+2))
+  (invoke "ge"
+    (f32.const -3.402_823_466_385_288_6e+38)
+    (f32.const 6.283_185_482_025_146_5)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x1.fffffep+127) (f32.const -0x1.921fb6p+2))
+  (invoke "ge"
+    (f32.const 3.402_823_466_385_288_6e+38)
+    (f32.const -6.283_185_482_025_146_5)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x1.fffffep+127) (f32.const 0x1.921fb6p+2))
+  (invoke "ge"
+    (f32.const 3.402_823_466_385_288_6e+38)
+    (f32.const 6.283_185_482_025_146_5)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x1.fffffep+127) (f32.const -0x1.fffffep+127))
+  (invoke "ge"
+    (f32.const -3.402_823_466_385_288_6e+38)
+    (f32.const -3.402_823_466_385_288_6e+38)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x1.fffffep+127) (f32.const 0x1.fffffep+127))
+  (invoke "ge"
+    (f32.const -3.402_823_466_385_288_6e+38)
+    (f32.const 3.402_823_466_385_288_6e+38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x1.fffffep+127) (f32.const -0x1.fffffep+127))
+  (invoke "ge"
+    (f32.const 3.402_823_466_385_288_6e+38)
+    (f32.const -3.402_823_466_385_288_6e+38)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x1.fffffep+127) (f32.const 0x1.fffffep+127))
+  (invoke "ge"
+    (f32.const 3.402_823_466_385_288_6e+38)
+    (f32.const 3.402_823_466_385_288_6e+38)
+  )
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x1.fffffep+127) (f32.const -inf))
+  (invoke "ge" (f32.const -3.402_823_466_385_288_6e+38) (f32.const -inf))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x1.fffffep+127) (f32.const inf))
+  (invoke "ge" (f32.const -3.402_823_466_385_288_6e+38) (f32.const inf))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x1.fffffep+127) (f32.const -inf))
+  (invoke "ge" (f32.const 3.402_823_466_385_288_6e+38) (f32.const -inf))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x1.fffffep+127) (f32.const inf))
+  (invoke "ge" (f32.const 3.402_823_466_385_288_6e+38) (f32.const inf))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x1.fffffep+127) (f32.const -nan:0x400000))
+  (invoke "ge"
+    (f32.const -3.402_823_466_385_288_6e+38)
+    (f32.const -nan:0x400000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x1.fffffep+127) (f32.const -nan:0x200000))
+  (invoke "ge"
+    (f32.const -3.402_823_466_385_288_6e+38)
+    (f32.const -nan:0x200000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x1.fffffep+127) (f32.const nan:0x400000))
+  (invoke "ge"
+    (f32.const -3.402_823_466_385_288_6e+38)
+    (f32.const nan:0x400000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const -0x1.fffffep+127) (f32.const nan:0x200000))
+  (invoke "ge"
+    (f32.const -3.402_823_466_385_288_6e+38)
+    (f32.const nan:0x200000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x1.fffffep+127) (f32.const -nan:0x400000))
+  (invoke "ge"
+    (f32.const 3.402_823_466_385_288_6e+38)
+    (f32.const -nan:0x400000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x1.fffffep+127) (f32.const -nan:0x200000))
+  (invoke "ge"
+    (f32.const 3.402_823_466_385_288_6e+38)
+    (f32.const -nan:0x200000)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x1.fffffep+127) (f32.const nan:0x400000))
+  (invoke "ge" (f32.const 3.402_823_466_385_288_6e+38) (f32.const nan:0x400000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const 0x1.fffffep+127) (f32.const nan:0x200000))
+  (invoke "ge" (f32.const 3.402_823_466_385_288_6e+38) (f32.const nan:0x200000))
   (i32.const 0)
 )
-(assert_return (invoke "ge" (f32.const -inf) (f32.const -0x0p+0)) (i32.const 0))
-(assert_return (invoke "ge" (f32.const -inf) (f32.const 0x0p+0)) (i32.const 0))
-(assert_return (invoke "ge" (f32.const inf) (f32.const -0x0p+0)) (i32.const 1))
-(assert_return (invoke "ge" (f32.const inf) (f32.const 0x0p+0)) (i32.const 1))
+(assert_return (invoke "ge" (f32.const -inf) (f32.const -0)) (i32.const 0))
+(assert_return (invoke "ge" (f32.const -inf) (f32.const 0)) (i32.const 0))
+(assert_return (invoke "ge" (f32.const inf) (f32.const -0)) (i32.const 1))
+(assert_return (invoke "ge" (f32.const inf) (f32.const 0)) (i32.const 1))
 (assert_return
-  (invoke "ge" (f32.const -inf) (f32.const -0x1p-149))
+  (invoke "ge" (f32.const -inf) (f32.const -1.401_298_464_324_817_1e-45))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const -inf) (f32.const 0x1p-149))
+  (invoke "ge" (f32.const -inf) (f32.const 1.401_298_464_324_817_1e-45))
   (i32.const 0)
+)
+(assert_return
+  (invoke "ge" (f32.const inf) (f32.const -1.401_298_464_324_817_1e-45))
+  (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f32.const inf) (f32.const -0x1p-149))
+  (invoke "ge" (f32.const inf) (f32.const 1.401_298_464_324_817_1e-45))
   (i32.const 1)
 )
-(assert_return (invoke "ge" (f32.const inf) (f32.const 0x1p-149)) (i32.const 1))
 (assert_return
-  (invoke "ge" (f32.const -inf) (f32.const -0x1p-126))
+  (invoke "ge" (f32.const -inf) (f32.const -1.175_494_350_822_287_5e-38))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const -inf) (f32.const 0x1p-126))
+  (invoke "ge" (f32.const -inf) (f32.const 1.175_494_350_822_287_5e-38))
   (i32.const 0)
+)
+(assert_return
+  (invoke "ge" (f32.const inf) (f32.const -1.175_494_350_822_287_5e-38))
+  (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f32.const inf) (f32.const -0x1p-126))
+  (invoke "ge" (f32.const inf) (f32.const 1.175_494_350_822_287_5e-38))
   (i32.const 1)
 )
-(assert_return (invoke "ge" (f32.const inf) (f32.const 0x1p-126)) (i32.const 1))
-(assert_return (invoke "ge" (f32.const -inf) (f32.const -0x1p-1)) (i32.const 0))
-(assert_return (invoke "ge" (f32.const -inf) (f32.const 0x1p-1)) (i32.const 0))
-(assert_return (invoke "ge" (f32.const inf) (f32.const -0x1p-1)) (i32.const 1))
-(assert_return (invoke "ge" (f32.const inf) (f32.const 0x1p-1)) (i32.const 1))
-(assert_return (invoke "ge" (f32.const -inf) (f32.const -0x1p+0)) (i32.const 0))
-(assert_return (invoke "ge" (f32.const -inf) (f32.const 0x1p+0)) (i32.const 0))
-(assert_return (invoke "ge" (f32.const inf) (f32.const -0x1p+0)) (i32.const 1))
-(assert_return (invoke "ge" (f32.const inf) (f32.const 0x1p+0)) (i32.const 1))
+(assert_return (invoke "ge" (f32.const -inf) (f32.const -0.5)) (i32.const 0))
+(assert_return (invoke "ge" (f32.const -inf) (f32.const 0.5)) (i32.const 0))
+(assert_return (invoke "ge" (f32.const inf) (f32.const -0.5)) (i32.const 1))
+(assert_return (invoke "ge" (f32.const inf) (f32.const 0.5)) (i32.const 1))
+(assert_return (invoke "ge" (f32.const -inf) (f32.const -1)) (i32.const 0))
+(assert_return (invoke "ge" (f32.const -inf) (f32.const 1)) (i32.const 0))
+(assert_return (invoke "ge" (f32.const inf) (f32.const -1)) (i32.const 1))
+(assert_return (invoke "ge" (f32.const inf) (f32.const 1)) (i32.const 1))
 (assert_return
-  (invoke "ge" (f32.const -inf) (f32.const -0x1.921fb6p+2))
+  (invoke "ge" (f32.const -inf) (f32.const -6.283_185_482_025_146_5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const -inf) (f32.const 0x1.921fb6p+2))
+  (invoke "ge" (f32.const -inf) (f32.const 6.283_185_482_025_146_5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const inf) (f32.const -0x1.921fb6p+2))
+  (invoke "ge" (f32.const inf) (f32.const -6.283_185_482_025_146_5))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f32.const inf) (f32.const 0x1.921fb6p+2))
+  (invoke "ge" (f32.const inf) (f32.const 6.283_185_482_025_146_5))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f32.const -inf) (f32.const -0x1.fffffep+127))
+  (invoke "ge" (f32.const -inf) (f32.const -3.402_823_466_385_288_6e+38))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const -inf) (f32.const 0x1.fffffep+127))
+  (invoke "ge" (f32.const -inf) (f32.const 3.402_823_466_385_288_6e+38))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const inf) (f32.const -0x1.fffffep+127))
+  (invoke "ge" (f32.const inf) (f32.const -3.402_823_466_385_288_6e+38))
   (i32.const 1)
 )
 (assert_return
-  (invoke "ge" (f32.const inf) (f32.const 0x1.fffffep+127))
+  (invoke "ge" (f32.const inf) (f32.const 3.402_823_466_385_288_6e+38))
   (i32.const 1)
 )
 (assert_return (invoke "ge" (f32.const -inf) (f32.const -inf)) (i32.const 1))
@@ -8715,227 +9885,281 @@
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const -nan:0x400000) (f32.const -0x0p+0))
+  (invoke "ge" (f32.const -nan:0x400000) (f32.const -0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const -nan:0x200000) (f32.const -0x0p+0))
+  (invoke "ge" (f32.const -nan:0x200000) (f32.const -0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const -nan:0x400000) (f32.const 0x0p+0))
+  (invoke "ge" (f32.const -nan:0x400000) (f32.const 0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const -nan:0x200000) (f32.const 0x0p+0))
+  (invoke "ge" (f32.const -nan:0x200000) (f32.const 0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const nan:0x400000) (f32.const -0x0p+0))
+  (invoke "ge" (f32.const nan:0x400000) (f32.const -0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const nan:0x200000) (f32.const -0x0p+0))
+  (invoke "ge" (f32.const nan:0x200000) (f32.const -0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const nan:0x400000) (f32.const 0x0p+0))
+  (invoke "ge" (f32.const nan:0x400000) (f32.const 0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const nan:0x200000) (f32.const 0x0p+0))
+  (invoke "ge" (f32.const nan:0x200000) (f32.const 0))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const -nan:0x400000) (f32.const -0x1p-149))
+  (invoke "ge"
+    (f32.const -nan:0x400000)
+    (f32.const -1.401_298_464_324_817_1e-45)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const -nan:0x200000) (f32.const -0x1p-149))
+  (invoke "ge"
+    (f32.const -nan:0x200000)
+    (f32.const -1.401_298_464_324_817_1e-45)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const -nan:0x400000) (f32.const 0x1p-149))
+  (invoke "ge"
+    (f32.const -nan:0x400000)
+    (f32.const 1.401_298_464_324_817_1e-45)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const -nan:0x200000) (f32.const 0x1p-149))
+  (invoke "ge"
+    (f32.const -nan:0x200000)
+    (f32.const 1.401_298_464_324_817_1e-45)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const nan:0x400000) (f32.const -0x1p-149))
+  (invoke "ge"
+    (f32.const nan:0x400000)
+    (f32.const -1.401_298_464_324_817_1e-45)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const nan:0x200000) (f32.const -0x1p-149))
+  (invoke "ge"
+    (f32.const nan:0x200000)
+    (f32.const -1.401_298_464_324_817_1e-45)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const nan:0x400000) (f32.const 0x1p-149))
+  (invoke "ge" (f32.const nan:0x400000) (f32.const 1.401_298_464_324_817_1e-45))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const nan:0x200000) (f32.const 0x1p-149))
+  (invoke "ge" (f32.const nan:0x200000) (f32.const 1.401_298_464_324_817_1e-45))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const -nan:0x400000) (f32.const -0x1p-126))
+  (invoke "ge"
+    (f32.const -nan:0x400000)
+    (f32.const -1.175_494_350_822_287_5e-38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const -nan:0x200000) (f32.const -0x1p-126))
+  (invoke "ge"
+    (f32.const -nan:0x200000)
+    (f32.const -1.175_494_350_822_287_5e-38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const -nan:0x400000) (f32.const 0x1p-126))
+  (invoke "ge"
+    (f32.const -nan:0x400000)
+    (f32.const 1.175_494_350_822_287_5e-38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const -nan:0x200000) (f32.const 0x1p-126))
+  (invoke "ge"
+    (f32.const -nan:0x200000)
+    (f32.const 1.175_494_350_822_287_5e-38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const nan:0x400000) (f32.const -0x1p-126))
+  (invoke "ge"
+    (f32.const nan:0x400000)
+    (f32.const -1.175_494_350_822_287_5e-38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const nan:0x200000) (f32.const -0x1p-126))
+  (invoke "ge"
+    (f32.const nan:0x200000)
+    (f32.const -1.175_494_350_822_287_5e-38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const nan:0x400000) (f32.const 0x1p-126))
+  (invoke "ge" (f32.const nan:0x400000) (f32.const 1.175_494_350_822_287_5e-38))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const nan:0x200000) (f32.const 0x1p-126))
+  (invoke "ge" (f32.const nan:0x200000) (f32.const 1.175_494_350_822_287_5e-38))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const -nan:0x400000) (f32.const -0x1p-1))
+  (invoke "ge" (f32.const -nan:0x400000) (f32.const -0.5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const -nan:0x200000) (f32.const -0x1p-1))
+  (invoke "ge" (f32.const -nan:0x200000) (f32.const -0.5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const -nan:0x400000) (f32.const 0x1p-1))
+  (invoke "ge" (f32.const -nan:0x400000) (f32.const 0.5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const -nan:0x200000) (f32.const 0x1p-1))
+  (invoke "ge" (f32.const -nan:0x200000) (f32.const 0.5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const nan:0x400000) (f32.const -0x1p-1))
+  (invoke "ge" (f32.const nan:0x400000) (f32.const -0.5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const nan:0x200000) (f32.const -0x1p-1))
+  (invoke "ge" (f32.const nan:0x200000) (f32.const -0.5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const nan:0x400000) (f32.const 0x1p-1))
+  (invoke "ge" (f32.const nan:0x400000) (f32.const 0.5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const nan:0x200000) (f32.const 0x1p-1))
+  (invoke "ge" (f32.const nan:0x200000) (f32.const 0.5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const -nan:0x400000) (f32.const -0x1p+0))
+  (invoke "ge" (f32.const -nan:0x400000) (f32.const -1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const -nan:0x200000) (f32.const -0x1p+0))
+  (invoke "ge" (f32.const -nan:0x200000) (f32.const -1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const -nan:0x400000) (f32.const 0x1p+0))
+  (invoke "ge" (f32.const -nan:0x400000) (f32.const 1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const -nan:0x200000) (f32.const 0x1p+0))
+  (invoke "ge" (f32.const -nan:0x200000) (f32.const 1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const nan:0x400000) (f32.const -0x1p+0))
+  (invoke "ge" (f32.const nan:0x400000) (f32.const -1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const nan:0x200000) (f32.const -0x1p+0))
+  (invoke "ge" (f32.const nan:0x200000) (f32.const -1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const nan:0x400000) (f32.const 0x1p+0))
+  (invoke "ge" (f32.const nan:0x400000) (f32.const 1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const nan:0x200000) (f32.const 0x1p+0))
+  (invoke "ge" (f32.const nan:0x200000) (f32.const 1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const -nan:0x400000) (f32.const -0x1.921fb6p+2))
+  (invoke "ge" (f32.const -nan:0x400000) (f32.const -6.283_185_482_025_146_5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const -nan:0x200000) (f32.const -0x1.921fb6p+2))
+  (invoke "ge" (f32.const -nan:0x200000) (f32.const -6.283_185_482_025_146_5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const -nan:0x400000) (f32.const 0x1.921fb6p+2))
+  (invoke "ge" (f32.const -nan:0x400000) (f32.const 6.283_185_482_025_146_5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const -nan:0x200000) (f32.const 0x1.921fb6p+2))
+  (invoke "ge" (f32.const -nan:0x200000) (f32.const 6.283_185_482_025_146_5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const nan:0x400000) (f32.const -0x1.921fb6p+2))
+  (invoke "ge" (f32.const nan:0x400000) (f32.const -6.283_185_482_025_146_5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const nan:0x200000) (f32.const -0x1.921fb6p+2))
+  (invoke "ge" (f32.const nan:0x200000) (f32.const -6.283_185_482_025_146_5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const nan:0x400000) (f32.const 0x1.921fb6p+2))
+  (invoke "ge" (f32.const nan:0x400000) (f32.const 6.283_185_482_025_146_5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const nan:0x200000) (f32.const 0x1.921fb6p+2))
+  (invoke "ge" (f32.const nan:0x200000) (f32.const 6.283_185_482_025_146_5))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const -nan:0x400000) (f32.const -0x1.fffffep+127))
+  (invoke "ge"
+    (f32.const -nan:0x400000)
+    (f32.const -3.402_823_466_385_288_6e+38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const -nan:0x200000) (f32.const -0x1.fffffep+127))
+  (invoke "ge"
+    (f32.const -nan:0x200000)
+    (f32.const -3.402_823_466_385_288_6e+38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const -nan:0x400000) (f32.const 0x1.fffffep+127))
+  (invoke "ge"
+    (f32.const -nan:0x400000)
+    (f32.const 3.402_823_466_385_288_6e+38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const -nan:0x200000) (f32.const 0x1.fffffep+127))
+  (invoke "ge"
+    (f32.const -nan:0x200000)
+    (f32.const 3.402_823_466_385_288_6e+38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const nan:0x400000) (f32.const -0x1.fffffep+127))
+  (invoke "ge"
+    (f32.const nan:0x400000)
+    (f32.const -3.402_823_466_385_288_6e+38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const nan:0x200000) (f32.const -0x1.fffffep+127))
+  (invoke "ge"
+    (f32.const nan:0x200000)
+    (f32.const -3.402_823_466_385_288_6e+38)
+  )
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const nan:0x400000) (f32.const 0x1.fffffep+127))
+  (invoke "ge" (f32.const nan:0x400000) (f32.const 3.402_823_466_385_288_6e+38))
   (i32.const 0)
 )
 (assert_return
-  (invoke "ge" (f32.const nan:0x200000) (f32.const 0x1.fffffep+127))
+  (invoke "ge" (f32.const nan:0x200000) (f32.const 3.402_823_466_385_288_6e+38))
   (i32.const 0)
 )
 (assert_return
@@ -9033,4 +10257,58 @@
 (assert_return
   (invoke "ge" (f32.const nan:0x200000) (f32.const nan:0x200000))
   (i32.const 0)
+)
+(assert_invalid
+  (module binary
+    "\00\61\73\6d\01\00\00\00\01\85\80\80\80\00\01\60"
+    "\00\01\7d\03\82\80\80\80\00\01\00\0a\94\80\80\80"
+    "\00\01\8e\80\80\80\00\00\42\00\44\00\00\00\00\00"
+    "\00\00\00\5b\0b"
+  )
+  "type mismatch"
+)
+(assert_invalid
+  (module binary
+    "\00\61\73\6d\01\00\00\00\01\85\80\80\80\00\01\60"
+    "\00\01\7d\03\82\80\80\80\00\01\00\0a\94\80\80\80"
+    "\00\01\8e\80\80\80\00\00\42\00\44\00\00\00\00\00"
+    "\00\00\00\60\0b"
+  )
+  "type mismatch"
+)
+(assert_invalid
+  (module binary
+    "\00\61\73\6d\01\00\00\00\01\85\80\80\80\00\01\60"
+    "\00\01\7d\03\82\80\80\80\00\01\00\0a\94\80\80\80"
+    "\00\01\8e\80\80\80\00\00\42\00\44\00\00\00\00\00"
+    "\00\00\00\5e\0b"
+  )
+  "type mismatch"
+)
+(assert_invalid
+  (module binary
+    "\00\61\73\6d\01\00\00\00\01\85\80\80\80\00\01\60"
+    "\00\01\7d\03\82\80\80\80\00\01\00\0a\94\80\80\80"
+    "\00\01\8e\80\80\80\00\00\42\00\44\00\00\00\00\00"
+    "\00\00\00\5f\0b"
+  )
+  "type mismatch"
+)
+(assert_invalid
+  (module binary
+    "\00\61\73\6d\01\00\00\00\01\85\80\80\80\00\01\60"
+    "\00\01\7d\03\82\80\80\80\00\01\00\0a\94\80\80\80"
+    "\00\01\8e\80\80\80\00\00\42\00\44\00\00\00\00\00"
+    "\00\00\00\5d\0b"
+  )
+  "type mismatch"
+)
+(assert_invalid
+  (module binary
+    "\00\61\73\6d\01\00\00\00\01\85\80\80\80\00\01\60"
+    "\00\01\7d\03\82\80\80\80\00\01\00\0a\94\80\80\80"
+    "\00\01\8e\80\80\80\00\00\42\00\44\00\00\00\00\00"
+    "\00\00\00\5c\0b"
+  )
+  "type mismatch"
 )

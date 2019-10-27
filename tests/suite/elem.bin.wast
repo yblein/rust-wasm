@@ -243,7 +243,7 @@
     "\01\00\41\00\0b\01\00\0a\88\80\80\80\00\01\82\80"
     "\80\80\00\00\0b"
   )
-  "unknown table 0"
+  "unknown table"
 )
 (assert_invalid
   (module binary
@@ -318,7 +318,7 @@
   "\87\80\80\80\00\00\41\09\11\00\00\0b"
 )
 (register "module1" $module1)
-(assert_trap (invoke $module1 "call-7") "uninitialized element 7")
+(assert_trap (invoke $module1 "call-7") "uninitialized element")
 (assert_return (invoke $module1 "call-8") (i32.const 65))
 (assert_return (invoke $module1 "call-9") (i32.const 66))
 (module $module2 binary

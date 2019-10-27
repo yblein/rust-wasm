@@ -7,1124 +7,1292 @@
   "\00\8b\0b\85\80\80\80\00\00\20\00\8c\0b\87\80\80"
   "\80\00\00\20\00\20\01\98\0b"
 )
+(assert_return (invoke "copysign" (f32.const -0) (f32.const -0)) (f32.const -0))
+(assert_return (invoke "copysign" (f32.const -0) (f32.const 0)) (f32.const 0))
+(assert_return (invoke "copysign" (f32.const 0) (f32.const -0)) (f32.const -0))
+(assert_return (invoke "copysign" (f32.const 0) (f32.const 0)) (f32.const 0))
 (assert_return
-  (invoke "copysign" (f32.const -0x0p+0) (f32.const -0x0p+0))
-  (f32.const -0x0p+0)
+  (invoke "copysign" (f32.const -0) (f32.const -1.401_298_464_324_817_1e-45))
+  (f32.const -0)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x0p+0) (f32.const 0x0p+0))
-  (f32.const 0x0p+0)
+  (invoke "copysign" (f32.const -0) (f32.const 1.401_298_464_324_817_1e-45))
+  (f32.const 0)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x0p+0) (f32.const -0x0p+0))
-  (f32.const -0x0p+0)
+  (invoke "copysign" (f32.const 0) (f32.const -1.401_298_464_324_817_1e-45))
+  (f32.const -0)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x0p+0) (f32.const 0x0p+0))
-  (f32.const 0x0p+0)
+  (invoke "copysign" (f32.const 0) (f32.const 1.401_298_464_324_817_1e-45))
+  (f32.const 0)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x0p+0) (f32.const -0x1p-149))
-  (f32.const -0x0p+0)
+  (invoke "copysign" (f32.const -0) (f32.const -1.175_494_350_822_287_5e-38))
+  (f32.const -0)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x0p+0) (f32.const 0x1p-149))
-  (f32.const 0x0p+0)
+  (invoke "copysign" (f32.const -0) (f32.const 1.175_494_350_822_287_5e-38))
+  (f32.const 0)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x0p+0) (f32.const -0x1p-149))
-  (f32.const -0x0p+0)
+  (invoke "copysign" (f32.const 0) (f32.const -1.175_494_350_822_287_5e-38))
+  (f32.const -0)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x0p+0) (f32.const 0x1p-149))
-  (f32.const 0x0p+0)
+  (invoke "copysign" (f32.const 0) (f32.const 1.175_494_350_822_287_5e-38))
+  (f32.const 0)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x0p+0) (f32.const -0x1p-126))
-  (f32.const -0x0p+0)
+  (invoke "copysign" (f32.const -0) (f32.const -0.5))
+  (f32.const -0)
 )
+(assert_return (invoke "copysign" (f32.const -0) (f32.const 0.5)) (f32.const 0))
 (assert_return
-  (invoke "copysign" (f32.const -0x0p+0) (f32.const 0x1p-126))
-  (f32.const 0x0p+0)
+  (invoke "copysign" (f32.const 0) (f32.const -0.5))
+  (f32.const -0)
 )
+(assert_return (invoke "copysign" (f32.const 0) (f32.const 0.5)) (f32.const 0))
+(assert_return (invoke "copysign" (f32.const -0) (f32.const -1)) (f32.const -0))
+(assert_return (invoke "copysign" (f32.const -0) (f32.const 1)) (f32.const 0))
+(assert_return (invoke "copysign" (f32.const 0) (f32.const -1)) (f32.const -0))
+(assert_return (invoke "copysign" (f32.const 0) (f32.const 1)) (f32.const 0))
 (assert_return
-  (invoke "copysign" (f32.const 0x0p+0) (f32.const -0x1p-126))
-  (f32.const -0x0p+0)
+  (invoke "copysign" (f32.const -0) (f32.const -6.283_185_482_025_146_5))
+  (f32.const -0)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x0p+0) (f32.const 0x1p-126))
-  (f32.const 0x0p+0)
+  (invoke "copysign" (f32.const -0) (f32.const 6.283_185_482_025_146_5))
+  (f32.const 0)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x0p+0) (f32.const -0x1p-1))
-  (f32.const -0x0p+0)
+  (invoke "copysign" (f32.const 0) (f32.const -6.283_185_482_025_146_5))
+  (f32.const -0)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x0p+0) (f32.const 0x1p-1))
-  (f32.const 0x0p+0)
+  (invoke "copysign" (f32.const 0) (f32.const 6.283_185_482_025_146_5))
+  (f32.const 0)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x0p+0) (f32.const -0x1p-1))
-  (f32.const -0x0p+0)
+  (invoke "copysign" (f32.const -0) (f32.const -3.402_823_466_385_288_6e+38))
+  (f32.const -0)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x0p+0) (f32.const 0x1p-1))
-  (f32.const 0x0p+0)
+  (invoke "copysign" (f32.const -0) (f32.const 3.402_823_466_385_288_6e+38))
+  (f32.const 0)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x0p+0) (f32.const -0x1p+0))
-  (f32.const -0x0p+0)
+  (invoke "copysign" (f32.const 0) (f32.const -3.402_823_466_385_288_6e+38))
+  (f32.const -0)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x0p+0) (f32.const 0x1p+0))
-  (f32.const 0x0p+0)
+  (invoke "copysign" (f32.const 0) (f32.const 3.402_823_466_385_288_6e+38))
+  (f32.const 0)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x0p+0) (f32.const -0x1p+0))
-  (f32.const -0x0p+0)
+  (invoke "copysign" (f32.const -0) (f32.const -inf))
+  (f32.const -0)
 )
+(assert_return (invoke "copysign" (f32.const -0) (f32.const inf)) (f32.const 0))
 (assert_return
-  (invoke "copysign" (f32.const 0x0p+0) (f32.const 0x1p+0))
-  (f32.const 0x0p+0)
+  (invoke "copysign" (f32.const 0) (f32.const -inf))
+  (f32.const -0)
 )
+(assert_return (invoke "copysign" (f32.const 0) (f32.const inf)) (f32.const 0))
 (assert_return
-  (invoke "copysign" (f32.const -0x0p+0) (f32.const -0x1.921fb6p+2))
-  (f32.const -0x0p+0)
+  (invoke "copysign" (f32.const -0) (f32.const -nan:0x400000))
+  (f32.const -0)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x0p+0) (f32.const 0x1.921fb6p+2))
-  (f32.const 0x0p+0)
+  (invoke "copysign" (f32.const -0) (f32.const nan:0x400000))
+  (f32.const 0)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x0p+0) (f32.const -0x1.921fb6p+2))
-  (f32.const -0x0p+0)
+  (invoke "copysign" (f32.const 0) (f32.const -nan:0x400000))
+  (f32.const -0)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x0p+0) (f32.const 0x1.921fb6p+2))
-  (f32.const 0x0p+0)
+  (invoke "copysign" (f32.const 0) (f32.const nan:0x400000))
+  (f32.const 0)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x0p+0) (f32.const -0x1.fffffep+127))
-  (f32.const -0x0p+0)
+  (invoke "copysign" (f32.const -1.401_298_464_324_817_1e-45) (f32.const -0))
+  (f32.const -1.401_298_464_324_817_1e-45)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x0p+0) (f32.const 0x1.fffffep+127))
-  (f32.const 0x0p+0)
+  (invoke "copysign" (f32.const -1.401_298_464_324_817_1e-45) (f32.const 0))
+  (f32.const 1.401_298_464_324_817_1e-45)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x0p+0) (f32.const -0x1.fffffep+127))
-  (f32.const -0x0p+0)
+  (invoke "copysign" (f32.const 1.401_298_464_324_817_1e-45) (f32.const -0))
+  (f32.const -1.401_298_464_324_817_1e-45)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x0p+0) (f32.const 0x1.fffffep+127))
-  (f32.const 0x0p+0)
+  (invoke "copysign" (f32.const 1.401_298_464_324_817_1e-45) (f32.const 0))
+  (f32.const 1.401_298_464_324_817_1e-45)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x0p+0) (f32.const -inf))
-  (f32.const -0x0p+0)
+  (invoke "copysign"
+    (f32.const -1.401_298_464_324_817_1e-45)
+    (f32.const -1.401_298_464_324_817_1e-45)
+  )
+  (f32.const -1.401_298_464_324_817_1e-45)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x0p+0) (f32.const inf))
-  (f32.const 0x0p+0)
+  (invoke "copysign"
+    (f32.const -1.401_298_464_324_817_1e-45)
+    (f32.const 1.401_298_464_324_817_1e-45)
+  )
+  (f32.const 1.401_298_464_324_817_1e-45)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x0p+0) (f32.const -inf))
-  (f32.const -0x0p+0)
+  (invoke "copysign"
+    (f32.const 1.401_298_464_324_817_1e-45)
+    (f32.const -1.401_298_464_324_817_1e-45)
+  )
+  (f32.const -1.401_298_464_324_817_1e-45)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x0p+0) (f32.const inf))
-  (f32.const 0x0p+0)
+  (invoke "copysign"
+    (f32.const 1.401_298_464_324_817_1e-45)
+    (f32.const 1.401_298_464_324_817_1e-45)
+  )
+  (f32.const 1.401_298_464_324_817_1e-45)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x0p+0) (f32.const -nan:0x400000))
-  (f32.const -0x0p+0)
+  (invoke "copysign"
+    (f32.const -1.401_298_464_324_817_1e-45)
+    (f32.const -1.175_494_350_822_287_5e-38)
+  )
+  (f32.const -1.401_298_464_324_817_1e-45)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x0p+0) (f32.const nan:0x400000))
-  (f32.const 0x0p+0)
+  (invoke "copysign"
+    (f32.const -1.401_298_464_324_817_1e-45)
+    (f32.const 1.175_494_350_822_287_5e-38)
+  )
+  (f32.const 1.401_298_464_324_817_1e-45)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x0p+0) (f32.const -nan:0x400000))
-  (f32.const -0x0p+0)
+  (invoke "copysign"
+    (f32.const 1.401_298_464_324_817_1e-45)
+    (f32.const -1.175_494_350_822_287_5e-38)
+  )
+  (f32.const -1.401_298_464_324_817_1e-45)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x0p+0) (f32.const nan:0x400000))
-  (f32.const 0x0p+0)
+  (invoke "copysign"
+    (f32.const 1.401_298_464_324_817_1e-45)
+    (f32.const 1.175_494_350_822_287_5e-38)
+  )
+  (f32.const 1.401_298_464_324_817_1e-45)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x1p-149) (f32.const -0x0p+0))
-  (f32.const -0x1p-149)
+  (invoke "copysign" (f32.const -1.401_298_464_324_817_1e-45) (f32.const -0.5))
+  (f32.const -1.401_298_464_324_817_1e-45)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x1p-149) (f32.const 0x0p+0))
-  (f32.const 0x1p-149)
+  (invoke "copysign" (f32.const -1.401_298_464_324_817_1e-45) (f32.const 0.5))
+  (f32.const 1.401_298_464_324_817_1e-45)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x1p-149) (f32.const -0x0p+0))
-  (f32.const -0x1p-149)
+  (invoke "copysign" (f32.const 1.401_298_464_324_817_1e-45) (f32.const -0.5))
+  (f32.const -1.401_298_464_324_817_1e-45)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x1p-149) (f32.const 0x0p+0))
-  (f32.const 0x1p-149)
+  (invoke "copysign" (f32.const 1.401_298_464_324_817_1e-45) (f32.const 0.5))
+  (f32.const 1.401_298_464_324_817_1e-45)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x1p-149) (f32.const -0x1p-149))
-  (f32.const -0x1p-149)
+  (invoke "copysign" (f32.const -1.401_298_464_324_817_1e-45) (f32.const -1))
+  (f32.const -1.401_298_464_324_817_1e-45)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x1p-149) (f32.const 0x1p-149))
-  (f32.const 0x1p-149)
+  (invoke "copysign" (f32.const -1.401_298_464_324_817_1e-45) (f32.const 1))
+  (f32.const 1.401_298_464_324_817_1e-45)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x1p-149) (f32.const -0x1p-149))
-  (f32.const -0x1p-149)
+  (invoke "copysign" (f32.const 1.401_298_464_324_817_1e-45) (f32.const -1))
+  (f32.const -1.401_298_464_324_817_1e-45)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x1p-149) (f32.const 0x1p-149))
-  (f32.const 0x1p-149)
+  (invoke "copysign" (f32.const 1.401_298_464_324_817_1e-45) (f32.const 1))
+  (f32.const 1.401_298_464_324_817_1e-45)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x1p-149) (f32.const -0x1p-126))
-  (f32.const -0x1p-149)
+  (invoke "copysign"
+    (f32.const -1.401_298_464_324_817_1e-45)
+    (f32.const -6.283_185_482_025_146_5)
+  )
+  (f32.const -1.401_298_464_324_817_1e-45)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x1p-149) (f32.const 0x1p-126))
-  (f32.const 0x1p-149)
+  (invoke "copysign"
+    (f32.const -1.401_298_464_324_817_1e-45)
+    (f32.const 6.283_185_482_025_146_5)
+  )
+  (f32.const 1.401_298_464_324_817_1e-45)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x1p-149) (f32.const -0x1p-126))
-  (f32.const -0x1p-149)
+  (invoke "copysign"
+    (f32.const 1.401_298_464_324_817_1e-45)
+    (f32.const -6.283_185_482_025_146_5)
+  )
+  (f32.const -1.401_298_464_324_817_1e-45)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x1p-149) (f32.const 0x1p-126))
-  (f32.const 0x1p-149)
+  (invoke "copysign"
+    (f32.const 1.401_298_464_324_817_1e-45)
+    (f32.const 6.283_185_482_025_146_5)
+  )
+  (f32.const 1.401_298_464_324_817_1e-45)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x1p-149) (f32.const -0x1p-1))
-  (f32.const -0x1p-149)
+  (invoke "copysign"
+    (f32.const -1.401_298_464_324_817_1e-45)
+    (f32.const -3.402_823_466_385_288_6e+38)
+  )
+  (f32.const -1.401_298_464_324_817_1e-45)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x1p-149) (f32.const 0x1p-1))
-  (f32.const 0x1p-149)
+  (invoke "copysign"
+    (f32.const -1.401_298_464_324_817_1e-45)
+    (f32.const 3.402_823_466_385_288_6e+38)
+  )
+  (f32.const 1.401_298_464_324_817_1e-45)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x1p-149) (f32.const -0x1p-1))
-  (f32.const -0x1p-149)
+  (invoke "copysign"
+    (f32.const 1.401_298_464_324_817_1e-45)
+    (f32.const -3.402_823_466_385_288_6e+38)
+  )
+  (f32.const -1.401_298_464_324_817_1e-45)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x1p-149) (f32.const 0x1p-1))
-  (f32.const 0x1p-149)
+  (invoke "copysign"
+    (f32.const 1.401_298_464_324_817_1e-45)
+    (f32.const 3.402_823_466_385_288_6e+38)
+  )
+  (f32.const 1.401_298_464_324_817_1e-45)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x1p-149) (f32.const -0x1p+0))
-  (f32.const -0x1p-149)
+  (invoke "copysign" (f32.const -1.401_298_464_324_817_1e-45) (f32.const -inf))
+  (f32.const -1.401_298_464_324_817_1e-45)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x1p-149) (f32.const 0x1p+0))
-  (f32.const 0x1p-149)
+  (invoke "copysign" (f32.const -1.401_298_464_324_817_1e-45) (f32.const inf))
+  (f32.const 1.401_298_464_324_817_1e-45)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x1p-149) (f32.const -0x1p+0))
-  (f32.const -0x1p-149)
+  (invoke "copysign" (f32.const 1.401_298_464_324_817_1e-45) (f32.const -inf))
+  (f32.const -1.401_298_464_324_817_1e-45)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x1p-149) (f32.const 0x1p+0))
-  (f32.const 0x1p-149)
+  (invoke "copysign" (f32.const 1.401_298_464_324_817_1e-45) (f32.const inf))
+  (f32.const 1.401_298_464_324_817_1e-45)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x1p-149) (f32.const -0x1.921fb6p+2))
-  (f32.const -0x1p-149)
+  (invoke "copysign"
+    (f32.const -1.401_298_464_324_817_1e-45)
+    (f32.const -nan:0x400000)
+  )
+  (f32.const -1.401_298_464_324_817_1e-45)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x1p-149) (f32.const 0x1.921fb6p+2))
-  (f32.const 0x1p-149)
+  (invoke "copysign"
+    (f32.const -1.401_298_464_324_817_1e-45)
+    (f32.const nan:0x400000)
+  )
+  (f32.const 1.401_298_464_324_817_1e-45)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x1p-149) (f32.const -0x1.921fb6p+2))
-  (f32.const -0x1p-149)
+  (invoke "copysign"
+    (f32.const 1.401_298_464_324_817_1e-45)
+    (f32.const -nan:0x400000)
+  )
+  (f32.const -1.401_298_464_324_817_1e-45)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x1p-149) (f32.const 0x1.921fb6p+2))
-  (f32.const 0x1p-149)
+  (invoke "copysign"
+    (f32.const 1.401_298_464_324_817_1e-45)
+    (f32.const nan:0x400000)
+  )
+  (f32.const 1.401_298_464_324_817_1e-45)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x1p-149) (f32.const -0x1.fffffep+127))
-  (f32.const -0x1p-149)
+  (invoke "copysign" (f32.const -1.175_494_350_822_287_5e-38) (f32.const -0))
+  (f32.const -1.175_494_350_822_287_5e-38)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x1p-149) (f32.const 0x1.fffffep+127))
-  (f32.const 0x1p-149)
+  (invoke "copysign" (f32.const -1.175_494_350_822_287_5e-38) (f32.const 0))
+  (f32.const 1.175_494_350_822_287_5e-38)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x1p-149) (f32.const -0x1.fffffep+127))
-  (f32.const -0x1p-149)
+  (invoke "copysign" (f32.const 1.175_494_350_822_287_5e-38) (f32.const -0))
+  (f32.const -1.175_494_350_822_287_5e-38)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x1p-149) (f32.const 0x1.fffffep+127))
-  (f32.const 0x1p-149)
+  (invoke "copysign" (f32.const 1.175_494_350_822_287_5e-38) (f32.const 0))
+  (f32.const 1.175_494_350_822_287_5e-38)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x1p-149) (f32.const -inf))
-  (f32.const -0x1p-149)
+  (invoke "copysign"
+    (f32.const -1.175_494_350_822_287_5e-38)
+    (f32.const -1.401_298_464_324_817_1e-45)
+  )
+  (f32.const -1.175_494_350_822_287_5e-38)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x1p-149) (f32.const inf))
-  (f32.const 0x1p-149)
+  (invoke "copysign"
+    (f32.const -1.175_494_350_822_287_5e-38)
+    (f32.const 1.401_298_464_324_817_1e-45)
+  )
+  (f32.const 1.175_494_350_822_287_5e-38)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x1p-149) (f32.const -inf))
-  (f32.const -0x1p-149)
+  (invoke "copysign"
+    (f32.const 1.175_494_350_822_287_5e-38)
+    (f32.const -1.401_298_464_324_817_1e-45)
+  )
+  (f32.const -1.175_494_350_822_287_5e-38)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x1p-149) (f32.const inf))
-  (f32.const 0x1p-149)
+  (invoke "copysign"
+    (f32.const 1.175_494_350_822_287_5e-38)
+    (f32.const 1.401_298_464_324_817_1e-45)
+  )
+  (f32.const 1.175_494_350_822_287_5e-38)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x1p-149) (f32.const -nan:0x400000))
-  (f32.const -0x1p-149)
+  (invoke "copysign"
+    (f32.const -1.175_494_350_822_287_5e-38)
+    (f32.const -1.175_494_350_822_287_5e-38)
+  )
+  (f32.const -1.175_494_350_822_287_5e-38)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x1p-149) (f32.const nan:0x400000))
-  (f32.const 0x1p-149)
+  (invoke "copysign"
+    (f32.const -1.175_494_350_822_287_5e-38)
+    (f32.const 1.175_494_350_822_287_5e-38)
+  )
+  (f32.const 1.175_494_350_822_287_5e-38)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x1p-149) (f32.const -nan:0x400000))
-  (f32.const -0x1p-149)
+  (invoke "copysign"
+    (f32.const 1.175_494_350_822_287_5e-38)
+    (f32.const -1.175_494_350_822_287_5e-38)
+  )
+  (f32.const -1.175_494_350_822_287_5e-38)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x1p-149) (f32.const nan:0x400000))
-  (f32.const 0x1p-149)
+  (invoke "copysign"
+    (f32.const 1.175_494_350_822_287_5e-38)
+    (f32.const 1.175_494_350_822_287_5e-38)
+  )
+  (f32.const 1.175_494_350_822_287_5e-38)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x1p-126) (f32.const -0x0p+0))
-  (f32.const -0x1p-126)
+  (invoke "copysign" (f32.const -1.175_494_350_822_287_5e-38) (f32.const -0.5))
+  (f32.const -1.175_494_350_822_287_5e-38)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x1p-126) (f32.const 0x0p+0))
-  (f32.const 0x1p-126)
+  (invoke "copysign" (f32.const -1.175_494_350_822_287_5e-38) (f32.const 0.5))
+  (f32.const 1.175_494_350_822_287_5e-38)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x1p-126) (f32.const -0x0p+0))
-  (f32.const -0x1p-126)
+  (invoke "copysign" (f32.const 1.175_494_350_822_287_5e-38) (f32.const -0.5))
+  (f32.const -1.175_494_350_822_287_5e-38)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x1p-126) (f32.const 0x0p+0))
-  (f32.const 0x1p-126)
+  (invoke "copysign" (f32.const 1.175_494_350_822_287_5e-38) (f32.const 0.5))
+  (f32.const 1.175_494_350_822_287_5e-38)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x1p-126) (f32.const -0x1p-149))
-  (f32.const -0x1p-126)
+  (invoke "copysign" (f32.const -1.175_494_350_822_287_5e-38) (f32.const -1))
+  (f32.const -1.175_494_350_822_287_5e-38)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x1p-126) (f32.const 0x1p-149))
-  (f32.const 0x1p-126)
+  (invoke "copysign" (f32.const -1.175_494_350_822_287_5e-38) (f32.const 1))
+  (f32.const 1.175_494_350_822_287_5e-38)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x1p-126) (f32.const -0x1p-149))
-  (f32.const -0x1p-126)
+  (invoke "copysign" (f32.const 1.175_494_350_822_287_5e-38) (f32.const -1))
+  (f32.const -1.175_494_350_822_287_5e-38)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x1p-126) (f32.const 0x1p-149))
-  (f32.const 0x1p-126)
+  (invoke "copysign" (f32.const 1.175_494_350_822_287_5e-38) (f32.const 1))
+  (f32.const 1.175_494_350_822_287_5e-38)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x1p-126) (f32.const -0x1p-126))
-  (f32.const -0x1p-126)
+  (invoke "copysign"
+    (f32.const -1.175_494_350_822_287_5e-38)
+    (f32.const -6.283_185_482_025_146_5)
+  )
+  (f32.const -1.175_494_350_822_287_5e-38)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x1p-126) (f32.const 0x1p-126))
-  (f32.const 0x1p-126)
+  (invoke "copysign"
+    (f32.const -1.175_494_350_822_287_5e-38)
+    (f32.const 6.283_185_482_025_146_5)
+  )
+  (f32.const 1.175_494_350_822_287_5e-38)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x1p-126) (f32.const -0x1p-126))
-  (f32.const -0x1p-126)
+  (invoke "copysign"
+    (f32.const 1.175_494_350_822_287_5e-38)
+    (f32.const -6.283_185_482_025_146_5)
+  )
+  (f32.const -1.175_494_350_822_287_5e-38)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x1p-126) (f32.const 0x1p-126))
-  (f32.const 0x1p-126)
+  (invoke "copysign"
+    (f32.const 1.175_494_350_822_287_5e-38)
+    (f32.const 6.283_185_482_025_146_5)
+  )
+  (f32.const 1.175_494_350_822_287_5e-38)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x1p-126) (f32.const -0x1p-1))
-  (f32.const -0x1p-126)
+  (invoke "copysign"
+    (f32.const -1.175_494_350_822_287_5e-38)
+    (f32.const -3.402_823_466_385_288_6e+38)
+  )
+  (f32.const -1.175_494_350_822_287_5e-38)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x1p-126) (f32.const 0x1p-1))
-  (f32.const 0x1p-126)
+  (invoke "copysign"
+    (f32.const -1.175_494_350_822_287_5e-38)
+    (f32.const 3.402_823_466_385_288_6e+38)
+  )
+  (f32.const 1.175_494_350_822_287_5e-38)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x1p-126) (f32.const -0x1p-1))
-  (f32.const -0x1p-126)
+  (invoke "copysign"
+    (f32.const 1.175_494_350_822_287_5e-38)
+    (f32.const -3.402_823_466_385_288_6e+38)
+  )
+  (f32.const -1.175_494_350_822_287_5e-38)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x1p-126) (f32.const 0x1p-1))
-  (f32.const 0x1p-126)
+  (invoke "copysign"
+    (f32.const 1.175_494_350_822_287_5e-38)
+    (f32.const 3.402_823_466_385_288_6e+38)
+  )
+  (f32.const 1.175_494_350_822_287_5e-38)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x1p-126) (f32.const -0x1p+0))
-  (f32.const -0x1p-126)
+  (invoke "copysign" (f32.const -1.175_494_350_822_287_5e-38) (f32.const -inf))
+  (f32.const -1.175_494_350_822_287_5e-38)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x1p-126) (f32.const 0x1p+0))
-  (f32.const 0x1p-126)
+  (invoke "copysign" (f32.const -1.175_494_350_822_287_5e-38) (f32.const inf))
+  (f32.const 1.175_494_350_822_287_5e-38)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x1p-126) (f32.const -0x1p+0))
-  (f32.const -0x1p-126)
+  (invoke "copysign" (f32.const 1.175_494_350_822_287_5e-38) (f32.const -inf))
+  (f32.const -1.175_494_350_822_287_5e-38)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x1p-126) (f32.const 0x1p+0))
-  (f32.const 0x1p-126)
+  (invoke "copysign" (f32.const 1.175_494_350_822_287_5e-38) (f32.const inf))
+  (f32.const 1.175_494_350_822_287_5e-38)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x1p-126) (f32.const -0x1.921fb6p+2))
-  (f32.const -0x1p-126)
+  (invoke "copysign"
+    (f32.const -1.175_494_350_822_287_5e-38)
+    (f32.const -nan:0x400000)
+  )
+  (f32.const -1.175_494_350_822_287_5e-38)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x1p-126) (f32.const 0x1.921fb6p+2))
-  (f32.const 0x1p-126)
+  (invoke "copysign"
+    (f32.const -1.175_494_350_822_287_5e-38)
+    (f32.const nan:0x400000)
+  )
+  (f32.const 1.175_494_350_822_287_5e-38)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x1p-126) (f32.const -0x1.921fb6p+2))
-  (f32.const -0x1p-126)
+  (invoke "copysign"
+    (f32.const 1.175_494_350_822_287_5e-38)
+    (f32.const -nan:0x400000)
+  )
+  (f32.const -1.175_494_350_822_287_5e-38)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x1p-126) (f32.const 0x1.921fb6p+2))
-  (f32.const 0x1p-126)
+  (invoke "copysign"
+    (f32.const 1.175_494_350_822_287_5e-38)
+    (f32.const nan:0x400000)
+  )
+  (f32.const 1.175_494_350_822_287_5e-38)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x1p-126) (f32.const -0x1.fffffep+127))
-  (f32.const -0x1p-126)
+  (invoke "copysign" (f32.const -0.5) (f32.const -0))
+  (f32.const -0.5)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x1p-126) (f32.const 0x1.fffffep+127))
-  (f32.const 0x1p-126)
+  (invoke "copysign" (f32.const -0.5) (f32.const 0))
+  (f32.const 0.5)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x1p-126) (f32.const -0x1.fffffep+127))
-  (f32.const -0x1p-126)
+  (invoke "copysign" (f32.const 0.5) (f32.const -0))
+  (f32.const -0.5)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x1p-126) (f32.const 0x1.fffffep+127))
-  (f32.const 0x1p-126)
+  (invoke "copysign" (f32.const 0.5) (f32.const 0))
+  (f32.const 0.5)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x1p-126) (f32.const -inf))
-  (f32.const -0x1p-126)
+  (invoke "copysign" (f32.const -0.5) (f32.const -1.401_298_464_324_817_1e-45))
+  (f32.const -0.5)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x1p-126) (f32.const inf))
-  (f32.const 0x1p-126)
+  (invoke "copysign" (f32.const -0.5) (f32.const 1.401_298_464_324_817_1e-45))
+  (f32.const 0.5)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x1p-126) (f32.const -inf))
-  (f32.const -0x1p-126)
+  (invoke "copysign" (f32.const 0.5) (f32.const -1.401_298_464_324_817_1e-45))
+  (f32.const -0.5)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x1p-126) (f32.const inf))
-  (f32.const 0x1p-126)
+  (invoke "copysign" (f32.const 0.5) (f32.const 1.401_298_464_324_817_1e-45))
+  (f32.const 0.5)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x1p-126) (f32.const -nan:0x400000))
-  (f32.const -0x1p-126)
+  (invoke "copysign" (f32.const -0.5) (f32.const -1.175_494_350_822_287_5e-38))
+  (f32.const -0.5)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x1p-126) (f32.const nan:0x400000))
-  (f32.const 0x1p-126)
+  (invoke "copysign" (f32.const -0.5) (f32.const 1.175_494_350_822_287_5e-38))
+  (f32.const 0.5)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x1p-126) (f32.const -nan:0x400000))
-  (f32.const -0x1p-126)
+  (invoke "copysign" (f32.const 0.5) (f32.const -1.175_494_350_822_287_5e-38))
+  (f32.const -0.5)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x1p-126) (f32.const nan:0x400000))
-  (f32.const 0x1p-126)
+  (invoke "copysign" (f32.const 0.5) (f32.const 1.175_494_350_822_287_5e-38))
+  (f32.const 0.5)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x1p-1) (f32.const -0x0p+0))
-  (f32.const -0x1p-1)
+  (invoke "copysign" (f32.const -0.5) (f32.const -0.5))
+  (f32.const -0.5)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x1p-1) (f32.const 0x0p+0))
-  (f32.const 0x1p-1)
+  (invoke "copysign" (f32.const -0.5) (f32.const 0.5))
+  (f32.const 0.5)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x1p-1) (f32.const -0x0p+0))
-  (f32.const -0x1p-1)
+  (invoke "copysign" (f32.const 0.5) (f32.const -0.5))
+  (f32.const -0.5)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x1p-1) (f32.const 0x0p+0))
-  (f32.const 0x1p-1)
+  (invoke "copysign" (f32.const 0.5) (f32.const 0.5))
+  (f32.const 0.5)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x1p-1) (f32.const -0x1p-149))
-  (f32.const -0x1p-1)
+  (invoke "copysign" (f32.const -0.5) (f32.const -1))
+  (f32.const -0.5)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x1p-1) (f32.const 0x1p-149))
-  (f32.const 0x1p-1)
+  (invoke "copysign" (f32.const -0.5) (f32.const 1))
+  (f32.const 0.5)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x1p-1) (f32.const -0x1p-149))
-  (f32.const -0x1p-1)
+  (invoke "copysign" (f32.const 0.5) (f32.const -1))
+  (f32.const -0.5)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x1p-1) (f32.const 0x1p-149))
-  (f32.const 0x1p-1)
+  (invoke "copysign" (f32.const 0.5) (f32.const 1))
+  (f32.const 0.5)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x1p-1) (f32.const -0x1p-126))
-  (f32.const -0x1p-1)
+  (invoke "copysign" (f32.const -0.5) (f32.const -6.283_185_482_025_146_5))
+  (f32.const -0.5)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x1p-1) (f32.const 0x1p-126))
-  (f32.const 0x1p-1)
+  (invoke "copysign" (f32.const -0.5) (f32.const 6.283_185_482_025_146_5))
+  (f32.const 0.5)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x1p-1) (f32.const -0x1p-126))
-  (f32.const -0x1p-1)
+  (invoke "copysign" (f32.const 0.5) (f32.const -6.283_185_482_025_146_5))
+  (f32.const -0.5)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x1p-1) (f32.const 0x1p-126))
-  (f32.const 0x1p-1)
+  (invoke "copysign" (f32.const 0.5) (f32.const 6.283_185_482_025_146_5))
+  (f32.const 0.5)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x1p-1) (f32.const -0x1p-1))
-  (f32.const -0x1p-1)
+  (invoke "copysign" (f32.const -0.5) (f32.const -3.402_823_466_385_288_6e+38))
+  (f32.const -0.5)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x1p-1) (f32.const 0x1p-1))
-  (f32.const 0x1p-1)
+  (invoke "copysign" (f32.const -0.5) (f32.const 3.402_823_466_385_288_6e+38))
+  (f32.const 0.5)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x1p-1) (f32.const -0x1p-1))
-  (f32.const -0x1p-1)
+  (invoke "copysign" (f32.const 0.5) (f32.const -3.402_823_466_385_288_6e+38))
+  (f32.const -0.5)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x1p-1) (f32.const 0x1p-1))
-  (f32.const 0x1p-1)
+  (invoke "copysign" (f32.const 0.5) (f32.const 3.402_823_466_385_288_6e+38))
+  (f32.const 0.5)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x1p-1) (f32.const -0x1p+0))
-  (f32.const -0x1p-1)
+  (invoke "copysign" (f32.const -0.5) (f32.const -inf))
+  (f32.const -0.5)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x1p-1) (f32.const 0x1p+0))
-  (f32.const 0x1p-1)
+  (invoke "copysign" (f32.const -0.5) (f32.const inf))
+  (f32.const 0.5)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x1p-1) (f32.const -0x1p+0))
-  (f32.const -0x1p-1)
+  (invoke "copysign" (f32.const 0.5) (f32.const -inf))
+  (f32.const -0.5)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x1p-1) (f32.const 0x1p+0))
-  (f32.const 0x1p-1)
+  (invoke "copysign" (f32.const 0.5) (f32.const inf))
+  (f32.const 0.5)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x1p-1) (f32.const -0x1.921fb6p+2))
-  (f32.const -0x1p-1)
+  (invoke "copysign" (f32.const -0.5) (f32.const -nan:0x400000))
+  (f32.const -0.5)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x1p-1) (f32.const 0x1.921fb6p+2))
-  (f32.const 0x1p-1)
+  (invoke "copysign" (f32.const -0.5) (f32.const nan:0x400000))
+  (f32.const 0.5)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x1p-1) (f32.const -0x1.921fb6p+2))
-  (f32.const -0x1p-1)
+  (invoke "copysign" (f32.const 0.5) (f32.const -nan:0x400000))
+  (f32.const -0.5)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x1p-1) (f32.const 0x1.921fb6p+2))
-  (f32.const 0x1p-1)
+  (invoke "copysign" (f32.const 0.5) (f32.const nan:0x400000))
+  (f32.const 0.5)
 )
+(assert_return (invoke "copysign" (f32.const -1) (f32.const -0)) (f32.const -1))
+(assert_return (invoke "copysign" (f32.const -1) (f32.const 0)) (f32.const 1))
+(assert_return (invoke "copysign" (f32.const 1) (f32.const -0)) (f32.const -1))
+(assert_return (invoke "copysign" (f32.const 1) (f32.const 0)) (f32.const 1))
 (assert_return
-  (invoke "copysign" (f32.const -0x1p-1) (f32.const -0x1.fffffep+127))
-  (f32.const -0x1p-1)
+  (invoke "copysign" (f32.const -1) (f32.const -1.401_298_464_324_817_1e-45))
+  (f32.const -1)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x1p-1) (f32.const 0x1.fffffep+127))
-  (f32.const 0x1p-1)
+  (invoke "copysign" (f32.const -1) (f32.const 1.401_298_464_324_817_1e-45))
+  (f32.const 1)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x1p-1) (f32.const -0x1.fffffep+127))
-  (f32.const -0x1p-1)
+  (invoke "copysign" (f32.const 1) (f32.const -1.401_298_464_324_817_1e-45))
+  (f32.const -1)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x1p-1) (f32.const 0x1.fffffep+127))
-  (f32.const 0x1p-1)
+  (invoke "copysign" (f32.const 1) (f32.const 1.401_298_464_324_817_1e-45))
+  (f32.const 1)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x1p-1) (f32.const -inf))
-  (f32.const -0x1p-1)
+  (invoke "copysign" (f32.const -1) (f32.const -1.175_494_350_822_287_5e-38))
+  (f32.const -1)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x1p-1) (f32.const inf))
-  (f32.const 0x1p-1)
+  (invoke "copysign" (f32.const -1) (f32.const 1.175_494_350_822_287_5e-38))
+  (f32.const 1)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x1p-1) (f32.const -inf))
-  (f32.const -0x1p-1)
+  (invoke "copysign" (f32.const 1) (f32.const -1.175_494_350_822_287_5e-38))
+  (f32.const -1)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x1p-1) (f32.const inf))
-  (f32.const 0x1p-1)
+  (invoke "copysign" (f32.const 1) (f32.const 1.175_494_350_822_287_5e-38))
+  (f32.const 1)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x1p-1) (f32.const -nan:0x400000))
-  (f32.const -0x1p-1)
+  (invoke "copysign" (f32.const -1) (f32.const -0.5))
+  (f32.const -1)
 )
+(assert_return (invoke "copysign" (f32.const -1) (f32.const 0.5)) (f32.const 1))
 (assert_return
-  (invoke "copysign" (f32.const -0x1p-1) (f32.const nan:0x400000))
-  (f32.const 0x1p-1)
+  (invoke "copysign" (f32.const 1) (f32.const -0.5))
+  (f32.const -1)
 )
+(assert_return (invoke "copysign" (f32.const 1) (f32.const 0.5)) (f32.const 1))
+(assert_return (invoke "copysign" (f32.const -1) (f32.const -1)) (f32.const -1))
+(assert_return (invoke "copysign" (f32.const -1) (f32.const 1)) (f32.const 1))
+(assert_return (invoke "copysign" (f32.const 1) (f32.const -1)) (f32.const -1))
+(assert_return (invoke "copysign" (f32.const 1) (f32.const 1)) (f32.const 1))
 (assert_return
-  (invoke "copysign" (f32.const 0x1p-1) (f32.const -nan:0x400000))
-  (f32.const -0x1p-1)
+  (invoke "copysign" (f32.const -1) (f32.const -6.283_185_482_025_146_5))
+  (f32.const -1)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x1p-1) (f32.const nan:0x400000))
-  (f32.const 0x1p-1)
+  (invoke "copysign" (f32.const -1) (f32.const 6.283_185_482_025_146_5))
+  (f32.const 1)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x1p+0) (f32.const -0x0p+0))
-  (f32.const -0x1p+0)
+  (invoke "copysign" (f32.const 1) (f32.const -6.283_185_482_025_146_5))
+  (f32.const -1)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x1p+0) (f32.const 0x0p+0))
-  (f32.const 0x1p+0)
+  (invoke "copysign" (f32.const 1) (f32.const 6.283_185_482_025_146_5))
+  (f32.const 1)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x1p+0) (f32.const -0x0p+0))
-  (f32.const -0x1p+0)
+  (invoke "copysign" (f32.const -1) (f32.const -3.402_823_466_385_288_6e+38))
+  (f32.const -1)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x1p+0) (f32.const 0x0p+0))
-  (f32.const 0x1p+0)
+  (invoke "copysign" (f32.const -1) (f32.const 3.402_823_466_385_288_6e+38))
+  (f32.const 1)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x1p+0) (f32.const -0x1p-149))
-  (f32.const -0x1p+0)
+  (invoke "copysign" (f32.const 1) (f32.const -3.402_823_466_385_288_6e+38))
+  (f32.const -1)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x1p+0) (f32.const 0x1p-149))
-  (f32.const 0x1p+0)
+  (invoke "copysign" (f32.const 1) (f32.const 3.402_823_466_385_288_6e+38))
+  (f32.const 1)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x1p+0) (f32.const -0x1p-149))
-  (f32.const -0x1p+0)
+  (invoke "copysign" (f32.const -1) (f32.const -inf))
+  (f32.const -1)
 )
+(assert_return (invoke "copysign" (f32.const -1) (f32.const inf)) (f32.const 1))
 (assert_return
-  (invoke "copysign" (f32.const 0x1p+0) (f32.const 0x1p-149))
-  (f32.const 0x1p+0)
+  (invoke "copysign" (f32.const 1) (f32.const -inf))
+  (f32.const -1)
 )
+(assert_return (invoke "copysign" (f32.const 1) (f32.const inf)) (f32.const 1))
 (assert_return
-  (invoke "copysign" (f32.const -0x1p+0) (f32.const -0x1p-126))
-  (f32.const -0x1p+0)
+  (invoke "copysign" (f32.const -1) (f32.const -nan:0x400000))
+  (f32.const -1)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x1p+0) (f32.const 0x1p-126))
-  (f32.const 0x1p+0)
+  (invoke "copysign" (f32.const -1) (f32.const nan:0x400000))
+  (f32.const 1)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x1p+0) (f32.const -0x1p-126))
-  (f32.const -0x1p+0)
+  (invoke "copysign" (f32.const 1) (f32.const -nan:0x400000))
+  (f32.const -1)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x1p+0) (f32.const 0x1p-126))
-  (f32.const 0x1p+0)
+  (invoke "copysign" (f32.const 1) (f32.const nan:0x400000))
+  (f32.const 1)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x1p+0) (f32.const -0x1p-1))
-  (f32.const -0x1p+0)
+  (invoke "copysign" (f32.const -6.283_185_482_025_146_5) (f32.const -0))
+  (f32.const -6.283_185_482_025_146_5)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x1p+0) (f32.const 0x1p-1))
-  (f32.const 0x1p+0)
+  (invoke "copysign" (f32.const -6.283_185_482_025_146_5) (f32.const 0))
+  (f32.const 6.283_185_482_025_146_5)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x1p+0) (f32.const -0x1p-1))
-  (f32.const -0x1p+0)
+  (invoke "copysign" (f32.const 6.283_185_482_025_146_5) (f32.const -0))
+  (f32.const -6.283_185_482_025_146_5)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x1p+0) (f32.const 0x1p-1))
-  (f32.const 0x1p+0)
+  (invoke "copysign" (f32.const 6.283_185_482_025_146_5) (f32.const 0))
+  (f32.const 6.283_185_482_025_146_5)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x1p+0) (f32.const -0x1p+0))
-  (f32.const -0x1p+0)
+  (invoke "copysign"
+    (f32.const -6.283_185_482_025_146_5)
+    (f32.const -1.401_298_464_324_817_1e-45)
+  )
+  (f32.const -6.283_185_482_025_146_5)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x1p+0) (f32.const 0x1p+0))
-  (f32.const 0x1p+0)
+  (invoke "copysign"
+    (f32.const -6.283_185_482_025_146_5)
+    (f32.const 1.401_298_464_324_817_1e-45)
+  )
+  (f32.const 6.283_185_482_025_146_5)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x1p+0) (f32.const -0x1p+0))
-  (f32.const -0x1p+0)
+  (invoke "copysign"
+    (f32.const 6.283_185_482_025_146_5)
+    (f32.const -1.401_298_464_324_817_1e-45)
+  )
+  (f32.const -6.283_185_482_025_146_5)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x1p+0) (f32.const 0x1p+0))
-  (f32.const 0x1p+0)
+  (invoke "copysign"
+    (f32.const 6.283_185_482_025_146_5)
+    (f32.const 1.401_298_464_324_817_1e-45)
+  )
+  (f32.const 6.283_185_482_025_146_5)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x1p+0) (f32.const -0x1.921fb6p+2))
-  (f32.const -0x1p+0)
+  (invoke "copysign"
+    (f32.const -6.283_185_482_025_146_5)
+    (f32.const -1.175_494_350_822_287_5e-38)
+  )
+  (f32.const -6.283_185_482_025_146_5)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x1p+0) (f32.const 0x1.921fb6p+2))
-  (f32.const 0x1p+0)
+  (invoke "copysign"
+    (f32.const -6.283_185_482_025_146_5)
+    (f32.const 1.175_494_350_822_287_5e-38)
+  )
+  (f32.const 6.283_185_482_025_146_5)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x1p+0) (f32.const -0x1.921fb6p+2))
-  (f32.const -0x1p+0)
+  (invoke "copysign"
+    (f32.const 6.283_185_482_025_146_5)
+    (f32.const -1.175_494_350_822_287_5e-38)
+  )
+  (f32.const -6.283_185_482_025_146_5)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x1p+0) (f32.const 0x1.921fb6p+2))
-  (f32.const 0x1p+0)
+  (invoke "copysign"
+    (f32.const 6.283_185_482_025_146_5)
+    (f32.const 1.175_494_350_822_287_5e-38)
+  )
+  (f32.const 6.283_185_482_025_146_5)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x1p+0) (f32.const -0x1.fffffep+127))
-  (f32.const -0x1p+0)
+  (invoke "copysign" (f32.const -6.283_185_482_025_146_5) (f32.const -0.5))
+  (f32.const -6.283_185_482_025_146_5)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x1p+0) (f32.const 0x1.fffffep+127))
-  (f32.const 0x1p+0)
+  (invoke "copysign" (f32.const -6.283_185_482_025_146_5) (f32.const 0.5))
+  (f32.const 6.283_185_482_025_146_5)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x1p+0) (f32.const -0x1.fffffep+127))
-  (f32.const -0x1p+0)
+  (invoke "copysign" (f32.const 6.283_185_482_025_146_5) (f32.const -0.5))
+  (f32.const -6.283_185_482_025_146_5)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x1p+0) (f32.const 0x1.fffffep+127))
-  (f32.const 0x1p+0)
+  (invoke "copysign" (f32.const 6.283_185_482_025_146_5) (f32.const 0.5))
+  (f32.const 6.283_185_482_025_146_5)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x1p+0) (f32.const -inf))
-  (f32.const -0x1p+0)
+  (invoke "copysign" (f32.const -6.283_185_482_025_146_5) (f32.const -1))
+  (f32.const -6.283_185_482_025_146_5)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x1p+0) (f32.const inf))
-  (f32.const 0x1p+0)
+  (invoke "copysign" (f32.const -6.283_185_482_025_146_5) (f32.const 1))
+  (f32.const 6.283_185_482_025_146_5)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x1p+0) (f32.const -inf))
-  (f32.const -0x1p+0)
+  (invoke "copysign" (f32.const 6.283_185_482_025_146_5) (f32.const -1))
+  (f32.const -6.283_185_482_025_146_5)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x1p+0) (f32.const inf))
-  (f32.const 0x1p+0)
+  (invoke "copysign" (f32.const 6.283_185_482_025_146_5) (f32.const 1))
+  (f32.const 6.283_185_482_025_146_5)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x1p+0) (f32.const -nan:0x400000))
-  (f32.const -0x1p+0)
+  (invoke "copysign"
+    (f32.const -6.283_185_482_025_146_5)
+    (f32.const -6.283_185_482_025_146_5)
+  )
+  (f32.const -6.283_185_482_025_146_5)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x1p+0) (f32.const nan:0x400000))
-  (f32.const 0x1p+0)
+  (invoke "copysign"
+    (f32.const -6.283_185_482_025_146_5)
+    (f32.const 6.283_185_482_025_146_5)
+  )
+  (f32.const 6.283_185_482_025_146_5)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x1p+0) (f32.const -nan:0x400000))
-  (f32.const -0x1p+0)
+  (invoke "copysign"
+    (f32.const 6.283_185_482_025_146_5)
+    (f32.const -6.283_185_482_025_146_5)
+  )
+  (f32.const -6.283_185_482_025_146_5)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x1p+0) (f32.const nan:0x400000))
-  (f32.const 0x1p+0)
+  (invoke "copysign"
+    (f32.const 6.283_185_482_025_146_5)
+    (f32.const 6.283_185_482_025_146_5)
+  )
+  (f32.const 6.283_185_482_025_146_5)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x1.921fb6p+2) (f32.const -0x0p+0))
-  (f32.const -0x1.921fb6p+2)
+  (invoke "copysign"
+    (f32.const -6.283_185_482_025_146_5)
+    (f32.const -3.402_823_466_385_288_6e+38)
+  )
+  (f32.const -6.283_185_482_025_146_5)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x1.921fb6p+2) (f32.const 0x0p+0))
-  (f32.const 0x1.921fb6p+2)
+  (invoke "copysign"
+    (f32.const -6.283_185_482_025_146_5)
+    (f32.const 3.402_823_466_385_288_6e+38)
+  )
+  (f32.const 6.283_185_482_025_146_5)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x1.921fb6p+2) (f32.const -0x0p+0))
-  (f32.const -0x1.921fb6p+2)
+  (invoke "copysign"
+    (f32.const 6.283_185_482_025_146_5)
+    (f32.const -3.402_823_466_385_288_6e+38)
+  )
+  (f32.const -6.283_185_482_025_146_5)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x1.921fb6p+2) (f32.const 0x0p+0))
-  (f32.const 0x1.921fb6p+2)
+  (invoke "copysign"
+    (f32.const 6.283_185_482_025_146_5)
+    (f32.const 3.402_823_466_385_288_6e+38)
+  )
+  (f32.const 6.283_185_482_025_146_5)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x1.921fb6p+2) (f32.const -0x1p-149))
-  (f32.const -0x1.921fb6p+2)
+  (invoke "copysign" (f32.const -6.283_185_482_025_146_5) (f32.const -inf))
+  (f32.const -6.283_185_482_025_146_5)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x1.921fb6p+2) (f32.const 0x1p-149))
-  (f32.const 0x1.921fb6p+2)
+  (invoke "copysign" (f32.const -6.283_185_482_025_146_5) (f32.const inf))
+  (f32.const 6.283_185_482_025_146_5)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x1.921fb6p+2) (f32.const -0x1p-149))
-  (f32.const -0x1.921fb6p+2)
+  (invoke "copysign" (f32.const 6.283_185_482_025_146_5) (f32.const -inf))
+  (f32.const -6.283_185_482_025_146_5)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x1.921fb6p+2) (f32.const 0x1p-149))
-  (f32.const 0x1.921fb6p+2)
+  (invoke "copysign" (f32.const 6.283_185_482_025_146_5) (f32.const inf))
+  (f32.const 6.283_185_482_025_146_5)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x1.921fb6p+2) (f32.const -0x1p-126))
-  (f32.const -0x1.921fb6p+2)
+  (invoke "copysign"
+    (f32.const -6.283_185_482_025_146_5)
+    (f32.const -nan:0x400000)
+  )
+  (f32.const -6.283_185_482_025_146_5)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x1.921fb6p+2) (f32.const 0x1p-126))
-  (f32.const 0x1.921fb6p+2)
+  (invoke "copysign"
+    (f32.const -6.283_185_482_025_146_5)
+    (f32.const nan:0x400000)
+  )
+  (f32.const 6.283_185_482_025_146_5)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x1.921fb6p+2) (f32.const -0x1p-126))
-  (f32.const -0x1.921fb6p+2)
+  (invoke "copysign"
+    (f32.const 6.283_185_482_025_146_5)
+    (f32.const -nan:0x400000)
+  )
+  (f32.const -6.283_185_482_025_146_5)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x1.921fb6p+2) (f32.const 0x1p-126))
-  (f32.const 0x1.921fb6p+2)
+  (invoke "copysign"
+    (f32.const 6.283_185_482_025_146_5)
+    (f32.const nan:0x400000)
+  )
+  (f32.const 6.283_185_482_025_146_5)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x1.921fb6p+2) (f32.const -0x1p-1))
-  (f32.const -0x1.921fb6p+2)
+  (invoke "copysign" (f32.const -3.402_823_466_385_288_6e+38) (f32.const -0))
+  (f32.const -3.402_823_466_385_288_6e+38)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x1.921fb6p+2) (f32.const 0x1p-1))
-  (f32.const 0x1.921fb6p+2)
+  (invoke "copysign" (f32.const -3.402_823_466_385_288_6e+38) (f32.const 0))
+  (f32.const 3.402_823_466_385_288_6e+38)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x1.921fb6p+2) (f32.const -0x1p-1))
-  (f32.const -0x1.921fb6p+2)
+  (invoke "copysign" (f32.const 3.402_823_466_385_288_6e+38) (f32.const -0))
+  (f32.const -3.402_823_466_385_288_6e+38)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x1.921fb6p+2) (f32.const 0x1p-1))
-  (f32.const 0x1.921fb6p+2)
+  (invoke "copysign" (f32.const 3.402_823_466_385_288_6e+38) (f32.const 0))
+  (f32.const 3.402_823_466_385_288_6e+38)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x1.921fb6p+2) (f32.const -0x1p+0))
-  (f32.const -0x1.921fb6p+2)
+  (invoke "copysign"
+    (f32.const -3.402_823_466_385_288_6e+38)
+    (f32.const -1.401_298_464_324_817_1e-45)
+  )
+  (f32.const -3.402_823_466_385_288_6e+38)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x1.921fb6p+2) (f32.const 0x1p+0))
-  (f32.const 0x1.921fb6p+2)
+  (invoke "copysign"
+    (f32.const -3.402_823_466_385_288_6e+38)
+    (f32.const 1.401_298_464_324_817_1e-45)
+  )
+  (f32.const 3.402_823_466_385_288_6e+38)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x1.921fb6p+2) (f32.const -0x1p+0))
-  (f32.const -0x1.921fb6p+2)
+  (invoke "copysign"
+    (f32.const 3.402_823_466_385_288_6e+38)
+    (f32.const -1.401_298_464_324_817_1e-45)
+  )
+  (f32.const -3.402_823_466_385_288_6e+38)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x1.921fb6p+2) (f32.const 0x1p+0))
-  (f32.const 0x1.921fb6p+2)
+  (invoke "copysign"
+    (f32.const 3.402_823_466_385_288_6e+38)
+    (f32.const 1.401_298_464_324_817_1e-45)
+  )
+  (f32.const 3.402_823_466_385_288_6e+38)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x1.921fb6p+2) (f32.const -0x1.921fb6p+2))
-  (f32.const -0x1.921fb6p+2)
+  (invoke "copysign"
+    (f32.const -3.402_823_466_385_288_6e+38)
+    (f32.const -1.175_494_350_822_287_5e-38)
+  )
+  (f32.const -3.402_823_466_385_288_6e+38)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x1.921fb6p+2) (f32.const 0x1.921fb6p+2))
-  (f32.const 0x1.921fb6p+2)
+  (invoke "copysign"
+    (f32.const -3.402_823_466_385_288_6e+38)
+    (f32.const 1.175_494_350_822_287_5e-38)
+  )
+  (f32.const 3.402_823_466_385_288_6e+38)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x1.921fb6p+2) (f32.const -0x1.921fb6p+2))
-  (f32.const -0x1.921fb6p+2)
+  (invoke "copysign"
+    (f32.const 3.402_823_466_385_288_6e+38)
+    (f32.const -1.175_494_350_822_287_5e-38)
+  )
+  (f32.const -3.402_823_466_385_288_6e+38)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x1.921fb6p+2) (f32.const 0x1.921fb6p+2))
-  (f32.const 0x1.921fb6p+2)
+  (invoke "copysign"
+    (f32.const 3.402_823_466_385_288_6e+38)
+    (f32.const 1.175_494_350_822_287_5e-38)
+  )
+  (f32.const 3.402_823_466_385_288_6e+38)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x1.921fb6p+2) (f32.const -0x1.fffffep+127))
-  (f32.const -0x1.921fb6p+2)
+  (invoke "copysign" (f32.const -3.402_823_466_385_288_6e+38) (f32.const -0.5))
+  (f32.const -3.402_823_466_385_288_6e+38)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x1.921fb6p+2) (f32.const 0x1.fffffep+127))
-  (f32.const 0x1.921fb6p+2)
+  (invoke "copysign" (f32.const -3.402_823_466_385_288_6e+38) (f32.const 0.5))
+  (f32.const 3.402_823_466_385_288_6e+38)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x1.921fb6p+2) (f32.const -0x1.fffffep+127))
-  (f32.const -0x1.921fb6p+2)
+  (invoke "copysign" (f32.const 3.402_823_466_385_288_6e+38) (f32.const -0.5))
+  (f32.const -3.402_823_466_385_288_6e+38)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x1.921fb6p+2) (f32.const 0x1.fffffep+127))
-  (f32.const 0x1.921fb6p+2)
+  (invoke "copysign" (f32.const 3.402_823_466_385_288_6e+38) (f32.const 0.5))
+  (f32.const 3.402_823_466_385_288_6e+38)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x1.921fb6p+2) (f32.const -inf))
-  (f32.const -0x1.921fb6p+2)
+  (invoke "copysign" (f32.const -3.402_823_466_385_288_6e+38) (f32.const -1))
+  (f32.const -3.402_823_466_385_288_6e+38)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x1.921fb6p+2) (f32.const inf))
-  (f32.const 0x1.921fb6p+2)
+  (invoke "copysign" (f32.const -3.402_823_466_385_288_6e+38) (f32.const 1))
+  (f32.const 3.402_823_466_385_288_6e+38)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x1.921fb6p+2) (f32.const -inf))
-  (f32.const -0x1.921fb6p+2)
+  (invoke "copysign" (f32.const 3.402_823_466_385_288_6e+38) (f32.const -1))
+  (f32.const -3.402_823_466_385_288_6e+38)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x1.921fb6p+2) (f32.const inf))
-  (f32.const 0x1.921fb6p+2)
+  (invoke "copysign" (f32.const 3.402_823_466_385_288_6e+38) (f32.const 1))
+  (f32.const 3.402_823_466_385_288_6e+38)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x1.921fb6p+2) (f32.const -nan:0x400000))
-  (f32.const -0x1.921fb6p+2)
+  (invoke "copysign"
+    (f32.const -3.402_823_466_385_288_6e+38)
+    (f32.const -6.283_185_482_025_146_5)
+  )
+  (f32.const -3.402_823_466_385_288_6e+38)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x1.921fb6p+2) (f32.const nan:0x400000))
-  (f32.const 0x1.921fb6p+2)
+  (invoke "copysign"
+    (f32.const -3.402_823_466_385_288_6e+38)
+    (f32.const 6.283_185_482_025_146_5)
+  )
+  (f32.const 3.402_823_466_385_288_6e+38)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x1.921fb6p+2) (f32.const -nan:0x400000))
-  (f32.const -0x1.921fb6p+2)
+  (invoke "copysign"
+    (f32.const 3.402_823_466_385_288_6e+38)
+    (f32.const -6.283_185_482_025_146_5)
+  )
+  (f32.const -3.402_823_466_385_288_6e+38)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x1.921fb6p+2) (f32.const nan:0x400000))
-  (f32.const 0x1.921fb6p+2)
+  (invoke "copysign"
+    (f32.const 3.402_823_466_385_288_6e+38)
+    (f32.const 6.283_185_482_025_146_5)
+  )
+  (f32.const 3.402_823_466_385_288_6e+38)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x1.fffffep+127) (f32.const -0x0p+0))
-  (f32.const -0x1.fffffep+127)
+  (invoke "copysign"
+    (f32.const -3.402_823_466_385_288_6e+38)
+    (f32.const -3.402_823_466_385_288_6e+38)
+  )
+  (f32.const -3.402_823_466_385_288_6e+38)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x1.fffffep+127) (f32.const 0x0p+0))
-  (f32.const 0x1.fffffep+127)
+  (invoke "copysign"
+    (f32.const -3.402_823_466_385_288_6e+38)
+    (f32.const 3.402_823_466_385_288_6e+38)
+  )
+  (f32.const 3.402_823_466_385_288_6e+38)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x1.fffffep+127) (f32.const -0x0p+0))
-  (f32.const -0x1.fffffep+127)
+  (invoke "copysign"
+    (f32.const 3.402_823_466_385_288_6e+38)
+    (f32.const -3.402_823_466_385_288_6e+38)
+  )
+  (f32.const -3.402_823_466_385_288_6e+38)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x1.fffffep+127) (f32.const 0x0p+0))
-  (f32.const 0x1.fffffep+127)
+  (invoke "copysign"
+    (f32.const 3.402_823_466_385_288_6e+38)
+    (f32.const 3.402_823_466_385_288_6e+38)
+  )
+  (f32.const 3.402_823_466_385_288_6e+38)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x1.fffffep+127) (f32.const -0x1p-149))
-  (f32.const -0x1.fffffep+127)
+  (invoke "copysign" (f32.const -3.402_823_466_385_288_6e+38) (f32.const -inf))
+  (f32.const -3.402_823_466_385_288_6e+38)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x1.fffffep+127) (f32.const 0x1p-149))
-  (f32.const 0x1.fffffep+127)
+  (invoke "copysign" (f32.const -3.402_823_466_385_288_6e+38) (f32.const inf))
+  (f32.const 3.402_823_466_385_288_6e+38)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x1.fffffep+127) (f32.const -0x1p-149))
-  (f32.const -0x1.fffffep+127)
+  (invoke "copysign" (f32.const 3.402_823_466_385_288_6e+38) (f32.const -inf))
+  (f32.const -3.402_823_466_385_288_6e+38)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x1.fffffep+127) (f32.const 0x1p-149))
-  (f32.const 0x1.fffffep+127)
+  (invoke "copysign" (f32.const 3.402_823_466_385_288_6e+38) (f32.const inf))
+  (f32.const 3.402_823_466_385_288_6e+38)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x1.fffffep+127) (f32.const -0x1p-126))
-  (f32.const -0x1.fffffep+127)
+  (invoke "copysign"
+    (f32.const -3.402_823_466_385_288_6e+38)
+    (f32.const -nan:0x400000)
+  )
+  (f32.const -3.402_823_466_385_288_6e+38)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x1.fffffep+127) (f32.const 0x1p-126))
-  (f32.const 0x1.fffffep+127)
+  (invoke "copysign"
+    (f32.const -3.402_823_466_385_288_6e+38)
+    (f32.const nan:0x400000)
+  )
+  (f32.const 3.402_823_466_385_288_6e+38)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x1.fffffep+127) (f32.const -0x1p-126))
-  (f32.const -0x1.fffffep+127)
+  (invoke "copysign"
+    (f32.const 3.402_823_466_385_288_6e+38)
+    (f32.const -nan:0x400000)
+  )
+  (f32.const -3.402_823_466_385_288_6e+38)
 )
 (assert_return
-  (invoke "copysign" (f32.const 0x1.fffffep+127) (f32.const 0x1p-126))
-  (f32.const 0x1.fffffep+127)
+  (invoke "copysign"
+    (f32.const 3.402_823_466_385_288_6e+38)
+    (f32.const nan:0x400000)
+  )
+  (f32.const 3.402_823_466_385_288_6e+38)
 )
 (assert_return
-  (invoke "copysign" (f32.const -0x1.fffffep+127) (f32.const -0x1p-1))
-  (f32.const -0x1.fffffep+127)
-)
-(assert_return
-  (invoke "copysign" (f32.const -0x1.fffffep+127) (f32.const 0x1p-1))
-  (f32.const 0x1.fffffep+127)
-)
-(assert_return
-  (invoke "copysign" (f32.const 0x1.fffffep+127) (f32.const -0x1p-1))
-  (f32.const -0x1.fffffep+127)
-)
-(assert_return
-  (invoke "copysign" (f32.const 0x1.fffffep+127) (f32.const 0x1p-1))
-  (f32.const 0x1.fffffep+127)
-)
-(assert_return
-  (invoke "copysign" (f32.const -0x1.fffffep+127) (f32.const -0x1p+0))
-  (f32.const -0x1.fffffep+127)
-)
-(assert_return
-  (invoke "copysign" (f32.const -0x1.fffffep+127) (f32.const 0x1p+0))
-  (f32.const 0x1.fffffep+127)
-)
-(assert_return
-  (invoke "copysign" (f32.const 0x1.fffffep+127) (f32.const -0x1p+0))
-  (f32.const -0x1.fffffep+127)
-)
-(assert_return
-  (invoke "copysign" (f32.const 0x1.fffffep+127) (f32.const 0x1p+0))
-  (f32.const 0x1.fffffep+127)
-)
-(assert_return
-  (invoke "copysign" (f32.const -0x1.fffffep+127) (f32.const -0x1.921fb6p+2))
-  (f32.const -0x1.fffffep+127)
-)
-(assert_return
-  (invoke "copysign" (f32.const -0x1.fffffep+127) (f32.const 0x1.921fb6p+2))
-  (f32.const 0x1.fffffep+127)
-)
-(assert_return
-  (invoke "copysign" (f32.const 0x1.fffffep+127) (f32.const -0x1.921fb6p+2))
-  (f32.const -0x1.fffffep+127)
-)
-(assert_return
-  (invoke "copysign" (f32.const 0x1.fffffep+127) (f32.const 0x1.921fb6p+2))
-  (f32.const 0x1.fffffep+127)
-)
-(assert_return
-  (invoke "copysign" (f32.const -0x1.fffffep+127) (f32.const -0x1.fffffep+127))
-  (f32.const -0x1.fffffep+127)
-)
-(assert_return
-  (invoke "copysign" (f32.const -0x1.fffffep+127) (f32.const 0x1.fffffep+127))
-  (f32.const 0x1.fffffep+127)
-)
-(assert_return
-  (invoke "copysign" (f32.const 0x1.fffffep+127) (f32.const -0x1.fffffep+127))
-  (f32.const -0x1.fffffep+127)
-)
-(assert_return
-  (invoke "copysign" (f32.const 0x1.fffffep+127) (f32.const 0x1.fffffep+127))
-  (f32.const 0x1.fffffep+127)
-)
-(assert_return
-  (invoke "copysign" (f32.const -0x1.fffffep+127) (f32.const -inf))
-  (f32.const -0x1.fffffep+127)
-)
-(assert_return
-  (invoke "copysign" (f32.const -0x1.fffffep+127) (f32.const inf))
-  (f32.const 0x1.fffffep+127)
-)
-(assert_return
-  (invoke "copysign" (f32.const 0x1.fffffep+127) (f32.const -inf))
-  (f32.const -0x1.fffffep+127)
-)
-(assert_return
-  (invoke "copysign" (f32.const 0x1.fffffep+127) (f32.const inf))
-  (f32.const 0x1.fffffep+127)
-)
-(assert_return
-  (invoke "copysign" (f32.const -0x1.fffffep+127) (f32.const -nan:0x400000))
-  (f32.const -0x1.fffffep+127)
-)
-(assert_return
-  (invoke "copysign" (f32.const -0x1.fffffep+127) (f32.const nan:0x400000))
-  (f32.const 0x1.fffffep+127)
-)
-(assert_return
-  (invoke "copysign" (f32.const 0x1.fffffep+127) (f32.const -nan:0x400000))
-  (f32.const -0x1.fffffep+127)
-)
-(assert_return
-  (invoke "copysign" (f32.const 0x1.fffffep+127) (f32.const nan:0x400000))
-  (f32.const 0x1.fffffep+127)
-)
-(assert_return
-  (invoke "copysign" (f32.const -inf) (f32.const -0x0p+0))
+  (invoke "copysign" (f32.const -inf) (f32.const -0))
   (f32.const -inf)
 )
 (assert_return
-  (invoke "copysign" (f32.const -inf) (f32.const 0x0p+0))
+  (invoke "copysign" (f32.const -inf) (f32.const 0))
   (f32.const inf)
 )
 (assert_return
-  (invoke "copysign" (f32.const inf) (f32.const -0x0p+0))
+  (invoke "copysign" (f32.const inf) (f32.const -0))
   (f32.const -inf)
 )
 (assert_return
-  (invoke "copysign" (f32.const inf) (f32.const 0x0p+0))
+  (invoke "copysign" (f32.const inf) (f32.const 0))
   (f32.const inf)
 )
 (assert_return
-  (invoke "copysign" (f32.const -inf) (f32.const -0x1p-149))
+  (invoke "copysign" (f32.const -inf) (f32.const -1.401_298_464_324_817_1e-45))
   (f32.const -inf)
 )
 (assert_return
-  (invoke "copysign" (f32.const -inf) (f32.const 0x1p-149))
+  (invoke "copysign" (f32.const -inf) (f32.const 1.401_298_464_324_817_1e-45))
   (f32.const inf)
 )
 (assert_return
-  (invoke "copysign" (f32.const inf) (f32.const -0x1p-149))
+  (invoke "copysign" (f32.const inf) (f32.const -1.401_298_464_324_817_1e-45))
   (f32.const -inf)
 )
 (assert_return
-  (invoke "copysign" (f32.const inf) (f32.const 0x1p-149))
+  (invoke "copysign" (f32.const inf) (f32.const 1.401_298_464_324_817_1e-45))
   (f32.const inf)
 )
 (assert_return
-  (invoke "copysign" (f32.const -inf) (f32.const -0x1p-126))
+  (invoke "copysign" (f32.const -inf) (f32.const -1.175_494_350_822_287_5e-38))
   (f32.const -inf)
 )
 (assert_return
-  (invoke "copysign" (f32.const -inf) (f32.const 0x1p-126))
+  (invoke "copysign" (f32.const -inf) (f32.const 1.175_494_350_822_287_5e-38))
   (f32.const inf)
 )
 (assert_return
-  (invoke "copysign" (f32.const inf) (f32.const -0x1p-126))
+  (invoke "copysign" (f32.const inf) (f32.const -1.175_494_350_822_287_5e-38))
   (f32.const -inf)
 )
 (assert_return
-  (invoke "copysign" (f32.const inf) (f32.const 0x1p-126))
+  (invoke "copysign" (f32.const inf) (f32.const 1.175_494_350_822_287_5e-38))
   (f32.const inf)
 )
 (assert_return
-  (invoke "copysign" (f32.const -inf) (f32.const -0x1p-1))
+  (invoke "copysign" (f32.const -inf) (f32.const -0.5))
   (f32.const -inf)
 )
 (assert_return
-  (invoke "copysign" (f32.const -inf) (f32.const 0x1p-1))
+  (invoke "copysign" (f32.const -inf) (f32.const 0.5))
   (f32.const inf)
 )
 (assert_return
-  (invoke "copysign" (f32.const inf) (f32.const -0x1p-1))
+  (invoke "copysign" (f32.const inf) (f32.const -0.5))
   (f32.const -inf)
 )
 (assert_return
-  (invoke "copysign" (f32.const inf) (f32.const 0x1p-1))
+  (invoke "copysign" (f32.const inf) (f32.const 0.5))
   (f32.const inf)
 )
 (assert_return
-  (invoke "copysign" (f32.const -inf) (f32.const -0x1p+0))
+  (invoke "copysign" (f32.const -inf) (f32.const -1))
   (f32.const -inf)
 )
 (assert_return
-  (invoke "copysign" (f32.const -inf) (f32.const 0x1p+0))
+  (invoke "copysign" (f32.const -inf) (f32.const 1))
   (f32.const inf)
 )
 (assert_return
-  (invoke "copysign" (f32.const inf) (f32.const -0x1p+0))
+  (invoke "copysign" (f32.const inf) (f32.const -1))
   (f32.const -inf)
 )
 (assert_return
-  (invoke "copysign" (f32.const inf) (f32.const 0x1p+0))
+  (invoke "copysign" (f32.const inf) (f32.const 1))
   (f32.const inf)
 )
 (assert_return
-  (invoke "copysign" (f32.const -inf) (f32.const -0x1.921fb6p+2))
+  (invoke "copysign" (f32.const -inf) (f32.const -6.283_185_482_025_146_5))
   (f32.const -inf)
 )
 (assert_return
-  (invoke "copysign" (f32.const -inf) (f32.const 0x1.921fb6p+2))
+  (invoke "copysign" (f32.const -inf) (f32.const 6.283_185_482_025_146_5))
   (f32.const inf)
 )
 (assert_return
-  (invoke "copysign" (f32.const inf) (f32.const -0x1.921fb6p+2))
+  (invoke "copysign" (f32.const inf) (f32.const -6.283_185_482_025_146_5))
   (f32.const -inf)
 )
 (assert_return
-  (invoke "copysign" (f32.const inf) (f32.const 0x1.921fb6p+2))
+  (invoke "copysign" (f32.const inf) (f32.const 6.283_185_482_025_146_5))
   (f32.const inf)
 )
 (assert_return
-  (invoke "copysign" (f32.const -inf) (f32.const -0x1.fffffep+127))
+  (invoke "copysign" (f32.const -inf) (f32.const -3.402_823_466_385_288_6e+38))
   (f32.const -inf)
 )
 (assert_return
-  (invoke "copysign" (f32.const -inf) (f32.const 0x1.fffffep+127))
+  (invoke "copysign" (f32.const -inf) (f32.const 3.402_823_466_385_288_6e+38))
   (f32.const inf)
 )
 (assert_return
-  (invoke "copysign" (f32.const inf) (f32.const -0x1.fffffep+127))
+  (invoke "copysign" (f32.const inf) (f32.const -3.402_823_466_385_288_6e+38))
   (f32.const -inf)
 )
 (assert_return
-  (invoke "copysign" (f32.const inf) (f32.const 0x1.fffffep+127))
+  (invoke "copysign" (f32.const inf) (f32.const 3.402_823_466_385_288_6e+38))
   (f32.const inf)
 )
 (assert_return
@@ -1160,115 +1328,163 @@
   (f32.const inf)
 )
 (assert_return
-  (invoke "copysign" (f32.const -nan:0x400000) (f32.const -0x0p+0))
+  (invoke "copysign" (f32.const -nan:0x400000) (f32.const -0))
   (f32.const -nan:0x400000)
 )
 (assert_return
-  (invoke "copysign" (f32.const -nan:0x400000) (f32.const 0x0p+0))
+  (invoke "copysign" (f32.const -nan:0x400000) (f32.const 0))
   (f32.const nan:0x400000)
 )
 (assert_return
-  (invoke "copysign" (f32.const nan:0x400000) (f32.const -0x0p+0))
+  (invoke "copysign" (f32.const nan:0x400000) (f32.const -0))
   (f32.const -nan:0x400000)
 )
 (assert_return
-  (invoke "copysign" (f32.const nan:0x400000) (f32.const 0x0p+0))
+  (invoke "copysign" (f32.const nan:0x400000) (f32.const 0))
   (f32.const nan:0x400000)
 )
 (assert_return
-  (invoke "copysign" (f32.const -nan:0x400000) (f32.const -0x1p-149))
+  (invoke "copysign"
+    (f32.const -nan:0x400000)
+    (f32.const -1.401_298_464_324_817_1e-45)
+  )
   (f32.const -nan:0x400000)
 )
 (assert_return
-  (invoke "copysign" (f32.const -nan:0x400000) (f32.const 0x1p-149))
+  (invoke "copysign"
+    (f32.const -nan:0x400000)
+    (f32.const 1.401_298_464_324_817_1e-45)
+  )
   (f32.const nan:0x400000)
 )
 (assert_return
-  (invoke "copysign" (f32.const nan:0x400000) (f32.const -0x1p-149))
+  (invoke "copysign"
+    (f32.const nan:0x400000)
+    (f32.const -1.401_298_464_324_817_1e-45)
+  )
   (f32.const -nan:0x400000)
 )
 (assert_return
-  (invoke "copysign" (f32.const nan:0x400000) (f32.const 0x1p-149))
+  (invoke "copysign"
+    (f32.const nan:0x400000)
+    (f32.const 1.401_298_464_324_817_1e-45)
+  )
   (f32.const nan:0x400000)
 )
 (assert_return
-  (invoke "copysign" (f32.const -nan:0x400000) (f32.const -0x1p-126))
+  (invoke "copysign"
+    (f32.const -nan:0x400000)
+    (f32.const -1.175_494_350_822_287_5e-38)
+  )
   (f32.const -nan:0x400000)
 )
 (assert_return
-  (invoke "copysign" (f32.const -nan:0x400000) (f32.const 0x1p-126))
+  (invoke "copysign"
+    (f32.const -nan:0x400000)
+    (f32.const 1.175_494_350_822_287_5e-38)
+  )
   (f32.const nan:0x400000)
 )
 (assert_return
-  (invoke "copysign" (f32.const nan:0x400000) (f32.const -0x1p-126))
+  (invoke "copysign"
+    (f32.const nan:0x400000)
+    (f32.const -1.175_494_350_822_287_5e-38)
+  )
   (f32.const -nan:0x400000)
 )
 (assert_return
-  (invoke "copysign" (f32.const nan:0x400000) (f32.const 0x1p-126))
+  (invoke "copysign"
+    (f32.const nan:0x400000)
+    (f32.const 1.175_494_350_822_287_5e-38)
+  )
   (f32.const nan:0x400000)
 )
 (assert_return
-  (invoke "copysign" (f32.const -nan:0x400000) (f32.const -0x1p-1))
+  (invoke "copysign" (f32.const -nan:0x400000) (f32.const -0.5))
   (f32.const -nan:0x400000)
 )
 (assert_return
-  (invoke "copysign" (f32.const -nan:0x400000) (f32.const 0x1p-1))
+  (invoke "copysign" (f32.const -nan:0x400000) (f32.const 0.5))
   (f32.const nan:0x400000)
 )
 (assert_return
-  (invoke "copysign" (f32.const nan:0x400000) (f32.const -0x1p-1))
+  (invoke "copysign" (f32.const nan:0x400000) (f32.const -0.5))
   (f32.const -nan:0x400000)
 )
 (assert_return
-  (invoke "copysign" (f32.const nan:0x400000) (f32.const 0x1p-1))
+  (invoke "copysign" (f32.const nan:0x400000) (f32.const 0.5))
   (f32.const nan:0x400000)
 )
 (assert_return
-  (invoke "copysign" (f32.const -nan:0x400000) (f32.const -0x1p+0))
+  (invoke "copysign" (f32.const -nan:0x400000) (f32.const -1))
   (f32.const -nan:0x400000)
 )
 (assert_return
-  (invoke "copysign" (f32.const -nan:0x400000) (f32.const 0x1p+0))
+  (invoke "copysign" (f32.const -nan:0x400000) (f32.const 1))
   (f32.const nan:0x400000)
 )
 (assert_return
-  (invoke "copysign" (f32.const nan:0x400000) (f32.const -0x1p+0))
+  (invoke "copysign" (f32.const nan:0x400000) (f32.const -1))
   (f32.const -nan:0x400000)
 )
 (assert_return
-  (invoke "copysign" (f32.const nan:0x400000) (f32.const 0x1p+0))
+  (invoke "copysign" (f32.const nan:0x400000) (f32.const 1))
   (f32.const nan:0x400000)
 )
 (assert_return
-  (invoke "copysign" (f32.const -nan:0x400000) (f32.const -0x1.921fb6p+2))
+  (invoke "copysign"
+    (f32.const -nan:0x400000)
+    (f32.const -6.283_185_482_025_146_5)
+  )
   (f32.const -nan:0x400000)
 )
 (assert_return
-  (invoke "copysign" (f32.const -nan:0x400000) (f32.const 0x1.921fb6p+2))
+  (invoke "copysign"
+    (f32.const -nan:0x400000)
+    (f32.const 6.283_185_482_025_146_5)
+  )
   (f32.const nan:0x400000)
 )
 (assert_return
-  (invoke "copysign" (f32.const nan:0x400000) (f32.const -0x1.921fb6p+2))
+  (invoke "copysign"
+    (f32.const nan:0x400000)
+    (f32.const -6.283_185_482_025_146_5)
+  )
   (f32.const -nan:0x400000)
 )
 (assert_return
-  (invoke "copysign" (f32.const nan:0x400000) (f32.const 0x1.921fb6p+2))
+  (invoke "copysign"
+    (f32.const nan:0x400000)
+    (f32.const 6.283_185_482_025_146_5)
+  )
   (f32.const nan:0x400000)
 )
 (assert_return
-  (invoke "copysign" (f32.const -nan:0x400000) (f32.const -0x1.fffffep+127))
+  (invoke "copysign"
+    (f32.const -nan:0x400000)
+    (f32.const -3.402_823_466_385_288_6e+38)
+  )
   (f32.const -nan:0x400000)
 )
 (assert_return
-  (invoke "copysign" (f32.const -nan:0x400000) (f32.const 0x1.fffffep+127))
+  (invoke "copysign"
+    (f32.const -nan:0x400000)
+    (f32.const 3.402_823_466_385_288_6e+38)
+  )
   (f32.const nan:0x400000)
 )
 (assert_return
-  (invoke "copysign" (f32.const nan:0x400000) (f32.const -0x1.fffffep+127))
+  (invoke "copysign"
+    (f32.const nan:0x400000)
+    (f32.const -3.402_823_466_385_288_6e+38)
+  )
   (f32.const -nan:0x400000)
 )
 (assert_return
-  (invoke "copysign" (f32.const nan:0x400000) (f32.const 0x1.fffffep+127))
+  (invoke "copysign"
+    (f32.const nan:0x400000)
+    (f32.const 3.402_823_466_385_288_6e+38)
+  )
   (f32.const nan:0x400000)
 )
 (assert_return
@@ -1303,31 +1519,43 @@
   (invoke "copysign" (f32.const nan:0x400000) (f32.const nan:0x400000))
   (f32.const nan:0x400000)
 )
-(assert_return (invoke "abs" (f32.const -0x0p+0)) (f32.const 0x0p+0))
-(assert_return (invoke "abs" (f32.const 0x0p+0)) (f32.const 0x0p+0))
-(assert_return (invoke "abs" (f32.const -0x1p-149)) (f32.const 0x1p-149))
-(assert_return (invoke "abs" (f32.const 0x1p-149)) (f32.const 0x1p-149))
-(assert_return (invoke "abs" (f32.const -0x1p-126)) (f32.const 0x1p-126))
-(assert_return (invoke "abs" (f32.const 0x1p-126)) (f32.const 0x1p-126))
-(assert_return (invoke "abs" (f32.const -0x1p-1)) (f32.const 0x1p-1))
-(assert_return (invoke "abs" (f32.const 0x1p-1)) (f32.const 0x1p-1))
-(assert_return (invoke "abs" (f32.const -0x1p+0)) (f32.const 0x1p+0))
-(assert_return (invoke "abs" (f32.const 0x1p+0)) (f32.const 0x1p+0))
+(assert_return (invoke "abs" (f32.const -0)) (f32.const 0))
+(assert_return (invoke "abs" (f32.const 0)) (f32.const 0))
 (assert_return
-  (invoke "abs" (f32.const -0x1.921fb6p+2))
-  (f32.const 0x1.921fb6p+2)
+  (invoke "abs" (f32.const -1.401_298_464_324_817_1e-45))
+  (f32.const 1.401_298_464_324_817_1e-45)
 )
 (assert_return
-  (invoke "abs" (f32.const 0x1.921fb6p+2))
-  (f32.const 0x1.921fb6p+2)
+  (invoke "abs" (f32.const 1.401_298_464_324_817_1e-45))
+  (f32.const 1.401_298_464_324_817_1e-45)
 )
 (assert_return
-  (invoke "abs" (f32.const -0x1.fffffep+127))
-  (f32.const 0x1.fffffep+127)
+  (invoke "abs" (f32.const -1.175_494_350_822_287_5e-38))
+  (f32.const 1.175_494_350_822_287_5e-38)
 )
 (assert_return
-  (invoke "abs" (f32.const 0x1.fffffep+127))
-  (f32.const 0x1.fffffep+127)
+  (invoke "abs" (f32.const 1.175_494_350_822_287_5e-38))
+  (f32.const 1.175_494_350_822_287_5e-38)
+)
+(assert_return (invoke "abs" (f32.const -0.5)) (f32.const 0.5))
+(assert_return (invoke "abs" (f32.const 0.5)) (f32.const 0.5))
+(assert_return (invoke "abs" (f32.const -1)) (f32.const 1))
+(assert_return (invoke "abs" (f32.const 1)) (f32.const 1))
+(assert_return
+  (invoke "abs" (f32.const -6.283_185_482_025_146_5))
+  (f32.const 6.283_185_482_025_146_5)
+)
+(assert_return
+  (invoke "abs" (f32.const 6.283_185_482_025_146_5))
+  (f32.const 6.283_185_482_025_146_5)
+)
+(assert_return
+  (invoke "abs" (f32.const -3.402_823_466_385_288_6e+38))
+  (f32.const 3.402_823_466_385_288_6e+38)
+)
+(assert_return
+  (invoke "abs" (f32.const 3.402_823_466_385_288_6e+38))
+  (f32.const 3.402_823_466_385_288_6e+38)
 )
 (assert_return (invoke "abs" (f32.const -inf)) (f32.const inf))
 (assert_return (invoke "abs" (f32.const inf)) (f32.const inf))
@@ -1336,31 +1564,43 @@
   (f32.const nan:0x400000)
 )
 (assert_return (invoke "abs" (f32.const nan:0x400000)) (f32.const nan:0x400000))
-(assert_return (invoke "neg" (f32.const -0x0p+0)) (f32.const 0x0p+0))
-(assert_return (invoke "neg" (f32.const 0x0p+0)) (f32.const -0x0p+0))
-(assert_return (invoke "neg" (f32.const -0x1p-149)) (f32.const 0x1p-149))
-(assert_return (invoke "neg" (f32.const 0x1p-149)) (f32.const -0x1p-149))
-(assert_return (invoke "neg" (f32.const -0x1p-126)) (f32.const 0x1p-126))
-(assert_return (invoke "neg" (f32.const 0x1p-126)) (f32.const -0x1p-126))
-(assert_return (invoke "neg" (f32.const -0x1p-1)) (f32.const 0x1p-1))
-(assert_return (invoke "neg" (f32.const 0x1p-1)) (f32.const -0x1p-1))
-(assert_return (invoke "neg" (f32.const -0x1p+0)) (f32.const 0x1p+0))
-(assert_return (invoke "neg" (f32.const 0x1p+0)) (f32.const -0x1p+0))
+(assert_return (invoke "neg" (f32.const -0)) (f32.const 0))
+(assert_return (invoke "neg" (f32.const 0)) (f32.const -0))
 (assert_return
-  (invoke "neg" (f32.const -0x1.921fb6p+2))
-  (f32.const 0x1.921fb6p+2)
+  (invoke "neg" (f32.const -1.401_298_464_324_817_1e-45))
+  (f32.const 1.401_298_464_324_817_1e-45)
 )
 (assert_return
-  (invoke "neg" (f32.const 0x1.921fb6p+2))
-  (f32.const -0x1.921fb6p+2)
+  (invoke "neg" (f32.const 1.401_298_464_324_817_1e-45))
+  (f32.const -1.401_298_464_324_817_1e-45)
 )
 (assert_return
-  (invoke "neg" (f32.const -0x1.fffffep+127))
-  (f32.const 0x1.fffffep+127)
+  (invoke "neg" (f32.const -1.175_494_350_822_287_5e-38))
+  (f32.const 1.175_494_350_822_287_5e-38)
 )
 (assert_return
-  (invoke "neg" (f32.const 0x1.fffffep+127))
-  (f32.const -0x1.fffffep+127)
+  (invoke "neg" (f32.const 1.175_494_350_822_287_5e-38))
+  (f32.const -1.175_494_350_822_287_5e-38)
+)
+(assert_return (invoke "neg" (f32.const -0.5)) (f32.const 0.5))
+(assert_return (invoke "neg" (f32.const 0.5)) (f32.const -0.5))
+(assert_return (invoke "neg" (f32.const -1)) (f32.const 1))
+(assert_return (invoke "neg" (f32.const 1)) (f32.const -1))
+(assert_return
+  (invoke "neg" (f32.const -6.283_185_482_025_146_5))
+  (f32.const 6.283_185_482_025_146_5)
+)
+(assert_return
+  (invoke "neg" (f32.const 6.283_185_482_025_146_5))
+  (f32.const -6.283_185_482_025_146_5)
+)
+(assert_return
+  (invoke "neg" (f32.const -3.402_823_466_385_288_6e+38))
+  (f32.const 3.402_823_466_385_288_6e+38)
+)
+(assert_return
+  (invoke "neg" (f32.const 3.402_823_466_385_288_6e+38))
+  (f32.const -3.402_823_466_385_288_6e+38)
 )
 (assert_return (invoke "neg" (f32.const -inf)) (f32.const inf))
 (assert_return (invoke "neg" (f32.const inf)) (f32.const -inf))
@@ -1371,4 +1611,29 @@
 (assert_return
   (invoke "neg" (f32.const nan:0x400000))
   (f32.const -nan:0x400000)
+)
+(assert_invalid
+  (module binary
+    "\00\61\73\6d\01\00\00\00\01\85\80\80\80\00\01\60"
+    "\00\01\7d\03\82\80\80\80\00\01\00\0a\94\80\80\80"
+    "\00\01\8e\80\80\80\00\00\42\00\44\00\00\00\00\00"
+    "\00\00\00\98\0b"
+  )
+  "type mismatch"
+)
+(assert_invalid
+  (module binary
+    "\00\61\73\6d\01\00\00\00\01\85\80\80\80\00\01\60"
+    "\00\01\7d\03\82\80\80\80\00\01\00\0a\8b\80\80\80"
+    "\00\01\85\80\80\80\00\00\42\00\8b\0b"
+  )
+  "type mismatch"
+)
+(assert_invalid
+  (module binary
+    "\00\61\73\6d\01\00\00\00\01\85\80\80\80\00\01\60"
+    "\00\01\7d\03\82\80\80\80\00\01\00\0a\8b\80\80\80"
+    "\00\01\85\80\80\80\00\00\42\00\8c\0b"
+  )
+  "type mismatch"
 )

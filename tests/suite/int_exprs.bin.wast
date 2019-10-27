@@ -16,7 +16,7 @@
   "\7c\20\01\42\01\7c\54\0b"
 )
 (assert_return
-  (invoke "i32.no_fold_cmp_s_offset" (i32.const 2147483647) (i32.const 0))
+  (invoke "i32.no_fold_cmp_s_offset" (i32.const 2_147_483_647) (i32.const 0))
   (i32.const 1)
 )
 (assert_return
@@ -25,7 +25,7 @@
 )
 (assert_return
   (invoke "i64.no_fold_cmp_s_offset"
-    (i64.const 9223372036854775807)
+    (i64.const 9_223_372_036_854_775_807)
     (i64.const 0)
   )
   (i32.const 1)
@@ -43,12 +43,12 @@
   "\0b"
 )
 (assert_return
-  (invoke "i64.no_fold_wrap_extend_s" (i64.const 4538991236898928))
-  (i64.const 1079009392)
+  (invoke "i64.no_fold_wrap_extend_s" (i64.const 4_538_991_236_898_928))
+  (i64.const 1_079_009_392)
 )
 (assert_return
-  (invoke "i64.no_fold_wrap_extend_s" (i64.const 45230338458316960))
-  (i64.const -790564704)
+  (invoke "i64.no_fold_wrap_extend_s" (i64.const 45_230_338_458_316_960))
+  (i64.const -790_564_704)
 )
 (module binary
   "\00\61\73\6d\01\00\00\00\01\86\80\80\80\00\01\60"
@@ -59,8 +59,8 @@
   "\0b"
 )
 (assert_return
-  (invoke "i64.no_fold_wrap_extend_u" (i64.const 4538991236898928))
-  (i64.const 1079009392)
+  (invoke "i64.no_fold_wrap_extend_u" (i64.const 4_538_991_236_898_928))
+  (i64.const 1_079_009_392)
 )
 (module binary
   "\00\61\73\6d\01\00\00\00\01\8b\80\80\80\00\02\60"
@@ -78,19 +78,19 @@
   "\80\80\80\00\00\20\00\42\01\86\42\01\88\0b"
 )
 (assert_return
-  (invoke "i32.no_fold_shl_shr_s" (i32.const -2147483648))
+  (invoke "i32.no_fold_shl_shr_s" (i32.const -2_147_483_648))
   (i32.const 0)
 )
 (assert_return
-  (invoke "i32.no_fold_shl_shr_u" (i32.const -2147483648))
+  (invoke "i32.no_fold_shl_shr_u" (i32.const -2_147_483_648))
   (i32.const 0)
 )
 (assert_return
-  (invoke "i64.no_fold_shl_shr_s" (i64.const -9223372036854775808))
+  (invoke "i64.no_fold_shl_shr_s" (i64.const -9_223_372_036_854_775_808))
   (i64.const 0)
 )
 (assert_return
-  (invoke "i64.no_fold_shl_shr_u" (i64.const -9223372036854775808))
+  (invoke "i64.no_fold_shl_shr_u" (i64.const -9_223_372_036_854_775_808))
   (i64.const 0)
 )
 (module binary
@@ -209,19 +209,19 @@
   "\80\80\80\00\00\20\00\42\06\7e\42\06\80\0b"
 )
 (assert_return
-  (invoke "i32.no_fold_mul_div_s" (i32.const -2147483648))
+  (invoke "i32.no_fold_mul_div_s" (i32.const -2_147_483_648))
   (i32.const 0)
 )
 (assert_return
-  (invoke "i32.no_fold_mul_div_u" (i32.const -2147483648))
+  (invoke "i32.no_fold_mul_div_u" (i32.const -2_147_483_648))
   (i32.const 0)
 )
 (assert_return
-  (invoke "i64.no_fold_mul_div_s" (i64.const -9223372036854775808))
+  (invoke "i64.no_fold_mul_div_s" (i64.const -9_223_372_036_854_775_808))
   (i64.const 0)
 )
 (assert_return
-  (invoke "i64.no_fold_mul_div_u" (i64.const -9223372036854775808))
+  (invoke "i64.no_fold_mul_div_u" (i64.const -9_223_372_036_854_775_808))
   (i64.const 0)
 )
 (module binary
@@ -278,23 +278,23 @@
 )
 (assert_return (invoke "i32.div_s_3" (i32.const 71)) (i32.const 23))
 (assert_return
-  (invoke "i32.div_s_3" (i32.const 1610612736))
-  (i32.const 536870912)
+  (invoke "i32.div_s_3" (i32.const 1_610_612_736))
+  (i32.const 536_870_912)
 )
 (assert_return (invoke "i32.div_u_3" (i32.const 71)) (i32.const 23))
 (assert_return
-  (invoke "i32.div_u_3" (i32.const -1073741824))
-  (i32.const 1073741824)
+  (invoke "i32.div_u_3" (i32.const -1_073_741_824))
+  (i32.const 1_073_741_824)
 )
 (assert_return (invoke "i64.div_s_3" (i64.const 71)) (i64.const 23))
 (assert_return
-  (invoke "i64.div_s_3" (i64.const 3458764513820540928))
-  (i64.const 1152921504606846976)
+  (invoke "i64.div_s_3" (i64.const 3_458_764_513_820_540_928))
+  (i64.const 1_152_921_504_606_846_976)
 )
 (assert_return (invoke "i64.div_u_3" (i64.const 71)) (i64.const 23))
 (assert_return
-  (invoke "i64.div_u_3" (i64.const -4611686018427387904))
-  (i64.const 4611686018427387904)
+  (invoke "i64.div_u_3" (i64.const -4_611_686_018_427_387_904))
+  (i64.const 4_611_686_018_427_387_904)
 )
 (module binary
   "\00\61\73\6d\01\00\00\00\01\8b\80\80\80\00\02\60"
@@ -310,23 +310,23 @@
 )
 (assert_return (invoke "i32.div_s_5" (i32.const 71)) (i32.const 14))
 (assert_return
-  (invoke "i32.div_s_5" (i32.const 1342177280))
-  (i32.const 268435456)
+  (invoke "i32.div_s_5" (i32.const 1_342_177_280))
+  (i32.const 268_435_456)
 )
 (assert_return (invoke "i32.div_u_5" (i32.const 71)) (i32.const 14))
 (assert_return
-  (invoke "i32.div_u_5" (i32.const -1610612736))
-  (i32.const 536870912)
+  (invoke "i32.div_u_5" (i32.const -1_610_612_736))
+  (i32.const 536_870_912)
 )
 (assert_return (invoke "i64.div_s_5" (i64.const 71)) (i64.const 14))
 (assert_return
-  (invoke "i64.div_s_5" (i64.const 5764607523034234880))
-  (i64.const 1152921504606846976)
+  (invoke "i64.div_s_5" (i64.const 5_764_607_523_034_234_880))
+  (i64.const 1_152_921_504_606_846_976)
 )
 (assert_return (invoke "i64.div_u_5" (i64.const 71)) (i64.const 14))
 (assert_return
-  (invoke "i64.div_u_5" (i64.const -6917529027641081856))
-  (i64.const 2305843009213693952)
+  (invoke "i64.div_u_5" (i64.const -6_917_529_027_641_081_856))
+  (i64.const 2_305_843_009_213_693_952)
 )
 (module binary
   "\00\61\73\6d\01\00\00\00\01\8b\80\80\80\00\02\60"
@@ -342,23 +342,23 @@
 )
 (assert_return (invoke "i32.div_s_7" (i32.const 71)) (i32.const 10))
 (assert_return
-  (invoke "i32.div_s_7" (i32.const 1879048192))
-  (i32.const 268435456)
+  (invoke "i32.div_s_7" (i32.const 1_879_048_192))
+  (i32.const 268_435_456)
 )
 (assert_return (invoke "i32.div_u_7" (i32.const 71)) (i32.const 10))
 (assert_return
-  (invoke "i32.div_u_7" (i32.const -536870912))
-  (i32.const 536870912)
+  (invoke "i32.div_u_7" (i32.const -536_870_912))
+  (i32.const 536_870_912)
 )
 (assert_return (invoke "i64.div_s_7" (i64.const 71)) (i64.const 10))
 (assert_return
-  (invoke "i64.div_s_7" (i64.const 8070450532247928832))
-  (i64.const 1152921504606846976)
+  (invoke "i64.div_s_7" (i64.const 8_070_450_532_247_928_832))
+  (i64.const 1_152_921_504_606_846_976)
 )
 (assert_return (invoke "i64.div_u_7" (i64.const 71)) (i64.const 10))
 (assert_return
-  (invoke "i64.div_u_7" (i64.const -2305843009213693952))
-  (i64.const 2305843009213693952)
+  (invoke "i64.div_u_7" (i64.const -2_305_843_009_213_693_952))
+  (i64.const 2_305_843_009_213_693_952)
 )
 (module binary
   "\00\61\73\6d\01\00\00\00\01\8b\80\80\80\00\02\60"
@@ -373,17 +373,17 @@
   "\80\80\00\00\20\00\42\03\82\0b"
 )
 (assert_return (invoke "i32.rem_s_3" (i32.const 71)) (i32.const 2))
-(assert_return (invoke "i32.rem_s_3" (i32.const 1610612736)) (i32.const 0))
+(assert_return (invoke "i32.rem_s_3" (i32.const 1_610_612_736)) (i32.const 0))
 (assert_return (invoke "i32.rem_u_3" (i32.const 71)) (i32.const 2))
-(assert_return (invoke "i32.rem_u_3" (i32.const -1073741824)) (i32.const 0))
+(assert_return (invoke "i32.rem_u_3" (i32.const -1_073_741_824)) (i32.const 0))
 (assert_return (invoke "i64.rem_s_3" (i64.const 71)) (i64.const 2))
 (assert_return
-  (invoke "i64.rem_s_3" (i64.const 3458764513820540928))
+  (invoke "i64.rem_s_3" (i64.const 3_458_764_513_820_540_928))
   (i64.const 0)
 )
 (assert_return (invoke "i64.rem_u_3" (i64.const 71)) (i64.const 2))
 (assert_return
-  (invoke "i64.rem_u_3" (i64.const -4611686018427387904))
+  (invoke "i64.rem_u_3" (i64.const -4_611_686_018_427_387_904))
   (i64.const 0)
 )
 (module binary
@@ -399,17 +399,17 @@
   "\80\80\00\00\20\00\42\05\82\0b"
 )
 (assert_return (invoke "i32.rem_s_5" (i32.const 71)) (i32.const 1))
-(assert_return (invoke "i32.rem_s_5" (i32.const 1342177280)) (i32.const 0))
+(assert_return (invoke "i32.rem_s_5" (i32.const 1_342_177_280)) (i32.const 0))
 (assert_return (invoke "i32.rem_u_5" (i32.const 71)) (i32.const 1))
-(assert_return (invoke "i32.rem_u_5" (i32.const -1610612736)) (i32.const 0))
+(assert_return (invoke "i32.rem_u_5" (i32.const -1_610_612_736)) (i32.const 0))
 (assert_return (invoke "i64.rem_s_5" (i64.const 71)) (i64.const 1))
 (assert_return
-  (invoke "i64.rem_s_5" (i64.const 5764607523034234880))
+  (invoke "i64.rem_s_5" (i64.const 5_764_607_523_034_234_880))
   (i64.const 0)
 )
 (assert_return (invoke "i64.rem_u_5" (i64.const 71)) (i64.const 1))
 (assert_return
-  (invoke "i64.rem_u_5" (i64.const -6917529027641081856))
+  (invoke "i64.rem_u_5" (i64.const -6_917_529_027_641_081_856))
   (i64.const 0)
 )
 (module binary
@@ -425,17 +425,17 @@
   "\80\80\00\00\20\00\42\07\82\0b"
 )
 (assert_return (invoke "i32.rem_s_7" (i32.const 71)) (i32.const 1))
-(assert_return (invoke "i32.rem_s_7" (i32.const 1879048192)) (i32.const 0))
+(assert_return (invoke "i32.rem_s_7" (i32.const 1_879_048_192)) (i32.const 0))
 (assert_return (invoke "i32.rem_u_7" (i32.const 71)) (i32.const 1))
-(assert_return (invoke "i32.rem_u_7" (i32.const -536870912)) (i32.const 0))
+(assert_return (invoke "i32.rem_u_7" (i32.const -536_870_912)) (i32.const 0))
 (assert_return (invoke "i64.rem_s_7" (i64.const 71)) (i64.const 1))
 (assert_return
-  (invoke "i64.rem_s_7" (i64.const 8070450532247928832))
+  (invoke "i64.rem_s_7" (i64.const 8_070_450_532_247_928_832))
   (i64.const 0)
 )
 (assert_return (invoke "i64.rem_u_7" (i64.const 71)) (i64.const 1))
 (assert_return
-  (invoke "i64.rem_u_7" (i64.const -2305843009213693952))
+  (invoke "i64.rem_u_7" (i64.const -2_305_843_009_213_693_952))
   (i64.const 0)
 )
 (module binary
@@ -449,10 +449,10 @@
   "\20\00\42\7f\7f\0b"
 )
 (assert_trap
-  (invoke "i32.no_fold_div_neg1" (i32.const -2147483648))
+  (invoke "i32.no_fold_div_neg1" (i32.const -2_147_483_648))
   "integer overflow"
 )
 (assert_trap
-  (invoke "i64.no_fold_div_neg1" (i64.const -9223372036854775808))
+  (invoke "i64.no_fold_div_neg1" (i64.const -9_223_372_036_854_775_808))
   "integer overflow"
 )

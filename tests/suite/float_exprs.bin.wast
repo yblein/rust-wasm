@@ -7,43 +7,43 @@
 )
 (assert_return
   (invoke "f64.no_contraction"
-    (f64.const -0x1.9e87ce14273afp-103)
-    (f64.const 0x1.2515ad31db63ep+664)
-    (f64.const 0x1.868c6685e6185p+533)
+    (f64.const -1.596_713_360_409_623_4e-31)
+    (f64.const 8.763_352_160_827_122_7e+199)
+    (f64.const 4.289_657_620_489_845_8e+160)
   )
-  (f64.const -0x1.da94885b11493p+561)
+  (f64.const -1.399_256_143_427_063_2e+169)
 )
 (assert_return
   (invoke "f64.no_contraction"
-    (f64.const 0x1.da21c460a6f44p+52)
-    (f64.const 0x1.60859d2e7714ap-321)
-    (f64.const 0x1.e63f1b7b660e1p-302)
+    (f64.const 8_341_016_642_481_988)
+    (f64.const 3.223_424_965_918_292_8e-97)
+    (f64.const 2.331_083_574_165_908_6e-91)
   )
-  (f64.const 0x1.4672f256d1794p-268)
+  (f64.const 2.688_664_128_884_749_6e-81)
 )
 (assert_return
   (invoke "f64.no_contraction"
-    (f64.const -0x1.f3eaf43f327cp-594)
-    (f64.const 0x1.dfcc009906b57p+533)
-    (f64.const 0x1.5984e03c520a1p-104)
+    (f64.const -3.011_904_529_052_001_3e-179)
+    (f64.const 5.269_933_643_923_674_9e+160)
+    (f64.const 6.654_454_781_339_855_5e-32)
   )
-  (f64.const -0x1.d4797fb3db166p-60)
+  (f64.const -1.587_253_700_993_656_6e-18)
 )
 (assert_return
   (invoke "f64.no_contraction"
-    (f64.const 0x1.dab6c772cb2e2p-69)
-    (f64.const -0x1.d761663679a84p-101)
-    (f64.const 0x1.f22f92c843226p-218)
+    (f64.const 3.141_393_611_678_074_3e-21)
+    (f64.const -7.262_766_035_707_377_1e-31)
+    (f64.const 4.619_684_894_228_460_9e-66)
   )
-  (f64.const -0x1.b50d72dfcef68p-169)
+  (f64.const -2.281_520_682_768_359_9e-51)
 )
 (assert_return
   (invoke "f64.no_contraction"
-    (f64.const -0x1.87c5def1e4d3dp-950)
-    (f64.const -0x1.50cd5dab2207fp+935)
-    (f64.const 0x1.e629bd0da8c5dp-54)
+    (f64.const -1.608_046_421_740_237_8e-286)
+    (f64.const -3.821_034_102_268_329_7e+281)
+    (f64.const 1.054_198_050_415_134_5e-16)
   )
-  (f64.const 0x1.01b6feb4e78a7p-14)
+  (f64.const 6.144_400_215_510_552_4e-05)
 )
 (module binary
   "\00\61\73\6d\01\00\00\00\01\8f\80\80\80\00\02\60"
@@ -56,83 +56,83 @@
 )
 (assert_return
   (invoke "f32.no_fma"
-    (f32.const 0x1.a78402p+124)
-    (f32.const 0x1.cf8548p-23)
-    (f32.const 0x1.992adap+107)
+    (f32.const 3.518_430_412_294_782_6e+37)
+    (f32.const 2.158_436_132_049_246_2e-07)
+    (f32.const 2.593_406_430_766_022_9e+32)
   )
-  (f32.const 0x1.a5262cp+107)
+  (f32.const 2.669_349_603_329_164_8e+32)
 )
 (assert_return
   (invoke "f32.no_fma"
-    (f32.const 0x1.ed15a4p-28)
-    (f32.const -0x1.613c72p-50)
-    (f32.const 0x1.4757bp-88)
+    (f32.const 7.175_324_334_696_142_6e-09)
+    (f32.const -1.225_533_960_778_739_1e-15)
+    (f32.const 4.131_643_583_655_494_2e-27)
   )
-  (f32.const -0x1.5406b8p-77)
+  (f32.const -8.789_472_428_754_409_1e-24)
 )
 (assert_return
   (invoke "f32.no_fma"
-    (f32.const 0x1.ae63a2p+37)
-    (f32.const 0x1.b3a59ap-13)
-    (f32.const 0x1.c16918p+10)
+    (f32.const 231_063_437_312)
+    (f32.const 0.000_207_732_620_765_455_07)
+    (f32.const 1_797.642_089_843_75)
   )
-  (f32.const 0x1.6e385cp+25)
+  (f32.const 48_001_208)
 )
 (assert_return
   (invoke "f32.no_fma"
-    (f32.const 0x1.2a77fap-8)
-    (f32.const -0x1.bb7356p+22)
-    (f32.const -0x1.32be2ap+1)
+    (f32.const 0.004_554_270_301_014_185)
+    (f32.const -7_265_493.5)
+    (f32.const -2.396_428_346_633_911_1)
   )
-  (f32.const -0x1.0286d4p+15)
+  (f32.const -33_091.414_062_5)
 )
 (assert_return
   (invoke "f32.no_fma"
-    (f32.const 0x1.298fb6p+126)
-    (f32.const -0x1.03080cp-70)
-    (f32.const -0x1.418de6p+34)
+    (f32.const 9.888_172_614_935_959e+37)
+    (f32.const -8.570_631_180_266_810_1e-22)
+    (f32.const -21_579_143_168)
   )
-  (f32.const -0x1.2d15c6p+56)
+  (f32.const -84_747_908_137_615_360)
 )
 (assert_return
   (invoke "f64.no_fma"
-    (f64.const 0x1.ac357ff46eed4p+557)
-    (f64.const 0x1.852c01a5e7297p+430)
-    (f64.const -0x1.05995704eda8ap+987)
+    (f64.const 7.890_842_843_751_791_6e+167)
+    (f64.const 4.215_020_052_117_359_9e+129)
+    (f64.const -1.336_601_081_131_744_7e+297)
   )
-  (f64.const 0x1.855d905d338ep+987)
+  (f64.const 1.989_405_000_320_312_8e+297)
 )
 (assert_return
   (invoke "f64.no_fma"
-    (f64.const 0x1.e2fd6bf32010cp+749)
-    (f64.const 0x1.01c2238d405e4p-130)
-    (f64.const 0x1.2ecc0db4b9f94p+573)
+    (f64.const 5.586_822_348_009_285_5e+225)
+    (f64.const 7.397_302_005_677_333_7e-40)
+    (f64.const 3.656_783_417_204_091_7e+172)
   )
-  (f64.const 0x1.e64eb07e063bcp+619)
+  (f64.const 4.132_741_216_029_240_7e+186)
 )
 (assert_return
   (invoke "f64.no_fma"
-    (f64.const 0x1.92b7c7439ede3p-721)
-    (f64.const -0x1.6aa97586d3de6p+1011)
-    (f64.const 0x1.8de4823f6358ap+237)
+    (f64.const 1.426_047_782_227_458_7e-217)
+    (f64.const -3.108_763_203_659_986_1e+304)
+    (f64.const 3.432_692_355_237_776_3e+71)
   )
-  (f64.const -0x1.1d4139fd20ecdp+291)
+  (f64.const -4.433_244_872_049_653e+87)
 )
 (assert_return
   (invoke "f64.no_fma"
-    (f64.const -0x1.466d30bddb453p-386)
-    (f64.const -0x1.185a4d739c7aap+443)
-    (f64.const 0x1.5f9c436fbfc7bp+55)
+    (f64.const -8.090_347_017_354_779_8e-117)
+    (f64.const -2.487_441_785_066_744_9e+133)
+    (f64.const 49_484_765_138_510_808)
   )
-  (f64.const 0x1.bd61a350fcc1ap+57)
+  (f64.const 2.507_274_374_050_947_2e+17)
 )
 (assert_return
   (invoke "f64.no_fma"
-    (f64.const 0x1.7e2c44058a799p+52)
-    (f64.const 0x1.c73b71765b8b2p+685)
-    (f64.const -0x1.16c641df0b108p+690)
+    (f64.const 6_723_256_985_364_377)
+    (f64.const 2.854_565_666_928_794_6e+206)
+    (f64.const -5.593_839_470_050_757e+207)
   )
-  (f64.const 0x1.53ccb53de0bd1p+738)
+  (f64.const 1.919_197_856_036_028_6e+222)
 )
 (module binary
   "\00\61\73\6d\01\00\00\00\01\8b\80\80\80\00\02\60"
@@ -144,14 +144,8 @@
   "\80\80\00\00\20\00\43\00\00\00\00\92\0b\8e\80\80"
   "\80\00\00\20\00\44\00\00\00\00\00\00\00\00\a0\0b"
 )
-(assert_return
-  (invoke "f32.no_fold_add_zero" (f32.const -0x0p+0))
-  (f32.const 0x0p+0)
-)
-(assert_return
-  (invoke "f64.no_fold_add_zero" (f64.const -0x0p+0))
-  (f64.const 0x0p+0)
-)
+(assert_return (invoke "f32.no_fold_add_zero" (f32.const -0)) (f32.const 0))
+(assert_return (invoke "f64.no_fold_add_zero" (f64.const -0)) (f64.const 0))
 (assert_return_arithmetic_nan
   (invoke "f32.no_fold_add_zero" (f32.const nan:0x200000))
 )
@@ -168,14 +162,8 @@
   "\80\80\00\00\43\00\00\00\00\20\00\93\0b\8e\80\80"
   "\80\00\00\44\00\00\00\00\00\00\00\00\20\00\a1\0b"
 )
-(assert_return
-  (invoke "f32.no_fold_zero_sub" (f32.const 0x0p+0))
-  (f32.const 0x0p+0)
-)
-(assert_return
-  (invoke "f64.no_fold_zero_sub" (f64.const 0x0p+0))
-  (f64.const 0x0p+0)
-)
+(assert_return (invoke "f32.no_fold_zero_sub" (f32.const 0)) (f32.const 0))
+(assert_return (invoke "f64.no_fold_zero_sub" (f64.const 0)) (f64.const 0))
 (assert_return_arithmetic_nan
   (invoke "f32.no_fold_zero_sub" (f32.const nan:0x200000))
 )
@@ -208,33 +196,15 @@
   "\80\80\00\00\20\00\43\00\00\00\00\94\0b\8e\80\80"
   "\80\00\00\20\00\44\00\00\00\00\00\00\00\00\a2\0b"
 )
-(assert_return
-  (invoke "f32.no_fold_mul_zero" (f32.const -0x0p+0))
-  (f32.const -0x0p+0)
-)
-(assert_return
-  (invoke "f32.no_fold_mul_zero" (f32.const -0x1p+0))
-  (f32.const -0x0p+0)
-)
-(assert_return
-  (invoke "f32.no_fold_mul_zero" (f32.const -0x1p+1))
-  (f32.const -0x0p+0)
-)
+(assert_return (invoke "f32.no_fold_mul_zero" (f32.const -0)) (f32.const -0))
+(assert_return (invoke "f32.no_fold_mul_zero" (f32.const -1)) (f32.const -0))
+(assert_return (invoke "f32.no_fold_mul_zero" (f32.const -2)) (f32.const -0))
 (assert_return_arithmetic_nan
   (invoke "f32.no_fold_mul_zero" (f32.const nan:0x200000))
 )
-(assert_return
-  (invoke "f64.no_fold_mul_zero" (f64.const -0x0p+0))
-  (f64.const -0x0p+0)
-)
-(assert_return
-  (invoke "f64.no_fold_mul_zero" (f64.const -0x1p+0))
-  (f64.const -0x0p+0)
-)
-(assert_return
-  (invoke "f64.no_fold_mul_zero" (f64.const -0x1p+1))
-  (f64.const -0x0p+0)
-)
+(assert_return (invoke "f64.no_fold_mul_zero" (f64.const -0)) (f64.const -0))
+(assert_return (invoke "f64.no_fold_mul_zero" (f64.const -1)) (f64.const -0))
+(assert_return (invoke "f64.no_fold_mul_zero" (f64.const -2)) (f64.const -0))
 (assert_return_arithmetic_nan
   (invoke "f64.no_fold_mul_zero" (f64.const nan:0x4000000000000))
 )
@@ -264,20 +234,16 @@
   "\80\80\00\00\43\00\00\00\00\20\00\95\0b\8e\80\80"
   "\80\00\00\44\00\00\00\00\00\00\00\00\20\00\a3\0b"
 )
-(assert_return_canonical_nan (invoke "f32.no_fold_zero_div" (f32.const 0x0p+0)))
-(assert_return_canonical_nan
-  (invoke "f32.no_fold_zero_div" (f32.const -0x0p+0))
-)
+(assert_return_canonical_nan (invoke "f32.no_fold_zero_div" (f32.const 0)))
+(assert_return_canonical_nan (invoke "f32.no_fold_zero_div" (f32.const -0)))
 (assert_return_canonical_nan
   (invoke "f32.no_fold_zero_div" (f32.const nan:0x400000))
 )
 (assert_return_arithmetic_nan
   (invoke "f32.no_fold_zero_div" (f32.const nan:0x200000))
 )
-(assert_return_canonical_nan (invoke "f64.no_fold_zero_div" (f64.const 0x0p+0)))
-(assert_return_canonical_nan
-  (invoke "f64.no_fold_zero_div" (f64.const -0x0p+0))
-)
+(assert_return_canonical_nan (invoke "f64.no_fold_zero_div" (f64.const 0)))
+(assert_return_canonical_nan (invoke "f64.no_fold_zero_div" (f64.const -0)))
 (assert_return_canonical_nan
   (invoke "f64.no_fold_zero_div" (f64.const nan:0x8000000000000))
 )
@@ -416,18 +382,14 @@
 (assert_return_canonical_nan
   (invoke "f32.no_fold_div_self" (f32.const nan:0x400000))
 )
-(assert_return_canonical_nan (invoke "f32.no_fold_div_self" (f32.const 0x0p+0)))
-(assert_return_canonical_nan
-  (invoke "f32.no_fold_div_self" (f32.const -0x0p+0))
-)
+(assert_return_canonical_nan (invoke "f32.no_fold_div_self" (f32.const 0)))
+(assert_return_canonical_nan (invoke "f32.no_fold_div_self" (f32.const -0)))
 (assert_return_canonical_nan (invoke "f64.no_fold_div_self" (f64.const inf)))
 (assert_return_canonical_nan
   (invoke "f64.no_fold_div_self" (f64.const nan:0x8000000000000))
 )
-(assert_return_canonical_nan (invoke "f64.no_fold_div_self" (f64.const 0x0p+0)))
-(assert_return_canonical_nan
-  (invoke "f64.no_fold_div_self" (f64.const -0x0p+0))
-)
+(assert_return_canonical_nan (invoke "f64.no_fold_div_self" (f64.const 0)))
+(assert_return_canonical_nan (invoke "f64.no_fold_div_self" (f64.const -0)))
 (module binary
   "\00\61\73\6d\01\00\00\00\01\8b\80\80\80\00\02\60"
   "\01\7d\01\7d\60\01\7c\01\7c\03\83\80\80\80\00\02"
@@ -439,44 +401,44 @@
   "\00\00\00\00\00\00\08\40\a3\0b"
 )
 (assert_return
-  (invoke "f32.no_fold_div_3" (f32.const -0x1.359c26p+50))
-  (f32.const -0x1.9cd032p+48)
+  (invoke "f32.no_fold_div_3" (f32.const -1_361_678_981_660_672))
+  (f32.const -453_892_982_702_080)
 )
 (assert_return
-  (invoke "f32.no_fold_div_3" (f32.const -0x1.e45646p+93))
-  (f32.const -0x1.42e42ep+92)
+  (invoke "f32.no_fold_div_3" (f32.const -1.873_688_036_745_895_9e+28))
+  (f32.const -6.245_626_592_387_716_2e+27)
 )
 (assert_return
-  (invoke "f32.no_fold_div_3" (f32.const -0x1.2a3916p-83))
-  (f32.const -0x1.8da172p-85)
+  (invoke "f32.no_fold_div_3" (f32.const -1.204_513_072_036_643_8e-25))
+  (f32.const -4.015_043_470_739_215_5e-26)
 )
 (assert_return
-  (invoke "f32.no_fold_div_3" (f32.const -0x1.1f8b38p-124))
-  (f32.const -0x1.7f644ap-126)
+  (invoke "f32.no_fold_div_3" (f32.const -5.281_345_934_922_402_8e-38))
+  (f32.const -1.760_448_598_264_185_5e-38)
 )
 (assert_return
-  (invoke "f32.no_fold_div_3" (f32.const -0x1.d64f64p-56))
-  (f32.const -0x1.398a42p-57)
+  (invoke "f32.no_fold_div_3" (f32.const -2.549_556_267_217_888_2e-17))
+  (f32.const -8.498_520_614_999_423_1e-18)
 )
 (assert_return
-  (invoke "f64.no_fold_div_3" (f64.const -0x1.a8a88d29e2cc3p+632))
-  (f64.const -0x1.1b1b08c69732dp+631)
+  (invoke "f64.no_fold_div_3" (f64.const -2.956_357_957_396_963_4e+190))
+  (f64.const -9.854_526_524_656_545_4e+189)
 )
 (assert_return
-  (invoke "f64.no_fold_div_3" (f64.const -0x1.bcf52dc950972p-167))
-  (f64.const -0x1.28a373db8b0f7p-168)
+  (invoke "f64.no_fold_div_3" (f64.const -9.291_150_921_449_772e-51))
+  (f64.const -3.097_050_307_149_924_2e-51)
 )
 (assert_return
-  (invoke "f64.no_fold_div_3" (f64.const 0x1.bd3c0d989f7a4p-874))
-  (f64.const 0x1.28d2b3bb14fc3p-875)
+  (invoke "f64.no_fold_div_3" (f64.const 1.380_806_154_355_700_6e-263))
+  (f64.const 4.602_687_181_185_668_9e-264)
 )
 (assert_return
-  (invoke "f64.no_fold_div_3" (f64.const -0x1.0138bf530a53cp+1007))
-  (f64.const -0x1.56f6546eb86fbp+1005)
+  (invoke "f64.no_fold_div_3" (f64.const -1.378_076_163_468_348_9e+303))
+  (f64.const -4.593_587_211_561_163_2e+302)
 )
 (assert_return
-  (invoke "f64.no_fold_div_3" (f64.const 0x1.052b87f9d794dp+415))
-  (f64.const 0x1.5c3a0aa274c67p+413)
+  (invoke "f64.no_fold_div_3" (f64.const 8.632_400_808_831_365_5e+124))
+  (f64.const 2.877_466_936_277_122e+124)
 )
 (module binary
   "\00\61\73\6d\01\00\00\00\01\8f\80\80\80\00\02\60"
@@ -490,83 +452,83 @@
 )
 (assert_return
   (invoke "f32.no_factor"
-    (f32.const -0x1.4e2352p+40)
-    (f32.const -0x1.842e2cp+49)
-    (f32.const 0x1.eea602p+59)
+    (f32.const -1_435_111_653_376)
+    (f32.const -853_617_636_540_416)
+    (f32.const 1.113_849_328_121_675_8e+18)
   )
-  (f32.const -0x1.77a7dp+109)
+  (f32.const -9.523_998_846_739_126_7e+32)
 )
 (assert_return
   (invoke "f32.no_factor"
-    (f32.const -0x1.b4e7f6p-6)
-    (f32.const 0x1.8c990cp-5)
-    (f32.const -0x1.70cc02p-9)
+    (f32.const -0.026_666_631_922_125_816)
+    (f32.const 0.048_412_822_186_946_869)
+    (f32.const -0.002_813_697_094_097_733_5)
   )
-  (f32.const -0x1.00a342p-14)
+  (f32.const -6.118_720_193_626_359_1e-05)
 )
 (assert_return
   (invoke "f32.no_factor"
-    (f32.const -0x1.06722ep-41)
-    (f32.const 0x1.eed3cep-64)
-    (f32.const 0x1.5c5558p+123)
+    (f32.const -4.661_977_726_604_094e-13)
+    (f32.const 1.047_837_697_170_539_4e-19)
+    (f32.const 1.446_920_226_931_785_3e+37)
   )
-  (f32.const -0x1.651aaep+82)
+  (f32.const -6.745_507_951_006_969_6e+24)
 )
 (assert_return
   (invoke "f32.no_factor"
-    (f32.const -0x1.f8c6a4p-64)
-    (f32.const 0x1.08c806p-83)
-    (f32.const 0x1.b5ceccp+118)
+    (f32.const -1.068_904_630_279_072_6e-19)
+    (f32.const 1.069_443_321_768_570_6e-25)
+    (f32.const 5.683_070_165_258_062_1e+35)
   )
-  (f32.const -0x1.afa15p+55)
+  (f32.const -60_746_539_965_874_176)
 )
 (assert_return
   (invoke "f32.no_factor"
-    (f32.const -0x1.3aaa1ep-84)
-    (f32.const 0x1.c6d5eep-71)
-    (f32.const 0x1.8d2924p+20)
+    (f32.const -6.354_599_380_381_071_6e-26)
+    (f32.const 7.524_624_844_008_798_1e-22)
+    (f32.const 1_626_770.25)
   )
-  (f32.const 0x1.60c9cep-50)
+  (f32.const 1.223_980_290_595_237_9e-15)
 )
 (assert_return
   (invoke "f64.no_factor"
-    (f64.const 0x1.3adeda9144977p-424)
-    (f64.const 0x1.c15af887049e1p-462)
-    (f64.const -0x1.905179c4c4778p-225)
+    (f64.const 2.839_055_470_998_877_4e-128)
+    (f64.const 1.473_981_250_649_640_9e-139)
+    (f64.const -2.900_122_984_655_076_6e-68)
   )
-  (f64.const -0x1.ec606bcb87b1ap-649)
+  (f64.const -8.233_610_026_197_335_8e-196)
 )
 (assert_return
   (invoke "f64.no_factor"
-    (f64.const 0x1.3c84821c1d348p-662)
-    (f64.const -0x1.4ffd4c77ad037p-1009)
-    (f64.const -0x1.dd275335c6f4p-957)
+    (f64.const 6.461_015_505_916_123_1e-200)
+    (f64.const -2.392_324_280_297_593_8e-304)
+    (f64.const -1.530_073_879_856_160_4e-288)
   )
-  (f64.const 0x0p+0)
+  (f64.const 0)
 )
 (assert_return
   (invoke "f64.no_factor"
-    (f64.const -0x1.074f372347051p-334)
-    (f64.const -0x1.aaeef661f4c96p-282)
-    (f64.const -0x1.9bd34abe8696dp+479)
+    (f64.const -2.939_056_292_080_733e-101)
+    (f64.const -2.146_156_743_463_355_9e-85)
+    (f64.const -2.510_967_223_130_241_6e+144)
   )
-  (f64.const 0x1.5767029593e2p+198)
+  (f64.const 5.388_929_238_536_426_3e+59)
 )
 (assert_return
   (invoke "f64.no_factor"
-    (f64.const -0x1.c4ded58a6f389p-289)
-    (f64.const 0x1.ba6fdef5d59c9p-260)
-    (f64.const -0x1.c1201c0470205p-253)
+    (f64.const -1.778_546_677_170_887_8e-87)
+    (f64.const 9.328_516_775_403_212_9e-79)
+    (f64.const -1.212_100_904_487_673_5e-76)
   )
-  (f64.const -0x1.841ada2e0f184p-512)
+  (f64.const -1.130_710_359_943_689e-154)
 )
 (assert_return
   (invoke "f64.no_factor"
-    (f64.const 0x1.9d3688f8e375ap-608)
-    (f64.const 0x1.bf91311588256p-579)
-    (f64.const -0x1.1605a6b5d5ff8p+489)
+    (f64.const 1.519_485_906_317_736_2e-183)
+    (f64.const 8.835_899_214_380_649_9e-175)
+    (f64.const -1.735_830_019_469_195_8e+147)
   )
-  (f64.const -0x1.e6118ca76af53p-90)
+  (f64.const -1.533_761_913_170_190_8e-27)
 )
 (module binary
   "\00\61\73\6d\01\00\00\00\01\8f\80\80\80\00\02\60"
@@ -580,83 +542,83 @@
 )
 (assert_return
   (invoke "f32.no_distribute"
-    (f32.const -0x1.4e2352p+40)
-    (f32.const -0x1.842e2cp+49)
-    (f32.const 0x1.eea602p+59)
+    (f32.const -1_435_111_653_376)
+    (f32.const -853_617_636_540_416)
+    (f32.const 1.113_849_328_121_675_8e+18)
   )
-  (f32.const -0x1.77a7d2p+109)
+  (f32.const -9.523_999_620_451_651_3e+32)
 )
 (assert_return
   (invoke "f32.no_distribute"
-    (f32.const -0x1.b4e7f6p-6)
-    (f32.const 0x1.8c990cp-5)
-    (f32.const -0x1.70cc02p-9)
+    (f32.const -0.026_666_631_922_125_816)
+    (f32.const 0.048_412_822_186_946_869)
+    (f32.const -0.002_813_697_094_097_733_5)
   )
-  (f32.const -0x1.00a34p-14)
+  (f32.const -6.118_719_466_030_597_7e-05)
 )
 (assert_return
   (invoke "f32.no_distribute"
-    (f32.const -0x1.06722ep-41)
-    (f32.const 0x1.eed3cep-64)
-    (f32.const 0x1.5c5558p+123)
+    (f32.const -4.661_977_726_604_094e-13)
+    (f32.const 1.047_837_697_170_539_4e-19)
+    (f32.const 1.446_920_226_931_785_3e+37)
   )
-  (f32.const -0x1.651abp+82)
+  (f32.const -6.745_508_527_467_721_9e+24)
 )
 (assert_return
   (invoke "f32.no_distribute"
-    (f32.const -0x1.f8c6a4p-64)
-    (f32.const 0x1.08c806p-83)
-    (f32.const 0x1.b5ceccp+118)
+    (f32.const -1.068_904_630_279_072_6e-19)
+    (f32.const 1.069_443_321_768_570_6e-25)
+    (f32.const 5.683_070_165_258_062_1e+35)
   )
-  (f32.const -0x1.afa14ep+55)
+  (f32.const -60_746_535_670_906_880)
 )
 (assert_return
   (invoke "f32.no_distribute"
-    (f32.const -0x1.3aaa1ep-84)
-    (f32.const 0x1.c6d5eep-71)
-    (f32.const 0x1.8d2924p+20)
+    (f32.const -6.354_599_380_381_071_6e-26)
+    (f32.const 7.524_624_844_008_798_1e-22)
+    (f32.const 1_626_770.25)
   )
-  (f32.const 0x1.60c9ccp-50)
+  (f32.const 1.223_980_184_716_119_5e-15)
 )
 (assert_return
   (invoke "f64.no_distribute"
-    (f64.const 0x1.3adeda9144977p-424)
-    (f64.const 0x1.c15af887049e1p-462)
-    (f64.const -0x1.905179c4c4778p-225)
+    (f64.const 2.839_055_470_998_877_4e-128)
+    (f64.const 1.473_981_250_649_640_9e-139)
+    (f64.const -2.900_122_984_655_076_6e-68)
   )
-  (f64.const -0x1.ec606bcb87b1bp-649)
+  (f64.const -8.233_610_026_197_336_7e-196)
 )
 (assert_return
   (invoke "f64.no_distribute"
-    (f64.const 0x1.3c84821c1d348p-662)
-    (f64.const -0x1.4ffd4c77ad037p-1009)
-    (f64.const -0x1.dd275335c6f4p-957)
+    (f64.const 6.461_015_505_916_123_1e-200)
+    (f64.const -2.392_324_280_297_593_8e-304)
+    (f64.const -1.530_073_879_856_160_4e-288)
   )
-  (f64.const -0x0p+0)
+  (f64.const -0)
 )
 (assert_return
   (invoke "f64.no_distribute"
-    (f64.const -0x1.074f372347051p-334)
-    (f64.const -0x1.aaeef661f4c96p-282)
-    (f64.const -0x1.9bd34abe8696dp+479)
+    (f64.const -2.939_056_292_080_733e-101)
+    (f64.const -2.146_156_743_463_355_9e-85)
+    (f64.const -2.510_967_223_130_241_6e+144)
   )
-  (f64.const 0x1.5767029593e1fp+198)
+  (f64.const 5.388_929_238_536_425_4e+59)
 )
 (assert_return
   (invoke "f64.no_distribute"
-    (f64.const -0x1.c4ded58a6f389p-289)
-    (f64.const 0x1.ba6fdef5d59c9p-260)
-    (f64.const -0x1.c1201c0470205p-253)
+    (f64.const -1.778_546_677_170_887_8e-87)
+    (f64.const 9.328_516_775_403_212_9e-79)
+    (f64.const -1.212_100_904_487_673_5e-76)
   )
-  (f64.const -0x1.841ada2e0f183p-512)
+  (f64.const -1.130_710_359_943_688_9e-154)
 )
 (assert_return
   (invoke "f64.no_distribute"
-    (f64.const 0x1.9d3688f8e375ap-608)
-    (f64.const 0x1.bf91311588256p-579)
-    (f64.const -0x1.1605a6b5d5ff8p+489)
+    (f64.const 1.519_485_906_317_736_2e-183)
+    (f64.const 8.835_899_214_380_649_9e-175)
+    (f64.const -1.735_830_019_469_195_8e+147)
   )
-  (f64.const -0x1.e6118ca76af52p-90)
+  (f64.const -1.533_761_913_170_190_7e-27)
 )
 (module binary
   "\00\61\73\6d\01\00\00\00\01\8f\80\80\80\00\02\60"
@@ -671,83 +633,83 @@
 )
 (assert_return
   (invoke "f32.no_regroup_div_mul"
-    (f32.const -0x1.2d14a6p-115)
-    (f32.const -0x1.575a6cp-64)
-    (f32.const 0x1.5cee0ep-116)
+    (f32.const -2.831_348_900_581_148_2e-35)
+    (f32.const -7.270_787_044_900_694_7e-20)
+    (f32.const 1.640_660_510_412_483_8e-35)
   )
-  (f32.const 0x1.2844cap-63)
+  (f32.const 1.254_746_781_513_478_5e-19)
 )
 (assert_return
   (invoke "f32.no_regroup_div_mul"
-    (f32.const -0x1.454738p+91)
-    (f32.const -0x1.b28a66p-115)
-    (f32.const -0x1.f53908p+72)
+    (f32.const -3.145_897_699_301_650_8e+27)
+    (f32.const -4.086_400_341_725_103_5e-35)
+    (f32.const -9.245_928_315_588_460_9e+21)
   )
-  (f32.const -0x0p+0)
+  (f32.const -0)
 )
 (assert_return
   (invoke "f32.no_regroup_div_mul"
-    (f32.const -0x1.6be56ep+16)
-    (f32.const -0x1.b46fc6p-21)
-    (f32.const -0x1.a51df6p-123)
+    (f32.const -93_157.429_687_5)
+    (f32.const -8.129_265_438_583_388_5e-07)
+    (f32.const -1.546_939_673_669_426_9e-37)
   )
-  (f32.const -0x1.792258p+118)
+  (f32.const -4.895_481_224_181_138_6e+35)
 )
 (assert_return
   (invoke "f32.no_regroup_div_mul"
-    (f32.const -0x1.c343f8p-94)
-    (f32.const 0x1.e4d906p+73)
-    (f32.const 0x1.be69f8p+68)
+    (f32.const -8.899_642_828_403_210_9e-29)
+    (f32.const 1.788_772_463_686_302_7e+22)
+    (f32.const 5.146_802_318_776_666_7e+20)
   )
-  (f32.const -0x1.ea1df2p-89)
+  (f32.const -3.093_072_957_414_049_9e-27)
 )
 (assert_return
   (invoke "f32.no_regroup_div_mul"
-    (f32.const 0x1.c6ae76p+112)
-    (f32.const 0x1.fc953cp+24)
-    (f32.const -0x1.60b3e8p+71)
+    (f32.const 9.222_036_179_566_499_3e+33)
+    (f32.const 33_330_492)
+    (f32.const -3.253_108_762_736_574_1e+21)
   )
-  (f32.const -0x1.47d0eap+66)
+  (f32.const -9.448_654_932_511_660_4e+19)
 )
 (assert_return
   (invoke "f64.no_regroup_div_mul"
-    (f64.const 0x1.3c04b815e30bp-423)
-    (f64.const -0x1.379646fd98127p-119)
-    (f64.const 0x1.bddb158506031p-642)
+    (f64.const 5.698_811_412_550_058_7e-128)
+    (f64.const -1.831_343_913_291_933_6e-36)
+    (f64.const 9.543_270_551_003_097_8e-194)
   )
-  (f64.const -0x1.b9b3301f2dd2dp+99)
+  (f64.const -1.093_596_114_413_330_9e+30)
 )
 (assert_return
   (invoke "f64.no_regroup_div_mul"
-    (f64.const 0x1.46b3a402f86d5p+337)
-    (f64.const 0x1.6fbf1b9e1798dp-447)
-    (f64.const -0x1.bd9704a5a6a06p+797)
+    (f64.const 3.572_892_884_255_075_5e+101)
+    (f64.const 3.952_760_844_538_651e-135)
+    (f64.const -1.450_781_241_254_900_8e+240)
   )
-  (f64.const -0x0p+0)
+  (f64.const -0)
 )
 (assert_return
   (invoke "f64.no_regroup_div_mul"
-    (f64.const 0x1.6c9765bb4347fp-479)
-    (f64.const 0x1.a4af42e34a141p+902)
-    (f64.const 0x1.d2dde70eb68f9p-448)
+    (f64.const 9.124_278_383_497_106_7e-145)
+    (f64.const 5.556_134_527_714_796_8e+271)
+    (f64.const 2.509_082_694_030_650_7e-135)
   )
   (f64.const inf)
 )
 (assert_return
   (invoke "f64.no_regroup_div_mul"
-    (f64.const -0x1.706023645be72p+480)
-    (f64.const -0x1.6c229f7d9101dp+611)
-    (f64.const -0x1.4d50fa68d3d9ep+836)
+    (f64.const -4.492_093_000_352_014_7e+144)
+    (f64.const -1.208_787_898_401_785_2e+184)
+    (f64.const -5.966_133_806_260_622_6e+251)
   )
-  (f64.const -0x1.926fa3cacc651p+255)
+  (f64.const -9.101_350_780_337_626_2e+76)
 )
 (assert_return
   (invoke "f64.no_regroup_div_mul"
-    (f64.const 0x1.8cc63d8caf4c7p-599)
-    (f64.const 0x1.8671ac4c35753p-878)
-    (f64.const -0x1.ef35b1695e659p-838)
+    (f64.const 7.470_269_158_630_455_4e-181)
+    (f64.const 7.568_026_329_781_282_2e-265)
+    (f64.const -1.055_389_683_973_521e-252)
   )
-  (f64.const -0x1.38d55f56406dp-639)
+  (f64.const -5.356_807_494_101_560_7e-193)
 )
 (module binary
   "\00\61\73\6d\01\00\00\00\01\8f\80\80\80\00\02\60"
@@ -762,83 +724,83 @@
 )
 (assert_return
   (invoke "f32.no_regroup_mul_div"
-    (f32.const -0x1.2d14a6p-115)
-    (f32.const -0x1.575a6cp-64)
-    (f32.const 0x1.5cee0ep-116)
+    (f32.const -2.831_348_900_581_148_2e-35)
+    (f32.const -7.270_787_044_900_694_7e-20)
+    (f32.const 1.640_660_510_412_483_8e-35)
   )
-  (f32.const 0x0p+0)
+  (f32.const 0)
 )
 (assert_return
   (invoke "f32.no_regroup_mul_div"
-    (f32.const -0x1.454738p+91)
-    (f32.const -0x1.b28a66p-115)
-    (f32.const -0x1.f53908p+72)
+    (f32.const -3.145_897_699_301_650_8e+27)
+    (f32.const -4.086_400_341_725_103_5e-35)
+    (f32.const -9.245_928_315_588_460_9e+21)
   )
-  (f32.const -0x1.1a00e8p-96)
+  (f32.const -1.390_384_799_192_154_3e-29)
 )
 (assert_return
   (invoke "f32.no_regroup_mul_div"
-    (f32.const -0x1.6be56ep+16)
-    (f32.const -0x1.b46fc6p-21)
-    (f32.const -0x1.a51df6p-123)
+    (f32.const -93_157.429_687_5)
+    (f32.const -8.129_265_438_583_388_5e-07)
+    (f32.const -1.546_939_673_669_426_9e-37)
   )
-  (f32.const -0x1.79225ap+118)
+  (f32.const -4.895_481_620_321_951_1e+35)
 )
 (assert_return
   (invoke "f32.no_regroup_mul_div"
-    (f32.const -0x1.c343f8p-94)
-    (f32.const 0x1.e4d906p+73)
-    (f32.const 0x1.be69f8p+68)
+    (f32.const -8.899_642_828_403_210_9e-29)
+    (f32.const 1.788_772_463_686_302_7e+22)
+    (f32.const 5.146_802_318_776_666_7e+20)
   )
-  (f32.const -0x1.ea1df4p-89)
+  (f32.const -3.093_073_150_007_044_3e-27)
 )
 (assert_return
   (invoke "f32.no_regroup_mul_div"
-    (f32.const 0x1.c6ae76p+112)
-    (f32.const 0x1.fc953cp+24)
-    (f32.const -0x1.60b3e8p+71)
+    (f32.const 9.222_036_179_566_499_3e+33)
+    (f32.const 33_330_492)
+    (f32.const -3.253_108_762_736_574_1e+21)
   )
   (f32.const -inf)
 )
 (assert_return
   (invoke "f64.no_regroup_mul_div"
-    (f64.const 0x1.3c04b815e30bp-423)
-    (f64.const -0x1.379646fd98127p-119)
-    (f64.const 0x1.bddb158506031p-642)
+    (f64.const 5.698_811_412_550_058_7e-128)
+    (f64.const -1.831_343_913_291_933_6e-36)
+    (f64.const 9.543_270_551_003_097_8e-194)
   )
-  (f64.const -0x1.b9b3301f2dd2ep+99)
+  (f64.const -1.093_596_114_413_331_1e+30)
 )
 (assert_return
   (invoke "f64.no_regroup_mul_div"
-    (f64.const 0x1.46b3a402f86d5p+337)
-    (f64.const 0x1.6fbf1b9e1798dp-447)
-    (f64.const -0x1.bd9704a5a6a06p+797)
+    (f64.const 3.572_892_884_255_075_5e+101)
+    (f64.const 3.952_760_844_538_651e-135)
+    (f64.const -1.450_781_241_254_900_8e+240)
   )
-  (f64.const -0x1.0da0b6328e09p-907)
+  (f64.const -9.734_611_044_734_944_7e-274)
 )
 (assert_return
   (invoke "f64.no_regroup_mul_div"
-    (f64.const 0x1.6c9765bb4347fp-479)
-    (f64.const 0x1.a4af42e34a141p+902)
-    (f64.const 0x1.d2dde70eb68f9p-448)
+    (f64.const 9.124_278_383_497_106_7e-145)
+    (f64.const 5.556_134_527_714_796_8e+271)
+    (f64.const 2.509_082_694_030_650_7e-135)
   )
-  (f64.const 0x1.4886b6d9a9a79p+871)
+  (f64.const 2.020_488_136_466_766_3e+262)
 )
 (assert_return
   (invoke "f64.no_regroup_mul_div"
-    (f64.const -0x1.706023645be72p+480)
-    (f64.const -0x1.6c229f7d9101dp+611)
-    (f64.const -0x1.4d50fa68d3d9ep+836)
+    (f64.const -4.492_093_000_352_014_7e+144)
+    (f64.const -1.208_787_898_401_785_2e+184)
+    (f64.const -5.966_133_806_260_622_6e+251)
   )
   (f64.const -inf)
 )
 (assert_return
   (invoke "f64.no_regroup_mul_div"
-    (f64.const 0x1.8cc63d8caf4c7p-599)
-    (f64.const 0x1.8671ac4c35753p-878)
-    (f64.const -0x1.ef35b1695e659p-838)
+    (f64.const 7.470_269_158_630_455_4e-181)
+    (f64.const 7.568_026_329_781_282_2e-265)
+    (f64.const -1.055_389_683_973_521e-252)
   )
-  (f64.const -0x0p+0)
+  (f64.const -0)
 )
 (module binary
   "\00\61\73\6d\01\00\00\00\01\91\80\80\80\00\02\60"
@@ -853,93 +815,93 @@
 )
 (assert_return
   (invoke "f32.no_reassociate_add"
-    (f32.const -0x1.5f7ddcp+44)
-    (f32.const 0x1.854e1p+34)
-    (f32.const -0x1.b2068cp+47)
-    (f32.const -0x1.209692p+41)
+    (f32.const -24_154_321_453_056)
+    (f32.const 26_125_811_712)
+    (f32.const -238_608_082_534_400)
+    (f32.const -2_478_953_463_808)
   )
-  (f32.const -0x1.e26c76p+47)
+  (f32.const -265_215_220_383_744)
 )
 (assert_return
   (invoke "f32.no_reassociate_add"
-    (f32.const 0x1.da3b78p-9)
-    (f32.const -0x1.4312fap-7)
-    (f32.const 0x1.0395e6p-4)
-    (f32.const -0x1.6d5ea6p-7)
+    (f32.const 0.003_618_105_314_671_993_3)
+    (f32.const -0.009_859_439_916_908_741)
+    (f32.const 0.063_375_376_164_913_177)
+    (f32.const -0.011_150_198_988_616_467)
   )
-  (f32.const 0x1.78b31ap-5)
+  (f32.const 0.045_983_839_780_092_239)
 )
 (assert_return
   (invoke "f32.no_reassociate_add"
-    (f32.const -0x1.fdb93ap+34)
-    (f32.const -0x1.b6fce6p+41)
-    (f32.const 0x1.c131d8p+44)
-    (f32.const 0x1.8835b6p+38)
+    (f32.const -34_206_967_808)
+    (f32.const -3_770_877_214_720)
+    (f32.const 30_868_424_884_224)
+    (f32.const 421_132_075_008)
   )
-  (f32.const 0x1.8ff3a2p+44)
+  (f32.const 27_484_470_902_784)
 )
 (assert_return
   (invoke "f32.no_reassociate_add"
-    (f32.const 0x1.1739fcp+47)
-    (f32.const 0x1.a4b186p+49)
-    (f32.const -0x1.0c623cp+35)
-    (f32.const 0x1.16a102p+51)
+    (f32.const 153_506_392_571_904)
+    (f32.const 925_114_682_048_512)
+    (f32.const -36_021_854_208)
+    (f32.const 2_450_846_046_486_528)
   )
-  (f32.const 0x1.913ff6p+51)
+  (f32.const 3_529_430_982_983_680)
 )
 (assert_return
   (invoke "f32.no_reassociate_add"
-    (f32.const 0x1.733cfap+108)
-    (f32.const -0x1.38d30cp+108)
-    (f32.const 0x1.2f5854p+105)
-    (f32.const -0x1.ccb058p+94)
+    (f32.const 4.706_003_139_973_800_6e+32)
+    (f32.const -3.965_520_407_781_218e+32)
+    (f32.const 4.806_693_894_491_044_1e+31)
+    (f32.const -3.564_407_275_758_035e+28)
   )
-  (f32.const 0x1.813716p+106)
+  (f32.const 1.220_795_633_595_999e+32)
 )
 (assert_return
   (invoke "f64.no_reassociate_add"
-    (f64.const -0x1.697a4d9ff19a6p+841)
-    (f64.const 0x1.b305466238397p+847)
-    (f64.const 0x1.e0b2d9bfb4e72p+855)
-    (f64.const -0x1.6e1f3ae2b06bbp+857)
+    (f64.const -2.070_465_292_771_701_9e+253)
+    (f64.const 1.594_689_704_376_369_7e+255)
+    (f64.const 4.511_066_365_594_161_3e+257)
+    (f64.const -1.374_333_509_186_863_3e+258)
   )
-  (f64.const -0x1.eb0e5936f087ap+856)
+  (f64.const -9.216_528_875_759_986_2e+257)
 )
 (assert_return
   (invoke "f64.no_reassociate_add"
-    (f64.const 0x1.00ef6746b30e1p-543)
-    (f64.const 0x1.cc1cfafdf3fe1p-544)
-    (f64.const -0x1.f7726df3ecba6p-543)
-    (f64.const -0x1.b26695f99d307p-594)
+    (f64.const 3.485_747_658_213_531_3e-164)
+    (f64.const 3.121_095_739_131_175_4e-164)
+    (f64.const -6.830_085_464_316_209_8e-164)
+    (f64.const -2.617_177_347_131_094_9e-179)
   )
-  (f64.const -0x1.074892e3fad76p-547)
+  (f64.const -2.232_420_669_715_053_6e-165)
 )
 (assert_return
   (invoke "f64.no_reassociate_add"
-    (f64.const -0x1.e807b3bd6d854p+440)
-    (f64.const 0x1.cedae26c2c5fp+407)
-    (f64.const -0x1.00ab6e1442541p+437)
-    (f64.const 0x1.28538a55997bdp+397)
+    (f64.const -5.412_584_921_122_726_3e+132)
+    (f64.const 5.976_036_561_703_795e+122)
+    (f64.const -3.558_300_777_933_963e+131)
+    (f64.const 3.736_272_599_576_254_4e+119)
   )
-  (f64.const -0x1.040e90bf871ebp+441)
+  (f64.const -5.768_414_998_318_146_4e+132)
 )
 (assert_return
   (invoke "f64.no_reassociate_add"
-    (f64.const -0x1.ba2b6f35a2402p-317)
-    (f64.const 0x1.ad1c3fea7cd9ep-307)
-    (f64.const -0x1.93aace2bf1261p-262)
-    (f64.const 0x1.9fddbe472847ep-260)
+    (f64.const -6.469_047_714_189_599_4e-96)
+    (f64.const 6.428_658_497_474_600_4e-93)
+    (f64.const -2.127_769_807_228_560_4e-79)
+    (f64.const 8.768_287_273_189_493e-79)
   )
-  (f64.const 0x1.3af30abc2c01bp-260)
+  (f64.const 6.640_517_465_960_996_5e-79)
 )
 (assert_return
   (invoke "f64.no_reassociate_add"
-    (f64.const -0x1.ccb9c6092fb1dp+641)
-    (f64.const -0x1.4b7c28c108244p+614)
-    (f64.const 0x1.8a7cefef4bde1p+646)
-    (f64.const -0x1.901b28b08b482p+644)
+    (f64.const -1.642_213_708_641_482_8e+193)
+    (f64.const -8.803_213_793_979_071e+184)
+    (f64.const 4.499_570_597_828_578_5e+194)
+    (f64.const -1.140_912_671_662_743_9e+194)
   )
-  (f64.const 0x1.1810579194126p+646)
+  (f64.const 3.194_436_554_421_365_6e+194)
 )
 (module binary
   "\00\61\73\6d\01\00\00\00\01\91\80\80\80\00\02\60"
@@ -954,93 +916,93 @@
 )
 (assert_return
   (invoke "f32.no_reassociate_mul"
-    (f32.const 0x1.950ba8p-116)
-    (f32.const 0x1.efdacep-33)
-    (f32.const -0x1.5f9bcp+102)
-    (f32.const 0x1.f04508p-56)
+    (f32.const 1.904_514_939_832_524_1e-35)
+    (f32.const 2.254_886_138_919_332e-10)
+    (f32.const -6.964_321_833_196_614_2e+30)
+    (f32.const 2.690_283_181_342_554_7e-17)
   )
-  (f32.const -0x1.ff356ep-101)
+  (f32.const -7.876_417_295_001_129_6e-31)
 )
 (assert_return
   (invoke "f32.no_reassociate_mul"
-    (f32.const 0x1.5990aep-56)
-    (f32.const -0x1.7dfb04p+102)
-    (f32.const -0x1.4f774ap-125)
-    (f32.const -0x1.595fe6p+70)
+    (f32.const 1.873_312_459_090_269_1e-17)
+    (f32.const -7.565_903_872_775_787_2e+30)
+    (f32.const -3.080_768_406_543_060_7e-38)
+    (f32.const -1.592_759_229_027_010_5e+21)
   )
-  (f32.const -0x1.c7c8fcp-8)
+  (f32.const -0.006_954_728_625_714_778_9)
 )
 (assert_return
   (invoke "f32.no_reassociate_mul"
-    (f32.const 0x1.6ad9a4p-48)
-    (f32.const -0x1.9138aap+55)
-    (f32.const -0x1.4a774ep-40)
-    (f32.const 0x1.1ff08p+76)
+    (f32.const 5.035_557_508_351_138_5e-15)
+    (f32.const -56_466_884_228_284_416)
+    (f32.const -1.174_051_199_141_767_9e-12)
+    (f32.const 8.498_472_640_833_220_8e+22)
   )
-  (f32.const 0x1.9cd8ecp+44)
+  (f32.const 28_370_653_937_664)
 )
 (assert_return
   (invoke "f32.no_reassociate_mul"
-    (f32.const 0x1.e1caecp-105)
-    (f32.const 0x1.af0dd2p+77)
-    (f32.const -0x1.016eep+56)
-    (f32.const -0x1.ab70d6p+59)
+    (f32.const 4.639_494_588_818_366_8e-32)
+    (f32.const 2.544_493_617_355_654_1e+23)
+    (f32.const -72_460_977_366_368_256)
+    (f32.const -9.625_110_358_460_989_4e+17)
   )
-  (f32.const 0x1.54870ep+89)
+  (f32.const 8.233_451_127_971_567_1e+26)
 )
 (assert_return
   (invoke "f32.no_reassociate_mul"
-    (f32.const -0x1.3b1dcp-99)
-    (f32.const 0x1.4e5a34p-49)
-    (f32.const -0x1.38ba5ap+3)
-    (f32.const 0x1.7fb8eep+59)
+    (f32.const -1.942_053_589_140_402_7e-30)
+    (f32.const 2.320_035_524_507_263_8e-15)
+    (f32.const -9.772_747_993_469_238_3)
+    (f32.const 8.640_659_873_752_678_4e+17)
   )
-  (f32.const 0x1.5bbf98p-85)
+  (f32.const 3.511_361_637_582_630_4e-26)
 )
 (assert_return
   (invoke "f64.no_reassociate_mul"
-    (f64.const -0x1.e7842ab7181p-667)
-    (f64.const -0x1.fabf40ceeceafp+990)
-    (f64.const -0x1.1a38a825ab01ap-376)
-    (f64.const -0x1.27e8ea469b14fp+664)
+    (f64.const -3.109_868_654_414_945_8e-201)
+    (f64.const -2.071_319_048_774_543_4e+298)
+    (f64.const -7.162_612_845_524_978e-114)
+    (f64.const -8.847_825_329_596_909e+199)
   )
-  (f64.const 0x1.336eb428af4f3p+613)
+  (f64.const 4.082_226_181_327_861_4e+184)
 )
 (assert_return
   (invoke "f64.no_reassociate_mul"
-    (f64.const 0x1.4ca2292a6acbcp+454)
-    (f64.const 0x1.6ffbab850089ap-516)
-    (f64.const -0x1.547c32e1f5b93p-899)
-    (f64.const -0x1.c7571d9388375p+540)
+    (f64.const 6.044_271_641_295_680_7e+136)
+    (f64.const 6.700_545_015_107_396_5e-156)
+    (f64.const -3.146_966_427_579_818_5e-271)
+    (f64.const -6.401_677_295_640_561_5e+162)
   )
-  (f64.const 0x1.1ac796954fc1p-419)
+  (f64.const 8.159_057_447_560_471_2e-127)
 )
 (assert_return
   (invoke "f64.no_reassociate_mul"
-    (f64.const 0x1.73881a52e0401p-501)
-    (f64.const -0x1.1b68dd9efb1a7p+788)
-    (f64.const 0x1.d1c5e6a3eb27cp-762)
-    (f64.const -0x1.56cb2fcc7546fp+88)
+    (f64.const 2.216_807_720_454_268e-151)
+    (f64.const -1.802_234_186_536_721_6e+237)
+    (f64.const 7.500_283_778_521_930_6e-230)
+    (f64.const -4.144_121_524_339_569_3e+26)
   )
-  (f64.const 0x1.f508db92c34efp-386)
+  (f64.const 1.241_793_627_299_937e-116)
 )
 (assert_return
   (invoke "f64.no_reassociate_mul"
-    (f64.const 0x1.2efa87859987cp+692)
-    (f64.const 0x1.68e4373e241p-423)
-    (f64.const 0x1.4e2d0fb383a57p+223)
-    (f64.const -0x1.301d3265c737bp-23)
+    (f64.const 2.431_806_596_629_872e+208)
+    (f64.const 6.508_014_075_793_435_9e-128)
+    (f64.const 1.759_642_128_723_389_7e+67)
+    (f64.const -1.416_141_401_305_357_9e-07)
   )
-  (f64.const -0x1.4b2b6c393f30cp+470)
+  (f64.const -3.943_741_918_531_222_8e+141)
 )
 (assert_return
   (invoke "f64.no_reassociate_mul"
-    (f64.const 0x1.1013f7498b95fp-234)
-    (f64.const 0x1.d2d1c36fff138p-792)
-    (f64.const -0x1.cbf1824ea7bfdp+728)
-    (f64.const -0x1.440da9c8b836dp-599)
+    (f64.const 3.849_767_156_964_772_2e-71)
+    (f64.const 7.000_875_494_322_487_5e-239)
+    (f64.const -2.536_887_825_218_386_5e+219)
+    (f64.const -6.101_114_518_858_448_5e-181)
   )
-  (f64.const 0x1.1a16512881c91p-895)
+  (f64.const 4.171_548_126_376_116_6e-270)
 )
 (module binary
   "\00\61\73\6d\01\00\00\00\01\8b\80\80\80\00\02\60"
@@ -1052,30 +1014,24 @@
   "\43\00\00\00\00\95\0b\8e\80\80\80\00\00\20\00\44"
   "\00\00\00\00\00\00\00\00\a3\0b"
 )
-(assert_return (invoke "f32.no_fold_div_0" (f32.const 0x1p+0)) (f32.const inf))
-(assert_return
-  (invoke "f32.no_fold_div_0" (f32.const -0x1p+0))
-  (f32.const -inf)
-)
+(assert_return (invoke "f32.no_fold_div_0" (f32.const 1)) (f32.const inf))
+(assert_return (invoke "f32.no_fold_div_0" (f32.const -1)) (f32.const -inf))
 (assert_return (invoke "f32.no_fold_div_0" (f32.const inf)) (f32.const inf))
 (assert_return (invoke "f32.no_fold_div_0" (f32.const -inf)) (f32.const -inf))
-(assert_return_canonical_nan (invoke "f32.no_fold_div_0" (f32.const 0x0p+0)))
-(assert_return_canonical_nan (invoke "f32.no_fold_div_0" (f32.const -0x0p+0)))
+(assert_return_canonical_nan (invoke "f32.no_fold_div_0" (f32.const 0)))
+(assert_return_canonical_nan (invoke "f32.no_fold_div_0" (f32.const -0)))
 (assert_return_arithmetic_nan
   (invoke "f32.no_fold_div_0" (f32.const nan:0x200000))
 )
 (assert_return_canonical_nan
   (invoke "f32.no_fold_div_0" (f32.const nan:0x400000))
 )
-(assert_return (invoke "f64.no_fold_div_0" (f64.const 0x1p+0)) (f64.const inf))
-(assert_return
-  (invoke "f64.no_fold_div_0" (f64.const -0x1p+0))
-  (f64.const -inf)
-)
+(assert_return (invoke "f64.no_fold_div_0" (f64.const 1)) (f64.const inf))
+(assert_return (invoke "f64.no_fold_div_0" (f64.const -1)) (f64.const -inf))
 (assert_return (invoke "f64.no_fold_div_0" (f64.const inf)) (f64.const inf))
 (assert_return (invoke "f64.no_fold_div_0" (f64.const -inf)) (f64.const -inf))
-(assert_return_canonical_nan (invoke "f64.no_fold_div_0" (f64.const 0x0p+0)))
-(assert_return_canonical_nan (invoke "f64.no_fold_div_0" (f64.const -0x0p+0)))
+(assert_return_canonical_nan (invoke "f64.no_fold_div_0" (f64.const 0)))
+(assert_return_canonical_nan (invoke "f64.no_fold_div_0" (f64.const -0)))
 (assert_return_canonical_nan
   (invoke "f64.no_fold_div_0" (f64.const nan:0x8000000000000))
 )
@@ -1092,40 +1048,24 @@
   "\80\80\00\00\20\00\43\00\00\00\80\95\0b\8e\80\80"
   "\80\00\00\20\00\44\00\00\00\00\00\00\00\80\a3\0b"
 )
-(assert_return
-  (invoke "f32.no_fold_div_neg0" (f32.const 0x1p+0))
-  (f32.const -inf)
-)
-(assert_return
-  (invoke "f32.no_fold_div_neg0" (f32.const -0x1p+0))
-  (f32.const inf)
-)
+(assert_return (invoke "f32.no_fold_div_neg0" (f32.const 1)) (f32.const -inf))
+(assert_return (invoke "f32.no_fold_div_neg0" (f32.const -1)) (f32.const inf))
 (assert_return (invoke "f32.no_fold_div_neg0" (f32.const inf)) (f32.const -inf))
 (assert_return (invoke "f32.no_fold_div_neg0" (f32.const -inf)) (f32.const inf))
-(assert_return_canonical_nan (invoke "f32.no_fold_div_neg0" (f32.const 0x0p+0)))
-(assert_return_canonical_nan
-  (invoke "f32.no_fold_div_neg0" (f32.const -0x0p+0))
-)
+(assert_return_canonical_nan (invoke "f32.no_fold_div_neg0" (f32.const 0)))
+(assert_return_canonical_nan (invoke "f32.no_fold_div_neg0" (f32.const -0)))
 (assert_return_arithmetic_nan
   (invoke "f32.no_fold_div_neg0" (f32.const nan:0x200000))
 )
 (assert_return_canonical_nan
   (invoke "f32.no_fold_div_neg0" (f32.const nan:0x400000))
 )
-(assert_return
-  (invoke "f64.no_fold_div_neg0" (f64.const 0x1p+0))
-  (f64.const -inf)
-)
-(assert_return
-  (invoke "f64.no_fold_div_neg0" (f64.const -0x1p+0))
-  (f64.const inf)
-)
+(assert_return (invoke "f64.no_fold_div_neg0" (f64.const 1)) (f64.const -inf))
+(assert_return (invoke "f64.no_fold_div_neg0" (f64.const -1)) (f64.const inf))
 (assert_return (invoke "f64.no_fold_div_neg0" (f64.const inf)) (f64.const -inf))
 (assert_return (invoke "f64.no_fold_div_neg0" (f64.const -inf)) (f64.const inf))
-(assert_return_canonical_nan (invoke "f64.no_fold_div_neg0" (f64.const 0x0p+0)))
-(assert_return_canonical_nan
-  (invoke "f64.no_fold_div_neg0" (f64.const -0x0p+0))
-)
+(assert_return_canonical_nan (invoke "f64.no_fold_div_neg0" (f64.const 0)))
+(assert_return_canonical_nan (invoke "f64.no_fold_div_neg0" (f64.const -0)))
 (assert_return_canonical_nan
   (invoke "f64.no_fold_div_neg0" (f64.const nan:0x8000000000000))
 )
@@ -1145,73 +1085,73 @@
 )
 (assert_return
   (invoke "f32.no_fold_to_hypot"
-    (f32.const 0x1.c2f338p-81)
-    (f32.const 0x1.401b5ep-68)
+    (f32.const 7.285_491_363_580_182_6e-25)
+    (f32.const 4.236_579_586_704_008_2e-21)
   )
-  (f32.const 0x1.401cccp-68)
+  (f32.const 4.236_653_499_815_383_8e-21)
 )
 (assert_return
   (invoke "f32.no_fold_to_hypot"
-    (f32.const -0x1.c38d1p-71)
-    (f32.const -0x1.359ddp-107)
+    (f32.const -7.470_285_075_631_298_8e-22)
+    (f32.const -7.453_745_026_374_829_9e-33)
   )
-  (f32.const 0x1.c36a62p-71)
+  (f32.const 7.468_043_953_354_002_1e-22)
 )
 (assert_return
   (invoke "f32.no_fold_to_hypot"
-    (f32.const -0x1.99e0cap-114)
-    (f32.const -0x1.ed0c6cp-69)
+    (f32.const -7.708_949_923_849_511_2e-35)
+    (f32.const -3.262_721_433_852_002_3e-21)
   )
-  (f32.const 0x1.ed0e48p-69)
+  (f32.const 3.262_769_497_569_235_6e-21)
 )
 (assert_return
   (invoke "f32.no_fold_to_hypot"
-    (f32.const -0x1.1b6ceap+5)
-    (f32.const 0x1.5440bep+17)
+    (f32.const -35.428_180_694_580_078)
+    (f32.const 174_209.484_375)
   )
-  (f32.const 0x1.5440cp+17)
+  (f32.const 174_209.5)
 )
 (assert_return
   (invoke "f32.no_fold_to_hypot"
-    (f32.const 0x1.8f019ep-76)
-    (f32.const -0x1.182308p-71)
+    (f32.const 2.062_814_311_395_588_9e-23)
+    (f32.const -4.634_475_271_768_322e-22)
   )
-  (f32.const 0x1.17e2bcp-71)
+  (f32.const 4.630_320_183_608_341_9e-22)
 )
 (assert_return
   (invoke "f64.no_fold_to_hypot"
-    (f64.const 0x1.1a0ac4f7c8711p-636)
-    (f64.const 0x1.1372ebafff551p-534)
+    (f64.const 3.863_640_258_986_321_1e-192)
+    (f64.const 1.913_301_475_262_401_4e-161)
   )
-  (f64.const 0x1.13463fa37014ep-534)
+  (f64.const 1.912_089_375_323_555_4e-161)
 )
 (assert_return
   (invoke "f64.no_fold_to_hypot"
-    (f64.const 0x1.b793512167499p+395)
-    (f64.const -0x1.11cbc52af4c36p+410)
+    (f64.const 1.385_612_389_503_297_7e+119)
+    (f64.const -2.828_038_515_930_043_3e+123)
   )
-  (f64.const 0x1.11cbc530783a2p+410)
+  (f64.const 2.828_038_519_324_483_4e+123)
 )
 (assert_return
   (invoke "f64.no_fold_to_hypot"
-    (f64.const 0x1.76777f44ff40bp-536)
-    (f64.const -0x1.c3896e4dc1fbp-766)
+    (f64.const 6.502_729_096_641_791_6e-162)
+    (f64.const -4.544_399_933_151_274_7e-231)
   )
-  (f64.const 0x1.8p-536)
+  (f64.const 6.668_276_248_455_232_5e-162)
 )
 (assert_return
   (invoke "f64.no_fold_to_hypot"
-    (f64.const -0x1.889ac72cc6b5dp-521)
-    (f64.const 0x1.8d7084e659f3bp-733)
+    (f64.const -2.234_023_202_420_260_4e-157)
+    (f64.const 3.435_929_714_143_315_1e-221)
   )
-  (f64.const 0x1.889ac72ca843ap-521)
+  (f64.const 2.234_023_202_379_923_4e-157)
 )
 (assert_return
   (invoke "f64.no_fold_to_hypot"
-    (f64.const 0x1.5ee588c02cb08p-670)
-    (f64.const -0x1.05ce25788d9ecp-514)
+    (f64.const 2.797_963_998_630_553_8e-202)
+    (f64.const -1.906_867_996_862_015_9e-155)
   )
-  (f64.const 0x1.05ce25788d9dfp-514)
+  (f64.const 1.906_867_996_862_010_5e-155)
 )
 (module binary
   "\00\61\73\6d\01\00\00\00\01\86\80\80\80\00\01\60"
@@ -1222,24 +1162,32 @@
   "\43\00\00\80\3f\20\00\95\0b"
 )
 (assert_return
-  (invoke "f32.no_approximate_reciprocal" (f32.const -0x1.2900b6p-10))
-  (f32.const -0x1.b950d4p+9)
+  (invoke "f32.no_approximate_reciprocal"
+    (f32.const -0.001_132_975_681_684_911_3)
+  )
+  (f32.const -882.631_469_726_562_5)
 )
 (assert_return
-  (invoke "f32.no_approximate_reciprocal" (f32.const 0x1.e7212p+127))
-  (f32.const 0x1.0d11f8p-128)
+  (invoke "f32.no_approximate_reciprocal" (f32.const 3.237_530_143_903_465e+38))
+  (f32.const 3.088_774_304_929_441_3e-39)
 )
 (assert_return
-  (invoke "f32.no_approximate_reciprocal" (f32.const -0x1.42a466p-93))
-  (f32.const -0x1.963ee6p+92)
+  (invoke "f32.no_approximate_reciprocal"
+    (f32.const -1.272_599_016_394_562_8e-28)
+  )
+  (f32.const -7.857_934_595_785_829_1e+27)
 )
 (assert_return
-  (invoke "f32.no_approximate_reciprocal" (f32.const 0x1.5d0c32p+76))
-  (f32.const 0x1.778362p-77)
+  (invoke "f32.no_approximate_reciprocal"
+    (f32.const 1.030_206_791_456_307_9e+23)
+  )
+  (f32.const 9.706_789_077_198_894_8e-24)
 )
 (assert_return
-  (invoke "f32.no_approximate_reciprocal" (f32.const -0x1.601de2p-82))
-  (f32.const -0x1.743d7ep+81)
+  (invoke "f32.no_approximate_reciprocal"
+    (f32.const -2.844_376_290_951_804_6e-25)
+  )
+  (f32.const -3.515_709_324_545_706_2e+24)
 )
 (module binary
   "\00\61\73\6d\01\00\00\00\01\8b\80\80\80\00\02\60"
@@ -1254,44 +1202,58 @@
   "\f0\3f\20\00\9f\a3\0b"
 )
 (assert_return
-  (invoke "f32.no_approximate_reciprocal_sqrt" (f32.const 0x1.6af12ap-43))
-  (f32.const 0x1.300ed4p+21)
+  (invoke "f32.no_approximate_reciprocal_sqrt"
+    (f32.const 1.611_786_469_265_033_6e-13)
+  )
+  (f32.const 2_490_842.5)
 )
 (assert_return
-  (invoke "f32.no_approximate_reciprocal_sqrt" (f32.const 0x1.e82fc6p-8))
-  (f32.const 0x1.72c376p+3)
+  (invoke "f32.no_approximate_reciprocal_sqrt"
+    (f32.const 0.007_449_136_581_271_886_8)
+  )
+  (f32.const 11.586_359_977_722_168)
 )
 (assert_return
-  (invoke "f32.no_approximate_reciprocal_sqrt" (f32.const 0x1.b9fa9cp-66))
-  (f32.const 0x1.85a9bap+32)
+  (invoke "f32.no_approximate_reciprocal_sqrt"
+    (f32.const 2.339_817_041_277_766_1e-20)
+  )
+  (f32.const 6_537_460_224)
 )
 (assert_return
-  (invoke "f32.no_approximate_reciprocal_sqrt" (f32.const 0x1.f4f546p-44))
-  (f32.const 0x1.6e01c2p+21)
+  (invoke "f32.no_approximate_reciprocal_sqrt"
+    (f32.const 1.112_350_432_575_480_4e-13)
+  )
+  (f32.const 2_998_328.25)
 )
 (assert_return
-  (invoke "f32.no_approximate_reciprocal_sqrt" (f32.const 0x1.5da7aap-86))
-  (f32.const 0x1.b618cap+42)
+  (invoke "f32.no_approximate_reciprocal_sqrt"
+    (f32.const 1.765_306_308_504_571_5e-26)
+  )
+  (f32.const 7_526_446_268_416)
 )
 (assert_return
-  (invoke "f64.no_fuse_reciprocal_sqrt" (f64.const 0x1.1568a63b55fa3p+889))
-  (f64.const 0x1.5bc9c74c9952p-445)
+  (invoke "f64.no_fuse_reciprocal_sqrt"
+    (f64.const 4.472_459_252_766_336_6e+267)
+  )
+  (f64.const 1.495_294_733_589_809_6e-134)
 )
 (assert_return
-  (invoke "f64.no_fuse_reciprocal_sqrt" (f64.const 0x1.239fcd0939cafp+311))
-  (f64.const 0x1.5334a922b4818p-156)
+  (invoke "f64.no_fuse_reciprocal_sqrt" (f64.const 4.752_392_260_007_119_1e+93))
+  (f64.const 1.450_587_263_895_484_3e-47)
 )
 (assert_return
-  (invoke "f64.no_fuse_reciprocal_sqrt" (f64.const 0x1.6e36a24e11054p+104))
-  (f64.const 0x1.ac13f20977f29p-53)
+  (invoke "f64.no_fuse_reciprocal_sqrt" (f64.const 2.901_441_588_539_243_6e+31))
+  (f64.const 1.856_492_008_479_360_8e-16)
 )
 (assert_return
-  (invoke "f64.no_fuse_reciprocal_sqrt" (f64.const 0x1.23ee173219f83p+668))
-  (f64.const 0x1.df753e055862dp-335)
+  (invoke "f64.no_fuse_reciprocal_sqrt"
+    (f64.const 1.396_612_507_697_477_8e+201)
+  )
+  (f64.const 2.675_851_675_107_213_2e-101)
 )
 (assert_return
-  (invoke "f64.no_fuse_reciprocal_sqrt" (f64.const 0x1.b30f74caf9babp+146))
-  (f64.const 0x1.88bfc3d1764a9p-74)
+  (invoke "f64.no_fuse_reciprocal_sqrt" (f64.const 1.515_964_154_407_044_3e+44))
+  (f64.const 8.121_860_649_480_894_1e-23)
 )
 (module binary
   "\00\61\73\6d\01\00\00\00\01\86\80\80\80\00\01\60"
@@ -1302,24 +1264,32 @@
   "\80\80\80\00\00\43\00\00\80\3f\20\00\95\91\0b"
 )
 (assert_return
-  (invoke "f32.no_approximate_sqrt_reciprocal" (f32.const 0x1.a4c986p+60))
-  (f32.const 0x1.8f5ac6p-31)
+  (invoke "f32.no_approximate_sqrt_reciprocal"
+    (f32.const 1.895_057_081_300_418_6e+18)
+  )
+  (f32.const 7.264_217_560_809_527_2e-10)
 )
 (assert_return
-  (invoke "f32.no_approximate_sqrt_reciprocal" (f32.const 0x1.50511ep-9))
-  (f32.const 0x1.3bdd46p+4)
+  (invoke "f32.no_approximate_sqrt_reciprocal"
+    (f32.const 0.002_565_894_043_073_058_1)
+  )
+  (f32.const 19.741_521_835_327_148)
 )
 (assert_return
-  (invoke "f32.no_approximate_sqrt_reciprocal" (f32.const 0x1.125ec2p+69))
-  (f32.const 0x1.5db572p-35)
+  (invoke "f32.no_approximate_sqrt_reciprocal"
+    (f32.const 6.326_544_870_226_830_3e+20)
+  )
+  (f32.const 3.975_728_427_030_311_7e-11)
 )
 (assert_return
-  (invoke "f32.no_approximate_sqrt_reciprocal" (f32.const 0x1.ba4c5p+13))
-  (f32.const 0x1.136f16p-7)
+  (invoke "f32.no_approximate_sqrt_reciprocal" (f32.const 14_153.539_062_5))
+  (f32.const 0.008_405_576_460_063_457_5)
 )
 (assert_return
-  (invoke "f32.no_approximate_sqrt_reciprocal" (f32.const 0x1.4a5be2p+104))
-  (f32.const 0x1.c2b5bp-53)
+  (invoke "f32.no_approximate_sqrt_reciprocal"
+    (f32.const 2.617_372_998_283_620_7e+31)
+  )
+  (f32.const 1.954_641_816_445_993_3e-16)
 )
 (module binary
   "\00\61\73\6d\01\00\00\00\01\8b\80\80\80\00\02\60"
@@ -1335,52 +1305,52 @@
   "\b9\b0\0b\86\80\80\80\00\00\20\00\ba\b1\0b"
 )
 (assert_return
-  (invoke "i32.no_fold_f32_s" (i32.const 16777216))
-  (i32.const 16777216)
+  (invoke "i32.no_fold_f32_s" (i32.const 16_777_216))
+  (i32.const 16_777_216)
 )
 (assert_return
-  (invoke "i32.no_fold_f32_s" (i32.const 16777217))
-  (i32.const 16777216)
+  (invoke "i32.no_fold_f32_s" (i32.const 16_777_217))
+  (i32.const 16_777_216)
 )
 (assert_return
-  (invoke "i32.no_fold_f32_s" (i32.const -268435440))
-  (i32.const -268435440)
+  (invoke "i32.no_fold_f32_s" (i32.const -268_435_440))
+  (i32.const -268_435_440)
 )
 (assert_return
-  (invoke "i32.no_fold_f32_u" (i32.const 16777216))
-  (i32.const 16777216)
+  (invoke "i32.no_fold_f32_u" (i32.const 16_777_216))
+  (i32.const 16_777_216)
 )
 (assert_return
-  (invoke "i32.no_fold_f32_u" (i32.const 16777217))
-  (i32.const 16777216)
+  (invoke "i32.no_fold_f32_u" (i32.const 16_777_217))
+  (i32.const 16_777_216)
 )
 (assert_return
-  (invoke "i32.no_fold_f32_u" (i32.const -268435440))
-  (i32.const -268435456)
+  (invoke "i32.no_fold_f32_u" (i32.const -268_435_440))
+  (i32.const -268_435_456)
 )
 (assert_return
-  (invoke "i64.no_fold_f64_s" (i64.const 9007199254740992))
-  (i64.const 9007199254740992)
+  (invoke "i64.no_fold_f64_s" (i64.const 9_007_199_254_740_992))
+  (i64.const 9_007_199_254_740_992)
 )
 (assert_return
-  (invoke "i64.no_fold_f64_s" (i64.const 9007199254740993))
-  (i64.const 9007199254740992)
+  (invoke "i64.no_fold_f64_s" (i64.const 9_007_199_254_740_993))
+  (i64.const 9_007_199_254_740_992)
 )
 (assert_return
-  (invoke "i64.no_fold_f64_s" (i64.const -1152921504606845952))
-  (i64.const -1152921504606845952)
+  (invoke "i64.no_fold_f64_s" (i64.const -1_152_921_504_606_845_952))
+  (i64.const -1_152_921_504_606_845_952)
 )
 (assert_return
-  (invoke "i64.no_fold_f64_u" (i64.const 9007199254740992))
-  (i64.const 9007199254740992)
+  (invoke "i64.no_fold_f64_u" (i64.const 9_007_199_254_740_992))
+  (i64.const 9_007_199_254_740_992)
 )
 (assert_return
-  (invoke "i64.no_fold_f64_u" (i64.const 9007199254740993))
-  (i64.const 9007199254740992)
+  (invoke "i64.no_fold_f64_u" (i64.const 9_007_199_254_740_993))
+  (i64.const 9_007_199_254_740_992)
 )
 (assert_return
-  (invoke "i64.no_fold_f64_u" (i64.const -1152921504606845952))
-  (i64.const -1152921504606846976)
+  (invoke "i64.no_fold_f64_u" (i64.const -1_152_921_504_606_845_952))
+  (i64.const -1_152_921_504_606_846_976)
 )
 (module binary
   "\00\61\73\6d\01\00\00\00\01\8d\80\80\80\00\02\60"
@@ -1394,73 +1364,73 @@
 )
 (assert_return
   (invoke "f32.no_fold_add_sub"
-    (f32.const 0x1.b553e4p-47)
-    (f32.const -0x1.67db2cp-26)
+    (f32.const 1.213_828_198_381_745_2e-14)
+    (f32.const -2.094_638_418_270_733_4e-08)
   )
-  (f32.const 0x1.cp-47)
+  (f32.const 1.243_449_787_580_175_3e-14)
 )
 (assert_return
   (invoke "f32.no_fold_add_sub"
-    (f32.const -0x1.a884dp-23)
-    (f32.const 0x1.f2ae1ep-19)
+    (f32.const -1.976_819_703_486_398_8e-07)
+    (f32.const 3.715_456_614_372_669_7e-06)
   )
-  (f32.const -0x1.a884ep-23)
+  (f32.const -1.976_820_840_354_776e-07)
 )
 (assert_return
   (invoke "f32.no_fold_add_sub"
-    (f32.const -0x1.fc04fp+82)
-    (f32.const -0x1.65403ap+101)
+    (f32.const -9.596_213_016_386_574_8e+24)
+    (f32.const -3.538_041_396_989_809e+30)
   )
-  (f32.const -0x1p+83)
+  (f32.const -9.671_406_556_917_033_4e+24)
 )
 (assert_return
   (invoke "f32.no_fold_add_sub"
-    (f32.const 0x1.870fa2p-78)
-    (f32.const 0x1.c54916p-56)
+    (f32.const 5.054_345_810_151_827_1e-24)
+    (f32.const 2.457_265_575_605_754_3e-17)
   )
-  (f32.const 0x1.8p-78)
+  (f32.const 4.963_083_675_318_166e-24)
 )
 (assert_return
   (invoke "f32.no_fold_add_sub"
-    (f32.const -0x1.17e966p-108)
-    (f32.const -0x1.5fa61ap-84)
+    (f32.const -3.369_314_682_316_122_5e-33)
+    (f32.const -7.101_491_652_849_161_1e-26)
   )
-  (f32.const -0x1p-107)
+  (f32.const -6.162_975_822_039_154_7e-33)
 )
 (assert_return
   (invoke "f64.no_fold_add_sub"
-    (f64.const -0x1.1053ea172dba8p-874)
-    (f64.const 0x1.113c413408ac8p-857)
+    (f64.const -8.445_702_651_973_108_6e-264)
+    (f64.const 1.110_684_389_828_854_1e-258)
   )
-  (f64.const -0x1.1053ea172p-874)
+  (f64.const -8.445_702_651_873_978e-264)
 )
 (assert_return
   (invoke "f64.no_fold_add_sub"
-    (f64.const 0x1.e377d54807972p-546)
-    (f64.const 0x1.040a0a4d1ff7p-526)
+    (f64.const 8.198_798_715_927_054_9e-165)
+    (f64.const 4.624_035_606_110_903_4e-159)
   )
-  (f64.const 0x1.e377d548p-546)
+  (f64.const 8.198_798_715_897_085_2e-165)
 )
 (assert_return
   (invoke "f64.no_fold_add_sub"
-    (f64.const -0x1.75f53cd926b62p-30)
-    (f64.const -0x1.66b176e602bb5p-3)
+    (f64.const -1.360_451_132_206_671_4e-09)
+    (f64.const -0.175_143_174_070_709_81)
   )
-  (f64.const -0x1.75f53dp-30)
+  (f64.const -1.360_451_140_630_658_5e-09)
 )
 (assert_return
   (invoke "f64.no_fold_add_sub"
-    (f64.const -0x1.c450ff28332ap-341)
-    (f64.const 0x1.15a5855023baep-305)
+    (f64.const -3.944_335_437_865_966e-103)
+    (f64.const 1.663_809_741_322_667_1e-92)
   )
-  (f64.const -0x1.c451p-341)
+  (f64.const -3.944_335_550_032_510_4e-103)
 )
 (assert_return
   (invoke "f64.no_fold_add_sub"
-    (f64.const -0x1.1ad4a596d3ea8p-619)
-    (f64.const -0x1.17d81a41c0ea8p-588)
+    (f64.const -5.078_309_818_866_000_2e-187)
+    (f64.const -1.079_043_164_446_110_4e-177)
   )
-  (f64.const -0x1.1ad4a8p-619)
+  (f64.const -5.078_310_479_375_670_4e-187)
 )
 (module binary
   "\00\61\73\6d\01\00\00\00\01\8d\80\80\80\00\02\60"
@@ -1474,73 +1444,73 @@
 )
 (assert_return
   (invoke "f32.no_fold_sub_add"
-    (f32.const -0x1.523cb8p+9)
-    (f32.const 0x1.93096cp+8)
+    (f32.const -676.474_365_234_375)
+    (f32.const 403.036_804_199_218_75)
   )
-  (f32.const -0x1.523cbap+9)
+  (f32.const -676.474_426_269_531_25)
 )
 (assert_return
   (invoke "f32.no_fold_sub_add"
-    (f32.const -0x1.a31a1p-111)
-    (f32.const 0x1.745efp-95)
+    (f32.const -6.305_943_118_406_007_7e-34)
+    (f32.const 3.671_860_068_759_610_2e-29)
   )
-  (f32.const -0x1.a4p-111)
+  (f32.const -6.319_457_630_020_617_6e-34)
 )
 (assert_return
   (invoke "f32.no_fold_sub_add"
-    (f32.const 0x1.3d5328p+26)
-    (f32.const 0x1.58567p+35)
+    (f32.const 83_184_800)
+    (f32.const 46_216_216_576)
   )
-  (f32.const 0x1.3d54p+26)
+  (f32.const 83_185_664)
 )
 (assert_return
   (invoke "f32.no_fold_sub_add"
-    (f32.const 0x1.374e26p-39)
-    (f32.const -0x1.66a5p-27)
+    (f32.const 2.211_956_963_080_186_1e-12)
+    (f32.const -1.043_792_963_173_473_3e-08)
   )
-  (f32.const 0x1.374p-39)
+  (f32.const 2.211_564_265_053_311_8e-12)
 )
 (assert_return
   (invoke "f32.no_fold_sub_add"
-    (f32.const 0x1.320facp-3)
-    (f32.const -0x1.ac069ap+14)
+    (f32.const 0.149_443_954_229_354_86)
+    (f32.const -27_393.650_390_625)
   )
-  (f32.const 0x1.34p-3)
+  (f32.const 0.150_390_625)
 )
 (assert_return
   (invoke "f64.no_fold_sub_add"
-    (f64.const 0x1.8f92aad2c9b8dp+255)
-    (f64.const -0x1.08cd4992266cbp+259)
+    (f64.const 9.036_598_261_794_624_3e+76)
+    (f64.const -9.581_864_275_355_520_2e+77)
   )
-  (f64.const 0x1.8f92aad2c9b9p+255)
+  (f64.const 9.036_598_261_794_628_1e+76)
 )
 (assert_return
   (invoke "f64.no_fold_sub_add"
-    (f64.const 0x1.5aaff55742c8bp-666)
-    (f64.const 0x1.8f5f47181f46dp-647)
+    (f64.const 4.423_040_356_465_881_5e-201)
+    (f64.const 2.671_349_104_936_657_6e-195)
   )
-  (f64.const 0x1.5aaff5578p-666)
+  (f64.const 4.423_040_356_647_721_1e-201)
 )
 (assert_return
   (invoke "f64.no_fold_sub_add"
-    (f64.const 0x1.21bc52967a98dp+251)
-    (f64.const -0x1.fcffaa32d0884p+300)
+    (f64.const 4.095_348_452_776_428_8e+75)
+    (f64.const -4.050_190_019_576_568_7e+90)
   )
-  (f64.const 0x1.2p+251)
+  (f64.const 4.070_815_637_249_397_5e+75)
 )
 (assert_return
   (invoke "f64.no_fold_sub_add"
-    (f64.const 0x1.9c78361f47374p-26)
-    (f64.const -0x1.69d69f4edc61cp-13)
+    (f64.const 2.400_888_920_755_443_3e-08)
+    (f64.const -0.000_172_537_979_291_884_84)
   )
-  (f64.const 0x1.9c78361f48p-26)
+  (f64.const 2.400_888_920_756_506_1e-08)
 )
 (assert_return
   (invoke "f64.no_fold_sub_add"
-    (f64.const 0x1.4dbe68e4afab2p-367)
-    (f64.const -0x1.dc24e5b39cd02p-361)
+    (f64.const 4.336_754_291_830_586_6e-111)
+    (f64.const -3.959_770_670_822_712_2e-109)
   )
-  (f64.const 0x1.4dbe68e4afacp-367)
+  (f64.const 4.336_754_291_830_596_9e-111)
 )
 (module binary
   "\00\61\73\6d\01\00\00\00\01\8d\80\80\80\00\02\60"
@@ -1554,73 +1524,73 @@
 )
 (assert_return
   (invoke "f32.no_fold_mul_div"
-    (f32.const -0x1.cd859ap+54)
-    (f32.const 0x1.6ca936p-47)
+    (f32.const -32_476_715_183_767_552)
+    (f32.const 1.012_137_541_069_350_5e-14)
   )
-  (f32.const -0x1.cd8598p+54)
+  (f32.const -32_476_713_036_283_904)
 )
 (assert_return
   (invoke "f32.no_fold_mul_div"
-    (f32.const -0x1.0b56b8p-26)
-    (f32.const 0x1.48264cp-106)
+    (f32.const -1.556_116_302_481_314_1e-08)
+    (f32.const 1.579_982_838_560_999_8e-32)
   )
-  (f32.const -0x1.0b56a4p-26)
+  (f32.const -1.556_114_526_124_474_7e-08)
 )
 (assert_return
   (invoke "f32.no_fold_mul_div"
-    (f32.const -0x1.e7555cp-48)
-    (f32.const -0x1.9161cp+48)
+    (f32.const -6.763_110_003_396_490_7e-15)
+    (f32.const -441_323_995_791_360)
   )
-  (f32.const -0x1.e7555ap-48)
+  (f32.const -6.763_109_579_880_017_1e-15)
 )
 (assert_return
   (invoke "f32.no_fold_mul_div"
-    (f32.const 0x1.aaa50ep+52)
-    (f32.const -0x1.dfb39ep+60)
+    (f32.const 7_505_613_726_679_040)
+    (f32.const -2.160_384_080_489_742_3e+18)
   )
-  (f32.const 0x1.aaa50cp+52)
+  (f32.const 7_505_613_189_808_128)
 )
 (assert_return
   (invoke "f32.no_fold_mul_div"
-    (f32.const -0x1.2b7dfap-92)
-    (f32.const -0x1.7c4ca6p-37)
+    (f32.const -2.362_576_059_154_980_8e-28)
+    (f32.const -1.080_875_926_956_492_7e-11)
   )
-  (f32.const -0x1.2b7dfep-92)
+  (f32.const -2.362_576_540_637_466_9e-28)
 )
 (assert_return
   (invoke "f64.no_fold_mul_div"
-    (f64.const -0x1.3d79ff4118a1ap-837)
-    (f64.const -0x1.b8b5dda31808cp-205)
+    (f64.const -1.353_210_371_357_558_6e-252)
+    (f64.const -3.347_836_467_564_916_2e-62)
   )
-  (f64.const -0x1.3d79ff412263ep-837)
+  (f64.const -1.353_210_371_367_243_4e-252)
 )
 (assert_return
   (invoke "f64.no_fold_mul_div"
-    (f64.const 0x1.f894d1ee6b3a4p+384)
-    (f64.const 0x1.8c2606d03d58ap+585)
+    (f64.const 7.766_217_431_318_084_5e+115)
+    (f64.const 1.959_591_556_069_395_3e+176)
   )
-  (f64.const 0x1.f894d1ee6b3a5p+384)
+  (f64.const 7.766_217_431_318_085_4e+115)
 )
 (assert_return
   (invoke "f64.no_fold_mul_div"
-    (f64.const -0x1.a022260acc993p+238)
-    (f64.const -0x1.5fbc128fc8e3cp-552)
+    (f64.const -7.180_117_811_902_948_5e+71)
+    (f64.const -9.320_036_042_623_635_9e-167)
   )
-  (f64.const -0x1.a022260acc992p+238)
+  (f64.const -7.180_117_811_902_947_5e+71)
 )
 (assert_return
   (invoke "f64.no_fold_mul_div"
-    (f64.const 0x1.9d4b8ed174f54p-166)
-    (f64.const 0x1.ee3d467aeeac6p-906)
+    (f64.const 1.726_001_072_469_306_3e-50)
+    (f64.const 3.568_792_428_129_926e-273)
   )
-  (f64.const 0x1.8dcc95a053b2bp-166)
+  (f64.const 1.661_286_799_244_215_9e-50)
 )
 (assert_return
   (invoke "f64.no_fold_mul_div"
-    (f64.const -0x1.e95ea897cdcd4p+660)
-    (f64.const -0x1.854d5df085f2ep-327)
+    (f64.const -9.145_223_045_828_962_1e+198)
+    (f64.const -5.562_094_034_342_844_7e-99)
   )
-  (f64.const -0x1.e95ea897cdcd5p+660)
+  (f64.const -9.145_223_045_828_963_2e+198)
 )
 (module binary
   "\00\61\73\6d\01\00\00\00\01\8d\80\80\80\00\02\60"
@@ -1634,73 +1604,73 @@
 )
 (assert_return
   (invoke "f32.no_fold_div_mul"
-    (f32.const -0x1.dc6364p+38)
-    (f32.const 0x1.d630ecp+29)
+    (f32.const -511_517_982_720)
+    (f32.const 986_062_208)
   )
-  (f32.const -0x1.dc6362p+38)
+  (f32.const -511_517_949_952)
 )
 (assert_return
   (invoke "f32.no_fold_div_mul"
-    (f32.const -0x1.1f9836p-52)
-    (f32.const -0x1.16c4e4p-18)
+    (f32.const -2.494_485_295_186_516_8e-16)
+    (f32.const -4.153_983_354_626_689_1e-06)
   )
-  (f32.const -0x1.1f9838p-52)
+  (f32.const -2.494_485_559_884_312_8e-16)
 )
 (assert_return
   (invoke "f32.no_fold_div_mul"
-    (f32.const 0x1.c5972cp-126)
-    (f32.const -0x1.d6659ep+7)
+    (f32.const 2.082_785_500_506_969_5e-38)
+    (f32.const -235.198_471_069_335_94)
   )
-  (f32.const 0x1.c5980ep-126)
+  (f32.const 2.082_801_335_179_616_3e-38)
 )
 (assert_return
   (invoke "f32.no_fold_div_mul"
-    (f32.const -0x1.2e3a9ep-74)
-    (f32.const -0x1.353994p+59)
+    (f32.const -6.249_948_683_472_857_5e-23)
+    (f32.const -6.963_126_049_722_859_5e+17)
   )
-  (f32.const -0x1.2e3a4p-74)
+  (f32.const -6.249_919_022_302_821_2e-23)
 )
 (assert_return
   (invoke "f32.no_fold_div_mul"
-    (f32.const 0x1.d96b82p-98)
-    (f32.const 0x1.95d908p+27)
+    (f32.const 5.835_351_440_532_773_3e-30)
+    (f32.const 212_781_120)
   )
-  (f32.const 0x1.d96b84p-98)
+  (f32.const 5.835_351_816_690_965_6e-30)
 )
 (assert_return
   (invoke "f64.no_fold_div_mul"
-    (f64.const 0x1.d01f913a52481p-876)
-    (f64.const -0x1.2cd0668b28344p+184)
+    (f64.const 3.598_464_425_993_536_2e-264)
+    (f64.const -2.881_226_329_803_331_8e+55)
   )
-  (f64.const 0x1.d020daf71cdcp-876)
+  (f64.const 3.598_503_435_656_548_5e-264)
 )
 (assert_return
   (invoke "f64.no_fold_div_mul"
-    (f64.const -0x1.81cb7d400918dp-714)
-    (f64.const 0x1.7caa643586d6ep-53)
+    (f64.const -1.748_636_704_747_944_7e-215)
+    (f64.const 1.650_873_845_479_863_6e-16)
   )
-  (f64.const -0x1.81cb7d400918ep-714)
+  (f64.const -1.748_636_704_747_945e-215)
 )
 (assert_return
   (invoke "f64.no_fold_div_mul"
-    (f64.const -0x1.66904c97b5c8ep-145)
-    (f64.const 0x1.5c3481592ad4cp+428)
+    (f64.const -3.140_341_989_542_684_1e-44)
+    (f64.const 9.428_298_090_819_195_5e+128)
   )
-  (f64.const -0x1.66904c97b5c8dp-145)
+  (f64.const -3.140_341_989_542_683_6e-44)
 )
 (assert_return
   (invoke "f64.no_fold_div_mul"
-    (f64.const -0x1.e75859d2f0765p-278)
-    (f64.const -0x1.5f19b6ab497f9p+283)
+    (f64.const -3.919_745_428_533_519e-84)
+    (f64.const -2.131_474_717_965_470_5e+85)
   )
-  (f64.const -0x1.e75859d2f0764p-278)
+  (f64.const -3.919_745_428_533_518_5e-84)
 )
 (assert_return
   (invoke "f64.no_fold_div_mul"
-    (f64.const -0x1.515fe9c3b5f5p+620)
-    (f64.const 0x1.36be869c99f7ap+989)
+    (f64.const -5.734_160_003_788_981_7e+186)
+    (f64.const 6.350_805_843_612_228_8e+297)
   )
-  (f64.const -0x1.515fe9c3b5f4fp+620)
+  (f64.const -5.734_160_003_788_980_7e+186)
 )
 (module binary
   "\00\61\73\6d\01\00\00\00\01\8b\80\80\80\00\02\60"
@@ -1715,12 +1685,12 @@
   "\a2\0b"
 )
 (assert_return
-  (invoke "f32.no_fold_div2_mul2" (f32.const 0x1.fffffep-126))
-  (f32.const 0x1p-125)
+  (invoke "f32.no_fold_div2_mul2" (f32.const 2.350_988_561_514_728_6e-38))
+  (f32.const 2.350_988_701_644_575e-38)
 )
 (assert_return
-  (invoke "f64.no_fold_div2_mul2" (f64.const 0x1.fffffffffffffp-1022))
-  (f64.const 0x1p-1021)
+  (invoke "f64.no_fold_div2_mul2" (f64.const 4.450_147_717_014_402_3e-308))
+  (f64.const 4.450_147_717_014_402_8e-308)
 )
 (module binary
   "\00\61\73\6d\01\00\00\00\01\86\80\80\80\00\01\60"
@@ -1730,24 +1700,24 @@
   "\80\00\01\86\80\80\80\00\00\20\00\b6\bb\0b"
 )
 (assert_return
-  (invoke "no_fold_demote_promote" (f64.const -0x1.dece272390f5dp-133))
-  (f64.const -0x1.decep-133)
+  (invoke "no_fold_demote_promote" (f64.const -1.717_629_722_056_948_1e-40))
+  (f64.const -1.717_627_579_661_501_3e-40)
 )
 (assert_return
-  (invoke "no_fold_demote_promote" (f64.const -0x1.19e6c79938a6fp-85))
-  (f64.const -0x1.19e6c8p-85)
+  (invoke "no_fold_demote_promote" (f64.const -2.846_477_557_330_405_5e-26))
+  (f64.const -2.846_477_619_188_087_1e-26)
 )
 (assert_return
-  (invoke "no_fold_demote_promote" (f64.const 0x1.49b297ec44dc1p+107))
-  (f64.const 0x1.49b298p+107)
+  (invoke "no_fold_demote_promote" (f64.const 2.089_706_996_999_092_3e+32))
+  (f64.const 2.089_707_004_453_259_8e+32)
 )
 (assert_return
-  (invoke "no_fold_demote_promote" (f64.const -0x1.74f5bd865163p-88))
-  (f64.const -0x1.74f5bep-88)
+  (invoke "no_fold_demote_promote" (f64.const -4.707_416_041_612_177_5e-27))
+  (f64.const -4.707_416_133_155_602_4e-27)
 )
 (assert_return
-  (invoke "no_fold_demote_promote" (f64.const 0x1.26d675662367ep+104))
-  (f64.const 0x1.26d676p+104)
+  (invoke "no_fold_demote_promote" (f64.const 2.335_945_149_795_088e+31))
+  (f64.const 2.335_945_222_454_219_8e+31)
 )
 (module binary
   "\00\61\73\6d\01\00\00\00\01\86\80\80\80\00\01\60"
@@ -1759,45 +1729,39 @@
 (assert_return_arithmetic_nan
   (invoke "no_fold_promote_demote" (f32.const nan:0x200000))
 )
+(assert_return (invoke "no_fold_promote_demote" (f32.const 0)) (f32.const 0))
+(assert_return (invoke "no_fold_promote_demote" (f32.const -0)) (f32.const -0))
 (assert_return
-  (invoke "no_fold_promote_demote" (f32.const 0x0p+0))
-  (f32.const 0x0p+0)
+  (invoke "no_fold_promote_demote" (f32.const 1.401_298_464_324_817_1e-45))
+  (f32.const 1.401_298_464_324_817_1e-45)
 )
 (assert_return
-  (invoke "no_fold_promote_demote" (f32.const -0x0p+0))
-  (f32.const -0x0p+0)
+  (invoke "no_fold_promote_demote" (f32.const -1.401_298_464_324_817_1e-45))
+  (f32.const -1.401_298_464_324_817_1e-45)
 )
 (assert_return
-  (invoke "no_fold_promote_demote" (f32.const 0x1p-149))
-  (f32.const 0x1p-149)
+  (invoke "no_fold_promote_demote" (f32.const 1.175_494_210_692_441_1e-38))
+  (f32.const 1.175_494_210_692_441_1e-38)
 )
 (assert_return
-  (invoke "no_fold_promote_demote" (f32.const -0x1p-149))
-  (f32.const -0x1p-149)
+  (invoke "no_fold_promote_demote" (f32.const -1.175_494_210_692_441_1e-38))
+  (f32.const -1.175_494_210_692_441_1e-38)
 )
 (assert_return
-  (invoke "no_fold_promote_demote" (f32.const 0x1.fffffcp-127))
-  (f32.const 0x1.fffffcp-127)
+  (invoke "no_fold_promote_demote" (f32.const 1.175_494_350_822_287_5e-38))
+  (f32.const 1.175_494_350_822_287_5e-38)
 )
 (assert_return
-  (invoke "no_fold_promote_demote" (f32.const -0x1.fffffcp-127))
-  (f32.const -0x1.fffffcp-127)
+  (invoke "no_fold_promote_demote" (f32.const -1.175_494_350_822_287_5e-38))
+  (f32.const -1.175_494_350_822_287_5e-38)
 )
 (assert_return
-  (invoke "no_fold_promote_demote" (f32.const 0x1p-126))
-  (f32.const 0x1p-126)
+  (invoke "no_fold_promote_demote" (f32.const 3.402_823_466_385_288_6e+38))
+  (f32.const 3.402_823_466_385_288_6e+38)
 )
 (assert_return
-  (invoke "no_fold_promote_demote" (f32.const -0x1p-126))
-  (f32.const -0x1p-126)
-)
-(assert_return
-  (invoke "no_fold_promote_demote" (f32.const 0x1.fffffep+127))
-  (f32.const 0x1.fffffep+127)
-)
-(assert_return
-  (invoke "no_fold_promote_demote" (f32.const -0x1.fffffep+127))
-  (f32.const -0x1.fffffep+127)
+  (invoke "no_fold_promote_demote" (f32.const -3.402_823_466_385_288_6e+38))
+  (f32.const -3.402_823_466_385_288_6e+38)
 )
 (assert_return
   (invoke "no_fold_promote_demote" (f32.const inf))
@@ -1820,73 +1784,73 @@
 )
 (assert_return
   (invoke "no_demote_mixed_add"
-    (f64.const 0x1.f51a9d04854f9p-95)
-    (f32.const 0x1.3f4e9cp-119)
+    (f64.const 4.941_266_527_909_197_2e-29)
+    (f32.const 1.876_718_272_300_497_2e-36)
   )
-  (f32.const 0x1.f51a9ep-95)
+  (f32.const 4.941_266_675_715_418_8e-29)
 )
 (assert_return
   (invoke "no_demote_mixed_add"
-    (f64.const 0x1.065b3d81ad8dp+37)
-    (f32.const 0x1.758cd8p+38)
+    (f64.const 140_851_523_637.693_85)
+    (f32.const 401_096_441_856)
   )
-  (f32.const 0x1.f8ba76p+38)
+  (f32.const 541_947_953_152)
 )
 (assert_return
   (invoke "no_demote_mixed_add"
-    (f64.const 0x1.626c80963bd17p-119)
-    (f32.const -0x1.9bbf86p-121)
+    (f64.const 2.083_116_091_419_285_2e-36)
+    (f32.const -6.050_095_133_542_437_4e-37)
   )
-  (f32.const 0x1.f6f93ep-120)
+  (f32.const 1.478_106_570_276_041_5e-36)
 )
 (assert_return
   (invoke "no_demote_mixed_add"
-    (f64.const -0x1.0d5110e3385bbp-20)
-    (f32.const 0x1.096f4ap-29)
+    (f64.const -1.003_282_755_367_462_6e-06)
+    (f32.const 1.931_291_793_155_764_9e-09)
   )
-  (f32.const -0x1.0ccc5ap-20)
+  (f32.const -1.001_351_506_602_077_3e-06)
 )
 (assert_return
   (invoke "no_demote_mixed_add"
-    (f64.const -0x1.73852db4e5075p-20)
-    (f32.const -0x1.24e474p-41)
+    (f64.const -1.384_020_703_575_271_1e-06)
+    (f32.const -5.202_814_091_012_641_9e-13)
   )
-  (f32.const -0x1.738536p-20)
+  (f32.const -1.384_021_174_999_361_4e-06)
 )
 (assert_return
   (invoke "no_demote_mixed_add_commuted"
-    (f32.const 0x1.3f4e9cp-119)
-    (f64.const 0x1.f51a9d04854f9p-95)
+    (f32.const 1.876_718_272_300_497_2e-36)
+    (f64.const 4.941_266_527_909_197_2e-29)
   )
-  (f32.const 0x1.f51a9ep-95)
+  (f32.const 4.941_266_675_715_418_8e-29)
 )
 (assert_return
   (invoke "no_demote_mixed_add_commuted"
-    (f32.const 0x1.758cd8p+38)
-    (f64.const 0x1.065b3d81ad8dp+37)
+    (f32.const 401_096_441_856)
+    (f64.const 140_851_523_637.693_85)
   )
-  (f32.const 0x1.f8ba76p+38)
+  (f32.const 541_947_953_152)
 )
 (assert_return
   (invoke "no_demote_mixed_add_commuted"
-    (f32.const -0x1.9bbf86p-121)
-    (f64.const 0x1.626c80963bd17p-119)
+    (f32.const -6.050_095_133_542_437_4e-37)
+    (f64.const 2.083_116_091_419_285_2e-36)
   )
-  (f32.const 0x1.f6f93ep-120)
+  (f32.const 1.478_106_570_276_041_5e-36)
 )
 (assert_return
   (invoke "no_demote_mixed_add_commuted"
-    (f32.const 0x1.096f4ap-29)
-    (f64.const -0x1.0d5110e3385bbp-20)
+    (f32.const 1.931_291_793_155_764_9e-09)
+    (f64.const -1.003_282_755_367_462_6e-06)
   )
-  (f32.const -0x1.0ccc5ap-20)
+  (f32.const -1.001_351_506_602_077_3e-06)
 )
 (assert_return
   (invoke "no_demote_mixed_add_commuted"
-    (f32.const -0x1.24e474p-41)
-    (f64.const -0x1.73852db4e5075p-20)
+    (f32.const -5.202_814_091_012_641_9e-13)
+    (f64.const -1.384_020_703_575_271_1e-06)
   )
-  (f32.const -0x1.738536p-20)
+  (f32.const -1.384_021_174_999_361_4e-06)
 )
 (module binary
   "\00\61\73\6d\01\00\00\00\01\87\80\80\80\00\01\60"
@@ -1897,38 +1861,38 @@
 )
 (assert_return
   (invoke "no_demote_mixed_sub"
-    (f64.const 0x1.a0a183220e9b1p+82)
-    (f32.const 0x1.c5acf8p+61)
+    (f64.const 7.869_935_327_202_667_9e+24)
+    (f32.const 4.086_347_059_257_409_5e+18)
   )
-  (f32.const 0x1.a0a174p+82)
+  (f32.const 7.869_930_965_402_192_2e+24)
 )
 (assert_return
   (invoke "no_demote_mixed_sub"
-    (f64.const -0x1.6e2c5ac39f63ep+30)
-    (f32.const 0x1.d48ca4p+17)
+    (f64.const -1_535_841_968.905_654_4)
+    (f32.const 239_897.281_25)
   )
-  (f32.const -0x1.6e3bp+30)
+  (f32.const -1_536_081_920)
 )
 (assert_return
   (invoke "no_demote_mixed_sub"
-    (f64.const -0x1.98c74350dde6ap+6)
-    (f32.const 0x1.9d69bcp-12)
+    (f64.const -102.194_592_727_226_02)
+    (f32.const 0.000_394_261_383_917_182_68)
   )
-  (f32.const -0x1.98c7aap+6)
+  (f32.const -102.194_984_436_035_16)
 )
 (assert_return
   (invoke "no_demote_mixed_sub"
-    (f64.const 0x1.0459f34091dbfp-54)
-    (f32.const 0x1.61ad08p-71)
+    (f64.const 5.645_470_375_565_188_2e-17)
+    (f32.const 5.851_077_007_074_829_8e-22)
   )
-  (f32.const 0x1.045942p-54)
+  (f32.const 5.645_411_727_723_357_7e-17)
 )
 (assert_return
   (invoke "no_demote_mixed_sub"
-    (f64.const 0x1.a7498dca3fdb7p+14)
-    (f32.const 0x1.ed21c8p+15)
+    (f64.const 27_090.388_466_832_894)
+    (f32.const 63_120.890_625)
   )
-  (f32.const -0x1.197d02p+15)
+  (f32.const -36_030.503_906_25)
 )
 (module binary
   "\00\61\73\6d\01\00\00\00\01\8b\80\80\80\00\02\60"
@@ -1984,132 +1948,132 @@
   "\b0\ba\0b\86\80\80\80\00\00\20\00\b1\ba\0b"
 )
 (assert_return
-  (invoke "f32.i32.no_fold_trunc_s_convert_s" (f32.const 0x1.8p+0))
-  (f32.const 0x1p+0)
+  (invoke "f32.i32.no_fold_trunc_s_convert_s" (f32.const 1.5))
+  (f32.const 1)
 )
 (assert_return
-  (invoke "f32.i32.no_fold_trunc_s_convert_s" (f32.const -0x1.8p+0))
-  (f32.const -0x1p+0)
+  (invoke "f32.i32.no_fold_trunc_s_convert_s" (f32.const -1.5))
+  (f32.const -1)
 )
 (assert_return
-  (invoke "f32.i32.no_fold_trunc_u_convert_s" (f32.const 0x1.8p+0))
-  (f32.const 0x1p+0)
+  (invoke "f32.i32.no_fold_trunc_u_convert_s" (f32.const 1.5))
+  (f32.const 1)
 )
 (assert_return
-  (invoke "f32.i32.no_fold_trunc_u_convert_s" (f32.const -0x1p-1))
-  (f32.const 0x0p+0)
+  (invoke "f32.i32.no_fold_trunc_u_convert_s" (f32.const -0.5))
+  (f32.const 0)
 )
 (assert_return
-  (invoke "f32.i32.no_fold_trunc_s_convert_u" (f32.const 0x1.8p+0))
-  (f32.const 0x1p+0)
+  (invoke "f32.i32.no_fold_trunc_s_convert_u" (f32.const 1.5))
+  (f32.const 1)
 )
 (assert_return
-  (invoke "f32.i32.no_fold_trunc_s_convert_u" (f32.const -0x1.8p+0))
-  (f32.const 0x1p+32)
+  (invoke "f32.i32.no_fold_trunc_s_convert_u" (f32.const -1.5))
+  (f32.const 4_294_967_296)
 )
 (assert_return
-  (invoke "f32.i32.no_fold_trunc_u_convert_u" (f32.const 0x1.8p+0))
-  (f32.const 0x1p+0)
+  (invoke "f32.i32.no_fold_trunc_u_convert_u" (f32.const 1.5))
+  (f32.const 1)
 )
 (assert_return
-  (invoke "f32.i32.no_fold_trunc_u_convert_u" (f32.const -0x1p-1))
-  (f32.const 0x0p+0)
+  (invoke "f32.i32.no_fold_trunc_u_convert_u" (f32.const -0.5))
+  (f32.const 0)
 )
 (assert_return
-  (invoke "f64.i32.no_fold_trunc_s_convert_s" (f64.const 0x1.8p+0))
-  (f64.const 0x1p+0)
+  (invoke "f64.i32.no_fold_trunc_s_convert_s" (f64.const 1.5))
+  (f64.const 1)
 )
 (assert_return
-  (invoke "f64.i32.no_fold_trunc_s_convert_s" (f64.const -0x1.8p+0))
-  (f64.const -0x1p+0)
+  (invoke "f64.i32.no_fold_trunc_s_convert_s" (f64.const -1.5))
+  (f64.const -1)
 )
 (assert_return
-  (invoke "f64.i32.no_fold_trunc_u_convert_s" (f64.const 0x1.8p+0))
-  (f64.const 0x1p+0)
+  (invoke "f64.i32.no_fold_trunc_u_convert_s" (f64.const 1.5))
+  (f64.const 1)
 )
 (assert_return
-  (invoke "f64.i32.no_fold_trunc_u_convert_s" (f64.const -0x1p-1))
-  (f64.const 0x0p+0)
+  (invoke "f64.i32.no_fold_trunc_u_convert_s" (f64.const -0.5))
+  (f64.const 0)
 )
 (assert_return
-  (invoke "f64.i32.no_fold_trunc_s_convert_u" (f64.const 0x1.8p+0))
-  (f64.const 0x1p+0)
+  (invoke "f64.i32.no_fold_trunc_s_convert_u" (f64.const 1.5))
+  (f64.const 1)
 )
 (assert_return
-  (invoke "f64.i32.no_fold_trunc_s_convert_u" (f64.const -0x1.8p+0))
-  (f64.const 0x1.fffffffep+31)
+  (invoke "f64.i32.no_fold_trunc_s_convert_u" (f64.const -1.5))
+  (f64.const 4_294_967_295)
 )
 (assert_return
-  (invoke "f64.i32.no_fold_trunc_u_convert_u" (f64.const 0x1.8p+0))
-  (f64.const 0x1p+0)
+  (invoke "f64.i32.no_fold_trunc_u_convert_u" (f64.const 1.5))
+  (f64.const 1)
 )
 (assert_return
-  (invoke "f64.i32.no_fold_trunc_u_convert_u" (f64.const -0x1p-1))
-  (f64.const 0x0p+0)
+  (invoke "f64.i32.no_fold_trunc_u_convert_u" (f64.const -0.5))
+  (f64.const 0)
 )
 (assert_return
-  (invoke "f32.i64.no_fold_trunc_s_convert_s" (f32.const 0x1.8p+0))
-  (f32.const 0x1p+0)
+  (invoke "f32.i64.no_fold_trunc_s_convert_s" (f32.const 1.5))
+  (f32.const 1)
 )
 (assert_return
-  (invoke "f32.i64.no_fold_trunc_s_convert_s" (f32.const -0x1.8p+0))
-  (f32.const -0x1p+0)
+  (invoke "f32.i64.no_fold_trunc_s_convert_s" (f32.const -1.5))
+  (f32.const -1)
 )
 (assert_return
-  (invoke "f32.i64.no_fold_trunc_u_convert_s" (f32.const 0x1.8p+0))
-  (f32.const 0x1p+0)
+  (invoke "f32.i64.no_fold_trunc_u_convert_s" (f32.const 1.5))
+  (f32.const 1)
 )
 (assert_return
-  (invoke "f32.i64.no_fold_trunc_u_convert_s" (f32.const -0x1p-1))
-  (f32.const 0x0p+0)
+  (invoke "f32.i64.no_fold_trunc_u_convert_s" (f32.const -0.5))
+  (f32.const 0)
 )
 (assert_return
-  (invoke "f32.i64.no_fold_trunc_s_convert_u" (f32.const 0x1.8p+0))
-  (f32.const 0x1p+0)
+  (invoke "f32.i64.no_fold_trunc_s_convert_u" (f32.const 1.5))
+  (f32.const 1)
 )
 (assert_return
-  (invoke "f32.i64.no_fold_trunc_s_convert_u" (f32.const -0x1.8p+0))
-  (f32.const 0x1p+64)
+  (invoke "f32.i64.no_fold_trunc_s_convert_u" (f32.const -1.5))
+  (f32.const 1.844_674_407_370_955_2e+19)
 )
 (assert_return
-  (invoke "f32.i64.no_fold_trunc_u_convert_u" (f32.const 0x1.8p+0))
-  (f32.const 0x1p+0)
+  (invoke "f32.i64.no_fold_trunc_u_convert_u" (f32.const 1.5))
+  (f32.const 1)
 )
 (assert_return
-  (invoke "f32.i64.no_fold_trunc_u_convert_u" (f32.const -0x1p-1))
-  (f32.const 0x0p+0)
+  (invoke "f32.i64.no_fold_trunc_u_convert_u" (f32.const -0.5))
+  (f32.const 0)
 )
 (assert_return
-  (invoke "f64.i64.no_fold_trunc_s_convert_s" (f64.const 0x1.8p+0))
-  (f64.const 0x1p+0)
+  (invoke "f64.i64.no_fold_trunc_s_convert_s" (f64.const 1.5))
+  (f64.const 1)
 )
 (assert_return
-  (invoke "f64.i64.no_fold_trunc_s_convert_s" (f64.const -0x1.8p+0))
-  (f64.const -0x1p+0)
+  (invoke "f64.i64.no_fold_trunc_s_convert_s" (f64.const -1.5))
+  (f64.const -1)
 )
 (assert_return
-  (invoke "f64.i64.no_fold_trunc_u_convert_s" (f64.const 0x1.8p+0))
-  (f64.const 0x1p+0)
+  (invoke "f64.i64.no_fold_trunc_u_convert_s" (f64.const 1.5))
+  (f64.const 1)
 )
 (assert_return
-  (invoke "f64.i64.no_fold_trunc_u_convert_s" (f64.const -0x1p-1))
-  (f64.const 0x0p+0)
+  (invoke "f64.i64.no_fold_trunc_u_convert_s" (f64.const -0.5))
+  (f64.const 0)
 )
 (assert_return
-  (invoke "f64.i64.no_fold_trunc_s_convert_u" (f64.const 0x1.8p+0))
-  (f64.const 0x1p+0)
+  (invoke "f64.i64.no_fold_trunc_s_convert_u" (f64.const 1.5))
+  (f64.const 1)
 )
 (assert_return
-  (invoke "f64.i64.no_fold_trunc_s_convert_u" (f64.const -0x1.8p+0))
-  (f64.const 0x1p+64)
+  (invoke "f64.i64.no_fold_trunc_s_convert_u" (f64.const -1.5))
+  (f64.const 1.844_674_407_370_955_2e+19)
 )
 (assert_return
-  (invoke "f64.i64.no_fold_trunc_u_convert_u" (f64.const 0x1.8p+0))
-  (f64.const 0x1p+0)
+  (invoke "f64.i64.no_fold_trunc_u_convert_u" (f64.const 1.5))
+  (f64.const 1)
 )
 (assert_return
-  (invoke "f64.i64.no_fold_trunc_u_convert_u" (f64.const -0x1p-1))
-  (f64.const 0x0p+0)
+  (invoke "f64.i64.no_fold_trunc_u_convert_u" (f64.const -0.5))
+  (f64.const 0)
 )
 (module binary
   "\00\61\73\6d\01\00\00\00\01\8b\80\80\80\00\02\60"
@@ -2123,19 +2087,43 @@
   "\20\00\49\0d\00\0b\0b\0b\87\80\80\80\00\00\20\00"
   "\2a\02\00\0b"
 )
-(invoke "init" (i32.const 0) (f32.const 0x1.e33334p+3))
-(invoke "init" (i32.const 4) (f32.const 0x1.e66666p+3))
-(invoke "init" (i32.const 8) (f32.const 0x1.e9999ap+3))
-(invoke "init" (i32.const 12) (f32.const 0x1.ecccccp+3))
-(assert_return (invoke "check" (i32.const 0)) (f32.const 0x1.e33334p+3))
-(assert_return (invoke "check" (i32.const 4)) (f32.const 0x1.e66666p+3))
-(assert_return (invoke "check" (i32.const 8)) (f32.const 0x1.e9999ap+3))
-(assert_return (invoke "check" (i32.const 12)) (f32.const 0x1.ecccccp+3))
-(invoke "run" (i32.const 16) (f32.const 0x1.8p+1))
-(assert_return (invoke "check" (i32.const 0)) (f32.const 0x1.422222p+2))
-(assert_return (invoke "check" (i32.const 4)) (f32.const 0x1.444444p+2))
-(assert_return (invoke "check" (i32.const 8)) (f32.const 0x1.466666p+2))
-(assert_return (invoke "check" (i32.const 12)) (f32.const 0x1.488888p+2))
+(invoke "init" (i32.const 0) (f32.const 15.100_000_381_469_727))
+(invoke "init" (i32.const 4) (f32.const 15.199_999_809_265_137))
+(invoke "init" (i32.const 8) (f32.const 15.300_000_190_734_863))
+(invoke "init" (i32.const 12) (f32.const 15.399_999_618_530_273))
+(assert_return
+  (invoke "check" (i32.const 0))
+  (f32.const 15.100_000_381_469_727)
+)
+(assert_return
+  (invoke "check" (i32.const 4))
+  (f32.const 15.199_999_809_265_137)
+)
+(assert_return
+  (invoke "check" (i32.const 8))
+  (f32.const 15.300_000_190_734_863)
+)
+(assert_return
+  (invoke "check" (i32.const 12))
+  (f32.const 15.399_999_618_530_273)
+)
+(invoke "run" (i32.const 16) (f32.const 3))
+(assert_return
+  (invoke "check" (i32.const 0))
+  (f32.const 5.033_333_301_544_189_5)
+)
+(assert_return
+  (invoke "check" (i32.const 4))
+  (f32.const 5.066_666_603_088_378_9)
+)
+(assert_return
+  (invoke "check" (i32.const 8))
+  (f32.const 5.099_999_904_632_568_4)
+)
+(assert_return
+  (invoke "check" (i32.const 12))
+  (f32.const 5.133_333_206_176_757_8)
+)
 (module binary
   "\00\61\73\6d\01\00\00\00\01\8b\80\80\80\00\02\60"
   "\02\7f\7c\00\60\01\7f\01\7c\03\84\80\80\80\00\03"
@@ -2148,19 +2136,37 @@
   "\20\00\49\0d\00\0b\0b\0b\87\80\80\80\00\00\20\00"
   "\2b\03\00\0b"
 )
-(invoke "init" (i32.const 0) (f64.const 0x1.e333333333333p+3))
-(invoke "init" (i32.const 8) (f64.const 0x1.e666666666666p+3))
-(invoke "init" (i32.const 16) (f64.const 0x1.e99999999999ap+3))
-(invoke "init" (i32.const 24) (f64.const 0x1.ecccccccccccdp+3))
-(assert_return (invoke "check" (i32.const 0)) (f64.const 0x1.e333333333333p+3))
-(assert_return (invoke "check" (i32.const 8)) (f64.const 0x1.e666666666666p+3))
-(assert_return (invoke "check" (i32.const 16)) (f64.const 0x1.e99999999999ap+3))
-(assert_return (invoke "check" (i32.const 24)) (f64.const 0x1.ecccccccccccdp+3))
-(invoke "run" (i32.const 32) (f64.const 0x1.8p+1))
-(assert_return (invoke "check" (i32.const 0)) (f64.const 0x1.4222222222222p+2))
-(assert_return (invoke "check" (i32.const 8)) (f64.const 0x1.4444444444444p+2))
-(assert_return (invoke "check" (i32.const 16)) (f64.const 0x1.4666666666667p+2))
-(assert_return (invoke "check" (i32.const 24)) (f64.const 0x1.4888888888889p+2))
+(invoke "init" (i32.const 0) (f64.const 15.1))
+(invoke "init" (i32.const 8) (f64.const 15.199_999_999_999_999))
+(invoke "init" (i32.const 16) (f64.const 15.300_000_000_000_001))
+(invoke "init" (i32.const 24) (f64.const 15.4))
+(assert_return (invoke "check" (i32.const 0)) (f64.const 15.1))
+(assert_return
+  (invoke "check" (i32.const 8))
+  (f64.const 15.199_999_999_999_999)
+)
+(assert_return
+  (invoke "check" (i32.const 16))
+  (f64.const 15.300_000_000_000_001)
+)
+(assert_return (invoke "check" (i32.const 24)) (f64.const 15.4))
+(invoke "run" (i32.const 32) (f64.const 3))
+(assert_return
+  (invoke "check" (i32.const 0))
+  (f64.const 5.033_333_333_333_333_2)
+)
+(assert_return
+  (invoke "check" (i32.const 8))
+  (f64.const 5.066_666_666_666_666_4)
+)
+(assert_return
+  (invoke "check" (i32.const 16))
+  (f64.const 5.100_000_000_000_000_5)
+)
+(assert_return
+  (invoke "check" (i32.const 24))
+  (f64.const 5.133_333_333_333_333_7)
+)
 (module binary
   "\00\61\73\6d\01\00\00\00\01\8d\80\80\80\00\02\60"
   "\02\7d\7d\01\7f\60\02\7c\7c\01\7f\03\89\80\80\80"
@@ -2178,132 +2184,60 @@
   "\00\20\01\64\45\0b\88\80\80\80\00\00\20\00\20\01"
   "\65\45\0b\88\80\80\80\00\00\20\00\20\01\63\45\0b"
 )
+(assert_return (invoke "f32.ult" (f32.const 3) (f32.const 2)) (i32.const 0))
+(assert_return (invoke "f32.ult" (f32.const 2) (f32.const 2)) (i32.const 0))
+(assert_return (invoke "f32.ult" (f32.const 2) (f32.const 3)) (i32.const 1))
 (assert_return
-  (invoke "f32.ult" (f32.const 0x1.8p+1) (f32.const 0x1p+1))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "f32.ult" (f32.const 0x1p+1) (f32.const 0x1p+1))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "f32.ult" (f32.const 0x1p+1) (f32.const 0x1.8p+1))
+  (invoke "f32.ult" (f32.const 2) (f32.const nan:0x400000))
   (i32.const 1)
 )
+(assert_return (invoke "f32.ule" (f32.const 3) (f32.const 2)) (i32.const 0))
+(assert_return (invoke "f32.ule" (f32.const 2) (f32.const 2)) (i32.const 1))
+(assert_return (invoke "f32.ule" (f32.const 2) (f32.const 3)) (i32.const 1))
 (assert_return
-  (invoke "f32.ult" (f32.const 0x1p+1) (f32.const nan:0x400000))
+  (invoke "f32.ule" (f32.const 2) (f32.const nan:0x400000))
   (i32.const 1)
 )
+(assert_return (invoke "f32.ugt" (f32.const 3) (f32.const 2)) (i32.const 1))
+(assert_return (invoke "f32.ugt" (f32.const 2) (f32.const 2)) (i32.const 0))
+(assert_return (invoke "f32.ugt" (f32.const 2) (f32.const 3)) (i32.const 0))
 (assert_return
-  (invoke "f32.ule" (f32.const 0x1.8p+1) (f32.const 0x1p+1))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "f32.ule" (f32.const 0x1p+1) (f32.const 0x1p+1))
+  (invoke "f32.ugt" (f32.const 2) (f32.const nan:0x400000))
   (i32.const 1)
 )
+(assert_return (invoke "f32.uge" (f32.const 3) (f32.const 2)) (i32.const 1))
+(assert_return (invoke "f32.uge" (f32.const 2) (f32.const 2)) (i32.const 1))
+(assert_return (invoke "f32.uge" (f32.const 2) (f32.const 3)) (i32.const 0))
 (assert_return
-  (invoke "f32.ule" (f32.const 0x1p+1) (f32.const 0x1.8p+1))
+  (invoke "f32.uge" (f32.const 2) (f32.const nan:0x400000))
   (i32.const 1)
 )
+(assert_return (invoke "f64.ult" (f64.const 3) (f64.const 2)) (i32.const 0))
+(assert_return (invoke "f64.ult" (f64.const 2) (f64.const 2)) (i32.const 0))
+(assert_return (invoke "f64.ult" (f64.const 2) (f64.const 3)) (i32.const 1))
 (assert_return
-  (invoke "f32.ule" (f32.const 0x1p+1) (f32.const nan:0x400000))
+  (invoke "f64.ult" (f64.const 2) (f64.const nan:0x8000000000000))
   (i32.const 1)
 )
+(assert_return (invoke "f64.ule" (f64.const 3) (f64.const 2)) (i32.const 0))
+(assert_return (invoke "f64.ule" (f64.const 2) (f64.const 2)) (i32.const 1))
+(assert_return (invoke "f64.ule" (f64.const 2) (f64.const 3)) (i32.const 1))
 (assert_return
-  (invoke "f32.ugt" (f32.const 0x1.8p+1) (f32.const 0x1p+1))
+  (invoke "f64.ule" (f64.const 2) (f64.const nan:0x8000000000000))
   (i32.const 1)
 )
+(assert_return (invoke "f64.ugt" (f64.const 3) (f64.const 2)) (i32.const 1))
+(assert_return (invoke "f64.ugt" (f64.const 2) (f64.const 2)) (i32.const 0))
+(assert_return (invoke "f64.ugt" (f64.const 2) (f64.const 3)) (i32.const 0))
 (assert_return
-  (invoke "f32.ugt" (f32.const 0x1p+1) (f32.const 0x1p+1))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "f32.ugt" (f32.const 0x1p+1) (f32.const 0x1.8p+1))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "f32.ugt" (f32.const 0x1p+1) (f32.const nan:0x400000))
+  (invoke "f64.ugt" (f64.const 2) (f64.const nan:0x8000000000000))
   (i32.const 1)
 )
+(assert_return (invoke "f64.uge" (f64.const 3) (f64.const 2)) (i32.const 1))
+(assert_return (invoke "f64.uge" (f64.const 2) (f64.const 2)) (i32.const 1))
+(assert_return (invoke "f64.uge" (f64.const 2) (f64.const 3)) (i32.const 0))
 (assert_return
-  (invoke "f32.uge" (f32.const 0x1.8p+1) (f32.const 0x1p+1))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "f32.uge" (f32.const 0x1p+1) (f32.const 0x1p+1))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "f32.uge" (f32.const 0x1p+1) (f32.const 0x1.8p+1))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "f32.uge" (f32.const 0x1p+1) (f32.const nan:0x400000))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "f64.ult" (f64.const 0x1.8p+1) (f64.const 0x1p+1))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "f64.ult" (f64.const 0x1p+1) (f64.const 0x1p+1))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "f64.ult" (f64.const 0x1p+1) (f64.const 0x1.8p+1))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "f64.ult" (f64.const 0x1p+1) (f64.const nan:0x8000000000000))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "f64.ule" (f64.const 0x1.8p+1) (f64.const 0x1p+1))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "f64.ule" (f64.const 0x1p+1) (f64.const 0x1p+1))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "f64.ule" (f64.const 0x1p+1) (f64.const 0x1.8p+1))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "f64.ule" (f64.const 0x1p+1) (f64.const nan:0x8000000000000))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "f64.ugt" (f64.const 0x1.8p+1) (f64.const 0x1p+1))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "f64.ugt" (f64.const 0x1p+1) (f64.const 0x1p+1))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "f64.ugt" (f64.const 0x1p+1) (f64.const 0x1.8p+1))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "f64.ugt" (f64.const 0x1p+1) (f64.const nan:0x8000000000000))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "f64.uge" (f64.const 0x1.8p+1) (f64.const 0x1p+1))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "f64.uge" (f64.const 0x1p+1) (f64.const 0x1p+1))
-  (i32.const 1)
-)
-(assert_return
-  (invoke "f64.uge" (f64.const 0x1p+1) (f64.const 0x1.8p+1))
-  (i32.const 0)
-)
-(assert_return
-  (invoke "f64.uge" (f64.const 0x1p+1) (f64.const nan:0x8000000000000))
+  (invoke "f64.uge" (f64.const 2) (f64.const nan:0x8000000000000))
   (i32.const 1)
 )
 (module binary
@@ -2333,156 +2267,132 @@
   "\80\80\80\00\00\20\00\20\01\20\00\20\01\66\1b\0b"
 )
 (assert_return
-  (invoke "f32.no_fold_lt_select" (f32.const 0x0p+0) (f32.const nan:0x400000))
+  (invoke "f32.no_fold_lt_select" (f32.const 0) (f32.const nan:0x400000))
   (f32.const nan:0x400000)
 )
 (assert_return
-  (invoke "f32.no_fold_lt_select" (f32.const nan:0x400000) (f32.const 0x0p+0))
-  (f32.const 0x0p+0)
+  (invoke "f32.no_fold_lt_select" (f32.const nan:0x400000) (f32.const 0))
+  (f32.const 0)
 )
 (assert_return
-  (invoke "f32.no_fold_lt_select" (f32.const 0x0p+0) (f32.const -0x0p+0))
-  (f32.const -0x0p+0)
+  (invoke "f32.no_fold_lt_select" (f32.const 0) (f32.const -0))
+  (f32.const -0)
 )
 (assert_return
-  (invoke "f32.no_fold_lt_select" (f32.const -0x0p+0) (f32.const 0x0p+0))
-  (f32.const 0x0p+0)
+  (invoke "f32.no_fold_lt_select" (f32.const -0) (f32.const 0))
+  (f32.const 0)
 )
 (assert_return
-  (invoke "f32.no_fold_le_select" (f32.const 0x0p+0) (f32.const nan:0x400000))
+  (invoke "f32.no_fold_le_select" (f32.const 0) (f32.const nan:0x400000))
   (f32.const nan:0x400000)
 )
 (assert_return
-  (invoke "f32.no_fold_le_select" (f32.const nan:0x400000) (f32.const 0x0p+0))
-  (f32.const 0x0p+0)
+  (invoke "f32.no_fold_le_select" (f32.const nan:0x400000) (f32.const 0))
+  (f32.const 0)
 )
 (assert_return
-  (invoke "f32.no_fold_le_select" (f32.const 0x0p+0) (f32.const -0x0p+0))
-  (f32.const 0x0p+0)
+  (invoke "f32.no_fold_le_select" (f32.const 0) (f32.const -0))
+  (f32.const 0)
 )
 (assert_return
-  (invoke "f32.no_fold_le_select" (f32.const -0x0p+0) (f32.const 0x0p+0))
-  (f32.const -0x0p+0)
+  (invoke "f32.no_fold_le_select" (f32.const -0) (f32.const 0))
+  (f32.const -0)
 )
 (assert_return
-  (invoke "f32.no_fold_gt_select" (f32.const 0x0p+0) (f32.const nan:0x400000))
+  (invoke "f32.no_fold_gt_select" (f32.const 0) (f32.const nan:0x400000))
   (f32.const nan:0x400000)
 )
 (assert_return
-  (invoke "f32.no_fold_gt_select" (f32.const nan:0x400000) (f32.const 0x0p+0))
-  (f32.const 0x0p+0)
+  (invoke "f32.no_fold_gt_select" (f32.const nan:0x400000) (f32.const 0))
+  (f32.const 0)
 )
 (assert_return
-  (invoke "f32.no_fold_gt_select" (f32.const 0x0p+0) (f32.const -0x0p+0))
-  (f32.const -0x0p+0)
+  (invoke "f32.no_fold_gt_select" (f32.const 0) (f32.const -0))
+  (f32.const -0)
 )
 (assert_return
-  (invoke "f32.no_fold_gt_select" (f32.const -0x0p+0) (f32.const 0x0p+0))
-  (f32.const 0x0p+0)
+  (invoke "f32.no_fold_gt_select" (f32.const -0) (f32.const 0))
+  (f32.const 0)
 )
 (assert_return
-  (invoke "f32.no_fold_ge_select" (f32.const 0x0p+0) (f32.const nan:0x400000))
+  (invoke "f32.no_fold_ge_select" (f32.const 0) (f32.const nan:0x400000))
   (f32.const nan:0x400000)
 )
 (assert_return
-  (invoke "f32.no_fold_ge_select" (f32.const nan:0x400000) (f32.const 0x0p+0))
-  (f32.const 0x0p+0)
+  (invoke "f32.no_fold_ge_select" (f32.const nan:0x400000) (f32.const 0))
+  (f32.const 0)
 )
 (assert_return
-  (invoke "f32.no_fold_ge_select" (f32.const 0x0p+0) (f32.const -0x0p+0))
-  (f32.const 0x0p+0)
+  (invoke "f32.no_fold_ge_select" (f32.const 0) (f32.const -0))
+  (f32.const 0)
 )
 (assert_return
-  (invoke "f32.no_fold_ge_select" (f32.const -0x0p+0) (f32.const 0x0p+0))
-  (f32.const -0x0p+0)
+  (invoke "f32.no_fold_ge_select" (f32.const -0) (f32.const 0))
+  (f32.const -0)
 )
 (assert_return
-  (invoke "f64.no_fold_lt_select"
-    (f64.const 0x0p+0)
-    (f64.const nan:0x8000000000000)
-  )
+  (invoke "f64.no_fold_lt_select" (f64.const 0) (f64.const nan:0x8000000000000))
   (f64.const nan:0x8000000000000)
 )
 (assert_return
-  (invoke "f64.no_fold_lt_select"
-    (f64.const nan:0x8000000000000)
-    (f64.const 0x0p+0)
-  )
-  (f64.const 0x0p+0)
+  (invoke "f64.no_fold_lt_select" (f64.const nan:0x8000000000000) (f64.const 0))
+  (f64.const 0)
 )
 (assert_return
-  (invoke "f64.no_fold_lt_select" (f64.const 0x0p+0) (f64.const -0x0p+0))
-  (f64.const -0x0p+0)
+  (invoke "f64.no_fold_lt_select" (f64.const 0) (f64.const -0))
+  (f64.const -0)
 )
 (assert_return
-  (invoke "f64.no_fold_lt_select" (f64.const -0x0p+0) (f64.const 0x0p+0))
-  (f64.const 0x0p+0)
+  (invoke "f64.no_fold_lt_select" (f64.const -0) (f64.const 0))
+  (f64.const 0)
 )
 (assert_return
-  (invoke "f64.no_fold_le_select"
-    (f64.const 0x0p+0)
-    (f64.const nan:0x8000000000000)
-  )
+  (invoke "f64.no_fold_le_select" (f64.const 0) (f64.const nan:0x8000000000000))
   (f64.const nan:0x8000000000000)
 )
 (assert_return
-  (invoke "f64.no_fold_le_select"
-    (f64.const nan:0x8000000000000)
-    (f64.const 0x0p+0)
-  )
-  (f64.const 0x0p+0)
+  (invoke "f64.no_fold_le_select" (f64.const nan:0x8000000000000) (f64.const 0))
+  (f64.const 0)
 )
 (assert_return
-  (invoke "f64.no_fold_le_select" (f64.const 0x0p+0) (f64.const -0x0p+0))
-  (f64.const 0x0p+0)
+  (invoke "f64.no_fold_le_select" (f64.const 0) (f64.const -0))
+  (f64.const 0)
 )
 (assert_return
-  (invoke "f64.no_fold_le_select" (f64.const -0x0p+0) (f64.const 0x0p+0))
-  (f64.const -0x0p+0)
+  (invoke "f64.no_fold_le_select" (f64.const -0) (f64.const 0))
+  (f64.const -0)
 )
 (assert_return
-  (invoke "f64.no_fold_gt_select"
-    (f64.const 0x0p+0)
-    (f64.const nan:0x8000000000000)
-  )
+  (invoke "f64.no_fold_gt_select" (f64.const 0) (f64.const nan:0x8000000000000))
   (f64.const nan:0x8000000000000)
 )
 (assert_return
-  (invoke "f64.no_fold_gt_select"
-    (f64.const nan:0x8000000000000)
-    (f64.const 0x0p+0)
-  )
-  (f64.const 0x0p+0)
+  (invoke "f64.no_fold_gt_select" (f64.const nan:0x8000000000000) (f64.const 0))
+  (f64.const 0)
 )
 (assert_return
-  (invoke "f64.no_fold_gt_select" (f64.const 0x0p+0) (f64.const -0x0p+0))
-  (f64.const -0x0p+0)
+  (invoke "f64.no_fold_gt_select" (f64.const 0) (f64.const -0))
+  (f64.const -0)
 )
 (assert_return
-  (invoke "f64.no_fold_gt_select" (f64.const -0x0p+0) (f64.const 0x0p+0))
-  (f64.const 0x0p+0)
+  (invoke "f64.no_fold_gt_select" (f64.const -0) (f64.const 0))
+  (f64.const 0)
 )
 (assert_return
-  (invoke "f64.no_fold_ge_select"
-    (f64.const 0x0p+0)
-    (f64.const nan:0x8000000000000)
-  )
+  (invoke "f64.no_fold_ge_select" (f64.const 0) (f64.const nan:0x8000000000000))
   (f64.const nan:0x8000000000000)
 )
 (assert_return
-  (invoke "f64.no_fold_ge_select"
-    (f64.const nan:0x8000000000000)
-    (f64.const 0x0p+0)
-  )
-  (f64.const 0x0p+0)
+  (invoke "f64.no_fold_ge_select" (f64.const nan:0x8000000000000) (f64.const 0))
+  (f64.const 0)
 )
 (assert_return
-  (invoke "f64.no_fold_ge_select" (f64.const 0x0p+0) (f64.const -0x0p+0))
-  (f64.const 0x0p+0)
+  (invoke "f64.no_fold_ge_select" (f64.const 0) (f64.const -0))
+  (f64.const 0)
 )
 (assert_return
-  (invoke "f64.no_fold_ge_select" (f64.const -0x0p+0) (f64.const 0x0p+0))
-  (f64.const -0x0p+0)
+  (invoke "f64.no_fold_ge_select" (f64.const -0) (f64.const 0))
+  (f64.const -0)
 )
 (module binary
   "\00\61\73\6d\01\00\00\00\01\8d\80\80\80\00\02\60"
@@ -2511,156 +2421,132 @@
   "\7c\20\00\05\20\01\0b\0b"
 )
 (assert_return
-  (invoke "f32.no_fold_lt_if" (f32.const 0x0p+0) (f32.const nan:0x400000))
+  (invoke "f32.no_fold_lt_if" (f32.const 0) (f32.const nan:0x400000))
   (f32.const nan:0x400000)
 )
 (assert_return
-  (invoke "f32.no_fold_lt_if" (f32.const nan:0x400000) (f32.const 0x0p+0))
-  (f32.const 0x0p+0)
+  (invoke "f32.no_fold_lt_if" (f32.const nan:0x400000) (f32.const 0))
+  (f32.const 0)
 )
 (assert_return
-  (invoke "f32.no_fold_lt_if" (f32.const 0x0p+0) (f32.const -0x0p+0))
-  (f32.const -0x0p+0)
+  (invoke "f32.no_fold_lt_if" (f32.const 0) (f32.const -0))
+  (f32.const -0)
 )
 (assert_return
-  (invoke "f32.no_fold_lt_if" (f32.const -0x0p+0) (f32.const 0x0p+0))
-  (f32.const 0x0p+0)
+  (invoke "f32.no_fold_lt_if" (f32.const -0) (f32.const 0))
+  (f32.const 0)
 )
 (assert_return
-  (invoke "f32.no_fold_le_if" (f32.const 0x0p+0) (f32.const nan:0x400000))
+  (invoke "f32.no_fold_le_if" (f32.const 0) (f32.const nan:0x400000))
   (f32.const nan:0x400000)
 )
 (assert_return
-  (invoke "f32.no_fold_le_if" (f32.const nan:0x400000) (f32.const 0x0p+0))
-  (f32.const 0x0p+0)
+  (invoke "f32.no_fold_le_if" (f32.const nan:0x400000) (f32.const 0))
+  (f32.const 0)
 )
 (assert_return
-  (invoke "f32.no_fold_le_if" (f32.const 0x0p+0) (f32.const -0x0p+0))
-  (f32.const 0x0p+0)
+  (invoke "f32.no_fold_le_if" (f32.const 0) (f32.const -0))
+  (f32.const 0)
 )
 (assert_return
-  (invoke "f32.no_fold_le_if" (f32.const -0x0p+0) (f32.const 0x0p+0))
-  (f32.const -0x0p+0)
+  (invoke "f32.no_fold_le_if" (f32.const -0) (f32.const 0))
+  (f32.const -0)
 )
 (assert_return
-  (invoke "f32.no_fold_gt_if" (f32.const 0x0p+0) (f32.const nan:0x400000))
+  (invoke "f32.no_fold_gt_if" (f32.const 0) (f32.const nan:0x400000))
   (f32.const nan:0x400000)
 )
 (assert_return
-  (invoke "f32.no_fold_gt_if" (f32.const nan:0x400000) (f32.const 0x0p+0))
-  (f32.const 0x0p+0)
+  (invoke "f32.no_fold_gt_if" (f32.const nan:0x400000) (f32.const 0))
+  (f32.const 0)
 )
 (assert_return
-  (invoke "f32.no_fold_gt_if" (f32.const 0x0p+0) (f32.const -0x0p+0))
-  (f32.const -0x0p+0)
+  (invoke "f32.no_fold_gt_if" (f32.const 0) (f32.const -0))
+  (f32.const -0)
 )
 (assert_return
-  (invoke "f32.no_fold_gt_if" (f32.const -0x0p+0) (f32.const 0x0p+0))
-  (f32.const 0x0p+0)
+  (invoke "f32.no_fold_gt_if" (f32.const -0) (f32.const 0))
+  (f32.const 0)
 )
 (assert_return
-  (invoke "f32.no_fold_ge_if" (f32.const 0x0p+0) (f32.const nan:0x400000))
+  (invoke "f32.no_fold_ge_if" (f32.const 0) (f32.const nan:0x400000))
   (f32.const nan:0x400000)
 )
 (assert_return
-  (invoke "f32.no_fold_ge_if" (f32.const nan:0x400000) (f32.const 0x0p+0))
-  (f32.const 0x0p+0)
+  (invoke "f32.no_fold_ge_if" (f32.const nan:0x400000) (f32.const 0))
+  (f32.const 0)
 )
 (assert_return
-  (invoke "f32.no_fold_ge_if" (f32.const 0x0p+0) (f32.const -0x0p+0))
-  (f32.const 0x0p+0)
+  (invoke "f32.no_fold_ge_if" (f32.const 0) (f32.const -0))
+  (f32.const 0)
 )
 (assert_return
-  (invoke "f32.no_fold_ge_if" (f32.const -0x0p+0) (f32.const 0x0p+0))
-  (f32.const -0x0p+0)
+  (invoke "f32.no_fold_ge_if" (f32.const -0) (f32.const 0))
+  (f32.const -0)
 )
 (assert_return
-  (invoke "f64.no_fold_lt_if"
-    (f64.const 0x0p+0)
-    (f64.const nan:0x8000000000000)
-  )
+  (invoke "f64.no_fold_lt_if" (f64.const 0) (f64.const nan:0x8000000000000))
   (f64.const nan:0x8000000000000)
 )
 (assert_return
-  (invoke "f64.no_fold_lt_if"
-    (f64.const nan:0x8000000000000)
-    (f64.const 0x0p+0)
-  )
-  (f64.const 0x0p+0)
+  (invoke "f64.no_fold_lt_if" (f64.const nan:0x8000000000000) (f64.const 0))
+  (f64.const 0)
 )
 (assert_return
-  (invoke "f64.no_fold_lt_if" (f64.const 0x0p+0) (f64.const -0x0p+0))
-  (f64.const -0x0p+0)
+  (invoke "f64.no_fold_lt_if" (f64.const 0) (f64.const -0))
+  (f64.const -0)
 )
 (assert_return
-  (invoke "f64.no_fold_lt_if" (f64.const -0x0p+0) (f64.const 0x0p+0))
-  (f64.const 0x0p+0)
+  (invoke "f64.no_fold_lt_if" (f64.const -0) (f64.const 0))
+  (f64.const 0)
 )
 (assert_return
-  (invoke "f64.no_fold_le_if"
-    (f64.const 0x0p+0)
-    (f64.const nan:0x8000000000000)
-  )
+  (invoke "f64.no_fold_le_if" (f64.const 0) (f64.const nan:0x8000000000000))
   (f64.const nan:0x8000000000000)
 )
 (assert_return
-  (invoke "f64.no_fold_le_if"
-    (f64.const nan:0x8000000000000)
-    (f64.const 0x0p+0)
-  )
-  (f64.const 0x0p+0)
+  (invoke "f64.no_fold_le_if" (f64.const nan:0x8000000000000) (f64.const 0))
+  (f64.const 0)
 )
 (assert_return
-  (invoke "f64.no_fold_le_if" (f64.const 0x0p+0) (f64.const -0x0p+0))
-  (f64.const 0x0p+0)
+  (invoke "f64.no_fold_le_if" (f64.const 0) (f64.const -0))
+  (f64.const 0)
 )
 (assert_return
-  (invoke "f64.no_fold_le_if" (f64.const -0x0p+0) (f64.const 0x0p+0))
-  (f64.const -0x0p+0)
+  (invoke "f64.no_fold_le_if" (f64.const -0) (f64.const 0))
+  (f64.const -0)
 )
 (assert_return
-  (invoke "f64.no_fold_gt_if"
-    (f64.const 0x0p+0)
-    (f64.const nan:0x8000000000000)
-  )
+  (invoke "f64.no_fold_gt_if" (f64.const 0) (f64.const nan:0x8000000000000))
   (f64.const nan:0x8000000000000)
 )
 (assert_return
-  (invoke "f64.no_fold_gt_if"
-    (f64.const nan:0x8000000000000)
-    (f64.const 0x0p+0)
-  )
-  (f64.const 0x0p+0)
+  (invoke "f64.no_fold_gt_if" (f64.const nan:0x8000000000000) (f64.const 0))
+  (f64.const 0)
 )
 (assert_return
-  (invoke "f64.no_fold_gt_if" (f64.const 0x0p+0) (f64.const -0x0p+0))
-  (f64.const -0x0p+0)
+  (invoke "f64.no_fold_gt_if" (f64.const 0) (f64.const -0))
+  (f64.const -0)
 )
 (assert_return
-  (invoke "f64.no_fold_gt_if" (f64.const -0x0p+0) (f64.const 0x0p+0))
-  (f64.const 0x0p+0)
+  (invoke "f64.no_fold_gt_if" (f64.const -0) (f64.const 0))
+  (f64.const 0)
 )
 (assert_return
-  (invoke "f64.no_fold_ge_if"
-    (f64.const 0x0p+0)
-    (f64.const nan:0x8000000000000)
-  )
+  (invoke "f64.no_fold_ge_if" (f64.const 0) (f64.const nan:0x8000000000000))
   (f64.const nan:0x8000000000000)
 )
 (assert_return
-  (invoke "f64.no_fold_ge_if"
-    (f64.const nan:0x8000000000000)
-    (f64.const 0x0p+0)
-  )
-  (f64.const 0x0p+0)
+  (invoke "f64.no_fold_ge_if" (f64.const nan:0x8000000000000) (f64.const 0))
+  (f64.const 0)
 )
 (assert_return
-  (invoke "f64.no_fold_ge_if" (f64.const 0x0p+0) (f64.const -0x0p+0))
-  (f64.const 0x0p+0)
+  (invoke "f64.no_fold_ge_if" (f64.const 0) (f64.const -0))
+  (f64.const 0)
 )
 (assert_return
-  (invoke "f64.no_fold_ge_if" (f64.const -0x0p+0) (f64.const 0x0p+0))
-  (f64.const -0x0p+0)
+  (invoke "f64.no_fold_ge_if" (f64.const -0) (f64.const 0))
+  (f64.const -0)
 )
 (module binary
   "\00\61\73\6d\01\00\00\00\01\8b\80\80\80\00\02\60"
@@ -2704,12 +2590,12 @@
   (f32.const -nan:0x400000)
 )
 (assert_return
-  (invoke "f32.no_fold_lt_select_to_abs" (f32.const 0x0p+0))
-  (f32.const 0x0p+0)
+  (invoke "f32.no_fold_lt_select_to_abs" (f32.const 0))
+  (f32.const 0)
 )
 (assert_return
-  (invoke "f32.no_fold_lt_select_to_abs" (f32.const -0x0p+0))
-  (f32.const -0x0p+0)
+  (invoke "f32.no_fold_lt_select_to_abs" (f32.const -0))
+  (f32.const -0)
 )
 (assert_return
   (invoke "f32.no_fold_le_select_to_abs" (f32.const nan:0x200000))
@@ -2720,12 +2606,12 @@
   (f32.const -nan:0x400000)
 )
 (assert_return
-  (invoke "f32.no_fold_le_select_to_abs" (f32.const 0x0p+0))
-  (f32.const -0x0p+0)
+  (invoke "f32.no_fold_le_select_to_abs" (f32.const 0))
+  (f32.const -0)
 )
 (assert_return
-  (invoke "f32.no_fold_le_select_to_abs" (f32.const -0x0p+0))
-  (f32.const 0x0p+0)
+  (invoke "f32.no_fold_le_select_to_abs" (f32.const -0))
+  (f32.const 0)
 )
 (assert_return
   (invoke "f32.no_fold_gt_select_to_abs" (f32.const nan:0x200000))
@@ -2736,12 +2622,12 @@
   (f32.const nan:0x400000)
 )
 (assert_return
-  (invoke "f32.no_fold_gt_select_to_abs" (f32.const 0x0p+0))
-  (f32.const -0x0p+0)
+  (invoke "f32.no_fold_gt_select_to_abs" (f32.const 0))
+  (f32.const -0)
 )
 (assert_return
-  (invoke "f32.no_fold_gt_select_to_abs" (f32.const -0x0p+0))
-  (f32.const 0x0p+0)
+  (invoke "f32.no_fold_gt_select_to_abs" (f32.const -0))
+  (f32.const 0)
 )
 (assert_return
   (invoke "f32.no_fold_ge_select_to_abs" (f32.const nan:0x200000))
@@ -2752,12 +2638,12 @@
   (f32.const nan:0x400000)
 )
 (assert_return
-  (invoke "f32.no_fold_ge_select_to_abs" (f32.const 0x0p+0))
-  (f32.const 0x0p+0)
+  (invoke "f32.no_fold_ge_select_to_abs" (f32.const 0))
+  (f32.const 0)
 )
 (assert_return
-  (invoke "f32.no_fold_ge_select_to_abs" (f32.const -0x0p+0))
-  (f32.const -0x0p+0)
+  (invoke "f32.no_fold_ge_select_to_abs" (f32.const -0))
+  (f32.const -0)
 )
 (assert_return
   (invoke "f64.no_fold_lt_select_to_abs" (f64.const nan:0x4000000000000))
@@ -2768,12 +2654,12 @@
   (f64.const -nan:0x8000000000000)
 )
 (assert_return
-  (invoke "f64.no_fold_lt_select_to_abs" (f64.const 0x0p+0))
-  (f64.const 0x0p+0)
+  (invoke "f64.no_fold_lt_select_to_abs" (f64.const 0))
+  (f64.const 0)
 )
 (assert_return
-  (invoke "f64.no_fold_lt_select_to_abs" (f64.const -0x0p+0))
-  (f64.const -0x0p+0)
+  (invoke "f64.no_fold_lt_select_to_abs" (f64.const -0))
+  (f64.const -0)
 )
 (assert_return
   (invoke "f64.no_fold_le_select_to_abs" (f64.const nan:0x4000000000000))
@@ -2784,12 +2670,12 @@
   (f64.const -nan:0x8000000000000)
 )
 (assert_return
-  (invoke "f64.no_fold_le_select_to_abs" (f64.const 0x0p+0))
-  (f64.const -0x0p+0)
+  (invoke "f64.no_fold_le_select_to_abs" (f64.const 0))
+  (f64.const -0)
 )
 (assert_return
-  (invoke "f64.no_fold_le_select_to_abs" (f64.const -0x0p+0))
-  (f64.const 0x0p+0)
+  (invoke "f64.no_fold_le_select_to_abs" (f64.const -0))
+  (f64.const 0)
 )
 (assert_return
   (invoke "f64.no_fold_gt_select_to_abs" (f64.const nan:0x4000000000000))
@@ -2800,12 +2686,12 @@
   (f64.const nan:0x8000000000000)
 )
 (assert_return
-  (invoke "f64.no_fold_gt_select_to_abs" (f64.const 0x0p+0))
-  (f64.const -0x0p+0)
+  (invoke "f64.no_fold_gt_select_to_abs" (f64.const 0))
+  (f64.const -0)
 )
 (assert_return
-  (invoke "f64.no_fold_gt_select_to_abs" (f64.const -0x0p+0))
-  (f64.const 0x0p+0)
+  (invoke "f64.no_fold_gt_select_to_abs" (f64.const -0))
+  (f64.const 0)
 )
 (assert_return
   (invoke "f64.no_fold_ge_select_to_abs" (f64.const nan:0x4000000000000))
@@ -2816,12 +2702,12 @@
   (f64.const nan:0x8000000000000)
 )
 (assert_return
-  (invoke "f64.no_fold_ge_select_to_abs" (f64.const 0x0p+0))
-  (f64.const 0x0p+0)
+  (invoke "f64.no_fold_ge_select_to_abs" (f64.const 0))
+  (f64.const 0)
 )
 (assert_return
-  (invoke "f64.no_fold_ge_select_to_abs" (f64.const -0x0p+0))
-  (f64.const -0x0p+0)
+  (invoke "f64.no_fold_ge_select_to_abs" (f64.const -0))
+  (f64.const -0)
 )
 (module binary
   "\00\61\73\6d\01\00\00\00\01\8b\80\80\80\00\02\60"
@@ -2863,13 +2749,10 @@
   (invoke "f32.no_fold_lt_if_to_abs" (f32.const -nan:0x400000))
   (f32.const -nan:0x400000)
 )
+(assert_return (invoke "f32.no_fold_lt_if_to_abs" (f32.const 0)) (f32.const 0))
 (assert_return
-  (invoke "f32.no_fold_lt_if_to_abs" (f32.const 0x0p+0))
-  (f32.const 0x0p+0)
-)
-(assert_return
-  (invoke "f32.no_fold_lt_if_to_abs" (f32.const -0x0p+0))
-  (f32.const -0x0p+0)
+  (invoke "f32.no_fold_lt_if_to_abs" (f32.const -0))
+  (f32.const -0)
 )
 (assert_return
   (invoke "f32.no_fold_le_if_to_abs" (f32.const nan:0x200000))
@@ -2879,14 +2762,8 @@
   (invoke "f32.no_fold_le_if_to_abs" (f32.const -nan:0x400000))
   (f32.const -nan:0x400000)
 )
-(assert_return
-  (invoke "f32.no_fold_le_if_to_abs" (f32.const 0x0p+0))
-  (f32.const -0x0p+0)
-)
-(assert_return
-  (invoke "f32.no_fold_le_if_to_abs" (f32.const -0x0p+0))
-  (f32.const 0x0p+0)
-)
+(assert_return (invoke "f32.no_fold_le_if_to_abs" (f32.const 0)) (f32.const -0))
+(assert_return (invoke "f32.no_fold_le_if_to_abs" (f32.const -0)) (f32.const 0))
 (assert_return
   (invoke "f32.no_fold_gt_if_to_abs" (f32.const nan:0x200000))
   (f32.const -nan:0x200000)
@@ -2895,14 +2772,8 @@
   (invoke "f32.no_fold_gt_if_to_abs" (f32.const -nan:0x400000))
   (f32.const nan:0x400000)
 )
-(assert_return
-  (invoke "f32.no_fold_gt_if_to_abs" (f32.const 0x0p+0))
-  (f32.const -0x0p+0)
-)
-(assert_return
-  (invoke "f32.no_fold_gt_if_to_abs" (f32.const -0x0p+0))
-  (f32.const 0x0p+0)
-)
+(assert_return (invoke "f32.no_fold_gt_if_to_abs" (f32.const 0)) (f32.const -0))
+(assert_return (invoke "f32.no_fold_gt_if_to_abs" (f32.const -0)) (f32.const 0))
 (assert_return
   (invoke "f32.no_fold_ge_if_to_abs" (f32.const nan:0x200000))
   (f32.const -nan:0x200000)
@@ -2911,13 +2782,10 @@
   (invoke "f32.no_fold_ge_if_to_abs" (f32.const -nan:0x400000))
   (f32.const nan:0x400000)
 )
+(assert_return (invoke "f32.no_fold_ge_if_to_abs" (f32.const 0)) (f32.const 0))
 (assert_return
-  (invoke "f32.no_fold_ge_if_to_abs" (f32.const 0x0p+0))
-  (f32.const 0x0p+0)
-)
-(assert_return
-  (invoke "f32.no_fold_ge_if_to_abs" (f32.const -0x0p+0))
-  (f32.const -0x0p+0)
+  (invoke "f32.no_fold_ge_if_to_abs" (f32.const -0))
+  (f32.const -0)
 )
 (assert_return
   (invoke "f64.no_fold_lt_if_to_abs" (f64.const nan:0x4000000000000))
@@ -2927,13 +2795,10 @@
   (invoke "f64.no_fold_lt_if_to_abs" (f64.const -nan:0x8000000000000))
   (f64.const -nan:0x8000000000000)
 )
+(assert_return (invoke "f64.no_fold_lt_if_to_abs" (f64.const 0)) (f64.const 0))
 (assert_return
-  (invoke "f64.no_fold_lt_if_to_abs" (f64.const 0x0p+0))
-  (f64.const 0x0p+0)
-)
-(assert_return
-  (invoke "f64.no_fold_lt_if_to_abs" (f64.const -0x0p+0))
-  (f64.const -0x0p+0)
+  (invoke "f64.no_fold_lt_if_to_abs" (f64.const -0))
+  (f64.const -0)
 )
 (assert_return
   (invoke "f64.no_fold_le_if_to_abs" (f64.const nan:0x4000000000000))
@@ -2943,14 +2808,8 @@
   (invoke "f64.no_fold_le_if_to_abs" (f64.const -nan:0x8000000000000))
   (f64.const -nan:0x8000000000000)
 )
-(assert_return
-  (invoke "f64.no_fold_le_if_to_abs" (f64.const 0x0p+0))
-  (f64.const -0x0p+0)
-)
-(assert_return
-  (invoke "f64.no_fold_le_if_to_abs" (f64.const -0x0p+0))
-  (f64.const 0x0p+0)
-)
+(assert_return (invoke "f64.no_fold_le_if_to_abs" (f64.const 0)) (f64.const -0))
+(assert_return (invoke "f64.no_fold_le_if_to_abs" (f64.const -0)) (f64.const 0))
 (assert_return
   (invoke "f64.no_fold_gt_if_to_abs" (f64.const nan:0x4000000000000))
   (f64.const -nan:0x4000000000000)
@@ -2959,14 +2818,8 @@
   (invoke "f64.no_fold_gt_if_to_abs" (f64.const -nan:0x8000000000000))
   (f64.const nan:0x8000000000000)
 )
-(assert_return
-  (invoke "f64.no_fold_gt_if_to_abs" (f64.const 0x0p+0))
-  (f64.const -0x0p+0)
-)
-(assert_return
-  (invoke "f64.no_fold_gt_if_to_abs" (f64.const -0x0p+0))
-  (f64.const 0x0p+0)
-)
+(assert_return (invoke "f64.no_fold_gt_if_to_abs" (f64.const 0)) (f64.const -0))
+(assert_return (invoke "f64.no_fold_gt_if_to_abs" (f64.const -0)) (f64.const 0))
 (assert_return
   (invoke "f64.no_fold_ge_if_to_abs" (f64.const nan:0x4000000000000))
   (f64.const -nan:0x4000000000000)
@@ -2975,13 +2828,10 @@
   (invoke "f64.no_fold_ge_if_to_abs" (f64.const -nan:0x8000000000000))
   (f64.const nan:0x8000000000000)
 )
+(assert_return (invoke "f64.no_fold_ge_if_to_abs" (f64.const 0)) (f64.const 0))
 (assert_return
-  (invoke "f64.no_fold_ge_if_to_abs" (f64.const 0x0p+0))
-  (f64.const 0x0p+0)
-)
-(assert_return
-  (invoke "f64.no_fold_ge_if_to_abs" (f64.const -0x0p+0))
-  (f64.const -0x0p+0)
+  (invoke "f64.no_fold_ge_if_to_abs" (f64.const -0))
+  (f64.const -0)
 )
 (module binary
   "\00\61\73\6d\01\00\00\00\01\89\80\80\80\00\02\60"
@@ -2996,8 +2846,14 @@
   "\3f\44\9a\99\99\99\99\99\f3\3f\a0\44\87\16\d9\ce"
   "\f7\53\f5\3f\a1\44\9a\99\99\99\99\99\f3\3f\a1\0b"
 )
-(assert_return (invoke "f32.incorrect_correction") (f32.const 0x1p-23))
-(assert_return (invoke "f64.incorrect_correction") (f64.const -0x1p-52))
+(assert_return
+  (invoke "f32.incorrect_correction")
+  (f32.const 1.192_092_895_507_812_5e-07)
+)
+(assert_return
+  (invoke "f64.incorrect_correction")
+  (f64.const -2.220_446_049_250_313_1e-16)
+)
 (module binary
   "\00\61\73\6d\01\00\00\00\01\85\80\80\80\00\01\60"
   "\00\01\7d\03\82\80\80\80\00\01\00\07\8d\80\80\80"
@@ -3009,7 +2865,7 @@
   "\93\95\21\04\02\40\20\03\20\04\5b\0d\00\00\0b\20"
   "\04\0b"
 )
-(assert_return (invoke "calculate") (f32.const -0x1.d2ed46p+8))
+(assert_return (invoke "calculate") (f32.const -466.926_849_365_234_38))
 (module binary
   "\00\61\73\6d\01\00\00\00\01\85\80\80\80\00\01\60"
   "\00\01\7c\03\82\80\80\80\00\01\00\07\8d\80\80\80"
@@ -3021,7 +2877,7 @@
   "\01\9a\20\00\a2\20\00\20\02\a2\20\01\a1\a3\21\04"
   "\02\40\20\03\20\04\61\0d\00\00\0b\20\04\0b"
 )
-(assert_return (invoke "calculate") (f64.const -0x1.d2ed4d0218c93p+8))
+(assert_return (invoke "calculate") (f64.const -466.926_956_301_738_02))
 (module binary
   "\00\61\73\6d\01\00\00\00\01\86\80\80\80\00\01\60"
   "\01\7d\01\7d\03\82\80\80\80\00\01\00\07\90\80\80"
@@ -3029,7 +2885,7 @@
   "\00\00\0a\96\80\80\80\00\01\90\80\80\80\00\00\43"
   "\00\00\00\00\43\00\00\00\80\20\00\93\93\0b"
 )
-(assert_return (invoke "llvm_pr26746" (f32.const -0x0p+0)) (f32.const 0x0p+0))
+(assert_return (invoke "llvm_pr26746" (f32.const -0)) (f32.const 0))
 (module binary
   "\00\61\73\6d\01\00\00\00\01\86\80\80\80\00\01\60"
   "\01\7f\01\7d\03\82\80\80\80\00\01\00\07\90\80\80"
@@ -3038,8 +2894,8 @@
   "\00\41\ff\ff\ff\ff\00\71\b2\43\00\00\00\cb\92\0b"
 )
 (assert_return
-  (invoke "llvm_pr27153" (i32.const 33554434))
-  (f32.const 0x1.8p+24)
+  (invoke "llvm_pr27153" (i32.const 33_554_434))
+  (f32.const 25_165_824)
 )
 (module binary
   "\00\61\73\6d\01\00\00\00\01\87\80\80\80\00\01\60"
@@ -3050,8 +2906,8 @@
   "\71\b2\92\0b"
 )
 (assert_return
-  (invoke "llvm_pr27036" (i32.const -25034805) (i32.const 14942208))
-  (f32.const -0x1.340068p+23)
+  (invoke "llvm_pr27036" (i32.const -25_034_805) (i32.const 14_942_208))
+  (f32.const -10_092_596)
 )
 (module binary
   "\00\61\73\6d\01\00\00\00\01\97\80\80\80\00\03\60"
@@ -3066,24 +2922,28 @@
 )
 (assert_return
   (invoke "thepast0"
-    (f64.const 0x1p-1021)
-    (f64.const 0x1.fffffffffffffp-1)
-    (f64.const 0x1p+1)
-    (f64.const 0x1p-1)
+    (f64.const 4.450_147_717_014_402_8e-308)
+    (f64.const 0.999_999_999_999_999_89)
+    (f64.const 2)
+    (f64.const 0.5)
   )
-  (f64.const 0x1.fffffffffffffp-1022)
+  (f64.const 4.450_147_717_014_402_3e-308)
 )
 (assert_return
   (invoke "thepast1"
-    (f64.const 0x1p-54)
-    (f64.const 0x1.fffffffffffffp-1)
-    (f64.const 0x1p-54)
+    (f64.const 5.551_115_123_125_782_7e-17)
+    (f64.const 0.999_999_999_999_999_89)
+    (f64.const 5.551_115_123_125_782_7e-17)
   )
-  (f64.const -0x1p-107)
+  (f64.const -6.162_975_822_039_154_7e-33)
 )
 (assert_return
-  (invoke "thepast2" (f32.const 0x1p-125) (f32.const 0x1p-1) (f32.const 0x1p+0))
-  (f32.const 0x1p-126)
+  (invoke "thepast2"
+    (f32.const 2.350_988_701_644_575e-38)
+    (f32.const 0.5)
+    (f32.const 1)
+  )
+  (f32.const 1.175_494_350_822_287_5e-38)
 )
 (module binary
   "\00\61\73\6d\01\00\00\00\01\86\80\80\80\00\01\60"
@@ -3093,8 +2953,8 @@
   "\00\95\0b"
 )
 (assert_return
-  (invoke "inverse" (f32.const 0x1.8p+6))
-  (f32.const 0x1.555556p-7)
+  (invoke "inverse" (f32.const 96))
+  (f32.const 0.010_416_666_977_107_525)
 )
 (module binary
   "\00\61\73\6d\01\00\00\00\01\8b\80\80\80\00\02\60"
@@ -3106,14 +2966,8 @@
   "\00\00\00\40\93\0b\8f\80\80\80\00\00\20\00\9f\44"
   "\00\00\00\00\00\00\00\40\a1\0b"
 )
-(assert_return
-  (invoke "f32_sqrt_minus_2" (f32.const 0x1p+2))
-  (f32.const 0x0p+0)
-)
-(assert_return
-  (invoke "f64_sqrt_minus_2" (f64.const 0x1p+2))
-  (f64.const 0x0p+0)
-)
+(assert_return (invoke "f32_sqrt_minus_2" (f32.const 4)) (f32.const 0))
+(assert_return (invoke "f64_sqrt_minus_2" (f64.const 4)) (f64.const 0))
 (module binary
   "\00\61\73\6d\01\00\00\00\01\8b\80\80\80\00\02\60"
   "\01\7d\01\7d\60\01\7c\01\7c\03\83\80\80\80\00\02"
@@ -3127,33 +2981,27 @@
   "\3f\20\00\a3\a3\0b"
 )
 (assert_return
-  (invoke "f32.no_fold_recip_recip" (f32.const -0x1.e8bf18p+65))
-  (f32.const -0x1.e8bf16p+65)
+  (invoke "f32.no_fold_recip_recip" (f32.const -7.043_578_799_867_926_9e+19))
+  (f32.const -7.043_578_360_063_275_8e+19)
 )
 (assert_return
-  (invoke "f32.no_fold_recip_recip" (f32.const 0x1.e24248p-77))
-  (f32.const 0x1.e24246p-77)
+  (invoke "f32.no_fold_recip_recip" (f32.const 1.246_610_067_249_987_4e-23))
+  (f32.const 1.246_609_988_363_896_9e-23)
 )
 (assert_return
-  (invoke "f32.no_fold_recip_recip" (f32.const 0x1.caf0e8p-64))
-  (f32.const 0x1.caf0eap-64)
+  (invoke "f32.no_fold_recip_recip" (f32.const 9.718_454_544_006_024_2e-20))
+  (f32.const 9.718_455_190_240_877_7e-20)
 )
 (assert_return
-  (invoke "f32.no_fold_recip_recip" (f32.const -0x1.e66982p+4))
-  (f32.const -0x1.e66984p+4)
+  (invoke "f32.no_fold_recip_recip" (f32.const -30.400_758_743_286_133))
+  (f32.const -30.400_760_650_634_766)
 )
 (assert_return
-  (invoke "f32.no_fold_recip_recip" (f32.const 0x1.f99916p+70))
-  (f32.const 0x1.f99914p+70)
+  (invoke "f32.no_fold_recip_recip" (f32.const 2.331_659_190_390_153_5e+21))
+  (f32.const 2.331_659_049_652_665_2e+21)
 )
-(assert_return
-  (invoke "f32.no_fold_recip_recip" (f32.const -0x0p+0))
-  (f32.const -0x0p+0)
-)
-(assert_return
-  (invoke "f32.no_fold_recip_recip" (f32.const 0x0p+0))
-  (f32.const 0x0p+0)
-)
+(assert_return (invoke "f32.no_fold_recip_recip" (f32.const -0)) (f32.const -0))
+(assert_return (invoke "f32.no_fold_recip_recip" (f32.const 0)) (f32.const 0))
 (assert_return
   (invoke "f32.no_fold_recip_recip" (f32.const -inf))
   (f32.const -inf)
@@ -3163,33 +3011,27 @@
   (f32.const inf)
 )
 (assert_return
-  (invoke "f64.no_fold_recip_recip" (f64.const -0x1.d81248dda63dp+148))
-  (f64.const -0x1.d81248dda63d1p+148)
+  (invoke "f64.no_fold_recip_recip" (f64.const -6.579_715_343_628_868_6e+44))
+  (f64.const -6.579_715_343_628_869_3e+44)
 )
 (assert_return
-  (invoke "f64.no_fold_recip_recip" (f64.const -0x1.f4750312039e3p+66))
-  (f64.const -0x1.f4750312039e2p+66)
+  (invoke "f64.no_fold_recip_recip" (f64.const -1.442_469_318_685_764_3e+20))
+  (f64.const -1.442_469_318_685_764_2e+20)
 )
 (assert_return
-  (invoke "f64.no_fold_recip_recip" (f64.const 0x1.fa50630eec7f6p+166))
-  (f64.const 0x1.fa50630eec7f5p+166)
+  (invoke "f64.no_fold_recip_recip" (f64.const 1.849_946_892_062_313_5e+50))
+  (f64.const 1.849_946_892_062_313_3e+50)
 )
 (assert_return
-  (invoke "f64.no_fold_recip_recip" (f64.const 0x1.db0598617ba92p-686))
-  (f64.const 0x1.db0598617ba91p-686)
+  (invoke "f64.no_fold_recip_recip" (f64.const 5.779_584_288_006_583e-207))
+  (f64.const 5.779_584_288_006_582_3e-207)
 )
 (assert_return
-  (invoke "f64.no_fold_recip_recip" (f64.const 0x1.85f1638a0c82bp+902))
-  (f64.const 0x1.85f1638a0c82ap+902)
+  (invoke "f64.no_fold_recip_recip" (f64.const 5.150_117_869_614_164_1e+271))
+  (f64.const 5.150_117_869_614_163_4e+271)
 )
-(assert_return
-  (invoke "f64.no_fold_recip_recip" (f64.const -0x0p+0))
-  (f64.const -0x0p+0)
-)
-(assert_return
-  (invoke "f64.no_fold_recip_recip" (f64.const 0x0p+0))
-  (f64.const 0x0p+0)
-)
+(assert_return (invoke "f64.no_fold_recip_recip" (f64.const -0)) (f64.const -0))
+(assert_return (invoke "f64.no_fold_recip_recip" (f64.const 0)) (f64.const 0))
 (assert_return
   (invoke "f64.no_fold_recip_recip" (f64.const -inf))
   (f64.const -inf)
@@ -3211,73 +3053,73 @@
 )
 (assert_return
   (invoke "f32.no_algebraic_factoring"
-    (f32.const -0x1.ef678ep-55)
-    (f32.const 0x1.c160b8p-54)
+    (f32.const -5.371_186_465_411_003_1e-17)
+    (f32.const 9.744_327_905_706_555e-17)
   )
-  (f32.const -0x1.129402p-107)
+  (f32.const -6.610_228_647_323_987_9e-33)
 )
 (assert_return
   (invoke "f32.no_algebraic_factoring"
-    (f32.const -0x1.2d76bcp+24)
-    (f32.const 0x1.f4089cp+24)
+    (f32.const -19_756_732)
+    (f32.const 32_770_204)
   )
-  (f32.const -0x1.36d89ap+49)
+  (f32.const -683_557_802_475_520)
 )
 (assert_return
   (invoke "f32.no_algebraic_factoring"
-    (f32.const 0x1.7ca2b2p+45)
-    (f32.const -0x1.08513cp+47)
+    (f32.const 52_314_148_700_160)
+    (f32.const -145_309_984_358_400)
   )
-  (f32.const -0x1.db10dep+93)
+  (f32.const -1.837_822_135_545_149_2e+28)
 )
 (assert_return
   (invoke "f32.no_algebraic_factoring"
-    (f32.const 0x1.7d5e3p+17)
-    (f32.const -0x1.c783b4p+7)
+    (f32.const 195_260.375)
+    (f32.const -227.757_232_666_015_62)
   )
-  (f32.const 0x1.1c10a6p+35)
+  (f32.const 38_126_563_328)
 )
 (assert_return
   (invoke "f32.no_algebraic_factoring"
-    (f32.const -0x1.daf96p+7)
-    (f32.const -0x1.dac6bp+19)
+    (f32.const -237.487_060_546_875)
+    (f32.const -972_341.5)
   )
-  (f32.const -0x1.b8422ep+39)
+  (f32.const -945_447_960_576)
 )
 (assert_return
   (invoke "f64.no_algebraic_factoring"
-    (f64.const 0x1.e17c0a02ac6b5p-476)
-    (f64.const 0x1.e8f13f1fcdc14p-463)
+    (f64.const 9.639_720_335_949_766_8e-144)
+    (f64.const 8.019_175_443_606_207_3e-140)
   )
-  (f64.const -0x1.d2ec518f62863p-925)
+  (f64.const -6.430_717_386_609_472_8e-279)
 )
 (assert_return
   (invoke "f64.no_algebraic_factoring"
-    (f64.const 0x1.971b55a57e3a3p-377)
-    (f64.const 0x1.edeb4233c1b27p-399)
+    (f64.const 5.166_066_590_392_026_8e-114)
+    (f64.const 1.494_333_315_888_213e-120)
   )
-  (f64.const 0x1.43b3f69fb258bp-753)
+  (f64.const 2.668_824_401_636_246_8e-227)
 )
 (assert_return
   (invoke "f64.no_algebraic_factoring"
-    (f64.const -0x1.c3b9dc02472fap-378)
-    (f64.const -0x1.74e9faebaff14p-369)
+    (f64.const -2.866_135_870_517_634_8e-114)
+    (f64.const -1.211_435_525_426_851_6e-111)
   )
-  (f64.const -0x1.0f9c07e8caa25p-737)
+  (f64.const -1.467_567_817_531_403_6e-222)
 )
 (assert_return
   (invoke "f64.no_algebraic_factoring"
-    (f64.const -0x1.afaf4688ed019p+179)
-    (f64.const 0x1.b07171cb49e94p+188)
+    (f64.const -1.292_099_281_007_814_9e+54)
+    (f64.const 6.627_171_877_280_340_1e+56)
   )
-  (f64.const -0x1.6d3f2e2bebcf7p+377)
+  (f64.const -4.391_924_013_896_022_7e+113)
 )
 (assert_return
   (invoke "f64.no_algebraic_factoring"
-    (f64.const 0x1.4377a98948f12p+114)
-    (f64.const -0x1.500c05bd24c97p+90)
+    (f64.const 2.624_279_568_901_057e+34)
+    (f64.const -1.625_023_398_605_080_2e+27)
   )
-  (f64.const 0x1.98b72dbf7bf72p+228)
+  (f64.const 6.886_843_255_751_491_4e+68)
 )
 (module binary
   "\00\61\73\6d\01\00\00\00\01\8d\80\80\80\00\02\60"
@@ -3292,73 +3134,73 @@
 )
 (assert_return
   (invoke "f32.no_algebraic_factoring"
-    (f32.const 0x1.8e2c14p-46)
-    (f32.const 0x1.bad59ap-39)
+    (f32.const 2.210_299_610_981_743_3e-14)
+    (f32.const 3.146_527_526_379_228_1e-12)
   )
-  (f32.const -0x1.7efe5p-77)
+  (f32.const -9.900_147_562_538_522_2e-24)
 )
 (assert_return
   (invoke "f32.no_algebraic_factoring"
-    (f32.const -0x1.7ef192p+41)
-    (f32.const -0x1.db184ap+33)
+    (f32.const -3_289_460_768_768)
+    (f32.const -15_941_538_816)
   )
-  (f32.const 0x1.1e6932p+83)
+  (f32.const 1.082_029_860_086_527_9e+25)
 )
 (assert_return
   (invoke "f32.no_algebraic_factoring"
-    (f32.const 0x1.7eb458p-12)
-    (f32.const -0x1.52c498p-13)
+    (f32.const 0.000_364_975_421_689_450_74)
+    (f32.const -0.000_161_537_143_867_462_87)
   )
-  (f32.const 0x1.cc0bc6p-24)
+  (f32.const 1.071_128_039_598_079_3e-07)
 )
 (assert_return
   (invoke "f32.no_algebraic_factoring"
-    (f32.const 0x1.2675c6p-44)
-    (f32.const -0x1.edd31ap-46)
+    (f32.const 6.538_326_602_139_807_3e-14)
+    (f32.const -2.741_277_291_154_562_6e-14)
   )
-  (f32.const 0x1.17294cp-88)
+  (f32.const 3.523_511_174_043_802_9e-27)
 )
 (assert_return
   (invoke "f32.no_algebraic_factoring"
-    (f32.const 0x1.9a5f92p+51)
-    (f32.const -0x1.2b0098p+52)
+    (f32.const 3_609_681_910_038_528)
+    (f32.const -5_260_104_429_469_696)
   )
-  (f32.const -0x1.7189a6p+103)
+  (f32.const -1.463_889_604_789_756e+31)
 )
 (assert_return
   (invoke "f64.no_algebraic_factoring"
-    (f64.const 0x1.749a128f18f69p+356)
-    (f64.const -0x1.0bc97ee1354e1p+337)
+    (f64.const 2.136_404_543_498_951_1e+107)
+    (f64.const -2.928_587_558_394_428_2e+101)
   )
-  (f64.const 0x1.0f28115518d74p+713)
+  (f64.const 4.564_224_373_474_384_6e+214)
 )
 (assert_return
   (invoke "f64.no_algebraic_factoring"
-    (f64.const -0x1.2dab01b2215eap+309)
-    (f64.const -0x1.e12b288bff2bdp+331)
+    (f64.const -1.229_017_115_924_435_8e+93)
+    (f64.const -8.222_158_919_016_600_2e+99)
   )
-  (f64.const -0x1.c4319ad25d201p+663)
+  (f64.const -6.760_389_728_956_271_3e+199)
 )
 (assert_return
   (invoke "f64.no_algebraic_factoring"
-    (f64.const 0x1.3ed898431e102p+42)
-    (f64.const -0x1.c409183fa92e6p+39)
+    (f64.const 5_477_733_829_752.252)
+    (f64.const -970_738_900_948.590_58)
   )
-  (f64.const 0x1.80a611103c71dp+84)
+  (f64.const 2.906_323_389_579_739_7e+25)
 )
 (assert_return
   (invoke "f64.no_algebraic_factoring"
-    (f64.const -0x1.be663e4c0e4b2p+182)
-    (f64.const -0x1.da85703760d25p+166)
+    (f64.const -1.068_914_174_492_355_1e+55)
+    (f64.const -1.733_783_935_937_380_4e+50)
   )
-  (f64.const 0x1.853434f1a2ffep+365)
+  (f64.const 1.142_577_512_130_072_4e+110)
 )
 (assert_return
   (invoke "f64.no_algebraic_factoring"
-    (f64.const -0x1.230e09952df1cp-236)
-    (f64.const -0x1.fa2752adfadc9p-237)
+    (f64.const -1.029_569_987_702_210_6e-71)
+    (f64.const -8.952_274_637_805_907_7e-72)
   )
-  (f64.const 0x1.42e43156bd1b8p-474)
+  (f64.const 2.585_821_476_701_010_5e-143)
 )
 (module binary
   "\00\61\73\6d\01\00\00\00\01\8c\80\80\80\00\02\60"
@@ -3382,10 +3224,19 @@
 (assert_return
   (invoke "f32.simple_x4_sum" (i32.const 0) (i32.const 16) (i32.const 32))
 )
-(assert_return (invoke "f32.load" (i32.const 32)) (f32.const 0x1p-148))
-(assert_return (invoke "f32.load" (i32.const 36)) (f32.const 0x0p+0))
-(assert_return (invoke "f32.load" (i32.const 40)) (f32.const 0x1p-149))
-(assert_return (invoke "f32.load" (i32.const 44)) (f32.const -0x1p-149))
+(assert_return
+  (invoke "f32.load" (i32.const 32))
+  (f32.const 2.802_596_928_649_634_1e-45)
+)
+(assert_return (invoke "f32.load" (i32.const 36)) (f32.const 0))
+(assert_return
+  (invoke "f32.load" (i32.const 40))
+  (f32.const 1.401_298_464_324_817_1e-45)
+)
+(assert_return
+  (invoke "f32.load" (i32.const 44))
+  (f32.const -1.401_298_464_324_817_1e-45)
+)
 (module binary
   "\00\61\73\6d\01\00\00\00\01\8c\80\80\80\00\02\60"
   "\03\7f\7f\7f\00\60\01\7f\01\7c\03\83\80\80\80\00"
@@ -3413,16 +3264,16 @@
 )
 (assert_return
   (invoke "f64.load" (i32.const 64))
-  (f64.const 0x0.0000000000002p-1022)
+  (f64.const 9.881_312_916_824_930_9e-324)
 )
-(assert_return (invoke "f64.load" (i32.const 72)) (f64.const 0x0p+0))
+(assert_return (invoke "f64.load" (i32.const 72)) (f64.const 0))
 (assert_return
   (invoke "f64.load" (i32.const 80))
-  (f64.const 0x0.0000000000001p-1022)
+  (f64.const 4.940_656_458_412_465_4e-324)
 )
 (assert_return
   (invoke "f64.load" (i32.const 88))
-  (f64.const -0x0.0000000000001p-1022)
+  (f64.const -4.940_656_458_412_465_4e-324)
 )
 (module binary
   "\00\61\73\6d\01\00\00\00\01\87\80\80\80\00\01\60"
@@ -3505,11 +3356,11 @@
 )
 (assert_return
   (invoke "f32.kahan_sum" (i32.const 0) (i32.const 256))
-  (f32.const -0x1.101a1ap+104)
+  (f32.const -2.155_813_824_620_656_5e+31)
 )
 (assert_return
   (invoke "f32.plain_sum" (i32.const 0) (i32.const 256))
-  (f32.const -0x1.a0343ap+103)
+  (f32.const -1.648_753_947_207_110_6e+31)
 )
 (module binary
   "\00\61\73\6d\01\00\00\00\01\87\80\80\80\00\01\60"
@@ -3656,11 +3507,11 @@
 )
 (assert_return
   (invoke "f64.kahan_sum" (i32.const 0) (i32.const 256))
-  (f64.const 0x1.dd7cb2a5ffc88p+998)
+  (f64.const 4.996_401_743_142_033_1e+300)
 )
 (assert_return
   (invoke "f64.plain_sum" (i32.const 0) (i32.const 256))
-  (f64.const 0x1.dd7cb2a63fc87p+998)
+  (f64.const 4.996_401_743_297_957_6e+300)
 )
 (module binary
   "\00\61\73\6d\01\00\00\00\01\8d\80\80\80\00\02\60"
@@ -3673,36 +3524,36 @@
   "\00\20\00\20\01\a1\9a\0b"
 )
 (assert_return
-  (invoke "f32.no_fold_neg_sub" (f32.const -0x0p+0) (f32.const -0x0p+0))
-  (f32.const -0x0p+0)
+  (invoke "f32.no_fold_neg_sub" (f32.const -0) (f32.const -0))
+  (f32.const -0)
 )
 (assert_return
-  (invoke "f32.no_fold_neg_sub" (f32.const 0x0p+0) (f32.const -0x0p+0))
-  (f32.const -0x0p+0)
+  (invoke "f32.no_fold_neg_sub" (f32.const 0) (f32.const -0))
+  (f32.const -0)
 )
 (assert_return
-  (invoke "f32.no_fold_neg_sub" (f32.const -0x0p+0) (f32.const 0x0p+0))
-  (f32.const 0x0p+0)
+  (invoke "f32.no_fold_neg_sub" (f32.const -0) (f32.const 0))
+  (f32.const 0)
 )
 (assert_return
-  (invoke "f32.no_fold_neg_sub" (f32.const 0x0p+0) (f32.const 0x0p+0))
-  (f32.const -0x0p+0)
+  (invoke "f32.no_fold_neg_sub" (f32.const 0) (f32.const 0))
+  (f32.const -0)
 )
 (assert_return
-  (invoke "f64.no_fold_neg_sub" (f64.const -0x0p+0) (f64.const -0x0p+0))
-  (f64.const -0x0p+0)
+  (invoke "f64.no_fold_neg_sub" (f64.const -0) (f64.const -0))
+  (f64.const -0)
 )
 (assert_return
-  (invoke "f64.no_fold_neg_sub" (f64.const 0x0p+0) (f64.const -0x0p+0))
-  (f64.const -0x0p+0)
+  (invoke "f64.no_fold_neg_sub" (f64.const 0) (f64.const -0))
+  (f64.const -0)
 )
 (assert_return
-  (invoke "f64.no_fold_neg_sub" (f64.const -0x0p+0) (f64.const 0x0p+0))
-  (f64.const 0x0p+0)
+  (invoke "f64.no_fold_neg_sub" (f64.const -0) (f64.const 0))
+  (f64.const 0)
 )
 (assert_return
-  (invoke "f64.no_fold_neg_sub" (f64.const 0x0p+0) (f64.const 0x0p+0))
-  (f64.const -0x0p+0)
+  (invoke "f64.no_fold_neg_sub" (f64.const 0) (f64.const 0))
+  (f64.const -0)
 )
 (module binary
   "\00\61\73\6d\01\00\00\00\01\8d\80\80\80\00\02\60"
@@ -3715,36 +3566,36 @@
   "\00\20\00\20\01\a0\9a\0b"
 )
 (assert_return
-  (invoke "f32.no_fold_neg_add" (f32.const -0x0p+0) (f32.const -0x0p+0))
-  (f32.const 0x0p+0)
+  (invoke "f32.no_fold_neg_add" (f32.const -0) (f32.const -0))
+  (f32.const 0)
 )
 (assert_return
-  (invoke "f32.no_fold_neg_add" (f32.const 0x0p+0) (f32.const -0x0p+0))
-  (f32.const -0x0p+0)
+  (invoke "f32.no_fold_neg_add" (f32.const 0) (f32.const -0))
+  (f32.const -0)
 )
 (assert_return
-  (invoke "f32.no_fold_neg_add" (f32.const -0x0p+0) (f32.const 0x0p+0))
-  (f32.const -0x0p+0)
+  (invoke "f32.no_fold_neg_add" (f32.const -0) (f32.const 0))
+  (f32.const -0)
 )
 (assert_return
-  (invoke "f32.no_fold_neg_add" (f32.const 0x0p+0) (f32.const 0x0p+0))
-  (f32.const -0x0p+0)
+  (invoke "f32.no_fold_neg_add" (f32.const 0) (f32.const 0))
+  (f32.const -0)
 )
 (assert_return
-  (invoke "f64.no_fold_neg_add" (f64.const -0x0p+0) (f64.const -0x0p+0))
-  (f64.const 0x0p+0)
+  (invoke "f64.no_fold_neg_add" (f64.const -0) (f64.const -0))
+  (f64.const 0)
 )
 (assert_return
-  (invoke "f64.no_fold_neg_add" (f64.const 0x0p+0) (f64.const -0x0p+0))
-  (f64.const -0x0p+0)
+  (invoke "f64.no_fold_neg_add" (f64.const 0) (f64.const -0))
+  (f64.const -0)
 )
 (assert_return
-  (invoke "f64.no_fold_neg_add" (f64.const -0x0p+0) (f64.const 0x0p+0))
-  (f64.const -0x0p+0)
+  (invoke "f64.no_fold_neg_add" (f64.const -0) (f64.const 0))
+  (f64.const -0)
 )
 (assert_return
-  (invoke "f64.no_fold_neg_add" (f64.const 0x0p+0) (f64.const 0x0p+0))
-  (f64.const -0x0p+0)
+  (invoke "f64.no_fold_neg_add" (f64.const 0) (f64.const 0))
+  (f64.const -0)
 )
 (module binary
   "\00\61\73\6d\01\00\00\00\01\8d\80\80\80\00\02\60"
@@ -3758,36 +3609,36 @@
   "\a0\0b"
 )
 (assert_return
-  (invoke "f32.no_fold_add_neg_neg" (f32.const -0x0p+0) (f32.const -0x0p+0))
-  (f32.const 0x0p+0)
+  (invoke "f32.no_fold_add_neg_neg" (f32.const -0) (f32.const -0))
+  (f32.const 0)
 )
 (assert_return
-  (invoke "f32.no_fold_add_neg_neg" (f32.const 0x0p+0) (f32.const -0x0p+0))
-  (f32.const 0x0p+0)
+  (invoke "f32.no_fold_add_neg_neg" (f32.const 0) (f32.const -0))
+  (f32.const 0)
 )
 (assert_return
-  (invoke "f32.no_fold_add_neg_neg" (f32.const -0x0p+0) (f32.const 0x0p+0))
-  (f32.const 0x0p+0)
+  (invoke "f32.no_fold_add_neg_neg" (f32.const -0) (f32.const 0))
+  (f32.const 0)
 )
 (assert_return
-  (invoke "f32.no_fold_add_neg_neg" (f32.const 0x0p+0) (f32.const 0x0p+0))
-  (f32.const -0x0p+0)
+  (invoke "f32.no_fold_add_neg_neg" (f32.const 0) (f32.const 0))
+  (f32.const -0)
 )
 (assert_return
-  (invoke "f64.no_fold_add_neg_neg" (f64.const -0x0p+0) (f64.const -0x0p+0))
-  (f64.const 0x0p+0)
+  (invoke "f64.no_fold_add_neg_neg" (f64.const -0) (f64.const -0))
+  (f64.const 0)
 )
 (assert_return
-  (invoke "f64.no_fold_add_neg_neg" (f64.const 0x0p+0) (f64.const -0x0p+0))
-  (f64.const 0x0p+0)
+  (invoke "f64.no_fold_add_neg_neg" (f64.const 0) (f64.const -0))
+  (f64.const 0)
 )
 (assert_return
-  (invoke "f64.no_fold_add_neg_neg" (f64.const -0x0p+0) (f64.const 0x0p+0))
-  (f64.const 0x0p+0)
+  (invoke "f64.no_fold_add_neg_neg" (f64.const -0) (f64.const 0))
+  (f64.const 0)
 )
 (assert_return
-  (invoke "f64.no_fold_add_neg_neg" (f64.const 0x0p+0) (f64.const 0x0p+0))
-  (f64.const -0x0p+0)
+  (invoke "f64.no_fold_add_neg_neg" (f64.const 0) (f64.const 0))
+  (f64.const -0)
 )
 (module binary
   "\00\61\73\6d\01\00\00\00\01\8b\80\80\80\00\02\60"
@@ -3799,24 +3650,12 @@
   "\00\00\20\00\8c\20\00\92\0b\88\80\80\80\00\00\20"
   "\00\9a\20\00\a0\0b"
 )
-(assert_return
-  (invoke "f32.no_fold_add_neg" (f32.const 0x0p+0))
-  (f32.const 0x0p+0)
-)
-(assert_return
-  (invoke "f32.no_fold_add_neg" (f32.const -0x0p+0))
-  (f32.const 0x0p+0)
-)
+(assert_return (invoke "f32.no_fold_add_neg" (f32.const 0)) (f32.const 0))
+(assert_return (invoke "f32.no_fold_add_neg" (f32.const -0)) (f32.const 0))
 (assert_return_canonical_nan (invoke "f32.no_fold_add_neg" (f32.const inf)))
 (assert_return_canonical_nan (invoke "f32.no_fold_add_neg" (f32.const -inf)))
-(assert_return
-  (invoke "f64.no_fold_add_neg" (f64.const 0x0p+0))
-  (f64.const 0x0p+0)
-)
-(assert_return
-  (invoke "f64.no_fold_add_neg" (f64.const -0x0p+0))
-  (f64.const 0x0p+0)
-)
+(assert_return (invoke "f64.no_fold_add_neg" (f64.const 0)) (f64.const 0))
+(assert_return (invoke "f64.no_fold_add_neg" (f64.const -0)) (f64.const 0))
 (assert_return_canonical_nan (invoke "f64.no_fold_add_neg" (f64.const inf)))
 (assert_return_canonical_nan (invoke "f64.no_fold_add_neg" (f64.const -inf)))
 (module binary
@@ -3832,44 +3671,44 @@
   "\a0\0b"
 )
 (assert_return
-  (invoke "f32.no_fold_6x_via_add" (f32.const -0x1.598a0cp+99))
-  (f32.const -0x1.03278ap+102)
+  (invoke "f32.no_fold_6x_via_add" (f32.const -8.555_137_345_589_493e+29))
+  (f32.const -5.133_082_709_585_150_7e+30)
 )
 (assert_return
-  (invoke "f32.no_fold_6x_via_add" (f32.const -0x1.d3e7acp-77))
-  (f32.const -0x1.5eedc2p-74)
+  (invoke "f32.no_fold_6x_via_add" (f32.const -1.209_505_994_572_917_2e-23))
+  (f32.const -7.257_036_282_981_865e-23)
 )
 (assert_return
-  (invoke "f32.no_fold_6x_via_add" (f32.const 0x1.00fa02p-77))
-  (f32.const 0x1.817702p-75)
+  (invoke "f32.no_fold_6x_via_add" (f32.const 6.642_689_238_252_199e-24))
+  (f32.const 3.985_613_385_179_138_4e-23)
 )
 (assert_return
-  (invoke "f32.no_fold_6x_via_add" (f32.const -0x1.51f434p-31))
-  (f32.const -0x1.faee4cp-29)
+  (invoke "f32.no_fold_6x_via_add" (f32.const -6.147_345_965_601_402_9e-10))
+  (f32.const -3.688_407_357_316_236_8e-09)
 )
 (assert_return
-  (invoke "f32.no_fold_6x_via_add" (f32.const -0x1.00328ap+80))
-  (f32.const -0x1.804bcep+82)
+  (invoke "f32.no_fold_6x_via_add" (f32.const -1.209_858_100_766_291_9e+24))
+  (f32.const -7.259_148_316_367_375_2e+24)
 )
 (assert_return
-  (invoke "f64.no_fold_6x_via_add" (f64.const -0x1.310e15acaffe6p+68))
-  (f64.const -0x1.c995208307fdap+70)
+  (invoke "f64.no_fold_6x_via_add" (f64.const -3.517_044_906_027_713_8e+20))
+  (f64.const -2.110_226_943_616_628_6e+21)
 )
 (assert_return
-  (invoke "f64.no_fold_6x_via_add" (f64.const -0x1.aad62c78fa9b4p-535))
-  (f64.const -0x1.4020a15abbf46p-532)
+  (invoke "f64.no_fold_6x_via_add" (f64.const -1.482_429_410_986_873_4e-161))
+  (f64.const -8.894_576_465_921_239_1e-161)
 )
 (assert_return
-  (invoke "f64.no_fold_6x_via_add" (f64.const -0x1.f8fbfa94f6ab2p+271))
-  (f64.const -0x1.7abcfbefb9005p+274)
+  (invoke "f64.no_fold_6x_via_add" (f64.const -7.484_567_838_781_002_8e+81))
+  (f64.const -4.490_740_703_268_601_4e+82)
 )
 (assert_return
-  (invoke "f64.no_fold_6x_via_add" (f64.const 0x1.756ccc2830a8ep+751))
-  (f64.const 0x1.1811991e247ebp+754)
+  (invoke "f64.no_fold_6x_via_add" (f64.const 1.727_786_819_293_606_7e+226))
+  (f64.const 1.036_672_091_576_164_1e+227)
 )
 (assert_return
-  (invoke "f64.no_fold_6x_via_add" (f64.const -0x1.8fd1ab1d2402ap+234))
-  (f64.const -0x1.2bdd4055db01fp+237)
+  (invoke "f64.no_fold_6x_via_add" (f64.const -4.311_639_752_519_561e+70))
+  (f64.const -2.586_983_851_511_736_4e+71)
 )
 (module binary
   "\00\61\73\6d\01\00\00\00\01\8f\80\80\80\00\02\60"
@@ -3883,83 +3722,83 @@
 )
 (assert_return
   (invoke "f32.no_fold_div_div"
-    (f32.const -0x1.f70228p+78)
-    (f32.const -0x1.fbc612p-16)
-    (f32.const -0x1.8c379p+10)
+    (f32.const -5.938_475_291_688_351_2e+23)
+    (f32.const -3.026_567_173_947_114_5e-05)
+    (f32.const -1_584.868_164_062_5)
   )
-  (f32.const -0x1.47b43cp+83)
+  (f32.const -1.238_030_861_829_827_2e+25)
 )
 (assert_return
   (invoke "f32.no_fold_div_div"
-    (f32.const 0x1.d29d2ep-70)
-    (f32.const 0x1.f3a17ep+110)
-    (f32.const -0x1.64d41p-112)
+    (f32.const 1.543_896_161_645_517_7e-21)
+    (f32.const 2.533_429_280_374_554_4e+33)
+    (f32.const -2.684_478_285_682_781_1e-34)
   )
-  (f32.const -0x0p+0)
+  (f32.const -0)
 )
 (assert_return
   (invoke "f32.no_fold_div_div"
-    (f32.const 0x1.867f98p+43)
-    (f32.const 0x1.30acfcp-105)
-    (f32.const 0x1.e210d8p+105)
+    (f32.const 13_417_423_306_752)
+    (f32.const 2.933_920_464_447_575_3e-32)
+    (f32.const 7.638_637_444_001_917_8e+31)
   )
   (f32.const inf)
 )
 (assert_return
   (invoke "f32.no_fold_div_div"
-    (f32.const -0x1.c4001ap-14)
-    (f32.const -0x1.9beb6cp+124)
-    (f32.const -0x1.74f34cp-43)
+    (f32.const -0.000_107_765_292_341_355_23)
+    (f32.const -3.422_094_290_809_958_1e+37)
+    (f32.const -1.656_232_388_649_175_9e-13)
   )
-  (f32.const -0x1.819874p-96)
+  (f32.const -1.901_132_693_573_588_8e-29)
 )
 (assert_return
   (invoke "f32.no_fold_div_div"
-    (f32.const 0x1.db0e6ep+46)
-    (f32.const 0x1.55eea2p+56)
-    (f32.const -0x1.f3134p+124)
+    (f32.const 130_582_499_557_376)
+    (f32.const 96_245_346_610_446_336)
+    (f32.const -4.146_154_510_069_998_9e+37)
   )
-  (f32.const -0x1.6cep-135)
+  (f32.const -3.272_312_173_891_312_8e-41)
 )
 (assert_return
   (invoke "f64.no_fold_div_div"
-    (f64.const 0x1.b4dc8ec3c7777p+337)
-    (f64.const 0x1.9f95ac2d1863p+584)
-    (f64.const -0x1.d4318abba341ep-782)
+    (f64.const 4.777_628_746_710_143_4e+101)
+    (f64.const 1.027_867_204_204_040_1e+176)
+    (f64.const -7.189_998_949_888_839_8e-236)
   )
-  (f64.const -0x1.2649159d87e02p+534)
+  (f64.const -6.464_673_011_878_798_9e+160)
 )
 (assert_return
   (invoke "f64.no_fold_div_div"
-    (f64.const -0x1.ac53af5eb445fp+791)
-    (f64.const 0x1.8549c0a4ceb13p-29)
-    (f64.const 0x1.64e384003c801p+316)
+    (f64.const -2.179_023_678_387_571_4e+238)
+    (f64.const 2.832_443_684_461_657_6e-09)
+    (f64.const 1.861_107_682_598_687e+95)
   )
-  (f64.const -0x1.9417cdccbae91p+503)
+  (f64.const -4.133_606_807_992_067_1e+151)
 )
 (assert_return
   (invoke "f64.no_fold_div_div"
-    (f64.const -0x1.d2685afb27327p+2)
-    (f64.const -0x1.abb1eeed3dbebp+880)
-    (f64.const 0x1.a543e2e6968a3p+170)
+    (f64.const -7.287_619_347_826_683_3)
+    (f64.const -1.346_760_731_673_985_5e+265)
+    (f64.const 2.462_719_007_013_688e+51)
   )
-  (f64.const 0x0.0000002a69a5fp-1022)
+  (f64.const 2.197_254_540_070_561_1e-316)
 )
 (assert_return
   (invoke "f64.no_fold_div_div"
-    (f64.const -0x1.47ddede78ad1cp+825)
-    (f64.const 0x1.6d932d070a367p-821)
-    (f64.const 0x1.79cf18cc64fp+961)
+    (f64.const -2.865_523_978_629_633_2e+248)
+    (f64.const 1.021_198_037_063_941_4e-247)
+    (f64.const 2.876_458_648_332_401e+289)
   )
   (f64.const -inf)
 )
 (assert_return
   (invoke "f64.no_fold_div_div"
-    (f64.const -0x1.f73d4979a9379p-888)
-    (f64.const 0x1.4d83b53e97788p-596)
-    (f64.const -0x1.f8f86c9603b5bp-139)
+    (f64.const -9.525_735_602_663_874e-268)
+    (f64.const 5.023_394_881_663_179_6e-180)
+    (f64.const -2.830_457_022_822_107_7e-42)
   )
-  (f64.const 0x1.87a7bd89c586cp-154)
+  (f64.const 6.699_534_674_970_116_3e-47)
 )
 (module binary
   "\00\61\73\6d\01\00\00\00\01\91\80\80\80\00\02\60"
@@ -3974,93 +3813,93 @@
 )
 (assert_return
   (invoke "f32.no_fold_mul_divs"
-    (f32.const -0x1.c483bep-109)
-    (f32.const 0x1.ee1c3cp-92)
-    (f32.const 0x1.800756p-88)
-    (f32.const -0x1.95b972p+4)
+    (f32.const -2.723_473_290_390_395_1e-33)
+    (f32.const 3.897_842_910_644_175_3e-28)
+    (f32.const 4.847_123_091_321_452_5e-27)
+    (f32.const -25.357_774_734_497_07)
   )
-  (f32.const 0x1.bbd30cp-110)
+  (f32.const 1.335_585_477_473_751_8e-33)
 )
 (assert_return
   (invoke "f32.no_fold_mul_divs"
-    (f32.const -0x1.0f4262p+102)
-    (f32.const 0x1.248498p+25)
-    (f32.const 0x1.f66a7cp-17)
-    (f32.const 0x1.897fc8p-3)
+    (f32.const -5.372_844_131_686_041_6e+30)
+    (f32.const 38_340_912)
+    (f32.const 1.497_316_225_140_821_2e-05)
+    (f32.const 0.192_138_254_642_486_57)
   )
-  (f32.const -0x1.2f1aa4p+63)
+  (f32.const -1.092_047_483_139_679_8e+19)
 )
 (assert_return
   (invoke "f32.no_fold_mul_divs"
-    (f32.const -0x1.df5f22p+33)
-    (f32.const -0x1.fcee3ep+39)
-    (f32.const -0x1.9ea914p+29)
-    (f32.const -0x1.2c4d3p+10)
+    (f32.const -16_085_042_176)
+    (f32.const -1_092_920_213_504)
+    (f32.const -869_606_016)
+    (f32.const -1_201.206_054_687_5)
   )
-  (f32.const 0x1.4cf51cp+13)
+  (f32.const 10_654.638_671_875)
 )
 (assert_return
   (invoke "f32.no_fold_mul_divs"
-    (f32.const -0x1.f568bcp+109)
-    (f32.const 0x1.d9963p-34)
-    (f32.const 0x1.37a87ap-16)
-    (f32.const 0x1.a1524ap+78)
+    (f32.const -1.271_223_140_439_102_1e+33)
+    (f32.const 1.076_811_417_810_574_8e-10)
+    (f32.const 1.857_627_103_163_395_1e-05)
+    (f32.const 4.926_861_971_581_612_6e+23)
   )
   (f32.const -inf)
 )
 (assert_return
   (invoke "f32.no_fold_mul_divs"
-    (f32.const 0x1.3dd592p-53)
-    (f32.const -0x1.332c22p-64)
-    (f32.const 0x1.b01064p-91)
-    (f32.const 0x1.92bb3ap-36)
+    (f32.const 1.378_386_376_536_477_6e-16)
+    (f32.const -6.504_628_450_864_498_9e-20)
+    (f32.const 6.816_768_371_365_373_1e-28)
+    (f32.const 2.289_262_703_014_660_6e-11)
   )
-  (f32.const -0x1.1c2dbp-44)
+  (f32.const -6.310_029_538_811_323_7e-14)
 )
 (assert_return
   (invoke "f64.no_fold_mul_divs"
-    (f64.const -0x1.363d6764f7b12p-819)
-    (f64.const -0x1.ed5471f660b5fp-464)
-    (f64.const -0x1.671b0a7f3a42p+547)
-    (f64.const 0x1.0633be34ba1f2p+186)
+    (f64.const -3.466_499_805_233_368_9e-247)
+    (f64.const -4.045_567_512_248_635e-140)
+    (f64.const -6.462_341_070_607_592_3e+164)
+    (f64.const 1.004_558_953_335_407_4e+56)
   )
-  (f64.const -0x1.b8fa2b76baeebp+5)
+  (f64.const -55.122_153_213_100_169)
 )
 (assert_return
   (invoke "f64.no_fold_mul_divs"
-    (f64.const -0x1.37880182e0fa8p+115)
-    (f64.const 0x1.f842631576147p-920)
-    (f64.const -0x1.999372231d156p+362)
-    (f64.const -0x1.d5db481ab9554p+467)
+    (f64.const -5.054_883_907_636_325_5e+34)
+    (f64.const 2.222_378_164_997_627_5e-277)
+    (f64.const -1.502_979_037_110_085_2e+109)
+    (f64.const -6.994_123_759_538_121_2e+140)
   )
   (f64.const -inf)
 )
 (assert_return
   (invoke "f64.no_fold_mul_divs"
-    (f64.const -0x1.9a747c8d4b541p+308)
-    (f64.const -0x1.99092ad6bbdc8p+192)
-    (f64.const -0x1.cb23755c20101p-140)
-    (f64.const -0x1.de8716f6b0b6ap+732)
+    (f64.const -8.361_116_536_344_947_2e+92)
+    (f64.const -1.002_952_887_606_756_7e+58)
+    (f64.const -1.286_780_176_603_877_2e-42)
+    (f64.const -4.223_027_774_688_375_3e+220)
   )
-  (f64.const 0x1.ecf584c8466a5p-757)
+  (f64.const 2.540_178_100_556_387e-228)
 )
 (assert_return
   (invoke "f64.no_fold_mul_divs"
-    (f64.const -0x1.c424b2ece903dp+129)
-    (f64.const -0x1.568ce281db37fp-347)
-    (f64.const 0x1.53900b99fd3dp-957)
-    (f64.const 0x1.5c33952254dadp+223)
+    (f64.const -1.202_003_211_641_119_3e+39)
+    (f64.const -4.667_409_771_338_768_9e-105)
+    (f64.const 1.088_865_237_654_008_5e-288)
+    (f64.const 1.833_494_866_651_721_6e+67)
   )
-  (f64.const 0x0p+0)
+  (f64.const 0)
 )
 (assert_return
   (invoke "f64.no_fold_mul_divs"
-    (f64.const 0x1.a8ec2cecb32a9p-18)
-    (f64.const 0x1.58acab0051851p-277)
-    (f64.const 0x1.35e87c9077f7fp-620)
-    (f64.const -0x1.925ee37ffb386p+352)
+    (f64.const 6.331_839_568_840_418_9e-06)
+    (f64.const 5.544_474_241_905_778_2e-84)
+    (f64.const 2.782_247_248_035_909_7e-187)
+    (f64.const -1.441_932_108_189_302_2e+106)
   )
-  (f64.const -0x1.e6286970b31bfp-714)
+  (f64.const -2.203_537_477_074_651_8e-215)
 )
 (module binary
   "\00\61\73\6d\01\00\00\00\01\8f\80\80\80\00\02\60"
@@ -4075,83 +3914,83 @@
 )
 (assert_return
   (invoke "f32.no_fold_add_divs"
-    (f32.const 0x1.795e7p+8)
-    (f32.const -0x1.48a5eep-5)
-    (f32.const -0x1.9a244cp+126)
+    (f32.const 377.368_896_484_375)
+    (f32.const -0.040_118_183_940_649_033)
+    (f32.const -1.362_929_856_054_631_6e+38)
   )
-  (f32.const -0x1.d709b6p-119)
+  (f32.const -2.768_512_148_377_355e-36)
 )
 (assert_return
   (invoke "f32.no_fold_add_divs"
-    (f32.const -0x1.ae89e8p-63)
-    (f32.const -0x1.e9903ep-49)
-    (f32.const -0x1.370a8cp+47)
+    (f32.const -1.823_402_304_123_743_5e-19)
+    (f32.const -3.397_028_811_336_923_7e-15)
+    (f32.const -170_996_707_360_768)
   )
-  (f32.const 0x1.92f3f6p-96)
+  (f32.const 1.986_711_541_115_712_5e-29)
 )
 (assert_return
   (invoke "f32.no_fold_add_divs"
-    (f32.const -0x1.626408p-46)
-    (f32.const 0x1.2ee5b2p-64)
-    (f32.const -0x1.ecefaap+48)
+    (f32.const -1.967_263_835_557_855_9e-14)
+    (f32.const 6.414_098_702_699_398_5e-20)
+    (f32.const -541_989_070_176_256)
   )
-  (f32.const 0x1.701864p-95)
+  (f32.const 3.629_699_656_717_650_7e-29)
 )
 (assert_return
   (invoke "f32.no_fold_add_divs"
-    (f32.const -0x1.061d3p-101)
-    (f32.const 0x1.383492p-98)
-    (f32.const -0x1.1d92d2p+88)
+    (f32.const -4.038_505_822_193_515_2e-31)
+    (f32.const 3.848_228_081_428_171_2e-30)
+    (f32.const -3.452_371_979_129_237_6e+26)
   )
-  (f32.const 0x0p+0)
+  (f32.const 0)
 )
 (assert_return
   (invoke "f32.no_fold_add_divs"
-    (f32.const 0x1.1ea39ep-10)
-    (f32.const 0x1.a7fffep-3)
-    (f32.const 0x1.6fc574p-123)
+    (f32.const 0.001_093_441_504_053_771_5)
+    (f32.const 0.207_031_235_098_838_81)
+    (f32.const 1.350_978_396_990_298_6e-37)
   )
-  (f32.const 0x1.28b2dep+120)
+  (f32.const 1.540_547_727_687_837_1e+36)
 )
 (assert_return
   (invoke "f64.no_fold_add_divs"
-    (f64.const -0x1.c5fcc3273b136p+430)
-    (f64.const 0x1.892a09eed8f6fp+434)
-    (f64.const 0x1.8258b71e64397p+911)
+    (f64.const -4.917_019_432_143_76e+129)
+    (f64.const 6.813_215_632_201_901_9e+130)
+    (f64.const 2.612_541_010_023_778_4e+274)
   )
-  (f64.const 0x1.e36eb9706ad82p-478)
+  (f64.const 2.419_680_175_252_058_4e-144)
 )
 (assert_return
   (invoke "f64.no_fold_add_divs"
-    (f64.const -0x1.2215d4061b5b3p+53)
-    (f64.const 0x1.fb6184d97f27cp+5)
-    (f64.const -0x1.f3bb59dacc0ebp-957)
+    (f64.const -10_206_467_953_224_550)
+    (f64.const 63.422_616_671_746_226)
+    (f64.const -1.602_474_786_981_489_2e-288)
   )
-  (f64.const 0x1.2934eb0118be3p+1009)
+  (f64.const 6.369_190_976_445_851e+303)
 )
 (assert_return
   (invoke "f64.no_fold_add_divs"
-    (f64.const -0x1.e7a4533741d8ep-967)
-    (f64.const 0x1.a519bb7feb802p-976)
-    (f64.const 0x1.1f8a43454e51ap+504)
+    (f64.const -1.527_056_963_310_983_7e-291)
+    (f64.const 2.575_550_332_923_251_4e-294)
+    (f64.const 5.882_693_916_421_491_6e+151)
   )
-  (f64.const 0x0p+0)
+  (f64.const 0)
 )
 (assert_return
   (invoke "f64.no_fold_add_divs"
-    (f64.const 0x1.991c6cf93e2b4p+313)
-    (f64.const -0x1.f2f7432698d11p+329)
-    (f64.const 0x1.0d8c1b2453617p-126)
+    (f64.const 2.666_796_487_439_464_2e+94)
+    (f64.const -2.131_569_252_493_657_8e+99)
+    (f64.const 1.237_700_451_868_001_2e-38)
   )
-  (f64.const -0x1.d9e1d84ddd1d4p+455)
+  (f64.const -1.722_179_693_246_253_4e+137)
 )
 (assert_return
   (invoke "f64.no_fold_add_divs"
-    (f64.const -0x1.d436849dc1271p-728)
-    (f64.const 0x1.19d1c1450e52dp-755)
-    (f64.const 0x1.fa1be69ea06fep-70)
+    (f64.const -1.295_288_837_728_821_6e-219)
+    (f64.const 5.808_769_259_900_048_3e-228)
+    (f64.const 1.674_574_169_944_375_6e-21)
   )
-  (f64.const -0x1.d9a9b1c2f5623p-659)
+  (f64.const -7.735_034_106_987_796_5e-199)
 )
 (module binary
   "\00\61\73\6d\01\00\00\00\01\8b\80\80\80\00\02\60"
@@ -4164,43 +4003,43 @@
   "\0b\88\80\80\80\00\00\20\00\20\00\a2\9f\0b"
 )
 (assert_return
-  (invoke "f32.no_fold_sqrt_square" (f32.const -0x1.5cb316p-66))
-  (f32.const 0x1.5cb322p-66)
+  (invoke "f32.no_fold_sqrt_square" (f32.const -1.846_000_070_665_125_3e-20))
+  (f32.const 1.846_001_040_017_405_7e-20)
 )
 (assert_return
-  (invoke "f32.no_fold_sqrt_square" (f32.const -0x1.b0f9e4p-73))
-  (f32.const 0x1.b211b2p-73)
+  (invoke "f32.no_fold_sqrt_square" (f32.const -1.790_747_323_900_843_7e-22))
+  (f32.const 1.795_267_812_432_122_1e-22)
 )
 (assert_return
-  (invoke "f32.no_fold_sqrt_square" (f32.const -0x1.de417cp-71))
-  (f32.const 0x1.de65b8p-71)
+  (invoke "f32.no_fold_sqrt_square" (f32.const -7.912_078_484_555_784_6e-22))
+  (f32.const 7.914_420_076_157_970_2e-22)
 )
 (assert_return
-  (invoke "f32.no_fold_sqrt_square" (f32.const 0x1.64c872p-86))
-  (f32.const 0x0p+0)
+  (invoke "f32.no_fold_sqrt_square" (f32.const 1.801_293_773_222_204_8e-26))
+  (f32.const 0)
 )
 (assert_return
-  (invoke "f32.no_fold_sqrt_square" (f32.const 0x1.e199e4p+108))
+  (invoke "f32.no_fold_sqrt_square" (f32.const 6.105_019_681_752_109_5e+32))
   (f32.const inf)
 )
 (assert_return
-  (invoke "f64.no_fold_sqrt_square" (f64.const 0x1.1759d657203fdp-529))
-  (f64.const 0x1.1759dd57545f3p-529)
+  (invoke "f64.no_fold_sqrt_square" (f64.const 6.209_297_167_747_495_9e-160))
+  (f64.const 6.209_299_542_179_726_5e-160)
 )
 (assert_return
-  (invoke "f64.no_fold_sqrt_square" (f64.const -0x1.4c68de1c78d83p-514))
-  (f64.const 0x1.4c68de1c78d81p-514)
+  (invoke "f64.no_fold_sqrt_square" (f64.const -2.421_117_530_373_894_5e-155))
+  (f64.const 2.421_117_530_373_893_7e-155)
 )
 (assert_return
-  (invoke "f64.no_fold_sqrt_square" (f64.const -0x1.214736edb6e1ep-521))
-  (f64.const 0x1.214736ed9cf8dp-521)
+  (invoke "f64.no_fold_sqrt_square" (f64.const -1.646_068_761_187_564_5e-157))
+  (f64.const 1.646_068_761_153_236_7e-157)
 )
 (assert_return
-  (invoke "f64.no_fold_sqrt_square" (f64.const -0x1.0864b9f68457p-616))
-  (f64.const 0x0p+0)
+  (invoke "f64.no_fold_sqrt_square" (f64.const -3.797_811_613_378_828e-186))
+  (f64.const 0)
 )
 (assert_return
-  (invoke "f64.no_fold_sqrt_square" (f64.const 0x1.b2a9855995abap+856))
+  (invoke "f64.no_fold_sqrt_square" (f64.const 8.158_084_284_605_591_9e+257))
   (f64.const inf)
 )
 (module binary
@@ -4215,71 +4054,71 @@
 )
 (assert_return_canonical_nan
   (invoke "f32.no_fold_mul_sqrts"
-    (f32.const 0x1.dddda8p-125)
-    (f32.const -0x1.25d22ap-83)
+    (f32.const 4.388_504_694_742_145_5e-38)
+    (f32.const -1.186_733_379_828_126_6e-25)
   )
 )
 (assert_return
   (invoke "f32.no_fold_mul_sqrts"
-    (f32.const 0x1.418d14p-92)
-    (f32.const 0x1.c6535cp-32)
+    (f32.const 2.536_590_811_126_416e-28)
+    (f32.const 4.132_067_465_967_281_8e-10)
   )
-  (f32.const 0x1.7e373ap-62)
+  (f32.const 3.237_493_152_183_345_2e-19)
 )
 (assert_return
   (invoke "f32.no_fold_mul_sqrts"
-    (f32.const 0x1.4de7ep-88)
-    (f32.const 0x1.84ff18p+6)
+    (f32.const 4.214_483_223_167_433_5e-27)
+    (f32.const 97.249_114_990_234_375)
   )
-  (f32.const 0x1.686668p-41)
+  (f32.const 6.401_990_482_879_371_7e-13)
 )
 (assert_return
   (invoke "f32.no_fold_mul_sqrts"
-    (f32.const 0x1.78091ep+101)
-    (f32.const 0x1.81feb8p-9)
+    (f32.const 3.724_076_342_278_296_4e+30)
+    (f32.const 0.002_944_908_104_836_940_8)
   )
-  (f32.const 0x1.7cfb98p+46)
+  (f32.const 104_723_751_370_752)
 )
 (assert_return
   (invoke "f32.no_fold_mul_sqrts"
-    (f32.const 0x1.583ap-56)
-    (f32.const 0x1.14ba2ap-9)
+    (f32.const 1.866_055_934_448_586_4e-17)
+    (f32.const 0.002_111_261_012_032_628_1)
   )
-  (f32.const 0x1.b47a8ep-33)
+  (f32.const 1.984_875_458_438_395_4e-10)
 )
 (assert_return_canonical_nan
   (invoke "f64.no_fold_mul_sqrts"
-    (f64.const -0x1.d1144cc28cdbep-635)
-    (f64.const -0x1.bf9bc373d3b6ap-8)
+    (f64.const -1.274_206_436_977_286_2e-191)
+    (f64.const -0.006_829_962_938_197_245_8)
   )
 )
 (assert_return
   (invoke "f64.no_fold_mul_sqrts"
-    (f64.const 0x1.5a7eb976bebc9p-643)
-    (f64.const 0x1.f30cb8865a4cap-404)
+    (f64.const 3.708_256_926_952_753_4e-194)
+    (f64.const 4.718_300_285_701_504_3e-122)
   )
-  (f64.const 0x1.260a1032d6e76p-523)
+  (f64.const 4.182_902_068_886_595_4e-158)
 )
 (assert_return
   (invoke "f64.no_fold_mul_sqrts"
-    (f64.const 0x1.711a0c1707935p-89)
-    (f64.const 0x1.6fb5de51a20d3p-913)
+    (f64.const 2.329_359_505_918_655_1e-27)
+    (f64.const 2.074_339_964_280_636_4e-275)
   )
-  (f64.const 0x1.7067ca28e31ecp-501)
+  (f64.const 2.198_154_570_157_445_2e-151)
 )
 (assert_return
   (invoke "f64.no_fold_mul_sqrts"
-    (f64.const 0x1.fb0bbea33b076p-363)
-    (f64.const 0x1.d963b34894158p-573)
+    (f64.const 1.054_189_933_628_943_7e-109)
+    (f64.const 5.981_238_198_728_029_7e-173)
   )
-  (f64.const 0x1.e9edc1fa624afp-468)
+  (f64.const 2.511_047_809_129_887e-141)
 )
 (assert_return
   (invoke "f64.no_fold_mul_sqrts"
-    (f64.const 0x1.8676eab7a4d0dp+24)
-    (f64.const 0x1.75a58231ba7a5p+513)
+    (f64.const 25_589_482.717_358_638)
+    (f64.const 3.913_891_207_119_901_8e+154)
   )
-  (f64.const 0x1.0e16aebe203b3p+269)
+  (f64.const 1.000_771_959_050_695_5e+81)
 )
 (module binary
   "\00\61\73\6d\01\00\00\00\01\8d\80\80\80\00\02\60"
@@ -4293,71 +4132,71 @@
 )
 (assert_return_canonical_nan
   (invoke "f32.no_fold_div_sqrts"
-    (f32.const -0x1.bea9bap+25)
-    (f32.const -0x1.db776ep-58)
+    (f32.const -58_545_012)
+    (f32.const -6.443_772_954_144_731_6e-18)
   )
 )
 (assert_return
   (invoke "f32.no_fold_div_sqrts"
-    (f32.const 0x1.b983b6p+32)
-    (f32.const 0x1.901f1ep+27)
+    (f32.const 7_407_384_064)
+    (f32.const 209_778_928)
   )
-  (f32.const 0x1.7c4df6p+2)
+  (f32.const 5.942_258_358_001_709)
 )
 (assert_return
   (invoke "f32.no_fold_div_sqrts"
-    (f32.const 0x1.d45e72p-120)
-    (f32.const 0x1.ab49ccp+15)
+    (f32.const 1.376_412_569_478_730_6e-36)
+    (f32.const 54_692.898_437_5)
   )
-  (f32.const 0x1.7b0b04p-68)
+  (f32.const 5.016_592_728_986_257e-21)
 )
 (assert_return
   (invoke "f32.no_fold_div_sqrts"
-    (f32.const 0x1.b2e444p+59)
-    (f32.const 0x1.5b8b16p-30)
+    (f32.const 9.792_889_648_106_700_8e+17)
+    (f32.const 1.264_355_176_111_564_6e-09)
   )
-  (f32.const 0x1.94fca8p+44)
+  (f32.const 27_830_490_497_024)
 )
 (assert_return
   (invoke "f32.no_fold_div_sqrts"
-    (f32.const 0x1.835aa6p-112)
-    (f32.const 0x1.d17128p-103)
+    (f32.const 2.914_128_326_271_444_6e-34)
+    (f32.const 1.792_817_434_297_860_3e-31)
   )
-  (f32.const 0x1.4a468p-5)
+  (f32.const 0.040_316_820_144_653_32)
 )
 (assert_return_canonical_nan
   (invoke "f64.no_fold_div_sqrts"
-    (f64.const -0x1.509fc16411167p-711)
-    (f64.const -0x1.9c4255f5d6517p-187)
+    (f64.const -1.220_613_731_988_302_2e-214)
+    (f64.const -8.209_583_449_676_082_9e-57)
   )
 )
 (assert_return
   (invoke "f64.no_fold_div_sqrts"
-    (f64.const 0x1.b6897bddac76p-587)
-    (f64.const 0x1.104578b4c91f3p+541)
+    (f64.const 3.381_885_246_230_582_4e-177)
+    (f64.const 7.655_783_976_315_048e+162)
   )
-  (f64.const 0x1.44e4f21f26cc9p-564)
+  (f64.const 2.101_767_142_566_568_7e-170)
 )
 (assert_return
   (invoke "f64.no_fold_div_sqrts"
-    (f64.const 0x1.ac83451b08989p+523)
-    (f64.const 0x1.8da575c6d12b8p-109)
+    (f64.const 4.596_333_567_064_751e+157)
+    (f64.const 2.393_246_784_688_304_6e-33)
   )
-  (f64.const 0x1.09c003991ce17p+316)
+  (f64.const 1.385_836_601_726_631_5e+95)
 )
 (assert_return
   (invoke "f64.no_fold_div_sqrts"
-    (f64.const 0x1.bab7836456417p-810)
-    (f64.const 0x1.1ff60d03ba607p+291)
+    (f64.const 2.532_734_097_866_808_6e-244)
+    (f64.const 4.475_305_129_961_257_9e+87)
   )
-  (f64.const 0x1.c0e6c833bf657p-551)
+  (f64.const 2.378_939_914_132_501_8e-166)
 )
 (assert_return
   (invoke "f64.no_fold_div_sqrts"
-    (f64.const 0x1.a957816ad9515p-789)
-    (f64.const 0x1.8c18a3a222ab1p+945)
+    (f64.const 5.103_070_160_197_939_2e-238)
+    (f64.const 4.601_576_690_980_825_1e+284)
   )
-  (f64.const 0x1.0948539781e92p-867)
+  (f64.const 1.053_082_600_992_449_5e-261)
 )
 (module binary
   "\00\61\73\6d\01\00\00\00\01\8d\80\80\80\00\02\60"
@@ -4372,73 +4211,73 @@
 )
 (assert_return
   (invoke "f32.no_fold_mul_sqrt_div"
-    (f32.const -0x1.f4a7cap+81)
-    (f32.const 0x1.c09adep+92)
+    (f32.const -4.728_556_806_658_255_5e+24)
+    (f32.const 8.677_281_708_846_402_5e+27)
   )
   (f32.const -inf)
 )
 (assert_return
   (invoke "f32.no_fold_mul_sqrt_div"
-    (f32.const -0x1.90bf1cp-120)
-    (f32.const 0x1.8dbe88p-97)
+    (f32.const -1.177_688_178_856_483_6e-36)
+    (f32.const 9.805_153_097_384_004_2e-30)
   )
-  (f32.const -0x0p+0)
+  (f32.const -0)
 )
 (assert_return
   (invoke "f32.no_fold_mul_sqrt_div"
-    (f32.const 0x1.8570e8p+29)
-    (f32.const 0x1.217d3p-128)
+    (f32.const 816_717_056)
+    (f32.const 3.323_170_900_355_517_7e-39)
   )
-  (f32.const 0x1.6e391ap+93)
+  (f32.const 1.416_756_814_348_236e+28)
 )
 (assert_return
   (invoke "f32.no_fold_mul_sqrt_div"
-    (f32.const -0x1.5b4652p+43)
-    (f32.const 0x1.a9d71cp+112)
+    (f32.const -11_932_267_446_272)
+    (f32.const 8.637_066_802_072_801_8e+33)
   )
-  (f32.const -0x1.0d423ap-13)
+  (f32.const -0.000_128_392_552_142_031_49)
 )
 (assert_return
   (invoke "f32.no_fold_mul_sqrt_div"
-    (f32.const -0x1.910604p+8)
-    (f32.const 0x1.0ca912p+7)
+    (f32.const -401.023_498_535_156_25)
+    (f32.const 134.330_215_454_101_56)
   )
-  (f32.const -0x1.14cdecp+5)
+  (f32.const -34.600_547_790_527_344)
 )
 (assert_return
   (invoke "f64.no_fold_mul_sqrt_div"
-    (f64.const 0x1.1dcdeb857305fp+698)
-    (f64.const 0x1.a066171c40eb9p+758)
+    (f64.const 1.468_134_622_910_490_5e+210)
+    (f64.const 2.466_074_582_285_183e+228)
   )
   (f64.const inf)
 )
 (assert_return
   (invoke "f64.no_fold_mul_sqrt_div"
-    (f64.const -0x1.8b4f1c218e2abp-827)
-    (f64.const 0x1.5e1ee65953b0bp-669)
+    (f64.const -1.725_402_201_675_802_8e-249)
+    (f64.const 5.583_554_074_713_002_5e-202)
   )
-  (f64.const -0x0p+0)
+  (f64.const -0)
 )
 (assert_return
   (invoke "f64.no_fold_mul_sqrt_div"
-    (f64.const 0x1.74ee531ddba38p-425)
-    (f64.const 0x1.f370f758857f3p+560)
+    (f64.const 1.681_281_025_602_916_6e-128)
+    (f64.const 7.362_783_602_442_128_7e+168)
   )
-  (f64.const 0x1.0aff34269583ep-705)
+  (f64.const 6.196_112_486_187_196_3e-213)
 )
 (assert_return
   (invoke "f64.no_fold_mul_sqrt_div"
-    (f64.const -0x1.27f216b0da6c5p+352)
-    (f64.const 0x1.8e0b4e0b9fd7ep-483)
+    (f64.const -1.060_548_372_993_983_6e+106)
+    (f64.const 6.225_917_836_940_72e-146)
   )
-  (f64.const -0x1.4fa558aad514ep+593)
+  (f64.const -4.250_390_082_223_376_5e+178)
 )
 (assert_return
   (invoke "f64.no_fold_mul_sqrt_div"
-    (f64.const 0x1.4c6955df9912bp+104)
-    (f64.const 0x1.0cca42c9d371ep+842)
+    (f64.const 2.633_634_969_537_309_3e+31)
+    (f64.const 3.079_141_328_585_329_9e+253)
   )
-  (f64.const 0x1.4468072f54294p-317)
+  (f64.const 4.746_142_447_510_694_7e-96)
 )
 (module binary
   "\00\61\73\6d\01\00\00\00\01\8f\80\80\80\00\02\60"
@@ -4454,19 +4293,19 @@
 )
 (assert_return
   (invoke "f32.no_flush_intermediate_subnormal"
-    (f32.const 0x1p-126)
-    (f32.const 0x1p-23)
-    (f32.const 0x1p+23)
+    (f32.const 1.175_494_350_822_287_5e-38)
+    (f32.const 1.192_092_895_507_812_5e-07)
+    (f32.const 8_388_608)
   )
-  (f32.const 0x1p-126)
+  (f32.const 1.175_494_350_822_287_5e-38)
 )
 (assert_return
   (invoke "f64.no_flush_intermediate_subnormal"
-    (f64.const 0x1p-1022)
-    (f64.const 0x1p-52)
-    (f64.const 0x1p+52)
+    (f64.const 2.225_073_858_507_201_4e-308)
+    (f64.const 2.220_446_049_250_313_1e-16)
+    (f64.const 4_503_599_627_370_496)
   )
-  (f64.const 0x1p-1022)
+  (f64.const 2.225_073_858_507_201_4e-308)
 )
 (module binary
   "\00\61\73\6d\01\00\00\00\01\93\80\80\80\00\03\60"
@@ -4490,56 +4329,59 @@
   "\94\0b"
 )
 (assert_return
-  (invoke "f32.recoding_eq" (f32.const -inf) (f32.const 0x1.8p+1))
+  (invoke "f32.recoding_eq" (f32.const -inf) (f32.const 3))
   (i32.const 1)
 )
 (assert_return
-  (invoke "f32.recoding_le" (f32.const -inf) (f32.const 0x1.8p+1))
+  (invoke "f32.recoding_le" (f32.const -inf) (f32.const 3))
   (i32.const 1)
 )
 (assert_return
-  (invoke "f32.recoding_lt" (f32.const -inf) (f32.const 0x1.8p+1))
+  (invoke "f32.recoding_lt" (f32.const -inf) (f32.const 3))
   (i32.const 0)
 )
 (assert_return
-  (invoke "f32.recoding_eq" (f32.const 0x0p+0) (f32.const 0x1p+0))
+  (invoke "f32.recoding_eq" (f32.const 0) (f32.const 1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "f32.recoding_le" (f32.const 0x0p+0) (f32.const 0x1p+0))
+  (invoke "f32.recoding_le" (f32.const 0) (f32.const 1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "f32.recoding_lt" (f32.const 0x0p+0) (f32.const 0x1p+0))
+  (invoke "f32.recoding_lt" (f32.const 0) (f32.const 1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "f64.recoding_eq" (f64.const -inf) (f64.const 0x1.8p+1))
+  (invoke "f64.recoding_eq" (f64.const -inf) (f64.const 3))
   (i32.const 1)
 )
 (assert_return
-  (invoke "f64.recoding_le" (f64.const -inf) (f64.const 0x1.8p+1))
+  (invoke "f64.recoding_le" (f64.const -inf) (f64.const 3))
   (i32.const 1)
 )
 (assert_return
-  (invoke "f64.recoding_lt" (f64.const -inf) (f64.const 0x1.8p+1))
+  (invoke "f64.recoding_lt" (f64.const -inf) (f64.const 3))
   (i32.const 0)
 )
 (assert_return
-  (invoke "f64.recoding_eq" (f64.const 0x0p+0) (f64.const 0x1p+0))
+  (invoke "f64.recoding_eq" (f64.const 0) (f64.const 1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "f64.recoding_le" (f64.const 0x0p+0) (f64.const 0x1p+0))
+  (invoke "f64.recoding_le" (f64.const 0) (f64.const 1))
   (i32.const 1)
 )
 (assert_return
-  (invoke "f64.recoding_lt" (f64.const 0x0p+0) (f64.const 0x1p+0))
+  (invoke "f64.recoding_lt" (f64.const 0) (f64.const 1))
   (i32.const 0)
 )
 (assert_return
-  (invoke "recoding_demote" (f64.const 0x1.4c8f8p-132) (f32.const 0x1.314p+10))
-  (f32.const 0x1.8c8a1cp-122)
+  (invoke "recoding_demote"
+    (f64.const 2.386_004_908_190_509_3e-40)
+    (f32.const 1_221)
+  )
+  (f32.const 2.913_312_062_965_535e-37)
 )
 (module binary
   "\00\61\73\6d\01\00\00\00\01\8f\80\80\80\00\02\60"
@@ -4555,17 +4397,17 @@
 )
 (assert_return
   (invoke "f32.no_extended_precision_div"
-    (f32.const 0x1.8p+1)
-    (f32.const 0x1.cp+2)
-    (f32.const 0x1.b6db6ep-2)
+    (f32.const 3)
+    (f32.const 7)
+    (f32.const 0.428_571_432_828_903_2)
   )
   (i32.const 1)
 )
 (assert_return
   (invoke "f64.no_extended_precision_div"
-    (f64.const 0x1.8p+1)
-    (f64.const 0x1.cp+2)
-    (f64.const 0x1.b6db6db6db6dbp-2)
+    (f64.const 3)
+    (f64.const 7)
+    (f64.const 0.428_571_428_571_428_55)
   )
   (i32.const 1)
 )
@@ -4581,14 +4423,8 @@
   "\00\00\44\00\00\00\00\00\00\20\c0\20\00\a2\44\00"
   "\00\00\00\00\00\20\40\20\00\a2\a0\0b"
 )
-(assert_return
-  (invoke "f32.no_distribute_exact" (f32.const -0x0p+0))
-  (f32.const 0x0p+0)
-)
-(assert_return
-  (invoke "f64.no_distribute_exact" (f64.const -0x0p+0))
-  (f64.const 0x0p+0)
-)
+(assert_return (invoke "f32.no_distribute_exact" (f32.const -0)) (f32.const 0))
+(assert_return (invoke "f64.no_distribute_exact" (f64.const -0)) (f64.const 0))
 (module binary
   "\00\61\73\6d\01\00\00\00\01\a9\80\80\80\00\06\60"
   "\01\7d\01\7d\60\04\7d\7d\7d\7d\01\7d\60\03\7d\7d"
@@ -4619,94 +4455,97 @@
   "\a0\0b\93\80\80\80\00\00\20\00\20\01\20\02\a2\a0"
   "\20\03\20\01\20\02\a2\a1\a3\0b"
 )
-(assert_return (invoke "f32.sqrt" (f32.const 0x1p+1)) (f32.const 0x1.6a09e6p+0))
 (assert_return
-  (invoke "f32.xkcd_sqrt_2"
-    (f32.const 0x1.8p+1)
-    (f32.const 0x1.4p+2)
-    (f32.const 0x1.921fb6p+1)
-    (f32.const 0x1.cp+2)
-  )
-  (f32.const 0x1.6a0a54p+0)
+  (invoke "f32.sqrt" (f32.const 2))
+  (f32.const 1.414_213_538_169_860_8)
 )
 (assert_return
-  (invoke "f32.sqrt" (f32.const 0x1.8p+1))
-  (f32.const 0x1.bb67aep+0)
+  (invoke "f32.xkcd_sqrt_2"
+    (f32.const 3)
+    (f32.const 5)
+    (f32.const 3.141_592_741_012_573_2)
+    (f32.const 7)
+  )
+  (f32.const 1.414_220_094_680_786_1)
+)
+(assert_return
+  (invoke "f32.sqrt" (f32.const 3))
+  (f32.const 1.732_050_776_481_628_4)
 )
 (assert_return
   (invoke "f32.xkcd_sqrt_3"
-    (f32.const 0x1p+1)
-    (f32.const 0x1.5bf0a8p+1)
-    (f32.const 0x1.921fb6p+1)
+    (f32.const 2)
+    (f32.const 2.718_281_745_910_644_5)
+    (f32.const 3.141_592_741_012_573_2)
   )
-  (f32.const 0x1.bb02d4p+0)
+  (f32.const 1.730_511_903_762_817_4)
 )
 (assert_return
-  (invoke "f32.sqrt" (f32.const 0x1.4p+2))
-  (f32.const 0x1.1e377ap+1)
+  (invoke "f32.sqrt" (f32.const 5))
+  (f32.const 2.236_068_010_330_200_2)
 )
 (assert_return
   (invoke "f32.xkcd_sqrt_5"
-    (f32.const 0x1p+1)
-    (f32.const 0x1.5bf0a8p+1)
-    (f32.const 0x1.8p+1)
+    (f32.const 2)
+    (f32.const 2.718_281_745_910_644_5)
+    (f32.const 3)
   )
-  (f32.const 0x1.1e2d58p+1)
+  (f32.const 2.235_758_781_433_105_5)
 )
 (assert_return
   (invoke "f32.xkcd_better_sqrt_5"
-    (f32.const 0x1.ap+3)
-    (f32.const 0x1p+2)
-    (f32.const 0x1.921fb6p+1)
-    (f32.const 0x1.8p+4)
+    (f32.const 13)
+    (f32.const 4)
+    (f32.const 3.141_592_741_012_573_2)
+    (f32.const 24)
   )
-  (f32.const 0x1.1e377ap+1)
+  (f32.const 2.236_068_010_330_200_2)
 )
 (assert_return
-  (invoke "f64.sqrt" (f64.const 0x1p+1))
-  (f64.const 0x1.6a09e667f3bcdp+0)
+  (invoke "f64.sqrt" (f64.const 2))
+  (f64.const 1.414_213_562_373_095_1)
 )
 (assert_return
   (invoke "f64.xkcd_sqrt_2"
-    (f64.const 0x1.8p+1)
-    (f64.const 0x1.4p+2)
-    (f64.const 0x1.921fb54442d18p+1)
-    (f64.const 0x1.cp+2)
+    (f64.const 3)
+    (f64.const 5)
+    (f64.const 3.141_592_653_589_793_1)
+    (f64.const 7)
   )
-  (f64.const 0x1.6a0a5362b055fp+0)
+  (f64.const 1.414_220_058_053_920_8)
 )
 (assert_return
-  (invoke "f64.sqrt" (f64.const 0x1.8p+1))
-  (f64.const 0x1.bb67ae8584caap+0)
+  (invoke "f64.sqrt" (f64.const 3))
+  (f64.const 1.732_050_807_568_877_2)
 )
 (assert_return
   (invoke "f64.xkcd_sqrt_3"
-    (f64.const 0x1p+1)
-    (f64.const 0x1.5bf0a8b145769p+1)
-    (f64.const 0x1.921fb54442d18p+1)
+    (f64.const 2)
+    (f64.const 2.718_281_828_459_045_1)
+    (f64.const 3.141_592_653_589_793_1)
   )
-  (f64.const 0x1.bb02d4eca8f95p+0)
+  (f64.const 1.730_511_958_864_530_1)
 )
 (assert_return
-  (invoke "f64.sqrt" (f64.const 0x1.4p+2))
-  (f64.const 0x1.1e3779b97f4a8p+1)
+  (invoke "f64.sqrt" (f64.const 5))
+  (f64.const 2.236_067_977_499_789_8)
 )
 (assert_return
   (invoke "f64.xkcd_sqrt_5"
-    (f64.const 0x1p+1)
-    (f64.const 0x1.5bf0a8b145769p+1)
-    (f64.const 0x1.8p+1)
+    (f64.const 2)
+    (f64.const 2.718_281_828_459_045_1)
+    (f64.const 3)
   )
-  (f64.const 0x1.1e2d58d8b3bcep+1)
+  (f64.const 2.235_758_882_342_884_7)
 )
 (assert_return
   (invoke "f64.xkcd_better_sqrt_5"
-    (f64.const 0x1.ap+3)
-    (f64.const 0x1p+2)
-    (f64.const 0x1.921fb54442d18p+1)
-    (f64.const 0x1.8p+4)
+    (f64.const 13)
+    (f64.const 4)
+    (f64.const 3.141_592_653_589_793_1)
+    (f64.const 24)
   )
-  (f64.const 0x1.1e3778509a5a3p+1)
+  (f64.const 2.236_067_809_445_289_3)
 )
 (module binary
   "\00\61\73\6d\01\00\00\00\01\8d\80\80\80\00\02\60"
@@ -4727,12 +4566,12 @@
   "\00\00\00\00\00\00\00\62\0d\00\0b\20\01\0b"
 )
 (assert_return
-  (invoke "f32.compute_radix" (f32.const 0x1p+0) (f32.const 0x1p+0))
-  (f32.const 0x1p+1)
+  (invoke "f32.compute_radix" (f32.const 1) (f32.const 1))
+  (f32.const 2)
 )
 (assert_return
-  (invoke "f64.compute_radix" (f64.const 0x1p+0) (f64.const 0x1p+0))
-  (f64.const 0x1p+1)
+  (invoke "f64.compute_radix" (f64.const 1) (f64.const 1))
+  (f64.const 2)
 )
 (module binary
   "\00\61\73\6d\01\00\00\00\01\8d\80\80\80\00\02\60"
@@ -4747,12 +4586,18 @@
   "\01\a2\20\01\a0\0b"
 )
 (assert_return
-  (invoke "f32.no_fold_sub1_mul_add" (f32.const 0x1p-32) (f32.const 0x1p+0))
-  (f32.const 0x0p+0)
+  (invoke "f32.no_fold_sub1_mul_add"
+    (f32.const 2.328_306_436_538_696_3e-10)
+    (f32.const 1)
+  )
+  (f32.const 0)
 )
 (assert_return
-  (invoke "f64.no_fold_sub1_mul_add" (f64.const 0x1p-64) (f64.const 0x1p+0))
-  (f64.const 0x0p+0)
+  (invoke "f64.no_fold_sub1_mul_add"
+    (f64.const 5.421_010_862_427_522_2e-20)
+    (f64.const 1)
+  )
+  (f64.const 0)
 )
 (module binary
   "\00\61\73\6d\01\00\00\00\01\8f\80\80\80\00\02\60"
@@ -4775,8 +4620,8 @@
 )
 (assert_return
   (invoke "f32.no_fold_add_le_monotonicity"
-    (f32.const 0x0p+0)
-    (f32.const 0x0p+0)
+    (f32.const 0)
+    (f32.const 0)
     (f32.const nan:0x400000)
   )
   (i32.const 0)
@@ -4791,8 +4636,8 @@
 )
 (assert_return
   (invoke "f64.no_fold_add_le_monotonicity"
-    (f64.const 0x0p+0)
-    (f64.const 0x0p+0)
+    (f64.const 0)
+    (f64.const 0)
     (f64.const nan:0x8000000000000)
   )
   (i32.const 0)
@@ -4825,35 +4670,35 @@
   "\00\20\00\20\01\66\45\0b"
 )
 (assert_return
-  (invoke "f32.not_lt" (f32.const nan:0x400000) (f32.const 0x0p+0))
+  (invoke "f32.not_lt" (f32.const nan:0x400000) (f32.const 0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "f32.not_le" (f32.const nan:0x400000) (f32.const 0x0p+0))
+  (invoke "f32.not_le" (f32.const nan:0x400000) (f32.const 0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "f32.not_gt" (f32.const nan:0x400000) (f32.const 0x0p+0))
+  (invoke "f32.not_gt" (f32.const nan:0x400000) (f32.const 0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "f32.not_ge" (f32.const nan:0x400000) (f32.const 0x0p+0))
+  (invoke "f32.not_ge" (f32.const nan:0x400000) (f32.const 0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "f64.not_lt" (f64.const nan:0x8000000000000) (f64.const 0x0p+0))
+  (invoke "f64.not_lt" (f64.const nan:0x8000000000000) (f64.const 0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "f64.not_le" (f64.const nan:0x8000000000000) (f64.const 0x0p+0))
+  (invoke "f64.not_le" (f64.const nan:0x8000000000000) (f64.const 0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "f64.not_gt" (f64.const nan:0x8000000000000) (f64.const 0x0p+0))
+  (invoke "f64.not_gt" (f64.const nan:0x8000000000000) (f64.const 0))
   (i32.const 1)
 )
 (assert_return
-  (invoke "f64.not_ge" (f64.const nan:0x8000000000000) (f64.const 0x0p+0))
+  (invoke "f64.not_ge" (f64.const nan:0x8000000000000) (f64.const 0))
   (i32.const 1)
 )
 (module binary
@@ -4869,8 +4714,8 @@
   "\00\00\00\00\00\00\08\40\a3\44\00\00\00\00\00\00"
   "\f0\3f\a1\a2\a1\0b"
 )
-(assert_return (invoke "f32.epsilon") (f32.const -0x1p-23))
-(assert_return (invoke "f64.epsilon") (f64.const 0x1p-52))
+(assert_return (invoke "f32.epsilon") (f32.const -1.192_092_895_507_812_5e-07))
+(assert_return (invoke "f64.epsilon") (f64.const 2.220_446_049_250_313_1e-16))
 (module binary
   "\00\61\73\6d\01\00\00\00\01\89\80\80\80\00\02\60"
   "\00\01\7d\60\00\01\7c\03\83\80\80\80\00\02\00\01"
@@ -4885,8 +4730,8 @@
   "\00\00\00\00\00\f0\3f\a0\44\00\00\00\00\00\00\f0"
   "\3f\64\0d\00\0b\20\01\0b"
 )
-(assert_return (invoke "f32.epsilon") (f32.const 0x1p-23))
-(assert_return (invoke "f64.epsilon") (f64.const 0x1p-52))
+(assert_return (invoke "f32.epsilon") (f32.const 1.192_092_895_507_812_5e-07))
+(assert_return (invoke "f64.epsilon") (f64.const 2.220_446_049_250_313_1e-16))
 (module binary
   "\00\61\73\6d\01\00\00\00\01\8d\80\80\80\00\02\60"
   "\02\7d\7d\01\7f\60\02\7c\7c\01\7f\03\89\80\80\80"
@@ -4914,47 +4759,35 @@
   "\80\80\00\00\20\00\20\01\66\20\00\20\01\63\72\0b"
 )
 (assert_return
-  (invoke "f32.no_trichotomy_lt" (f32.const 0x0p+0) (f32.const nan:0x400000))
+  (invoke "f32.no_trichotomy_lt" (f32.const 0) (f32.const nan:0x400000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "f32.no_trichotomy_le" (f32.const 0x0p+0) (f32.const nan:0x400000))
+  (invoke "f32.no_trichotomy_le" (f32.const 0) (f32.const nan:0x400000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "f32.no_trichotomy_gt" (f32.const 0x0p+0) (f32.const nan:0x400000))
+  (invoke "f32.no_trichotomy_gt" (f32.const 0) (f32.const nan:0x400000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "f32.no_trichotomy_ge" (f32.const 0x0p+0) (f32.const nan:0x400000))
+  (invoke "f32.no_trichotomy_ge" (f32.const 0) (f32.const nan:0x400000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "f64.no_trichotomy_lt"
-    (f64.const 0x0p+0)
-    (f64.const nan:0x8000000000000)
-  )
+  (invoke "f64.no_trichotomy_lt" (f64.const 0) (f64.const nan:0x8000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "f64.no_trichotomy_le"
-    (f64.const 0x0p+0)
-    (f64.const nan:0x8000000000000)
-  )
+  (invoke "f64.no_trichotomy_le" (f64.const 0) (f64.const nan:0x8000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "f64.no_trichotomy_gt"
-    (f64.const 0x0p+0)
-    (f64.const nan:0x8000000000000)
-  )
+  (invoke "f64.no_trichotomy_gt" (f64.const 0) (f64.const nan:0x8000000000000))
   (i32.const 0)
 )
 (assert_return
-  (invoke "f64.no_trichotomy_ge"
-    (f64.const 0x0p+0)
-    (f64.const nan:0x8000000000000)
-  )
+  (invoke "f64.no_trichotomy_ge" (f64.const 0) (f64.const nan:0x8000000000000))
   (i32.const 0)
 )
 (module binary
@@ -5027,165 +4860,169 @@
 )
 (assert_return
   (invoke "f32.arithmetic_nan_bitpattern"
-    (i32.const 2139107856)
-    (i32.const 2139107856)
+    (i32.const 2_139_107_856)
+    (i32.const 2_139_107_856)
   )
-  (i32.const 2143289344)
+  (i32.const 2_143_289_344)
 )
 (assert_return
   (invoke "f32.canonical_nan_bitpattern" (i32.const 0) (i32.const 0))
-  (i32.const 2143289344)
+  (i32.const 2_143_289_344)
 )
 (assert_return
   (invoke "f32.canonical_nan_bitpattern"
-    (i32.const 2143289344)
-    (i32.const 2143289344)
+    (i32.const 2_143_289_344)
+    (i32.const 2_143_289_344)
   )
-  (i32.const 2143289344)
+  (i32.const 2_143_289_344)
 )
 (assert_return
   (invoke "f32.canonical_nan_bitpattern"
-    (i32.const -4194304)
-    (i32.const 2143289344)
+    (i32.const -4_194_304)
+    (i32.const 2_143_289_344)
   )
-  (i32.const 2143289344)
+  (i32.const 2_143_289_344)
 )
 (assert_return
   (invoke "f32.canonical_nan_bitpattern"
-    (i32.const 2143289344)
-    (i32.const -4194304)
+    (i32.const 2_143_289_344)
+    (i32.const -4_194_304)
   )
-  (i32.const 2143289344)
+  (i32.const 2_143_289_344)
 )
 (assert_return
   (invoke "f32.canonical_nan_bitpattern"
-    (i32.const -4194304)
-    (i32.const -4194304)
+    (i32.const -4_194_304)
+    (i32.const -4_194_304)
   )
-  (i32.const 2143289344)
+  (i32.const 2_143_289_344)
 )
 (assert_return
-  (invoke "f32.nonarithmetic_nan_bitpattern" (i32.const 2143302160))
-  (i32.const -4181488)
+  (invoke "f32.nonarithmetic_nan_bitpattern" (i32.const 2_143_302_160))
+  (i32.const -4_181_488)
 )
 (assert_return
-  (invoke "f32.nonarithmetic_nan_bitpattern" (i32.const -4181488))
-  (i32.const 2143302160)
+  (invoke "f32.nonarithmetic_nan_bitpattern" (i32.const -4_181_488))
+  (i32.const 2_143_302_160)
 )
 (assert_return
-  (invoke "f32.nonarithmetic_nan_bitpattern" (i32.const 2139107856))
-  (i32.const -8375792)
+  (invoke "f32.nonarithmetic_nan_bitpattern" (i32.const 2_139_107_856))
+  (i32.const -8_375_792)
 )
 (assert_return
-  (invoke "f32.nonarithmetic_nan_bitpattern" (i32.const -8375792))
-  (i32.const 2139107856)
+  (invoke "f32.nonarithmetic_nan_bitpattern" (i32.const -8_375_792))
+  (i32.const 2_139_107_856)
 )
 (assert_return
   (invoke "f64.arithmetic_nan_bitpattern"
-    (i64.const 9218868437227418128)
-    (i64.const 9218868437227418128)
+    (i64.const 9_218_868_437_227_418_128)
+    (i64.const 9_218_868_437_227_418_128)
   )
-  (i64.const 9221120237041090560)
+  (i64.const 9_221_120_237_041_090_560)
 )
 (assert_return
   (invoke "f64.canonical_nan_bitpattern" (i64.const 0) (i64.const 0))
-  (i64.const 9221120237041090560)
+  (i64.const 9_221_120_237_041_090_560)
 )
 (assert_return
   (invoke "f64.canonical_nan_bitpattern"
-    (i64.const 9221120237041090560)
-    (i64.const 9221120237041090560)
+    (i64.const 9_221_120_237_041_090_560)
+    (i64.const 9_221_120_237_041_090_560)
   )
-  (i64.const 9221120237041090560)
+  (i64.const 9_221_120_237_041_090_560)
 )
 (assert_return
   (invoke "f64.canonical_nan_bitpattern"
-    (i64.const -2251799813685248)
-    (i64.const 9221120237041090560)
+    (i64.const -2_251_799_813_685_248)
+    (i64.const 9_221_120_237_041_090_560)
   )
-  (i64.const 9221120237041090560)
+  (i64.const 9_221_120_237_041_090_560)
 )
 (assert_return
   (invoke "f64.canonical_nan_bitpattern"
-    (i64.const 9221120237041090560)
-    (i64.const -2251799813685248)
+    (i64.const 9_221_120_237_041_090_560)
+    (i64.const -2_251_799_813_685_248)
   )
-  (i64.const 9221120237041090560)
+  (i64.const 9_221_120_237_041_090_560)
 )
 (assert_return
   (invoke "f64.canonical_nan_bitpattern"
-    (i64.const -2251799813685248)
-    (i64.const -2251799813685248)
+    (i64.const -2_251_799_813_685_248)
+    (i64.const -2_251_799_813_685_248)
   )
-  (i64.const 9221120237041090560)
+  (i64.const 9_221_120_237_041_090_560)
 )
 (assert_return
-  (invoke "f64.nonarithmetic_nan_bitpattern" (i64.const 9221120237041103376))
-  (i64.const -2251799813672432)
+  (invoke "f64.nonarithmetic_nan_bitpattern"
+    (i64.const 9_221_120_237_041_103_376)
+  )
+  (i64.const -2_251_799_813_672_432)
 )
 (assert_return
-  (invoke "f64.nonarithmetic_nan_bitpattern" (i64.const -2251799813672432))
-  (i64.const 9221120237041103376)
+  (invoke "f64.nonarithmetic_nan_bitpattern" (i64.const -2_251_799_813_672_432))
+  (i64.const 9_221_120_237_041_103_376)
 )
 (assert_return
-  (invoke "f64.nonarithmetic_nan_bitpattern" (i64.const 9218868437227418128))
-  (i64.const -4503599627357680)
+  (invoke "f64.nonarithmetic_nan_bitpattern"
+    (i64.const 9_218_868_437_227_418_128)
+  )
+  (i64.const -4_503_599_627_357_680)
 )
 (assert_return
-  (invoke "f64.nonarithmetic_nan_bitpattern" (i64.const -4503599627357680))
-  (i64.const 9218868437227418128)
+  (invoke "f64.nonarithmetic_nan_bitpattern" (i64.const -4_503_599_627_357_680))
+  (i64.const 9_218_868_437_227_418_128)
 )
 (assert_return
-  (invoke "f32.no_fold_sub_zero" (i32.const 2141192192))
-  (i32.const 2143289344)
+  (invoke "f32.no_fold_sub_zero" (i32.const 2_141_192_192))
+  (i32.const 2_143_289_344)
 )
 (assert_return
-  (invoke "f32.no_fold_neg0_sub" (i32.const 2141192192))
-  (i32.const 2143289344)
+  (invoke "f32.no_fold_neg0_sub" (i32.const 2_141_192_192))
+  (i32.const 2_143_289_344)
 )
 (assert_return
-  (invoke "f32.no_fold_mul_one" (i32.const 2141192192))
-  (i32.const 2143289344)
+  (invoke "f32.no_fold_mul_one" (i32.const 2_141_192_192))
+  (i32.const 2_143_289_344)
 )
 (assert_return
-  (invoke "f32.no_fold_neg1_mul" (i32.const 2141192192))
-  (i32.const 2143289344)
+  (invoke "f32.no_fold_neg1_mul" (i32.const 2_141_192_192))
+  (i32.const 2_143_289_344)
 )
 (assert_return
-  (invoke "f32.no_fold_div_one" (i32.const 2141192192))
-  (i32.const 2143289344)
+  (invoke "f32.no_fold_div_one" (i32.const 2_141_192_192))
+  (i32.const 2_143_289_344)
 )
 (assert_return
-  (invoke "f32.no_fold_div_neg1" (i32.const 2141192192))
-  (i32.const 2143289344)
+  (invoke "f32.no_fold_div_neg1" (i32.const 2_141_192_192))
+  (i32.const 2_143_289_344)
 )
 (assert_return
-  (invoke "f64.no_fold_sub_zero" (i64.const 9219994337134247936))
-  (i64.const 9221120237041090560)
+  (invoke "f64.no_fold_sub_zero" (i64.const 9_219_994_337_134_247_936))
+  (i64.const 9_221_120_237_041_090_560)
 )
 (assert_return
-  (invoke "f64.no_fold_neg0_sub" (i64.const 9219994337134247936))
-  (i64.const 9221120237041090560)
+  (invoke "f64.no_fold_neg0_sub" (i64.const 9_219_994_337_134_247_936))
+  (i64.const 9_221_120_237_041_090_560)
 )
 (assert_return
-  (invoke "f64.no_fold_mul_one" (i64.const 9219994337134247936))
-  (i64.const 9221120237041090560)
+  (invoke "f64.no_fold_mul_one" (i64.const 9_219_994_337_134_247_936))
+  (i64.const 9_221_120_237_041_090_560)
 )
 (assert_return
-  (invoke "f64.no_fold_neg1_mul" (i64.const 9219994337134247936))
-  (i64.const 9221120237041090560)
+  (invoke "f64.no_fold_neg1_mul" (i64.const 9_219_994_337_134_247_936))
+  (i64.const 9_221_120_237_041_090_560)
 )
 (assert_return
-  (invoke "f64.no_fold_div_one" (i64.const 9219994337134247936))
-  (i64.const 9221120237041090560)
+  (invoke "f64.no_fold_div_one" (i64.const 9_219_994_337_134_247_936))
+  (i64.const 9_221_120_237_041_090_560)
 )
 (assert_return
-  (invoke "f64.no_fold_div_neg1" (i64.const 9219994337134247936))
-  (i64.const 9221120237041090560)
+  (invoke "f64.no_fold_div_neg1" (i64.const 9_219_994_337_134_247_936))
+  (i64.const 9_221_120_237_041_090_560)
 )
 (assert_return
-  (invoke "no_fold_promote_demote" (i32.const 2141192192))
-  (i32.const 2143289344)
+  (invoke "no_fold_promote_demote" (i32.const 2_141_192_192))
+  (i32.const 2_143_289_344)
 )
 (module binary
   "\00\61\73\6d\01\00\00\00\01\8d\80\80\80\00\01\60"
@@ -5201,29 +5038,29 @@
 )
 (assert_return
   (invoke "dot_product_example"
-    (f64.const 0x1.e848p+24)
-    (f64.const 0x1p+0)
-    (f64.const -0x1p+0)
-    (f64.const 0x1.312dp+26)
-    (f64.const 0x1.312dp+25)
-    (f64.const 0x1p+0)
-    (f64.const -0x1p+0)
-    (f64.const -0x1.e848p+23)
+    (f64.const 32_000_000)
+    (f64.const 1)
+    (f64.const -1)
+    (f64.const 80_000_000)
+    (f64.const 40_000_000)
+    (f64.const 1)
+    (f64.const -1)
+    (f64.const -16_000_000)
   )
-  (f64.const 0x1p+1)
+  (f64.const 2)
 )
 (assert_return
   (invoke "with_binary_sum_collapse"
-    (f64.const 0x1.e848p+24)
-    (f64.const 0x1p+0)
-    (f64.const -0x1p+0)
-    (f64.const 0x1.312dp+26)
-    (f64.const 0x1.312dp+25)
-    (f64.const 0x1p+0)
-    (f64.const -0x1p+0)
-    (f64.const -0x1.e848p+23)
+    (f64.const 32_000_000)
+    (f64.const 1)
+    (f64.const -1)
+    (f64.const 80_000_000)
+    (f64.const 40_000_000)
+    (f64.const 1)
+    (f64.const -1)
+    (f64.const -16_000_000)
   )
-  (f64.const 0x1p+1)
+  (f64.const 2)
 )
 (module binary
   "\00\61\73\6d\01\00\00\00\01\8d\80\80\80\00\02\60"
@@ -5236,40 +5073,37 @@
   "\00\20\00\20\00\a2\20\01\20\01\a2\a1\9f\0b"
 )
 (assert_return
-  (invoke "f32.contract2fma" (f32.const 0x1p+0) (f32.const 0x1p+0))
-  (f32.const 0x0p+0)
+  (invoke "f32.contract2fma" (f32.const 1) (f32.const 1))
+  (f32.const 0)
 )
 (assert_return
   (invoke "f32.contract2fma"
-    (f32.const 0x1.19999ap+0)
-    (f32.const 0x1.19999ap+0)
+    (f32.const 1.100_000_023_841_857_9)
+    (f32.const 1.100_000_023_841_857_9)
   )
-  (f32.const 0x0p+0)
+  (f32.const 0)
 )
 (assert_return
   (invoke "f32.contract2fma"
-    (f32.const 0x1.333332p+0)
-    (f32.const 0x1.333332p+0)
+    (f32.const 1.199_999_928_474_426_3)
+    (f32.const 1.199_999_928_474_426_3)
   )
-  (f32.const 0x0p+0)
+  (f32.const 0)
 )
 (assert_return
-  (invoke "f64.contract2fma" (f64.const 0x1p+0) (f64.const 0x1p+0))
-  (f64.const 0x0p+0)
-)
-(assert_return
-  (invoke "f64.contract2fma"
-    (f64.const 0x1.199999999999ap+0)
-    (f64.const 0x1.199999999999ap+0)
-  )
-  (f64.const 0x0p+0)
+  (invoke "f64.contract2fma" (f64.const 1) (f64.const 1))
+  (f64.const 0)
 )
 (assert_return
   (invoke "f64.contract2fma"
-    (f64.const 0x1.3333333333333p+0)
-    (f64.const 0x1.3333333333333p+0)
+    (f64.const 1.100_000_000_000_000_1)
+    (f64.const 1.100_000_000_000_000_1)
   )
-  (f64.const 0x0p+0)
+  (f64.const 0)
+)
+(assert_return
+  (invoke "f64.contract2fma" (f64.const 1.2) (f64.const 1.2))
+  (f64.const 0)
 )
 (module binary
   "\00\61\73\6d\01\00\00\00\01\8f\80\80\80\00\02\60"
@@ -5284,19 +5118,19 @@
 )
 (assert_return
   (invoke "f32.division_by_small_number"
-    (f32.const 0x1.ab3fp+26)
-    (f32.const 0x1.86ap+16)
-    (f32.const 0x1.d7dbf4p-11)
+    (f32.const 112_000_000)
+    (f32.const 100_000)
+    (f32.const 0.000_899_999_984_540_045_26)
   )
-  (f32.const 0x1.b207p+19)
+  (f32.const 888_888)
 )
 (assert_return
   (invoke "f64.division_by_small_number"
-    (f64.const 0x1.ab3fp+26)
-    (f64.const 0x1.86ap+16)
-    (f64.const 0x1.d7dbf487fcb92p-11)
+    (f64.const 112_000_000)
+    (f64.const 100_000)
+    (f64.const 0.000_899_999_999_999_999_98)
   )
-  (f64.const 0x1.b2071c71c718p+19)
+  (f64.const 888_888.888_888_880_61)
 )
 (module binary
   "\00\61\73\6d\01\00\00\00\01\8f\80\80\80\00\02\60"
@@ -5309,20 +5143,12 @@
   "\20\00\20\01\20\02\9f\a0\a2\0b"
 )
 (assert_return
-  (invoke "f32.golden_ratio"
-    (f32.const 0x1p-1)
-    (f32.const 0x1p+0)
-    (f32.const 0x1.4p+2)
-  )
-  (f32.const 0x1.9e377ap+0)
+  (invoke "f32.golden_ratio" (f32.const 0.5) (f32.const 1) (f32.const 5))
+  (f32.const 1.618_034_005_165_100_1)
 )
 (assert_return
-  (invoke "f64.golden_ratio"
-    (f64.const 0x1p-1)
-    (f64.const 0x1p+0)
-    (f64.const 0x1.4p+2)
-  )
-  (f64.const 0x1.9e3779b97f4a8p+0)
+  (invoke "f64.golden_ratio" (f64.const 0.5) (f64.const 1) (f64.const 5))
+  (f64.const 1.618_033_988_749_894_9)
 )
 (module binary
   "\00\61\73\6d\01\00\00\00\01\8b\80\80\80\00\02\60"
@@ -5336,53 +5162,47 @@
   "\3f\20\00\20\00\20\00\a2\44\00\00\00\00\00\00\10"
   "\40\a0\9f\a0\a2\0b"
 )
+(assert_return (invoke "f32.silver_means" (f32.const 0)) (f32.const 1))
 (assert_return
-  (invoke "f32.silver_means" (f32.const 0x0p+0))
-  (f32.const 0x1p+0)
+  (invoke "f32.silver_means" (f32.const 1))
+  (f32.const 1.618_034_005_165_100_1)
 )
 (assert_return
-  (invoke "f32.silver_means" (f32.const 0x1p+0))
-  (f32.const 0x1.9e377ap+0)
+  (invoke "f32.silver_means" (f32.const 2))
+  (f32.const 2.414_213_657_379_150_4)
 )
 (assert_return
-  (invoke "f32.silver_means" (f32.const 0x1p+1))
-  (f32.const 0x1.3504f4p+1)
+  (invoke "f32.silver_means" (f32.const 3))
+  (f32.const 3.302_775_621_414_184_6)
 )
 (assert_return
-  (invoke "f32.silver_means" (f32.const 0x1.8p+1))
-  (f32.const 0x1.a6c15ap+1)
+  (invoke "f32.silver_means" (f32.const 4))
+  (f32.const 4.236_067_771_911_621_1)
 )
 (assert_return
-  (invoke "f32.silver_means" (f32.const 0x1p+2))
-  (f32.const 0x1.0f1bbcp+2)
+  (invoke "f32.silver_means" (f32.const 5))
+  (f32.const 5.192_582_130_432_128_9)
+)
+(assert_return (invoke "f64.silver_means" (f64.const 0)) (f64.const 1))
+(assert_return
+  (invoke "f64.silver_means" (f64.const 1))
+  (f64.const 1.618_033_988_749_894_9)
 )
 (assert_return
-  (invoke "f32.silver_means" (f32.const 0x1.4p+2))
-  (f32.const 0x1.4c5344p+2)
+  (invoke "f64.silver_means" (f64.const 2))
+  (f64.const 2.414_213_562_373_094_9)
 )
 (assert_return
-  (invoke "f64.silver_means" (f64.const 0x0p+0))
-  (f64.const 0x1p+0)
+  (invoke "f64.silver_means" (f64.const 3))
+  (f64.const 3.302_775_637_731_994_8)
 )
 (assert_return
-  (invoke "f64.silver_means" (f64.const 0x1p+0))
-  (f64.const 0x1.9e3779b97f4a8p+0)
+  (invoke "f64.silver_means" (f64.const 4))
+  (f64.const 4.236_067_977_499_789_8)
 )
 (assert_return
-  (invoke "f64.silver_means" (f64.const 0x1p+1))
-  (f64.const 0x1.3504f333f9de6p+1)
-)
-(assert_return
-  (invoke "f64.silver_means" (f64.const 0x1.8p+1))
-  (f64.const 0x1.a6c15a230acfap+1)
-)
-(assert_return
-  (invoke "f64.silver_means" (f64.const 0x1p+2))
-  (f64.const 0x1.0f1bbcdcbfa54p+2)
-)
-(assert_return
-  (invoke "f64.silver_means" (f64.const 0x1.4p+2))
-  (f64.const 0x1.4c53452546cfap+2)
+  (invoke "f64.silver_means" (f64.const 5))
+  (f64.const 5.192_582_403_567_252_3)
 )
 (module binary
   "\00\61\73\6d\01\00\00\00\01\87\80\80\80\00\01\60"
@@ -5391,10 +5211,7 @@
   "\00\0a\97\80\80\80\00\01\91\80\80\80\00\00\20\00"
   "\20\01\a3\44\9a\99\99\99\99\99\d9\3f\63\0b"
 )
-(assert_return
-  (invoke "point_four" (f64.const 0x1p+2) (f64.const 0x1.4p+3))
-  (i32.const 0)
-)
+(assert_return (invoke "point_four" (f64.const 4) (f64.const 10)) (i32.const 0))
 (module binary
   "\00\61\73\6d\01\00\00\00\01\86\80\80\80\00\01\60"
   "\01\7f\01\7c\03\82\80\80\80\00\01\00\07\87\80\80"
@@ -5413,8 +5230,14 @@
   "\03\20\02\44\00\00\00\00\00\00\b0\3f\a2\21\02\20"
   "\00\41\7f\6a\22\00\0d\00\0b\0b\20\01\0b"
 )
-(assert_return (invoke "tau" (i32.const 10)) (f64.const 0x1.921fb54442d14p+2))
-(assert_return (invoke "tau" (i32.const 11)) (f64.const 0x1.921fb54442d18p+2))
+(assert_return
+  (invoke "tau" (i32.const 10))
+  (f64.const 6.283_185_307_179_582_7)
+)
+(assert_return
+  (invoke "tau" (i32.const 11))
+  (f64.const 6.283_185_307_179_586_2)
+)
 (module binary
   "\00\61\73\6d\01\00\00\00\01\8d\80\80\80\00\02\60"
   "\02\7d\7d\01\7d\60\02\7c\7c\01\7c\03\83\80\80\80"
@@ -5429,10 +5252,10 @@
   "\00\00\00\00\00\00\00\63\1b\0b"
 )
 (assert_return
-  (invoke "f32.no_fold_conditional_inc" (f32.const -0x0p+0) (f32.const -0x1p+0))
-  (f32.const -0x0p+0)
+  (invoke "f32.no_fold_conditional_inc" (f32.const -0) (f32.const -1))
+  (f32.const -0)
 )
 (assert_return
-  (invoke "f64.no_fold_conditional_inc" (f64.const -0x0p+0) (f64.const -0x1p+0))
-  (f64.const -0x0p+0)
+  (invoke "f64.no_fold_conditional_inc" (f64.const -0) (f64.const -1))
+  (f64.const -0)
 )

@@ -588,8 +588,11 @@
 )
 (assert_return (invoke "load" (i32.const 0)) (i32.const 0))
 (assert_return (invoke "load" (i32.const 10)) (i32.const 16))
-(assert_return (invoke "load" (i32.const 8)) (i32.const 1048576))
-(assert_trap (invoke "load" (i32.const 1000000)) "out of bounds memory access")
+(assert_return (invoke "load" (i32.const 8)) (i32.const 1_048_576))
+(assert_trap
+  (invoke "load" (i32.const 1_000_000))
+  "out of bounds memory access"
+)
 (module binary
   "\00\61\73\6d\01\00\00\00\01\86\80\80\80\00\01\60"
   "\01\7f\01\7f\02\95\80\80\80\00\01\08\73\70\65\63"
@@ -601,8 +604,11 @@
 )
 (assert_return (invoke "load" (i32.const 0)) (i32.const 0))
 (assert_return (invoke "load" (i32.const 10)) (i32.const 16))
-(assert_return (invoke "load" (i32.const 8)) (i32.const 1048576))
-(assert_trap (invoke "load" (i32.const 1000000)) "out of bounds memory access")
+(assert_return (invoke "load" (i32.const 8)) (i32.const 1_048_576))
+(assert_trap
+  (invoke "load" (i32.const 1_000_000))
+  "out of bounds memory access"
+)
 (assert_invalid
   (module binary
     "\00\61\73\6d\01\00\00\00\02\8b\80\80\80\00\02\00"
@@ -798,7 +804,7 @@
   "import after function"
 )
 (assert_malformed
-  (module quote "(func) (import \"\" \"\" (table 0 anyfunc))")
+  (module quote "(func) (import \"\" \"\" (table 0 funcref))")
   "import after function"
 )
 (assert_malformed
@@ -815,7 +821,7 @@
 )
 (assert_malformed
   (module quote
-    "(global i64 (i64.const 0)) (import \"\" \"\" (table 0 anyfunc))"
+    "(global i64 (i64.const 0)) (import \"\" \"\" (table 0 funcref))"
   )
   "import after global"
 )
@@ -824,19 +830,19 @@
   "import after global"
 )
 (assert_malformed
-  (module quote "(table 0 anyfunc) (import \"\" \"\" (func))")
+  (module quote "(table 0 funcref) (import \"\" \"\" (func))")
   "import after table"
 )
 (assert_malformed
-  (module quote "(table 0 anyfunc) (import \"\" \"\" (global i32))")
+  (module quote "(table 0 funcref) (import \"\" \"\" (global i32))")
   "import after table"
 )
 (assert_malformed
-  (module quote "(table 0 anyfunc) (import \"\" \"\" (table 0 anyfunc))")
+  (module quote "(table 0 funcref) (import \"\" \"\" (table 0 funcref))")
   "import after table"
 )
 (assert_malformed
-  (module quote "(table 0 anyfunc) (import \"\" \"\" (memory 0))")
+  (module quote "(table 0 funcref) (import \"\" \"\" (memory 0))")
   "import after table"
 )
 (assert_malformed
@@ -848,13 +854,15 @@
   "import after memory"
 )
 (assert_malformed
-  (module quote "(memory 0) (import \"\" \"\" (table 1 3 anyfunc))")
+  (module quote "(memory 0) (import \"\" \"\" (table 1 3 funcref))")
   "import after memory"
 )
 (assert_malformed
   (module quote "(memory 0) (import \"\" \"\" (memory 1 2))")
   "import after memory"
 )
+(module binary "\00\61\73\6d\01\00\00\00")
+(register "not wasm")
 (assert_unlinkable
   (module binary
     "\00\61\73\6d\01\00\00\00\01\a9\80\80\80\00\0a\60"
