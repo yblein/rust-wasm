@@ -501,7 +501,7 @@ fn check_export(mod_ctx: &ModContext, export: &ast::Export) -> Option<()> {
 		Func(x) => require((x as usize) < mod_ctx.funcs.len()),
 		Table(x) => require((x as usize) < mod_ctx.tables.len()),
 		Memory(x) => require((x as usize) < mod_ctx.memories.len()),
-		Global(x) => require(!mod_ctx.globals.get(x as usize)?.mutable),
+		Global(x) => require((x as usize) < mod_ctx.globals.len()),
 	}
 }
 
@@ -522,7 +522,6 @@ fn check_import<'a>(ctx: &mut ModContext<'a>, import: &'a ast::Import) -> Option
 			ctx.memories.push(mem_type);
 		}
 		Global(ref global_type) => {
-			require(!global_type.mutable)?;
 			ctx.globals.push(global_type);
 		}
 	}
