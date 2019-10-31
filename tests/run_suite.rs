@@ -1,5 +1,5 @@
-extern crate rust_wasm;
 extern crate hexf_parse;
+extern crate rust_wasm;
 
 mod script;
 
