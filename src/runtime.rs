@@ -82,23 +82,6 @@ pub struct MemAddr(Addr);
 #[derive(Clone, Copy, PartialEq, Eq, Debug, Hash)]
 pub struct GlobalAddr(Addr);
 
-impl From<u32> for MemAddr {
-    fn from(value: u32) -> MemAddr {
-        MemAddr(value as usize)
-    }
-}
-
-impl From<MemAddr> for u32 {
-    fn from(value: MemAddr) -> u32 {
-        value.0 as u32
-    }
-}
-impl From<GlobalAddr> for u32 {
-    fn from(value: GlobalAddr) -> u32 {
-        value.0 as u32
-    }
-}
-
 #[derive(Clone, Copy, PartialEq, Eq, Hash, Debug)]
 pub enum ExternVal {
     Func(FuncAddr),

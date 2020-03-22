@@ -38,7 +38,7 @@ pub fn run<P: AsRef<Path>>(path: P) {
                     .map(|(name, _)| name.to_owned())
                     .collect();
 
-                let inst = instantiate_module(&mut store, m, &imports[..]).unwrap();
+                let inst = instantiate_module(&mut store, m, &imports[..], None).unwrap();
 
                 let exports = export_names
                     .into_iter()
@@ -142,7 +142,7 @@ fn run_assertion(store: &mut Store, registry: &Registry, assertion: Assertion) {
         TrapInstantiate(module, _) => {
             let (_, m) = decode_module_src(&module);
             let imports = resolve_imports(&m, registry).unwrap();
-            if let Err(Error::CodeTrapped(_)) = instantiate_module(store, m, &imports[..]) {
+            if let Err(Error::CodeTrapped(_)) = instantiate_module(store, m, &imports[..], None) {
             } else {
                 panic!("instantiating module `{:?}` should cause a trap", module);
             }
@@ -159,7 +159,7 @@ fn run_assertion(store: &mut Store, registry: &Registry, assertion: Assertion) {
         Invalid(module, reason) => {
             let (_, m) = decode_module_src(&module);
             // Do not resolve the imports for invalid modules
-            match (reason, instantiate_module(store, m, &[]).err()) {
+            match (reason, instantiate_module(store, m, &[], None).err()) {
                 (_, Some(Error::InvalidModule)) => (),
                 (reason, err) => panic!(
                     "instantiating module `{:?}` should not be valid (reason = {}, err = {:?})",
@@ -191,7 +191,7 @@ fn run_assertion(store: &mut Store, registry: &Registry, assertion: Assertion) {
 
             match (
                 reason.as_ref(),
-                instantiate_module(store, m, &imports[..]).err(),
+                instantiate_module(store, m, &imports[..], None).err(),
             ) {
                 ("incompatible import type", Some(Error::ImportTypeMismatch)) => (),
                 ("elements segment does not fit", Some(Error::ElemOffsetTooLarge(_))) => (),
@@ -222,7 +222,7 @@ fn run_action(
                 &registry.last_key
             };
             match registry.mod_exports[mod_name][func] {
-                ExternVal::Func(addr) => invoke_func(store, addr, args.clone()),
+                ExternVal::Func(addr) => invoke_func(store, addr, args.clone(), None),
                 _ => panic!("extern val should be a function"),
             }
         }

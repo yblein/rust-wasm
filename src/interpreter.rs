@@ -10,6 +10,7 @@ use std::rc::Rc;
 pub struct Interpreter {
     pub(crate) stack: Vec<Value>,
     /// Buffer to collect return values of host functions
+    pub(crate) contract_data: Option<Vec<u8>>,
     return_buffer: Vec<Value>,
 }
 
@@ -81,10 +82,11 @@ impl StackFrame {
 
 impl Interpreter {
     /// Instantiate a new interpreter
-    pub fn new() -> Interpreter {
+    pub fn new(contract_data: Option<Vec<u8>>) -> Interpreter {
         Interpreter {
             stack: Vec::new(),
             return_buffer: Vec::new(),
+            contract_data,
         }
     }
 
@@ -974,20 +976,47 @@ impl Interpreter {
         use types::Value as Tv;
         use types::{Float, Int};
 
-        let mem = &memories[frame_memories[0]];
-        let offset = match self.stack.pop().unwrap() {
-            Value::I32(c) => c as usize + memop.offset as usize,
+        let load_addr = match self.stack.pop() {
+            Some(Value::I32(v)) => v as usize + memop.offset as usize,
+            None => unreachable!(),
             _ => unreachable!(),
         };
+
+        let is_mapped_addr = (load_addr & (1 << 31)) > 0;
+        if is_mapped_addr {
+            println!("----->Highest bit set!!");
+        } else {
+            println!(
+                "----->Addr is {:X?}, offset is {:X?}",
+                load_addr, memop.offset
+            );
+        }
+
+        // let contract_data = vec![0x42, 0x42, 0x42, 0x42];
+        let contract_data = self.contract_data.as_ref().unwrap();
+
+        let (offset, mem_data) = if is_mapped_addr {
+            (
+                // Unset the highest bit to get the actual address
+                (load_addr & 0x7FFFFFFF) as usize,
+                contract_data,
+            )
+        } else {
+            // this is a regular memory address
+            let mem = &memories[frame_memories[0]];
+            (load_addr as usize, &mem.data)
+        };
+
         let (size_in_bits, signed) = memop.opt.unwrap_or((memop.type_.bit_width(), false));
         let size_in_bytes: usize = (size_in_bits as usize) / 8;
 
-        if offset + size_in_bytes > mem.data.len() {
+        if offset + size_in_bytes > mem_data.len() {
+            println!("offset: {:?}, size: {:?}", offset, size_in_bytes);
             return Err(Trap {
                 origin: TrapOrigin::LoadOutOfMemory,
             });
         }
-        let bits = &mem.data[offset..(offset + size_in_bytes)];
+        let bits = &mem_data[offset..(offset + size_in_bytes)];
 
         let res = match (size_in_bits, signed, memop.type_) {
             (8, false, Tv::Int(Int::I32)) => Value::I32(u8::from_bits(bits) as u32),
