@@ -1,10 +1,12 @@
-use ops::IntOp;
+use super::ast::*;
+use super::ops::IntOp;
+// use super::instr::
 use std::io::Read;
 use std::{i32, i64, io};
 
-use ast::*;
-use types;
-use values::Value;
+use super::ast::*;
+use super::types;
+use super::values::Value;
 
 const MAGIC: u32 = 0x6d736100;
 
@@ -249,7 +251,7 @@ impl<R: Read> Decoder<R> {
     }
 
     fn read_meta_instr(&mut self) -> DecodeResult<MetaInstr> {
-        use ast::Instr::*;
+        use super::ast::Instr::*;
         use types::Float::*;
         use types::Int::*;
         use types::Value::*;
@@ -455,105 +457,105 @@ impl<R: Read> Decoder<R> {
             0xa5 => FBin(F64, FBinOp::Max),
             0xa6 => FBin(F64, FBinOp::CopySign),
 
-            0xa7 => Convert(ConvertOp::I32WrapI64),
-            0xa8 => Convert(ConvertOp::Trunc {
+            0xa7 => Instr::Convert(ConvertOp::I32WrapI64),
+            0xa8 => Instr::Convert(ConvertOp::Trunc {
                 from: F32,
                 to: I32,
                 signed: true,
             }),
-            0xa9 => Convert(ConvertOp::Trunc {
+            0xa9 => Instr::Convert(ConvertOp::Trunc {
                 from: F32,
                 to: I32,
                 signed: false,
             }),
-            0xaa => Convert(ConvertOp::Trunc {
+            0xaa => Instr::Convert(ConvertOp::Trunc {
                 from: F64,
                 to: I32,
                 signed: true,
             }),
-            0xab => Convert(ConvertOp::Trunc {
+            0xab => Instr::Convert(ConvertOp::Trunc {
                 from: F64,
                 to: I32,
                 signed: false,
             }),
-            0xac => Convert(ConvertOp::I64ExtendSI32),
-            0xad => Convert(ConvertOp::I64ExtendUI32),
-            0xae => Convert(ConvertOp::Trunc {
+            0xac => Instr::Convert(ConvertOp::I64ExtendSI32),
+            0xad => Instr::Convert(ConvertOp::I64ExtendUI32),
+            0xae => Instr::Convert(ConvertOp::Trunc {
                 from: F32,
                 to: I64,
                 signed: true,
             }),
-            0xaf => Convert(ConvertOp::Trunc {
+            0xaf => Instr::Convert(ConvertOp::Trunc {
                 from: F32,
                 to: I64,
                 signed: false,
             }),
-            0xb0 => Convert(ConvertOp::Trunc {
+            0xb0 => Instr::Convert(ConvertOp::Trunc {
                 from: F64,
                 to: I64,
                 signed: true,
             }),
-            0xb1 => Convert(ConvertOp::Trunc {
+            0xb1 => Instr::Convert(ConvertOp::Trunc {
                 from: F64,
                 to: I64,
                 signed: false,
             }),
-            0xb2 => Convert(ConvertOp::Convert {
+            0xb2 => Instr::Convert(ConvertOp::Convert {
                 from: I32,
                 to: F32,
                 signed: true,
             }),
-            0xb3 => Convert(ConvertOp::Convert {
+            0xb3 => Instr::Convert(ConvertOp::Convert {
                 from: I32,
                 to: F32,
                 signed: false,
             }),
-            0xb4 => Convert(ConvertOp::Convert {
+            0xb4 => Instr::Convert(ConvertOp::Convert {
                 from: I64,
                 to: F32,
                 signed: true,
             }),
-            0xb5 => Convert(ConvertOp::Convert {
+            0xb5 => Instr::Convert(ConvertOp::Convert {
                 from: I64,
                 to: F32,
                 signed: false,
             }),
-            0xb6 => Convert(ConvertOp::F32DemoteF64),
-            0xb7 => Convert(ConvertOp::Convert {
+            0xb6 => Instr::Convert(ConvertOp::F32DemoteF64),
+            0xb7 => Instr::Convert(ConvertOp::Convert {
                 from: I32,
                 to: F64,
                 signed: true,
             }),
-            0xb8 => Convert(ConvertOp::Convert {
+            0xb8 => Instr::Convert(ConvertOp::Convert {
                 from: I32,
                 to: F64,
                 signed: false,
             }),
-            0xb9 => Convert(ConvertOp::Convert {
+            0xb9 => Instr::Convert(ConvertOp::Convert {
                 from: I64,
                 to: F64,
                 signed: true,
             }),
-            0xba => Convert(ConvertOp::Convert {
+            0xba => Instr::Convert(ConvertOp::Convert {
                 from: I64,
                 to: F64,
                 signed: false,
             }),
-            0xbb => Convert(ConvertOp::F64PromoteF32),
+            0xbb => Instr::Convert(ConvertOp::F64PromoteF32),
 
-            0xbc => Convert(ConvertOp::Reinterpret {
+            0xbc => Instr::Convert(ConvertOp::Reinterpret {
                 from: Float(F32),
                 to: Int(I32),
             }),
-            0xbd => Convert(ConvertOp::Reinterpret {
+            0xbd => Instr::Convert(ConvertOp::Reinterpret {
                 from: Float(F64),
                 to: Int(I64),
             }),
-            0xbe => Convert(ConvertOp::Reinterpret {
+            0xbe => Instr::Convert(ConvertOp::Reinterpret {
                 from: Int(I32),
                 to: Float(F32),
             }),
-            0xbf => Convert(ConvertOp::Reinterpret {
+            0xbf => Instr::Convert(ConvertOp::Reinterpret {
                 from: Int(I64),
                 to: Float(F64),
             }),

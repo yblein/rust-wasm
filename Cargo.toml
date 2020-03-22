@@ -3,8 +3,10 @@ name = "rust-wasm"
 version = "0.1.0"
 authors = ["Yoann Blein <yoann.blein@free.fr>", "Hugo Guiroux <gx.hugo@gmail.com>"]
 build = "build.rs"
+edition = "2018"
 
 [dependencies]
+serde = { version = "*", features = ["derive"] }
 
 [dev-dependencies]
 hexf-parse = "0.1.0"

@@ -1,8 +1,8 @@
-use ast::*;
-use ops::{BitsOp, FloatDemoteOp, FloatOp, FloatPromoteOp, IntOp};
-use runtime::*;
-use types;
-use values::Value;
+use super::ast::*;
+use super::ops::{BitsOp, FloatDemoteOp, FloatOp, FloatPromoteOp, IntOp};
+use super::runtime::*;
+use super::types;
+use super::values::Value;
 
 use std::rc::Rc;
 
@@ -101,7 +101,7 @@ impl Interpreter {
         globals: &mut GlobalInstStore,
         mems: &mut MemInstStore,
     ) -> IntResult {
-        use ast::Instr::*;
+        use super::ast::Instr::*;
 
         // Note: passing VM components mutability is case by case
         match *instr {
