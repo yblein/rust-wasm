@@ -23,7 +23,10 @@ use runtime::*;
 
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
+use std::fs::File;
+use std::io::prelude::*;
 use std::io::{Read, Seek};
+use std::path::Path;
 use std::rc::Rc;
 
 // Do not publish internal fields of the Store struct
@@ -58,6 +61,15 @@ pub enum Error {
     GlobalImmutable,
     GrowMemoryFailed,
     StackOverflow,
+}
+
+pub fn save_store(path: &Path, store: &Store) {
+    let text = serde_json::to_string(&store.mems).unwrap();
+    // println!("{}", text);
+    let binary = bson::to_bson(&store.mems).unwrap();
+    println!("{:?}", binary);
+    // let mut file = File::open("derp.bin").unwrap();
+    // file.write_all(&binary);
 }
 
 /// Return the empty store

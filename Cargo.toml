@@ -7,6 +7,9 @@ edition = "2018"
 
 [dependencies]
 serde = { version = "*", features = ["derive"] }
+serde_json = "1.0"
+bson = "*"
+
 
 [dev-dependencies]
 hexf-parse = "0.1.0"

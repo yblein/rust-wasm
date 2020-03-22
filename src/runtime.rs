@@ -6,6 +6,8 @@ use std::collections::HashMap;
 use std::ops::{Index, IndexMut};
 use std::rc::Rc;
 
+use serde::{Deserialize, Serialize};
+
 // Use a map for types to answer type_{func, table, memory, global}
 #[derive(PartialEq, Eq, Hash)]
 pub struct TypeKey {
@@ -24,11 +26,13 @@ pub struct ModuleInst {
     pub(crate) exports: Vec<ExportInst>,
 }
 
+#[derive(Serialize, Deserialize)]
 pub struct MemInst {
     pub data: Vec<u8>,
     pub max: Option<u32>,
 }
 
+#[derive(Serialize, Deserialize)]
 pub struct GlobalInst {
     pub value: values::Value,
     pub mutable: bool,
@@ -67,8 +71,10 @@ pub struct ExportInst {
 }
 
 pub struct FuncInstStore(Vec<FuncInst>);
+#[derive(Serialize, Deserialize)]
 pub struct MemInstStore(Vec<MemInst>);
 pub struct TableInstStore(Vec<TableInst>);
+#[derive(Serialize, Deserialize)]
 pub struct GlobalInstStore(Vec<GlobalInst>);
 
 // Addrs and extern valus exported to the user

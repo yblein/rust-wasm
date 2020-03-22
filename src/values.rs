@@ -1,22 +1,12 @@
 use super::types;
+use serde::{Deserialize, Serialize};
 
-#[derive(Debug, Clone, Copy)]
+#[derive(Debug, Clone, Copy, Serialize, Deserialize)]
 pub enum Value {
     I32(u32),
     I64(u64),
     F32(f32),
     F64(f64),
-}
-
-impl From<Value> for usize {
-    fn from(value: Value) -> usize {
-        match value {
-            Value::I32(v) => v as usize,
-            Value::I64(v) => v as usize,
-            Value::F32(v) => v as usize,
-            Value::F64(v) => v as usize,
-        }
-    }
 }
 
 impl PartialEq for Value {
