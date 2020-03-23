@@ -64,7 +64,7 @@ pub enum Error {
 
 use std::fs::create_dir_all;
 
-pub fn save_store(path: &Path, store: &Store) {
+pub fn save_store(path: &str, store: &Store) {
     let path = Path::new("./states/").join(path);
     create_dir_all(&path).unwrap();
     [
@@ -82,6 +82,28 @@ pub fn save_store(path: &Path, store: &Store) {
         let mut file = File::create(path.join(format!("{}.json", label))).unwrap();
         file.write_all(&text[..]).unwrap();
     });
+}
+
+use std::fs::read_to_string;
+
+pub fn restore_store(store: &mut Store, path: &str) {
+    let path = Path::new("./states/").join(path);
+    let memstr = read_to_string(path.join("mem.json")).unwrap();
+    let mems: MemInstStore = serde_json::from_str(&memstr).unwrap();
+
+    let globalstr = read_to_string(path.join("globals.json")).unwrap();
+    let globals: GlobalInstStore = serde_json::from_str(&globalstr).unwrap();
+
+    store.mems = mems;
+    store.globals = globals;
+
+    // Store {
+    //     funcs: FuncInstStore::new(),
+    //     tables: TableInstStore::new(),
+    //     mems,
+    //     globals,
+    //     types_map: HashMap::new(),
+    // }
 }
 
 enum Storable<'a> {
