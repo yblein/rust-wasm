@@ -20,7 +20,6 @@ pub use runtime::{
 use interpreter::{eval_const_expr, Trap, TrapOrigin};
 use runtime::*;
 
-use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 use std::io::{Read, Seek};
 use std::rc::Rc;

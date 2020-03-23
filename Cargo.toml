@@ -6,7 +6,6 @@ build = "build.rs"
 edition = "2018"
 
 [dependencies]
-serde = { version = "*", features = ["derive"] }
 
 [dev-dependencies]
 hexf-parse = "0.1.0"
