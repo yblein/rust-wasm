@@ -983,22 +983,15 @@ impl Interpreter {
         };
 
         let is_mapped_addr = (load_addr & (1 << 31)) > 0;
-        if is_mapped_addr {
-            println!("----->Highest bit set!!");
-        } else {
-            println!(
-                "----->Addr is {:X?}, offset is {:X?}",
-                load_addr, memop.offset
-            );
-        }
-
         let (offset, mem_data) = if is_mapped_addr {
             (
                 // Unset the highest bit to get the actual address
                 (load_addr & 0x7FFFFFFF) as usize,
                 match self.contract_data.as_ref() {
                     Some(data) => data,
-                    None => unreachable!("contract data is None in load()"),
+                    None => return Err(Trap {
+                        origin: TrapOrigin::LoadOutOfMemory,
+                    }),
                 },
             )
         } else {
@@ -1011,7 +1004,7 @@ impl Interpreter {
         let size_in_bytes: usize = (size_in_bits as usize) / 8;
 
         if offset + size_in_bytes > mem_data.len() {
-            println!("offset: {:?}, size: {:?}", offset, size_in_bytes);
+            //println!("offset: {:?}, size: {:?}", offset, size_in_bytes);
             return Err(Trap {
                 origin: TrapOrigin::LoadOutOfMemory,
             });

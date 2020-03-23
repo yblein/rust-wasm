@@ -691,10 +691,10 @@ fn allocate_and_init_module(
     }
 
     // call the start function if it exists
-    // if let Some(idx) = module.start {
-    //     let func_addr = inst.func_addrs[idx as usize];
-    //     invoke_func(store, func_addr, Vec::new(), store.contract_data.unwrap())?;
-    // }
+    if let Some(idx) = module.start {
+        let func_addr = inst.func_addrs[idx as usize];
+        invoke_func(store, func_addr, Vec::new(), None)?;
+    }
 
     Ok(inst)
 }
