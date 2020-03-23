@@ -21,7 +21,6 @@ pub use runtime::{
 use interpreter::{eval_const_expr, Trap, TrapOrigin};
 use runtime::*;
 
-use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 use std::fs::File;
 use std::io::prelude::*;
@@ -63,13 +62,32 @@ pub enum Error {
     StackOverflow,
 }
 
+use std::fs::create_dir_all;
+
 pub fn save_store(path: &Path, store: &Store) {
-    let text = serde_json::to_string(&store.mems).unwrap();
-    // println!("{}", text);
-    let binary = bson::to_bson(&store.mems).unwrap();
-    println!("{:?}", binary);
-    // let mut file = File::open("derp.bin").unwrap();
-    // file.write_all(&binary);
+    let path = Path::new("./states/").join(path);
+    create_dir_all(&path).unwrap();
+    [
+        ("mem", Storable::Mem(&store.mems)),
+        ("globals", Storable::Global(&store.globals)),
+        // ("types_map", Storable::TypesMap(&store.types_map)),
+    ]
+    .iter()
+    .for_each(|(label, thing)| {
+        let text = match thing {
+            Storable::Mem(thing) => serde_json::to_vec(thing).unwrap(),
+            Storable::Global(thing) => serde_json::to_vec(thing).unwrap(),
+            // Storable::TypesMap(thing) => serde_json::to_vec(thing).unwrap(),
+        };
+        let mut file = File::create(path.join(format!("{}.json", label))).unwrap();
+        file.write_all(&text[..]).unwrap();
+    });
+}
+
+enum Storable<'a> {
+    Mem(&'a MemInstStore),
+    Global(&'a GlobalInstStore),
+    // TypesMap(&'a TypeHashMap),
 }
 
 /// Return the empty store

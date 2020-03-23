@@ -992,14 +992,14 @@ impl Interpreter {
             );
         }
 
-        // let contract_data = vec![0x42, 0x42, 0x42, 0x42];
-        let contract_data = self.contract_data.as_ref().unwrap();
-
         let (offset, mem_data) = if is_mapped_addr {
             (
                 // Unset the highest bit to get the actual address
                 (load_addr & 0x7FFFFFFF) as usize,
-                contract_data,
+                match self.contract_data.as_ref() {
+                    Some(data) => data,
+                    None => unreachable!("contract data is None in load()"),
+                },
             )
         } else {
             // this is a regular memory address
