@@ -11,6 +11,7 @@ pub struct Interpreter {
     pub(crate) stack: Vec<Value>,
     /// Buffer to collect return values of host functions
     pub(crate) contract_data: Option<Vec<u8>>,
+    pub(crate) msg_data: Vec<u8>,
     return_buffer: Vec<Value>,
 }
 
@@ -87,6 +88,7 @@ impl Interpreter {
             stack: Vec::new(),
             return_buffer: Vec::new(),
             contract_data,
+            msg_data: Vec::new(),
         }
     }
 
@@ -989,9 +991,11 @@ impl Interpreter {
                 (load_addr & 0x7FFFFFFF) as usize,
                 match self.contract_data.as_ref() {
                     Some(data) => data,
-                    None => return Err(Trap {
-                        origin: TrapOrigin::LoadOutOfMemory,
-                    }),
+                    None => {
+                        return Err(Trap {
+                            origin: TrapOrigin::LoadOutOfMemory,
+                        })
+                    }
                 },
             )
         } else {
@@ -1046,21 +1050,34 @@ impl Interpreter {
         use types::Value as Tv;
         use types::{Float, Int};
 
-        let mem = &mut memories[frame_memories[0]];
         let c = self.stack.pop().unwrap();
         let offset = match self.stack.pop().unwrap() {
             Value::I32(c) => c as usize + memop.offset as usize,
             _ => unreachable!(),
         };
+
+        let is_mapped_addr = (offset & (1 << 31)) > 0;
+
+        let mem_data = if is_mapped_addr {
+            &mut self.msg_data
+        } else {
+            &mut memories[frame_memories[0]].data
+        };
+
         let size_in_bits = memop.opt.unwrap_or(memop.type_.bit_width());
         let size_in_bytes: usize = (size_in_bits as usize) / 8;
 
-        if offset + size_in_bytes > mem.data.len() {
-            return Err(Trap {
-                origin: TrapOrigin::StoreOutOfMemory,
-            });
+        if offset + size_in_bytes > mem_data.len() {
+            // If we're running in a contract context and this is a mapped addr, give us more memory
+            if is_mapped_addr && self.contract_data.is_some() {
+                mem_data.extend(vec![0; mem_data.len() - (offset + size_in_bytes)]);
+            } else {
+                return Err(Trap {
+                    origin: TrapOrigin::StoreOutOfMemory,
+                });
+            }
         }
-        let bits = &mut mem.data[offset..(offset + size_in_bytes)];
+        let bits = &mut mem_data[offset..(offset + size_in_bytes)];
         match (size_in_bits, memop.type_, c) {
             (8, Tv::Int(Int::I32), Value::I32(c)) => (c as u8).to_bits(bits),
             (16, Tv::Int(Int::I32), Value::I32(c)) => (c as u16).to_bits(bits),

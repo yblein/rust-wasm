@@ -1,6 +1,6 @@
+use super::*;
 use hexf_parse::{parse_hexf32, parse_hexf64};
 use rust_wasm::values::Value;
-use super::*;
 use std::convert::TryFrom;
 use std::iter::Peekable;
 use std::str::{CharIndices, FromStr};

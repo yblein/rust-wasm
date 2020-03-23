@@ -1,5 +1,5 @@
-use rust_wasm::*;
 use super::*;
+use rust_wasm::*;
 use std::collections::HashMap;
 use std::fs::File;
 use std::io::{Cursor, Read};
