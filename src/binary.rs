@@ -1,10 +1,9 @@
-use std::{i32, i64, io};
+use super::ast::*;
+use super::ops::IntOp;
+use super::types;
+use super::values::Value;
 use std::io::Read;
-use ops::IntOp;
-
-use types;
-use ast::*;
-use values::Value;
+use std::{i32, i64, io};
 
 const MAGIC: u32 = 0x6d736100;
 
@@ -12,7 +11,11 @@ pub const VERSION: u32 = 1;
 
 /// Decode a Web Assembly module from the given `reader`
 pub fn decode<R: Read>(reader: R) -> Result<Module, DecodeError> {
-	Decoder { reader: reader, pos: 0 }.read_module()
+	Decoder {
+		reader: reader,
+		pos: 0,
+	}
+	.read_module()
 }
 
 #[derive(Debug)]
@@ -161,7 +164,8 @@ impl<R: Read> Decoder<R> {
 	}
 
 	fn read_vec<T, F>(&mut self, read_elem: F) -> DecodeResult<Vec<T>>
-		where F: Fn(&mut Decoder<R>) -> DecodeResult<T>
+	where
+		F: Fn(&mut Decoder<R>) -> DecodeResult<T>,
 	{
 		let n = self.read_vu32()?;
 		let mut vec = Vec::with_capacity(n as usize);
@@ -214,7 +218,9 @@ impl<R: Read> Decoder<R> {
 	}
 
 	fn read_memory_type(&mut self) -> DecodeResult<types::Memory> {
-		Ok(types::Memory { limits: self.read_limits()? })
+		Ok(types::Memory {
+			limits: self.read_limits()?,
+		})
 	}
 
 	fn read_elem_type(&mut self) -> DecodeResult<types::Elem> {
@@ -242,10 +248,10 @@ impl<R: Read> Decoder<R> {
 	}
 
 	fn read_meta_instr(&mut self) -> DecodeResult<MetaInstr> {
-		use ast::Instr::*;
-		use types::Value::*;
-		use types::Int::*;
+		use super::ast::Instr::*;
 		use types::Float::*;
+		use types::Int::*;
+		use types::Value::*;
 
 		let opcode = self.read_byte()?;
 
@@ -257,12 +263,12 @@ impl<R: Read> Decoder<R> {
 				let block_type = self.read_block_type()?;
 				let instrs = self.read_instr_block()?;
 				Block(block_type, instrs)
-			},
+			}
 			0x03 => {
 				let block_type = self.read_block_type()?;
 				let instrs = self.read_instr_block()?;
 				Loop(block_type, instrs)
-			},
+			}
 			0x04 => {
 				let block_type = self.read_block_type()?;
 				let (instrs1, delim) = self.read_instr_block_with_delim()?;
@@ -271,7 +277,7 @@ impl<R: Read> Decoder<R> {
 					PseudoInstr::Else => self.read_instr_block()?,
 				};
 				If(block_type, instrs1, instrs2)
-			},
+			}
 
 			0x05 => return Ok(MetaInstr::PseudoInstr(PseudoInstr::Else)),
 			0x0b => return Ok(MetaInstr::PseudoInstr(PseudoInstr::End)),
@@ -288,7 +294,7 @@ impl<R: Read> Decoder<R> {
 					return Err(DecodeError::MalformedBinary);
 				}
 				CallIndirect(index)
-			},
+			}
 
 			0x1a => Drop_,
 			0x1b => Select,
@@ -329,13 +335,13 @@ impl<R: Read> Decoder<R> {
 					return Err(DecodeError::MalformedBinary);
 				}
 				CurrentMemory
-			},
+			}
 			0x40 => {
 				if self.read_byte()? != 0 {
 					return Err(DecodeError::MalformedBinary);
 				}
 				GrowMemory
-			},
+			}
 
 			0x41 => Const(Value::from_i32(self.read_vs32()?)),
 			0x42 => Const(Value::from_i64(self.read_vs64()?)),
@@ -449,31 +455,107 @@ impl<R: Read> Decoder<R> {
 			0xa6 => FBin(F64, FBinOp::CopySign),
 
 			0xa7 => Convert(ConvertOp::I32WrapI64),
-			0xa8 => Convert(ConvertOp::Trunc { from: F32, to: I32, signed: true }),
-			0xa9 => Convert(ConvertOp::Trunc { from: F32, to: I32, signed: false }),
-			0xaa => Convert(ConvertOp::Trunc { from: F64, to: I32, signed: true }),
-			0xab => Convert(ConvertOp::Trunc { from: F64, to: I32, signed: false }),
+			0xa8 => Convert(ConvertOp::Trunc {
+				from: F32,
+				to: I32,
+				signed: true,
+			}),
+			0xa9 => Convert(ConvertOp::Trunc {
+				from: F32,
+				to: I32,
+				signed: false,
+			}),
+			0xaa => Convert(ConvertOp::Trunc {
+				from: F64,
+				to: I32,
+				signed: true,
+			}),
+			0xab => Convert(ConvertOp::Trunc {
+				from: F64,
+				to: I32,
+				signed: false,
+			}),
 			0xac => Convert(ConvertOp::I64ExtendSI32),
 			0xad => Convert(ConvertOp::I64ExtendUI32),
-			0xae => Convert(ConvertOp::Trunc { from: F32, to: I64, signed: true }),
-			0xaf => Convert(ConvertOp::Trunc { from: F32, to: I64, signed: false }),
-			0xb0 => Convert(ConvertOp::Trunc { from: F64, to: I64, signed: true }),
-			0xb1 => Convert(ConvertOp::Trunc { from: F64, to: I64, signed: false }),
-			0xb2 => Convert(ConvertOp::Convert { from: I32, to: F32, signed: true }),
-			0xb3 => Convert(ConvertOp::Convert { from: I32, to: F32, signed: false }),
-			0xb4 => Convert(ConvertOp::Convert { from: I64, to: F32, signed: true }),
-			0xb5 => Convert(ConvertOp::Convert { from: I64, to: F32, signed: false }),
+			0xae => Convert(ConvertOp::Trunc {
+				from: F32,
+				to: I64,
+				signed: true,
+			}),
+			0xaf => Convert(ConvertOp::Trunc {
+				from: F32,
+				to: I64,
+				signed: false,
+			}),
+			0xb0 => Convert(ConvertOp::Trunc {
+				from: F64,
+				to: I64,
+				signed: true,
+			}),
+			0xb1 => Convert(ConvertOp::Trunc {
+				from: F64,
+				to: I64,
+				signed: false,
+			}),
+			0xb2 => Convert(ConvertOp::Convert {
+				from: I32,
+				to: F32,
+				signed: true,
+			}),
+			0xb3 => Convert(ConvertOp::Convert {
+				from: I32,
+				to: F32,
+				signed: false,
+			}),
+			0xb4 => Convert(ConvertOp::Convert {
+				from: I64,
+				to: F32,
+				signed: true,
+			}),
+			0xb5 => Convert(ConvertOp::Convert {
+				from: I64,
+				to: F32,
+				signed: false,
+			}),
 			0xb6 => Convert(ConvertOp::F32DemoteF64),
-			0xb7 => Convert(ConvertOp::Convert { from: I32, to: F64, signed: true }),
-			0xb8 => Convert(ConvertOp::Convert { from: I32, to: F64, signed: false }),
-			0xb9 => Convert(ConvertOp::Convert { from: I64, to: F64, signed: true }),
-			0xba => Convert(ConvertOp::Convert { from: I64, to: F64, signed: false }),
+			0xb7 => Convert(ConvertOp::Convert {
+				from: I32,
+				to: F64,
+				signed: true,
+			}),
+			0xb8 => Convert(ConvertOp::Convert {
+				from: I32,
+				to: F64,
+				signed: false,
+			}),
+			0xb9 => Convert(ConvertOp::Convert {
+				from: I64,
+				to: F64,
+				signed: true,
+			}),
+			0xba => Convert(ConvertOp::Convert {
+				from: I64,
+				to: F64,
+				signed: false,
+			}),
 			0xbb => Convert(ConvertOp::F64PromoteF32),
 
-			0xbc => Convert(ConvertOp::Reinterpret { from: Float(F32), to: Int(I32) }),
-			0xbd => Convert(ConvertOp::Reinterpret { from: Float(F64), to: Int(I64) }),
-			0xbe => Convert(ConvertOp::Reinterpret { from: Int(I32), to: Float(F32) }),
-			0xbf => Convert(ConvertOp::Reinterpret { from: Int(I64), to: Float(F64) }),
+			0xbc => Convert(ConvertOp::Reinterpret {
+				from: Float(F32),
+				to: Int(I32),
+			}),
+			0xbd => Convert(ConvertOp::Reinterpret {
+				from: Float(F64),
+				to: Int(I64),
+			}),
+			0xbe => Convert(ConvertOp::Reinterpret {
+				from: Int(I32),
+				to: Float(F32),
+			}),
+			0xbf => Convert(ConvertOp::Reinterpret {
+				from: Int(I64),
+				to: Float(F64),
+			}),
 
 			_ => return Err(DecodeError::MalformedBinary),
 		}))
@@ -501,16 +583,30 @@ impl<R: Read> Decoder<R> {
 		self.read_instr_block()
 	}
 
-	fn read_load_op(&mut self, type_: types::Value, opt: Option<(u32, bool)>) -> DecodeResult<Instr> {
+	fn read_load_op(
+		&mut self,
+		type_: types::Value,
+		opt: Option<(u32, bool)>,
+	) -> DecodeResult<Instr> {
 		let align = self.read_vu32()?;
 		let offset = self.read_vu32()?;
-		Ok(Instr::Load(LoadOp { align, offset, type_, opt }))
+		Ok(Instr::Load(LoadOp {
+			align,
+			offset,
+			type_,
+			opt,
+		}))
 	}
 
 	fn read_store_op(&mut self, type_: types::Value, opt: Option<u32>) -> DecodeResult<Instr> {
 		let align = self.read_vu32()?;
 		let offset = self.read_vu32()?;
-		Ok(Instr::Store(StoreOp { align, offset, type_, opt }))
+		Ok(Instr::Store(StoreOp {
+			align,
+			offset,
+			type_,
+			opt,
+		}))
 	}
 
 	fn skip_custom_section(&mut self, size: u32) -> DecodeResult<()> {
@@ -561,7 +657,9 @@ impl<R: Read> Decoder<R> {
 	}
 
 	fn read_table(&mut self) -> DecodeResult<Table> {
-		Ok(Table { type_: self.read_table_type()? })
+		Ok(Table {
+			type_: self.read_table_type()?,
+		})
 	}
 
 	fn read_table_section(&mut self) -> DecodeResult<Vec<Table>> {
@@ -569,7 +667,9 @@ impl<R: Read> Decoder<R> {
 	}
 
 	fn read_memory(&mut self) -> DecodeResult<Memory> {
-		Ok(Memory { type_: self.read_memory_type()? })
+		Ok(Memory {
+			type_: self.read_memory_type()?,
+		})
 	}
 
 	fn read_memory_section(&mut self) -> DecodeResult<Vec<Memory>> {
@@ -611,12 +711,17 @@ impl<R: Read> Decoder<R> {
 	}
 
 	fn read_segment<T, F>(&mut self, read_elem: F) -> DecodeResult<Segment<T>>
-		where F: Fn(&mut Decoder<R>) -> DecodeResult<T>
+	where
+		F: Fn(&mut Decoder<R>) -> DecodeResult<T>,
 	{
 		let index = self.read_index()?;
 		let offset = self.read_expr()?;
 		let init = self.read_vec(read_elem)?;
-		Ok(Segment { index, offset, init })
+		Ok(Segment {
+			index,
+			offset,
+			init,
+		})
 	}
 
 	fn read_elem(&mut self) -> DecodeResult<Segment<Index>> {
@@ -723,12 +828,28 @@ impl<R: Read> Decoder<R> {
 		}
 
 		// pairwise merge function types and code
-		let funcs = func_types.into_iter()
+		let funcs = func_types
+			.into_iter()
 			.zip(func_bodies)
-			.map(|(type_index, (locals, body))| Func { type_index, locals, body })
+			.map(|(type_index, (locals, body))| Func {
+				type_index,
+				locals,
+				body,
+			})
 			.collect();
 
-		Ok(Module { types, funcs, tables, memories, globals, elems, data, start, imports, exports })
+		Ok(Module {
+			types,
+			funcs,
+			tables,
+			memories,
+			globals,
+			elems,
+			data,
+			start,
+			imports,
+			exports,
+		})
 	}
 }
 

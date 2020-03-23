@@ -1,8 +1,8 @@
-use ast::*;
-use runtime::*;
-use types;
-use values::Value;
-use ops::{IntOp, FloatOp, FloatDemoteOp, FloatPromoteOp, BitsOp};
+use super::ast::*;
+use super::ops::{BitsOp, FloatDemoteOp, FloatOp, FloatPromoteOp, IntOp};
+use super::runtime::*;
+use super::types;
+use super::values::Value;
 
 use std::rc::Rc;
 
@@ -88,18 +88,18 @@ impl Interpreter {
 		}
 	}
 
-	/// Intrepret a single instruction.
-	/// This is the main dispatching function of the interpreter.
-	pub fn instr(
-		&mut self,
-		sframe: &StackFrame,
-		instr: &Instr,
-		funcs: & FuncInstStore,
-		tables: &TableInstStore,
-		globals: &mut GlobalInstStore,
-		mems: &mut MemInstStore
-	) -> IntResult {
-		use ast::Instr::*;
+    /// Intrepret a single instruction.
+    /// This is the main dispatching function of the interpreter.
+    pub fn instr(
+        &mut self,
+        sframe: &StackFrame,
+        instr: &Instr,
+        funcs: &FuncInstStore,
+        tables: &TableInstStore,
+        globals: &mut GlobalInstStore,
+        mems: &mut MemInstStore,
+    ) -> IntResult {
+        use super::ast::Instr::*;
 
 		// Note: passing VM components mutability is case by case
 		match *instr {

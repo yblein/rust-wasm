@@ -1,9 +1,9 @@
-use ast;
-use runtime::PAGE_SIZE;
-use types;
-use types::Value::*;
-use types::Int::*;
-use types::Float::*;
+use super::ast;
+use super::runtime::PAGE_SIZE;
+use super::types;
+use super::types::Float::*;
+use super::types::Int::*;
+use super::types::Value::*;
 
 use std::collections::HashSet;
 
@@ -209,7 +209,7 @@ fn check_instr<'a>(
 	frames: &mut Vec<Frame<'a>>,
 	instr: &'a ast::Instr,
 ) -> Option<()> {
-	use ast::Instr::*;
+    use super::ast::Instr::*;
 
 	match *instr {
 		Nop => {}
@@ -403,7 +403,7 @@ fn check_convert_op(
 	frames: &mut Vec<Frame>,
 	convert_op: &ast::ConvertOp,
 ) -> Option<()> {
-	use ast::ConvertOp::*;
+    use super::ast::ConvertOp::*;
 
 	match *convert_op {
 		I32WrapI64 => {
@@ -495,7 +495,7 @@ fn check_start(mod_ctx: &ModContext, start: &ast::Index) -> Option<()> {
 }
 
 fn check_export(mod_ctx: &ModContext, export: &ast::Export) -> Option<()> {
-	use ast::ExportDesc::*;
+    use super::ast::ExportDesc::*;
 
 	match export.desc {
 		Func(x) => require((x as usize) < mod_ctx.funcs.len()),
@@ -507,7 +507,7 @@ fn check_export(mod_ctx: &ModContext, export: &ast::Export) -> Option<()> {
 
 /// Validate an import and insert it into the context of the module
 fn check_import<'a>(ctx: &mut ModContext<'a>, import: &'a ast::Import) -> Option<()> {
-	use ast::ImportDesc::*;
+    use super::ast::ImportDesc::*;
 
 	match import.desc {
 		Func(x) => {

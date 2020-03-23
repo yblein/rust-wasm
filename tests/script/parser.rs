@@ -1,10 +1,10 @@
-use std::convert::TryFrom;
-use std::iter::Peekable;
-use std::str::{FromStr, CharIndices};
-use std::{f32, f64};
+use super::*;
 use hexf_parse::{parse_hexf32, parse_hexf64};
 use rust_wasm::values::Value;
-use script::*;
+use std::convert::TryFrom;
+use std::iter::Peekable;
+use std::str::{CharIndices, FromStr};
+use std::{f32, f64};
 
 struct Lexer<'a> {
 	src: &'a str,
@@ -26,13 +26,16 @@ impl<'a> Iterator for Lexer<'a> {
 	fn next(&mut self) -> Option<Self::Item> {
 		loop {
 			match self.chars.next() {
-				Some((_, c)) if c.is_whitespace() => {},
-				Some((start, '(')) | Some((start, ')')) => return Some(&self.src[start..start+1]),
-				Some((start, '"')) => { // string
+				Some((_, c)) if c.is_whitespace() => {}
+				Some((start, '(')) | Some((start, ')')) => {
+					return Some(&self.src[start..start + 1])
+				}
+				Some((start, '"')) => {
+					// string
 					loop {
 						match self.chars.next() {
 							Some((i, '\"')) => {
-								return Some(&self.src[start..i+1]);
+								return Some(&self.src[start..i + 1]);
 							}
 							Some((_, '\\')) => {
 								let _ = self.chars.next();
@@ -41,9 +44,9 @@ impl<'a> Iterator for Lexer<'a> {
 							None => panic!("unexpected eof"),
 						}
 					}
-
 				}
-				Some((start, _)) => { // symbol
+				Some((start, _)) => {
+					// symbol
 					loop {
 						match self.chars.peek() {
 							Some(&(i, c)) if c.is_whitespace() => return Some(&self.src[start..i]),
@@ -55,13 +58,12 @@ impl<'a> Iterator for Lexer<'a> {
 						}
 						self.chars.next();
 					}
-				},
+				}
 				None => return None,
 			}
 		}
 	}
 }
-
 
 pub struct Parser<'a> {
 	lexer: Peekable<Lexer<'a>>,
@@ -81,7 +83,9 @@ impl<'a> Iterator for Parser<'a> {
 
 impl<'a> Parser<'a> {
 	pub fn new(src: &'a str) -> Parser {
-		Parser { lexer: Lexer::new(src).peekable() }
+		Parser {
+			lexer: Lexer::new(src).peekable(),
+		}
 	}
 
 	fn next_token(&mut self) -> &'a str {
@@ -90,20 +94,20 @@ impl<'a> Parser<'a> {
 
 	fn open(&mut self) {
 		match self.next_token() {
-			"(" => {},
-			s => panic!(expected(s, &["("]))
+			"(" => {}
+			s => panic!(expected(s, &["("])),
 		}
 	}
 
 	fn close(&mut self) {
 		match self.next_token() {
-			")" => {},
-			s => panic!(expected(s, &[")"]))
+			")" => {}
+			s => panic!(expected(s, &[")"])),
 		}
 	}
 
 	fn cmd(&mut self) -> Cmd {
-		use script::Assertion::*;
+		use super::Assertion::*;
 
 		self.open();
 		let cmd = match self.next_token() {
@@ -118,7 +122,10 @@ impl<'a> Parser<'a> {
 			"assert_malformed" => Cmd::Assertion(Malformed(self.module(), self.string())),
 			"assert_unlinkable" => Cmd::Assertion(Unlinkable(self.module(), self.string())),
 
-			"register" => Cmd::Register { name: self.string(), mod_ref: self.opt_id() },
+			"register" => Cmd::Register {
+				name: self.string(),
+				mod_ref: self.opt_id(),
+			},
 
 			"invoke" => Cmd::Action(self.invoke()),
 			"get" => Cmd::Action(self.get()),
@@ -205,16 +212,23 @@ impl<'a> Parser<'a> {
 
 		loop {
 			match self.lexer.peek() {
-				Some(&"(") => {},
-				_ => return values
+				Some(&"(") => {}
+				_ => return values,
 			}
 			self.open();
 			values.push(match self.next_token() {
-				"i32.const" => Value::I32(i32::from_str(&next_lit(self)).expect("invalid i32 literal") as u32),
-				"i64.const" => Value::I64(i64::from_str(&next_lit(self)).expect("invalid i64 literal") as u64),
+				"i32.const" => {
+					Value::I32(i32::from_str(&next_lit(self)).expect("invalid i32 literal") as u32)
+				}
+				"i64.const" => {
+					Value::I64(i64::from_str(&next_lit(self)).expect("invalid i64 literal") as u64)
+				}
 				"f32.const" => Value::F32(parse_f32(&next_lit(self))),
 				"f64.const" => Value::F64(parse_f64(&next_lit(self))),
-				s => panic!(expected(s, &["i32.const", "i64.const", "f32.const", "f64.const"]))
+				s => panic!(expected(
+					s,
+					&["i32.const", "i64.const", "f32.const", "f64.const"]
+				)),
 			});
 			self.close();
 		}
@@ -231,21 +245,21 @@ impl<'a> Parser<'a> {
 	fn string(&mut self) -> String {
 		let mut vec = Vec::new();
 		let s = self.next_token();
-		unescape_in(&mut vec, &s[1..s.len()-1]);
+		unescape_in(&mut vec, &s[1..s.len() - 1]);
 		String::from_utf8(vec).expect("invalid UTF-8")
 	}
 
 	fn bytestrings(&mut self) -> Vec<u8> {
 		let mut vec = Vec::new();
-		
+
 		loop {
 			match self.lexer.peek() {
-				Some(s) if s.starts_with("\"") => {},
+				Some(s) if s.starts_with("\"") => {}
 				_ => return vec,
 			}
 
 			let s = self.next_token();
-			unescape_in(&mut vec, &s[1..s.len()-1])
+			unescape_in(&mut vec, &s[1..s.len() - 1])
 		}
 	}
 }
@@ -274,7 +288,7 @@ fn unescape_in<'a>(vec: &mut Vec<u8>, s: &'a str) {
 				let l = parse_hex_digit(c);
 				vec.push(h << 4 | l);
 				state = State::Normal;
-			},
+			}
 			State::Esc => match c {
 				b't' => {
 					vec.push(b'\t');
@@ -305,10 +319,12 @@ fn unescape_in<'a>(vec: &mut Vec<u8>, s: &'a str) {
 					state = State::Codepoint(0);
 				}
 				_ => panic!("expected `{{`, found `{}`", c),
-			}
+			},
 			State::Codepoint(v) => match c {
 				b'}' => {
-					let u: char = char::try_from(v).expect(&format!("invalid unicode point {:x}", v)).into();
+					let u: char = char::try_from(v)
+						.expect(&format!("invalid unicode point {:x}", v))
+						.into();
 					let mut s = [0u8; 4];
 					let _ = u.encode_utf8(&mut s);
 					vec.extend_from_slice(&s[..u.len_utf8()]);
@@ -319,7 +335,7 @@ fn unescape_in<'a>(vec: &mut Vec<u8>, s: &'a str) {
 					state = State::Codepoint(v << 4 | hb as u32);
 				}
 				_ => panic!("expected hex digit"),
-			}
+			},
 		}
 	}
 }
@@ -329,12 +345,12 @@ fn parse_hex_digit(c: u8) -> u8 {
 		b'0'..=b'9' => c - b'0',
 		b'a'..=b'f' => c - b'a' + 10,
 		b'A'..=b'F' => c - b'A' + 10,
-		_ => unreachable!()
+		_ => unreachable!(),
 	}
 }
 
 macro_rules! define_parse_f {
-    ($name:ident, $f:ident, $i:ident, $parse_hex:ident) => (
+	($name:ident, $f:ident, $i:ident, $parse_hex:ident) => {
 		fn $name(s: &str) -> $f {
 			let (negate, s) = match &s[0..1] {
 				"-" => (true, &s[1..]),
@@ -354,14 +370,18 @@ macro_rules! define_parse_f {
 			} else {
 				$f::from_str(s).unwrap()
 			};
-			if negate { -z } else { z }
+			if negate {
+				-z
+			} else {
+				z
+			}
 		}
-	)
+	};
 }
 
 define_parse_f!(parse_f32, f32, u32, parse_hexf32);
 define_parse_f!(parse_f64, f64, u64, parse_hexf64);
 
-fn expected(found: &str, options: &[&str]) -> String{
+fn expected(found: &str, options: &[&str]) -> String {
 	format!("found: {:?}, expected: {:?}", found, options)
 }

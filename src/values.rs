@@ -1,4 +1,4 @@
-use types;
+use super::types;
 
 #[derive(Debug, Clone, Copy)]
 pub enum Value {
