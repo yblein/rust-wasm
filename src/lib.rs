@@ -7,6 +7,7 @@ extern crate core;
 #[macro_use]
 mod interpreter;
 mod binary;
+mod memmap;
 mod ops;
 pub mod runtime;
 mod valid;

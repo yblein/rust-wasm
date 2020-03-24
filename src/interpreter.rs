@@ -975,6 +975,8 @@ impl Interpreter {
         memories: &MemInstStore,
         frame_memories: &[MemAddr],
     ) -> IntResult {
+        use super::memmap::MemMap;
+        use std::convert::TryFrom;
         use types::Value as Tv;
         use types::{Float, Int};
 
@@ -984,11 +986,17 @@ impl Interpreter {
             _ => unreachable!(),
         };
 
-        let is_mapped_addr = (load_addr & (1 << 31)) > 0;
-        let (offset, mem_data) = if is_mapped_addr {
-            (
-                // Unset the highest bit to get the actual address
-                (load_addr & 0x7FFFFFFF) as usize,
+        let mmap = match MemMap::try_from(load_addr) {
+            Ok(m) => m,
+            Err(_) => {
+                return Err(Trap {
+                    origin: TrapOrigin::LoadOutOfMemory,
+                })
+            }
+        };
+        let (offset, mem_data) = match mmap {
+            MemMap::ContractData(v) => (
+                v,
                 match self.contract_data.as_ref() {
                     Some(data) => data,
                     None => {
@@ -997,11 +1005,17 @@ impl Interpreter {
                         })
                     }
                 },
-            )
-        } else {
-            // this is a regular memory address
-            let mem = &memories[frame_memories[0]];
-            (load_addr as usize, &mem.data)
+            ),
+            MemMap::Prog(v) => {
+                // this is a regular memory address
+                let mem = &memories[frame_memories[0]];
+                (v, &mem.data)
+            }
+            _ => {
+                return Err(Trap {
+                    origin: TrapOrigin::LoadOutOfMemory,
+                })
+            }
         };
 
         let (size_in_bits, signed) = memop.opt.unwrap_or((memop.type_.bit_width(), false));
