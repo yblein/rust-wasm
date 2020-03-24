@@ -994,15 +994,19 @@ impl Interpreter {
                 })
             }
         };
+
+        // Given the memory mapping, get a reference to the
+        // actual data it points to, along with the relative offset
         let (offset, mem_data) = match mmap {
             MemMap::ContractData(v) => (
                 v,
                 match self.contract_data.as_ref() {
                     Some(data) => data,
                     None => {
+                        // If our contract data is None, this is just a bad memory access
                         return Err(Trap {
                             origin: TrapOrigin::LoadOutOfMemory,
-                        })
+                        });
                     }
                 },
             ),
@@ -1061,6 +1065,8 @@ impl Interpreter {
         memories: &mut MemInstStore,
         frame_memories: &[MemAddr],
     ) -> IntResult {
+        use super::memmap::MemMap;
+        use std::convert::TryFrom;
         use types::Value as Tv;
         use types::{Float, Int};
 
@@ -1069,28 +1075,50 @@ impl Interpreter {
             Value::I32(c) => c as usize + memop.offset as usize,
             _ => unreachable!(),
         };
-
-        let is_mapped_addr = (offset & (1 << 31)) > 0;
-
-        let mem_data = if is_mapped_addr {
-            &mut self.msg_data
-        } else {
-            &mut memories[frame_memories[0]].data
-        };
-
         let size_in_bits = memop.opt.unwrap_or(memop.type_.bit_width());
         let size_in_bytes: usize = (size_in_bits as usize) / 8;
 
-        if offset + size_in_bytes > mem_data.len() {
-            // If we're running in a contract context and this is a mapped addr, give us more memory
-            if is_mapped_addr && self.contract_data.is_some() {
-                mem_data.extend(vec![0; mem_data.len() - (offset + size_in_bytes)]);
-            } else {
+        let mmap = match MemMap::try_from(offset) {
+            Ok(m) => m,
+            Err(_) => {
+                return Err(Trap {
+                    origin: TrapOrigin::StoreOutOfMemory,
+                })
+            }
+        };
+        let mem_data = match mmap {
+            MemMap::ContractData(_) => {
+                // Contract data is read only
                 return Err(Trap {
                     origin: TrapOrigin::StoreOutOfMemory,
                 });
             }
-        }
+            MemMap::Prog(_) => {
+                let mem_data = &mut memories[frame_memories[0]].data;
+                // Storing past allocated memory is an error condition
+                if offset + size_in_bytes > mem_data.len() {
+                    return Err(Trap {
+                        origin: TrapOrigin::StoreOutOfMemory,
+                    });
+                } else {
+                    mem_data
+                }
+            }
+            MemMap::MsgData(_) => {
+                let mem_data = &mut self.msg_data;
+                // If we're about to store deeper than we've allocated, push it out
+                if offset + size_in_bytes > mem_data.len() {
+                    mem_data.extend(vec![0; mem_data.len() - (offset + size_in_bytes)]);
+                }
+                mem_data
+            }
+            _ => {
+                return Err(Trap {
+                    origin: TrapOrigin::StoreOutOfMemory,
+                })
+            }
+        };
+
         let bits = &mut mem_data[offset..(offset + size_in_bytes)];
         match (size_in_bits, memop.type_, c) {
             (8, Tv::Int(Int::I32), Value::I32(c)) => (c as u8).to_bits(bits),
