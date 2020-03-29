@@ -222,7 +222,7 @@ fn run_action(
                 &registry.last_key
             };
             match registry.mod_exports[mod_name][func] {
-                ExternVal::Func(addr) => invoke_func(store, addr, args.clone(), None),
+                ExternVal::Func(addr) => invoke_func(store, addr, args.clone(), None, None),
                 _ => panic!("extern val should be a function"),
             }
         }

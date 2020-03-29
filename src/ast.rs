@@ -113,7 +113,7 @@ pub struct MemOp<T> {
 pub type LoadOp = MemOp<(u32, bool)>;
 
 /// A memory store with optional size
-pub type StoreOp = MemOp<(u32)>;
+pub type StoreOp = MemOp<u32>;
 
 #[derive(Debug)]
 pub enum Instr {

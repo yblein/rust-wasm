@@ -277,7 +277,8 @@ pub fn invoke_func(
     store: &mut Store,
     funcaddr: FuncAddr,
     args: Vec<values::Value>,
-    contract_data: Option<Vec<u8>>,
+    contract_data: Option<&Vec<u8>>,
+    msg_data: Option<&Vec<u8>>,
 ) -> Result<Vec<values::Value>, Error> {
     assert!(store.funcs.contains(funcaddr));
     let funcinst = &store.funcs[funcaddr];
@@ -299,7 +300,7 @@ pub fn invoke_func(
         return Err(Error::ArgumentTypeMismatch);
     }
 
-    let mut int = interpreter::Interpreter::new(contract_data);
+    let mut int = interpreter::Interpreter::new(contract_data, msg_data);
     int.stack.extend(args);
 
     let sframe = interpreter::StackFrame::new(None);
@@ -694,7 +695,7 @@ fn allocate_and_init_module(
     // call the start function if it exists
     if let Some(idx) = module.start {
         let func_addr = inst.func_addrs[idx as usize];
-        invoke_func(store, func_addr, Vec::new(), None)?;
+        invoke_func(store, func_addr, Vec::new(), None, None)?;
     }
 
     Ok(inst)

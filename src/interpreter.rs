@@ -10,7 +10,7 @@ use std::rc::Rc;
 pub struct Interpreter {
     pub(crate) stack: Vec<Value>,
     /// Buffer to collect return values of host functions
-    pub(crate) contract_data: Option<Vec<u8>>,
+    pub(crate) aux_data: Vec<u8>,
     pub(crate) msg_data: Vec<u8>,
     return_buffer: Vec<Value>,
 }
@@ -83,12 +83,28 @@ impl StackFrame {
 
 impl Interpreter {
     /// Instantiate a new interpreter
-    pub fn new(contract_data: Option<Vec<u8>>) -> Interpreter {
+    pub fn new(aux_data: Option<&Vec<u8>>, msg_data: Option<&Vec<u8>>) -> Interpreter {
+        // Aux and Msg data must always at least contain the size
+        let aux_data = if let Some(data) = aux_data {
+            let mut new_vec = (data.len() as u32).to_le_bytes().to_vec();
+            new_vec.extend(data);
+            new_vec
+        } else {
+            vec![0u8; 4]
+        };
+        let msg_data = if let Some(data) = msg_data {
+            let mut new_vec = (data.len() as u32).to_le_bytes().to_vec();
+            new_vec.extend(data);
+            new_vec
+        } else {
+            vec![0u8; 4]
+        };
+
         Interpreter {
             stack: Vec::new(),
             return_buffer: Vec::new(),
-            contract_data,
-            msg_data: Vec::new(),
+            aux_data,
+            msg_data,
         }
     }
 
@@ -981,9 +997,9 @@ impl Interpreter {
         use types::{Float, Int};
 
         let load_addr = match self.stack.pop() {
-            Some(Value::I32(v)) => v as usize + memop.offset as usize,
-            None => unreachable!(),
-            _ => unreachable!(),
+            Some(Value::I32(v)) => (v as usize + memop.offset as usize) as u32,
+            None => unreachable!("load_addr None in load()"),
+            v => unreachable!("bad load_addr in load() {:X?}", v),
         };
 
         let mmap = match MemMap::try_from(load_addr) {
@@ -994,22 +1010,12 @@ impl Interpreter {
                 })
             }
         };
-
+        println!("load() mmap: {:X?} from {:X?}", mmap, load_addr);
         // Given the memory mapping, get a reference to the
         // actual data it points to, along with the relative offset
         let (offset, mem_data) = match mmap {
-            MemMap::ContractData(v) => (
-                v,
-                match self.contract_data.as_ref() {
-                    Some(data) => data,
-                    None => {
-                        // If our contract data is None, this is just a bad memory access
-                        return Err(Trap {
-                            origin: TrapOrigin::LoadOutOfMemory,
-                        });
-                    }
-                },
-            ),
+            MemMap::AuxData(v) => (v, &self.aux_data),
+            MemMap::MsgData(v) => (v, &self.msg_data),
             MemMap::Prog(v) => {
                 // this is a regular memory address
                 let mem = &memories[frame_memories[0]];
@@ -1023,15 +1029,15 @@ impl Interpreter {
         };
 
         let (size_in_bits, signed) = memop.opt.unwrap_or((memop.type_.bit_width(), false));
-        let size_in_bytes: usize = (size_in_bits as usize) / 8;
+        let size_in_bytes = (size_in_bits) / 8;
 
-        if offset + size_in_bytes > mem_data.len() {
+        if offset + size_in_bytes > mem_data.len() as u32 {
             //println!("offset: {:?}, size: {:?}", offset, size_in_bytes);
             return Err(Trap {
                 origin: TrapOrigin::LoadOutOfMemory,
             });
         }
-        let bits = &mem_data[offset..(offset + size_in_bytes)];
+        let bits = &mem_data[offset as usize..(offset + size_in_bytes) as usize];
 
         let res = match (size_in_bits, signed, memop.type_) {
             (8, false, Tv::Int(Int::I32)) => Value::I32(u8::from_bits(bits) as u32),
@@ -1072,11 +1078,11 @@ impl Interpreter {
 
         let c = self.stack.pop().unwrap();
         let offset = match self.stack.pop().unwrap() {
-            Value::I32(c) => c as usize + memop.offset as usize,
-            _ => unreachable!(),
+            Value::I32(c) => c + memop.offset,
+            c => unreachable!("bad Value for offset in store(): {:X?}", c),
         };
         let size_in_bits = memop.opt.unwrap_or(memop.type_.bit_width());
-        let size_in_bytes: usize = (size_in_bits as usize) / 8;
+        let size_in_bytes = size_in_bits / 8;
 
         let mmap = match MemMap::try_from(offset) {
             Ok(m) => m,
@@ -1086,9 +1092,13 @@ impl Interpreter {
                 })
             }
         };
+        println!(
+            "\tstore() mmap: {:X?} from {:X?}\tdata: {:X?}",
+            mmap, offset, c
+        );
         let mem_data = match mmap {
-            MemMap::ContractData(_) => {
-                // Contract data is read only
+            MemMap::AuxData(_) => {
+                // Aux data is read only
                 return Err(Trap {
                     origin: TrapOrigin::StoreOutOfMemory,
                 });
@@ -1096,7 +1106,7 @@ impl Interpreter {
             MemMap::Prog(_) => {
                 let mem_data = &mut memories[frame_memories[0]].data;
                 // Storing past allocated memory is an error condition
-                if offset + size_in_bytes > mem_data.len() {
+                if offset + size_in_bytes > mem_data.len() as u32 {
                     return Err(Trap {
                         origin: TrapOrigin::StoreOutOfMemory,
                     });
@@ -1107,19 +1117,18 @@ impl Interpreter {
             MemMap::MsgData(_) => {
                 let mem_data = &mut self.msg_data;
                 // If we're about to store deeper than we've allocated, push it out
-                if offset + size_in_bytes > mem_data.len() {
-                    mem_data.extend(vec![0; mem_data.len() - (offset + size_in_bytes)]);
+                if offset + size_in_bytes > mem_data.len() as u32 {
+                    mem_data.extend(vec![0; mem_data.len() - (offset + size_in_bytes) as usize]);
                 }
                 mem_data
-            }
-            _ => {
-                return Err(Trap {
-                    origin: TrapOrigin::StoreOutOfMemory,
-                })
-            }
+            } // _ => {
+              //     return Err(Trap {
+              //         origin: TrapOrigin::StoreOutOfMemory,
+              //     })
+              // }
         };
 
-        let bits = &mut mem_data[offset..(offset + size_in_bytes)];
+        let bits = &mut mem_data[offset as usize..(offset + size_in_bytes) as usize];
         match (size_in_bits, memop.type_, c) {
             (8, Tv::Int(Int::I32), Value::I32(c)) => (c as u8).to_bits(bits),
             (16, Tv::Int(Int::I32), Value::I32(c)) => (c as u16).to_bits(bits),
@@ -1132,7 +1141,10 @@ impl Interpreter {
 
             (32, Tv::Float(Float::F32), Value::F32(c)) => (c as f32).to_bits().to_bits(bits),
             (64, Tv::Float(Float::F64), Value::F64(c)) => (c as f64).to_bits().to_bits(bits),
-            _ => unreachable!(),
+            (size_in_bits, memop_type, c) => unreachable!(
+                "bad match in store(): {:X?} {:X?} {:X?}",
+                size_in_bits, memop_type, c
+            ),
         };
         Ok(Continue)
     }
