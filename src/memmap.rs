@@ -2,17 +2,17 @@ use std::convert::TryFrom;
 
 #[derive(Debug)]
 pub enum MemMap {
-    Prog(u32),
-    AuxData(u32),
-    MsgData(u32),
+    Prog(usize),
+    AuxData(usize),
+    MsgData(usize),
 }
 
-const MASK: u32 = !(0b11 << 30);
+const MASK: usize = !(0b11 << 30);
 
-impl TryFrom<u32> for MemMap {
+impl TryFrom<usize> for MemMap {
     type Error = &'static str;
 
-    fn try_from(value: u32) -> Result<Self, Self::Error> {
+    fn try_from(value: usize) -> Result<Self, Self::Error> {
         // Highest two bits are the enum
         match value >> 30 {
             2 => Ok(MemMap::AuxData(value & MASK)),

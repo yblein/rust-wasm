@@ -997,7 +997,7 @@ impl Interpreter {
         use types::{Float, Int};
 
         let load_addr = match self.stack.pop() {
-            Some(Value::I32(v)) => (v as usize + memop.offset as usize) as u32,
+            Some(Value::I32(v)) => v as usize + memop.offset as usize,
             None => unreachable!("load_addr None in load()"),
             v => unreachable!("bad load_addr in load() {:X?}", v),
         };
@@ -1029,9 +1029,9 @@ impl Interpreter {
         };
 
         let (size_in_bits, signed) = memop.opt.unwrap_or((memop.type_.bit_width(), false));
-        let size_in_bytes = (size_in_bits) / 8;
+        let size_in_bytes = size_in_bits as usize / 8;
 
-        if offset + size_in_bytes > mem_data.len() as u32 {
+        if offset + size_in_bytes > mem_data.len() {
             //println!("offset: {:?}, size: {:?}", offset, size_in_bytes);
             return Err(Trap {
                 origin: TrapOrigin::LoadOutOfMemory,
@@ -1078,10 +1078,10 @@ impl Interpreter {
 
         let c = self.stack.pop().unwrap();
         let offset = match self.stack.pop().unwrap() {
-            Value::I32(c) => c + memop.offset,
+            Value::I32(c) => c as usize + memop.offset as usize,
             c => unreachable!("bad Value for offset in store(): {:X?}", c),
         };
-        let size_in_bits = memop.opt.unwrap_or(memop.type_.bit_width());
+        let size_in_bits = memop.opt.unwrap_or(memop.type_.bit_width()) as usize;
         let size_in_bytes = size_in_bits / 8;
 
         let mmap = match MemMap::try_from(offset) {
@@ -1106,7 +1106,7 @@ impl Interpreter {
             MemMap::Prog(_) => {
                 let mem_data = &mut memories[frame_memories[0]].data;
                 // Storing past allocated memory is an error condition
-                if offset + size_in_bytes > mem_data.len() as u32 {
+                if offset + size_in_bytes > mem_data.len() {
                     return Err(Trap {
                         origin: TrapOrigin::StoreOutOfMemory,
                     });
@@ -1117,8 +1117,8 @@ impl Interpreter {
             MemMap::MsgData(_) => {
                 let mem_data = &mut self.msg_data;
                 // If we're about to store deeper than we've allocated, push it out
-                if offset + size_in_bytes > mem_data.len() as u32 {
-                    mem_data.extend(vec![0; mem_data.len() - (offset + size_in_bytes) as usize]);
+                if offset + size_in_bytes > mem_data.len() {
+                    mem_data.extend(vec![0; mem_data.len() - (offset + size_in_bytes)]);
                 }
                 mem_data
             } // _ => {
@@ -1128,7 +1128,7 @@ impl Interpreter {
               // }
         };
 
-        let bits = &mut mem_data[offset as usize..(offset + size_in_bytes) as usize];
+        let bits = &mut mem_data[offset..(offset + size_in_bytes)];
         match (size_in_bits, memop.type_, c) {
             (8, Tv::Int(Int::I32), Value::I32(c)) => (c as u8).to_bits(bits),
             (16, Tv::Int(Int::I32), Value::I32(c)) => (c as u16).to_bits(bits),
