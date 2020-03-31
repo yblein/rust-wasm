@@ -20,15 +20,14 @@ fn main() {
             .next()
             .unwrap()
             .replace("-", "_");
-
+        let path = path.to_str().unwrap().replace("\\", "/");
         write!(
             f,
             "#[test]
 fn run_{}() {{
 	script::run(\"{}\");
 }}\n",
-            name,
-            path.display(),
+            name, path,
         )
         .unwrap();
     }
