@@ -1021,11 +1021,6 @@ impl Interpreter {
                 let mem = &memories[frame_memories[0]];
                 (v, &mem.data)
             }
-            _ => {
-                return Err(Trap {
-                    origin: TrapOrigin::LoadOutOfMemory,
-                })
-            }
         };
 
         let (size_in_bits, signed) = memop.opt.unwrap_or((memop.type_.bit_width(), false));
