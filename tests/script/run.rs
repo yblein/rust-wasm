@@ -120,10 +120,10 @@ fn run_assertion(store: &mut Store, registry: &Registry, assertion: Assertion) {
             assert!(result.len() == 1);
             let val = result[0];
             match val {
-                values::Value::F32(f) if f.to_bits() & f32::NAN.to_bits() == f32::NAN.to_bits() => {
-                }
-                values::Value::F64(f) if f.to_bits() & f64::NAN.to_bits() == f64::NAN.to_bits() => {
-                }
+                // NaN is when the most significant bits are set.  The most significant bits are
+                // 23rd and 52nd for 32 and 64 bit floats respectively per §2.2.3 of the WASM standard
+                values::Value::F32(f) if (f.to_bits() & 0x1 << 23) > 0 => {}
+                values::Value::F64(f) if (f.to_bits() & 0x1 << 52) > 0 => {}
                 _ => {
                     panic!(
                         "the result of the action `{:?}` is `{:?}` but should be an arithmetic NaN",
