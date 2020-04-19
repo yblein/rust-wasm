@@ -87,7 +87,7 @@ fn run_assertion(store: &mut Store, registry: &Registry, assertion: Assertion) {
         Return(action, expected) => {
             let result = run_action(store, registry, &action);
             match result {
-                Ok(ref actual) if *actual == expected => {}
+                Ok(ref actual) if actual.0 == expected => {}
                 _ => {
                     panic!(
                         "the result of the action `{:?}` is `{:?}` but should be `{:?}`",
@@ -98,8 +98,8 @@ fn run_assertion(store: &mut Store, registry: &Registry, assertion: Assertion) {
         }
         ReturnCanonicalNan(action) => {
             let result = run_action(store, registry, &action).unwrap();
-            assert!(result.len() == 1);
-            let val = result[0];
+            assert!(result.0.len() == 1);
+            let val = result.0[0];
             match val {
                 values::Value::F32(f)
                     if f.to_bits() == f32::NAN.to_bits()
@@ -117,8 +117,8 @@ fn run_assertion(store: &mut Store, registry: &Registry, assertion: Assertion) {
         }
         ReturnArithmeticNan(action) => {
             let result = run_action(store, registry, &action).unwrap();
-            assert!(result.len() == 1);
-            let val = result[0];
+            assert!(result.0.len() == 1);
+            let val = result.0[0];
             match val {
                 // NaN is when the most significant bits are set.  The most significant bits are
                 // 23rd and 52nd for 32 and 64 bit floats respectively per §2.2.3 of the WASM standard
@@ -209,7 +209,7 @@ fn run_action(
     store: &mut Store,
     registry: &Registry,
     action: &Action,
-) -> Result<Vec<values::Value>, Error> {
+) -> Result<(Vec<values::Value>, u128), Error> {
     match *action {
         Action::Invoke {
             mod_ref: ref mod_name,
@@ -236,7 +236,7 @@ fn run_action(
                 &registry.last_key
             };
             match registry.mod_exports[mod_name][global] {
-                ExternVal::Global(addr) => Ok(vec![read_global(store, addr)]),
+                ExternVal::Global(addr) => Ok((vec![read_global(store, addr)], 0)),
                 _ => panic!("extern val should be a global"),
             }
         }
