@@ -279,7 +279,7 @@ pub fn invoke_func(
     args: Vec<values::Value>,
     contract_data: Option<&Vec<u8>>,
     msg_data: Option<&Vec<u8>>,
-) -> Result<Vec<values::Value>, Error> {
+) -> Result<(Vec<values::Value>, u128), Error> {
     assert!(store.funcs.contains(funcaddr));
     let funcinst = &store.funcs[funcaddr];
     let functype = match *funcinst {
@@ -319,7 +319,8 @@ pub fn invoke_func(
         _ => {
             let end_drain = int.stack.len() - functype.result.len();
             int.stack.drain(0..end_drain);
-            Ok(int.stack)
+            let count = int.count();
+            Ok((int.stack, count))
         }
     }
 }

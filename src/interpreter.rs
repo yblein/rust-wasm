@@ -13,6 +13,7 @@ pub struct Interpreter {
     pub(crate) aux_data: Vec<u8>,
     pub(crate) msg_data: Vec<u8>,
     return_buffer: Vec<Value>,
+    count: u128,
 }
 
 #[derive(Debug, PartialEq)]
@@ -105,7 +106,12 @@ impl Interpreter {
             return_buffer: Vec::new(),
             aux_data,
             msg_data,
+            count: 0,
         }
+    }
+
+    pub fn count(&self) -> u128 {
+        self.count
     }
 
     /// Intrepret a single instruction.
@@ -120,7 +126,7 @@ impl Interpreter {
         mems: &mut MemInstStore,
     ) -> IntResult {
         use super::ast::Instr::*;
-
+        self.count += 1;
         // Note: passing VM components mutability is case by case
         match *instr {
             Unreachable => self.unreachable(),
