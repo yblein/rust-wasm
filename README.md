@@ -1,4 +1,6 @@
-# Rust-WASM
+![Rust](https://github.com/TheRealBluesun/rust-wasm/workflows/Rust/badge.svg)
+
+# Rust-WASM -- Cauchy Ledger Fork
 
 A [WASM](http://webassembly.org/) interpreter written in Rust.
 
