@@ -1,7 +1,28 @@
 ![Rust](https://github.com/TheRealBluesun/rust-wasm/workflows/Rust/badge.svg)
 
-# Rust-WASM -- Cauchy Ledger Fork
+# Rust-WASM - Cauchy Ledger Fork
 
+## Accessing Contract Data
+
+The Cauchy VM proides a generic means of communication between contracts and the VM via memory mapped addresses, similar to accessing peripherals in an embedded environment.  Specifically, the higher bits of all (32-bit) memory accesses are used to determine which type of data is being accessed.  As of [v0.1.1](https://github.com/TheRealBluesun/rust-wasm/releases/tag/v0.1.1), this mapping is as follows:
+
+
+
+| Highest Bits | Base Address | Highest Address | Data Mapping                  |
+| ------------ | ------------ | --------------- | ----------------------------- |
+| 0b00         | 0x00000000   | 0x3FFFFFFF      | Program Memory  (PM)          |
+| 0b01         | 0x40000000   | 0x7FFFFFFF      | Incoming Message Data  (IMD)  |
+| 0b10         | 0x80000000   | 0xBFFFFFFF      | Contract Auxiliary Data (CAD) |
+| 0b11         | 0xC0000000   | 0xFFFFFFFF      | \<Unmapped>                   |
+
+For IMD and CAD specifically, the first four bytes of data stored at these base addresses will _always_ contain the 32-bit little endian value for the `size` of the respective data.  For example, when there is no IMD provided to a contract, there will still be four `0x00` bytes stored at the IMD base address.
+
+Attempts to access memory outside of these bounds will cause the VM to fault and halt execution.  That is to say, any memory accesses outside `4 + size` will cause an invalid memory access trap to occur (i.e. LoadOutOfMemory or StoreOutOfMemory for load and store instructions respectively).
+
+
+## Original Description Follows
+---
+# Rust-Wasm
 A [WASM](http://webassembly.org/) interpreter written in Rust.
 
 Expect for parsing the text format, the implementation is complete, i.e., all the [specification](https://webassembly.github.io/spec/core/index.html) is implemented and the [official test suite](https://github.com/WebAssembly/spec/tree/master/test) is fully covered (as of 2019-10-27).
