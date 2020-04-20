@@ -10,10 +10,11 @@ The Cauchy VM proides a generic means of communication between contracts and the
 
 | Highest Bits | Base Address | Highest Address | Data Mapping                  |
 | ------------ | ------------ | --------------- | ----------------------------- |
-| 0b00         | 0x00000000   | 0x3FFFFFFF      | Program Memory  (PM)          |
-| 0b01         | 0x40000000   | 0x7FFFFFFF      | Incoming Message Data  (IMD)  |
-| 0b10         | 0x80000000   | 0xBFFFFFFF      | Contract Auxiliary Data (CAD) |
-| 0b11         | 0xC0000000   | 0xFFFFFFFF      | \<Unmapped>                   |
+| 0b000        | 0x00000000   | 0x7FFFFFFF      | Program Memory  (PM)          |
+| 0b100        | 0x80000000   | 0x9FFFFFFF      | Contract Auxiliary Data (CAD) |
+| 0b101        | 0xA0000000   | 0xBFFFFFFF      | Incoming Message Data  (IMD)  |
+| 0b110        | 0xC0000000   | 0xFFFFFFFF      | \<unmapped>                   |
+
 
 For IMD and CAD specifically, the first four bytes of data stored at these base addresses will _always_ contain the 32-bit little endian value for the `size` of the respective data.  For example, when there is no IMD provided to a contract, there will still be four `0x00` bytes stored at the IMD base address.
 
